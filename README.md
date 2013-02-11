@@ -1,6 +1,4 @@
 coolsoft-13
 ===========
 
-Coolsoft 2013 public repo. (to be updated)
-
-Mahmoud Abdelghany Abdelwahab ;)
+Mahmoud Abdelghany Abdelwahab again ;)
