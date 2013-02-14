@@ -15,8 +15,5 @@ Dayna was here :D
 Mahmoud Abdelghany Abdelwahab again ;)
 
 Hesham Nabil
-<<<<<<< HEAD
 
 muhammed hassan
-=======
->>>>>>> master
