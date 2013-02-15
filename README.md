@@ -1,14 +1,13 @@
+CoolSoft '13
+============
 
-
-coolsoft-13
-===========
+Mina Nagy Zaki was here.
 
 Mohammad Khalid Ibrahim Abdulkhaliq
 
 Omar Mahmoud
 
 marwa mehanna 22-0980
-
 
 Menna Amr was here.
 
@@ -34,5 +33,4 @@ Amina
 Hesham Nabil
 
 muhammed hassan
-
 
