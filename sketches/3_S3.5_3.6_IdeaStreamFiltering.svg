@@ -14,8 +14,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="2_S1.3-3.2b_IdeaStream.svg"
-   inkscape:export-filename="/home/mnzaki/School/GUC/6thSem/SE/coolsoft-13.git/sketches/2_S1.3-3.2b_IdeaStream.png"
+   sodipodi:docname="2_S1.3-3.2b_IdeaStreamFiltering.svg"
+   inkscape:export-filename="/home/mnzaki/School/GUC/6thSem/SE/coolsoft-13.git/sketches/2_S1.3-3.2b_IdeaStreamFiltering.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -90,9 +90,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="935.19125"
-     inkscape:cy="1766.1453"
+     inkscape:zoom="0.5"
+     inkscape:cx="454.26385"
+     inkscape:cy="1392.2801"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -100,7 +100,9 @@
      inkscape:window-height="880"
      inkscape:window-x="0"
      inkscape:window-y="18"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -109,7 +111,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -420,19 +422,19 @@
        width="650"
        height="250"
        x="156"
-       y="-752.43683" />
+       y="-618.43683" />
     <rect
        style="fill:#c8c4b7"
        id="rect3013"
        width="160"
        height="160"
        x="177"
-       y="-730.36572" />
+       y="-596.36572" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3015"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(25,-965.63782)"><flowRegion
+       transform="translate(25,-831.63782)"><flowRegion
          id="flowRegion3017"><rect
            id="rect3019"
            width="398"
@@ -444,7 +446,7 @@
        xml:space="preserve"
        id="flowRoot3047"
        style="font-size:80px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(112.08984,-960.6378)"><flowRegion
+       transform="translate(112.08984,-826.6378)"><flowRegion
          id="flowRegion3049"><rect
            id="rect3051"
            width="121"
@@ -456,7 +458,7 @@
        xml:space="preserve"
        id="flowRoot3261"
        style="font-size:18px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#0088aa;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(201.24264,-1169.1231)"><flowRegion
+       transform="translate(201.24264,-1035.1231)"><flowRegion
          id="flowRegion3263"><rect
            id="rect3265"
            width="176"
@@ -471,23 +473,23 @@
        width="100"
        height="40"
        x="697"
-       y="-552.45886" />
+       y="-418.45886" />
     <text
        xml:space="preserve"
        style="font-size:36px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="718.11292"
-       y="-513.40961"
+       y="-381.09525"
        id="text3990"
        sodipodi:linespacing="125%"
        transform="scale(0.98742086,1.0127394)"><tspan
          sodipodi:role="line"
          id="tspan3992"
          x="718.11292"
-         y="-513.40961"
+         y="-381.09525"
          style="font-size:36px">Vote</tspan></text>
     <g
        id="g3210"
-       transform="translate(6,2.5085759)">
+       transform="translate(6,136.50858)">
       <g
          transform="translate(4.7215881,-11.640997)"
          id="g4212">
@@ -616,7 +618,7 @@
        xml:space="preserve"
        id="flowRoot3245"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,46.203195,-907.47596)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,46.203195,-773.47596)"><flowRegion
          id="flowRegion3247"><rect
            id="rect3249"
            width="65"
@@ -628,7 +630,7 @@
        xml:space="preserve"
        id="flowRoot3253"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,48.52596,-909.5823)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,48.52596,-775.5823)"><flowRegion
          id="flowRegion3255"><rect
            id="rect3257"
            width="65"
@@ -640,7 +642,7 @@
        xml:space="preserve"
        id="flowRoot3253-1"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,48.923441,-888.39065)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,48.923441,-754.39065)"><flowRegion
          id="flowRegion3255-15"><rect
            id="rect3257-2"
            width="89.994431"
@@ -650,7 +652,7 @@
            style="font-size:15.03358746px" /></flowRegion><flowPara
          id="flowPara3259-7">Something</flowPara></flowRoot>    <g
        id="g4504"
-       transform="translate(10,6.4306431)">
+       transform="translate(10,140.43064)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69742817"
@@ -744,7 +746,7 @@
     </g>
     <g
        id="g4497"
-       transform="translate(10,6.4306431)">
+       transform="translate(10,140.43064)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -838,7 +840,7 @@
     </g>
     <g
        id="g4511"
-       transform="translate(10,6.4306431)">
+       transform="translate(10,140.43064)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -934,13 +936,13 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#93ac93;fill-opacity:1;stroke:none;font-family:Sans"
        x="662.33722"
-       y="-735.17511"
+       y="-601.17511"
        id="text3269"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3271"
          x="662.33722"
-         y="-735.17511"
+         y="-601.17511"
          style="font-size:12px;fill:#93ac93">by</tspan></text>
     <rect
        style="fill:#dde9af"
@@ -948,19 +950,19 @@
        width="650"
        height="250"
        x="156"
-       y="-489.63782" />
+       y="-355.63782" />
     <rect
        style="fill:#c8c4b7"
        id="rect3013-7"
        width="160"
        height="160"
        x="173"
-       y="-466.56671" />
+       y="-332.56671" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3015-4"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(21,-701.8388)"><flowRegion
+       transform="translate(21,-567.8388)"><flowRegion
          id="flowRegion3017-0"><rect
            id="rect3019-9"
            width="398"
@@ -972,7 +974,7 @@
        xml:space="preserve"
        id="flowRoot3047-8"
        style="font-size:80px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(108.08984,-696.8388)"><flowRegion
+       transform="translate(108.08984,-562.8388)"><flowRegion
          id="flowRegion3049-8"><rect
            id="rect3051-2"
            width="121"
@@ -984,7 +986,7 @@
        xml:space="preserve"
        id="flowRoot3261-5"
        style="font-size:18px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#0088aa;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(197.24264,-905.3241)"><flowRegion
+       transform="translate(197.24264,-771.3241)"><flowRegion
          id="flowRegion3263-5"><rect
            id="rect3265-1"
            width="176"
@@ -999,23 +1001,23 @@
        width="100"
        height="40"
        x="693"
-       y="-288.65985" />
+       y="-154.65985" />
     <text
        xml:space="preserve"
        style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="706.39264"
-       y="-256.87863"
+       y="-124.56419"
        id="text3990-5"
        sodipodi:linespacing="125%"
        transform="scale(0.98742086,1.0127394)"><tspan
          sodipodi:role="line"
          id="tspan3992-2"
          x="706.39264"
-         y="-256.87863"
+         y="-124.56419"
          style="font-size:26px">Unvote</tspan></text>
     <g
        id="g3210-7"
-       transform="translate(2,266.30759)">
+       transform="translate(2,400.30759)">
       <g
          transform="translate(4.7215881,-11.640997)"
          id="g4212-6">
@@ -1144,17 +1146,17 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#93ac93;fill-opacity:1;stroke:none;font-family:Sans"
        x="660.33722"
-       y="-471.3761"
+       y="-337.3761"
        id="text3269-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3271-8"
          x="660.33722"
-         y="-471.3761"
+         y="-337.3761"
          style="font-size:12px;fill:#93ac93">by</tspan></text>
     <g
        id="g3684"
-       transform="translate(126,41)">
+       transform="translate(126,175)">
       <rect
          y="-266.63782"
          x="30"
@@ -1169,12 +1171,12 @@
        width="160"
        height="160"
        x="177"
-       y="-203.56671" />
+       y="-69.566711" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3015-44"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(25,-438.8388)"><flowRegion
+       transform="translate(25,-304.8388)"><flowRegion
          id="flowRegion3017-6"><rect
            id="rect3019-0"
            width="398"
@@ -1186,7 +1188,7 @@
        xml:space="preserve"
        id="flowRoot3047-6"
        style="font-size:80px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(112.08984,-433.8388)"><flowRegion
+       transform="translate(112.08984,-299.8388)"><flowRegion
          id="flowRegion3049-1"><rect
            id="rect3051-8"
            width="121"
@@ -1198,7 +1200,7 @@
        xml:space="preserve"
        id="flowRoot3261-6"
        style="font-size:18px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#0088aa;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(201.24264,-642.3241)"><flowRegion
+       transform="translate(201.24264,-508.3241)"><flowRegion
          id="flowRegion3263-3"><rect
            id="rect3265-7"
            width="176"
@@ -1209,7 +1211,7 @@
          id="flowPara3267-8"
          style="font-size:16px;fill:#0088aa">Amina Zoheir</flowPara></flowRoot>    <g
        id="g4389-8"
-       transform="matrix(1,0,0,1.025641,34,570.89175)">
+       transform="matrix(1,0,0,1.025641,34,704.89175)">
       <rect
          y="-581.63782"
          x="663"
@@ -1232,7 +1234,7 @@
     </g>
     <g
        id="g3210-3"
-       transform="translate(6,529.30759)">
+       transform="translate(6,663.30759)">
       <g
          transform="translate(4.7215881,-11.640997)"
          id="g4212-5">
@@ -1361,7 +1363,7 @@
        xml:space="preserve"
        id="flowRoot3245-2"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,46.20319,-380.677)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,46.20319,-246.677)"><flowRegion
          id="flowRegion3247-0"><rect
            id="rect3249-0"
            width="65"
@@ -1373,7 +1375,7 @@
        xml:space="preserve"
        id="flowRoot3253-4"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,48.52596,-382.7833)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,48.52596,-248.7833)"><flowRegion
          id="flowRegion3255-6"><rect
            id="rect3257-0"
            width="65"
@@ -1385,7 +1387,7 @@
        xml:space="preserve"
        id="flowRoot3253-1-7"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,48.92344,-361.5916)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,48.92344,-227.5916)"><flowRegion
          id="flowRegion3255-15-7"><rect
            id="rect3257-2-7"
            width="89.994431"
@@ -1395,7 +1397,7 @@
            style="font-size:15.03358746px" /></flowRegion><flowPara
          id="flowPara3259-7-7">Something</flowPara></flowRoot>    <g
        id="g4504-3"
-       transform="translate(10,533.22965)">
+       transform="translate(10,667.22965)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69742817"
@@ -1488,7 +1490,7 @@
          transform="matrix(0.70777772,0,0,0.69241114,181.98907,-846.9099)" />
     </g>
     <path
-       transform="matrix(0.70777772,0,0,0.69241114,155.06985,-335.04066)"
+       transform="matrix(0.70777772,0,0,0.69241114,155.06985,-201.04066)"
        sodipodi:type="star"
        style="fill:#ffff00;stroke:#000000;stroke-opacity:1"
        id="path3065-1-8"
@@ -1506,7 +1508,7 @@
        inkscape:transform-center-x="0.69743419"
        inkscape:transform-center-y="0.28206263" />
     <path
-       transform="matrix(0.70777772,0,0,0.69241114,173.93968,-335.04066)"
+       transform="matrix(0.70777772,0,0,0.69241114,173.93968,-201.04066)"
        sodipodi:type="star"
        style="fill:#ffff00;stroke:#000000;stroke-opacity:1"
        id="path3065-11-2"
@@ -1524,7 +1526,7 @@
        inkscape:transform-center-x="0.69742817"
        inkscape:transform-center-y="0.28206263" />
     <path
-       transform="matrix(0.70777772,0,0,0.69241114,191.98907,-335.04066)"
+       transform="matrix(0.70777772,0,0,0.69241114,191.98907,-201.04066)"
        sodipodi:type="star"
        style="fill:#ffffff;stroke:#000000;stroke-opacity:1"
        id="path3065-5-6"
@@ -1542,7 +1544,7 @@
        inkscape:transform-center-x="0.69742817"
        inkscape:transform-center-y="0.28206263" />
     <path
-       transform="matrix(0.70777772,0,0,0.69241114,212.19254,-335.04066)"
+       transform="matrix(0.70777772,0,0,0.69241114,212.19254,-201.04066)"
        sodipodi:type="star"
        style="fill:#ffffff;stroke:#000000;stroke-opacity:1"
        id="path3065-5-10-60"
@@ -1560,7 +1562,7 @@
        inkscape:transform-center-x="0.69742817"
        inkscape:transform-center-y="0.28206263" />
     <path
-       transform="matrix(0.70777772,0,0,0.69241114,230.23417,-335.04066)"
+       transform="matrix(0.70777772,0,0,0.69241114,230.23417,-201.04066)"
        sodipodi:type="star"
        style="fill:#ffffff;stroke:#000000;stroke-opacity:1"
        id="path3065-5-2-3"
@@ -1579,7 +1581,7 @@
        inkscape:transform-center-y="0.28206263" />
     <g
        id="g4511-8"
-       transform="translate(10,533.22965)">
+       transform="translate(10,667.22965)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -1675,13 +1677,13 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#93ac93;fill-opacity:1;stroke:none;font-family:Sans"
        x="664.33722"
-       y="-208.3761"
+       y="-74.376099"
        id="text3269-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3271-4"
          x="664.33722"
-         y="-208.3761"
+         y="-74.376099"
          style="font-size:12px;fill:#93ac93">by</tspan></text>
     <rect
        style="fill:#ffffff"
@@ -1689,13 +1691,13 @@
        width="118"
        height="107"
        x="523"
-       y="-400.13782"
+       y="-266.13782"
        ry="15.604167" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3253-7"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,44.52596,-648.15136)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,44.52596,-514.15136)"><flowRegion
          id="flowRegion3255-4"><rect
            id="rect3257-27"
            width="65"
@@ -1705,7 +1707,7 @@
            style="font-size:15.03358746px" /></flowRegion><flowPara
          id="flowPara3259-79">Design</flowPara></flowRoot>    <g
        id="g4504-6"
-       transform="translate(6,268.78637)">
+       transform="translate(6,402.78637)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69742817"
@@ -1799,7 +1801,7 @@
     </g>
     <g
        id="g3446"
-       transform="translate(0,-1.8662942)">
+       transform="translate(0,132.13371)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69742817"
@@ -1895,7 +1897,7 @@
        xml:space="preserve"
        id="flowRoot3245-1"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,42.20319,-646.84751)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,42.20319,-512.84751)"><flowRegion
          id="flowRegion3247-1"><rect
            id="rect3249-3"
            width="65"
@@ -1905,7 +1907,7 @@
            style="font-size:15.03358746px;text-align:start;text-anchor:start" /></flowRegion><flowPara
          id="flowPara3251-8">Usabilty</flowPara></flowRoot>    <g
        id="g4497-0"
-       transform="translate(6,268.15264)">
+       transform="translate(6,402.15264)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -1999,7 +2001,7 @@
     </g>
     <g
        id="g3434"
-       transform="translate(0,-0.50002483)">
+       transform="translate(0,133.49998)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -2095,7 +2097,7 @@
        xml:space="preserve"
        id="flowRoot3253-1-3"
        style="font-size:15.03358746px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.82042706,0,0,0.77659982,44.92344,-626.15722)"><flowRegion
+       transform="matrix(0.82042706,0,0,0.77659982,44.92344,-492.15722)"><flowRegion
          id="flowRegion3255-15-1"><rect
            id="rect3257-2-9"
            width="89.994431"
@@ -2105,7 +2107,7 @@
            style="font-size:15.03358746px" /></flowRegion><flowPara
          id="flowPara3259-7-8">Something</flowPara></flowRoot>    <g
        id="g4511-0"
-       transform="translate(6,269.15269)">
+       transform="translate(6,403.15269)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -2199,7 +2201,7 @@
     </g>
     <g
        id="g3519"
-       transform="translate(0,-1.4999736)">
+       transform="translate(0,132.50003)">
       <path
          inkscape:transform-center-y="0.28206263"
          inkscape:transform-center-x="0.69743419"
@@ -2295,7 +2297,7 @@
        xml:space="preserve"
        id="flowRoot5058"
        style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(-103.74072,-974.63782)"><flowRegion
+       transform="translate(-103.74072,-840.63782)"><flowRegion
          id="flowRegion5060"><rect
            id="rect5062"
            width="121"
@@ -2305,7 +2307,7 @@
          id="flowPara5064">Your Rating</flowPara></flowRoot>    <g
        id="g5184"
        style="fill:#000000;stroke:#000003;stroke-width:0.69999999;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       transform="matrix(-0.80400093,0.59462804,-0.59462804,-0.80400093,420.89848,-808.28809)"
+       transform="matrix(-0.80400093,0.59462804,-0.59462804,-0.80400093,420.89848,-674.28809)"
        inkscape:transform-center-x="67"
        inkscape:transform-center-y="-17">
       <path
@@ -2371,5 +2373,87 @@
          id="tspan3337"
          x="842.87128"
          y="-705.50525">Post an Idea</tspan></text>
+    <rect
+       style="fill:#afdde9;fill-opacity:1"
+       id="rect3335"
+       width="652.95245"
+       height="140.00714"
+       x="154.14928"
+       y="-764.90228" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="178"
+       y="-734.63782"
+       id="text3337"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3339"
+         x="178"
+         y="-734.63782"
+         style="font-size:20px">Tags:</tspan></text>
+    <rect
+       style="fill:#d5f6ff;fill-opacity:1"
+       id="rect3341"
+       width="545"
+       height="110.51472"
+       x="248"
+       y="-752.63782" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="264.45795"
+       y="219.50513"
+       id="text3362"
+       sodipodi:linespacing="125%"
+       transform="translate(0,-947.63782)"><tspan
+         sodipodi:role="line"
+         id="tspan3364"
+         x="264.45795"
+         y="219.50513"
+         style="font-size:20px">Sof</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3366"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3368"><rect
+           id="rect3370"
+           width="143"
+           height="88.5"
+           x="257"
+           y="226" /></flowRegion><flowPara
+         id="flowPara3372"></flowPara></flowRoot>    <rect
+       style="fill:#ffffff;fill-opacity:1"
+       id="rect3374"
+       width="272.22897"
+       height="130.37006"
+       x="251.44365"
+       y="-723.13782"
+       ry="22.627417" />
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="277.89297"
+       y="253.44624"
+       id="text3376"
+       sodipodi:linespacing="125%"
+       transform="translate(0,-947.63782)"><tspan
+         sodipodi:role="line"
+         id="tspan3378"
+         x="277.89297"
+         y="253.44624">Software</tspan><tspan
+         sodipodi:role="line"
+         x="277.89297"
+         y="278.44623"
+         id="tspan3380">Software Engineering</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="rect3382"
+       width="2.8284271"
+       height="21.920311"
+       x="299.81326"
+       y="201.82745"
+       transform="translate(0,-947.63782)"
+       ry="1.4142135" />
   </g>
 </svg>
