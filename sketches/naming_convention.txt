@@ -1,0 +1,2 @@
+Put your sketcher here with the following naming convention 
+[sketchNumber]_S[storyNumber]_descriptiveShortName
