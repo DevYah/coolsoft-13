@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Navigation bar - Guest.svg"
+   sodipodi:docname="7_S1.1-1.2-3.5_Guest navigation bar.svg"
    inkscape:export-filename="7_S_Guest navigation bar.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="461.59672"
-     inkscape:cy="1042.5255"
+     inkscape:zoom="1"
+     inkscape:cx="1084.8243"
+     inkscape:cy="871.08626"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -786,5 +786,23 @@
        d="m 663,1008 -1.73205,-3 -1.73205,-3 3.4641,0 3.4641,0 -1.73205,3 z"
        transform="translate(415,-789.63782)"
        inkscape:transform-center-y="1" />
+    <rect
+       style="fill:#ffffff"
+       id="rect3113"
+       width="20"
+       height="21"
+       x="807"
+       y="305.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="832"
+       y="321.36218"
+       id="text3115"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3117"
+         x="832"
+         y="321.36218">Signup as committee</tspan></text>
   </g>
 </svg>
