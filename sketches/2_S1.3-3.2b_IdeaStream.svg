@@ -14,7 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="2_S1.3-3.2b_IdeaStream.svg">
+   sodipodi:docname="2_S1.3-3.2b_IdeaStream.svg"
+   inkscape:export-filename="/home/mnzaki/School/GUC/6thSem/SE/coolsoft-13.git/sketches/2_S1.3-3.2b_IdeaStream.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <marker
@@ -87,14 +90,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="583.87209"
-     inkscape:cy="1516.2784"
+     inkscape:zoom="0.5"
+     inkscape:cx="582.49315"
+     inkscape:cy="1443.4518"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1600"
-     inkscape:window-height="882"
+     inkscape:window-width="998"
+     inkscape:window-height="880"
      inkscape:window-x="0"
      inkscape:window-y="18"
      inkscape:window-maximized="0" />
@@ -106,7 +109,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -128,7 +131,7 @@
        width="290"
        height="448"
        x="819"
-       y="-755.63782" />
+       y="-667.63782" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3035"
@@ -144,7 +147,7 @@
        xml:space="preserve"
        id="flowRoot3792"
        style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(71,-965.63782)"><flowRegion
+       transform="translate(71,-877.63782)"><flowRegion
          id="flowRegion3794"><rect
            id="rect3796"
            width="233"
@@ -154,7 +157,7 @@
            style="font-size:32px" /></flowRegion><flowPara
          id="flowPara3798">Trending</flowPara></flowRoot>    <g
        id="g3984"
-       transform="translate(10.449219,-18)">
+       transform="translate(10.449219,70)">
       <g
          transform="translate(0,8)"
          id="g3917">
@@ -194,7 +197,7 @@
            id="flowPara3930">Amina Zoheir published: </flowPara></flowRoot>    </g>
     <g
        id="g3972"
-       transform="translate(11,-14)">
+       transform="translate(11,74)">
       <g
          transform="translate(114,20)"
          id="g3903">
@@ -234,7 +237,7 @@
            id="flowPara3930-5">Lina Basheer published: </flowPara></flowRoot>    </g>
     <g
        id="g3996"
-       transform="translate(11,-18)">
+       transform="translate(11,70)">
       <g
          transform="translate(78,20)"
          id="g3910">
@@ -278,12 +281,12 @@
        width="290"
        height="448"
        x="821"
-       y="-295.63782" />
+       y="-207.63782" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3792-2"
        style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="translate(77,-509.6378)"><flowRegion
+       transform="translate(77,-421.6378)"><flowRegion
          id="flowRegion3794-6"><rect
            id="rect3796-6"
            width="233"
@@ -292,7 +295,7 @@
            y="230"
            style="font-size:32px" /></flowRegion><flowPara
          id="flowPara3798-0">Top 10</flowPara></flowRoot>    <g
-       transform="translate(14.449219,436)"
+       transform="translate(14.449219,524)"
        id="g3984-3">
       <g
          transform="translate(0,8)"
@@ -333,7 +336,7 @@
            id="flowPara3930-2">Amina Zoheir published: </flowPara></flowRoot>    </g>
     <g
        id="g3972-0"
-       transform="translate(15,440)">
+       transform="translate(15,528)">
       <g
          transform="translate(114,20)"
          id="g3903-1">
@@ -372,7 +375,7 @@
              id="rect3928-3-4" /></flowRegion><flowPara
            id="flowPara3930-5-1">Lina Basheer published: </flowPara></flowRoot>    </g>
     <g
-       transform="translate(15,436)"
+       transform="translate(15,524)"
        id="g3996-4">
       <g
          transform="translate(78,20)"
@@ -2330,5 +2333,43 @@
          id="rect5182"
          style="fill:#000000;stroke:#000003;stroke-width:0.69999999;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
+    <rect
+       style="fill:#afdde9;fill-opacity:1"
+       id="rect3339"
+       width="175.36249"
+       height="29.698484"
+       x="632.15344"
+       y="-794.70123" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="639.6994"
+       y="-773.2558"
+       id="text3329"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3331"
+         x="639.6994"
+         y="-773.2558"
+         style="font-size:20px">Advanced filters</tspan></text>
+    <rect
+       style="fill:#afdde9;fill-opacity:1"
+       id="rect3333"
+       width="289.91379"
+       height="69.296463"
+       x="818.82965"
+       y="195.4635"
+       transform="translate(0,-947.63782)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="842.87128"
+       y="-705.50525"
+       id="text3335"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3337"
+         x="842.87128"
+         y="-705.50525">Post an Idea</tspan></text>
   </g>
 </svg>
