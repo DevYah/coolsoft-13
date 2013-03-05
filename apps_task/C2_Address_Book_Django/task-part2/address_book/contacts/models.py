@@ -6,8 +6,8 @@ class User(models.Model):
 
 	user_name = models.CharField(max_length=20)
 	
-	def add (name, email, number, address):
-		self.contact_set.create(name=name, email=email, number=number, address=address)
+	def __unicode__(self):
+		return self.user_name
 	
 	#~ def edit(name, email, number, address)
 

@@ -1,0 +1,16 @@
+<h1>Add A New Contact</h1>
+<h3>Kindly fill this form</h3>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'contacts:index' user_id %}" method="post">
+{% csrf_token %}
+<div>
+
+
+
+
+
+</div>
+</form>
+
+
