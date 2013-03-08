@@ -5,12 +5,10 @@
 </head>
 <body>
 	<div class = "main">
-		<h3>you can add , search , delete your contacts here</h3>
+		<h3>You can add and view your contacts here check contact details for further actions ! :D</h3>
 		<ul>
-			<li><a href="{% url 'addressBook:add' %}">add contact</a></li>
-			<li><a href="delete/">delete contact</a></li>
-			<li><a href="{% url 'addressBook:contacts' %}">view contact</a></li>
-			<li><a href="edit/">edit contacts</a></li>
+			<li><a href="{% url 'addressBook:add' %}">Add a contact</a></li>
+			<li><a href="{% url 'addressBook:contacts' %}">View contacts</a></li>
 		</ul>
 		<br>
 		<a href="{% url 'addressBook:log_out' %}"> you can log out here</a>

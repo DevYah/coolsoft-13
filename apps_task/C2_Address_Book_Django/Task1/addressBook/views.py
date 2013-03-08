@@ -62,7 +62,7 @@ def enter(request):
 def contacts(request):
 	u = User.objects.get(pk=request.user.id)
 	contact_list = u.contact_set.all().order_by("-name")
-	template = loader.get_template('addressBook/view.html')
+	template = loader.get_template('addressBook/contacts.html')
 	context = Context({
 		'contact_list' : contact_list,
 		 })		
@@ -74,21 +74,24 @@ def detail(request, contact_id):
 	
 def delete(request, contact_id):
 	Contact.objects.get(pk=contact_id).delete()
-	return render(request, 'addressBook/view.html',{})
+	return render(request, 'addressBook/contacts.html',{})
 	
 def add(request):
+	return render(request, 'addressBook/add.html',{})
+	
+def addContact(request):
 	try:
 		u = User.objects.get(pk=request.user.id)
-		c_name= 'name' in request.POST['name']
-		c_email='email' in request.POST['email']
-		c_number='number' in request.POST['number']
-		c_address='address' in request.POST['address']
+		c_name= request.POST['name']
+		c_email= request.POST['email']
+		c_number= request.POST['number']
+		c_address= request.POST['address']
 	except Exception as e:
 		return HttpResponse(e.message)
 	else:
 		u.contact_set.create(name=c_name, email=c_email, number=c_number, address=c_address)
 		u.save()
-		return HttpResponseRedirect(reverse('addressBook:view'))
+		return HttpResponseRedirect(reverse('addressBook:contacts'))
 
 def edit(request, contact_id):
 	return HttpResponse("To")

@@ -5,7 +5,8 @@
 <body>
 <h1>Add A New Contact</h1>
 <h3>Kindly fill this form</h3>
-<form action="{% url 'addressBook:add' %}" method="post">
+<form action="{% url 'addressBook:addContact' %}" method="post">
+{% csrf_token %}
 <div>
 	<dl>
         <dt>Name</dt>
