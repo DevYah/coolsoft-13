@@ -35,17 +35,21 @@ class UsersController extends AppController {
 
   public function add() {
     if ($this->request->is('post')) {
+      $conditions= array('User.username'=> $this->request->data['User']['username'] );
+      if(! $this->User->hasAny($conditions)){
       $this->User->create();
       if ($this->User->save($this->request->data)) {
         $this->Session->setFlash('The user has been saved');
         $this->redirect(array('controller' => 'pages', 'action' => 'index'));
       } else {
-
         $this->Session->setFlash('The user could not be saved. Please, try again.');
       }
+    }else{
+      $this->Session->setFlash('This Username is already taken.');
+    }
     }
   }
-  public function edit($id = null) {
+    public function edit($id = null) {
     $this->User->id = $id;
     if (!$this->User->exists()) {
       throw new NotFoundException('Invalid user');
