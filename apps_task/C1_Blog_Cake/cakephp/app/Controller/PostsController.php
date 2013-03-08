@@ -1,9 +1,9 @@
-
 <?php
 	class PostsController extends AppController{
 		public $helpers = array('Html', 'Form');
-		public $components = array('Session','Search.Prg');
+		public $components = array('Session' , 'Search.Prg');
         public $presetVars = true;
+        
 		public function index($blogid){
         if($blogid==null){
             $this->redirect(array('controller'=>'blogs', 'action'=>'index'));
@@ -13,17 +13,29 @@
     }
 	   }
     public function view($id = null) {
-        if (!$id) {
+         $loggedin=0;
+            $this->set('uid',$this->Auth->user('id'));
+            if($this->Auth->user('id') == null){
+                $loggedin = 0;
+            }else{
+                $loggedin = 1;
+            }
+            $this->set('loggedin', $loggedin);
+            $this->set('postid', $id);     
+            $this->set('userid',$this->Auth->user('id'));
+        if (!$id) { 
             throw new NotFoundException(__('Invalid post'));
         }
 
         $post = $this->Post->findById($id);
+        foreach($post['Comment'] as &$comment){
+            $this->Post->Comment->User->id = $comment['user_id'];
+            $comment['username'] = $this->Post->Comment->User->field("username");
+        }
         if (!$post) {
             throw new NotFoundException(__('Invalid post'));
         }
-		$comments = $this->Post->Comment->findAllByPost_id($id);
         $this->set('post', $post);
-		$this->set('comments', $comments);
     }
     public function add($blogid) {
 	
@@ -73,16 +85,11 @@
 		}
         
     }
-
-    public function find() {
+       public function find() {
         $this->Prg->commonProcess();
-       // $this->paginate['conditions'] = $this->Post->parseCriteria($this->passedArgs);
         $this->paginate = array('conditions' => $this->Post->parseCriteria($this->passedArgs));
-
         $this->set('posts', $this->paginate());
 
     }
-
 	}
-
 ?>

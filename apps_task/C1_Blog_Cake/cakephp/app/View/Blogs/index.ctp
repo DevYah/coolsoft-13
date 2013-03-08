@@ -1,5 +1,3 @@
-
-
 <?php 
     if($loggedin == 0){
         echo $this->Html->link('Signup' , array('controller' => 'users' , 'action' => 'add'));

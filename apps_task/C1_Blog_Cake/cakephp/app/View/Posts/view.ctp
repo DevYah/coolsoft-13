@@ -1,4 +1,3 @@
-
 <!-- File: /app/View/Posts/view.ctp -->
 
 <h1><?php echo h($post['Post']['title']); ?></h1>
@@ -7,25 +6,29 @@
 
 <p><?php echo h($post['Post']['body']); ?></p>
 
+<h1>Comments</h1>
+<?php
+if($loggedin==1){
+echo $this->Form->create('Comment', array("controller" => "comments", "action" => "add/" . $post["Post"]["id"]));
+echo $this->Form->input('content', array('rows' => '3'));
+echo $this->Form->end('Add Comment');
+}
+?>
 
+<div id="comments">
+<?php foreach($post["Comment"] as $comment): ?>
+<div class="comment">
 
- <?php foreach ($comments as $comment): ?>
- <br>
-    <tr>
-        <td>
-            <?php
-			echo $comment['Comment']['content'] ?>
-        </td>
-		 <?php echo $this->Form->postLink(
-                'Delete',
-                array('controller'=>'Comments' , 'action' => 'delete', $comment['Comment']['id'] , $post['Post']['id']),
-                array('confirm' => 'Are you sure?'));
-            ?>
-		
-		
-    </tr>
-    <?php endforeach; ?>
-	
-	<br><br>
+     <span class="comment_user"><?php echo $comment["username"]; ?></span>
+     <span> : </span>
+  <?php echo $comment["content"]; ?>
+  <span class="comment_date"><?php echo $comment["created"]; ?></span>
+    
+     <?php
+     if($userid==$comment["user_id"]) {
+     echo $this->Html->link("Edit", array("controller"=> "comments", "action"=> "edit", $comment["id"]));
+     echo '     ';
+     echo $this->Html->link("Delete", array("controller"=> "comments", "action"=> "delete", $comment["id"]));
+     } ?>
 
-	<?php echo $this->Html->link('Add Comment', array('controller' => 'Comments' , 'action' => 'add' , $post['Post']['id'])); ?>
+<?php endforeach; ?>

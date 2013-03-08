@@ -12,7 +12,7 @@ class Post extends AppModel{
             'rule' => 'notEmpty'
         )
     );
-
+  
   public $actsAs = array('Search.Searchable');
 
   public $filterArgs = array(
@@ -29,4 +29,3 @@ class Post extends AppModel{
     }
 }
 ?>
-
