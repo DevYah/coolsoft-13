@@ -1,3 +1,4 @@
+
 <?php
 class UsersController extends AppController {
 
@@ -79,3 +80,4 @@ class UsersController extends AppController {
   }
 }
 ?>
+

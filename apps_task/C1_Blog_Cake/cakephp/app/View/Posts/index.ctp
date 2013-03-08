@@ -1,3 +1,4 @@
+
 <!-- File: /app/View/Posts/index.ctp -->
 
 <h1>Blog posts</h1>

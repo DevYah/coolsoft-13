@@ -1,4 +1,5 @@
 
+
 <?php 
     if($loggedin == 0){
         echo $this->Html->link('Signup' , array('controller' => 'users' , 'action' => 'add'));
@@ -13,7 +14,7 @@
 <?php echo $this->Form->create('Post', array(
     'url' => array_merge(array('controller' => 'posts' ,'action' => 'find'), $this->params['pass'])
 ));
-//echo $this->Form->input('title', array('div' => false));
+
 echo $this->Form->input('search');
 echo $this->Form->submit(__('Search'), array('div' => false));
 echo $this->Form->end();

@@ -1,3 +1,4 @@
+
 <?php
 class Post extends AppModel{
   public $hasMany = 'Comment';
@@ -16,8 +17,6 @@ class Post extends AppModel{
 
   public $filterArgs = array(
     'search' => array("field" => array("body", "title"), 'type' => 'like'));
-        //'title' => array('type' => 'like'),
-        //'body' => array('type' => 'like'));
 
   public function orConditions($data = array()) {
         $filter = $data['filter'];
@@ -30,3 +29,4 @@ class Post extends AppModel{
     }
 }
 ?>
+

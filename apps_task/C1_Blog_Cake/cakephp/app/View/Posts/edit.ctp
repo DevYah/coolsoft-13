@@ -1,3 +1,4 @@
+
 <!-- File: /app/View/Posts/edit.ctp -->
 
 <h1>Edit Post</h1>

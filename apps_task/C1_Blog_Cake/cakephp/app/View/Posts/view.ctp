@@ -1,3 +1,4 @@
+
 <!-- File: /app/View/Posts/view.ctp -->
 
 <h1><?php echo h($post['Post']['title']); ?></h1>
@@ -26,5 +27,5 @@
     <?php endforeach; ?>
 	
 	<br><br>
-	
+
 	<?php echo $this->Html->link('Add Comment', array('controller' => 'Comments' , 'action' => 'add' , $post['Post']['id'])); ?>
