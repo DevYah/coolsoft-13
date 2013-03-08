@@ -70,7 +70,7 @@ def contacts(request):
 	
 def detail(request, contact_id):
 	contact = Contact.objects.get(pk=contact_id)
-	return render(request, 'addressBook/detail.html', {'contact' : contact})
+	return render(request, 'addressBook/detail.html', {'contact' : contact })
 	
 def delete(request, contact_id):
 	Contact.objects.get(pk=contact_id).delete()
@@ -86,11 +86,19 @@ def addContact(request):
 		c_email= request.POST['email']
 		c_number= request.POST['number']
 		c_address= request.POST['address']
+		c_field = request.POST['field']
+		c_value = request.POST['value']
+			
 	except Exception as e:
 		return HttpResponse(e.message)
 	else:
-		u.contact_set.create(name=c_name, email=c_email, number=c_number, address=c_address)
-		u.save()
+		if not c_field:
+			u.contact_set.create(name=c_name, email=c_email, number=c_number, address=c_address)
+			u.save()
+		else:
+			u.contact_set.create(name=c_name,email=c_email,number=c_number,address=c_address)
+			u.save()
+			Contact.objects.get(name=c_name).field_set.create(field_name=c_field, field_value=c_value)
 		return HttpResponseRedirect(reverse('addressBook:contacts'))
 
 def edit(request, contact_id):

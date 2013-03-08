@@ -12,14 +12,15 @@ class Contact(models.Model):
 	
 	def __unicode__(self):
 		return self.name
-	
+
 class Field(models.Model):
 	
 	field_name = models.CharField(max_length=50)
+	field_value = models.CharField(max_length=50)
 	contact = models.ForeignKey(Contact)
 	
 	def __unicode__(self):
 		return self.field_name
-	
+
 
 
