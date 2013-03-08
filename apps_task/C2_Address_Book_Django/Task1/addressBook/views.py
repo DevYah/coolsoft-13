@@ -70,13 +70,19 @@ def contacts(request):
 	
 def detail(request, contact_id):
 	contact = Contact.objects.get(pk=contact_id)
-	field = contact.field_set.all()[0]
+	field = None
+	if not not contact.field_set.all():
+		field = contact.field_set.all()[0]
 	return render(request, 'addressBook/detail.html', {'contact' : contact, 'field' : field })
 	
 def delete(request, contact_id):
 	Contact.objects.get(pk=contact_id).delete()
-	return render(request, 'addressBook/contacts.html',{})
-	
+	return render(request, 'addressBook/home.html',{})
+
+def deleteField(request, contact_id):
+	Contact.objects.get(pk=contact_id).field_set.all()[0].delete()
+	return render(request, 'addressBook/home.html',{})
+
 def add(request):
 	return render(request, 'addressBook/add.html',{})
 	
@@ -103,5 +109,37 @@ def addContact(request):
 		return HttpResponseRedirect(reverse('addressBook:contacts'))
 
 def edit(request, contact_id):
-	return HttpResponse("To")
+	contact = Contact.objects.get(pk=contact_id)
+	field = None
+	if not not contact.field_set.all():
+		field = contact.field_set.all()[0]
+	return render(request, 'addressBook/edit.html', {'contact' : contact, 'field' : field})
+
+def editContact(request, contact_id) : 
+	try:
+		c = Contact.objects.get(pk=contact_id)
+		c_name= request.POST['name']
+		c_email= request.POST['email']
+		c_number= request.POST['number']
+		c_address= request.POST['address']
+		if not not request.POST['value']:
+			c_value = request.POST['value']
+			f = c.field_set.all()[0]
+		
+	except Exception as e:
+		return HttpResponse(e.message)
+	else:
+		if not not c_value:
+			f.field_value = c_value
+			f.save()
+		if not not c_name:
+			c.name = c_name
+		if not not c_email:
+			c.email = c_email
+		if not not c_number:
+			c.number = c.number
+		if not not c_address:
+			c.address = c.address
+		c.save()
+		return HttpResponseRedirect(reverse('addressBook:contacts'))
 

@@ -17,5 +17,7 @@ urlpatterns = patterns('',
 	url(r'^add/$', views.add, name='add'),
 	url(r'^addContact/$', views.addContact, name='addContact'),
 	url(r'^(?P<contact_id>\d+)/edit/$', views.edit, name='edit'),
+	url(r'^(?P<contact_id>\d+)/editContact/$', views.editContact, name='editContact'),
 	url(r'^(?P<contact_id>\d+)/delete/$', views.delete, name='delete'),
+	url(r'^(?P<contact_id>\d+)/deleteField/$', views.deleteField, name='deleteField'),
 )
