@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>sign up page !</title>
+</head>
+<body>
+	<div class = "main">
+		<h1>sign up</h1>
+		<div>
+			<form  action="{% url 'registration:register' %}" method="post">
+				{% csrf_token %}
+				<dl>
+					<dt>Name</dt>
+					<dd><input type = "text" name = "name"></dd>
+					<dt>Email</dt>
+					<dd><input type = "email" name = "email"></dd>
+					<dt>password</dt>
+					<dd><input type = "password" name = "password"></dd>
+					<input type = "submit" value = "sign up">
+				</dl>
+			</form>		
+		</div>
+	</div>
+</body>
+</html>
