@@ -1,0 +1,19 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}layout.css">
+	<title>your home page</title>
+</head>
+<body>
+	<div class = "main">
+		<h3>you can add , search , delete your contacts here</h3>
+		<ul>
+			<li><a href="{% url 'addressBook:add' %}">add contact</a></li>
+			<li><a href="delete/">delete contact</a></li>
+			<li><a href="{% url 'addressBook:contacts' %}">view contact</a></li>
+			<li><a href="edit/">edit contacts</a></li>
+		</ul>
+		<br>
+		<a href="{% url 'addressBook:log_out' %}"> you can log out here</a>
+	</div>
+</body>
+</html>

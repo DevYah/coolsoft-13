@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Add Contact!</title>
+</head>
+<body>
+<h1>Add A New Contact</h1>
+<h3>Kindly fill this form</h3>
+<form action="{% url 'addressBook:add' %}" method="post">
+<div>
+	<dl>
+        <dt>Name</dt>
+        <dd><input type="text" name="name"></dd>
+
+        <dt>Email</dt>
+        <dd><input type="text" name="email"></dd>
+        
+        <dt>Number</dt>
+        <dd><input type="text" name="number"></dd>
+        
+        <dt>Address</dt>
+        <dd><input type="text" name="address"></dd>
+
+        <dd><input onclick="loadAlert()" type="submit" value="Add Contact"></dd>
+	</dl>
+</div>
+</form>
+</body>
+</html>
+
+
