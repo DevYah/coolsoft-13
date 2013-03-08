@@ -1,8 +1,6 @@
 <?php
-	class Post extends AppModel{
-
-		public $hasMany = 'Comment';
-		
-		public $belongsTo = 'Blog';
-	}
+class Post extends AppModel{
+  public $hasMany = 'Comment';
+  public $belongsTo = 'Blog';
+}
 ?>
