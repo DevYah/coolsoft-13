@@ -1,0 +1,17 @@
+<h1>{{ contact.name }}</h1>
+
+<ul>
+	<li>{{ contact.email }}</li>
+	<li>{{ contact.number }}</li>
+	<li>{{ contact.address }}</li>
+	{% if not not field %}
+	<li>{{ field.field_name }} -- {{ field.field_value }}</li>
+	{% endif %}
+
+</ul>
+
+<a href="{% url 'addressBook:edit' contact.id %}">Edit Contact</a>
+<a href="{% url 'addressBook:delete' contact.id %}">Delete Contact</a>
+{% if not not field %}
+<a href="{% url 'addressBook:deleteField' contact.id %}">Remove Custom Field</a>
+{% endif %}

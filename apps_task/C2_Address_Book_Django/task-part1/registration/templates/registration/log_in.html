@@ -1,0 +1,23 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}layout.css">
+	<title>log in</title>
+</head>
+<body>
+	<div class = "main">
+		<h1>write your email and password</h1>
+		<div>
+			<form  action="{% url 'registration:enter' %}" method="post">
+				{% csrf_token %}
+				<dl>
+					<dt>name</dt>
+					<dd><input type = "text" name = "username"></dd>
+					<dt>password</dt>
+					<dd><input type = "password" name = "password"></dd>
+					<input type = "submit" value = "log in">
+				</dl>
+			</form>		
+		</div>
+	</div>
+</body>
+</html>
