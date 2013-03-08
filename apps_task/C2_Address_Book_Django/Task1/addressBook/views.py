@@ -70,7 +70,8 @@ def contacts(request):
 	
 def detail(request, contact_id):
 	contact = Contact.objects.get(pk=contact_id)
-	return render(request, 'addressBook/detail.html', {'contact' : contact })
+	field = contact.field_set.all()[0]
+	return render(request, 'addressBook/detail.html', {'contact' : contact, 'field' : field })
 	
 def delete(request, contact_id):
 	Contact.objects.get(pk=contact_id).delete()
