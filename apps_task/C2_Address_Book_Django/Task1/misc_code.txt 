@@ -1,0 +1,9 @@
+<!--
+	<li>{{ contact.field_set.all()[0].field_name }} -- {{ contact.field_set.all()[0].value }}</li>
+-->
+<!--
+<a href="{% url 'polls:upload' poll.id %}">Vote again?</a>-->
+
+<!--
+	<li>{ contact.field_set.all()[0].field_name }} -- {{ contact.field_set.all()[0].field_value }}</li>
+-->
