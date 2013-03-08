@@ -1,0 +1,12 @@
+
+<h1> All Blogs </h1>
+
+<% @blogs.each do |blog| %>
+<tr>
+	<td>
+		<%= link_to blog.name, blog %>
+	</td>
+	<br>
+	<br>
+</tr>
+<%end%>
