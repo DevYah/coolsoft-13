@@ -22,7 +22,7 @@ Steps to run the application:
 
 6) Open the server by typing the command:
 
-	<tt>rake db:test:prepare</tt>
+	<tt>rails server</tt>
 
 7) Open another command prompt and cd to the project's directory and then type the following command:
 
