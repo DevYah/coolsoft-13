@@ -2,9 +2,9 @@ class WelcomeController < ApplicationController
   def index
   end
 
-  def invite
-  	mail = Inviter.invite_email(params[:email] , params[:type])
+  def invite_committee
+  	InvitedPerson.create(:email => params[:email] , :committee => true , :admin => false)
+  	mail = Inviter.invite_email(params[:email] , 'committee')
   	mail.deliver
-  	redirect_to(:action => 'index')
   end
 end

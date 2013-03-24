@@ -2,7 +2,7 @@ Ideas::Application.routes.draw do
 
   get "welcome/index"
 
-  post 'welcome/invite'
+  post 'welcome/invite_committee'
 
 root :to => 'welcome#index'
 
