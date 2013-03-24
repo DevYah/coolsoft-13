@@ -1,0 +1,11 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+<h1>generate email</h1>
+	<%= form_tag(:action => 'invite') do %>
+		<p>Email:</br> 
+			<%= text_field_tag(:email) %></p> 
+		<p>Type:</br> 
+			<%= text_field_tag :type %></p> 
+		<%= submit_tag("send") %>
+	<% end %>
+
