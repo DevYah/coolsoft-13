@@ -81,19 +81,15 @@ class TagsController < ApplicationController
     end
   end
   
-  def create 
+  def addsym
     @tag = Tag.find(params[:id])
-    n = params[:name]
-    if Tag.where(:name => "#{n}") != nil 
-      t = Tag.create(params[:name])
-      @tag.tags.all << t
-      t.tags.all << @tag
-    else
-      t = Tag.where(:name => "#{n}")
-      @tag.tags.all << t
-      t.tags.all << @tag
-    end
+    y = params[:tag]['name']
+    t = Tag.new(:name => y)
+    t.tags << @tag
+    puts t.tags.all
+    @tag.tags << t
     redirect_to tag_path(@tag)
   end
+  
   
 end
