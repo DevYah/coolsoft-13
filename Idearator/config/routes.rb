@@ -48,7 +48,11 @@ Sprint0::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  get "home/index"
+  get 'Search', to: 'home#show', as: 'Search'
+  resources :home
+  resources :ideas
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
