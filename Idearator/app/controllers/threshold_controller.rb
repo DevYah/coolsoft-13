@@ -1,2 +1,0 @@
-class ThresholdController < ApplicationController
-end

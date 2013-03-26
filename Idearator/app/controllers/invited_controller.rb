@@ -1,2 +1,0 @@
-class InvitedController < ApplicationController
-end
