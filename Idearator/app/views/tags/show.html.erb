@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @tag.name %>
+</p>
+<h3>Synonym List<h3>
+
+
+
+	<% @tags.each do |tag| %>
+	  <tr>
+	    <td><%= tag.name %></td>
+	  </tr>
+	<% end %>
+
+<br />
+
+
+<%= link_to 'Add Synonym', @tag%>
+<%= link_to 'Edit', edit_tag_path(@tag) %>
+<%= link_to 'Back', tags_path %>

@@ -1,5 +1,5 @@
 class Invited < ActiveRecord::Base
   # attr_accessible :title, :body
 
-  belongs_to :admins
+  has_and_belongs_to_many :admins
 end
