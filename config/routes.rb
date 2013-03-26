@@ -30,7 +30,7 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-
+root:to => 'homes#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
