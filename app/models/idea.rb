@@ -1,5 +1,5 @@
 class Idea < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :title, :description, :problem_solved
 
   belongs_to :user
   has_many :comments
@@ -8,4 +8,8 @@ class Idea < ActiveRecord::Base
   has_and_belongs_to_many :committees
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :users, :join_table => :votes
+  searchable do 
+  	text :title
+  	text :description
+  end
 end

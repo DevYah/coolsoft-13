@@ -1,0 +1,43 @@
+<body class = overview>
+<h1>Home</h1>
+
+<%= form_tag "/home/", :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+ <style type="text/css">
+    .idea
+    {
+        background-color: #CCFF33;
+        width: 200px;
+        height:100px;
+    }
+    .overview{
+      background-color: #99CCFF
+    }
+    </style>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @ideas.each do |i| %>
+  <tr>
+    <div class = idea>
+    <td><%= i.title %></td>
+    <td><%= i.description %></td>
+  </div>
+  </tr>
+<% end %>
+</table>
+<table>
+<tr>
+<td><%= @ideas.count %></td>
+<td><h4>results found</h4></td>
+</tr>
+</table>
+</body>
