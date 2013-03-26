@@ -1,2 +1,0 @@
-class CommitteeController < ApplicationController
-end
