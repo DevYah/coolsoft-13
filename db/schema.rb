@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325005350) do
+ActiveRecord::Schema.define(:version => 20130326120703) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
@@ -55,22 +55,17 @@ ActiveRecord::Schema.define(:version => 20130325005350) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "committee_tags", :id => false, :force => true do |t|
-    t.integer  "committee_id"
-    t.integer  "tag_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "committees", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "idea_tags", :id => false, :force => true do |t|
-    t.integer "idea_id"
-    t.integer "tag_id"
+  create_table "committees_tags", :id => false, :force => true do |t|
+    t.integer  "committee_id"
+    t.integer  "tag_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "ideas", :force => true do |t|
@@ -84,12 +79,18 @@ ActiveRecord::Schema.define(:version => 20130325005350) do
     t.datetime "updated_at",                                           :null => false
   end
 
-  create_table "inviteds", :force => true do |t|
-    t.string   "email"
-    t.boolean  "admin"
-    t.boolean  "committee"
+  create_table "ideas_tags", :id => false, :force => true do |t|
+    t.integer  "idea_id"
+    t.integer  "tag_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "inviteds", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "admin_id"
   end
 
   create_table "likes", :id => false, :force => true do |t|
@@ -136,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20130325005350) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "user_ratings", :force => true do |t|
+  create_table "user_ratings", :id => false, :force => true do |t|
     t.string   "name"
     t.integer  "value"
     t.integer  "user_id"
