@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+<<<<<<< HEAD
   # GET /tags
   # GET /tags.json
   def index
@@ -92,4 +93,6 @@ class TagsController < ApplicationController
   end
   
   
+=======
+>>>>>>> master
 end
