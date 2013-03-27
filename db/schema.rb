@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "user_notifications", :id => false, :force => true do |t|
+  create_table "users_notifications", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "notification_id"
     t.datetime "created_at",      :null => false
