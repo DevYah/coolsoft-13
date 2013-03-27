@@ -30912,3 +30912,116 @@ Served asset /threshold.css - 304 Not Modified (0ms)
 Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 00:45:59 +0200
 Served asset /user.css - 304 Not Modified (0ms)
 Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (8.6ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20130324225716)
+Migrating to CreateIdeas (20130324225735)
+Migrating to CreateCommittees (20130324225754)
+Migrating to CreateAdmins (20130324225812)
+Migrating to CreateRatings (20130324225831)
+Migrating to CreateComments (20130324230112)
+Migrating to CreateUserRatings (20130324230433)
+Migrating to CreateCommitteeIdeas (20130324231106)
+Migrating to CreateTags (20130324231520)
+Migrating to CreateCommitteeTags (20130324231652)
+Migrating to CreateIdeaTags (20130324231842)
+Migrating to CreateVotes (20130324232641)
+Migrating to CreateLikes (20130324233126)
+Migrating to CreateInviteds (20130324233354)
+Migrating to CreateAdminInviteds (20130324233649)
+Migrating to CreateThresholds (20130324233958)
+Migrating to CreateNotifications (20130325000720)
+Migrating to CreateActionNotifications (20130325000751)
+Migrating to CreateCommitteeNotifications (20130325000843)
+Migrating to CreateUserNotifications (20130325001329)
+Migrating to CreateTagConnections (20130325005350)
+Migrating to RemoveUnnecessaryColumnsFromSubclasses (20130327105744)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_committees" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "committees"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "committees"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "committees" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_committees"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "altered_committees"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "admins"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "admins"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_admins"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "altered_admins"[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "type" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327105744')[0m
+  [1m[35m (1.6ms)[0m  commit transaction
+Migrating to DropCommitteeAdminTables (20130327111846)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "admins"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "committees"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130327111846')
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Migrating to ChangeUserStatus (20130327113853)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(100) NOT NULL, "password" varchar(255), "first_name" varchar(255), "last_name" varchar(255), "username" varchar(255), "date_of_birth" date, "gender" varchar(1), "about_me" text, "recieve_vote_notification" boolean DEFAULT 't', "recieve_comment_notification" boolean DEFAULT 't', "status" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "type" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(100) NOT NULL, "password" varchar(255), "first_name" varchar(255), "last_name" varchar(255), "username" varchar(255), "date_of_birth" date, "gender" varchar(1), "about_me" text, "recieve_vote_notification" boolean DEFAULT 't', "recieve_comment_notification" boolean DEFAULT 't', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "type" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_users"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "altered_users"
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "active" boolean DEFAULT 't'[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "banned" boolean DEFAULT 'f'
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327113853')[0m
+  [1m[35m (2.1ms)[0m  commit transaction
+Migrating to ChangeIdeaStatus (20130327114601)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_ideas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(100) NOT NULL, "description" varchar(255) NOT NULL, "problem_solved" varchar(255) NOT NULL, "num_votes" integer, "status" varchar(255) DEFAULT 'waiting', "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ideas"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "ideas"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "ideas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(100) NOT NULL, "description" varchar(255) NOT NULL, "problem_solved" varchar(255) NOT NULL, "num_votes" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_ideas"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "altered_ideas"[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "ideas" ADD "approved" boolean DEFAULT 'f'
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327114601')[0m
+  [1m[35m (1.9ms)[0m  commit transaction
+Migrating to EditCommitteesTags (20130327135749)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_committees_tags" ("committee_id" integer, "tag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "committees_tags"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "committees_tags"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "committees_tags" ("committee_id" integer, "tag_id" integer, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_committees_tags"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "altered_committees_tags"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_committees_tags" ("committee_id" integer, "tag_id" integer, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mSELECT * FROM "committees_tags"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "committees_tags"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "committees_tags" ("committee_id" integer, "tag_id" integer) [0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "altered_committees_tags"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "altered_committees_tags"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20130327135749')
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Migrating to EditIdeasTags (20130327141845)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "altered_ideas_tags" ("idea_id" integer, "tag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "ideas_tags"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "ideas_tags"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "ideas_tags" ("idea_id" integer, "tag_id" integer, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_ideas_tags"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "altered_ideas_tags"
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "altered_ideas_tags" ("idea_id" integer, "tag_id" integer, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "ideas_tags"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "ideas_tags"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "ideas_tags" ("idea_id" integer, "tag_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_ideas_tags"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "altered_ideas_tags"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327141845')[0m
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to RemoveAdminInviteds (20130327142819)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "admin_inviteds"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327142819')[0m
+  [1m[35m (1.3ms)[0m  commit transaction
+Migrating to EditCommitteIdeas (20130327143347)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "ideas" ADD "committee_id" integer
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327143347')[0m
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m

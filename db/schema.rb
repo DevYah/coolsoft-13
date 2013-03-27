@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130325005350) do
-=======
 ActiveRecord::Schema.define(:version => 20130327143347) do
->>>>>>> master
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
@@ -46,29 +42,23 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "committees_tags", :id => false, :force => true do |t|
-<<<<<<< HEAD
+  create_table "committee_tags", :id => false, :force => true do |t|
     t.integer  "committee_id"
     t.integer  "tag_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "committees", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "committees_tags", :id => false, :force => true do |t|
+    t.integer "committee_id"
+    t.integer "tag_id"
   end
 
-  create_table "ideas_tags", :id => false, :force => true do |t|
+  create_table "idea_tags", :id => false, :force => true do |t|
     t.integer  "idea_id"
     t.integer  "tag_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-=======
-    t.integer "committee_id"
-    t.integer "tag_id"
->>>>>>> master
   end
 
   create_table "ideas", :force => true do |t|
@@ -83,14 +73,11 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.integer  "committee_id"
   end
 
-<<<<<<< HEAD
-=======
   create_table "ideas_tags", :id => false, :force => true do |t|
     t.integer "idea_id"
     t.integer "tag_id"
   end
 
->>>>>>> master
   create_table "inviteds", :force => true do |t|
     t.string   "email"
     t.boolean  "admin"
