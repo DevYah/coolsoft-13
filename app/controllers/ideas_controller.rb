@@ -10,7 +10,7 @@ def show
        end
      end
 	def index
-
+    
 	end
 	def new
 		@idea=Idea.new
