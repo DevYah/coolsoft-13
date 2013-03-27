@@ -1,7 +1,9 @@
 Sprint0::Application.routes.draw do
-  
 
-  #get "ideas/new"
+
+  default_url_options :host => "localhost:3000"
+
+  devise_for :users, :controllers => { :registrations => "registrations" }
   resources :ideas
   # The priority is based upon order of creation:
   # first created -> highest priority.
