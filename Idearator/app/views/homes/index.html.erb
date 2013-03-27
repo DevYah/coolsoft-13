@@ -2,7 +2,7 @@
 <h1>Top Ten Ideas</h1>
 <% @top.each do |top| %>
 <div class="topten_idea">
-	<span><%= top.title  %></span>
+	<span><%= link_to top.title ,top %></span>
 	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>
 </div>
