@@ -1,6 +1,30 @@
+<%= form_tag "/home/show", :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+<style type="text/css">
+.topten{
+	position: relative;
+	left: 75%;
+	width: 300px;
+	height: 200px;
 
-<br>
-<br>
+}
+.topten_idea{
+		height:70px;
+	width: 300px;
+background-color: #999999;
+border-style: solid;
+border-width: 1px;
+border-color: white;
+	
+}
+.spam{
+	width: 50px;
+}
+</style>
 <div id = "IdeaStream">
 <% if @approved.size > 0 %>
 <% @approved.each do |approved| %>
@@ -24,14 +48,26 @@
 <%end%>
 <% end %>
 </div>
-
-<div id="topten">
+<div class="topten">
 <h1>Top Ten Ideas</h1>
 <% @top.each do |top| %>
 <div class="topten_idea">
+	
 	<span><%= link_to top.title ,top %></span>
 	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>
+	<span class = size><%= image_tag top.photo.url(:thumb) %></span>
+
+	
 </div>
 <% end %>
+<% if params[:search] == ""%>
+<em>
+Ohh! you entered nothing in the search
+</em>
+<% end %>
+<% if @ideas.count == 0 %>
+<em>No Results Found !!</em>
+<% end %>
+>>>>>>> 69cd96388d8a79a938179e7f14bd9c21f3fc80cf
 </div>
