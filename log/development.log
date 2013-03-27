@@ -31025,3 +31025,1433 @@ Migrating to EditCommitteIdeas (20130327143347)
   [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130327143347')[0m
   [1m[35m (1.3ms)[0m  commit transaction
   [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20130324225716)
+Migrating to CreateIdeas (20130324225735)
+Migrating to CreateCommittees (20130324225754)
+Migrating to CreateAdmins (20130324225812)
+Migrating to CreateRatings (20130324225831)
+Migrating to CreateComments (20130324230112)
+Migrating to CreateUserRatings (20130324230433)
+Migrating to CreateCommitteeIdeas (20130324231106)
+Migrating to CreateTags (20130324231520)
+Migrating to CreateCommitteeTags (20130324231652)
+Migrating to CreateIdeaTags (20130324231842)
+Migrating to CreateVotes (20130324232641)
+Migrating to CreateLikes (20130324233126)
+Migrating to CreateInviteds (20130324233354)
+Migrating to CreateAdminInviteds (20130324233649)
+Migrating to CreateThresholds (20130324233958)
+Migrating to CreateNotifications (20130325000720)
+Migrating to CreateActionNotifications (20130325000751)
+Migrating to CreateCommitteeNotifications (20130325000843)
+Migrating to CreateUserNotifications (20130325001329)
+Migrating to CreateTagConnections (20130325005350)
+Migrating to RemoveUnnecessaryColumnsFromSubclasses (20130327105744)
+Migrating to DropCommitteeAdminTables (20130327111846)
+Migrating to ChangeUserStatus (20130327113853)
+Migrating to ChangeIdeaStatus (20130327114601)
+Migrating to EditCommitteesTags (20130327135749)
+Migrating to EditIdeasTags (20130327141845)
+Migrating to RemoveAdminInviteds (20130327142819)
+Migrating to EditCommitteIdeas (20130327143347)
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-03-27 18:36:48 +0200
+Processing by AdminsController#index as HTML
+  Rendered admins/index.html.erb within layouts/application (3.4ms)
+Compiled admin.css  (48ms)  (pid 828)
+Compiled application.css  (3ms)  (pid 828)
+Compiled admin.js  (103ms)  (pid 828)
+Compiled admin.js  (0ms)  (pid 828)
+Compiled application.js  (12ms)  (pid 828)
+Completed 200 OK in 440ms (Views: 439.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /admin.css - 200 OK (1ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /invited.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /tag_connection.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /invited.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /notification.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /idea.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /application.css - 304 Not Modified (15ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /application.js - 304 Not Modified (37ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /commennt.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /committee.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /tag.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /idea.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /jquery.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /rating.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /scaffolds.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /tag.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /tag_connection.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /threshold.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /user.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /rating.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /threshold.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /commennt.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /committee.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /admin.js - 200 OK (1ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /user.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /notification.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:49 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:50 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:50 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:50 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/tags" for 127.0.0.1 at 2013-03-27 18:36:51 +0200
+Processing by TagsController#index as HTML
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" [0m
+  Rendered tags/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 181ms (Views: 153.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /scaffolds.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /tag.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /commennt.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /committee.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /idea.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /invited.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /notification.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /rating.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /tag.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /tag_connection.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /threshold.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:52 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:56 +0200
+Served asset /application.css - 304 Not Modified (23ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:56 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:36:57 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/tags" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Processing by TagsController#index as HTML
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" 
+  Rendered tags/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 137ms (Views: 136.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /commennt.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /committee.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /idea.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /invited.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /notification.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /rating.js - 304 Not Modified (22ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /tag.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /tag_connection.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /threshold.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /idea.css - 200 OK (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:07 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/tags/new" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Processing by TagsController#new as HTML
+  Rendered tags/_form.html.erb (50.7ms)
+  Rendered tags/new.html.erb within layouts/application (64.9ms)
+Completed 200 OK in 207ms (Views: 203.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /application.css - 304 Not Modified (31ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /tag.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /threshold.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /commennt.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /committee.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /idea.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /invited.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /rating.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /notification.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /tag.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /tag_connection.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /threshold.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:10 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:11 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started POST "/tags" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GwipjBDxlpbKK+eCj8ZlDoitr4EvDkbOwYv5E4kD0y4=", "tag"=>{"name"=>"Software"}, "commit"=>"Create Tag"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mTag Exists (0.1ms)[0m  SELECT 1 AS one FROM "tags" WHERE "tags"."name" = 'Software' LIMIT 1
+  [1m[36mSQL (18.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Wed, 27 Mar 2013 16:37:17 UTC +00:00], ["name", "Software"], ["updated_at", Wed, 27 Mar 2013 16:37:17 UTC +00:00]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/tags/8
+Completed 302 Found in 75ms (ActiveRecord: 19.8ms)
+
+
+Started GET "/tags/8" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mTag Load (0.3ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT 1[0m  [["id", "8"]]
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "tag_connections" ON "tags"."id" = "tag_connections"."tag_b_id" WHERE "tag_connections"."tag_a_id" = 8
+  Rendered tags/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 184ms (Views: 162.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /application.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /notification.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /commennt.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /committee.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /invited.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /idea.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /notification.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /rating.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /tag.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /threshold.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /tag_connection.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:17 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:18 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started PUT "/tags/8/synonym" for 127.0.0.1 at 2013-03-27 18:37:27 +0200
+Processing by TagsController#addsym as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GwipjBDxlpbKK+eCj8ZlDoitr4EvDkbOwYv5E4kD0y4=", "tag"=>{"name"=>"Computer"}, "commit"=>"Update Tag", "id"=>"8"}
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT 1[0m  [["id", "8"]]
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "tag_connections" ON "tags"."id" = "tag_connections"."tag_b_id" WHERE "tag_connections"."tag_a_id" IS NULL
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mTag Exists (0.1ms)[0m  SELECT 1 AS one FROM "tags" WHERE "tags"."name" = 'Computer' LIMIT 1
+  [1m[36mSQL (17.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Wed, 27 Mar 2013 16:37:27 UTC +00:00], ["name", "Computer"], ["updated_at", Wed, 27 Mar 2013 16:37:27 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  INSERT INTO "tag_connections" ("tag_a_id", "tag_b_id") VALUES (9, 8)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "tag_connections" ("tag_a_id", "tag_b_id") VALUES (8, 9)[0m
+  [1m[35m (6.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/tags/8
+Completed 302 Found in 29ms (ActiveRecord: 23.9ms)
+
+
+Started GET "/tags/8" for 127.0.0.1 at 2013-03-27 18:37:27 +0200
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT 1[0m  [["id", "8"]]
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "tag_connections" ON "tags"."id" = "tag_connections"."tag_b_id" WHERE "tag_connections"."tag_a_id" = 8
+  Rendered tags/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 164ms (Views: 161.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /application.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /commennt.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /tag.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /commennt.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /committee.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /idea.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /invited.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /notification.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /rating.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /tag.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /tag_connection.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /threshold.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:28 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started PUT "/tags/8/synonym" for 127.0.0.1 at 2013-03-27 18:37:34 +0200
+Processing by TagsController#addsym as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GwipjBDxlpbKK+eCj8ZlDoitr4EvDkbOwYv5E4kD0y4=", "tag"=>{"name"=>"Engineering"}, "commit"=>"Update Tag", "id"=>"8"}
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT 1[0m  [["id", "8"]]
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "tag_connections" ON "tags"."id" = "tag_connections"."tag_b_id" WHERE "tag_connections"."tag_a_id" IS NULL
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mTag Exists (0.1ms)[0m  SELECT 1 AS one FROM "tags" WHERE "tags"."name" = 'Engineering' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Wed, 27 Mar 2013 16:37:34 UTC +00:00], ["name", "Engineering"], ["updated_at", Wed, 27 Mar 2013 16:37:34 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  INSERT INTO "tag_connections" ("tag_a_id", "tag_b_id") VALUES (10, 8)
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO "tag_connections" ("tag_a_id", "tag_b_id") VALUES (8, 10)[0m
+  [1m[35m (2.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/tags/8
+Completed 302 Found in 7ms (ActiveRecord: 3.0ms)
+
+
+Started GET "/tags/8" for 127.0.0.1 at 2013-03-27 18:37:34 +0200
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT 1[0m  [["id", "8"]]
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "tag_connections" ON "tags"."id" = "tag_connections"."tag_b_id" WHERE "tag_connections"."tag_a_id" = 8
+  Rendered tags/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 141ms (Views: 138.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /invited.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/admin.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /admin.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /commennt.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /idea.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /committee.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /invited.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /notification.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /rating.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /tag.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /tag_connection.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /threshold.js - 304 Not Modified (24ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:35 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/tags" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Processing by TagsController#index as HTML
+  [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags" [0m
+  Rendered tags/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 133ms (Views: 132.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /committee.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /threshold.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /user.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/admin.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /admin.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /commennt.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /invited.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /committee.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/idea.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /idea.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /rating.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /notification.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/tag.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /tag.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /tag_connection.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /threshold.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /user.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/admin.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /admin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/commennt.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /commennt.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/committee.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /committee.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/idea.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /idea.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/invited.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /invited.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/notification.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:38 +0200
+Served asset /notification.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rating.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:39 +0200
+Served asset /rating.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:39 +0200
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:39 +0200
+Served asset /tag.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag_connection.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:39 +0200
+Served asset /tag_connection.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/threshold.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:39 +0200
+Served asset /threshold.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2013-03-27 18:37:39 +0200
+Served asset /user.css - 304 Not Modified (0ms)

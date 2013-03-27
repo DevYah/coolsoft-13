@@ -63,6 +63,6 @@ Sprint0::Application.routes.draw do
   
   match 'tags/:id/synonym' => 'tags#addsym', :via => :put
   
-  root :to => 'tags#index'
+  root :to => 'admins#index'
   
 end
