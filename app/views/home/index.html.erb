@@ -1,20 +1,24 @@
 <style type="text/css">
 .topten{
-	position : fixed;
+	position: relative;
 	left: 75%;
-	border: solid;
-	width: 200px;
-	height: 400px;
-	background-color: #ff99cc;
+	width: 300px;
+	height: 200px;
+
 }
 .topten_idea{
-	border: solid;
-	height:25px;
+		height:70px;
+	width: 300px;
+background-color: #999999;
+border-style: solid;
+border-width: 1px;
+border-color: white;
 	
 }
-.span{
-	width: 200px;
+.spam{
+	width: 50px;
 }
+</style>
 </style>
 <div class="topten">
 <h1>Top Ten Ideas</h1>
@@ -24,6 +28,8 @@
 	<span><%= link_to top.title ,top %></span>
 	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>
+	<span class = size><%= image_tag top.photo.url(:thumb) %></span>
+
 	
 </div>
 <% end %>
