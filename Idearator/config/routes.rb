@@ -1,4 +1,7 @@
 Sprint0::Application.routes.draw do
+
+  get '/admins/index'
+  post '/admins/invite_committee'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
