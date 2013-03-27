@@ -3,11 +3,13 @@ class HomeController < ApplicationController
 		@ideas = Idea.all
 	end
 	def show
-		@ispresent  = 1
 		@ideas = Idea.all
 		@search = Idea.search do
 			fulltext params[:search]
 		end
 		@ideas = @search.results
+		if @ideas.size == 0
+			flash[:alert] = "NO match"
+		end
  end
 end
