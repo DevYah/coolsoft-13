@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327135749) do
+ActiveRecord::Schema.define(:version => 20130327141845) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
@@ -66,10 +66,8 @@ ActiveRecord::Schema.define(:version => 20130327135749) do
   end
 
   create_table "ideas_tags", :id => false, :force => true do |t|
-    t.integer  "idea_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "idea_id"
+    t.integer "tag_id"
   end
 
   create_table "inviteds", :force => true do |t|
