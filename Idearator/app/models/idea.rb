@@ -1,5 +1,6 @@
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :description, :problem_solved
+  
+   attr_accessible :title, :description, :problem_solved ,:photo
 
   belongs_to :user
   has_many :comments
@@ -12,4 +13,5 @@ class Idea < ActiveRecord::Base
   	text :title
   	text :description
   end
+  has_attached_file :photo, :styles => { :small => "60x60>", :thumb => "10x10!" }, :default_url => "/images/:style/missing.png"
 end
