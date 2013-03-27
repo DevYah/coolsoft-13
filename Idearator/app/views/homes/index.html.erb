@@ -1,24 +1,10 @@
-
-<h1> Top Ten Ideas </h1>
-
-
+<div id="topten">
+<h1>Top Ten Ideas</h1>
 <% @top.each do |top| %>
-<% id=top.user_id %>
-<% user=User.find(id)%>
-
-
-<tr>
-	
-	<td>
-		
-		
-		<%= top.title %>
-		<%= top.num_votes %>
-		<%= user.first_name %>
-
-
-	</td>
-	<br>
-	<br>
-</tr>
-<%end%>
+<div class="topten_idea">
+	<span><%= top.title  %></span>
+	<span><%= top.num_votes %></span>
+	<span><%= top.user.first_name %></span>
+</div>
+<% end %>
+</div>
