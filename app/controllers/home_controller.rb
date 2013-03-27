@@ -1,4 +1,8 @@
 class HomeController < ApplicationController
+	#the show method previews the ideas that match the search results
+	#based on title and description columns, parameters that are defined are
+	#@ideas: getting all ideas and @search: getting all ideas that matches
+	#then @ideas is reset to match the results.
 	def show
 		@ideas = Idea.all
 		@search = Idea.search do
