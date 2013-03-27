@@ -1,7 +1,7 @@
 <body class = overview>
 <h1>Home</h1>
 
-<%= form_tag "/home/", :method => :get do %>
+<%= form_tag "/home/show", :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
@@ -11,13 +11,13 @@
     .idea
     {
         background-color: #CCFF33;
-        width: 200px;
-        height:100px;
+        
     }
     .overview{
       background-color: #99CCFF
     }
     </style>
+    <% if params[:search] != ""%>
 <table>
   <tr>
     <th>Title</th>
@@ -25,19 +25,42 @@
     <th></th>
     <th></th>
   </tr>
+  <% if @ideas.count > 0 %>
 <% @ideas.each do |i| %>
+<div class = idea>
   <tr>
-    <div class = idea>
-    <td><%= i.title %></td>
+    <td><%= link_to i.title, i %></td>
     <td><%= i.description %></td>
-  </div>
   </tr>
 <% end %>
+<% end %>
+</div>
 </table>
 <table>
 <tr>
+  <% if @ideas.count > 0 %>
 <td><%= @ideas.count %></td>
 <td><h4>results found</h4></td>
+<% end %>
 </tr>
+<% if @ideas.count == 0 %>
+<em>No Results Found !!</em>
+<% end %>
+<%= form_tag "/home/", :method => :get do %>
+  <p>
+    <%= submit_tag "Back to Stream", :name => nil %>
+  </p>
+<% end %>
 </table>
+<%end%>
+<% if params[:search] == ""%>
+<em>
+Ohh! you entered nothing in the search field
+</em>
+<%= form_tag "/home/", :method => :get do %>
+  <p>
+    <%= submit_tag "Back to Stream", :name => nil %>
+  </p>
+<% end %>
+<% end %>
 </body>
