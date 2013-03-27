@@ -1,0 +1,20 @@
+
+<br>
+<br>
+<% if @approved.size > 0 %>
+<% @approved.each do |approved| %>
+<tr>
+	<br>
+	<td>
+		<%= "Title: " + approved.title %>
+	</td>
+	<br>
+	<td>
+		<%= "Description: " + approved.description %>
+		<br>
+		<%= "Number of votes "  + approved.num_votes.to_s %>
+	</td>
+	<br>
+</tr>
+<%end%>
+<% end %>
