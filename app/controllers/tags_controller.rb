@@ -74,6 +74,7 @@ class TagsController < ApplicationController
   def destroy
     @tag = Tag.find(params[:id])
     @tag.destroy
+    @tag.tags.destroy_all
 
     respond_to do |format|
       format.html { redirect_to tags_url }
@@ -81,14 +82,43 @@ class TagsController < ApplicationController
     end
   end
   
+  ##
+    # Adds a Synonym with the name entered in the form
+    #
+    # If the entered name does not have an associated tag with the same name
+    # a new tag is created with the name and a connection is made
+    #
+    # Else if the entered name already has a tag but without a connection  
+    # a connection is made but a new tag is not created 
+    #
+    # Else if the entered name already has a tag and a connection to the  
+    # parent tag nothing is done and the user is informed so that the 
+    # synonym already exists
+    
   def addsym
     @tag = Tag.find(params[:id])
     y = params[:tag]['name']
-    t = Tag.new(:name => y)
-    t.tags << @tag
-    puts t.tags.all
-    @tag.tags << t
-    redirect_to tag_path(@tag)
+    #query for finding tag with input name returns Tag Array
+    tag_query = Tag.where("name = ?", y)  
+    respond_to do |format|
+      if tag_query.empty?
+        t = Tag.new(:name => y)
+        t.save
+        t.tags << @tag
+        @tag.tags << t
+        format.html { redirect_to @tag, notice: 'Synonym was successfully created.' }
+        format.json { head :no_content }
+      elsif not @tag.tags.all.include?(tag_query[0])
+        t = tag_query[0]
+        t.tags << @tag
+        @tag.tags << t
+        format.html { redirect_to @tag, notice: 'Synonym list was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @tag, notice: 'Synonym already exits !' }
+        format.json { head :no_content }
+      end
+    end
   end
   
 end
