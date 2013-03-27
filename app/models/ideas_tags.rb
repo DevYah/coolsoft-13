@@ -1,3 +1,3 @@
-class IdeaTag < ActiveRecord::Base
+class IdeasTags < ActiveRecord::Base
   # attr_accessible :title, :body
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326120703) do
+ActiveRecord::Schema.define(:version => 20130327143347) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
-
   create_table "admin_inviteds", :id => false, :force => true do |t|
     t.integer  "admin_id"
     t.integer  "invited_id"
@@ -32,7 +31,6 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
   create_table "comments", :force => true do |t|
     t.string   "content"
     t.integer  "num_likes"
@@ -62,10 +60,8 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
   end
 
   create_table "committees_tags", :id => false, :force => true do |t|
-    t.integer  "committee_id"
-    t.integer  "tag_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer "committee_id"
+    t.integer "tag_id"
   end
 
   create_table "ideas", :force => true do |t|
@@ -75,15 +71,15 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.integer  "num_votes"
     t.string   "status",                        :default => "waiting"
     t.integer  "user_id"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.boolean  "approved",                      :default => false
+    t.integer  "committee_id"
   end
 
   create_table "ideas_tags", :id => false, :force => true do |t|
-    t.integer  "idea_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "idea_id"
+    t.integer "tag_id"
   end
 
   create_table "inviteds", :force => true do |t|
