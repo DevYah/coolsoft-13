@@ -1,5 +1,10 @@
 class IdeasController < ApplicationController
+
+  #before_filter :authenticate_user!, :only => [:create, :edit]
+
 def show
+  current_user = User.find(1)
+    #@user=current_user.id
       @idea = Idea.find(params[:id])
      # @idea=Idea.new
        #rescue ActiveRecord::RecordNotFound
@@ -10,10 +15,11 @@ def show
        end
      end
 	def index
-    
+
 	end
 	def new
 		@idea=Idea.new
+    @tags= Tag.all
 		
 		respond_to do |format|
 	      format.html # new.html.erb
@@ -21,6 +27,7 @@ def show
 	    end
 	end
 	def edit   
+
     @idea = Idea.find(params[:id])
   end
   def update
@@ -37,10 +44,18 @@ def show
     end
   end
 	def create
+    puts params
+    current_user = User.find(1)
     @idea = Idea.new(params[:idea])
-     
+    
+
+     @idea.user_id=current_user.id
     respond_to do |format|
       if @idea.save
+        @tags= params[:idea_tags][:tags]
+        @tags.each do |tag|
+          IdeasTag.create(:idea_id => @idea.id , :tag_id => tag)
+        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else

@@ -16,7 +16,10 @@
   <%= @idea.problem_solved  %>
 </p>
 
-
+<% if @user == @idea.user_id %>
 <td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
+<%end%>
+
+<td><%= link_to 'Back', '/' %></td>
 
 
