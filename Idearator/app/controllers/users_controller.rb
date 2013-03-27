@@ -10,13 +10,13 @@ class UsersController < ApplicationController
 	end
 
 	#method checks the entered password if it's the current users password 
-	#it changes his status to deactivated and signs him out. 
+	#it changes the value of his active field to false and signs him out. 
 	#Params: 
 	#password:: the parameter is an instance of User passed through the form form confirm deactivate.
 	#Author: Amina Zoheir
 	def deactivate
 		if current_user.password == params[:user][:password]
-			current_user.status = "deactivated"
+			current_user.active = false
 			current_user.save
 			sign_out current_user
 			respond_to do |format|
@@ -33,11 +33,11 @@ class UsersController < ApplicationController
 		end
 	end
 
-	#method sets the status of the current user to active
+	#method sets the active field of the current user to true
 	#Params: none
 	#Author: Amina Zoheir
 	def activate
-		current_user.status = "active"
+		current_user.active = true
 		respond_to do |format|
 			format.html { falsh[:notice] = 'Successfully reactivated' }
 			format.json { head :no_content }
