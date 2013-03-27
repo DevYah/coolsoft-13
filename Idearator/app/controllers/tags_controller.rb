@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-<<<<<<< HEAD
   # GET /tags
   # GET /tags.json
   def index
@@ -92,7 +91,4 @@ class TagsController < ApplicationController
     redirect_to tag_path(@tag)
   end
   
-  
-=======
->>>>>>> master
 end
