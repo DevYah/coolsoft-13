@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326120703) do
+ActiveRecord::Schema.define(:version => 20130327111846) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
@@ -23,12 +23,6 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
   create_table "admin_inviteds", :id => false, :force => true do |t|
     t.integer  "admin_id"
     t.integer  "invited_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "admins", :force => true do |t|
-    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -53,12 +47,6 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.integer  "notification_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-  end
-
-  create_table "committees", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "committees_tags", :id => false, :force => true do |t|
@@ -160,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.string   "status"
     t.datetime "created_at",                                                    :null => false
     t.datetime "updated_at",                                                    :null => false
+    t.string   "type"
   end
 
   create_table "votes", :id => false, :force => true do |t|
