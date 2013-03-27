@@ -1,0 +1,29 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @tag.name %>
+</p>
+<h3>Synonym List<h3>
+
+
+
+	<% @tags.each do |tag| %>
+	  <tr>
+	    <td><%= tag.name %></td>
+	  </tr>
+	<% end %>
+
+<br />
+<h2>Add a Synonym:</h2>
+<%= form_for(@tag, :url =>  url_for(:controller => 'tags',  :action => 'addsym') ) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  <div class="actions">
+    <%= f.submit%>
+  </div>
+  <% end %>
+<%= link_to 'Edit', edit_tag_path(@tag) %>
+<%= link_to 'Back', tags_path %>
