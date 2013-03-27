@@ -1,4 +1,7 @@
 Sprint0::Application.configure do
+
+
+#  Paperclip.options[:command_path] = "C:\Program Files (x86)\ImageMagick-6.8.4-Q16"
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
