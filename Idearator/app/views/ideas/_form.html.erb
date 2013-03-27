@@ -26,6 +26,12 @@
      <%= i.file_field :photo %>
    </p>
    
+   <div>
+    <% @tags.each do |tag|%>
+    <div><%= check_box_tag 'idea_tags[tags][]', tag.id, false %><%= tag.name %> </div>
+<% end %> 
+  </div>
+   
     
     <div class="actions">
 	    <%= i.submit %>
