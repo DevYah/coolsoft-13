@@ -1,6 +1,9 @@
+
+
 class UsersController < ApplicationController
 
 	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate]
+
 
 	#method displays a form where the user enters his password to confrim deactivation.
 	#Params: none
@@ -15,7 +18,8 @@ class UsersController < ApplicationController
 	#password:: the parameter is an instance of User passed through the form form confirm deactivate.
 	#Author: Amina Zoheir
 	def deactivate
-		if current_user.password == params[:user][:password]
+		
+		if current_user.valid_password?(params[:user][:password])
 			current_user.active = false
 			current_user.save
 			sign_out current_user
