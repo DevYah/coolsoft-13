@@ -1,18 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <p>Title:</p>
+<%= image_tag @idea.photo.url(:thumb) %>
+</p>
+<p>
+  <b>Title:</b>
    <%= @idea.title %>
 </p>
 <p>
-  <p>Description:</p>
+  <b>Description:</b>
   <%= @idea.description %>
 </p>
 <p>
-  <p>Problem Solved:</p>
+  <b>Problem Solved:</b>
   <%= @idea.problem_solved  %>
 </p>
+
+<% if @user == @idea.user_id %>
 <td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
 <td><%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?" %></td>
-
+<td><%= link_to 'Back', '/' %></td>
+<%end%>
 

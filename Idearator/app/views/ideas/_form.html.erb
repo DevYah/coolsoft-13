@@ -1,4 +1,4 @@
-<%= form_for(@idea) do |i| %>
+<%= form_for(@idea , :html => { :multipart => true }) do |i| %>
 <% if @idea.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
@@ -22,8 +22,20 @@
 		<%= i.label :problem_solved %><br />
 	    <%= i.text_field :problem_solved %>
     </div>
+    <p>
+     <%= i.file_field :photo %>
+   </p>
+   
+   <div>
+    <% @tags.each do |tag|%>
+    <div><%= check_box_tag 'idea_tags[tags][]', tag.id, false %><%= tag.name %> </div>
+<% end %> 
+  </div>
+   
     
     <div class="actions">
 	    <%= i.submit %>
   </div>
 <% end %>
+
+
