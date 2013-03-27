@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
-	def show
-		@search = Idea.search do 
-		fulltext params[:search]
-		end
-		@ideas = @search.results
+	
+	def index
+		@approved = Idea.find(:all, :conditions => { :approved => true })
 	end
+		
 end
