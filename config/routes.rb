@@ -1,4 +1,7 @@
 Sprint0::Application.routes.draw do
+  match '/users/expertise' => 'users#expertise'
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'user#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
