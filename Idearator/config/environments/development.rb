@@ -5,6 +5,9 @@ Sprint0::Application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  #fixme
+  Paperclip.options[:command_path] = "C:\Program Files (x86)\ImageMagick-6.8.4-Q16"
+
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
