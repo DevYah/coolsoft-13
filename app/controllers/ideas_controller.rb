@@ -1,9 +1,10 @@
 class IdeasController < ApplicationController
 
-  #before_filter :authenticate_user!, :only => [:create, :edit]
-
+  # view idea of current user
+  #+id+
+  #Marwa Mehanna
 def show
-  current_user = User.find(1)
+  #current_user = User.find(1)
     #@user=current_user.id
       @idea = Idea.find(params[:id])
      # @idea=Idea.new
@@ -17,6 +18,8 @@ def show
 	def index
 
 	end
+  # making new Idea
+  #Marwa Mehanna
 	def new
 		@idea=Idea.new
     @tags= Tag.all
@@ -26,10 +29,19 @@ def show
 	      format.json { render json: @idea }
 	    end
 	end
-	def edit   
+	# editing Idea
+  #Params
+  #+id+
+  #Marwa Mehanna
+  def edit   
 
     @idea = Idea.find(params[:id])
   end
+  # updating Idea
+  #Params
+  #+id+ 
+  #+idea+ 
+  #Marwa Mehanna
   def update
     
     @idea = Idea.find(params[:id])
@@ -43,9 +55,17 @@ def show
       end
     end
   end
+  # creating new Idea
+  #Params
+  #+idea+ 
+  #+idea_tags+ 
+  #+tags+ 
+  #+idea_id+
+  #+tag_id+
+  #Marwa Mehanna
 	def create
-    puts params
-    current_user = User.find(1)
+    #puts params
+    #current_user = User.find(1)
     @idea = Idea.new(params[:idea])
     
 
