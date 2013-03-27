@@ -39,6 +39,15 @@ class TagsController < ApplicationController
 
   # POST /tags
   # POST /tags.json
+  #Create A new Tag
+  #
+  # * *Args*    :
+  #   - +void+ ->
+  # * *Returns* :
+  #   - Show#Tag view
+  # * *Raises* :
+  #   - +PresenceError+ ->If nothing is entered on submit
+  #   - +UniquenessError+ -> If Tag added is not unique	
   def create
     @tag = Tag.new(params[:tag])
 
@@ -55,6 +64,13 @@ class TagsController < ApplicationController
 
   # PUT /tags/1
   # PUT /tags/1.json
+  # * *Args*    :
+  #   - +tag.id+ ->
+  # * *Returns* :
+  #   - Show#Tag view
+  # * *Raises* :
+  #   - +PresenceError+ ->If nothing is entered on submit
+  #   - +UniquenessError+ -> If new Tag name is not unique	
   def update
     @tag = Tag.find(params[:id])
 
@@ -94,7 +110,15 @@ class TagsController < ApplicationController
     # Else if the entered name already has a tag and a connection to the  
     # parent tag nothing is done and the user is informed so that the 
     # synonym already exists
-    
+    #
+    #
+    # * *Args*    :
+    #   - +tag.id+ -> Tag id to add synonyms to
+    # * *Returns* :
+    #   - The updated Show#Tags/:id view 
+    # * *Raises* :
+    #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
+    #
   def addsym
     @tag = Tag.find(params[:id])
     y = params[:tag]['name']
