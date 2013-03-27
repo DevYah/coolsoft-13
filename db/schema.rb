@@ -11,20 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327141845) do
+ActiveRecord::Schema.define(:version => 20130327142819) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
     t.integer  "notification_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-  end
-
-  create_table "admin_inviteds", :id => false, :force => true do |t|
-    t.integer  "admin_id"
-    t.integer  "invited_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
