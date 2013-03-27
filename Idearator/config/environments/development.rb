@@ -14,13 +14,15 @@ Sprint0::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.default_url_options = {:host => 'localhost:3000'}
-
+  
+  ActionMailer::Base.delivery_method = :smtp
+  
   ActionMailer::Base.smtp_settings = {
    :address => "smtp.gmail.com",
-   :port => 1234,
+   :port => 587,
    :domain => 'gmail.com',
    :authentication => :plain,
    :user_name=> 'coolsoftc2',

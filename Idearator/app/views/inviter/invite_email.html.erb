@@ -4,12 +4,12 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to <div><%= link_to 'sign up' , '../users/sign_up' %></div> </h1>
+    <h1>Welcome to Idearator </h1>
     <p>
       You are invited to become a <%= @type %>  in <%= @address %>.<br/>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      To login to the site, just follow this link: <%= link_to 'click me !' , 'idearator/users/sign_up' %>
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>
