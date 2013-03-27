@@ -47,21 +47,6 @@ class IdeasController < ApplicationController
   	end
 	
 	def create
-    		@idea = Idea.new(params[:idea])
-     
-    		respond_to do |format|
-      			if @idea.save
-        			format.html { redirect_to @idea, notice: 'idea was successfully created.' }
-        			format.json { render json: @idea, status: :created, location: @idea }
-      			else
-        			format.html { render action: "new" }
-        			format.json { render json: @idea.errors, status: :unprocessable_entity }
-      			end
-   		end
-  	end
-
-	
-	def create
     		#puts params
     		#current_user = User.find(1)
     		@idea = Idea.new(params[:idea])
