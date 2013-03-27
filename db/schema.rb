@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326120703) do
+ActiveRecord::Schema.define(:version => 20130327114601) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
@@ -23,12 +23,6 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
   create_table "admin_inviteds", :id => false, :force => true do |t|
     t.integer  "admin_id"
     t.integer  "invited_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "admins", :force => true do |t|
-    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -55,12 +49,6 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "committees", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "committees_tags", :id => false, :force => true do |t|
     t.integer  "committee_id"
     t.integer  "tag_id"
@@ -69,14 +57,14 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
   end
 
   create_table "ideas", :force => true do |t|
-    t.string   "title",          :limit => 100,                        :null => false
-    t.string   "description",                                          :null => false
-    t.string   "problem_solved",                                       :null => false
+    t.string   "title",          :limit => 100,                    :null => false
+    t.string   "description",                                      :null => false
+    t.string   "problem_solved",                                   :null => false
     t.integer  "num_votes"
-    t.string   "status",                        :default => "waiting"
     t.integer  "user_id"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.boolean  "approved",                      :default => false
   end
 
   create_table "ideas_tags", :id => false, :force => true do |t|
@@ -147,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                        :limit => 100,                   :null => false
+    t.string   "email",                        :limit => 100,                    :null => false
     t.string   "password"
     t.string   "first_name"
     t.string   "last_name"
@@ -157,9 +145,11 @@ ActiveRecord::Schema.define(:version => 20130326120703) do
     t.text     "about_me"
     t.boolean  "recieve_vote_notification",                   :default => true
     t.boolean  "recieve_comment_notification",                :default => true
-    t.string   "status"
-    t.datetime "created_at",                                                    :null => false
-    t.datetime "updated_at",                                                    :null => false
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
+    t.string   "type"
+    t.boolean  "active",                                      :default => true
+    t.boolean  "banned",                                      :default => false
   end
 
   create_table "votes", :id => false, :force => true do |t|
