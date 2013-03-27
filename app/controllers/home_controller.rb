@@ -1,4 +1,4 @@
-class HomesController < ApplicationController
+class HomeController < ApplicationController
 	
 	def index
 @top= Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
