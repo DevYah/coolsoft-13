@@ -56,12 +56,14 @@ class IdeasController < ApplicationController
    		end
   	end
 
+	# Deletes the all records related to the +Idea+ instance from the database
+  	# Params:
+  	# +id+:: the id of the +Idea+ passed from the previous view, it helps in finding the +Idea+ instance from the database to process
+	# Author: Mahmoud Abdelghany Hashish
+	
 	def destroy
-		@current_user = User.first
-    		@idea = Idea.find(params[:id])
-		puts "DEBUG: " + @current_user.id.to_s + " " + @idea.user_id.to_s
-		if @current_user.id == @idea.user_id    
-			puts "authed!"		
+		@idea = Idea.find(params[:id])
+		if current_user.id == @idea.user_id    
 			@idea.destroy
     			
     			respond_to do |format|
