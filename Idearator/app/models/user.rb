@@ -18,4 +18,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :comments, :join_table => :likes
   has_and_belongs_to_many :ideas, :join_table => :votes
 
+  # Devise uses this to check if a User is active
+  def active?
+    super and self.active
+  end
+
 end
