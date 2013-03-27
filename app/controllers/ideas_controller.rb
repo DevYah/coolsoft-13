@@ -1,8 +1,12 @@
 class IdeasController < ApplicationController
+  	#before_filter :authenticate_user!, :only => [:create, :edit]
+
 	def show
-      		@idea = Idea.find(params[:id])
+  		current_user = User.find(1)
+    		#@user=current_user.id
+     		@idea = Idea.find(params[:id])
      		# @idea=Idea.new
-     		#rescue ActiveRecord::RecordNotFound
+       		#rescue ActiveRecord::RecordNotFound
       
       		respond_to do |format|
       			format.html # show.html.erb
@@ -16,6 +20,7 @@ class IdeasController < ApplicationController
 	
 	def new
 		@idea=Idea.new
+    		@tags= Tag.all
 		
 		respond_to do |format|
 	      		format.html # new.html.erb
@@ -23,12 +28,11 @@ class IdeasController < ApplicationController
 	    	end
 	end
 	
-	def edit   
+	def edit
     		@idea = Idea.find(params[:id])
   	end
   	
-	def update
-    
+  	def update
     		@idea = Idea.find(params[:id])
     
 		respond_to do |format|
@@ -54,6 +58,28 @@ class IdeasController < ApplicationController
         			format.json { render json: @idea.errors, status: :unprocessable_entity }
       			end
    		end
+  	end
+
+	
+	def create
+    		#puts params
+    		#current_user = User.find(1)
+    		@idea = Idea.new(params[:idea])
+     		@idea.user_id=current_user.id
+    
+		respond_to do |format|
+      			if @idea.save
+        			@tags= params[:idea_tags][:tags]
+        			@tags.each do |tag|
+          				IdeasTag.create(:idea_id => @idea.id , :tag_id => tag)
+       				end
+        			format.html { redirect_to @idea, notice: 'idea was successfully created.' }
+        			format.json { render json: @idea, status: :created, location: @idea }
+      			else
+        			format.html { render action: "new" }
+        			format.json { render json: @idea.errors, status: :unprocessable_entity }
+      			end
+    		end
   	end
 
 	# Deletes the all records related to the +Idea+ instance from the database
