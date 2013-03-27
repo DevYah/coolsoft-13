@@ -1,8 +1,15 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :email, :password , :first_name , :last_name , 
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :date_of_birth, :type, :active , :first_name , :last_name , 
   :username , :date_of_birth , :gender , :about_me , :recieve_vote_notification , 
-  :recieve_comment_notification , :status
+  :recieve_comment_notification
 
   has_many :action_notifications
   has_many :ideas
