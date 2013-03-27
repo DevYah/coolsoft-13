@@ -13,5 +13,6 @@
   <%= @idea.problem_solved  %>
 </p>
 <td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
+<td><%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?" %></td>
 
 
