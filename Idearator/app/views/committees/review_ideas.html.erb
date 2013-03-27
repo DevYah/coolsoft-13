@@ -1,0 +1,10 @@
+
+<h1>Reviewing</h1>
+<ul>
+<% @ideas.each do |idea|%> 
+<li><%= link_to idea.title, idea %></li>
+<% end %>
+</ul>
+<% if @ideas.empty? %>
+<h2>No ideas to review</h2>
+<% end %>
