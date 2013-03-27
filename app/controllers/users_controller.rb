@@ -21,4 +21,11 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def activate
+		current_user.status = "active"
+		respond_to do |format|
+			format.html { falsh[:notice] = 'Successfully reactivated' }
+			format.json { head :no_content }
+		end
+	end
 end
