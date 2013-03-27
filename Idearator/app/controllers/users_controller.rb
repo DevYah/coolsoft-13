@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+<<<<<<< HEAD
 
 
   def show
@@ -15,3 +16,6 @@ class UsersController < ApplicationController
 
 end
 
+=======
+end
+>>>>>>> master
