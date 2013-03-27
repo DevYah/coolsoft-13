@@ -1,6 +1,6 @@
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :body, :approved
-  
+   attr_accessible :title, :body
+
   belongs_to :user
   has_many :comments
   has_many :action_notifications
