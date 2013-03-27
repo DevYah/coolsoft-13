@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Inviter - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="class%20Inviter%20-%20RDoc%20Documentation_files/rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="class%20Inviter%20-%20RDoc%20Documentation_files/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="class%20Inviter%20-%20RDoc%20Documentation_files/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="class%20Inviter%20-%20RDoc%20Documentation_files/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="class%20Inviter%20-%20RDoc%20Documentation_files/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="class%20Inviter%20-%20RDoc%20Documentation_files/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="class%20Inviter%20-%20RDoc%20Documentation_files/darkfish.js"></script>
+
+
+</head><body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="file:///home/muhammed/Desktop/rdoc/doc/index.html">Home</a>
+    <a href="file:///home/muhammed/Desktop/rdoc/doc/table_of_contents.html#classes">Classes</a>
+    <a href="file:///home/muhammed/Desktop/rdoc/doc/table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input name="search" placeholder="Search" id="search-field" title="Type to search, Up and Down to navigate, Enter to load" type="text">
+    </h3>
+  </form>
+
+  <ul style="display: block;" id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>doc.rb
+  </li></ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActionMailer::Base
+  
+</p></nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-invite_email">#invite_email</a>
+    
+  </li></ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="file:///home/muhammed/Desktop/rdoc/doc/doc/created_rid.html">created.rid</a>
+  
+  </li></ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="file:///home/muhammed/Desktop/rdoc/doc/Inviter.html">Inviter</a>
+  
+  </li></ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Inviter</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-invite_email" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">invite_email</span><span class="method-args">(email )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>creates and returns invitation email</p>
+<dl class="rdoc-list note-list"><dt><code>email</code>
+</dt><dd>
+<p>the email of the guest</p>
+</dd></dl>
+
+<p>Author: muhammed hassan</p>
+          
+          
+
+          
+          <div style="display: none;" class="method-source-code" id="invite_email-source">
+            <pre><span class="ruby-comment"># File doc.rb, line 8</span>
+ <span class="ruby-keyword">def</span> <span class="ruby-identifier">invite_email</span>(<span class="ruby-identifier">email</span> )
+  <span class="ruby-ivar">@email</span> = <span class="ruby-identifier">email</span>
+  <span class="ruby-ivar">@type</span> = <span class="ruby-string">'committee'</span>
+  <span class="ruby-ivar">@address</span> = <span class="ruby-string">'idearator.com'</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">mail</span>(<span class="ruby-value">:to</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">email</span>, <span class="ruby-value">:subject</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">"Welcome to My Awesome Site"</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- invite_email-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- invite_email-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  </p><p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  </p><p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</p></footer>
+
+</body></html>

@@ -1,6 +1,11 @@
 class Inviter < ActionMailer::Base
   default from: "coolsoft@gmail.com"
 
+##
+# returns invitation email
+# Params:
+# +email+:: the email of the rec
+# Author: muhammed hassan
    def invite_email(email )
     @email = email
     @type = 'committee'

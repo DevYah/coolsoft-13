@@ -20,6 +20,10 @@ Sprint0::Application.configure do
   
   ActionMailer::Base.delivery_method = :smtp
   
+##
+# configure gmail account for development mailing
+# Author: muhammed hassan
+#--
   ActionMailer::Base.smtp_settings = {
    :address => "smtp.gmail.com",
    :port => 587,
