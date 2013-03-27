@@ -1,4 +1,11 @@
 <h1>User Profile</h1>
+<% if current_user.type == "Admin"%>
+	Ban
+<%end%>
+<% if current_user == @user%>
+Deactivate
+<%end%>
+<%if  @user.banned==true || @user.active==false %>
 <h2> About the User </h2>
    Email : <%= @user.email %><br>
    Username : <%= @user.username %><br>
@@ -9,26 +16,30 @@
 	<br> 
    <h2> User Ideas </h2>
    <div id = "IdeaStream">
-	<% if @approved.size > 0 %>
-	<% @approved.each do |approved| %>
+	<% if @ideas.size> 0 %>
+	<% @ideas.each do |ideas| %>
+	<% if ideas.approved == true%>
 	<tr>
 		<br>
 		<td>
-			<%= link_to "Title: " + approved.title , approved %>
+			<%= link_to "Title: " + ideas.title , ideas %>
 		</td>
 		<br>
 		<td>
-			<%= "Description: " + approved.description %>
+			<%= "Description: " + ideas.description %>
 			<br>
-			<%= "Number of votes "  + approved.num_votes.to_s %>
+			<%= "Number of votes "  + ideas.num_votes.to_s %>
 			<br>
-			<%= "Problem Solved " + approved.problem_solved %>
+			<%= "Problem Solved " + ideas.problem_solved %>
 			<br>
-			<%=  "Posted at " + approved.created_at.to_s %>
+			<%=  "Posted at " + ideas.created_at.to_s %>
 		</td>
 		<br>
 	</tr>
 	<%end%>
+	<%end%>
 	<% end %>
 	</div>
-   
+	<%else%>
+	This person is either banned or deactivated
+	<%end%>
