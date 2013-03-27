@@ -1,0 +1,9 @@
+<% div_for comment do %>
+ 
+  <p>
+    <b>Content:</b>
+    <%= comment.content %>
+  </p>
+
+<%= link_to 'Edit', edit_article_comment_path(@idea, comment) %> 
+<% end %>
