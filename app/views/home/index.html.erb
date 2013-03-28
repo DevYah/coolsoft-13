@@ -27,13 +27,13 @@ border-color: white;
 </style>
 <div class="topten">
 <h1>Top Ten Ideas</h1>
-<% @top.each do |top| %>
+<% @ideas.each do |top| %>
 <div class="topten_idea">
 	
 	<span><%= link_to top.title ,top %></span>
 	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>
-	<span class = size><%= image_tag top.photo.url(:thumb) %></span>
+	<span><%= image_tag top.photo.url(:thumb) %></span>
 
 	
 </div>

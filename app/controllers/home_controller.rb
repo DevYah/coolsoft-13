@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 	#based on title and description columns, parameters that are defined are
 	#@ideas: getting all ideas and @search: getting all ideas that matches
 	#then @ideas is reset to match the results.
+	#Author:Mohamed Salah Nazir
 	def show
 		@ideas = Idea.all
 		@search = Idea.search do
@@ -17,7 +18,7 @@ class HomeController < ApplicationController
 	# and sends maximum ten ideas to index view page
 	# Author: Lina Basheer 
 	def index
-@top= Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
+@ideas= Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
 render :action => 'index.html.erb'
     end
 end

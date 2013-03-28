@@ -19,18 +19,13 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
-  create_table "admin_inviteds", :id => false, :force => true do |t|
-    t.integer  "admin_id"
-    t.integer  "invited_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
   create_table "comments", :force => true do |t|
     t.string   "content"
     t.integer  "num_likes"
@@ -71,9 +66,8 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.integer  "num_votes"
     t.string   "status",                        :default => "waiting"
     t.integer  "user_id"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
-    t.boolean  "approved",                      :default => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.integer  "committee_id"
   end
 
