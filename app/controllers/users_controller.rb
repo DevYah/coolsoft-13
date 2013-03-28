@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 
-  #Description:Two variables are needed.A variable "user" to get the user for this particular profile,
-  # ana a variable "ideas" that stores this user's ideas. The view accesses the attributes of both the two
-  #variables and shows the information.
-  #Author:Hisham ElGezeery
+  #This method is used to generate the view of each User Profile. A specific user and his ideas are made
+  #available to the view to presented in the appropriate manner.
+  #Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
