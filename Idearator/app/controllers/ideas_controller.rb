@@ -4,7 +4,7 @@ class IdeasController < ApplicationController
 
 def show
   current_user = User.find(1)
-    #@user=current_user.id
+    @user=current_user.id
       @idea = Idea.find(params[:id])
      # @idea=Idea.new
        #rescue ActiveRecord::RecordNotFound
@@ -44,12 +44,12 @@ def show
     end
   end
 	def create
-    puts params
-    current_user = User.find(1)
+    #puts params
+
     @idea = Idea.new(params[:idea])
     
 
-     @idea.user_id=current_user.id
+    # @idea.user_id=current_user.id
     respond_to do |format|
       if @idea.save
         @tags= params[:idea_tags][:tags]
