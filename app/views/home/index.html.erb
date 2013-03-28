@@ -25,6 +25,29 @@ border-color: white;
 	width: 50px;
 }
 </style>
+<div id = "IdeaStream">
+<% if @approved.size > 0 %>
+<% @approved.each do |approved| %>
+<tr>
+	<br>
+	<td>
+		<%= link_to "Title: " + approved.title , approved %>
+	</td>
+	<br>
+	<td>
+		<%= "Description: " + approved.description %>
+		<br>
+		<%= "Number of votes "  + approved.num_votes.to_s %>
+		<br>
+		<%= "Problem Solved " + approved.problem_solved %>
+		<br>
+		<%=  "Posted at " + approved.created_at.to_s %>
+	</td>
+	<br>
+</tr>
+<%end%>
+<% end %>
+</div>
 <div class="topten">
 <h1>Top Ten Ideas</h1>
 <% @ideas.each do |top| %>
