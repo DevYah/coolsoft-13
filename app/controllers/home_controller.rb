@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 	# and sends maximum ten ideas to index view page
 	# Author: Lina Basheer
 	def index
-		@approved = Idea.find(:all)
+		@approved = Idea.find(:all, :conditions => { :approved => true })
 		@top = Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
         render :action => 'index.html.erb'
 	end
@@ -23,10 +23,7 @@ class HomeController < ApplicationController
 			fulltext params[:search]
 		end
 		@ideas = @search.results
-		if @ideas.size == 0
-			flash[:alert] = "NO match"
-		end
- end
+	 end
 end
 	# Method gets all ideas, order them in descending order according to number of votes 
 	# and sends maximum ten ideas to index view page
