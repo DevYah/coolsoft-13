@@ -18,8 +18,16 @@ class UsersController < ApplicationController
 	#password:: the parameter is an instance of User passed through the form form confirm deactivate.
 	#Author: Amina Zoheir
 	def deactivate
+		if current_user.is_a? Committee
+			puts 'amina'
+			puts params
+			@password = params[:committee][:password]
+		else
+			puts 'amina2'
+			@password = params[:user][:password]
+		end
 		
-		if current_user.valid_password?(params[:user][:password])
+		if current_user.valid_password?(@password)
 			current_user.active = false
 			current_user.save
 			sign_out current_user
