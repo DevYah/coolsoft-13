@@ -15,9 +15,9 @@
         <%= link_to 'Register', new_user_registration_path %> or <%= link_to 'Sign in', new_user_session_path %>
     <% end %>
   </div>
-    <% if user_signed_in? %>
-      <%= link_to 'Deactivate', controller: 'users' , action: 'confirm_deactivate' %>
-    <% end %>
+  <% if user_signed_in? %>
+    <%= link_to 'Deactivate', controller: 'users' , action: 'confirm_deactivate' %>
+  <% end %>
 </head>
 <body>
 
