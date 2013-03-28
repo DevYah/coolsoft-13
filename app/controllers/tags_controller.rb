@@ -1,40 +1,57 @@
 class TagsController < ApplicationController
+ # before_filter :authenticate_user!
   # GET /tags
   # GET /tags.json
   def index
+  #  if user_signed_in? and current_user.type.is_a? Admin
     @tags = Tag.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tags }
     end
+    #else
+  # render :text => "You Need To sign in as An Admin"
+#  end
   end
 
   # GET /tags/1
   # GET /tags/1.json
   def show
+  #  if user_signed_in? and current_user.type.is_a? Admin
     @tag = Tag.find(params[:id])
     @tags = @tag.tags.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @tag }
     end
+    #else
+    #render :text => "You Need To sign in as An Admin"
+   #end
   end
 
   # GET /tags/new
   # GET /tags/new.json
   def new
+    #if user_signed_in? and current_user.type.is_a? Admin
     @tag = Tag.new
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tag }
     end
+    #else
+   #render :text => "You Need To sign in as An Admin"
+   #end
   end
 
   # GET /tags/1/edit
   def edit
+  #if user_signed_in? and current_user.type.is_a? Admin
     @tag = Tag.find(params[:id])
+    #else
+   render :text => "You Need To sign in as An Admin"
+   #end
   end
 
   # POST /tags
@@ -132,7 +149,7 @@ class TagsController < ApplicationController
         @tag.tags << t
         format.html { redirect_to @tag, notice: 'Synonym was successfully created.' }
         format.json { head :no_content }
-      elsif not @tag.tags.all.include?(tag_query[0])
+      elsif not @tag.tags.all.include?(tag_query[0]) and @tag != tag_query[0]
         t = tag_query[0]
         t.tags << @tag
         @tag.tags << t
