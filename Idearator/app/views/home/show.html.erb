@@ -20,10 +20,10 @@
     <% if params[:search] != ""%>
 <table>
   <tr>
+    <th></th>
     <th>Title</th>
     <th>Description</th>
-    <th></th>
-    <th></th>
+    <th>Problem it solves</th>
   </tr>
   <% if @ideas.count > 0 %>
 <% @ideas.each do |i| %>
@@ -32,6 +32,7 @@
     <td><%= image_tag i.photo.url(:thumb) %></td>
     <td><%= link_to i.title, i %></td>
     <td><%= i.description %></td>
+    <td><%= i.problem_solved %></td>
   </tr>
 <% end %>
 <% end %>
