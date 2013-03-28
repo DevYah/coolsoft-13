@@ -1,5 +1,5 @@
 <body class = overview>
-<h1>Home</h1>
+<h1>Idearator</h1>
 
 <%= form_tag "/home/show", :method => :get do %>
   <p>
@@ -29,6 +29,7 @@
 <% @ideas.each do |i| %>
 <div class = idea>
   <tr>
+    <td><%= image_tag i.photo.url(:thumb) %></td>
     <td><%= link_to i.title, i %></td>
     <td><%= i.description %></td>
   </tr>
