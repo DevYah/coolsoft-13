@@ -1,24 +1,28 @@
 class TagsController < ApplicationController
- # before_filter :authenticate_user!
+  before_filter :authenticate_user!
   # GET /tags
   # GET /tags.json
   def index
-  #  if user_signed_in? and current_user.type.is_a? Admin
-    @tags = Tag.all
-
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
+      @tags = Tag.all
+  
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tags }
     end
-    #else
-  # render :text => "You Need To sign in as An Admin"
-#  end
   end
 
   # GET /tags/1
   # GET /tags/1.json
   def show
-  #  if user_signed_in? and current_user.type.is_a? Admin
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
+ 
     @tag = Tag.find(params[:id])
     @tags = @tag.tags.all
     respond_to do |format|
@@ -33,25 +37,26 @@ class TagsController < ApplicationController
   # GET /tags/new
   # GET /tags/new.json
   def new
-    #if user_signed_in? and current_user.type.is_a? Admin
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
+    
     @tag = Tag.new
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tag }
     end
-    #else
-   #render :text => "You Need To sign in as An Admin"
-   #end
   end
 
   # GET /tags/1/edit
   def edit
-  #if user_signed_in? and current_user.type.is_a? Admin
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
     @tag = Tag.find(params[:id])
-    #else
-   render :text => "You Need To sign in as An Admin"
-   #end
   end
 
   # POST /tags
@@ -66,6 +71,10 @@ class TagsController < ApplicationController
   #   - +PresenceError+ ->If nothing is entered on submit
   #   - +UniquenessError+ -> If Tag added is not unique	
   def create
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
     @tag = Tag.new(params[:tag])
 
     respond_to do |format|
@@ -89,6 +98,10 @@ class TagsController < ApplicationController
   #   - +PresenceError+ ->If nothing is entered on submit
   #   - +UniquenessError+ -> If new Tag name is not unique	
   def update
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
     @tag = Tag.find(params[:id])
 
     respond_to do |format|
@@ -105,6 +118,10 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
     @tag = Tag.find(params[:id])
     @tag.destroy
     @tag.tags.destroy_all
@@ -137,9 +154,13 @@ class TagsController < ApplicationController
     #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
     #
   def addsym
+    if not user_signed_in? or current_user.type != 'Admin'
+      render :text => "You Need To sign in as An Admin"
+      return
+    end
     @tag = Tag.find(params[:id])
     y = params[:tag]['name']
-    #query for finding tag with input name returns Tag Array
+    #query for finding tag with input name returns Tag Array matching 'name'
     tag_query = Tag.where("name = ?", y)  
     respond_to do |format|
       if tag_query.empty?
