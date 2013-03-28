@@ -19,6 +19,6 @@ class HomeController < ApplicationController
 		if @ideas.size == 0
 			flash[:alert] = "NO match"
 		end
- end
+	 end
 	 
 end
