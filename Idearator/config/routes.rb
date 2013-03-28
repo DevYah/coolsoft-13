@@ -1,7 +1,13 @@
 Sprint0::Application.routes.draw do
 
+
   get '/admins/index'
   post '/admins/invite_committee'
+
+  default_url_options :host => "localhost:3000"
+
+  devise_for :users, :controllers => { :registrations => "registrations" }
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -8,6 +8,13 @@ gem 'rails', '3.2.13.rc1'
 gem 'sqlite3'
 
 
+#Install devise for User Authentication
+gem 'devise'
+
+#Install tlsmail to allow mail sending
+gem 'tlsmail'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
