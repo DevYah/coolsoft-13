@@ -43,6 +43,7 @@ border-color: white;
 		<br>
 		<%=  "Posted at " + approved.created_at.to_s %>
 	</td>
+	<td><%= image_tag approved.photo.url(:thumb) %></td>
 	<br>
 </tr>
 <%end%>
@@ -50,23 +51,15 @@ border-color: white;
 </div>
 <div class="topten">
 <h1>Top Ten Ideas</h1>
-<% @ideas.each do |top| %>
+<% @top.each do |top| %>
 <div class="topten_idea">
 	
 	<span><%= link_to top.title ,top %></span>
-	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>
+	<span><%= top.num_votes %></span>
 	<span><%= image_tag top.photo.url(:thumb) %></span>
 
 	
 </div>
-<% end %>
-<% if params[:search] == ""%>
-<em>
-Ohh! you entered nothing in the search
-</em>
-<% end %>
-<% if @ideas.count == 0 %>
-<em>No Results Found !!</em>
 <% end %>
 </div>
