@@ -3,14 +3,13 @@ class CommentsController < ApplicationController
 #author dayna
 def show
    @idea = Idea.find(params[:id])
-      respond_to do |format|
+     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @comment }
     end
-  end
+ end
 def new
     @comment = Comment.new
-#@comment = Comment.new(params[:comment])
    respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
@@ -19,11 +18,9 @@ def new
 #create new Comment by building comments after getting the id of the idea 
 #author dayna 
 def create
-###@comment = Comment.new(params[:comment])
    @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.create(params[:comment])
     @comment.update_attributes(:idea_id => @idea.id)
-
     respond_to do |format|
       if @comment.save
        format.html { redirect_to(@idea, :notice => 'Comment was successfully created.') }
