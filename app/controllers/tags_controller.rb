@@ -1,19 +1,18 @@
 class TagsController < ApplicationController
   before_filter :authenticate_user!
-  #Tag Management Page 
-  #For displaying all tags and links to their actions.
+  # Tag Management Page 
+  # For displaying all tags and links to their actions.
   #
-  #Params: 
-  #+void+:: No parameters
+  # Params: 
+  # +void+:: No parameters
   #
-  #Author: Mohammad Abdulkhaliq
+  # Author: Mohammad Abdulkhaliq
   def index
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
       return
     end
       @tags = Tag.all
-  
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tags }
@@ -134,7 +133,6 @@ class TagsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   # Adds a Synonym with the name entered in the form
   #
   # If the entered name does not have an associated tag with the same name
