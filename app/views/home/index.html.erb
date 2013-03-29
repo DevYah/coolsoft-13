@@ -19,13 +19,11 @@ border-color: white;
 	width: 50px;
 }
 </style>
-<% @no = 0 %>
 <% if params[:search] != ""%>
- <% if !@approved.empty? %>
+ <% if @approved.count > 0 %>
   <div id = "IdeaStream">
    <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
-       <% @no = 1%>
         <tr>
 	       <br>
 	 				<td>
@@ -46,15 +44,16 @@ border-color: white;
      		</tr>
      <% end %>
    <%end%>
-  <% end %>
  </div>
+<% end %>
 <% end %>
 <% if params[:search] == ""%>
   <em>Ohh! you entered nothing in the search field</em>
 <% end %>
-<% if @approved.empty? or @no != 1 and params[:search] != "" and @ideas.count > 0%>
-  <em>No Results Found !!</em>
+<% if @approved.count == 0 and params[:search] != "" and @all.count > 0%>
+  <em>No ideas to preview !!</em>
 <% end %>
-<% if @ideas.count == 0%>
-  <em>No ideas to preview</em>
+<% if @all.count == 0%>
+<em>No ideas yet</em>
 <% end %>
+
