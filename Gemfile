@@ -11,9 +11,12 @@ gem 'sqlite3'
 #Install devise for User Authentication
 gem 'devise'
 
-#Install tlsmail to allow mail sending
-gem 'tlsmail'
-
+#install mail catcher to view emails sent
+#run gem install mailcatcher
+#run mailcatcher
+#go to localhost:1080 to view emails sent
+#Send mail through smtp://localhost:1025
+gem 'mailcatcher'
 
 # Gems used only for assets and not required
 # in production environments by default.
