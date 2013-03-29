@@ -11,13 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327143347) do
+ActiveRecord::Schema.define(:version => 20130327141845) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
     t.integer  "notification_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "admin_inviteds", :id => false, :force => true do |t|
+    t.integer  "admin_id"
+    t.integer  "invited_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -56,7 +63,6 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
     t.boolean  "approved",                      :default => false
-    t.integer  "committee_id"
   end
 
   create_table "ideas_tags", :id => false, :force => true do |t|
@@ -140,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.string   "type"
     t.boolean  "active",                                      :default => true
     t.boolean  "banned",                                      :default => false
+<<<<<<< HEAD
     t.string   "encrypted_password",                          :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -153,11 +160,9 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+=======
+>>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
   end
-
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "votes", :id => false, :force => true do |t|
     t.integer  "idea_id"

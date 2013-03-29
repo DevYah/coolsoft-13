@@ -1,10 +1,9 @@
 class Inviter < ActionMailer::Base
-  default from: "idearator.13@gmail.com"
+  default from: "coolsoftc2@gmail.com"
 
-##
 # returns invitation email
 # Params:
-# +email+:: the email of the rec
+# +email+:: the email of the guest
 # Author: muhammed hassan
    def invite_email(email )
     @email = email

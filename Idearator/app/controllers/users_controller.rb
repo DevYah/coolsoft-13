@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-
-	
   # This method creates a new User and calls UserMailer to send a confirmation email.
   #Author: Menna Amr
   def create

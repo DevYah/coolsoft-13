@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+<<<<<<< HEAD
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -10,6 +11,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :date_of_birth, :type
+=======
+>>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
   # attr_accessible :title, :body
 
   has_many :action_notifications
