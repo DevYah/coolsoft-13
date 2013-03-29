@@ -23,6 +23,7 @@ end
 #+comment_id+ :: the parameter is an instance of +Comment+ and it's used to show the comments after posting it 
 #author dayna 
 def create
+ if params[:comment]['content']!=""
    @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.create(params[:comment])
     @comment.update_attributes(:idea_id => @idea.id)
@@ -37,6 +38,7 @@ def create
       end
     end
    redirect_to comment_path(@idea)
+ end
 end
 #edit comment and update it
 #Params:
