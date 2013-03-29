@@ -11,6 +11,7 @@ class HomeController < ApplicationController
 	#Author:Mohamed Salah Nazir
 	
 	def index
+		@user = current_user
 		@all = Idea.find(:all, :conditions => {:approved => true})
 		@approved = Idea.find(:all, :conditions => { :approved => true })
 		@top = Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
@@ -20,5 +21,3 @@ class HomeController < ApplicationController
 		@approved = @search.results
 	end
 end
-
-
