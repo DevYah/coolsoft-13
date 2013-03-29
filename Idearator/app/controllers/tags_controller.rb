@@ -1,7 +1,12 @@
 class TagsController < ApplicationController
   before_filter :authenticate_user!
-  # GET /tags
-  # GET /tags.json
+  #Tag Management Page 
+  #For displaying all tags and links to their actions.
+  #
+  #Params: 
+  #+void+:: No parameters
+  #
+  #Author: Mohammad Abdulkhaliq
   def index
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -14,8 +19,13 @@ class TagsController < ApplicationController
       format.json { render json: @tags }
     end
   end
-  # GET /tags/1
-  # GET /tags/1.json
+  # Show Tags 
+  # For displaying a specific tag with it's synonym list
+  #
+  # Params: 
+  # +@tag:: This parameter is an instance of a +Tag+ passed through params
+  #
+  #Author: Mohammad Abdulkhaliq
   def show
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -28,8 +38,13 @@ class TagsController < ApplicationController
       format.json { render json: @tag }
     end
   end
-  # GET /tags/new
-  # GET /tags/new.json
+  # New controller for displaying new form
+  # Creates a null new Tag 
+  #
+  # Params: 
+  # +@tag:: This parameter is an instance of a +Tag+ passed through params
+  #
+  # Author: Mohammad Abdulkhaliq
   def new
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -41,7 +56,12 @@ class TagsController < ApplicationController
       format.json { render json: @tag }
     end
   end
-  # GET /tags/1/edit
+  # Controller for taking the tag id and finding the required tag to update
+  #
+  # Params: 
+  # +@tag:: This parameter is an instance of a +Tag+ passed through params
+  #
+  # Author: Mohammad Abdulkhaliq
   def edit
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -49,22 +69,18 @@ class TagsController < ApplicationController
     end
     @tag = Tag.find(params[:id])
   end
-  # POST /tags
-  # POST /tags.json
-  # * *Args*    :
-  #   - +void+ ->
-  # * *Returns* :
-  #   - Show#Tag view
-  # * *Raises* :
-  #   - +PresenceError+ ->If nothing is entered on submit
-  #   - +UniquenessError+ -> If Tag added is not unique	
+  # Controller for creating new tags after entering the name and submitting
+  #
+  # Params: 
+  # +@tag:: This parameter is an instance of a +Tag+ passed through params
+  #
+  # Author: Mohammad Abdulkhaliq
   def create
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
       return
     end
     @tag = Tag.new(params[:tag])
-
     respond_to do |format|
       if @tag.save
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
@@ -75,15 +91,13 @@ class TagsController < ApplicationController
       end
     end
   end
-  # PUT /tags/1
-  # PUT /tags/1.json
-  # * *Args*    :
-  #   - +tag.id+ ->
-  # * *Returns* :
-  #   - Show#Tag view
-  # * *Raises* :
-  #   - +PresenceError+ ->If nothing is entered on submit
-  #   - +UniquenessError+ -> If new Tag name is not unique	
+  # Updating tags with new names
+  #
+  # Params: 
+  # +@tag:: This parameter is an instance of a +Tag+ passed through params
+  # +name+:: This parameter is an instance of a +String+ passeed through params
+  #
+  # Author: Mohammad Abdulkhaliq
   def update
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -100,8 +114,13 @@ class TagsController < ApplicationController
       end
     end
   end
-  # DELETE /tags/1
-  # DELETE /tags/1.json
+  # Delete Tag Controller
+  # Simply destroys a tag and all it's synonyms (tag_connections) and
+  # redirects to Index
+  # Params: 
+  # +@tag:: This parameter is an instance of a +Tag+ passesd through params
+  #
+  # Author: Mohammad Abdulkhaliq
   def destroy
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -115,27 +134,23 @@ class TagsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  ##
-    # Adds a Synonym with the name entered in the form
-    #
-    # If the entered name does not have an associated tag with the same name
-    # a new tag is created with the name and a connection is made
-    #
-    # Else if the entered name already has a tag but without a connection  
-    # a connection is made but a new tag is not created 
-    #
-    # Else if the entered name already has a tag and a connection to the  
-    # parent tag nothing is done and the user is informed so that the 
-    # synonym already exists
-    #
-    #
-    # * *Args*    :
-    #   - +tag.id+ -> Tag id to add synonyms to
-    # * *Returns* :
-    #   - The updated Show#Tags/:id view 
-    # * *Raises* :
-    #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
-    #
+
+  # Adds a Synonym with the name entered in the form
+  #
+  # If the entered name does not have an associated tag with the same name
+  # a new tag is created with the name and a connection is made
+  #
+  # Else if the entered name already has a tag but without a connection  
+  # a connection is made but a new tag is not created 
+  #
+  # Else if the entered name already has a tag and a connection to the  
+  # parent tag nothing is done and the user is informed so that the 
+  # synonym already exists
+  #
+  # +@tag:: This parameter is an instance of a +Tag+ passed through params
+  # +name:: This paramter is an instance of a +String+ passed through params
+  #
+  # Author: Mohammad Abdulkhaliq
   def addsym
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -143,7 +158,6 @@ class TagsController < ApplicationController
     end
     @tag = Tag.find(params[:id])
     y = params[:tag]['name']
-    #query for finding tag with input name returns Tag Array matching 'name'
     tag_query = Tag.where("name = ?", y)  
     respond_to do |format|
       if tag_query.empty?
