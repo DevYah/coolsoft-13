@@ -20,7 +20,7 @@ end
 #create new Comment 
 #Params:
 #+idea_id+ :: the parameter is an instance of +Idea+ passed to get the id of the idea to build the comments 
-#+comment_id+ :: the parameter is an instance of +Comment+ 
+#+comment_id+ :: the parameter is an instance of +Comment+ and it's used to show the comments after posting it 
 #author dayna 
 def create
    @idea = Idea.find(params[:idea_id])
