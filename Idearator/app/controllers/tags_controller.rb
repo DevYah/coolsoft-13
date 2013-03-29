@@ -14,7 +14,6 @@ class TagsController < ApplicationController
       format.json { render json: @tags }
     end
   end
-
   # GET /tags/1
   # GET /tags/1.json
   def show
@@ -52,8 +51,6 @@ class TagsController < ApplicationController
   end
   # POST /tags
   # POST /tags.json
-  #Create A new Tag
-  #
   # * *Args*    :
   #   - +void+ ->
   # * *Returns* :
