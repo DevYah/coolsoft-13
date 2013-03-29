@@ -11,9 +11,6 @@ gem 'sqlite3'
 #Install devise for User Authentication
 gem 'devise'
 
-#Install tlsmail to allow mail sending
-gem 'tlsmail'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
