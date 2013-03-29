@@ -1,13 +1,9 @@
-
 <h1>Reviewing</h1>
-<% if @committee.type=="Committee" %>
-    <ul>
-        <% @ideas.each do |idea|%> 
-	    <li><%= link_to idea.title, idea %></li>
+<ul>
+	<% @ideas.each do |idea|%> 
+		<li><%= link_to idea.title, idea %></li>
 	<% end %>
-    </ul>
-    <% if @ideas.empty? %>
-        <h2>No ideas to review</h2>
-    <% end %>
-<% else %>
-    <h2>You are not a committee member to review ideas</h2>
+</ul>
+<% if @ideas.empty? %>
+	<h2>No ideas to review</h2>
+<% end %>
