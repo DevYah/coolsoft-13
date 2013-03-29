@@ -4,11 +4,11 @@
 <h2>Comments</h2>
   <%= @comment.body.each do |comment| %>
 
-<p>
-    <b>Comment:</b>
-    <%= comment.content %>
-  </p>
-<% end %>
+   <p>
+      <b>Comment:</b>
+      <%= comment.content %>
+    </p>
+  <% end %>
  
 <h2>Add a comment:</h2>
 <%= form_for([@comment, @comment.content.build]) do |f| %>
