@@ -8,9 +8,8 @@ class Invited < ActiveRecord::Base
   validates :admin_id,  :presence => true   
   belongs_to :admins
 
-##
-# creates invitated object and stores 
-# the invitation in the database if it is valid
+# checks the validations and creates new +Invited+ object 
+# Params:
 # +email+:: the email of the  guest
 # +admin_id+:: the id of the admin making the invitation
 # Author: muhammed hassan

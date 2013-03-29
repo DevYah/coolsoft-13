@@ -1,13 +1,15 @@
 class AdminsController < ApplicationController
 
-##
-# redirects to the index page
+
+  # redirects to the index page
+  # Author: muhammed hassan
   def index
   end
-##
-# checks invitation is valid and delivers the email
-# +email+:: the email of the  guest
-# Author: muhammed hassan
+  
+  # checks invitation is valid and delivers the email
+  # Params:
+  # +email+:: the email of the  guest
+  # Author: muhammed hassan
   def invite_committee
     if User.find(:all, :conditions => {:email => params[:email]}).length ==0
       i = Invited.creates( params[:email] , 5 )
