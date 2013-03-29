@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
     t.boolean  "active",                                      :default => true
     t.boolean  "banned",                                      :default => false
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.string   "encrypted_password",                          :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -160,6 +161,8 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+=======
+>>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
 =======
 >>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
   end

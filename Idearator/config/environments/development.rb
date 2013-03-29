@@ -31,7 +31,7 @@ ActionMailer::Base.smtp_settings = {
  :authentication => :plain,
  :user_name=> 'coolsoftc2',
  :password=>'coolsoft',
- :enable_starttls_auto => true,
+ :enable_starttls_auto => true
 }
 
 
