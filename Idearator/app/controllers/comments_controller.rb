@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 #Show all Comments 
+#Params:
+#+idea_id+ :: the parameter is an instance of +Idea+ passed through the form of action create
 #author dayna
 def show
    @idea = Idea.find(params[:id])
@@ -15,7 +17,10 @@ def new
       format.xml  { render :xml => @comment }
    end
 end
-#create new Comment by building comments after getting the id of the idea 
+#create new Comment 
+#Params:
+#+idea_id+ :: the parameter is an instance of +Idea+ passed to get the id of the idea to build the comments 
+#+comment_id+ :: the parameter is an instance of +Comment+ 
 #author dayna 
 def create
    @idea = Idea.find(params[:idea_id])
@@ -33,7 +38,9 @@ def create
     end
    redirect_to comment_path(@idea)
 end
-#edit comment by checking the comment's id and modifying it
+#edit comment and update it
+#Params:
+#+comment_id+ :: the parameter is an instance of +Comment+ to get the comment's id in order to modify it  
 #author dayna
 def edit
     @comment = Comment.find(params[:id])
