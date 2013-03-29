@@ -6,7 +6,11 @@ class HomeController < ApplicationController
 	# Method gets all ideas, order them in descending order according to number of votes 
 	# and sends maximum ten ideas to index view page
 	# Author: Lina Basheer
+	#in the index method if there is a search to be done then 
+	#the 
+	#Author:Mohamed Salah Nazir
 	def index
+		@ideas = Idea.all
 		@approved = Idea.find(:all, :conditions => { :approved => true })
 		@top = Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
         @search = Idea.search do
@@ -14,20 +18,9 @@ class HomeController < ApplicationController
 		end
 		@approved = @search.results
 	end
-		
-		#the show method previews the ideas that match the search results
-	#based on title and description columns, parameters that are defined are
-	#@ideas: getting all ideas and @search: getting all ideas that matches
-	#then @ideas is reset to match the results.
-	#Author:Mohamed Salah Nazir
-	def show
-		@ideas = Idea.all
-		@search = Idea.search do
-			fulltext params[:search]
-		end
-		@ideas = @search.results
-	 end
 end
+		
+	
 	# Method gets all ideas, order them in descending order according to number of votes 
 	# and sends maximum ten ideas to index view page
 	# Author: Lina Basheer 
