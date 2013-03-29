@@ -1,9 +1,9 @@
 <style type="text/css">
  .topten{
-	position: relative;
-	left: 75%;
-	width: 300px;
-	height: 200px;  
+  position: relative;
+  left: 75%;
+  width: 300px;
+  height: 200px;  
   }
   .topten_idea{
     height:70px;
@@ -11,48 +11,67 @@
     background-color: #999999;
     border-style: solid;
     border-width: 1px;
-    border-color: white;	
+    border-color: white;  
   }
  .spam{
-	width: 50px;
+  width: 50px;
  }
+.spam{
+	width: 50px;
+}
 </style>
+<% @no = 0%>
+<% if params[:search] != ""%>
+ <% if @approved.count > 0 %>
+  <div id = "IdeaStream">
+   <% @approved.each do |approved| %>
+     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
+       <% @no = 1%>
+        <tr>
+	       <br>
+	 				<td>
+						<%= link_to "Title: " + approved.title , approved %>
+				  </td>
+	 				<br>
+	  		  <td>
+		  		<%= "Description: " + approved.description %>
+		  		<br>
+		  		<%= "Number of votes "  + approved.num_votes.to_s %>
+		  		<br>
+		  		<%= "Problem Solved " + approved.problem_solved %>
+		  		<br>
+		  		<%=  "Posted at " + approved.created_at.to_s %>
+	  		  </td>
+	   		  <td><%= image_tag approved.photo.url(:thumb) %>
+          </td>
+	    	<br>
+     		</tr>
+     <% end %>
+   <%end%>
+  </div>
+ <% end %>
+<% end %>
 <div class="topten">
  <h1>Top Ten Ideas</h1>
  <% @top.each do |top| %>
     <% if top.user.active == true and top.user.banned == false%>
-	     <div class="topten_idea">
-		    <span><%= link_to top.title ,top %></span>
-		    <span><%= top.num_votes %></span>
-		    <span><%=  top.user.first_name  %></span>
-		    <span><%= image_tag top.photo.url(:thumb) %></span>
-	     </div>
+       <div class="topten_idea">
+        <span><%= link_to top.title ,top %></span>
+        <span><%= top.num_votes %></span>
+        <span><%=  top.user.first_name  %></span>
+        <span><%= image_tag top.photo.url(:thumb) %></span>
+       </div>
     <% end %>
  <% end %>   
 </div>
-<div id = "IdeaStream">
-   <% @approved.each do |approved| %>
-     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
-        <tr>
-      <br>
-      <td>
-      <%= link_to "Title: " + approved.title , approved %>
-	  </td>
-      <br>
-      <td>
-      <%= "Description: " + approved.description %>
-      <br>
-      <%= "Number of votes " + approved.num_votes.to_s %>
-      <br>
-      <%= "Problem Solved " + approved.problem_solved %>
-      <br>
-      <%= "Posted at " + approved.created_at.to_s %>
-      </td>
-      <td><%= image_tag approved.photo.url(:thumb) %></td>
-      <br>
-      </tr>
-     <% end %>
-  <% end %>
- </div>
+<% if params[:search] == ""%>
+  <em>Ohh! you entered nothing in the search field</em>
+<% end %>
+<% if (@approved.count == 0 and params[:search] != "" and @all.count > 0) or (@no == 0 and @all.count > 0)%>
+  <em>No ideas to preview !!</em>
+<% end %>
+<% if @all.count == 0%>
+ <em>No ideas yet</em>
+<% end %>
 
 
