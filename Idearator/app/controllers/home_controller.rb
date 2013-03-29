@@ -7,10 +7,10 @@ class HomeController < ApplicationController
 	# and sends maximum ten ideas to index view page
 	# Author: Lina Basheer
 	#in the index method if there is a search to be done then 
-	#the 
+	#it will return the list containing the search results.
 	#Author:Mohamed Salah Nazir
 	def index
-		@ideas = Idea.find(:all, :conditions => {:approved => true})
+		@all = Idea.find(:all, :conditions => {:approved => true})
 		@approved = Idea.find(:all, :conditions => { :approved => true })
 		@top = Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
         @search = Idea.search do
