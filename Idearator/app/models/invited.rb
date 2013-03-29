@@ -8,6 +8,12 @@ class Invited < ActiveRecord::Base
   validates :admin_id,  :presence => true   
   belongs_to :admins
 
+##
+# creates invitated object and stores 
+# the invitation in the database if it is valid
+# +email+:: the email of the  guest
+# +admin_id+:: the id of the admin making the invitation
+# Author: muhammed hassan
   def self.creates(mail ,id)
     i = Invited.new(:email=> mail , :admin_id => id)
     if i.valid?

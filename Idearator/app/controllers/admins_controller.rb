@@ -5,7 +5,7 @@ class AdminsController < ApplicationController
   def index
   end
 ##
-# sends invitation mail and stores the invitation in the database
+# checks invitation is valid and delivers the email
 # +email+:: the email of the  guest
 # Author: muhammed hassan
   def invite_committee
