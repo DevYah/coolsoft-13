@@ -3,18 +3,18 @@ class CommentsController < ApplicationController
 #author dayna
 def show
    @idea = Idea.find(params[:id])
-     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @comment }
-    end
- end
+   respond_to do |format|
+     format.html # show.html.erb
+     format.xml  { render :xml => @comment }
+   end
+end
 def new
-    @comment = Comment.new
+   @comment = Comment.new
    respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
-    end
-  end
+   end
+end
 #create new Comment by building comments after getting the id of the idea 
 #author dayna 
 def create
