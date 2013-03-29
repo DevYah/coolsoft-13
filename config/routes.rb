@@ -7,6 +7,12 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
 
+  get '/admins/index'
+  post '/admins/invite_committee'
+
+
+
+
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   devise_for :committees, :controllers => { :registrations => "registrations" }
@@ -57,6 +63,7 @@ Sprint0::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
+
   # match ':controller(/:action(/:id))(.:format)'
 
 
@@ -65,6 +72,14 @@ Sprint0::Application.routes.draw do
 
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
+
+
+
+
+  #2.3 Create/Edit Tags
+  resources :tags
+  match 'tags/:id/synonym' => 'tags#addsym', :via => :put
+  
 
 
 end
