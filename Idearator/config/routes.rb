@@ -1,4 +1,11 @@
 Sprint0::Application.routes.draw do
+  match '/users/expertise' => 'users#expertise'
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'home#index'
+
+  #get "ideas/new"
+  resources :ideas
+
 
 
   get '/admins/index'
@@ -7,6 +14,7 @@ Sprint0::Application.routes.draw do
   default_url_options :host => "localhost:3000"
 
   devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :committees, :controllers => { :registrations => "registrations" }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -22,24 +30,14 @@ Sprint0::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+
 
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-
+  root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -57,18 +55,21 @@ Sprint0::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+ #root :to => 'ideas#show'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  
+
+  # match ':controller(/:action(/:id))(.:format)'
+
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+
+
   #2.3 Create/Edit Tags
   resources :tags
-  
   match 'tags/:id/synonym' => 'tags#addsym', :via => :put
-  
-  root :to => 'admins#index'
   
 end
