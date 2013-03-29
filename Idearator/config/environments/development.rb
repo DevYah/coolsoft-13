@@ -21,6 +21,18 @@ Sprint0::Application.configure do
   config.action_mailer.raise_delivery_errors = true
 
 
+  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+
+  ActionMailer::Base.smtp_settings = {
+   :address => "smtp.gmail.com",
+   :port => 1234,
+   :domain => 'gmail.com',
+   :authentication => :plain,
+   :user_name=> 'coolsoftc2',
+   :password=>'coolsoft',
+   :enable_starttls_auto => true
+}
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
