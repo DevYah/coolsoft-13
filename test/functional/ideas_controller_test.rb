@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class IdeasControllerTest < ActionController::TestCase
+
   setup do
     @idea = ideas(:one)
   end
@@ -46,4 +47,8 @@ class IdeasControllerTest < ActionController::TestCase
 
     assert_redirected_to ideas_path
   end
+  # test "the truth" do
+  #   assert true
+  # end
+
 end
