@@ -1,4 +1,7 @@
 Sprint0::Application.routes.draw do
+  get '/admins/index'
+  post '/admins/invite_committee'
+
 
   default_url_options :host => "localhost:3000"
 
