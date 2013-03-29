@@ -20,9 +20,5 @@ class HomeController < ApplicationController
 		@approved = @search.results
 	end
 end
-		
-	
-	# Method gets all ideas, order them in descending order according to number of votes 
-	# and sends maximum ten ideas to index view page
-	# Author: Lina Basheer 
+
 
