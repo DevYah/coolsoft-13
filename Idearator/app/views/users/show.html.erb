@@ -2,10 +2,15 @@
 <% if current_user.type == "Admin"%>
 	Ban
 <%end%>
-<% if current_user == @user%>
+<br>
+<% if current_user == @user and @user.active%>
 Deactivate
 <%end%>
-<%if  @user.banned==true || @user.active==false %>
+<%if @user.banned == true %>
+This User is banned.
+<%elsif @user.active == false%>
+This User is deactivated
+<%else%>
 <h2> About the User </h2>
    Email : <%= @user.email %><br>
    Username : <%= @user.username %><br>
@@ -40,6 +45,4 @@ Deactivate
 	<%end%>
 	<% end %>
 	</div>
-	<%else%>
-	This person is either banned or deactivated
-	<%end%>
+	<%end%>	
