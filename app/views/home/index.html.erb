@@ -32,7 +32,7 @@ border-color: white;
 						<%= link_to "Title: " + approved.title , approved %>
 				  </td>
 	 				<br>
-	  		<td>
+	  		  <td>
 		  		<%= "Description: " + approved.description %>
 		  		<br>
 		  		<%= "Number of votes "  + approved.num_votes.to_s %>
@@ -40,8 +40,9 @@ border-color: white;
 		  		<%= "Problem Solved " + approved.problem_solved %>
 		  		<br>
 		  		<%=  "Posted at " + approved.created_at.to_s %>
-	  		</td>
-	   		<td><%= image_tag approved.photo.url(:thumb) %></td>
+	  		  </td>
+	   		  <td><%= image_tag approved.photo.url(:thumb) %>
+          </td>
 	    	<br>
      		</tr>
      <% end %>
