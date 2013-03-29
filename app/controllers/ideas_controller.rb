@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
-  	
+  	before_filter :authenticate_user!, :only => [:show, :create ,:edit]
+  
 	
 	
 	# Deletes the all records related to the +Idea+ instance from the database
@@ -24,7 +25,6 @@ class IdeasController < ApplicationController
 		end
   	end
 
-  before_filter :authenticate_user!, :only => [:show, :create ,:edit]
   # view idea of current user
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
