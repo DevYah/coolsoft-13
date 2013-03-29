@@ -36,7 +36,6 @@ def create
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end
-   redirect_to idea_path(@idea)
 end
 #edit comment and update it
 #Params:
