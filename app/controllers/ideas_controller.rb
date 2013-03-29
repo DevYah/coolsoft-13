@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
   # view idea of current user
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
-  # Marwa Mehannased in params through the new idea view, it is used to identify the instance of +Idea+
+  # Marwa Mehanna
   def show
     @user=current_user.id
     @idea = Idea.find(params[:id])
