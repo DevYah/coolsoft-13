@@ -1,5 +1,7 @@
 Sprint0::Application.routes.draw do
-
+  match '/users/expertise' => 'users#expertise'
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'home#index'
 
   #get "ideas/new"
   resources :ideas
@@ -24,17 +26,7 @@ Sprint0::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+
 
   # Sample resource route with sub-resources:
   #   resources :products do
