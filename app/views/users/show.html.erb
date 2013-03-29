@@ -26,27 +26,27 @@
 			<h2> User Ideas </h2>
 			<div id = "IdeaStream">
 				<% if @ideas.size> 0 %>
-					<% @ideas.each do |ideas| %>
-					<% if ideas.approved == true%>
-						<tr>
-							<br>
-							<td>
-								<%= link_to "Title: " + ideas.title , ideas %>
-							</td>
-							<br>
-							<td>
-								<%= "Description: " + ideas.description %>
+						<% @ideas.each do |ideas| %>
+						<% if ideas.approved == true%>
+							<tr>
 								<br>
-								<%= "Number of votes "  + ideas.num_votes.to_s %>
+								<td>
+									<%= link_to "Title: " + ideas.title , ideas %>
+								</td>
 								<br>
-								<%= "Problem Solved " + ideas.problem_solved %>
+								<td>
+									<%= "Description: " + ideas.description %>
+									<br>
+									<%= "Number of votes "  + ideas.num_votes.to_s %>
+									<br>
+									<%= "Problem Solved " + ideas.problem_solved %>
+									<br>
+									<%=  "Posted at " + ideas.created_at.to_s %>
+								</td>
 								<br>
-								<%=  "Posted at " + ideas.created_at.to_s %>
-							</td>
-							<br>
-						</tr>
-					<% end %>
+							</tr>
+						<% end %>
 				<% end %>
-		<% end %>
+	<% end %>
 			</div>
 <% end %>	
