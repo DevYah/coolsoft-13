@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 	# and sends top ten ideas to index view page
 	# Author: Lina Basheer 
 	def index
-      @top= Idea.find(:all,:order=> "num_votes desc",:limit=>10)
+      @top= Idea.find(:all, :conditions => { :approved => true },:order=> "num_votes desc",:limit=>10)
       render :action => 'index.html.erb'
     end
 end

@@ -23,7 +23,7 @@
 	 <div class="topten_idea">
 		<span><%= link_to top.title ,top %></span>
 		<span><%= top.num_votes %></span>
-		<span><%= link_to top.user.first_name , %></span>
+		<span><%=  top.user.first_name  %></span>
 		<span><%= image_tag top.photo.url(:thumb) %></span>
 	 </div>
  <% end %>
