@@ -1,8 +1,9 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!, :only => [:show, :create ,:edit]
   # view idea of current user
-   #+id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+
-  #Marwa Mehanna
+  # Params
+  # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
+  # Marwa Mehannased in params through the new idea view, it is used to identify the instance of +Idea+
   def show
     @user=current_user.id
     @idea = Idea.find(params[:id])
@@ -25,19 +26,19 @@ class IdeasController < ApplicationController
     end
   end
   # editing Idea
-  #Params
-    #+id+ :: his is an instance of Idea passed through _form.html.erb +Idea+
-  #Marwa Mehanna
+  # Params
+  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
+  # Author: Marwa Mehanna
   def edit   
     @idea = Idea.find(params[:id])
     @tags= Tag.all
     @chosentags= Idea.find(params[:id]).tags
   end
   # updating Idea
-  #Params
-    #+ideas_tags:: this is an instance of Idea passed through _form.html.erb +IdeaTags+ 
-    #+id+ ::his is an instance of Idea passed through _form.html.erb +Idea+
-  #Marwa Mehanna
+  # Params
+  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
   def update
     puts(params[:ideas_tags][:tags])
     @idea = Idea.find(params[:id])
@@ -53,26 +54,26 @@ class IdeasController < ApplicationController
     end
   end
   # creating new Idea
-  #Params
-    #+idea+ :: this is an instance of Idea passed through _form.html.erb +IdeaTable+
-    #+idea_tags+ :: this is an instance of Idea passed through _form.html.erb+IdeasTags+
-    #+tags+ ::this is an instance of Tag passed through _form.html.erb +Tags+
-  #Marwa Mehanna
+  # Params
+  # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
+  # +idea_tags+ :: this is an instance of +IdeaTags+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
   def create
     @idea = Idea.new(params[:idea])
     @idea.user_id=current_user.id
-      respond_to do |format|
-        if @idea.save
-          @tags= params[:ideas_tags][:tags]
-          @tags.each do |tag|
-            IdeasTags.create(:idea_id => @idea.id , :tag_id => tag)
-          end
-          format.html { redirect_to @idea, notice: 'idea was successfully created.' }
-          format.json { render json: @idea, status: :created, location: @idea }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
+    respond_to do |format|
+      if @idea.save
+        @tags= params[:ideas_tags][:tags]
+        @tags.each do |tag|
+          IdeasTags.create(:idea_id => @idea.id , :tag_id => tag)
+        end
+        format.html { redirect_to @idea, notice: 'idea was successfully created.' }
+        format.json { render json: @idea, status: :created, location: @idea }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @idea.errors, status: :unprocessable_entity }
+    end
     end
   end
 end
