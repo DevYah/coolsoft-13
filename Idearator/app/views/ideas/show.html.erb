@@ -24,12 +24,11 @@
 <h2>Comments</h2>
 <table>
   <% @idea.comments.each do |comment| %>
-<tr>
-    <td><%= comment.content %></td>
- <td><%= link_to "Edit", edit_idea_comment_path(@idea,comment) %> </td>
-
-</tr>
-<% end %>
+  <tr>
+      <td><%= comment.content %></td>
+   <td><%= link_to "Edit", edit_idea_comment_path(@idea,comment) %> </td>
+  </tr>
+ <% end %>
 </table><br>
  
 <h2>Add a comment:</h2>
