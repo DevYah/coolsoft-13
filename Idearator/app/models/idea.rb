@@ -11,4 +11,5 @@ class Idea < ActiveRecord::Base
   has_attached_file :photo, :styles => { :small => "60x60>", :thumb => "10x10!" }, :default_url => "/images/:style/missing.png"
   searchable do
   	test :title,:description
+  end
 end
