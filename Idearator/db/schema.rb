@@ -137,6 +137,9 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.boolean  "recieve_comment_notification",                :default => true
     t.datetime "created_at",                                                     :null => false
     t.datetime "updated_at",                                                     :null => false
+    t.string   "type"
+    t.boolean  "active",                                      :default => true
+    t.boolean  "banned",                                      :default => false
     t.string   "encrypted_password",                          :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -150,9 +153,6 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "type"
-    t.boolean  "active",                                      :default => true
-    t.boolean  "banned",                                      :default => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
