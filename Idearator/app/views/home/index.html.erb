@@ -20,11 +20,13 @@
 <div class="topten">
  <h1>Top Ten Ideas</h1>
  <% @top.each do |top| %>
-	 <div class="topten_idea">
-		<span><%= link_to top.title ,top %></span>
-		<span><%= top.num_votes %></span>
-		<span><%=  top.user.first_name  %></span>
-		<span><%= image_tag top.photo.url(:thumb) %></span>
-	 </div>
- <% end %>
+    <% if top.user.active == true and top.user.banned == false%>
+	     <div class="topten_idea">
+		    <span><%= link_to top.title ,top %></span>
+		    <span><%= top.num_votes %></span>
+		    <span><%=  top.user.first_name  %></span>
+		    <span><%= image_tag top.photo.url(:thumb) %></span>
+	     </div>
+    <% end %>
+ <% end %>   
 </div>
