@@ -9,7 +9,10 @@ class HomeController < ApplicationController
 	def index
 		@approved = Idea.find(:all, :conditions => { :approved => true })
 		@top = Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
-        render :action => 'index.html.erb'
+        @search = Idea.search do
+			fulltext params[:search]
+		end
+		@approved = @search.results
 	end
 		
 		#the show method previews the ideas that match the search results

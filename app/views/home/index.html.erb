@@ -19,9 +19,13 @@ border-color: white;
 	width: 50px;
 }
 </style>
+<% no = 0 %>
+<% if params[:search] != ""%>
+<% if !@approved.empty? %>
 <div id = "IdeaStream">
-<% if @approved.size > 0 %>
 <% @approved.each do |approved| %>
+<% if approved.user.active == true and approved.user.banned == false%>
+<% @no = 1%>
 <tr>
 	<br>
 	<td>
@@ -40,20 +44,33 @@ border-color: white;
 	<td><%= image_tag approved.photo.url(:thumb) %></td>
 	<br>
 </tr>
+<% end %>
 <%end%>
 <% end %>
 </div>
+<% end %>
 <div class="topten">
 <h1>Top Ten Ideas</h1>
 <% @top.each do |top| %>
+<% if top.user.active == true and top.user.banned == false%>
 <div class="topten_idea">
 	
 	<span><%= link_to top.title ,top %></span>
 	<span><%= top.user.first_name %></span>
 	<span><%= top.num_votes %></span>
 	<span><%= image_tag top.photo.url(:thumb) %></span>
-
-	
 </div>
 <% end %>
+<% end %>
 </div>
+<% if params[:search] == ""%>
+<em>
+Ohh! you entered nothing in the search field
+</em>
+<% end %>
+<% if @approved.empty? %>
+<em>No Results Found !!</em>
+<% end %>
+<% if @no !=  1%>
+<em>No Results Found !!</em>
+<% end %>
