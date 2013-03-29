@@ -1,18 +1,18 @@
 <h1>User Profile</h1>
 <% if current_user.type == "Admin"%>
-Ban
+	Ban
 <% end %>
 <br>
 
 <% if current_user == @user and @user.active%>
-Deactivate
+	Deactivate
 <% end %>
 <br>
 
 <%if @user.banned == true %>
-This User is banned.
+	This User is banned.
 	<%elsif @user.active == false%>
-This User is deactivated
+		This User is deactivated
 		<% else %>
 			<h2> About the User </h2>
 			   Email : <%= @user.email %><br>
@@ -25,28 +25,28 @@ This User is deactivated
 
 			<h2> User Ideas </h2>
 			<div id = "IdeaStream">
-			<% if @ideas.size> 0 %>
-			<% @ideas.each do |ideas| %>
-				<% if ideas.approved == true%>
-			<tr>
-				<br>
-				<td>
-					<%= link_to "Title: " + ideas.title , ideas %>
-				</td>
-				<br>
-				<td>
-					<%= "Description: " + ideas.description %>
-					<br>
-					<%= "Number of votes "  + ideas.num_votes.to_s %>
-					<br>
-					<%= "Problem Solved " + ideas.problem_solved %>
-					<br>
-					<%=  "Posted at " + ideas.created_at.to_s %>
-				</td>
-				<br>
-			</tr>
+				<% if @ideas.size> 0 %>
+					<% @ideas.each do |ideas| %>
+					<% if ideas.approved == true%>
+						<tr>
+							<br>
+							<td>
+								<%= link_to "Title: " + ideas.title , ideas %>
+							</td>
+							<br>
+							<td>
+								<%= "Description: " + ideas.description %>
+								<br>
+								<%= "Number of votes "  + ideas.num_votes.to_s %>
+								<br>
+								<%= "Problem Solved " + ideas.problem_solved %>
+								<br>
+								<%=  "Posted at " + ideas.created_at.to_s %>
+							</td>
+							<br>
+						</tr>
+					<% end %>
 				<% end %>
-			<% end %>
-	<% end %>
+		<% end %>
 			</div>
 <% end %>	
