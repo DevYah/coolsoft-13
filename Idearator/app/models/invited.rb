@@ -7,15 +7,8 @@ class Invited < ActiveRecord::Base
             :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
   validates :admin_id,  :presence => true   
   belongs_to :admins
-<<<<<<< HEAD
-
-##
-# creates invitated object and stores 
-# the invitation in the database if it is valid
-=======
 # checks the validations and creates new +Invited+ object 
 # Params:
->>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
 # +email+:: the email of the  guest
 # +admin_id+:: the id of the admin making the invitation
 # Author: muhammed hassan
