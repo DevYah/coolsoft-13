@@ -9,8 +9,16 @@ class UsersController < ApplicationController
 	# Author: Mohamed Sameh
 	def expertise
 		if current_user.is_a? Committee
-			@user= current_user
-			@tags= Tag.all
+			if Tag.all.count > 0
+				@user= current_user
+				@tags= Tag.all
+			else
+				respond_to do |format|
+				format.html{
+					redirect_to controller: 'home', action: 'index'
+				}
+			end
+			end
 		else
 			respond_to do |format|
 				format.html{
