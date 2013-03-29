@@ -1,5 +1,5 @@
 class Inviter < ActionMailer::Base
-  default from: "coolsoft@gmail.com"
+  default from: "coolsoftc2@gmail.com"
 
 ##
 # returns invitation email
