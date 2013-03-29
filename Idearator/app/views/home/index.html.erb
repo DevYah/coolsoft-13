@@ -24,7 +24,7 @@ border-color: white;
  <% if !@approved.empty? %>
   <div id = "IdeaStream">
    <% @approved.each do |approved| %>
-     <% if approved.user.active == true and approved.user.banned == false%>
+     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
        <% @no = 1%>
         <tr>
 	       <br>

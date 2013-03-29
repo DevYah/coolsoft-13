@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 	#the 
 	#Author:Mohamed Salah Nazir
 	def index
-		@ideas = Idea.all
+		@ideas = Idea.find(:all, :conditions => {:approved => true})
 		@approved = Idea.find(:all, :conditions => { :approved => true })
 		@top = Idea.find(:all,:order=> "num_votes",:limit=>10).reverse
         @search = Idea.search do
