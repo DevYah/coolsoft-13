@@ -52,7 +52,7 @@ border-color: white;
 <% if params[:search] == ""%>
   <em>Ohh! you entered nothing in the search field</em>
 <% end %>
-<% if (@approved.count == 0 and params[:search] != "" and @all.count > 0) or @no == 0%>
+<% if (@approved.count == 0 and params[:search] != "" and @all.count > 0) or (@no == 0 and @all.count > 0)%>
   <em>No ideas to preview !!</em>
 <% end %>
 <% if @all.count == 0%>
