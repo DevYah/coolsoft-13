@@ -21,10 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'sunspot_rails'
-group :development do
-	gem 'sunspot_solr'
-end
 gem 'paperclip'
 
 # To use ActiveModel has_secure_password
