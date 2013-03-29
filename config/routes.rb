@@ -1,6 +1,4 @@
 Sprint0::Application.routes.draw do
-  
-
   #get "ideas/new"
   resources :ideas
   default_url_options :host => "localhost:3000"
