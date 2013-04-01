@@ -1,5 +1,4 @@
 class Tag < ActiveRecord::Base
-  
   # attr_accessible :title, :body
   attr_accessible :name, :tag
   validates :name, :presence => true, :uniqueness => true
