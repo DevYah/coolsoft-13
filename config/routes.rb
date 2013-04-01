@@ -6,9 +6,6 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
 
-  get '/admins/index'
-  post '/admins/invite_committee'
-
 
 
 
