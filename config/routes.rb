@@ -1,5 +1,4 @@
 Sprint0::Application.routes.draw do
-  default_url_options :host => "localhost:3000"
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
@@ -13,7 +12,10 @@ Sprint0::Application.routes.draw do
 
 
 
+  default_url_options :host => "localhost:3000"
   devise_for :users, :controllers => { :registrations => "registrations" }
+
+
 
   devise_for :committees, :controllers => { :registrations => "registrations" }
 
@@ -57,7 +59,7 @@ Sprint0::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
- root :to => 'ideas#index'
+ #root :to => 'ideas#show'
 
   # See how all your routes lay out with "rake routes"
 
