@@ -1,0 +1,5 @@
+# various temp files
+.DS_Store
+*.swp
+*~
+*.orig
