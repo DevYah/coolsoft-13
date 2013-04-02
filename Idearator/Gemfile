@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -7,11 +8,8 @@ gem 'rails', '3.2.13.rc1'
 
 gem 'sqlite3'
 
-
-#Install devise for User Authentication
 gem 'devise'
 
-#Install tlsmail to allow mail sending
 gem 'tlsmail'
 
 
@@ -26,12 +24,9 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'sunspot_rails'
+
 gem 'jquery-rails'
 gem 'paperclip'
-group :development do
-	gem 'sunspot_solr'
-end
 gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password
@@ -48,3 +43,4 @@ gem 'bootstrap-sass'
 
 # To use debugger
 # gem 'debugger'
+
