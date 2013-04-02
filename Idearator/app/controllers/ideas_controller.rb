@@ -10,12 +10,12 @@ class IdeasController < ApplicationController
 			@idea.destroy
 
 			respond_to do |format|
-      			format.html { redirect_to '/' }
+      			format.html { redirect_to '/', alert: 'Idea is successfully deleted.' }
       			format.json { head :no_content }
     		end
     	else
     		respond_to do |format|
-      			format.html { redirect_to @idea }
+      			format.html { redirect_to @idea, alert: "Deleting failed, you don't own the idea." }
       			format.json { head :no_content }
     		end
     	end
