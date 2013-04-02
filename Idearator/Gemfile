@@ -11,6 +11,8 @@ gem 'sqlite3'
 #Install devise for User Authentication
 gem 'devise'
 
+gem 'omniauth'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
