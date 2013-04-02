@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
   def new
   end
-
  
 def create
 	auth_hash = request.env['omniauth.auth']
@@ -16,7 +15,6 @@ def create
  
     render :text => "Hi #{user.email}! You've signed up."
   end
-end
 
   def failure
   end
