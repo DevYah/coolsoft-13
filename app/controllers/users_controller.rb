@@ -105,9 +105,8 @@ class UsersController < ApplicationController
 	end
 
 
-	
-  # This method creates a new User and calls UserMailer to send a confirmation email.
-  #Author: Menna Amr
+	# POST /users
+  # POST /users.json
   def create
     @user = User.new(params[:user])
  
