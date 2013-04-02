@@ -11,13 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327143347) do
+ActiveRecord::Schema.define(:version => 20130402161844) do
 
   create_table "action_notifications", :force => true do |t|
     t.string   "action"
     t.integer  "notification_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -171,6 +179,8 @@ ActiveRecord::Schema.define(:version => 20130327143347) do
     t.string   "type"
     t.boolean  "active",                                      :default => true
     t.boolean  "banned",                                      :default => false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
