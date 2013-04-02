@@ -6,12 +6,12 @@
     <title><%= content_for?(:title) ? yield(:title) : "Idearator" %></title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <%= stylesheet_link_tag "main", :media => "all" %>
-    <%= javascript_include_tag "main" %>
+    <%= stylesheet_link_tag "application", :media => "screen" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
+  <body class>
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
         <div class="container">
