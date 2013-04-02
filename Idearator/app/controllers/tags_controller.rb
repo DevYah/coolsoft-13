@@ -151,7 +151,13 @@ class TagsController < ApplicationController
     respond_to do |format|
       if tag_query.empty?
         t = Tag.new(:name => y)
-        t.save
+        if @tag.save
+          format.html { redirect_to @tag, notice: 'Tag was successfully created. and Sym List appended' }
+          format.json { render json: @tag, status: :created, location: @tag }
+        else
+          format.html { redirect_to @tag, notice: tag.errors.full_messages[0] }
+          format.json { head :no_content }
+        end
         t.tags << @tag
         @tag.tags << t
         format.html { redirect_to @tag, notice: 'Synonym was successfully created.' }
