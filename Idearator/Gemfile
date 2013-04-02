@@ -32,7 +32,7 @@ gem 'paperclip'
 group :development do
 	gem 'sunspot_solr'
 end
-gem 'bootstrap'
+gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
