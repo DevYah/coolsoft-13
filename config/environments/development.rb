@@ -17,21 +17,8 @@ Sprint0::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Notify me if the mailer can't send
+  # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
-
-
-  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
-
-  ActionMailer::Base.smtp_settings = {
-   :address => "smtp.gmail.com",
-   :port => 1234,
-   :domain => 'gmail.com',
-   :authentication => :plain,
-   :user_name=> 'coolsoftc2',
-   :password=>'coolsoft',
-   :enable_starttls_auto => true
-}
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -51,12 +38,4 @@ Sprint0::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-
-#SMTP configuration for mail sending
-config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {:address => "localhost", :port => 1025}
-
-
-
 end
