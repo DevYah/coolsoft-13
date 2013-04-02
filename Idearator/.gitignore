@@ -3,10 +3,6 @@ tmp/*
 log/*
 *sqlite3
 db/schema.rb
-*/.DS_STORE
-*/*/.DS_STORE
-*/*/*/.DS_STORE
-
 # project specific files
 public/system/*
 

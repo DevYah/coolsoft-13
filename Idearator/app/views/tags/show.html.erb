@@ -1,18 +1,13 @@
 <%- model_class = Tag -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%=t '.title', :default => @tag.name %></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @tag.name %></dd>
-</dl>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Synonym</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+	  <th>Created At</th>
     </tr>
   </thead>
   <tbody>
@@ -35,25 +30,38 @@
 </table>
 
   
+<div id="example" class="modal hide fade in" style="display: none; ">
+            <div class="modal-body">
+	            <div class="modal-header">
+	              <a class="close" data-dismiss="modal">×</a>
+	              <h3>Add Synonym</h3>
+	            </div>
+			 
+			 
+				<%= form_for @tag, :html => { :class => 'form-horizontal' }, :url =>  url_for(:controller => 'tags',  :action => 'addsym') do |f| %>
+				  <div class="control-group">
+				    <%= f.label :name, :class => 'control-label' %>
+				    <div class="controls">
+				      <%= f.text_field :name, :class => 'text_field'%>
+				    </div>
+				  </div>
+				  <div class="form-actions">
+				    <%= f.submit "New Synonym", :class => 'btn btn-primary'%>
+				    <a href="#" class="btn" data-dismiss="modal">Close</a>
+				  </div>
+				<% end %>
+				
 
-<%= form_for @tag, :html => { :class => 'form-horizontal' }, :url =>  url_for(:controller => 'tags',  :action => 'addsym') do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field's%>
-    </div>
-  </div>
-  <div class="form-actions">
-    <%= f.submit "New Synonym", :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                tag_path(@tag), :class => 'btn' %>
-  </div>
-<% end %>
+				<div class="alert">  
+				  <a id = notice class="close" data-dismiss="alert">×</a>  
+				  <strong>Info: </strong> <p id="notice"><%= notice %></p>
+				</div>
+			        
+            </div>
+		</div>
 
-<div class="alert">  
-  <a id = notice class="close" data-dismiss="alert">×</a>  
-  <strong>Info:</strong> <p id="notice"><%= notice %></p>
-</div>  
+
+  
 
 
 <div class="form-actions">
@@ -66,7 +74,10 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
-		  
+			  <p style="display:inline;"><a data-toggle="modal" href="#example" class="btn btn-primary">Create</a></p>
+
+			  </div>
+
 </div>
 
 
