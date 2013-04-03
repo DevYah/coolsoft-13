@@ -6,6 +6,7 @@ class DisapproveIdeaNotification < IdeaNotification
     disapprove_notification.user = user_sender
     disapprove_notification.idea = idea
     disapprove_notification.users << users_receivers
+    disapprove_notification.save
   end
 
   def text
