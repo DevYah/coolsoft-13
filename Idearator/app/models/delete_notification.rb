@@ -1,6 +1,6 @@
 class DeleteNotification < IdeaNotification
 
-  def self.send_notification(user_sender, users_receivers)
+  def self.send_notification(user_sender, idea, users_receivers)
     delete_notification = DeleteNotification.new
     delete_notification.link = '/'
     delete_notification.user = user_sender

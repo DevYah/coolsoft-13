@@ -1,6 +1,6 @@
 class DisapproveIdeaNotification < IdeaNotification
 
-  def self.send_notification(user_sender, users_receivers) 
+  def self.send_notification(user_sender, idea, users_receivers) 
     disapprove_notification = DisapproveIdeaNotification.new
     disapprove_notification.link = 'idea#show'
     disapprove_notification.user = user_sender
