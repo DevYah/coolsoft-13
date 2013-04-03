@@ -1,0 +1,2 @@
+class InviteCommittee < UserNotification
+end

@@ -1,0 +1,2 @@
+class ApproveCommittee < UserNotification
+end
