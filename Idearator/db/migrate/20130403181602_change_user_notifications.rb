@@ -7,6 +7,6 @@ class ChangeUserNotifications < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :idea_notifications, :user_id
+    add_index :user_notifications, :user_id
   end
 end
