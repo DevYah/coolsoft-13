@@ -10,10 +10,7 @@ class ArchiveNotification < IdeaNotification
   end
 
   def text
-    if(!(User.find(self.user_id) == null || User.find(self.user_id).is_a? Admin))
-      User.find(self.user_id).first_name + " archived his idea " + Idea.find(self.idea_id).title + "."
-    else
-      "The idea " + Idea.find(self.idea_id).title + " got archived."
+    "The idea " + Idea.find(self.idea_id).title + " got archived."
   end
 
 end
