@@ -1,5 +1,6 @@
 # rails specific files
 tmp/*
+tmp/cache/assets/*
 log/*
 *sqlite3
 db/schema.rb
