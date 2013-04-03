@@ -1,4 +1,4 @@
-class IdeaNotifications < ActiveRecord::Base
+class IdeaNotification < ActiveRecord::Base
 
   belongs_to :idea
   belongs_to :user
