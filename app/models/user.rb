@@ -21,17 +21,10 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :ideas, :join_table => :votes
   has_many :authorizations
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-  user = User.where(:provider => auth.provider, :uid => auth.uid).first
-  unless user
-    user = User.create(
-                         provider:auth.provider,
-                         uid:auth.uid,
-                         email:auth.info.email,
-                         password:Devise.friendly_token[0,20]
-                         )
-  end
+def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+   user = User.where(email: auth['info']['email']).first
+   
+   user
+ end
 end
 
-
-end
