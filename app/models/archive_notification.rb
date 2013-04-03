@@ -1,7 +1,7 @@
 class ArchiveNotification < IdeaNotification
 
   def self.send_notification(user_sender, users_receivers) 
-    archive_notification = CommentNotification.new
+    archive_notification = ArchiveNotification.new
     archive_notification.link = 'idea#show'
     archive_notification.user = user_sender
     archive_notification.idea = idea

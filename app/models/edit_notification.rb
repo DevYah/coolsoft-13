@@ -1,7 +1,7 @@
 class EditNotification < IdeaNotification
 
   def self.send_notification(user_sender, users_receivers) 
-    edit_notification = CommentNotification.new
+    edit_notification = EditNotification.new
     edit_notification.link = 'idea#show'
     edit_notification.user = user_sender
     edit_notification.idea = idea
