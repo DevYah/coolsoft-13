@@ -5,7 +5,7 @@ class IdeaNotification < ActiveRecord::Base
   has_and_belongs_to_many :users
   attr_accessible :link, :type, :user, :idea, :users 
 
-  def self.send_notification(user_sender, users_receivers)
+  def self.send_notification(user_sender, idea, users_receivers)
   end
 
   def text

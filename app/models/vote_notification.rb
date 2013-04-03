@@ -1,6 +1,6 @@
 class VoteNotification < IdeaNotification
 
-  def self.send_notification (user_sender, users_receivers) 
+  def self.send_notification (user_sender, idea, users_receivers) 
     vote_notification = VoteNotification.new
     vote_notification.link = 'idea#show'
     vote_notification.user = user_sender

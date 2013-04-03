@@ -1,6 +1,6 @@
 class CommentNotification < IdeaNotification
 
-  def self.send_notification(user_sender, users_receivers) 
+  def self.send_notification(user_sender, idea, users_receivers) 
     comment_notification = CommentNotification.new
     comment_notification.link = 'idea#show'
     comment_notification.user = user_sender
