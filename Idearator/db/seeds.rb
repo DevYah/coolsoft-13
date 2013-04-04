@@ -5,7 +5,9 @@ last_name: "ElGezeery", username: "geezo", about_me: "Lorem ipsum dolor sit
 amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-User.find(1).confirm!
+user = User.find(1)
+user.confirm!
+user.save
 
 #Admin User
 Admin.create(email: "hishameladmin@gmail.com", password: 123123123, first_name: "Hisham",
@@ -13,7 +15,9 @@ last_name: "ElGezeery", username: "geezo", about_me: "Lorem ipsum dolor sit
 amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-Admin.find(:first).confirm!
+admin = Admin.find(:first)
+admin.confirm!
+admin.save
 
 #Committe User
 Committee.create(email: "marwaelcommittee@gmail.com", password: 123123123, first_name: "Marwa",
@@ -21,7 +25,10 @@ last_name: "Mehanna", username: "marwabentmehanna", about_me: "Lorem ipsum dolor
 amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-Committee.find(:first).confirm!
+committee = Committee.find(:first)
+committee.confirm!
+committee.save
+
 #-----------------------------------------------------------------------------------
 
 ### Ideas ###
@@ -36,9 +43,7 @@ nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.",
 problem_solved: 'here is the problem solved', num_votes: 16, approved: true)
 idea = Idea.find(1)
-user = User.find(1)
 idea.user = user 
-user.save
 idea.save
 
 #Idea by regular user, not approved, not archived.
@@ -58,7 +63,7 @@ idea2.save
 
 ### Ideas Approved by Committee ###
 
-idea.committee = Committee.find(:first)
+idea.committee = committee
 idea.save 
 
 #-----------------------------------------------------------------------------------
@@ -70,7 +75,6 @@ Tag.create(name: "Astrology")
 
 #-----------------------------------------------------------------------------------
 ### Assigning tags to the Committees ###
-committee = Committee.find(:first)
 committee.tags << [Tag.find(1)]
 committee.save
 
