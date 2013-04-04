@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -28,6 +29,10 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -42,3 +47,4 @@ gem 'bootstrap-sass'
 
 # To use debugger
 # gem 'debugger'
+
