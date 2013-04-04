@@ -4,6 +4,6 @@ class EditIdeaNotificationsUsers < ActiveRecord::Migration
   end
 
   def down
-  	add_column :idea_notifications_users, :read
+  	remove_column :idea_notifications_users, :read
   end
 end
