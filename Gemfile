@@ -7,9 +7,9 @@ gem 'rails', '3.2.13.rc1'
 
 gem 'sqlite3'
 
-
-#Install devise for User Authentication
 gem 'devise'
+
+gem 'tlsmail'
 
 
 # Gems used only for assets and not required
@@ -25,6 +25,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'paperclip'
+gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
