@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/mnzaki/pre-commit.git
+  revision: 136a04ecc3617c83579a063ea8c9ae042c985231
+  specs:
+    pre-commit (0.8.0)
+      execjs
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -143,6 +150,7 @@ DEPENDENCIES
   devise
   jquery-rails
   paperclip
+  pre-commit!
   rails (= 3.2.13.rc1)
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
