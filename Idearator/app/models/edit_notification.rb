@@ -10,7 +10,7 @@ class EditNotification < IdeaNotification
   end
 
   def text
-    User.find(self.user_id).first_name + " edited his idea " + Idea.find(self.idea_id).title + "."
+    User.find(self.user_id).first_name.to_s() + " edited his idea " + Idea.find(self.idea_id).title.to_s() + "."
   end
 
 end

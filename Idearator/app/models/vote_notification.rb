@@ -10,7 +10,7 @@ class VoteNotification < IdeaNotification
   end
 
   def text
-  	"Your idea " + Idea.find(self.idea_id).title + " got a vote."
+  	"Your idea " + Idea.find(self.idea_id).title.to_s() + " got a vote."
   end
 
 end

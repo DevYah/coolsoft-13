@@ -10,7 +10,7 @@ class ArchiveNotification < IdeaNotification
   end
 
   def text
-    "The idea " + Idea.find(self.idea_id).title + " got archived."
+    "The idea " + Idea.find(self.idea_id).title.to_s() + " got archived."
   end
 
 end
