@@ -4,5 +4,6 @@ class EditUserNotifications < ActiveRecord::Migration
   end
 
   def down
+    remove_column :user_notifications, :link_name
   end
 end
