@@ -1,0 +1,10 @@
+<ul>
+	<% @idea_notifications.each do |notification| %>
+		<li><%= notification.text %>		
+			<%= link_to "view", notification.link %> <%= notification.created_at %></li>
+	<% end %>
+	<% @user_notifications.each do |notification| %>
+		<li><%= notification.text %>		
+			<%= link_to "view", notification.link %> <%= notification.created_at %></li>
+	<% end %>
+</ul>
