@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
 		@idea = Idea.find(params[:id])
 
 		if current_user.type == 'Admin' || current_user.id == @idea.user_id
-			@idea.archive_status = !@idea.archive_status
+			@idea.toggle(:archive_status)
     		
     	respond_to do |format|
       		format.html { redirect_to '/', alert: 'Idea has been successfully archived.' }
