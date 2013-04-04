@@ -1,4 +1,3 @@
-
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -30,6 +29,7 @@ gem 'paperclip'
 gem 'bootstrap-sass'
 
 group :test, :development do
+  gem "pre-commit", :git => "https://github.com/mnzaki/pre-commit.git"
   gem "rspec-rails", "~> 2.0"
 end
 
@@ -47,4 +47,3 @@ end
 
 # To use debugger
 # gem 'debugger'
-
