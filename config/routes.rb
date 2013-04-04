@@ -6,7 +6,7 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
 
-
+  get '/tags/ajax'
 
 
   default_url_options :host => "localhost:3000"
