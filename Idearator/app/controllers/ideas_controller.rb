@@ -9,15 +9,15 @@ class IdeasController < ApplicationController
 		if current_user.isAdmin || current_user.id == @idea.user_id
 			@idea.archive_status = !@idea.archive_status
     		
-    		respond_to do |format|
-      			format.html { redirect_to '/', alert: 'Idea has been successfully archived.' }
-      			format.json { head :no_content }
-    		end
-    	else
-    		respond_to do |format|
-      			format.html { redirect_to @idea, alert: "Idea isn't archived, you are not allowed to archive it." }
-      			format.json { head :no_content }
-    		end
+    	respond_to do |format|
+      		format.html { redirect_to '/', alert: 'Idea has been successfully archived.' }
+      		format.json { head :no_content }
     	end
-    end 		
+    else
+    	respond_to do |format|
+      		format.html { redirect_to @idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+      		format.json { head :no_content }
+    	end
+    end
+  end 		
 end
