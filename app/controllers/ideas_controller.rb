@@ -1,26 +1,16 @@
 class IdeasController < ApplicationController
-
-  #before_filter :authenticate_user!, :only => [:create, :edit]
-
 def show
   current_user = User.find(1)
     @user=current_user.id
       @idea = Idea.find(params[:id])
-     # @idea=Idea.new
-       #rescue ActiveRecord::RecordNotFound
-      
       respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
        end
      end
-	def index
-
-	end
 	def new
-		@idea=Idea.new
-    @tags= Tag.all
-		
+          @idea=Idea.new
+          @tags= Tag.all
 		respond_to do |format|
 	      format.html # new.html.erb
 	      format.json { render json: @idea }
@@ -65,4 +55,3 @@ def show
     end
   end
 end
-
