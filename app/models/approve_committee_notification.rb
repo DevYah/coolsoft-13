@@ -9,7 +9,7 @@ class ApproveCommitteeNotification < UserNotification
   end
 
   def text
-    return User.find(self.user_id).first_name + " has signed up as a committee member."
+    return User.find(self.user_id).first_name.to_s() + " has signed up as a committee member."
   end
 
 end

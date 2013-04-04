@@ -10,7 +10,7 @@ class DisapproveIdeaNotification < IdeaNotification
   end
 
   def text
-    return "Your " + Idea.find(self.idea_id).title + " wasn't approved by the committee."
+    return "Your " + Idea.find(self.idea_id).title.to_s() + " wasn't approved by the committee."
   end
 
 end
