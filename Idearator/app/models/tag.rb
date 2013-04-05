@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   # attr_accessible :title, :body
-
+  attr_accessible :name	
    has_and_belongs_to_many :committees
    has_and_belongs_to_many :ideas
    has_and_belongs_to_many(:tags,
