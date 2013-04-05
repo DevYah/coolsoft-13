@@ -4,5 +4,6 @@ class EditUserNotificationsUsers < ActiveRecord::Migration
   end
 
   def down
+  	remove_column :user_notifications_users, :read
   end
 end

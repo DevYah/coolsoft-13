@@ -12,4 +12,7 @@ class IdeaNotification < ActiveRecord::Base
   def text
   end
 
+  def link
+  end
+
 end
