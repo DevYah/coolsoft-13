@@ -4,7 +4,4 @@ class ApproveCommitteeNotification < UserNotification
     approve_notification = ApproveCommitteeNotification.create(user: user_sender, users: users_receivers)
   end
 
-
-    # User.find(self.user_id).first_name.to_s() + " has signed up as a committee member."
-
 end
