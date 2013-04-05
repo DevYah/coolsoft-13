@@ -3,7 +3,7 @@
 
 require 'fileutils'
 
-FileUtils::cd '..' do
+FileUtils.cd '..' do
   # We install a custom hook because pre-commit is installed in the bundle
   File.open('.git/hooks/pre-commit', 'w') do |f|
     f.write <<-eos.strip_heredoc
@@ -18,6 +18,7 @@ FileUtils::cd '..' do
       end
     eos
   end
+  FileUtils.chmod(0755, '.git/hooks/pre-commit')
 
   system('git config pre-commit.checks ' +
          '"rubocop_all, debugger, pry, merge_conflict, console_log, migrations"')
