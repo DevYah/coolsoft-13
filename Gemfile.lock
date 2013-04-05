@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/mnzaki/pre-commit.git
-  revision: 136a04ecc3617c83579a063ea8c9ae042c985231
+  revision: 67e26ceeec16aec09e480dacf50d8900676099f9
   specs:
     pre-commit (0.8.0)
       execjs
