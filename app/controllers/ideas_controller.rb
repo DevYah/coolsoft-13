@@ -79,14 +79,31 @@ class IdeasController < ApplicationController
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be archived
   # Author: Mahmoud Abdelghany Hashish
-  def archiveAndUnarchive
+  def archive
     @idea = Idea.find(params[:id])
 
     if current_user.type == 'Admin' || current_user.id == @idea.user_id
-      @idea.toggle(:archive_status)
+      @idea.archive_status = true
         
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Idea has been successfully archived.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.json { head :no_content }
+      end
+    end
+  end    
+  def unarchive
+    @idea = Idea.find(params[:id])
+
+    if current_user.type == 'Admin' || current_user.id == @idea.user_id
+      @idea.archive_status = false
+        
+      respond_to do |format|
+        format.html { redirect_to '/', alert: 'Idea has been successfully unarchived.' }
         format.json { head :no_content }
       end
     else
