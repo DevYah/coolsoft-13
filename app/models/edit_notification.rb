@@ -1,12 +1,8 @@
 class EditNotification < IdeaNotification
 
   def self.send_notification(user_sender, idea, users_receivers) 
-    edit_notification = EditNotification.new
-    edit_notification.link = 'idea#show'
-    edit_notification.user = user_sender
-    edit_notification.idea = idea
-    edit_notification.users << users_receivers
-    edit_notification.save
+    edit_notification = EditNotification.create(user: user_sender, idea: idea, users: users_receivers)
+    #link = 'idea#show', link_name = 'view idea'
   end
 
   def text
