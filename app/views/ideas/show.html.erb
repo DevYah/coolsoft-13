@@ -9,7 +9,6 @@
 		<% if @user == @idea.user_id %>
 			<div class="btn-group">
 				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
-				<span class="caret"></span>
 				<%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 			</div>
 		<%end%>
