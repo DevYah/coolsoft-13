@@ -10,4 +10,7 @@ class UserNotification < ActiveRecord::Base
   def text
   end
 
+  def link
+  end
+
 end

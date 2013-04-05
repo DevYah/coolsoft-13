@@ -2,11 +2,14 @@ class VoteNotification < IdeaNotification
 
   def self.send_notification (user_sender, idea, users_receivers) 
     vote_notification = VoteNotification.create(user: user_sender, idea: idea, users: users_receivers)
-    #link = 'idea#show', link_name = 'view idea'
   end
 
   def text
   	"Your idea " + Idea.find(self.idea_id).title + " got a vote."
+  end
+
+  def link
+    link_to "view idea", "idea#show"
   end
 
 end
