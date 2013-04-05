@@ -1,25 +1,31 @@
 <h1> Ideas </h1>
 <p id="notice"><%= notice %></p>
-
-<p>
-<%= image_tag @idea.photo.url(:thumb) %>
-</p>
-<p>
-   <b>Title:</b>
-   <%= @idea.title %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= @idea.description %>
-</p>
-<p>
-  <b>Problem Solved:</b>
-  <%= @idea.problem_solved  %>
-</p>
-
-<% if @user == @idea.user_id %>
-<td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
-<%end%>
+<div class='media'>
+	<a  class="pull-left" href="#">
+		<%= image_tag @idea.photo.url(:medium) %>
+	</a>
+	<p>
+		<b>Title:</b>
+		<div><%= @idea.title %></div>
+		<% if @user == @idea.user_id %>
+			<div class="btn-group">
+				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
+				<span class="caret"></span>
+				<!--! add here archive and delete buttons -->
+			</div>
+		<%end%>
+	</p>
+</div>
+<div class="media-body">
+	<p>
+		<b>Description:</b>
+		<div><%= @idea.description %></div>
+	</p>
+	<p>
+		<b>Problem Solved:</b>
+		<div><%= @idea.problem_solved  %></div>
+	</p>
+</div>
 
 <h2>Comments</h2>
 <table>
@@ -40,7 +46,6 @@
     <%= f.submit 'Post comment'%>
 
 <% end %>
-<td><%= link_to 'Back', '/' %></td>
-
+<td><%= link_to 'Back', '/',:class => "btn" %></td>
 
 
