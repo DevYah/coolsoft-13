@@ -75,7 +75,7 @@ class IdeasController < ApplicationController
       end
     end
   end
-  # Archives/Unarchives a specific idea
+  # Archives a specific idea
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be archived
   # Author: Mahmoud Abdelghany Hashish
@@ -95,7 +95,11 @@ class IdeasController < ApplicationController
         format.json { head :no_content }
       end
     end
-  end    
+  end
+  # Unarchives a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be unarchived
+  # Author: Mahmoud Abdelghany Hashish    
   def unarchive
     @idea = Idea.find(params[:id])
 
