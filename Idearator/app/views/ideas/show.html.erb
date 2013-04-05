@@ -1,46 +1,48 @@
-<h1> Ideas </h1>
 <p id="notice"><%= notice %></p>
+<div class='media'>
+	<a  class="pull-left" href="#">
+		<%= image_tag @idea.photo.url(:medium) %>
+	</a>
+	<p>
+		<b>Title:</b>
+		<div><%= @idea.title %></div>
+		<% if @user == @idea.user_id %>
+			<div class="btn-group">
+				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
+				<span class="caret"></span>
+				<!--! add here archive and delete buttons -->
+			</div>
+		<%end%>
+	</p>
+</div>
+<div class="media-body">
+	<p>
+		<b>Description:</b>
+		<div><%= @idea.description %></div>
+	</p>
+	<p>
+		<b>Problem Solved:</b>
+		<div><%= @idea.problem_solved  %></div>
+	</p>
+</div>
 
-<p>
-<%= image_tag @idea.photo.url(:thumb) %>
-</p>
-<p>
-   <b>Title:</b>
-   <%= @idea.title %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= @idea.description %>
-</p>
-<p>
-  <b>Problem Solved:</b>
-  <%= @idea.problem_solved  %>
-</p>
-
-<% if @user == @idea.user_id %>
-<td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
-<%end%>
-
-<h2>Comments</h2>
+<h5>Comments</h5>
 <table>
   <% @idea.comments.each do |comment| %>
   <tr>
-      <td><%= comment.content %></td>
-      <td><%= link_to "<button>Edit</button>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "button_class" %></td>
-<td><%= button_to "delete", [@idea, comment], :method=>:delete, :class=>:destroy, :confirm => 'Are you sure?' %></td>
+      <td><blockquote><p><small><%= comment.content %></small><%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %></p></blockquote></td>
+<td><%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %></td>
   </tr>
  <% end %>
 </table><br>
- 
-<h2>Add a comment:</h2>
+<h5>Add a comment:</h5>
 <%= form_for([@idea, @idea.comments.create]) do |f| %>
 
     <%= f.label :content %><br />
     <%= f.text_area :content %>
-    <%= f.submit 'Post comment'%>
+   <i class="icon-plus"> <%= f.submit 'Post comment'%></i>
 
 <% end %>
-<td><%= link_to 'Back', '/' %></td>
-
+<td><%= link_to 'Back', '/',:class => "btn" %></td>
 
 
