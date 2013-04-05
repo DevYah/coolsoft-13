@@ -1,52 +1,62 @@
-<h1>User Profile</h1>
-<% if current_user.type == "Admin"%>
-	Ban
-<% end %>
-<br>
-
-<% if current_user == @user and @user.active%>
-	Deactivate
-<% end %>
-<br>
-
+<h1><%= @user.username %>'s Profile</h1>
 <%if @user.banned == true %>
-	This User is banned.
-	<%elsif @user.active == false%>
-		This User is deactivated
-		<% else %>
-			<h2> About the User </h2>
-			   Email : <%= @user.email %><br>
-			   Username : <%= @user.username %><br>
-			   First Name : <%= @user.first_name %><br>
-			   Last Name : <%= @user.last_name %><br>
-			   Gender  : <%= @user.gender %><br>
-			   About me : <%= @user.about_me %><br>
-			<br> 
+  <p class="text-error">This User is currently banned!</p>
+  <%elsif @user.active == false%>
+    <p class="text-error">This User is currently deactivated!</p>
+<% end %>
+<% if current_user.type == "Admin" && @user.active==true && @user.banned==false%>
+ <button class="btn btn-primary btn-large">Ban</button>
+<% end %>
+<% if current_user.type == "Admin" && @user.banned==true%>
+ <button class="btn btn-primary btn-large">Unban</button>
+<% end %>
+<% if current_user == @user %>
+ <button class="btn">Edit Profile</button>
+<% end %>
+<% if current_user == @user and @user.active%>
+ <button class="btn">Deactivate</button>
+<% end %>
+<% if @user.banned == false and @user.active == true %>
+  <h3> About the User </h3>
+  <strong>Email</strong><br>
+  <%= @user.email %><br>
+  <strong>First Name</strong><br>
+  <%= @user.first_name %><br>
+  <strong>Last Name</strong><br>
+  <%= @user.last_name %><br>
+  <strong>Gender</strong><br>
+  <%= @user.gender %><br>
+  <strong>About <%= @user.username %></strong><br>
+  <%= @user.about_me %><br>
+  <br>
+  <h3> User Ideas </h3>
+  <div id = "IdeaStream">
+    <% if @ideas.size> 0 %>
+      <% @ideas.each do |ideas| %>
+        <% if ideas.approved == true%>
+          <tr>
+          <br>
+            <td>
+              <%= link_to "Title: " + ideas.title , ideas %>
+            </td>
+            <br>
+            <td>
+              <%= "Description: " + ideas.description %>
+              <br>
+              <%= "Number of votes "  + ideas.num_votes.to_s %>
+              <br>
+              <%= "Problem Solved " + ideas.problem_solved %>
+              <br>
+              <%=  "Posted at " + ideas.created_at.to_s %>
+            </td>
+            <br>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
 
-			<h2> User Ideas </h2>
-			<div id = "IdeaStream">
-				<% if @ideas.size> 0 %>
-						<% @ideas.each do |ideas| %>
-							<% if ideas.approved == true%>
-							<tr>
-								<br>
-								<td>
-									<%= link_to "Title: " + ideas.title , ideas %>
-								</td>
-								<br>
-								<td>
-									<%= "Description: " + ideas.description %>
-									<br>
-									<%= "Number of votes "  + ideas.num_votes.to_s %>
-									<br>
-									<%= "Problem Solved " + ideas.problem_solved %>
-									<br>
-									<%=  "Posted at " + ideas.created_at.to_s %>
-								</td>
-								<br>
-							</tr>
-							<% end %>
-						<% end %>
-				<% end %>
-			</div>
-<% end %>	
+<ul class="pager">
+  <li><%= link_to 'Back', :back %></li>
+</ul>
