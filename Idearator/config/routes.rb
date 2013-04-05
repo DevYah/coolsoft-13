@@ -3,8 +3,10 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
 
+
   #get "ideas/new"
   resources :ideas
+  resources :dashboard
 
 
   default_url_options :host => "localhost:3000"
