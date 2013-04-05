@@ -1,11 +1,8 @@
 class ApproveCommitteeNotification < UserNotification
 
   def self.send_notification(user_sender, users_receivers) 
-    approve_notification = ApproveCommitteeNotification.new
-    approve_notification.link = '/'
-    approve_notification.user = user_sender
-    approve_notification.users << users_receivers
-    approve_notification.save
+    approve_notification = ApproveCommitteeNotification.create(user: user_sender, users: users_receivers)
+    #link = review committee page , link_name = 'review'
   end
 
   def text
