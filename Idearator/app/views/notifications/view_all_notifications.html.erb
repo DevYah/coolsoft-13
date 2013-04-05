@@ -27,7 +27,7 @@
       </div><div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification %>
-      <li><div>Your idea  <%= notification.user.username %>  got a vote.</div>
+      <li><div>You have been invited to become a committee member.</div>
         <div><%= link_to 'choose area of expertise',
         {controller: 'users', action: 'expertise'} %></div></li>
     <% end %>
