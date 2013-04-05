@@ -117,6 +117,7 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
+    rubocop (0.3.1)
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -153,6 +154,7 @@ DEPENDENCIES
   pre-commit!
   rails (= 3.2.13.rc1)
   rspec-rails (~> 2.0)
+  rubocop
   sass-rails (~> 3.2.3)
   sqlite3
   tlsmail
