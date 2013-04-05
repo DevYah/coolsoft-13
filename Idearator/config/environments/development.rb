@@ -1,6 +1,3 @@
-system('cd ..; pre-commit install -f &> /dev/null;' +
-       'git config pre-commit.checks ' +
-       '"rubocop_all, debugger, pry, merge_conflict, console_log, migrations"')
 Sprint0::Application.configure do
 
 
