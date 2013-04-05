@@ -30,7 +30,10 @@ gem 'paperclip'
 gem 'bootstrap-sass'
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.0"
+
+  gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
+  gem 'rubocop'
+  gem 'rspec-rails', '~> 2.0'
 end
 
 # To use ActiveModel has_secure_password
