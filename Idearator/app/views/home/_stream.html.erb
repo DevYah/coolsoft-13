@@ -1,6 +1,6 @@
 
-   <% @approved.each do |approved| %>
-     
+   
+     <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
       <div class ="row block span6">
       <div class = "span1"><%= image_tag 'png.png' %></div>
@@ -16,7 +16,7 @@
       </div>
       </div>  
      <% end %>
-    <% end %>
+     <% end %>
   
 
 

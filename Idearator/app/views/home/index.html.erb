@@ -1,7 +1,12 @@
  
 
 <div id = "IdeaStream">
-   <%= render :partial => 'stream' %>
+	<div class = "page">
+		<%= render :partial => 'ideas' %>
+	</div>	
+
+
+   
  </div>
 
 
@@ -18,3 +23,39 @@
 </div>
 <% end %>
 </div>
+
+
+<script type="text/javascript">
+(function() {
+  var page = 1,
+      loading = false;
+
+  function nearBottomOfPage() {
+    return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
+  }
+
+  $(window).scroll(function(){
+    if (loading) {
+      return;
+    }
+
+    if(nearBottomOfPage()) {
+      loading=true;
+      page++;
+      $.ajax({
+        url: '/home/index?page=' + page,
+        type: 'get',
+        dataType: 'script',
+        success: function() {
+        	loading=false;
+          $(window).sausage('draw');
+          
+        }
+
+      });
+    }
+  });
+
+  $(window).sausage();
+}());
+</script>
