@@ -58,15 +58,4 @@ def update
       end
     end
   end
-#delete comment
-#Params:
-#+comment_id+ :: the parameter is an instance of +Comment+ to get the comment's id in order to delete it
-#+idea_id+ :: the parameter is an instance of +Idea+ to get the idea's id in order to modify it after deleting the comment
-#author dayna
-def destroy
-    @idea = Idea.find(params[:idea_id])
-    @comment = @idea.comments.find(params[:id])
-    @comment.destroy
-    redirect_to idea_path(@idea)
-  end
 end
