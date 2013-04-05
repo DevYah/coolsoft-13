@@ -84,7 +84,8 @@ class IdeasController < ApplicationController
 
     if current_user.type == 'Admin' || current_user.id == @idea.user_id
       @idea.archive_status = true
-        
+      @idea.save
+
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Idea has been successfully archived.' }
         format.json { head :no_content }
@@ -105,9 +106,10 @@ class IdeasController < ApplicationController
 
     if current_user.type == 'Admin' || current_user.id == @idea.user_id
       @idea.archive_status = false
+      @idea.save
         
       respond_to do |format|
-        format.html { redirect_to '/', alert: 'Idea has been successfully unarchived.' }
+        format.html { redirect_to @idea, alert: 'Idea has been successfully unarchived.' }
         format.json { head :no_content }
       end
     else
