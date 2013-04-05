@@ -32,8 +32,7 @@
   <% @idea.comments.each do |comment| %>
   <tr>
       <td><%= comment.content %></td>
-      <td><%= link_to "<button>Edit</button>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "button_class" %></td>
-<td><%= button_to "delete", [@idea, comment], :method=>:delete, :class=>:destroy, :confirm => 'Are you sure?' %></td>
+      <td><%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %></td>
   </tr>
  <% end %>
 </table><br>
