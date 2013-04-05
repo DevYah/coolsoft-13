@@ -9,10 +9,4 @@ class IdeaNotification < ActiveRecord::Base
   def self.send_notification(user_sender, idea, users_receivers)
   end
 
-  def text
-  end
-
-  def link
-  end
-
 end
