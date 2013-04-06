@@ -1,28 +1,36 @@
-<p id="notice"><%= notice %></p>
+<p id='notice'><%= notice %></p>
 <div class='media'>
-	<a  class="pull-left" href="#">
-		<%= image_tag @idea.photo.url(:medium) %>
-	</a>
-	<p>
-		<b>Title:</b>
-		<div><%= @idea.title %></div>
-		<% if @user == @idea.user_id %>
-			<div class="btn-group">
-				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
-				<%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
-			</div>
-		<%end%>
-	</p>
+  <a class='pull-left' href='#'>
+    <%= image_tag @idea.photo.url(:medium) %>
+  </a>
+  <p>
+    <b>Title:</b>
+    <div><%= @idea.title %></div>
+    <% if @user == @idea.user_id %>
+      <div class='btn-group'>
+        <%= link_to 'Edit', edit_idea_path(@idea) ,:class => 'btn btn-inverse' %>
+        <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+      </div>
+    <%end%>
+  </p>
 </div>
-<div class="media-body">
-	<p>
-		<b>Description:</b>
-		<div><%= @idea.description %></div>
-	</p>
-	<p>
-		<b>Problem Solved:</b>
-		<div><%= @idea.problem_solved  %></div>
-	</p>
+<div class='media-body'>
+  <p>
+    <b>Description:</b>
+    <div><%= @idea.description %></div>
+  </p>
+  <p>
+    <b>Problem Solved:</b>
+    <div><%= @idea.problem_solved  %></div>
+  </p>
+  <p>
+    <b>Ratings:</b>
+    <% @idea.ratings.each do |therating| %>
+      <b><%= therating.name %></b>
+      <%= therating.average_rating %>
+      <%= render '/user_ratings/form' %>
+    <% end %>
+  </p>
 </div>
-<td><%= link_to 'Back', '/',:class => "btn" %></td>
+<td><%= link_to 'Back', '/',:class => 'btn' %></td>
 
