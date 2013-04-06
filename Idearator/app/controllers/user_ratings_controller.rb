@@ -1,6 +1,11 @@
 class UserRatingsController < ApplicationController
   before_filter :authenticate_user!
 
+  # creates a new user rating
+  # Params:
+  # +idea_id+:: is the id of the instance of +Idea+ which it's perspective will be rated
+  # +user_rating:: is the actual +User_Rating+ attributes passed from the view
+  # +rating_id+:: is the id of the instance of +Rating+, i.e Rating Perspective, which is being rated
   def create
     @idea = Idea.find_by_id(params[:idea_id])
     @user_rating = UserRating.new(params[:user_rating])
