@@ -6,6 +6,7 @@ namespace :db do
 			u = User.new
 			u.email = Faker::Internet.email
 			u.first_name = Faker::Name.name
+			u.password = 123123123
 			u.confirm!
 			u.save
 		end
