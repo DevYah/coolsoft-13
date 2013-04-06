@@ -70,44 +70,23 @@ def destroy
     redirect_to idea_path(@idea)
 end
 def like
-  @current_user =  User.find(params[:id])
-  @idea = Idea.find(params[:idea_id])
-  @comment = @idea.comments.find(params[:id])
-  if Like.comment_id == @comment && Like.user_id == @current_user
-alert = 'hello' 
-  end
-else 
-  @like= @comment.num_likes +1
-  if @like.save
-       format.html { redirect_to(@idea, :notice => 'like was successfully created.') }
-       format.xml  { render :xml => @idea, :status => :created, :location => @idea }
-      else
-       format.html { redirect_to(@idea, :notice => 
-        'Error')}
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-    
-    end
-  end 
-
-def unlike
-@current_user =  User.find(params[:id])
-  @idea = Idea.find(params[:idea_id])
-  @comment = @idea.comments.find(params[:id])
-  if Like.comment_id == @comment && Like.user_id == @current_user 
-  @like= @comment.num_likes -1
-  if @like.save
-       format.html { redirect_to(@idea, :notice => 'like was successfully deleted.') }
-       format.xml  { render :xml => @idea, :status => :created, :location => @idea }
-      else
-       format.html { redirect_to(@idea, :notice => 
-        'Error')}
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-      end 
-    else 
-      alert = "Hello"
-    end
-  end 
-
-
-
-end
+  #@current_user =  User.find(params[:id])
+  @current_user =  User.first
+  #@idea = Idea.find(params[:idea_id])
+  @comment = Comment.find(params[:id])
+  #if Like.find(params[:comment_id]) == @comment && Like.find(params[:user_id]) == @current_user
+#else 
+  @comment.num_likes+=1
+  # @comment.num_likes + 1
+  @like = @comment.num_likes
+  #if @like.save
+   #    format.html { redirect_to(@idea, :notice => 'like was successfully created.') }
+    #   format.xml  { render :xml => @idea, :status => :created, :location => @idea }
+     # else
+      # format.html { redirect_to(@idea, :notice => 
+       # 'Error')}
+       # format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+   # end
+   redirect_to idea_path , :notice => 'like was successfully created.'
+  end  
+end 
