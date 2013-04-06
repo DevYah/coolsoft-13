@@ -1,0 +1,18 @@
+<%= form_for(current_user, url: url_for(controller: 'users', action: 'change_settings'), :html => { :class => "form-horizontal" } ) do |form| %>
+<div class="well">
+  <label class="checkbox">
+  <%= check_box_tag 'user[]', '1', current_user.own_idea_notifications %>
+  Recieve Notifications on your own submitted Ideas. This allows you to recieve notifications whenever anyone comments on or votes for any of your ideas. 
+</label>
+</div>
+<div class="well">
+<label class="checkbox">
+  <%= check_box_tag 'user[]', '2', current_user.participated_idea_notifications%>
+  Recieve Notifications for any updates on ideas you commented on or liked. This allows you to stay up to date with what's happening with the ideas that interest you. 
+</label>
+</div>
+ <div class="form-actions">
+    	<input class="btn btn-primary" name="commit" type="submit" value="Save Changes" class="close" data-dismiss="modal" aria-hidden="true" >
+      <button type="button" class="btn" class="close" data-dismiss="modal" aria-hidden="true" >Cancel</button>
+ </div>
+<% end %>

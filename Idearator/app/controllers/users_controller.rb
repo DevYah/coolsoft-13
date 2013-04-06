@@ -125,11 +125,24 @@ class UsersController < ApplicationController
 
   def change_settings
 		if params[:user] != nil
-			@tags= params[:user][:tags]
-			@tags.each do |tag|
-				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
+			settings= params[:user]
+			s= User.find(current_user)
+			if settings.include?('1')
+				s.own_idea_notifications= true
+			else
+				s.own_idea_notifications= false
 			end
-		end
+			if settings.include?('2')
+				s.participated_idea_notifications= true
+			else
+				s.participated_idea_notifications= false
+			end
+			s.save
+		else
+			s= User.find(current_user)
+			s.own_idea_notifications= false
+	    s.participated_idea_notifications= false
+	    s.save
+	  end
 	end
-    	
 end
