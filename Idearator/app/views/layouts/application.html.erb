@@ -18,12 +18,10 @@
         <h3 id="myModalLabel">Notification Settings</h3>
       </div>
       <div class="modal-body">
-        <%= form_for(@user, url: url_for(action: 'new_committee_tag')) do |form| %>
-          <% @tags.each do |tag|%>
-            <div><%= check_box_tag 'user[tags][]', tag.id, false %><%= tag.name %> </div>
-          <% end %> 
-         <%= form.submit  value= 'Submit' %>
+        <%= form_for(current_user, url: url_for(controller: 'users', action: 'change_settings')) do |form| %>
+            <div><%= check_box_tag 'user[]', current_user.own_idea_notifications , current_user.own_idea_notifications %><%= "blaa" %> </div>
         <% end %>
+      </div>
     </div>   
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
