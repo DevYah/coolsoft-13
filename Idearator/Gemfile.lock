@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: ff38257d5d61fc5b205c87354e0a928a048fc700
+  revision: 1aaf8b0c26c093a88973817e2e2db7f8e6dbe720
   specs:
     rubocop (0.3.1)
 
 GIT
   remote: https://github.com/mnzaki/pre-commit.git
-  revision: 597318155c82dfcd6059c752f9ca5e67e7736a7f
+  revision: ff38257d5d61fc5b205c87354e0a928a048fc700
   specs:
     pre-commit (0.8.0)
       execjs
