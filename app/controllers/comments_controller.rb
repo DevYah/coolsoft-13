@@ -62,30 +62,44 @@ def destroy
     @comment.destroy
     redirect_to idea_path(@idea)
 end
-#def like
-  #@current_user =  User.find(params[:id])
-# @current_user =  User.first
-  #@idea = Idea.find(params[:idea_id])
- # @comment = Comment.find(params[:id])
+/def like 
+ # @current_user =  User.find(params[:id])
+  @current_user =  User.first
+  @idea = Idea.find(params[:idea_id])
+  @comment = @idea.comments.find(params[:id])
+  @commentsLiked = Like.find(params[:user_id]).comment_id
   #if Like.find(params[:comment_id]) == @comment && Like.find(params[:user_id]) == @current_user
 #else 
-  #@comment.num_likes+=1
+  if @commentsLiked =! @comment
+  @comment.num_likes+=1
   # @comment.num_likes + 1
-  #@like = @comment.num_likes
-  #if @like.save
+  @like = @comment.num_likes
+  @like.save
    #    format.html { redirect_to(@idea, :notice => 'like was successfully created.') }
     #   format.xml  { render :xml => @idea, :status => :created, :location => @idea }
      # else
       # format.html { redirect_to(@idea, :notice => 
        # 'Error')}
        # format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-   # end
-   #redirect_to idea_path , :notice => 'like was successfully created.'
-  #end
+    #end
+   redirect_to idea_path , :notice => 'like was successfully created.'
+  else 
+     redirect_to idea_path , :notice => 'You already liked that before .'
+
+  end 
+  end/
+
   def like
-    if user.flag!(comment, :likes).empty?
-    end   
-end 
+    @idea = Idea.find(params[:idea_id])
+    @Comment = @idea.comments.find(params[:id])
+    @like = Like.new(params[:comment_id][:user_id])
+    @user = User.first
+    @like.save
+       redirect_to idea_path , :notice => 'like was successfully created.'
+
+  end
+       
+ 
 def unlike
 @like = Like.find(params[:user_id][:comment_id])
     #@story = @like.story
