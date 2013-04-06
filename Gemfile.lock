@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/kristianmandrup/social-buttons.git
+  revision: 7d0ef2c5f63939336b1e30629084e68360ce3f87
+  specs:
+    social-buttons (0.3.7)
+      rails (>= 3.0.0)
+
+GIT
   remote: https://github.com/bbatsov/rubocop.git
   revision: 1aaf8b0c26c093a88973817e2e2db7f8e6dbe720
   specs:
@@ -161,6 +168,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   rubocop!
   sass-rails (~> 3.2.3)
+  social-buttons!
   sqlite3
   tlsmail
   uglifier (>= 1.0.3)
