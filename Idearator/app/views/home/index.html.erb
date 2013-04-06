@@ -1,3 +1,14 @@
-<h1>Welcome to Idearator!</h1>
+<p id="notice"><%= notice %></p>
 
+
+<div id="topten">
+<h1>Top Ten Ideas</h1>
+<% @top.each do |top| %>
+<div class="topten_idea">
+	<span><%= link_to top.title ,top %></span>
+	<span><%= top.num_votes %></span>
+	<span><%= top.user.first_name %></span>
+</div>
+<% end %>
+</div>
 

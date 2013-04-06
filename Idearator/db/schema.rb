@@ -86,24 +86,6 @@ ActiveRecord::Schema.define(:version => 20130402161844) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "models", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-  end
-
-  add_index "models", ["email"], :name => "index_models_on_email", :unique => true
-  add_index "models", ["reset_password_token"], :name => "index_models_on_reset_password_token", :unique => true
-
   create_table "notifications", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -163,6 +145,9 @@ ActiveRecord::Schema.define(:version => 20130402161844) do
     t.boolean  "recieve_comment_notification",                :default => true
     t.datetime "created_at",                                                     :null => false
     t.datetime "updated_at",                                                     :null => false
+    t.string   "type"
+    t.boolean  "active",                                      :default => true
+    t.boolean  "banned",                                      :default => false
     t.string   "encrypted_password",                          :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -176,9 +161,6 @@ ActiveRecord::Schema.define(:version => 20130402161844) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "type"
-    t.boolean  "active",                                      :default => true
-    t.boolean  "banned",                                      :default => false
     t.string   "provider"
     t.string   "uid"
   end

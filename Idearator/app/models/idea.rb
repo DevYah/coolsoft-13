@@ -1,5 +1,8 @@
 class Idea < ActiveRecord::Base
-  # attr_accessible :title, :body
+
+
+   attr_accessible :title, :description, :problem_solved
+
 
   belongs_to :user
   has_many :comments
