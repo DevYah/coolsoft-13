@@ -1,9 +1,13 @@
 Sprint0::Application.configure do
+
+
+#  Paperclip.options[:command_path] = "C:\Program Files (x86)\ImageMagick-6.8.4-Q16"
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
+  Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.4-Q16'
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
@@ -13,9 +17,8 @@ Sprint0::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Notify me if the mailer can't send
+  # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
-
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -35,12 +38,4 @@ Sprint0::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-
-#SMTP configuration for mail sending
-config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {:address => "localhost", :port => 1025}
-
-
-
 end

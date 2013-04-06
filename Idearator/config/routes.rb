@@ -6,7 +6,6 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
 
-
   get   '/login', :to => 'sessions#new', :as => :login
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
@@ -15,6 +14,7 @@ Sprint0::Application.routes.draw do
 
   default_url_options :host => "localhost:3000"
 devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -30,24 +30,14 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+
 
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-root:to => 'home#index'
+  root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -73,7 +63,12 @@ root:to => 'home#index'
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+
+  match "/review_ideas" => "committees#review_ideas"
+    
+
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
+
 
 end

@@ -10,8 +10,16 @@ class UsersController < ApplicationController
 	# Author: Mohamed Sameh
 	def expertise
 		if current_user.is_a? Committee
-			@user= current_user
-			@tags= Tag.all
+			if Tag.all.count > 0
+				@user= current_user
+				@tags= Tag.all
+			else
+				respond_to do |format|
+				format.html{
+					redirect_to controller: 'home', action: 'index'
+				}
+			end
+			end
 		else
 			respond_to do |format|
 				format.html{
@@ -92,8 +100,10 @@ class UsersController < ApplicationController
 	
  # This method creates a new User and calls UserMailer to send a confirmation email.
   #Author: Menna Amr
+
   def create
     @user = User.new(params[:user])
+
  
     respond_to do |format|
       if @user.save
