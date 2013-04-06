@@ -7,14 +7,14 @@ Sprint0::Application.routes.draw do
   resources :ideas
 
 
+  get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
 
+  root :to => 'home#index'
 
   default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :registrations => "registrations" }
-
-
-
-  devise_for :committees, :controllers => { :registrations => "registrations" }
+devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
 
   # The priority is based upon order of creation:
