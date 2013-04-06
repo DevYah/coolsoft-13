@@ -12,15 +12,14 @@
     <%= yield(:head) %>
   </head>
   <body class>
-    <div id="myModal" class="modal hide fade" style="display: none; ">
+     <div id="myModal" class="modal hide fade" style="display: none; ">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Notification Settings</h3>
+        <h2 id="myModalLabel">Notification Settings</h2>
       </div>
       <div class="modal-body">
-        <%= form_for(current_user, url: url_for(controller: 'users', action: 'change_settings')) do |form| %>
-            <div><%= check_box_tag 'user[]', current_user.own_idea_notifications , current_user.own_idea_notifications %><%= "blaa" %> </div>
-        <% end %>
+        <h4>Please choose the type of notifications you would like to recieve :-</h4>
+        <%= render 'users/settings' %>
       </div>
     </div>   
     <header class="navbar navbar-fixed-top">
