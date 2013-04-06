@@ -32,7 +32,7 @@ gem 'bootstrap-sass'
 group :test, :development do
 
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
-  gem 'rubocop'
+  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
 end
 
