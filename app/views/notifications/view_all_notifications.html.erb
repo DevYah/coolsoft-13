@@ -1,42 +1,76 @@
+<h3>Notifications</h3>
 <ul>
   <% @notifications.each do |notification| %>
     <% if notification.is_a? VoteNotification %>
-      <li><div>Your idea  <%= notification.idea.title %> got a vote.</div>
-        <div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+      <li>
+        <ul class = 'inline'>
+          <li>Your idea  <%= notification.idea.title %> got a vote.</li>
+          <li><%= link_to 'view', {controller: 'ideas', action: 'show'} %></li>
+        </ul>
+      </li>
     <% end %>
     <% if notification.is_a? CommentNotification %>
-      <li><div><%= notification.user.username %> commented on you idea
-        <%= notification.idea.title %>.</div>
-        <div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div>--></li>
+      <li>
+        <ul class = 'inline'>
+          <li><%= notification.user.username %> commented on you idea
+        <%= notification.idea.title %>.</li>
+          <li><%= link_to 'view', {controller: 'ideas', action: 'show'} %></li>
+        </ul>
+      </li>
     <% end %>
     <% if notification.is_a? DeleteNotification %>
       <li><div><%= notification.user.username %> deleted his idea
         <%= notification.idea.title %>.</div></li>
     <% end %>
     <% if notification.is_a? EditNotification %>
-      <li><div><%= notification.user.username %> edited his idea
-        <%= notification.idea.title %>.</div>
-        <div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+      <li>
+        <ul class = 'inline'>
+          <li><%= notification.user.username %> edited his idea
+          <%= notification.idea.title %>.</li>
+          <li><%= link_to 'view',
+          {controller: 'ideas', action: 'show'} %></li>
+        </ul>
+      </li>
     <% end %>
     <% if notification.is_a? ArchiveNotification %>
-      <li><div>The idea  <%= notification.idea.title %>  got a archived.</div>
-        <div><%=link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+      <li>
+        <ul class = 'inline'>
+          <li>The idea  <%= notification.idea.title %>  got a archived.</li>
+          <li><%=link_to 'view', {controller: 'ideas', action: 'show'} %></li>
+        </ul>
+      </li>
     <% end %>
     <% if notification.is_a? DisapproveIdeaNotification %>
-      <li><div>Your idea  <%= notification.idea.title %>  got a vote.
-      </div><div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+      <li>
+        <ul class = 'inline'>
+          <li>Your idea  <%= notification.idea.title %>
+          wasn't approved by committee.</li>
+          <li><%= link_to 'view', {controller: 'ideas', action: 'show'} %></li>
+        </ul>
+      </li>
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification %>
-      <li><div>You have been invited to become a committee member.</div>
-        <div><%= link_to 'choose area of expertise',
-        {controller: 'users', action: 'expertise'} %></div></li>
+      <li>
+        <ul class = 'inline'>
+          <li>You have been invited to become a committee member.</li>
+          <li><%= link_to 'choose area of expertise',
+          {controller: 'users', action: 'expertise'} %></li>
+        </ul>
+      </li>
     <% end %>
     <% if notification.is_a? ApproveCommitteeNotification %>
-      <li><div><%= notification.user.username %>
-        has signed up as a committee member.</div>
-        <div><%=link_to 'review',
-        {controller: 'committees', action: 'review_committee'} %></div></li>
+      <li>
+        <ul class = 'inline'>
+          <li><%= notification.user.username %>
+          has signed up as a committee member</li>
+          <li><%=link_to 'review',
+        {controller: 'committees', action: 'review_committee'} %></li>
+        </ul>
+      </li>
     <% end %>
   <% end %>
-
 </ul>
+
+
+
+
