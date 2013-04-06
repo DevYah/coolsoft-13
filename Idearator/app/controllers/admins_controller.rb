@@ -7,4 +7,7 @@ class AdminsController < ApplicationController
   		mail = Inviter.invite_email(params[:email])
   		mail.deliver
 	end
+  
+  def approve_committee
+    
 end

@@ -1,3 +1,4 @@
+
 class TagsController < ApplicationController
   before_filter :authenticate_user!
   # GET /tags
@@ -14,7 +15,6 @@ class TagsController < ApplicationController
       format.json { render json: @tags }
     end
   end
-
   # GET /tags/1
   # GET /tags/1.json
   def show
@@ -174,5 +174,4 @@ class TagsController < ApplicationController
       end
     end
   end
-    
 end
