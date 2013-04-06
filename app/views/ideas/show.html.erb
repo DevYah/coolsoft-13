@@ -1,3 +1,4 @@
+<%= javascript_include_tag "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515f76bb48a18b9b" %>
 <p id="notice"><%= notice %></p>
 <div class='media'>
 	<a  class="pull-left" href="#">
@@ -26,4 +27,13 @@
 	</p>
 </div>
 <td><%= link_to 'Back', '/',:class => "btn" %></td>
+<%if @idea.archive_status == false%>
+<button id="share" class="btn btn-primary" type="button">Share</button>
+<div id="show" style="display: none;" class="well">
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a id="fb" style="padding-left:10px;" class="addthis_button_facebook"></a>
+<h3 id="facebook" style="display:none; padding-left:150px;"> Share on Facebook </h3>
+</div>
+</div>
+<%end%>
 
