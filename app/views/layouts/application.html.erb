@@ -12,6 +12,19 @@
     <%= yield(:head) %>
   </head>
   <body class>
+    <div id="myModal" class="modal hide fade" style="display: none; ">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Notification Settings</h3>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@user, url: url_for(action: 'new_committee_tag')) do |form| %>
+          <% @tags.each do |tag|%>
+            <div><%= check_box_tag 'user[tags][]', tag.id, false %><%= tag.name %> </div>
+          <% end %> 
+         <%= form.submit  value= 'Submit' %>
+        <% end %>
+    </div>   
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
         <div class="container">
