@@ -1,3 +1,10 @@
+<style type="text/css">
+ .topten{
+  position: relative;
+  left: 75%;
+    
+  }
+</style>
 <div id = "IdeaStream">
    <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
@@ -26,13 +33,27 @@
 <p id="notice"><%= notice %></p>
 
 
-<div id="topten">
-<h1>Top Ten Ideas</h1>
-<% @top.each do |top| %>
-<div class="topten_idea">
-	<span><%= link_to top.title ,top %></span>
-	<span><%= top.num_votes %></span>
-	<span><%= top.user.first_name %></span>
-</div>
-<% end %>
-</div>
+<div class="topten">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <h1>Top Ten Ideas</h1>
+      <div class="span2">
+        <% @top.each do |top| %>
+           <% if top.user.active == true and top.user.banned == false%>
+             <div class="topten_idea">
+               <span><%= link_to top.title ,top %></span>
+               <span><%= top.num_votes %></span>
+               <span><%=  top.user.first_name  %></span>
+               <ul class="thumbnails">
+                 <a href="#" class="thumbnail">
+                   <span><%= image_tag top.photo.url(:thumb) %></span>
+                 </a>
+               </ul>   
+             </div>
+           <% end %>
+        <% end %> 
+      </div> 
+    </div>
+  </div>
+</div> 
+
