@@ -28,7 +28,7 @@ end
 gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
-
+gem 'faker'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
 end
