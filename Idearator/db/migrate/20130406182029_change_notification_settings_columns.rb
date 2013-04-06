@@ -5,8 +5,8 @@ class ChangeNotificationSettingsColumns < ActiveRecord::Migration
   def up
   	remove_column :users, :recieve_comment_notification
   	remove_column :users, :recieve_vote_notification
-  	add_column :users, :own_idea_notifications, :boolean
-  	add_column :users, :participated_idea_notifications, :boolean
+  	add_column :users, :own_idea_notifications, :boolean, :default => true
+  	add_column :users, :participated_idea_notifications, :boolean, :default => true
   end
 
   def down
