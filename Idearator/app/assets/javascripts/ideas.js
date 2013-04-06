@@ -1,5 +1,11 @@
 var addthis_config = {"data_track_addressbar":true};
 
+var addthis_share = 
+	{ 
+	  templates: {
+	    twitter: 'Check out this Idea on Idearator   {{url}} ',
+	 }
+	};
 
 var show = {
 	init: function(){
@@ -8,6 +14,9 @@ var show = {
 		});
 		$("#fb").hover(function () {
     		$("#facebook").toggle();
+		});
+		$("#tw").hover(function () {
+    		$("#twitter").toggle();
 		});
 	}
 }
