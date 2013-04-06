@@ -24,5 +24,6 @@ FileUtils.cd '..' do
          '"rubocop_all, debugger, pry, merge_conflict, white_space, tabs, console_log, migrations"')
   system('git config core.fileMode false')
   system('git config core.eol lf')
+  system('git config core.autocrlf true')
 end
 
