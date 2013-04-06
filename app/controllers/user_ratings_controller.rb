@@ -23,6 +23,10 @@ class UserRatingsController < ApplicationController
     end
   end
 
+  # updates an existing user rating
+  # Params:
+  # +idea_id+:: is the id of the instance of +Idea+ which it's perspective's rating will be updated
+  # +user_rating:: is the actual +User_Rating+ attributes passed from the view to update the record
   def update
     @idea = Idea.find_by_id(params[:idea_id])
     @user_rating = current_user.user_ratings.find_by_rating_id(@rating.id)
