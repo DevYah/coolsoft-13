@@ -10,13 +10,6 @@ def show
      format.xml  { render :xml => @comment }
    end
 end
-def new
-   @comment = Comment.new
-   respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @comment }
-   end
-end
 #create new Comment 
 #Params:
 #+idea_id+ :: the parameter is an instance of +Idea+ passed to get the id of the idea to build the comments 
@@ -69,16 +62,16 @@ def destroy
     @comment.destroy
     redirect_to idea_path(@idea)
 end
-def like
+#def like
   #@current_user =  User.find(params[:id])
-  @current_user =  User.first
+# @current_user =  User.first
   #@idea = Idea.find(params[:idea_id])
-  @comment = Comment.find(params[:id])
+ # @comment = Comment.find(params[:id])
   #if Like.find(params[:comment_id]) == @comment && Like.find(params[:user_id]) == @current_user
 #else 
-  @comment.num_likes+=1
+  #@comment.num_likes+=1
   # @comment.num_likes + 1
-  @like = @comment.num_likes
+  #@like = @comment.num_likes
   #if @like.save
    #    format.html { redirect_to(@idea, :notice => 'like was successfully created.') }
     #   format.xml  { render :xml => @idea, :status => :created, :location => @idea }
@@ -87,6 +80,21 @@ def like
        # 'Error')}
        # format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
    # end
-   redirect_to idea_path , :notice => 'like was successfully created.'
-  end  
+   #redirect_to idea_path , :notice => 'like was successfully created.'
+  #end
+  def like
+    if user.flag!(comment, :likes).empty?
+    end   
+end 
+def unlike
+@like = Like.find(params[:user_id][:comment_id])
+    #@story = @like.story
+    @like.destroy
+
+    respond_to do |format|
+      format.html { redirect_to idea_path }
+      format.js
+      format.json { head :ok }
+    end
+end 
 end 
