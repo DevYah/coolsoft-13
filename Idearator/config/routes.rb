@@ -3,7 +3,11 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
   resources :ideas do
-    resources :comments 
+    resources :comments do
+      member do
+      get 'like'
+      end
+    end 
   end
   default_url_options :host => "localhost:3000"
   devise_for :users, :controllers => { :registrations => "registrations" }
