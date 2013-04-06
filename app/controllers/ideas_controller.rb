@@ -6,6 +6,7 @@ class IdeasController < ApplicationController
   # Marwa Mehanna
   def show
     @user=current_user.id
+    @username=current_user.username
     @idea = Idea.find(params[:id])
     rescue ActiveRecord::RecordNotFound
     respond_to do |format|
