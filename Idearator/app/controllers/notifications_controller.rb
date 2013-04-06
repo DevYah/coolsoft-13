@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
     @user_notifications = current_user.user_notifications
     @not = @idea_notifications + @user_notifications
     @not2 = @not.sort_by &:created_at
-    @notifications = @not2.reverse
+    @notifications = @not2.reverse.first(10)
   end
 
   def view_all_notifications
