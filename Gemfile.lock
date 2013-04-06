@@ -1,3 +1,16 @@
+GIT
+  remote: https://github.com/bbatsov/rubocop.git
+  revision: 1aaf8b0c26c093a88973817e2e2db7f8e6dbe720
+  specs:
+    rubocop (0.3.1)
+
+GIT
+  remote: https://github.com/mnzaki/pre-commit.git
+  revision: 597318155c82dfcd6059c752f9ca5e67e7736a7f
+  specs:
+    pre-commit (0.8.0)
+      execjs
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -149,8 +162,10 @@ DEPENDENCIES
   faker
   jquery-rails
   paperclip
+  pre-commit!
   rails (= 3.2.13.rc1)
   rspec-rails (~> 2.0)
+  rubocop!
   sass-rails (~> 3.2.3)
   sqlite3
   tlsmail
