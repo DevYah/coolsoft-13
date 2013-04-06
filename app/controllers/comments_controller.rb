@@ -102,6 +102,7 @@ def unlike
        format.html { redirect_to(@idea, :notice => 
         'Error')}
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+      end 
     else 
       alert = "Hello"
     end
