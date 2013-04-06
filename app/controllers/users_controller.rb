@@ -104,7 +104,6 @@ class UsersController < ApplicationController
 		end
 	end
 
-
 	# POST /users
   # POST /users.json
   def create
@@ -123,5 +122,14 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def change_settings
+		if params[:user] != nil
+			@tags= params[:user][:tags]
+			@tags.each do |tag|
+				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
+			end
+		end
+	end
     	
 end
