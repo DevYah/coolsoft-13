@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 	#and sends top ten ideas to index view page
 	#Author: Lina Basheer 
 	def index
-		@approved = Idea.find (:all, :conditions => { :approved => true })
+		@approved = Idea.find(:all, :conditions => { :approved => true})
 		@user = current_user
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     render :action => 'index.html.erb'
