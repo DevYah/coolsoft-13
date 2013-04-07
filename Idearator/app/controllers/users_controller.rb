@@ -138,4 +138,19 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def edit 
+  	@user = User.find(params[:id])
+  end
+
+  def update
+  @user = User.find(params[:id])
+    
+    if @user.update_attributes( :about_me => params[:user][:about_me] )
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
 end
