@@ -1,4 +1,7 @@
 class DashboardController < ApplicationController
+  #Method that gets all tags belonging to an idea,
+  #+params[:idea_id]+ is the id of the idea the user clicks on
+  #Author: Mohamed Salah Nazir
   def index
     @tagid = params[:tagid]
     @ideastagsall = IdeasTags.find(:all, :conditions => {:tag_id => params[:tagid]})
