@@ -7,6 +7,7 @@
               <div id = "IdeaStream">
   <% if params[:search] != ""%>
   <% if @approved.count > 0 %>
+  <% params[:search] = "" %>
    <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
         <tr>
@@ -37,6 +38,7 @@
   <div class = "alert alert-success">1 Idea Found</div>
     <% end %>
   <% else %>
+  <% params[:search] = "" %>
  <div class = "alert alert-error">Your searching criterias didn't match our database</div>
  <% end %>
  <% else %>

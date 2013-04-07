@@ -18,10 +18,12 @@
     <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
   </li>
   <li>
-    <%= form_tag "/", :method => :get, :remote => true do %>
+    <%= form_tag "/", :method => :get, :class => 'input-append',:id => 'searchdiv', :remote => true do %>
   <p>
-    <%= text_field_tag :search, params[:search] , :class => "input-medium search-query" ,:placeholder => "Title, Description....."%>
-    <%= submit_tag "Search", :name => nil , :class => "btn btn-inverse" %>
+    <%= text_field_tag :search, params[:search], :placeholder => "Title, Description....."%>
+    <button class='btn btn-inverse'>
+        <i class="icon-search icon-white"></i>
+    </button>
   </p>
 <% end %>
   </li>
