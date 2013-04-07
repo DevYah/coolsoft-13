@@ -1,6 +1,13 @@
 GIT
+  remote: https://github.com/bbatsov/rubocop.git
+  revision: d343279ed7bb0b13be2f97b97b627f6a50297bc9
+  specs:
+    rubocop (0.3.2)
+      term-ansicolor
+
+GIT
   remote: https://github.com/mnzaki/pre-commit.git
-  revision: 597318155c82dfcd6059c752f9ca5e67e7736a7f
+  revision: 3580cf86a3510f51e22cfc2310156c25f0a22c38
   specs:
     pre-commit (0.8.0)
       execjs
@@ -35,22 +42,11 @@ GEM
     activesupport (3.2.13.rc1)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
-    ajax-chosen-rails (0.2.1)
-      chosen-rails_ffcrm
-      railties (~> 3.0)
-      thor (~> 0.14)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
-    chosen-rails (0.9.12)
-      coffee-rails (>= 3.2)
-      railties (>= 3.0)
-      sass-rails (>= 3.2)
-    chosen-rails_ffcrm (0.9.5)
-      railties (~> 3.0)
-      thor (~> 0.14)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -71,6 +67,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -117,11 +115,10 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.3)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.0)
+    rspec-mocks (2.13.1)
     rspec-rails (2.13.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -129,8 +126,6 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    rubocop (0.3.2)
-      term-ansicolor
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -160,18 +155,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajax-chosen-rails
   bootstrap-sass
-  chosen-rails
   coffee-rails (~> 3.2.1)
   devise
+  faker
   jquery-rails
   paperclip
   pre-commit!
   rails (= 3.2.13.rc1)
-  redis (~> 3.0.3)
   rspec-rails (~> 2.0)
-  rubocop
+  rubocop!
   sass-rails (~> 3.2.3)
   sqlite3
   tlsmail
