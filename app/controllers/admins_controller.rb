@@ -6,11 +6,13 @@ class AdminsController < ApplicationController
         format.json  { render :json => @posts }
     end
   end
+  
   def approve_committeee
     @user = User.find(params[:id])
     @user.type = 'Committee'
     respond_to do |format|
        if @user.save
+         UserMailer.committee_accept(@user).deliver
          format.html  { redirect_to(admins_path,
                        :notice => 'User successfully initiated as a Committee.') }
          format.json  { head :no_content }
@@ -21,10 +23,12 @@ class AdminsController < ApplicationController
        end
      end
    end
+   
    def reject_committee
      @user = User.find(params[:id])
      respond_to do |format|
         if @user.save
+          UserMailer.committee_reject(@user).deliver
           format.html  { redirect_to(admins_path,
                         :notice => 'User successfully initiated as a Committee.') }
           format.json  { head :no_content }
