@@ -22,7 +22,11 @@ Sprint0::Application.configure do
   config.action_mailer.perform_deliveries = true
 
 config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
+require 'tlsmail'       
+Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)   
+ActionMailer::Base.delivery_method = :smtp   
+ActionMailer::Base.perform_deliveries = true   
+ActionMailer::Base.raise_delivery_errors = true 
 ActionMailer::Base.smtp_settings = {
   :address              => 'smtp.gmail.com',
   :port                 => 587,
