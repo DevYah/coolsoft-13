@@ -1,3 +1,44 @@
 // Place all the styles related to the notification controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the notification controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.same_line{
+	display: inline;
+}
+
+div.notification{
+	border-radius: 5px;
+	widht: 10px;
+	height: 55px;
+	margin: 10px;
+}
+
+div.unread{
+	background: rgba(0,153,153, 0.25);
+}
+
+div.read{
+  background: rgba(0, 0, 0, 0.25);
+}
+
+div.centered{
+	padding: 8px;
+}
+
+h3.title{
+	margin: 11px;
+	font-size: 20px;
+}
+
+
+.notification:hover .link{
+  display: inline;
+}
+
+
+.link{
+  display: none;
+}
