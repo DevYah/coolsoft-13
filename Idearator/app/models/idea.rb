@@ -1,5 +1,5 @@
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :description, :problem_solved,:photo, :num_votes, :user_id, :approved
+  attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user_id, :approved
   belongs_to :user
   has_many :comments
   has_many :idea_notifications
