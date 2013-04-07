@@ -2,12 +2,11 @@ Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
-
+  match '/ideas/filter' => 'ideas#filter'
   #get "ideas/new"
   resources :ideas
 
   get '/tags/ajax'
-
 
   default_url_options :host => "localhost:3000"
   devise_for :users, :controllers => { :registrations => "registrations" }
