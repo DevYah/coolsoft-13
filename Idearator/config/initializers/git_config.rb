@@ -5,9 +5,15 @@ require 'fileutils'
 
 FileUtils.cd '..' do
   # We install a custom hook because pre-commit is installed in the bundle
+  interp =
+    if system('which rvm &> /dev/null')
+      'rvm default do ruby'
+    else
+      'ruby'
+    end
   File.open('.git/hooks/pre-commit', 'w') do |f|
     f.write <<-eos.strip_heredoc
-      #!/usr/bin/env ruby
+      #!/usr/bin/env #{interp}
       require 'fileutils'
       FileUtils::cd '#{Rails.root}' do
         require 'bundler/setup'
