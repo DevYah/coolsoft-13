@@ -1,20 +1,21 @@
-<div id = "IdeaStream">
+<%= render 'ideas/show' %>
+<div id ='IdeaStream'>
    <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
         <tr>
       <br>
       <td>
-      <%= link_to "Title: " + approved.title , approved %>
+      <%= link_to 'Title: ' + approved.title , approved %>
 	  </td>
       <br>
       <td>
-      <%= "Description: " + approved.description %>
+      <%= 'Description: ' + approved.description %>
       <br>
-      <%= "Number of votes " + approved.num_votes.to_s %>
+      <%= 'Number of votes ' + approved.num_votes.to_s %>
       <br>
-      <%= "Problem Solved " + approved.problem_solved %>
+      <%= 'Problem Solved ' + approved.problem_solved %>
       <br>
-      <%= "Posted at " + approved.created_at.to_s %>
+      <%= 'Posted at ' + approved.created_at.to_s %>
       </td>
       <td><%= image_tag approved.photo.url(:thumb) %></td>
       <br>
@@ -23,13 +24,13 @@
   <% end %>
  </div>
 
-<p id="notice"><%= notice %></p>
+<p id='notice'><%= notice %></p>
 
 
-<div id="topten">
+<div id='topten'>
 <h1>Top Ten Ideas</h1>
 <% @top.each do |top| %>
-<div class="topten_idea">
+<div class='topten_idea'>
 	<span><%= link_to top.title ,top %></span>
 	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>

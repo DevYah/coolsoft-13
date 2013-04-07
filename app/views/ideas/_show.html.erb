@@ -1,0 +1,42 @@
+<h1>Ideas#show</h1>
+<p>Find me in app/views/ideas/show.html.erb</p>
+<h2 id="theme">tags filtering</h2>
+    <div>
+        <input type="text" id="input-facebook-theme" name="blah2" />
+        <input type="button" value="Filter" id="filter"/> 
+            <script type="text/javascript">
+        
+        $(document).ready(function() {
+            $("#input-facebook-theme").tokenInput('/tags/ajax', {
+                theme: "facebook",
+                preventDuplicates: true,
+                tokenLimit: 5
+            });   
+        });
+        $('#filter').click(function() {
+            var array = [];
+            var i = 0;
+            $('.token-input-list-facebook li p').each(function() {
+              array[i] = $(this).text();
+              i++;
+            });
+            $.ajax({
+                  type: 'POST',
+                  url: '/ideas/filter',
+                  data: { myTags : array },
+                  beforeSend:function(){
+                    alert('sending')
+                    // this is where we append a loading image
+                    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+                  },
+                  success:function(array){
+                    alert(array[0].description)
+                  },
+                  error:function(){
+                    // failed request; give feedback to user
+                    alert('failure');
+                  }
+            });
+        });
+         </script>
+    </div>
