@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
   #Used to display the idea stream, top ten and trending ideas.
   #Author: Hesham Nabil
+  #Calls the action index but with the search parameters filtering
+  #the @approved to the ideas matching this search
+  #Author: Mohamed Salah Nazir
   def index
     @approved = Idea.find(:all, :conditions => { :approved => true })
     @user = current_user
