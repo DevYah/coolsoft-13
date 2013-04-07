@@ -9,7 +9,7 @@ describe IdeasController do
         @idea = Factory.build(:idea_one)
       end
 
-      it 'deletes the contact' do
+      it 'deletes the idea' do
         expect { delete :destroy, id: @idea }.to change(Idea, :count).by(-1)
       end
 
@@ -28,7 +28,7 @@ describe IdeasController do
         @idea = Factory.build(:idea)
       end
 
-      it 'deletes the contact' do
+      it 'deletes the idea' do
         expect { delete :destroy, id: @idea }.to change(Idea, :count).by(0)
       end
 
