@@ -10,6 +10,16 @@
 <% if current_user.type == "Admin" && @user.banned==true%>
  <button class="btn btn-primary btn-large">Unban</button>
 <% end %>
+<div>
+<% if current_user.type == "Admin" and @invited and @user.banned==false%>
+ <%= render :partial => 'modal_approve'%>
+ <p style="display-inline;"><a data-toggle="modal" href="#approve" class="btn btn-primary btn-large">Approve</a></p>  
+<% end %>
+<% if current_user.type == "Admin" and @invited and @user.banned==false%>
+ <%= render :partial => 'modal_reject'%>
+ <p style="display-inline;"><a data-toggle="modal" href="#reject" class="btn btn-primary btn-large btn-danger">Reject</a></p>  
+<% end %>
+</div>
 <% if current_user == @user %>
  <button class="btn">Edit Profile</button>
 <% end %>
