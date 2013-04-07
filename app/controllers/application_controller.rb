@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
       not1 = idea_notifications + user_notifications
       not2 = not1.sort_by &:created_at
       @notifications = not2.reverse.first(10)
+      @count = @notifications.length
     end
   end
 
