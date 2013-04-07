@@ -1,6 +1,12 @@
 GIT
+  remote: https://github.com/bbatsov/rubocop.git
+  revision: 1aaf8b0c26c093a88973817e2e2db7f8e6dbe720
+  specs:
+    rubocop (0.3.1)
+
+GIT
   remote: https://github.com/mnzaki/pre-commit.git
-  revision: 597318155c82dfcd6059c752f9ca5e67e7736a7f
+  revision: 3580cf86a3510f51e22cfc2310156c25f0a22c38
   specs:
     pre-commit (0.8.0)
       execjs
@@ -117,7 +123,6 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    rubocop (0.3.1)
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -154,7 +159,7 @@ DEPENDENCIES
   pre-commit!
   rails (= 3.2.13.rc1)
   rspec-rails (~> 2.0)
-  rubocop
+  rubocop!
   sass-rails (~> 3.2.3)
   sqlite3
   tlsmail
