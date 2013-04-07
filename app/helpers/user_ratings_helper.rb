@@ -3,6 +3,7 @@ module UserRatingsHelper
   # passes either newely created or the existing user rating ballot to the user_ratings/_form.html.erb
   # Params:
   # +rating_id+:: is the id of the instance of +Rating+, i.e Rating Perspective, which is being rated
+  # Authour: Mahmoud Abdelghany Hashish
   def rating_ballot
     if @user_rating = current_user.user_ratings.find_by_rating_id(params[:rating_id])
         @User_rating
@@ -14,6 +15,7 @@ module UserRatingsHelper
   # passes the existing user rating value, else string 'N/A', of a certain perspective to the user_ratings/_form.html.erb
   # Params:
   # +rating_id+:: is the id of the instance of +Rating+, i.e Rating Perspective, which is being rated
+  # Author: Mahmoud Abdelghany Hashish
   def current_user_rating
     if @user_rating = current_user.user_ratings.find_by_rating_id(params[:rating_id])
         @user_rating.value
