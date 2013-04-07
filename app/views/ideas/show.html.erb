@@ -23,7 +23,7 @@
 </p>
 <p>
 <b>Problem Solved:</b>
-<div><%= @idea.problem_solved  %><a data-pin-config="above" href="http://pinterest.com/pin/create/button/?url=Your Page URL&media=Your Default Pin it Button URL&description=Your Page Description" data-pin-do="buttonPin" ><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>
+<div><%= @idea.problem_solved  %><a data-pin-config="above" href="http://pinterest.com/pin/create/button/?url=<%= @idea.url  %>&media=<%= @idea.photo.url %>&description=<%= @idea.description  %>" data-pin-do="buttonPin" ><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>
 </p>
 </div>
 
