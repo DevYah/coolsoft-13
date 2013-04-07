@@ -6,7 +6,7 @@ require 'fileutils'
 FileUtils.cd '..' do
   # We install a custom hook because pre-commit is installed in the bundle
   interp =
-    if system('which rvm &> /dev/null')
+    if system('which rvm')
       'rvm default do ruby'
     else
       'ruby'
