@@ -118,17 +118,20 @@ end
 #The def checks if the user liked the comment before if not the num_likes is incremented
 #by 1 else nothing happens
 #author dayna
+
       def like
   #@current_user =  User.find(params[:id])
-  @current_user =  User.first
+  #@current_user =  User.first
   #@idea = Idea.find(params[:idea_id])
   @comment = Comment.find(params[:id])
+  #@like = Like.new(params[:comment_id => @comment][:user_id => @current_user])
+  ##@comment.update_attribute(:num_likes , num_likes+1)
   #if Like.find(params[:comment_id]) == @comment
   # && Like.find(params[:user_id]) == @current_user
 #else
   @comment.num_likes += 1
   # @comment.num_likes + 1
-  @like = @comment.num_likes
+  ##@like = @comment.num_likes
   #if @like.save
    #    format.html { redirect_to(@idea, :notice => 'like was successfully created.') }
     #   format.xml  { render :xml => @idea, :status => :created, :location => @idea }
