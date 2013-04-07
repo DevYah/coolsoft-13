@@ -1,0 +1,9 @@
+<div class = "well" id = "graph">
+	<table>
+	<% @ideas.each do |i|%>
+<tr><td><%= link_to i.title, :controller => 'dashboard', :action => 'index', :ideaid => i.id, :remote => true %></td></tr>
+<% end %>
+</table>
+</div>
+<div class = "well" id = "tagsall">
+</div>
