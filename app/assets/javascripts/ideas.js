@@ -19,7 +19,7 @@ var show = {
     		$("#twitter").toggle();
 		});
 	}
-}
+};
 
 $(document).ready(function() {
 	show.init();
