@@ -1,0 +1,25 @@
+
+   
+     <% @approved.each do |approved| %>
+     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
+      <div class ="row block span6">
+      <div class = "span1"><%= image_tag 'png.png' %></div>
+      <div class = "span4">
+      <h3> <%= link_to  approved.title , approved %> </h3>
+      <%= "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." %>
+      
+      <span class = "idea-vote lead h1 inline "><%=  approved.num_votes.to_s %></span>
+      <br>
+      <button class = "btn btn-large btn-success inline pull-right " type = "button"> Vote! </button>
+      <%= "Posted at " + approved.created_at.to_s %>
+      </div>
+      </div>  
+     <% end %>
+     <% end %>
+  
+
+
+
+
+
