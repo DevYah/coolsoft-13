@@ -1,23 +1,28 @@
-var addthis_config = {"data_track_addressbar":true};
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
-var addthis_share = 
-	{ 
-	  templates: {
-	    twitter: 'Check out this Idea on Idearator   {{url}} ',
-	 }
-	};
+!function(d,s,id){
+	var js,fjs=d.getElementsByTagName(s)[0];
+	if(!d.getElementById(id)){
+		js=d.createElement(s);
+		js.id=id;js.src="//platform.twitter.com/widgets.js";
+		fjs.parentNode.insertBefore(js,fjs);
+	}
+}(document,"script","twitter-wjs");
 
-var show = {
-	init: function(){
-		$("#fb").hover(function () {
-    		$("#facebook").toggle();
-		});
-		$("#tw").hover(function () {
-    		$("#twitter").toggle();
+var TabbedContent = {
+	init: function() {	
+		$("#share").click(function() {
+			$("#show").toggle("slow");
 		});
 	}
-};
-
+}
+	
 $(document).ready(function() {
-	show.init();
+	TabbedContent.init();
 });
