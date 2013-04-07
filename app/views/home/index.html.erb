@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class='span4'>
+  <div class='span6'>
     <div id = 'IdeaStream'>
       <% @approved.each do |approved| %>
         <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
@@ -24,7 +24,7 @@
     </div>
   </div>
   <p id="notice"><%= notice %></p>
-  <div class="span3 offset2 ">
+  <div class="span3 ">
     <div class="topten">
       <h1>Top Ten Ideas</h1>
       <div class="media">
