@@ -109,7 +109,15 @@ end
        redirect_to idea_path , :notice => 'like was successfully created.'
 
   end/
-
+#create new like
+#Params:
+#+User_id+ :: the parameter is an instance
+#of +User+ passed to get the id of the user to build the like
+#+comment_id+ :: the parameter is an instance
+# of +Comment+ and it's used to build the like after clicking like
+#The def checks if the user liked the comment before if not the num_likes is incremented
+#by 1 else nothing happens
+#author dayna
       def like
   #@current_user =  User.find(params[:id])
   @current_user =  User.first
