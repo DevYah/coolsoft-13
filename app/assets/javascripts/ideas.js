@@ -1,17 +1,7 @@
-var addthis_config = {"data_track_addressbar":true};
-
-
-var show = {
-	init: function(){
-		$("#share").click(function () {
-			$("#show").toggle("slow");
-		});
-		$("#fb").hover(function () {
-    		$("#facebook").toggle();
-		});
-	}
-}
-
-$(document).ready(function() {
-	show.init();
-});
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
