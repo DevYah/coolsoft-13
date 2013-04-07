@@ -25,5 +25,4 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :comments, :join_table => :likes
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :votes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
-
 end
