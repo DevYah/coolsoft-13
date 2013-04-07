@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-
+  #Method to add values to rows in table to draw a chart
+  #Author:Lina Basheer
 
   def index
     @tagid = params[:tagid]
