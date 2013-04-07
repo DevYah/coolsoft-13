@@ -14,4 +14,15 @@
     <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
     </li>
   <% end %>
+  <li>
+    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+  </li>
+  <li>
+    <%= form_tag "/", :method => :get, :remote => true do %>
+  <p>
+    <%= text_field_tag :search, params[:search] , :class => "input-medium search-query" ,:placeholder => "Title, Description....."%>
+    <%= submit_tag "Search", :name => nil , :class => "btn btn-inverse" %>
+  </p>
+<% end %>
+  </li>
 </ul>
