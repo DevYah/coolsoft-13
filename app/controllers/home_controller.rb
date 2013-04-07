@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   #Used to display the idea stream, top ten and trending ideas.
   #Author: Hesham Nabil
-  autocomplete :idea, :title, :full => true
   def index
     @approved = Idea.find(:all, :conditions => { :approved => true })
     @user = current_user

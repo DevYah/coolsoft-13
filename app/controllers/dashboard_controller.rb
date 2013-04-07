@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
     @ideatagsthen = IdeasTags.find(:all, :conditions => {:idea_id => @ideaid})
     @ideatags = Tag.where(:id => @ideatagsthen.map(&:tag_id))
     #########
-    @user = User.find(3)
+    @user = current_user
     @ideas = Idea.find(:all, :conditions => {:user_id => @user.id})
     #########
     respond_to do |format|
