@@ -9,9 +9,6 @@ var addthis_share =
 
 var show = {
 	init: function(){
-		$("#share").click(function () {
-			$("#show").toggle("slow");
-		});
 		$("#fb").hover(function () {
     		$("#facebook").toggle();
 		});
