@@ -5,3 +5,15 @@
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+
+var TabbedContent = {
+	init: function() {	
+		$("#share").click(function() {
+			$("#show").toggle("slow");
+		});
+	}
+}
+	
+$(document).ready(function() {
+	TabbedContent.init();
+});
