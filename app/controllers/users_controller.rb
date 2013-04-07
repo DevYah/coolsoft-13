@@ -144,5 +144,6 @@ class UsersController < ApplicationController
 	    s.participated_idea_notifications= false
 	    s.save
 	  end
+	  redirect_to '/'
 	end
 end
