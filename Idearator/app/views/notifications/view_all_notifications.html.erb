@@ -1,83 +1,79 @@
-<h3>Notifications</h3>
-<ul>
-  <% @notifications.each do |notification| %>
-    <% if notification.is_a? VoteNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li>Your idea  <%= notification.idea.title %> got a vote.</li>
-          <li><%= link_to 'view', '/' %></li>
-          <li><%= IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? CommentNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li><%= notification.user.username %> commented on you idea
-        <%= notification.idea.title %>.</li>
-          <li><%= link_to 'view', '/' %></li>
-          <li><%= IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? DeleteNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li><%= notification.user.username %> deleted his idea <%= notification.idea.title %>.</li>
-          <li><%= IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? EditNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li><%= notification.user.username %> edited his idea
-          <%= notification.idea.title %>.</li>
-          <li><%= link_to 'view',
-          '/' %></li>
-          <li><%= IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? ArchiveNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li>The idea  <%= notification.idea.title %>  got a archived.</li>
-          <li><%=link_to 'view', '/' %></li>
-          <li><%= IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? DisapproveIdeaNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li>Your idea  <%= notification.idea.title %>
-          wasn't approved by committee.</li>
-          <li><%= link_to 'view', '/' %></li>
-          <li><%= IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? InviteCommitteeNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li>You have been invited to become a committee member.</li>
-          <li><%= link_to 'choose area of expertise',
-          {controller: 'users', action: 'expertise'} %></li>
-          <li><%= UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
-    <% end %>
-    <% if notification.is_a? ApproveCommitteeNotification %>
-      <li>
-        <ul class = 'inline'>
-          <li><%= notification.user.username %>
-          has signed up as a committee member</li>
-          <li><%=link_to 'review',
-        {controller: 'committees', action: 'review_committee'} %></li>
-        <li><%= UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read %></li>
-        </ul>
-      </li>
+<h3 class = 'title'>Notifications</h3>
+<% @notifications.each do |notification| %>
+  <% if notification.is_a? VoteNotification %>
+    <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'>Your idea  <%= notification.idea.title %> got a vote.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'>Your idea  <%= notification.idea.title %> got a vote.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
     <% end %>
   <% end %>
-</ul>
+  <% if notification.is_a? CommentNotification %>
+    <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'><%= notification.user.username %> commented on you idea
+      <%= notification.idea.title %>.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'><%= notification.user.username %> commented on you idea
+      <%= notification.idea.title %>.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% end %>
+  <% end %>
+  <% if notification.is_a? DeleteNotification %>
+    <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'><%= notification.user.username %> deleted his idea <%= notification.idea.title %>.</div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'><%= notification.user.username %> deleted his idea <%= notification.idea.title %>.</div></div>
+    <% end %>
+  <% end %>
+  <% if notification.is_a? EditNotification %>
+    <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'><%= notification.user.username %> edited his idea
+      <%= notification.idea.title %>.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'><%= notification.user.username %> edited his idea
+      <%= notification.idea.title %>.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% end %>
+  <% end %>
+  <% if notification.is_a? ArchiveNotification %>
+    <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'>The idea  <%= notification.idea.title %>  got archived.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'>The idea  <%= notification.idea.title %>  got a archived.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% end %>
+  <% end %>
+  <% if notification.is_a? DisapproveIdeaNotification %>
+    <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'>Your idea <%= notification.idea.title %>
+      wasn't approved by committee.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'>Your idea <%= notification.idea.title %>
+      wasn't approved by committee.</div>
+      <div class = 'link'><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></div>
+    <% end %>
+  <% end %>
+  <% if notification.is_a? InviteCommitteeNotification %>
+    <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'>You have been invited to become a committee member.</div>
+      <div class = 'link'><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'>You have been invited to become a committee member.</div>
+      <div class = 'link'><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div></div>
+    <% end %>
+  <% end %>
+  <% if notification.is_a? ApproveCommitteeNotification %>
+    <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
+      <div class = 'notification unread'><br><div class = 'same_line centered'><%= notification.user.username %> has signed up as a committee member</div>
+      <div class = 'link'><%= link_to 'review', {controller: 'committees', action: 'review_committee'}  %></div></div>
+    <% else %>
+      <div class = 'notification read'><br><div class = 'same_line centered'><%= notification.user.username %> has signed up as a committee member</div>
+      <div class = 'link'><%= link_to 'review', {controller: 'committees', action: 'review_committee'} %></div></div>
+    <% end %>
+  <% end %>
+<% end %>
