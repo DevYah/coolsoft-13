@@ -123,6 +123,10 @@ class UsersController < ApplicationController
     end
   end
 
+  # Enter chosen notification settings chosen by user in table User
+	# Params:
+	# +user[]+:: the parameter is ana instance of +user+ passed through the form from settings action
+	# Author: Mohamed Sameh
   def change_settings
 		if params[:user] != nil
 			settings= params[:user]
