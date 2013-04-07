@@ -1,0 +1,51 @@
+ <div id="main" role="main">
+      <div class="container">
+        <div class="content">
+           <div class="row">
+            <div class="span12">
+              <%= render 'layouts/messages' %>
+              <div id = "IdeaStream">
+  <% if params[:search] != ""%>
+  <% if @approved.count > 0 %>
+   <% @approved.each do |approved| %>
+     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
+        <tr>
+      <br>
+      <td>
+      <%= link_to "Title: " + approved.title , approved %>
+    </td>
+      <br>
+      <td>
+      <%= "Description: " + approved.description %>
+      <br>
+      <%= "Number of votes " + approved.num_votes.to_s %>
+      <br>
+      <%= "Problem Solved " + approved.problem_solved %>
+      <br>
+      <%= "Posted at " + approved.created_at.to_s %>
+      </td>
+      <td><%= image_tag approved.photo.url(:thumb) %></td>
+      <br>
+      </tr>
+     <% end %>
+  <% end %>
+  <br>
+  <br>
+  <% if @approved.count > 1%>
+  <div class = "alert alert-success"> <%= @approved.count %> Ideas Found</div>
+  <% else %>
+  <div class = "alert alert-success">1 Idea Found</div>
+    <% end %>
+  <% else %>
+ <div class = "alert alert-error">Your searching criterias didn't match our database</div>
+ <% end %>
+ <% else %>
+  <div class = "alert alert-error">You entered nothing in the search field</div>
+ <% end %>
+ </div>
+            </div>
+          </div>
+          <footer>
+          </footer>
+        </div>
+      </div> 

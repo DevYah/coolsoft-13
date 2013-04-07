@@ -1,25 +1,23 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem "google_visualr", "~> 2.1.0"
+
 gem 'sqlite3'
 
 gem 'devise'
 
 gem 'tlsmail'
-
+gem "google_visualr", "~> 2.1.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem "google_visualr", "~> 2.1.0"
-  gem "googlecharts"
-
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -29,6 +27,18 @@ end
 
 gem 'jquery-rails'
 gem 'paperclip'
+gem 'bootstrap-sass'
+
+group :test, :development do
+  gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
+  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
+  gem 'rspec-rails', '~> 2.0'
+end
+gem 'sunspot_rails'
+ group :development do
+   gem 'sunspot_solr'
+ end
+ gem 'rails3-jquery-autocomplete'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
