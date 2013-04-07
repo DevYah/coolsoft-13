@@ -26,12 +26,11 @@ def create
     @comment.update_attributes(:idea_id => @idea.id)
     respond_to do |format|
       if @comment.save
-       format.html redirect_to(@idea, :notice => 'Comment was successfully created.')
-       format.xml  render :xml => @idea, :status => :created, :location => @idea
+       format.html { redirect_to(@idea, :notice => 'Comment was successfully created.') }
+       format.xml  { render :xml => @idea, :status => :created, :location => @idea }
       else
-       format.html  redirect_to(@idea, :notice =>
-        'Comment could not be saved. Please fill in all fields')}
-        format.xml  render :xml => @comment.errors, :status => :unprocessable_entity
+       format.html { redirect_to(@idea, :notice => 'Comment could not be saved. Please fill in all fields') }
+        format.xml { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end
 end
