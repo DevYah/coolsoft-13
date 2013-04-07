@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   #username is unique
   validates :username, :uniqueness => true
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :date_of_birth, :type, :active , :first_name , :last_name ,
@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :votes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
-def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+def self.find_for_facebook_oauth(auth, signed_in_resource = nil)
    user = User.where(email: auth['info']['email']).first
-   
+
    user
  end
 end
