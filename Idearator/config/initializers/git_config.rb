@@ -27,7 +27,7 @@ FileUtils.cd '..' do
   FileUtils.chmod(0755, '.git/hooks/pre-commit')
 
   system('git config pre-commit.checks ' +
-         '"rubocop_all, debugger, pry, merge_conflict, white_space, tabs, console_log, migrations"')
+         '"rubocop_all, debugger, pry, merge_conflict, white_space, tabs, console_log"')
   system('git config core.fileMode false')
   system('git config core.eol lf')
   system('git config core.autocrlf true')
