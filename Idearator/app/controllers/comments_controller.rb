@@ -140,6 +140,16 @@ end
    redirect_to idea_path , :notice => 'like was successfully created.'
   end
 end
+#Destory a like
+#Params:
+#+User_id+ :: the parameter is an instance
+#of +User+ passed to get the id of the user to get the id of the user
+#who liked the comment
+#+comment_id+ :: the parameter is an instance
+# of +Comment+ and it's used to get the id of the comment 
+#The def checks if the user liked the comment before if yes the num_likes is decremented 
+#by 1 and the like is destroyed 
+#author dayna
 
 def unlike
 @like = Like.find(params[:user_id][:comment_id])
