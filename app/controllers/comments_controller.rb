@@ -89,7 +89,7 @@ end
   end 
   end/
 
-  def like
+  /def like
     @idea = Idea.find(params[:idea_id])
     @Comment = @idea.comments.find(params[:id])
     @like = Like.new(params[:comment_id][:user_id])
@@ -97,8 +97,29 @@ end
     @like.save
        redirect_to idea_path , :notice => 'like was successfully created.'
 
-  end
-       
+  end/
+      def like
+  #@current_user =  User.find(params[:id])
+  @current_user =  User.first
+  #@idea = Idea.find(params[:idea_id])
+  @comment = Comment.find(params[:id])
+  #if Like.find(params[:comment_id]) == @comment && Like.find(params[:user_id]) == @current_user
+#else 
+  @comment.num_likes+=1
+  # @comment.num_likes + 1
+  @like = @comment.num_likes
+  #if @like.save
+   #    format.html { redirect_to(@idea, :notice => 'like was successfully created.') }
+    #   format.xml  { render :xml => @idea, :status => :created, :location => @idea }
+     # else
+      # format.html { redirect_to(@idea, :notice => 
+       # 'Error')}
+       # format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+   # end
+   redirect_to idea_path , :notice => 'like was successfully created.'
+  end  
+end 
+ 
  
 def unlike
 @like = Like.find(params[:user_id][:comment_id])
@@ -111,4 +132,4 @@ def unlike
       format.json { head :ok }
     end
 end 
-end 
+
