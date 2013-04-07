@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -29,6 +30,9 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
+gem 'jquery-rails'
+gem 'kaminari'
+
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
@@ -49,3 +53,4 @@ end
 
 # To use debugger
 # gem 'debugger'
+
