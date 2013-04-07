@@ -8,8 +8,11 @@
  <button class="btn btn-primary btn-large">Ban</button>
 <% end %>
 <% if current_user.type == "Admin" && @user.banned==true%>
- <button class="btn btn-primary btn-large">Unban</button>
+ <button class="btn btn-primary btn-large">Invite</button>
 <% end %>
+<% if current_user.type == "Admin" && @user.active==true && not current_user.is_a? Committee %>
+ <%= link_to "Invite", :controller => "admins", :action => "invite_member", :id => @user, :class => "btn btn-primary btn-large" %>
+ <%end%>
 <% if current_user == @user %>
  <button class="btn">Edit Profile</button>
 <% end %>
