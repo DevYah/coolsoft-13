@@ -2,7 +2,7 @@ Encoding:
   Enabled: false
 
 LineLength:
-  Enabled: true
+  Enabled: false
   Max: 90
 
 Tab:
