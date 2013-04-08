@@ -1,11 +1,11 @@
 <%if user_signed_in?%>
   <% @notifications.each do |notification| %>
     <% if notification.is_a? VoteNotification %>
-      <li><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', {controller: 'ideas', action: 'show'} %></li>
+      <li><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', '/' %></li>
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? CommentNotification %>
-      <li><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', {controller: 'ideas', action: 'show'}%></li>
+      <li><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', '/'%></li>
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? DeleteNotification %>
@@ -13,15 +13,15 @@
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? EditNotification %>
-      <li><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', {controller: 'ideas', action: 'show'}%></li>
+      <li><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', '/'%></li>
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? ArchiveNotification %>
-      <li><%=link_to 'The idea ' + notification.idea.title + ' got a archived.', {controller: 'ideas', action: 'show'} %></li>
+      <li><%=link_to 'The idea ' + notification.idea.title + ' got archived.', '/' %></li>
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? DisapproveIdeaNotification %>
-      <li><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', {controller: 'ideas', action: 'show'}%></li>
+      <li><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', '/'%></li>
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification %>
