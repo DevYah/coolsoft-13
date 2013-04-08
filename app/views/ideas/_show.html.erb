@@ -1,12 +1,21 @@
-<h1>Ideas#show</h1>
-<p>Find me in app/views/ideas/show.html.erb</p>
-<h2 id="theme">tags filtering</h2>
-    <div>
+    <style type="text/css">
+      .hidden{
+        display: none;
+      }
+    </style>
+      <button id ="click"> filter</button>
+    <div id ="fil" class="hidden">
+          
         <input type="text" id="input-facebook-theme" name="blah2" />
-        <input type="button" value="Filter" id="filter"/> 
+        <input type="button" value="apply" id="filter" /> 
             <script type="text/javascript">
         
         $(document).ready(function() {
+            $('#click').click(function(){
+              $('#fil').toggleClass('hidden');
+            });
+
+
             $("#input-facebook-theme").tokenInput('/tags/ajax', {
                 theme: "facebook",
                 preventDuplicates: true,
@@ -25,14 +34,16 @@
                   url: '/ideas/filter',
                   data: { myTags : array },
                   beforeSend:function(){
-                    alert('sending')
+                    alert('sending');
+
                     // this is where we append a loading image
                     //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
                   },
                   success:function(array){
-                    alert(array[0].description)
+
                   },
                   error:function(){
+
                     // failed request; give feedback to user
                     alert('failure');
                   }

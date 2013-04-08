@@ -3,7 +3,11 @@ class IdeasController < ApplicationController
   end
 
   def filter()
-  @ideas = Idea.joins(:tags).where(:tags => {:name => params[:myTags]})
-  render :json => @ideas
+  @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]})
+    respond_to do |format|
+        format.js
+        format.html  { render :template => "home/index"}
+        format.json  { render :json => @approved }
+    end
   end
 end

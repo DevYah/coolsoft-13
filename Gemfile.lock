@@ -165,6 +165,7 @@ DEPENDENCIES
   devise
   faker
   jquery-rails
+  jquery-tokeninput-rails
   kaminari
   paperclip
   pre-commit!
