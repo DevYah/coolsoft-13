@@ -1,8 +1,0 @@
-<p id="notice"><%= notice %></p>
-<%= form_for(@user, url: url_for(action: 'deactivate')) do |form| %>
-  <div class="field">
-    <%= form.label :password %><br />
-    <%= form.password_field :password %>
-  </div>
-  <%= form.submit value = 'confirm' %>
-<% end %>
