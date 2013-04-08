@@ -5,23 +5,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.same_line{
+p.same_line{
 	display: inline;
 }
 
 div.notification{
 	border-radius: 5px;
-	widht: 10px;
-	height: 55px;
 	margin: 10px;
+	cursor: pointer;
 }
 
 div.unread{
 	background: rgba(0,153,153, 0.25);
 }
 
-div.read{
-  background: rgba(0, 0, 0, 0.25);
+div.unread-select{
+	background: rgba(0,153,153, 0.50);
+}
+
+div.read-select{
+	background: rgba(0, 0, 0, 0.20);
+}
+
+.read{
+  background: rgba(0, 0, 0, 0.10);
 }
 
 div.centered{
@@ -41,6 +48,8 @@ h3.title{
 
 .link{
   display: none;
+  float: right;
+  padding-right: 30px;
 }
 
 div.padding_right{
