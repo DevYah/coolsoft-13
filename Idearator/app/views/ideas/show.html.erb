@@ -14,12 +14,10 @@
 <h2><%= @username%></h2>
 <%end%>
 <%=form_for(@idea, :action=>'update') do |f| %>
-<%if !@ideavoted.nil? %>
-<%= submit_tag 'vote', :name=>'vote',:disabled=>'disabled'%>
-<%= submit_tag 'unvote',:name=>'unvote'%>
-<%else%>
-<%= submit_tag 'vote', :name=>'vote'%>
-<%= submit_tag 'unvote',:name=>'unvote',:disabled=>'disabled'%>
+<%if @ideavoted.nil? %>
+<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+<% else %>
+<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 <%end%>
  <span class='help-inline'><h2><%= @idea.num_votes %></h2></span> 
 <%end%>
