@@ -1,99 +1,86 @@
-class CommentsController < ApplicationController
-#Show all Comments
-#Params:
-#+idea_id+ :: the parameter is an instance of +Idea+
-#passed through the form of action create
-#author dayna
+class IdeasController < ApplicationController
+  before_filter :authenticate_user!, :only => [:show, :create ,:edit, :update]
+  # view idea of current user
+  # Params
+  # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
+  # Marwa Mehanna
 
-def show
-    @user = current_user.id
-    @username = current_user.username
-   @idea = Idea.find(params[:id])
-   @commentliked = @current_user.like.detect { |w|w.id == @comment.id }
-end
-#create new Comment
-#Params:
-#+idea_id+ :: the parameter is an instance
-#of +Idea+ passed to get the id of the idea to build the comments
-#+comment_id+ :: the parameter is an instance
-# of +Comment+ and it's used to show the comments after posting it
-#author dayna
-
-def create
-   @idea = Idea.find(params[:idea_id])
-    @comment = @idea.comments.create(params[:comment])
-    @comment.update_attributes(:idea_id => @idea.id)
+  def show
+    if params[:commentid] != nil
+   @commentid = params[:commentid]
+   @comment = Comment.find(:first, :conditions => {:id => @commentid})
+   @comment.num_likes = @comment.num_likes + 1
+   @comment.save
+   @like = Like.new
+   @like.user_id = current_user.id
+   @like.comment_id = @commentid
+   @like.save
+ else
+    @user=current_user.id
+    @idea = Idea.find(params[:id])
+  end
+  end
+  # making new Idea
+  #Marwa Mehanna
+  def new
+    @idea=Idea.new
+    @tags= Tag.all
+    @chosentags=[]
     respond_to do |format|
-      if @comment.save
-       format.html { redirect_to(@idea, :notice => 'Comment was successfully created.') }
-       format.xml  { render :xml => @idea, :status => :created, :location => @idea }
-      else
-       format.html { redirect_to(@idea, :notice => 'Comment could not be saved. Please fill in all fields') }
-        format.xml { render :xml => @comment.errors, :status => :unprocessable_entity }
-      end
+      format.html # new.html.erb
+      format.json { render json: @idea }
     end
-end
-#edit comment and update it
-#Params:
-#+comment_id+ :: the parameter is an instance of +Comment+
-#to get the comment's id in order to modify it
-#author dayna
-
-def edit
-    @comment = Comment.find(params[:id])
-    @idea = Idea.find(params[:idea_id])
-end
-
-def update
-    @comment = Comment.find(params[:id])
-    @idea = Idea.find(params[:idea_id])
-     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
-        format.xml  { head :no_content }
+  end
+  # editing Idea
+  # Params
+  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
+  # Author: Marwa Mehanna
+  def edit   
+    @idea = Idea.find(params[:id])
+    @tags= Tag.all
+    @chosentags= Idea.find(params[:id]).tags
+  end
+  # updating Idea
+  # Params
+  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
+  def update
+    @idea = Idea.find(params[:id])
+    puts(params[:ideas_tags][:tags])
+    @idea.tag_ids=params["ideas_tags"]["tags"].collect{|t|t.to_i}
+    respond_to do |format|
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+        format.json { head :no_content }
       else
-        format.html { render :action => 'edit' }
-        format.xml  { render :xml => @idea.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
   end
-#delete comment
-#Params:
-#+comment_id+ :: the parameter is an instance
-#of +Comment+ to get the comment's id in order to delete it
-#+idea_id+ :: the parameter is an instance of
-# +Idea+ to get the idea's id in order to modify it after deleting the comment
-#author dayna
-
-def destroy
-    @idea = Idea.find(params[:idea_id])
-    @comment = @idea.comments.find(params[:id])
-    @comment.destroy
-    redirect_to idea_path(@idea)
-end
-#create new like
-#Params:
-#+comment_id+ :: the parameter is an instance
-# of +Comment+ and it's used to build the like after clicking like
-#The def checks if the user liked the comment before if not the num_likes is incremented
-#by 1 else nothing happens
-#author dayna
- 
- def like
-   @idea = Idea.find(params[:id])
-   @comment = @idea.comments.find(params[:id])
-    current_user.likes << @comment
-    @comment.num_likes = @comment.num_likes + 1
+  # creating new Idea
+  # Params
+  # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
+  # +idea_tags+ :: this is an instance of +IdeaTags+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
+  def create
+    @idea = Idea.new(params[:idea])
+    @idea.user_id=current_user.id
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @idea, :notice =>'Thank you for like' }
-        format.json { head :no_content }
+      if @idea.save
+        @tags= params[:ideas_tags][:tags]
+        @tags.each do |tag|
+          IdeasTags.create(:idea_id => @idea.id , :tag_id => tag)
+        end
+        format.html { redirect_to @idea, notice: 'idea was successfully created.' }
+        format.json { render json: @idea, status: :created, location: @idea }
       else
-        format.html { redirect_to @idea, alert: 'Sorry,cant like' }
-        format.json { head :no_content }
+        format.html { render action: "new" }
+        format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
- end
-
+  end
 end
 
