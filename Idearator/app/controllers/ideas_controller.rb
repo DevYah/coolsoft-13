@@ -5,13 +5,28 @@ class IdeasController < ApplicationController
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
   def show
-    @user = current_user.id
-    @username = current_user.username
+    if params[:commentid] != nil
+   @commentid = params[:commentid]
+   @comment = Comment.find(:first, :conditions => {:id => @commentid})
+   @comment.num_likes = @comment.num_likes + 1
+   @comment.save
+   @like = Like.new
+   @like.user_id = current_user.id
+   @like.comment_id = @commentid
+   @like.save
+ else
+    @user=current_user.id
     @idea = Idea.find(params[:id])
-    @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }
-    rescue ActiveRecord::RecordNotFound
+  end
+  end
+  # making new Idea
+  #Marwa Mehanna
+  def new
+    @idea=Idea.new
+    @tags= Tag.all
+    @chosentags=[]
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # new.html.erb
       format.json { render json: @idea }
     end
   end
@@ -53,44 +68,7 @@ class IdeasController < ApplicationController
     end
   end 
 
-  # Votes for a specific idea
-  # Params:
-  # +id+:: is used to specify the instance of +Idea+ to be voted
-  # Author: Marwa Mehannna
-  def vote
-    @idea = Idea.find(params[:id])
-    current_user.votes << @idea
-    @idea.num_votes = @idea.num_votes + 1
-    respond_to do |format|
-      if @idea.update_attributes(params[:idea])
-        format.html { redirect_to @idea, :notice =>'Thank you for voting' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
-        format.json { head :no_content }
-      end
-    end
-  end
-
-  # UnVotes for a specific idea
-  # Params:
-  # +id+:: is used to specify the instance of +Idea+ to be unvoted
-  # Author: Marwa Mehannna
-  def unvote
-    @idea = Idea.find(params[:id])
-    current_user.votes.delete(@idea)
-    @idea.num_votes = @idea.num_votes - 1
-    respond_to do |format|
-      if @idea.update_attributes(params[:idea])
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @idea, alert: 'Idea is still voted' }
-        format.json { head :no_content }
-      end
-    end 
-  end
-
+  
   # creating new Idea
   # Params
   # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
