@@ -1,0 +1,21 @@
+<h1 align="middle">Dashboard</h1>
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#pane1" data-toggle="tab">My dashboard</a></li>
+    <% if @user.type == "Committee" %>
+    <li><a href="#pane2" data-toggle="tab">Committee's Dashboard</a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+      <pre>Here are the contents of the user's dashboard</pre>
+    </div>
+    <% if @user.type == "Committee" %>
+    <div id="pane2" class="tab-pane">
+      <pre>Here are the contents of the committee's dashboard</pre>
+    </div>
+    <% end %>
+  </div><!-- /.tab-content -->
+</div>
+</div><!-- /.tabbable -->
