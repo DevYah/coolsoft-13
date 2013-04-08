@@ -32,12 +32,8 @@
   <tr>
       <td><blockquote><p><%= comment.content %></p><small> added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago</small></blockquote> </td>
 <td><%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
-<% if params[:commentid] == nil%>
+<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
 	<%= link_to "like", :controller => 'ideas', :action => 'show', :commentid => comment.id %>
-	<% else %>
-	<% if @like.user_id != current_user.id %>
-	<%= link_to "like", :controller => 'ideas', :action => 'show', :commentid => comment.id %>
-	<% end %>
 	<% end %>	
 	<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> <%= comment.num_likes %> likes</td><td><td>
   </tr>
