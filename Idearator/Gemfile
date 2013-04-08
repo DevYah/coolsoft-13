@@ -20,18 +20,19 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', :platforms => :ruby
+  # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem 'therubyracer', :platforms => :ruby
 gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
 group :test, :development do
+
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
-  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
+# gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
 end
 

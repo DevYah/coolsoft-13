@@ -17,9 +17,27 @@ Sprint0::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  # Dotrash:///Idearatorn't care if the mailer can't send
+    config.action_mailer.raise_delivery_errors = true
 
+    config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  
+    ActionMailer::Base.delivery_method = :smtp
+  
+  ##
+  # configure gmail account for development mailing
+  # Author: muhammed hassan
+  #--
+  ActionMailer::Base.smtp_settings = {
+   :address => "smtp.gmail.com",
+   :port => 587,
+   :domain => 'gmail.com',
+   :authentication => :plain,
+   :user_name=> 'coolsoftc2',
+   :password=>'coolsoft',
+   :enable_starttls_auto => true
+  }
+  
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
