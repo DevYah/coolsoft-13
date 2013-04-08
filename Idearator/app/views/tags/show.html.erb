@@ -1,48 +1,6 @@
 <%- model_class = Tag -%>
 <div class="page-header">
-<%= t '.title', :model => model_class.model_name.human %>
+<p style="display:inline;"><a data-toggle="modal" href="#example" class="btn btn-primary">Create</a></p>
 </div>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Synonym</th>
-	  <th>Created At</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tags.each do |tag| %>
-      <tr>
-        <td><%= link_to tag.name, tag_path(tag) %></td>
-        <td><%=l tag.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_tag_path(tag), :class => 'btn btn-mini' %>
-          <%= link_to t('.delsym', :default => t("helpers.links.destroy")),
-                      tag_path(@tag,tag),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 <%= render :partial => 'modal' %>
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              tags_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_tag_path(@tag), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              tag_path(@tag),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-			  <p style="display:inline;"><a data-toggle="modal" href="#example" class="btn btn-primary">Create</a></p>
-
-			  </div>
-
-</div>
-
 
