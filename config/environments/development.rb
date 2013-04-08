@@ -37,6 +37,10 @@ ActionMailer::Base.smtp_settings = {
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf55fb0e0646033f105b015ee19c124c8d15043b
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
