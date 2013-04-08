@@ -14,3 +14,12 @@
 //= require bootstrap
 //= require_tree .
 
+$(function() {
+    setTimeout(updateNotifications, 10000);
+});
+
+function updateNotifications(){
+	$.getScript("/all_notifications.js")
+  setTimeout(updateNotifications, 10000);
+}
+
