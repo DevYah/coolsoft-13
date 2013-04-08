@@ -1,12 +1,14 @@
 Sprint0::Application.routes.draw do
 
-  default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
   resources :ideas, :controller =>'ideas'
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
-  devise_for :committees, :controllers => { :registrations => "registrations" }
+  match '/ideas/:id/vote' => 'ideas#vote'
+  match '/ideas/:id/unvote' => 'ideas#unvote'
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
   # The priority is based upon order of creation:
@@ -58,9 +60,7 @@ Sprint0::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
 
-  match "/review_ideas" => "committees#review_ideas"
-    
-
+  match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
 
