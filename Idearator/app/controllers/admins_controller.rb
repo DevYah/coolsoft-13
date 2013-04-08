@@ -14,13 +14,8 @@ class AdminsController < ApplicationController
          format.html  { redirect_to('/',
                        :notice => 'User successfully initiated as a Committee.') }
          format.json  { head :no_content }
-       else
-         format.html  { redirect_to('/',
-                       :notice => @user.errors.full_messages) }
-         format.json  { render :json => :no_content }
        end
      end
-   end
  	# Remove the user's status as a committtee
  	# Then sends a mail notifiying him of what happened.
  	# Params: 
