@@ -12,6 +12,7 @@ gem 'devise'
 
 gem 'tlsmail'
 
+gem 'bot-away'
 
 # Gems used only for assets and not required
 # in production environments by default.
