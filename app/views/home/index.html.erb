@@ -1,5 +1,4 @@
-<div class='row'>
-  <div class='span6'>
+
     <div id = 'IdeaStream'>
       <% @approved.each do |approved| %>
         <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
@@ -22,9 +21,8 @@
        <% end %>
      <% end %>
     </div>
-  </div>
   <p id="notice"><%= notice %></p>
-  <div class="span3 ">
+  <% content_for :sidebar do %>
     <div class="topten">
       <h1>Top Ten Ideas</h1>
       <div class="media">
@@ -39,12 +37,12 @@
                 <span><%= top.num_votes %></span>
                 <span><%=  top.user.first_name  %></span>
               </div>
+            </div>
           <% end %>
         <%end%>
       </div>
     </div>
-  </div>
-</div>
+  <% end %>
 
 
 
