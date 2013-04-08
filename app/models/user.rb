@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :user_notifications_users
   has_many :user_notifications, :through => :user_notifications_users
   has_and_belongs_to_many :comments, :join_table => :likes
-  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :votes
+  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
   def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
