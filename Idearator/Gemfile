@@ -29,7 +29,6 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
-gem 'jquery-rails'
 gem 'kaminari'
 
 group :test, :development do
