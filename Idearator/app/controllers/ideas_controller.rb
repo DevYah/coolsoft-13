@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   def show
-  	@user=Committee.find(1)
+  	@user=current_user
   	@idea=Idea.find(params[:id])
   end
 end

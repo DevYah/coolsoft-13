@@ -1,6 +1,6 @@
 class CommitteesController < ApplicationController
   def review_ideas 
-    @committee=Committee.find(1)
+    @committee=current_user
     if @committee.type == "Committee"
       @ideas=Idea.find(:all, :conditions =>{:approved => false})
       @ideas.reject! do |i|
