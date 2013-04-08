@@ -4,6 +4,16 @@ class IdeasController < ApplicationController
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
+
+  #plus 
+#create new like
+#Params:
+#+comment_id+ :: the parameter is an instance
+# of +Comment+ and it's used to build the like after clicking like
+#The def checks if the user liked the comment before if not the num_likes is incremented
+#by 1 else nothing happens
+#author dayna
+
   def show
     if params[:commentid] != nil
    @commentid = params[:commentid]
