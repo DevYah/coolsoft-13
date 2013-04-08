@@ -1,3 +1,10 @@
+<div id='tags'>
+  <% if @tags2 %>
+    <% @tags2.each do |tag| %>
+      <label><%= tag %></label>
+    <% end %>
+  <% end %>
+</div>
 <%= render 'ideas/show' %>
 <div id = "IdeaStream">
 	<div class = "page">
@@ -53,19 +60,36 @@
     if(nearBottomOfPage()) {
       loading=true;
       page++;
-      $.ajax({
-        url: '/home/index?page=' + page,
-        type: 'get',
-        dataType: 'script',
-        success: function() {
-        	loading=false;
-          
-        }
+          var array = [];
+          var i = 0;
+          $('#tags label').each(function() {
+          array[i] = $(this).text();
+          i++;
+        });
+          $.ajax({
+                  type: 'POST',
+                  url: '/home/index',
+                  data: { 
+                    myTags : array,
+                    myPage : page
+                     },
+                  beforeSend:function(){
 
-      });
+                    // this is where we append a loading image
+                    //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+                  },
+                  success:function(array){
+                    loading = false;
+                  },
+                  error:function(){
+
+                    // failed request; give feedback to user
+                    alert('failure');
+                  }
+            });
     }
   });
 
-  $(window).sausage();
+  
 }());
 </script>
