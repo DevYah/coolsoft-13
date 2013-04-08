@@ -1,10 +1,4 @@
 GIT
-  remote: https://github.com/bbatsov/rubocop.git
-  revision: 1aaf8b0c26c093a88973817e2e2db7f8e6dbe720
-  specs:
-    rubocop (0.3.1)
-
-GIT
   remote: https://github.com/mnzaki/pre-commit.git
   revision: 3580cf86a3510f51e22cfc2310156c25f0a22c38
   specs:
@@ -170,7 +164,6 @@ DEPENDENCIES
   pre-commit!
   rails (= 3.2.13.rc1)
   rspec-rails (~> 2.0)
-  rubocop!
   sass-rails (~> 3.2.3)
   sqlite3
   therubyracer
