@@ -2,18 +2,26 @@
 
 <div class="tabbable tabs-left">
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#pane1" data-toggle="tab">My dashboard</a></li>
+    <li class="active"><a href="#pane1" data-toggle="tab">My Ideas</a></li>
     <% if @user.type == "Committee" %>
-    <li><a href="#pane2" data-toggle="tab">Committee's Dashboard</a></li>
+    <li><a href="#pane2" data-toggle="tab">Approved Ideas</a></li>
     <% end %>
   </ul>
   <div class="tab-content">
     <div id="pane1" class="tab-pane active">
-      <pre>Here are the contents of the user's dashboard</pre>
+      <pre class = "ideaList">
+        <% @own_ideas.each do |idea| %>
+          <%= idea.title %>
+        <% end %>
+      </pre>
     </div>
     <% if @user.type == "Committee" %>
     <div id="pane2" class="tab-pane">
-      <pre>Here are the contents of the committee's dashboard</pre>
+      <pre class = "ideaList">
+        <% @approved_ideas.each do |idea| %>
+          <%= idea.title %>
+        <% end %>
+      </pre>
     </div>
     <% end %>
   </div><!-- /.tab-content -->
