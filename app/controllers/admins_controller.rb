@@ -1,15 +1,9 @@
 class AdminsController < ApplicationController
-  def show_users
-      @users = User.all
-      respond_to do |format|
-        format.html  # index.html.erb
-        format.json  { render :json => @posts }
-    end
-  end
+
   
   def approve_committeee
     @user = User.find(params[:id])
-    @user.type = 'Committee'
+  
     respond_to do |format|
        if @user.save
          UserMailer.committee_accept(@user).deliver
@@ -26,6 +20,7 @@ class AdminsController < ApplicationController
    
    def reject_committee
      @user = User.find(params[:id])
+     @user.type = nil
      respond_to do |format|
         if @user.save
           UserMailer.committee_reject(@user).deliver
