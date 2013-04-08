@@ -9,13 +9,10 @@ Sprint0::Application.routes.draw do
       end
     end 
   end
-  default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :registrations => "registrations" }
-  resources :ideas, :controller =>'ideas'
-  match '/users/expertise' => 'users#expertise'
-  match '/users/new_committee_tag' => 'users#new_committee_tag'
-  match '/home/index' => 'home#index'
-  devise_for :committees, :controllers => { :registrations => "registrations" }
+
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -65,7 +62,9 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  match "/review_ideas" => "committees#review_ideas"   
+
+
+  match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
 
