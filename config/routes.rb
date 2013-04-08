@@ -1,4 +1,5 @@
 Sprint0::Application.routes.draw do
+
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
@@ -13,7 +14,7 @@ Sprint0::Application.routes.draw do
   root :to => 'home#index'
 
   default_url_options :host => "localhost:3000"
-devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
 
   # The priority is based upon order of creation:
