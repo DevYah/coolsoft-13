@@ -19,7 +19,10 @@
  <%= render :partial => 'modal_reject'%>
  <p style="display-inline;"><a data-toggle="modal" href="#reject" class="btn btn-primary btn-large btn-danger">Reject</a></p>  
 <% end %>
-</div>
+<% if @user.banned==false and @user.active=true and @user.type=='Committee'%>
+<%= render :partial => 'modal_expertise'%>
+<p><a data-toggle="modal" href="#expertise" class="btn btn-primary btn-large">Choose Area of Expertise</a></p>  
+<%end%>
 <% if current_user == @user %>
  <button class="btn">Edit Profile</button>
 <% end %>

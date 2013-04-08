@@ -64,16 +64,21 @@ class UsersController < ApplicationController
 				format.html{
 					redirect_to controller: 'home', action: 'index'
 				}
-			end
+			  end
 			end
 		else
-			respond_to do |format|
+			if Committee.where(:id => current_user.id).exists? and Tag.all.count > 0
+				@user= current_user
+				@tags= Tag.all
+			else
+				respond_to do |format|
 				format.html{
 					redirect_to controller: 'home', action: 'index'
 				}
+			   end
+			 end
 			end
-		end
-	end
+	  end
   
 	# Enter chosen tags sent from expertise view, in committeestags table 
 	# Params:
