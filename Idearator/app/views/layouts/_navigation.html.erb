@@ -14,14 +14,26 @@
     <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
     </li>
   <% end %>
+  <% if user_signed_in? %>
+  <% if current_user.is_a? Committee%>
   <li>
     <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
   </li>
+  <% else %>
+  <% if current_user.ideas != nil %>
+    <li>
+    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+  </li>
+  <% end %>
+  <% end %>
+  <% end %>
   <li>
-    <%= form_tag "/", :method => :get, :remote => true do %>
+    <%= form_tag "/", :method => :get, :class => 'input-append',:id => 'searchdiv', :remote => true do %>
   <p>
-    <%= text_field_tag :search, params[:search] , :class => "input-medium search-query" ,:placeholder => "Title, Description....."%>
-    <%= submit_tag "Search", :name => nil , :class => "btn btn-inverse" %>
+    <%= text_field_tag :search, params[:search], :placeholder => "Search....."%>
+    <button class='btn btn-info'>
+        <i class="icon-search icon-white"></i>
+    </button>
   </p>
 <% end %>
   </li>
