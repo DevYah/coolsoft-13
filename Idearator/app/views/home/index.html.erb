@@ -42,7 +42,6 @@
   }
 </style>
 
-
 <script type="text/javascript">
 (function() {
   var page = 1,
@@ -51,7 +50,9 @@
   function nearBottomOfPage() {
     return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
   }
-
+$('#filter').click(function() {
+  page = 1;
+});
   $(window).scroll(function(){
     if (loading) {
       return;
@@ -84,7 +85,6 @@
                   error:function(){
 
                     // failed request; give feedback to user
-                    alert('failure');
                   }
             });
     }
