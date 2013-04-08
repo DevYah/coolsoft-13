@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -27,7 +28,7 @@ end
 gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
-
+gem 'faker'
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
