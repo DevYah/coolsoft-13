@@ -11,8 +11,8 @@ class DashboardController < ApplicationController
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Idea')
     data_table.new_column('datetime'  , 'Date')
-    data_table.new_column('number', 'idea number')
-    data_table.new_column('number', 'number of votes')
+    data_table.new_column('number', 'Idea number')
+    data_table.new_column('number', 'Number of votes')
     @ideasall.each do |i|
     data_table.add_rows([
     [i.title, i.created_at, i.user_id, i.num_votes]
