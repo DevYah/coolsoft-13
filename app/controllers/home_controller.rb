@@ -6,16 +6,21 @@ class HomeController < ApplicationController
 	#+page+:: the parameter is the page user is currently browsing.
 	#Author: Hesham Nabil
 	def index
-		@approved = Idea.order(:created_at).page(params[:page]).per(10)
-		@user = current_user
-        @top= Idea.find(:all,:order=> "num_votes DESC",:limit=>10)
-        
-        respond_to do |format|
-   		 	format.js
-    		format.html # index.html.erb
-    		format.xml  { render :xml => @approved }
-    	end	
+    if(params[:myTags])
+      tags = Array(params[:myTags])
+      tags.map! { |e| e.delete(' ') }
+      @approved = Idea.joins(:tags).where(:tags => {:name => tags}).page(params[:myPage].to_i).per(10)
+    else
+     @approved = Idea.order(:created_at).page(params[:page]).per(10)
     end
-
+        respond_to do |format|
+          format.js
+          format.html # index.html.erb
+          format.xml  { render :xml => @approved }
+        end
+  end 
+    
+  def test
+  end
 end
 
