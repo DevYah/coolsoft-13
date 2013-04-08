@@ -1,6 +1,10 @@
 class AdminsController < ApplicationController
 
-  
+	# Sends mail confirming registration
+	# 
+	# Params: 
+	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+	# Author: Mohammad Abdulkhaliq
   def approve_committeee
     @user = User.find(params[:id])
   
@@ -17,7 +21,11 @@ class AdminsController < ApplicationController
        end
      end
    end
-   
+ 	# Remove the user's status as a committtee
+ 	# Then sends a mail notifiying him of what happened.
+ 	# Params: 
+ 	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+ 	# Author: Mohammad Abdulkhaliq
    def reject_committee
      @user = User.find(params[:id])
      @user.type = nil
