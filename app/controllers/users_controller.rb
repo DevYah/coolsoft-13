@@ -65,11 +65,7 @@ class UsersController < ApplicationController
 					redirect_to controller: 'home', action: 'index'
 				}
 			  end
-			end
-		else
-			if Committee.where(:id => current_user.id).exists? and Tag.all.count > 0
-				@user= current_user
-				@tags= Tag.all
+      end
 			else
 				respond_to do |format|
 				format.html{
@@ -78,7 +74,6 @@ class UsersController < ApplicationController
 			   end
 			 end
 			end
-	  end
   
 	# Enter chosen tags sent from expertise view, in committeestags table 
 	# Params:
@@ -112,6 +107,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
     @invited = ApproveCommitteeNotification.where(:user_id => params[:id]).exists?
+    if(Committee.where(:id => params[:id]).exists?)
+      @tags = Tag.all
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
