@@ -1,28 +1,36 @@
 <%if user_signed_in?%>
   <% @notifications.each do |notification| %>
     <% if notification.is_a? VoteNotification %>
-      <li><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', '/' %></li>
+      <li><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', {controller: 'ideas', action: 'show'} %></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? CommentNotification %>
-      <li><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', '/'%></li>
+      <li><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', {controller: 'ideas', action: 'show'}%></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? DeleteNotification %>
       <li class="disabled"><a><%= notification.user.username %>  deleted his idea <%= notification.idea.title %>.</a></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? EditNotification %>
-      <li><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', '/'%></li>
+      <li><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', {controller: 'ideas', action: 'show'}%></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? ArchiveNotification %>
-      <li><%=link_to 'The idea ' + notification.idea.title + ' got a archived.', '/' %></li>
+      <li><%=link_to 'The idea ' + notification.idea.title + ' got a archived.', {controller: 'ideas', action: 'show'} %></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? DisapproveIdeaNotification %>
-      <li><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', '/'%></li>
+      <li><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', {controller: 'ideas', action: 'show'}%></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification %>
       <li><%= link_to 'You have been invited to become a committee member.', {controller: 'users', action: 'expertise'} %></li>
+      <li class="divider"></li>
     <% end %>
     <% if notification.is_a? ApproveCommitteeNotification %>
-      <li><%=link_to notification.user.username + ' has signed up as a committee member.', {controller: 'committees', action: 'review_committee'} %></li>
+      <li><%=link_to notification.user.username + ' has signed up as a committee member.', '/' %></li>
+      <li class="divider"></li>
     <% end %>
   <% end %>
 <% end %>
