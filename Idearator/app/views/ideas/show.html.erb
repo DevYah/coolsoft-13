@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!--!<p id="notice"><%= notice %></p>-->
 <div class='media'>
 <a  class='pull-left' href='#'>
 <%= image_tag @idea.photo.url(:medium) %>
@@ -6,6 +6,15 @@
 <p>
 <!--!<h2>Title:</h2>-->
 <h3><%= @idea.title %></h3>
+<div class = 'pull-right'>
+<span class='help-inline'><h2><%= @idea.num_votes %></h2></span> 
+<%=form_for(@idea, :action=>'update') do |f| %>
+<%if @ideavoted.nil? %>
+<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+<% else %>
+<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+<%end%>
+ </div>
 <%if @user==@idea.user_id%>
 <div class='btn-group'>
  <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%> 
@@ -13,13 +22,6 @@
 </div>
 <h2><%= @username%></h2>
 <%end%>
-<%=form_for(@idea, :action=>'update') do |f| %>
-<%if @ideavoted.nil? %>
-<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id, :class => 'btn btn-inverse' %>
-<% else %>
-<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
-<%end%>
- <span class='help-inline'><h2><%= @idea.num_votes %></h2></span> 
 <%end%>
 </p>
 </div>
