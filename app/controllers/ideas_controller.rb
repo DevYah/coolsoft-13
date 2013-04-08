@@ -15,9 +15,9 @@ class IdeasController < ApplicationController
       format.json { render json: @idea }
     end
   end
+
   # making new Idea
   #Marwa Mehanna
-
   def new
     @idea = Idea.new
     @tags = Tag.all
@@ -40,45 +40,55 @@ class IdeasController < ApplicationController
 
   def update
     @idea = Idea.find(params[:id])
-    if params[:vote]
-      current_user.votes << @idea
-      @idea.num_votes = @idea.num_votes + 1
-      respond_to do |format|
-        if @idea.update_attributes(params[:idea])
-          format.html { redirect_to @idea, :notice =>'thank you for voting' }
-          format.json { head :no_content }
-        else
-          format.html { render :action=>'edit' }
-          format.json { render json: @idea.errors, status: :unprocessable_entity }
-        end
+    puts(params[:ideas_tags][:tags])
+    @idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
+    respond_to do |format|
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, notice: 'Idea was successfully updated' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
-    elsif params[:unvote]
-      if @idea.num_votes != 0
-        @idea.num_votes = @idea.num_votes - 1
+    end
+  end 
+
+  # Votes for a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be voted
+  # Author: Marwa Mehannna
+  def vote
+    @idea = Idea.find(params[:id])
+    current_user.votes << @idea
+    @idea.num_votes = @idea.num_votes + 1
+    respond_to do |format|
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, :notice =>'Thank you for voting' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
+        format.json { head :no_content }
       end
-      current_user.votes.reject! { |b|b == @idea }
-      respond_to do |format|
-        if @idea.update_attributes(params[:idea])
-          format.html { redirect_to @idea, :notice=>'thank you for voting' }
-          format.json { head :no_content }
-        else
-          format.html { render action: 'edit' }
-          format.json { render json: @idea.errors, status: :unprocessable_entity }
-        end
+    end
+  end
+
+  # UnVotes for a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be unvoted
+  # Author: Marwa Mehannna
+  def unvote
+    @idea = Idea.find(params[:id])
+    current_user.votes.delete(@idea)
+    @idea.num_votes = @idea.num_votes - 1
+    respond_to do |format|
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @idea, alert: 'Idea is still voted' }
+        format.json { head :no_content }
       end
-    else 
-      puts(params[:ideas_tags][:tags])
-      @idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
-      respond_to do |format|
-        if @idea.update_attributes(params[:idea])
-          format.html { redirect_to @idea, notice: 'Idea was successfully updated' }
-          format.json { head :no_content }
-        else
-          format.html { render action: 'edit' }
-          format.json { render json: @idea.errors, status: :unprocessable_entity }
-        end
-      end
-    end  
+    end 
   end
 
   # creating new Idea
