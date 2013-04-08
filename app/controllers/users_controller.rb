@@ -4,54 +4,6 @@ class UsersController < ApplicationController
 	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag]
 
 
-	# Pass the current_user and all the tags to the  expertise view
-	# Params:
-	# none
-	# Author: Mohamed Sameh
-	def expertise
-		if current_user.is_a? Committee
-			if Tag.all.count > 0
-				@user= current_user
-				@tags= Tag.all
-			else
-				respond_to do |format|
-				format.html{
-					redirect_to controller: 'home', action: 'index'
-				}
-			end
-			end
-		else
-			respond_to do |format|
-				format.html{
-					redirect_to controller: 'home', action: 'index'
-				}
-			end
-		end
-	end
-	# Enter chosen tags sent from expertise view, in committeestags table 
-	# Params:
-	# +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
-	# Author: Mohamed Sameh
-	def new_committee_tag
-		if params[:user] == nil
-			respond_to do |format|
-				format.html{
-					flash[:notice] = 'You must choose at least 1 area of expertise'
-					redirect_to action: 'expertise'
-				}
-			end
-		else
-			@tags= params[:user][:tags]
-			@tags.each do |tag|
-				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
-			end
-			respond_to do |format|
-				format.html{
-					redirect_to controller: 'home', action: 'index'
-				}
-			end
-		end
-	end
 	#method displays a form where the user enters his password to confrim deactivation.
 	#Params: none
 	#Author: Amina Zoheir
@@ -97,25 +49,4 @@ class UsersController < ApplicationController
 			format.json { head :no_content }
 		end
 	end
-	
- # This method creates a new User and calls UserMailer to send a confirmation email.
-  #Author: Menna Amr
-
-  def create
-    @user = User.new(params[:user])
-
- 
-    respond_to do |format|
-      if @user.save
-        # Tell the UserMailer to send a welcome Email after save
-        UserMailer.welcome_email(@user).deliver
- 
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.json { render :json => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
 end
