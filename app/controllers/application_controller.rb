@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  # gets first 10 current users notifications and the number of unread notificaations.
+  # Params: none.
+  # Author: Amina Zoheir
   def load_notifications
     if user_signed_in?
       idea_notifications = current_user.idea_notifications

@@ -1,6 +1,9 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!, :only => [:view_notifications]
 
+  # gets all current users notifications.
+  # Params: none.
+  # Author: Amina Zoheir
   def view_all_notifications
     if user_signed_in?
       idea_notifications = current_user.idea_notifications
