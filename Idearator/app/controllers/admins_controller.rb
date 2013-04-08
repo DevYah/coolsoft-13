@@ -5,17 +5,17 @@ class AdminsController < ApplicationController
 	# Params: 
 	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
 	# Author: Mohammad Abdulkhaliq
-  def approve_committeee
+  def approve_committee
     @user = User.find(params[:id])
   
     respond_to do |format|
-       if @user.save
+
          UserMailer.committee_accept(@user).deliver
-         format.html  { redirect_to(admins_path,
+         format.html  { redirect_to('/',
                        :notice => 'User successfully initiated as a Committee.') }
          format.json  { head :no_content }
        else
-         format.html  { redirect_to(admins_path,
+         format.html  { redirect_to('/',
                        :notice => @user.errors.full_messages) }
          format.json  { render :json => :no_content }
        end
