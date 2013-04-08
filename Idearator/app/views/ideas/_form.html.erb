@@ -16,8 +16,13 @@
   <div class = 'control-group' >
     <%= i.label :title , :class => 'control-label'%>
     <div class = 'controls'>
+      <% if @boolean%>
+    <%= i.text_field :title, :class => 'text_field', :placeholder=>'Write title here...',:readonly => "true"%>
+    <span class = 'help-inline'>Sorry you can't change the title</span>
+    <%else%>
     <%= i.text_field :title, :class => 'text_field', :placeholder=>'Write title here...'%>
-<span class = 'help-inline'>Please make it short and descriptive</span> 
+    <span class = 'help-inline'>Please make it short and descriptive</span>
+    <%end%>
     </div>
   </div>
   <div class = 'control-group'>
