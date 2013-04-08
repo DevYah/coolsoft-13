@@ -15,6 +15,8 @@ class IdeasController < ApplicationController
 #author dayna
 
   def show
+    @user=current_user.id
+    @idea = Idea.find(params[:id])
     if params[:commentid] != nil
    @commentid = params[:commentid]
    @comment = Comment.find(:first, :conditions => {:id => @commentid})
@@ -24,10 +26,8 @@ class IdeasController < ApplicationController
    @like.user_id = current_user.id
    @like.comment_id = @commentid
    @like.save
- else
-    @user=current_user.id
-    @idea = Idea.find(params[:id])
   end
+    @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
   end
   # making new Idea
   #Marwa Mehanna
