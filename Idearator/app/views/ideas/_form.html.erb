@@ -1,4 +1,5 @@
 <%= form_for(@idea, :html => { :multipart => true }) do |i| %>
+<fieldset>
   <% if @idea.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
@@ -12,24 +13,33 @@
   <p>
     <%= i.file_field :photo %>
   </p>
-  <div class="field">
-    <%= i.label :title %><br />
-    <%= i.text_field :title %>
+  <div class="control-group" >
+    <%= i.label :title ,:class => 'control-label'%>
+    <div class="controls">
+    <%= i.text_field :title,:class => 'text_field',:placeholder=>"Write title here..."%>
+    <span class="help-inline">Please make it short and descriptive</span> 
   </div>
-  <div class="field">
-    <%= i.label :description %><br />
-    <%= i.text_field :description %>
   </div>
-  <div class="field">
-    <%= i.label :problem_solved %><br />
-    <%= i.text_field :problem_solved %>
+  <div class="control-group">
+    <%= i.label :description,:class => 'control-label'%>
+    <div class="controls">
+    <%= i.text_field :description,:class => 'text_field',:placeholder=>"Write description here..."%>
+  </div>
+  </div>
+  <div class="control-group">
+    <%= i.label :problem_solved,:class => 'control-label'%>
+    <div class="controls">
+    <%= i.text_field :problem_solved,:class => 'text_field',:placeholder=>"Write problem solved here..."%>
+    </div>
   </div>
   <div>
     <% @tags.each do |tag|%>
       <div><%= check_box_tag 'ideas_tags[tags][]', tag.id, @chosentags.include?(tag) %><%= tag.name %> </div>
     <% end %> 
+     <span class="help-inline">Please check the relative tags</span> 
   </div>
   <div class="actions">
-    <%= i.submit %>
+    <%= i.submit nil, :class => 'btn btn-primary'%>
   </div>
+  </fieldset>
 <% end %>
