@@ -11,42 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327141845) do
-
-  create_table "action_notifications", :force => true do |t|
-    t.string   "action"
-    t.integer  "notification_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  create_table "admin_inviteds", :id => false, :force => true do |t|
-    t.integer  "admin_id"
-    t.integer  "invited_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130405160633) do
 
   create_table "comments", :force => true do |t|
     t.string   "content"
-    t.integer  "num_likes"
+    t.integer  "num_likes",  :default => 0
     t.integer  "user_id"
     t.integer  "idea_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "committee_ideas", :id => false, :force => true do |t|
-    t.integer  "committee_id"
-    t.integer  "idea_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "committee_notifications", :force => true do |t|
-    t.integer  "notification_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "committees_tags", :id => false, :force => true do |t|
@@ -54,15 +27,34 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
     t.integer "tag_id"
   end
 
+  create_table "idea_notifications", :force => true do |t|
+    t.string   "type"
+    t.integer  "idea_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "idea_notifications", ["idea_id"], :name => "index_idea_notifications_on_idea_id"
+  add_index "idea_notifications", ["user_id"], :name => "index_idea_notifications_on_user_id"
+
+  create_table "idea_notifications_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "idea_notification_id"
+    t.boolean "read",                 :default => false
+  end
+
   create_table "ideas", :force => true do |t|
     t.string   "title",          :limit => 100,                    :null => false
     t.string   "description",                                      :null => false
     t.string   "problem_solved",                                   :null => false
-    t.integer  "num_votes"
+    t.integer  "num_votes",                     :default => 0
     t.integer  "user_id"
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
     t.boolean  "approved",                      :default => false
+    t.integer  "committee_id"
+    t.boolean  "archive_status",                :default => false
   end
 
   create_table "ideas_tags", :id => false, :force => true do |t|
@@ -78,15 +70,8 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
   end
 
   create_table "likes", :id => false, :force => true do |t|
-    t.integer  "comment_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "notifications", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "comment_id"
+    t.integer "user_id"
   end
 
   create_table "ratings", :force => true do |t|
@@ -114,11 +99,19 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "user_notifications", :id => false, :force => true do |t|
+  create_table "user_notifications", :force => true do |t|
+    t.string   "type"
     t.integer  "user_id"
-    t.integer  "notification_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_notifications", ["user_id"], :name => "index_user_notifications_on_user_id"
+
+  create_table "user_notifications_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "user_notification_id"
+    t.boolean "read",                 :default => false
   end
 
   create_table "user_ratings", :id => false, :force => true do |t|
@@ -146,8 +139,6 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
     t.string   "type"
     t.boolean  "active",                                      :default => true
     t.boolean  "banned",                                      :default => false
-<<<<<<< HEAD
-<<<<<<< HEAD
     t.string   "encrypted_password",                          :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -161,17 +152,15 @@ ActiveRecord::Schema.define(:version => 20130327141845) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-=======
->>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
-=======
->>>>>>> 60a31f0b7c12323f9c4a133acb6d77a0808ea874
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
   create_table "votes", :id => false, :force => true do |t|
-    t.integer  "idea_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "idea_id"
+    t.integer "user_id"
   end
 
 end
