@@ -11,6 +11,7 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'tlsmail'
+gem 'factory_girl_rails'
 
 
 # Gems used only for assets and not required
