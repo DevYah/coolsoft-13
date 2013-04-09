@@ -25,13 +25,11 @@
   </p>
   <p>
     <% if @idea.ratings.size > 0 %>
-      <b>Ratings:</b>
+      <b>Ratings:-</b>
       <% @idea.ratings.each do |therating| %>
         <p>
-          <b><%= therating.name %></b>
-          <b><%= therating.value %><b>
           <div>
-            <%= render :partial => '/user_ratings/form', :locals => { :rating_id => therating.id} %>
+            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
           </div>
         </p>
       <% end %>
@@ -39,4 +37,3 @@
   </p>
 </div>
 <td><%= link_to 'Back', '/',:class => 'btn' %></td>
-
