@@ -34,7 +34,8 @@
 <% @idea.comments.each do |comment| %>
 <tr>
 <td><blockquote><p><%= comment.content %></p><small> created <%= time_ago_in_words comment.created_at %> ago </small></blockquote> </td>
-<td><%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %><%= link_to "<i></i>".html_safe, like_idea_comment_path(comment), :id => "button_id", :class => "icon-thumbs-up" %><%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> <%= comment.num_likes %> likes</td><td><td>
+<td><%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
+	<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> <%= comment.num_likes %> likes</td><td><td>
   </tr>
  <% end %>
 </table><br>
