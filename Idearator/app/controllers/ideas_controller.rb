@@ -83,11 +83,18 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
 
     if current_user.id == @idea.user_id
-      @list_of_commenters = Comment.find_idea_by_id(@idea.id)
+      @list_of_commenters = Comment.find_by_idea_id(@idea.id)
       @list_of_voters = Vote.find_by_idea_id(@idea.id)
       @idea.destroy
-      @list = @list_of_commenters.append(@list_of_voters).flatten!
-      DeleteNotification.send_notification(current_user, @idea, @list)
+      
+      if @list_of_commenters != nil
+        @list = @list_of_commenters.append(@list_of_voters).flatten!
+      else
+        @list = @list_of_voters
+      end
+      if @list != nil
+        DeleteNotification.send_notification(current_user, @idea, @list)
+      end
 
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Idea is successfully deleted.' }
