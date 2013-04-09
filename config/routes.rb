@@ -6,15 +6,13 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
 
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations',
+                                       :omniauth_callbacks => 'users/omniauth_callbacks' }
 
-  get   '/login', :to => 'sessions#new', :as => :login
-  match '/auth/:provider/callback', :to => 'sessions#create'
-  match '/auth/failure', :to => 'sessions#failure'
-
-  root :to => 'home#index'
-
-  default_url_options :host => "localhost:3000"
-devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_scope :user do
+    match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+  end
 
 
   # The priority is based upon order of creation:
@@ -65,9 +63,7 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
   # match ':controller(/:action(/:id))(.:format)'
 
 
-  match "/review_ideas" => "committees#review_ideas"
-    
-
+  match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
 
