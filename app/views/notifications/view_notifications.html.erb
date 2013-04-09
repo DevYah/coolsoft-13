@@ -23,9 +23,11 @@
       <li><div>Your idea  <%= notification.idea.title %>  got a vote.
       </div><div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
     <% end %>
-    <% if notification.is_a? InviteCommitteeNotification %>
+    <% if notification.is_a? InviteCommitteeNotification and Admin.find(notification.user_id) %>
       <li><div>You have been invited to become a committee member</div>
         <div><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div></li>
+      <% else %>
+      <li><div><% User.find(notification.id).name %> has accepted the invitation</div></li> 
     <% end %>
     <% if notification.is_a? ApproveCommitteeNotification %>
       <li><div><%= notification.user.username %> has signed up as a committee member.</div>

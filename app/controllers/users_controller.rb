@@ -76,6 +76,8 @@ class UsersController < ApplicationController
 			end
   
 	# Enter chosen tags sent from expertise view, in committeestags table 
+  # If the current user of the action is invited then a notification 
+  # is sent to the admin informing of user acceptance of invitation.
 	# Params:
 	# +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
 	# Author: Mohamed Sameh
@@ -120,7 +122,7 @@ class UsersController < ApplicationController
   end
 	
   # Rejects an admin invitaion to become a committee and the committee record is removed from db
-	# by initiating him into the database and then sending him a notification
+	# by removing his committee status
 	# Params: 
 	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
 	# Author: Mohammad Abdulkhaliq
@@ -130,7 +132,7 @@ class UsersController < ApplicationController
     @user.type = nil
     @user.save
     current_user = User.find(id)
-    InviteCommitteeNotification.send_notification(User.find(id), Admin.all)
+    #InviteCommitteeNotification.send_notification(User.find(id), Admin.all)
 		respond_to do |format|
         format.html { redirect_to controller: 'users', action: 'show' , notice: 'Rejected Invitation to become Committee' }
         format.json { head :no_content }
