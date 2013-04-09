@@ -88,14 +88,20 @@ class IdeasController < ApplicationController
 
       @list_of_voters = @idea.votes
       @list_of_commenters = []
+      
       @idea.comments.each do |c|
         @list_of_commenters.append(User.find_by_id(c.user_id))
       end
+      
       @list = @list_of_voters.append(@list_of_commenters).flatten!
       ArchiveNotification.send_notification(current_user, @idea, @list)
 
-      Vote.find_by_idea_id(@idea.id).each do |v|
-        v.destroy
+      @votes = Vote.find_by_idea_id(@idea.id)
+
+      if @votes != nil
+        @vote.each do |v|
+          v.destroy
+        end
       end
 
       respond_to do |format|
@@ -121,9 +127,11 @@ class IdeasController < ApplicationController
       @idea.save
 
       @list_of_commenters = []
+      
       @idea.comments.each do |c|
         @list_of_commenters.append(User.find_by_id(c.user_id))
       end
+      
       ArchiveNotification.send_notification(current_user, @idea, @list_of_commenters)
    
       respond_to do |format|
