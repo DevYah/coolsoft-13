@@ -26,11 +26,11 @@
 </p>
 </div>
 
-<h5>Comments</h5>
+<legend><h4>Comments</h4></legend>
 <table>
   <% @idea.comments.each do |comment| %>
   <tr>
-      <td><blockquote><p><%= comment.content %></p><small> added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago</small></blockquote> </td>
+      <td><blockquote><label><%= comment.content %></label><small> added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago</small></blockquote> </td>
 <td><%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
 <% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
 	<%= link_to "+1", :controller => 'ideas', :action => 'show', :commentid => comment.id %>
