@@ -1,4 +1,7 @@
 class CommitteesController < ApplicationController
+before_filter :authenticate_user!
+#generates list of ideas to be reviewed by the committee
+#Author : Omar Kassem
   def review_ideas 
     @committee=current_user
     if @committee.type == "Committee"
@@ -8,14 +11,19 @@ class CommitteesController < ApplicationController
       end
     end  	
   end
+#sets the approved status of the idea reviewed by the committee member
+#Author : Omar Kassem  
   def Disapprove
     @idea=Idea.find(session[:idea_id])
     @idea.approved = false
     @idea.save
   end  
+
   def test
 
   end
+#adds the rating prespectives taken from the user to the idea reviewed
+#Author : Omar Kassem  
   def add_rating
     @idea=Idea.find(session[:idea_id])
     @idea.approved = true
