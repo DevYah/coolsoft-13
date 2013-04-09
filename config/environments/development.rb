@@ -27,20 +27,16 @@ Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
 ActionMailer::Base.delivery_method = :smtp   
 ActionMailer::Base.perform_deliveries = true   
 ActionMailer::Base.raise_delivery_errors = true
-ActionMailer::Base.default from: "idearator.13@gmail.com"
+ActionMailer::Base.default from: "idearator.cool@gmail.com"
 ActionMailer::Base.smtp_settings = {
   :address              => 'smtp.gmail.com',
   :port                 => 587,
   :domain               => 'localhost:3000',
-  :user_name            => "idearator.13@gmail.com",
+  :user_name            => "idearator.cool@gmail.com",
   :password             => "idearator13",
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> bf55fb0e0646033f105b015ee19c124c8d15043b
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
