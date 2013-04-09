@@ -86,6 +86,18 @@ class IdeasController < ApplicationController
       @idea.archive_status = true
       @idea.save
 
+      @list_of_voters = @idea.votes
+      @list_of_commenters = []
+      @idea.comments.each do |c|
+        @list_of_commenters.append(User.find_by_id(c.user_id))
+      end
+      @list = @list_of_voters.append(@list_of_commenters).flatten!
+      ArchiveNotification.send_notification(current_user, @idea, @list)
+
+      Vote.find_by_idea_id(@idea.id).each do |v|
+        v.destroy
+      end
+
       respond_to do |format|
         format.html { redirect_to @idea, alert: 'Idea has been successfully archived.' }
         format.json { head :no_content }
