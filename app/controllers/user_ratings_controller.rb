@@ -4,7 +4,7 @@ class UserRatingsController < ApplicationController
   # creates a new user rating
   # Params:
   # +idea_id+:: is the id of the instance of +Idea+ which it's perspective will be rated
-  # +user_rating:: is the actual +User_Rating+ attributes passed from the view
+  # +rating+:: is the new rating value that will be added to the +UserRating+ table
   # +rating_id+:: is the id of the instance of +Rating+, i.e Rating Perspective, which is being rated
   # Author: Mahmoud Abdelghany Hashish
   def create
@@ -34,8 +34,9 @@ class UserRatingsController < ApplicationController
 
   # updates an existing user rating
   # Params:
-  # +idea_id+:: is the id of the instance of +Idea+ which it's perspective's rating will be updated
-  # +user_rating:: is the actual +User_Rating+ attributes passed from the view to update the record
+  # +idea_id+:: is the id of the instance of +Idea+ which it's perspective will be rated
+  # +rating+:: is the new rating value that will be updated in the +UserRating+ table
+  # +rating_id+:: is the id of the instance of +Rating+, i.e Rating Perspective, which is being rated
   # Author: Mahmoud Abdelghany Hashish
   def update
     @idea = Idea.find_by_id(params[:idea_id])
