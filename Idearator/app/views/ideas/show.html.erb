@@ -7,12 +7,14 @@
 <h3><%= @idea.title %></h3>
 <div class = 'pull-right'>
 <span class='help-inline'><h2><%= @idea.num_votes %></h2></span> 
-<%=form_for(@idea, :action=>'update') do |f| %>
+<%=form_for @idea do |f| %>
+<div id ='change_vote'>
 <%if @ideavoted.nil? %>
-<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,:class => 'btn btn-inverse' %>
 <% else %>
-<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",:class => 'btn btn-danger' %>
 <%end%>
+</div>
  </div>
 <%if @user==@idea.user_id%>
 <div class='btn-group'>
