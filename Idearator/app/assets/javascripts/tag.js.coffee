@@ -3,9 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 `$(document).ready(function () { 
-	if($("div.alert p").text()!="")
-		$("div.form-actions p a.btn").click()
-	else
-		if($("div.modal-backdrop"))
-			$("div.alert").hide()
+	if($('div.modal-backdrop').length==0)
+			$('div#example').modal()
 	})`

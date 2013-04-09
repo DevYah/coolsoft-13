@@ -177,8 +177,12 @@ class TagsController < ApplicationController
   
   def delsym
     @tag = Tag.find(params[:id])
-    @tag.tags.destroy(params[:id2])
-    format.html { redirect_to '/', notice: 'Synonym list was successfully updated.' }
+    @tag2 = Tag.find(params[:sym])
+    @tag.tags.destroy(@tag2)
+    @tag2.tags.destroy(@tag)
+    respond_to do |format|
+    format.html { redirect_to @tag , notice: 'Synonym list was successfully updated.' }
     format.json { head :no_content }
+  end
   end
 end
