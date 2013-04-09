@@ -3,10 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #show{
 	display:none;
-	padding-left:40px;
-	padding-top:20px;
+	padding-left:50px;
+	padding-top:40px;
 }
-#fb{
-	float:left;
+#fbk{
+	width:40px;
+	height:40px;
+	cursor: pointer;
 	padding-right:10px;
+}
+#tw{
+	width:40px;
+	height:40px;
+	cursor:pointer;
 }

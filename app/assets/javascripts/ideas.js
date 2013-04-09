@@ -1,28 +1,25 @@
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-!function(d,s,id){
-	var js,fjs=d.getElementsByTagName(s)[0];
-	if(!d.getElementById(id)){
-		js=d.createElement(s);
-		js.id=id;js.src="//platform.twitter.com/widgets.js";
-		fjs.parentNode.insertBefore(js,fjs);
-	}
-}(document,"script","twitter-wjs");
-
-var TabbedContent = {
-	init: function() {	
-		$("#share").click(function() {
-			$("#show").toggle("slow");
-		});
-	}
-}
-	
 $(document).ready(function() {
-	TabbedContent.init();
+	$("#share").click(function() {
+	$("#show").toggle("slow");
+	});
+	$("#fbk").click(function() {
+			var pathname = window.location;
+  		var fburl = 'http://www.facebook.com/sharer.php?u='+encodeURI(pathname);
+  		var win=window.open(fburl, 'popup');
+ 			win.focus();
+	});
+	$("#tw").click(function() {
+ 			var pathname = window.location;
+  		var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Checkout this idea on idearator';
+  		var win=window.open(tweeturl, 'popup');
+ 			win.focus();
+	});
+	$("#fbk").tooltip({
+		toggle: "tooltip",
+		title: "Share on Facebook",
+	});
+	$("#tw").tooltip({
+		toggle: "tooltip",
+		title: "Share on Twitter" 
+	});
 });
