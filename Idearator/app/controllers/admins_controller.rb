@@ -3,6 +3,9 @@ class AdminsController < ApplicationController
 # redirects to the index page
   def index
   end
+
+  def invite
+  end
 ##
 # checks invitation is valid and delivers the email
 # +email+:: the email of the  guest

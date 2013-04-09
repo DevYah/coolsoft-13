@@ -20,10 +20,9 @@ Sprint0::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
   
   ActionMailer::Base.delivery_method = :smtp
-  
+ActionMailer::Base.perform_deliveries = true  
 ##
 # configure gmail account for development mailing
 # Author: muhammed hassan
