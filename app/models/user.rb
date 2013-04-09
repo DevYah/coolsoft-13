@@ -27,6 +27,13 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
+  # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
+  # find the user.
+  # Params:
+  # +auth+:: omniauth authentication hash
+  # +signed_in_resource+:: Currently signed in resource. Unused.
+  #
+  # Author: Mina Nagy
   def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
@@ -36,6 +43,11 @@ class User < ActiveRecord::Base
     user
   end
 
+  # Try to create a +User+ from the twitter authentication hash
+  # Params:
+  # +auth+:: omniauth authentication hash
+  #
+  # Author: Mina Nagy
   def self.create_user_from_twitter_oauth(auth)
     name = auth.info.name.split(' ', 2)
     user = User.create(first_name: name[0],

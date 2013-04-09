@@ -1,4 +1,12 @@
+# Mixin for common oauth methods used by various controllers
 module OmniauthHandlerMixin
+  # If a user was found or created successfully after oauth authentication, log
+  # them in and close the popup
+  # Params:
+  # +params[:state]+:: If defined and set to 'popup' then render a javscript
+  #                    snippet that closes the login popup instead of redirecting
+  #
+  # Author: Mina Nagy
   def handle_oauth_login
     if @user.persisted?
       @user.confirm!
