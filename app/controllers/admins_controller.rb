@@ -10,7 +10,7 @@ class AdminsController < ApplicationController
   
     respond_to do |format|
 
-         UserMailer.committee_accept(@user).deliver
+         Inviter.committee_accept(@user.email).deliver
          format.html  { redirect_to('/',
                        :notice => 'User successfully initiated as a Committee.') }
          format.json  { head :no_content }
@@ -26,7 +26,7 @@ class AdminsController < ApplicationController
      @user.type = nil
      respond_to do |format|
         if @user.save
-          UserMailer.committee_reject(@user).deliver
+          Inviter.committee_reject(@user.email).deliver
           format.html  { redirect_to(admins_path,
                         :notice => 'User successfully initiated as a Committee.') }
           format.json  { head :no_content }
