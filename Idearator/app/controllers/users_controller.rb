@@ -106,6 +106,8 @@ class UsersController < ApplicationController
 
   #This method is used to generate the view of each User Profile. A specific user and his ideas are made
   #available to the view to be presented in the appropriate manner.
+  #Params:
+  #none
   #Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
