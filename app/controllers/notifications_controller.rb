@@ -14,7 +14,4 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def amina
-  end
-
 end
