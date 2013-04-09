@@ -61,6 +61,10 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     current_user.votes << @idea
     @idea.num_votes = @idea.num_votes + 1
+    @ideaowner = User.find(@idea.user_id)
+    if @ideaowner.own_idea_notifications
+     VoteNotification.send_notification(current_user,@idea,[@ideaowner])
+    end
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Thank you for voting' }
