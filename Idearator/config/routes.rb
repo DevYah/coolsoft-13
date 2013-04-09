@@ -7,6 +7,7 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
   devise_for :committees, :controllers => { :registrations => "registrations" }
+  resources :user_ratings, :controller => 'user_ratings'
 
 
   # The priority is based upon order of creation:
