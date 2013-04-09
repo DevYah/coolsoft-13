@@ -1,7 +1,7 @@
 <% @all_notifications.each do |notification| %>
     <% if notification.is_a? VoteNotification %>
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification idea unread'>
+        <div class = 'well notification idea unread' data-notification = <%= notification.idea.id %> >
           <span>Your idea  <%= notification.idea.title %> got a vote.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
@@ -14,12 +14,12 @@
     <% end %>
     <% if notification.is_a? CommentNotification %>
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification idea unread'>
+        <div class = 'well notification idea unread' data-notification = <%= notification.idea.id %>>
           <span><%= notification.user.username %> commented on you idea <%= notification.idea.title %>.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
-        <div class = 'well notification idea read'>
+        <div class = 'well notification idea read' data-notification = <%= notification.idea.id %>>
           <span><%= notification.user.username %> commented on you idea <%= notification.idea.title %>.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
@@ -38,12 +38,12 @@
     <% end %>
     <% if notification.is_a? EditNotification %>
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification idea unread'>
+        <div class = 'well notification idea unread' data-notification = <%= notification.idea.id %>>
           <span><%= notification.user.username %> edited his idea <%= notification.idea.title %>.</spans>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
-        <div class = 'well notification idea read'>
+        <div class = 'well notification idea read' data-notification = <%= notification.idea.id %>>
           <span><%= notification.user.username %> edited his idea <%= notification.idea.title %>.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
@@ -51,12 +51,12 @@
     <% end %>
     <% if notification.is_a? ArchiveNotification %>
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification idea unread'>
+        <div class = 'well notification idea unread' data-notification = <%= notification.idea.id %>>
           <span>The idea  <%= notification.idea.title %>  got archived.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
-        <div class = 'well notification idea read'>
+        <div class = 'well notification idea read' data-notification = <%= notification.idea.id %>>
           <span>The idea  <%= notification.idea.title %>  got archived.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
@@ -64,12 +64,12 @@
     <% end %>
     <% if notification.is_a? DisapproveIdeaNotification %>
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification idea unread'>
+        <div class = 'well notification idea unread' data-notification = <%= notification.idea.id %>>
           <span>Your idea <%= notification.idea.title %> wasn't approved by committee.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
-        <div class = 'well notification idea read'>
+        <div class = 'well notification idea read' data-notification = <%= notification.idea.id %>>
           <span>Your idea <%= notification.idea.title %> wasn't approved by committee.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
