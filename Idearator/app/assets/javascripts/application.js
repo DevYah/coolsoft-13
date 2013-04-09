@@ -16,17 +16,17 @@
 
 $(function() {
   if($("#notifications").length > 0){
-    setTimeout(updateNotifications, 2000);
+    setTimeout(updateNotifications, 5000);
   }
-  setTimeout(updateNavBar, 2000);
+  setTimeout(updateNavBar, 5000);
 });
 
 function updateNotifications(){
 	$.getScript("/all_notifications.js")
-  setTimeout(updateNotifications, 2000);
+  setTimeout(updateNotifications, 5000);
 }
 
 function updateNavBar(){
   $.getScript("/notifications.js")
-  setTimeout(updateNavBar, 2000);
+  setTimeout(updateNavBar, 5000);
 }
