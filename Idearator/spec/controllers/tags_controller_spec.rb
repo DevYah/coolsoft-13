@@ -28,5 +28,19 @@ describe TagsController do
       it "does not save the new contact in the database"
       it "re-renders the :new template"
     end
+    
+    describe "addsym" do
+      it "places the synonym name to :name in params[:tag][:name]"
+      it "updates the tag list of @tag"
+      it "updates the tag list of synonym tag"
+      it "redirects to :show view"
+    end
+    
+    describe "delsym" do
+      it "retrives the Tag instance from :id"
+      it "destroys @tag.tags using params[:id2]"
+      it "redirects to :show view"
+    end
+    
   end
 end
