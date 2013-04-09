@@ -32,8 +32,7 @@ def deactivate
   end
   else
     respond_to do |format|
-     format.html { redirect_to action: 'confirm_deactivate' 
-      flash[:notice] = 'Wrong password' }
+     format.html { redirect_to action: 'confirm_deactivate' flash[:notice] = 'Wrong password' }
      format.json { head :no_content }
     end
   end
@@ -62,31 +61,24 @@ def expertise
       @tags= Tag.all
     else
       respond_to do |format|
-      format.html{
-        redirect_to controller: 'home', action: 'index'
-      }
+      format.html { redirect_to controller: 'home', action: 'index' }
     end
     end
   else
     respond_to do |format|
-      format.html{
-        redirect_to controller: 'home', action: 'index'
-      }
+      format.html { redirect_to controller: 'home', action: 'index' }
     end
   end
 end
 
-# Enter chosen tags sent from expertise view, in committeestags table 
+# Enter chosen tags sent from expertise view, in committeestags table
 # Params:
 # +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
 # Author: Mohamed Sameh
 def new_committee_tag
   if params[:user] == nil
     respond_to do |format|
-      format.html{
-        flash[:notice] = 'You must choose at least 1 area of expertise'
-        redirect_to action: 'expertise'
-      }
+      format.html {flash[:notice] = 'You must choose at least 1 area of expertise' redirect_to action: 'expertise' }
     end
   else
     @tags= params[:user][:tags]
@@ -94,9 +86,7 @@ def new_committee_tag
       CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
     end
     respond_to do |format|
-      format.html{
-        redirect_to controller: 'home', action: 'index'
-      }
+      format.html { redirect_to controller: 'home', action: 'index' }
     end
   end
 end
@@ -108,7 +98,8 @@ end
 #Author: Hisham ElGezeery
 def show
   @user = User.find(params[:id])
-  @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
+  @ideas = Idea.where(:user_id => @user.id, :approved => true)
+  @approved = @ideas.order(:created_at).page(params[:page]).per(10)
 
   respond_to do |format|
      format.html # show.html.erb
