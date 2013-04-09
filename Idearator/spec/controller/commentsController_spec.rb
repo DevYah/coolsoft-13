@@ -40,9 +40,9 @@ describe CommentsController do
         expect { delete :destroy, :id => @comment.id }.to change(Comment, :count).by(0)
       end
 
-      it 'redirects to comment' do
+      it 'redirects to idea' do
         delete :destroy, :id => @comment.id
-        response.should redirect_to @comment
+        response.should redirect_to @idea
       end
     end
   end
