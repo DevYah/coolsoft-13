@@ -1,5 +1,13 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!, :only => [:index]
+
+  # renders the view of the dashboard for idea submitters and committee members.
+  # it checks the value of the current threshold, the user's ideas and committee's
+  # approved ideas and calculates the corresponding percentage of the ideas in relation
+  # to the threshold.
+  # Params:
+  # none
+  # Author: Hisham ElGezeery
   def index
     @user = current_user
     @threshold = Threshold.last
