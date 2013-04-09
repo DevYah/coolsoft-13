@@ -24,11 +24,17 @@
     <div><%= @idea.problem_solved  %></div>
   </p>
   <p>
-    <b>Ratings:</b>
-    <% @idea.ratings.each do |therating| %>
-      <b><%= therating.name %></b>
-      <%= therating.average_rating %>
-      <%= render '/user_ratings/form' %>
+    <% if @idea.ratings.size > 0 %>
+      <b>Ratings:</b>
+      <% @idea.ratings.each do |therating| %>
+        <p>
+          <b><%= therating.name %></b>
+          <b><%= therating.value %><b>
+          <div>
+            <%= render :partial => '/user_ratings/form', :locals => { :rating_id => therating.id} %>
+          </div>
+        </p>
+      <% end %>
     <% end %>
   </p>
 </div>
