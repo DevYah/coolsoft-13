@@ -36,7 +36,7 @@
 	<%= link_to "+1", :controller => 'ideas', :action => 'show', :commentid => comment.id %>
 	<% end %>	
 	<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
-  <%= comment.num_likes %> likes</td><td><td>
+  <small><%= comment.num_likes %> likes</small></td><td><td>
   </tr>
  <% end %>
 </table><br>
