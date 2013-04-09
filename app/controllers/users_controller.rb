@@ -92,7 +92,11 @@ class UsersController < ApplicationController
 			@tags.each do |tag|
 				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
 			end
-      
+      if InviteCommitteeNotification.where(:user_id => current_user.id).exists?
+      @inviter_id = InviteCommitteeNotification.where(:user_id => current_user.id)[0].id
+      @admin = Admin.find(@inviter_id) 
+      InviteCommitteeNotification.send_notification(User.find(current_user.id), @admin) 
+    end
 			respond_to do |format|
 				format.html{
 					redirect_to controller: 'home', action: 'index'
@@ -108,9 +112,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
     @invited = InviteCommitteeNotification.where(:user_id => params[:id]).exists?
-    if(Committee.where(:id => params[:id]).exists? and @invited)
-      @tags = Tag.all
-    end
+    @tags = Tag.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -123,9 +125,14 @@ class UsersController < ApplicationController
 	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
 	# Author: Mohammad Abdulkhaliq
   def reject_invitation
-    Committee.find(params[current_user.id]).destroy
+    @user = User.find(current_user.id)
+    id = current_user.id
+    @user.type = nil
+    @user.save
+    current_user = User.find(id)
+    InviteCommitteeNotification.send_notification(User.find(id), Admin.all)
 		respond_to do |format|
-        format.html { redirect_to  @user , notice: 'Rejected Invitation to become Committee' }
+        format.html { redirect_to controller: 'users', action: 'show' , notice: 'Rejected Invitation to become Committee' }
         format.json { head :no_content }
       end
     end
