@@ -30,7 +30,8 @@
 <%if @idea.archive_status == false%>
 	<button id="share" class="btn btn-primary" type="button">Share</button>	
 	<div id="show" class="container"> 
-		<div class="fb-like" data-send="false" data-width="250" data-show-faces="true" data-font="verdana" ></div>
-	</div>					
+		<%= image_tag("f_logo.png", :id => "fbk")%>
+		<img id="tw" src="https://twitter.com/images/resources/twitter-bird-white-on-blue.png">
+	</div>		
 <%end%>
 
