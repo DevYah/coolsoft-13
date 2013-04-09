@@ -1,4 +1,9 @@
 class AdminsController < ApplicationController
+  before_filter do 
+    unless current_user and current_user.is_a? Admin
+      redirect_to '/home/index'
+    end
+  end
 ##
 # redirects to the index page
   def index
