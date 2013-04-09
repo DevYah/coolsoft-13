@@ -14,6 +14,11 @@ class NotificationsController < ApplicationController
     end
   end
 
+
+  # sets the read field to true for the specified notification and redirects to ideas#show.
+  # Params:
+  # +not_id+:: the parameter is an instance of +IdeaNotification+ passed through the view_notifications view.
+  # Author: Amina Zoheir
   def redirect_idea
     idea_not = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: params[:not_id], user_id: current_user.id })
     idea_not.read = true
@@ -24,6 +29,11 @@ class NotificationsController < ApplicationController
     end
   end
 
+
+  # sets the read field to true for the specified notification and redirects to users#expertise.
+  # Params:
+  # +not_id+:: the parameter is an instance of +UserNotification+ passed through the view_notifications view.
+  # Author: Amina Zoheir
   def redirect_expertise
     user_not = UserNotificationsUser.find(:first, :conditions => {user_notification_id: params[:not_id], user_id: current_user.id })
     user_not.read = true
@@ -34,6 +44,11 @@ class NotificationsController < ApplicationController
     end
   end
 
+
+  # sets the read field to true for the specified notification and redirects to committees#review.
+  # Params:
+  # +not_id+:: the parameter is an instance of +UserNotification+ passed through the view_notifications view.
+  # Author: Amina Zoheir
   def redirect_review
     user_not = UserNotificationsUser.find(:first, :conditions => {user_notification_id: params[:not_id], user_id: current_user.id })
     user_not.read = true
