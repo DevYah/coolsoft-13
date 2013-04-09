@@ -72,7 +72,7 @@ Sprint0::Application.routes.draw do
   match '/users/deactivate' => 'users#deactivate'
   match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
   match '/all_notifications.js' => 'notifications#view_all_notifications'
-  match '/notifications.js' => 'notifications#amina'
+  match '/notifications.js' => application#update_nav_bar'
 
 
 end

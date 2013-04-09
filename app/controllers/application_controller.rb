@@ -34,4 +34,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def update_nav_bar
+    respond_to do |format|
+        format.js { render 'layouts/update_nav_bar' }
+    end
+  end
+
 end
