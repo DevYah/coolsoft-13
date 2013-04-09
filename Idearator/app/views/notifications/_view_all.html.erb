@@ -3,12 +3,12 @@
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification idea unread'>
           <span>Your idea  <%= notification.idea.title %> got a vote.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
         <div class = 'well notification idea read'>
           <span>Your idea  <%= notification.idea.title %> got a vote.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% end %>
     <% end %>
@@ -16,12 +16,12 @@
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification idea unread'>
           <span><%= notification.user.username %> commented on you idea <%= notification.idea.title %>.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
         <div class = 'well notification idea read'>
           <span><%= notification.user.username %> commented on you idea <%= notification.idea.title %>.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% end %>
     <% end %>
@@ -40,12 +40,12 @@
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification idea unread'>
           <span><%= notification.user.username %> edited his idea <%= notification.idea.title %>.</spans>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
         <div class = 'well notification idea read'>
           <span><%= notification.user.username %> edited his idea <%= notification.idea.title %>.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% end %>
     <% end %>
@@ -53,12 +53,12 @@
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification idea unread'>
           <span>The idea  <%= notification.idea.title %>  got archived.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
         <div class = 'well notification idea read'>
           <span>The idea  <%= notification.idea.title %>  got archived.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% end %>
     <% end %>
@@ -66,12 +66,12 @@
       <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification idea unread'>
           <span>Your idea <%= notification.idea.title %> wasn't approved by committee.</span>
-          <div class = 'link'><%= link_to 'view idea','/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
         <div class = 'well notification idea read'>
           <span>Your idea <%= notification.idea.title %> wasn't approved by committee.</span>
-          <div class = 'link'><%= link_to 'view idea', '/' %></div>
+          <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% end %>
     <% end %>
@@ -92,12 +92,12 @@
       <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification approve-committee unread'>
           <span><%= notification.user.username %> has signed up as a committee member</span>
-          <div class = 'link'><%= link_to 'review committee', '/'  %></div>
+          <div class = 'link'><%= link_to 'review committee', {controller: 'committees', action: 'review' }  %></div>
         </div>
       <% else %>
         <div class = 'well notification approve-committee read'>
           <span><%= notification.user.username %> has signed up as a committee member</span>
-          <div class = 'link'><%= link_to 'review committee', '/' %></div>
+          <div class = 'link'><%= link_to 'review committee', {controller: 'committees', action: 'review' } %></div>
         </div>
       <% end %>
     <% end %>

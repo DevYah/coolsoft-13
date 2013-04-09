@@ -24,7 +24,7 @@ class NotificationsController < ApplicationController
     idea_not.read = true
     idea_not.save
     respond_to do |format|
-        format.html { redirect_to controller: 'ideas', action: 'show' }
+        format.html { redirect_to IdeaNotification.find(params[:not_id]).idea }
         format.json { head :no_content }
     end
   end
