@@ -9,21 +9,106 @@
   </ul>
   <div class="tab-content">
     <div id="pane1" class="tab-pane active">
-      <pre class = "ideaList">
+      <pre class = "ideaList" id = "own">
+        <h4 style = "display:inline"> My Ideas </h4>
         <% @own_ideas.each do |idea| %>
-          <%= idea.title %>
+          <button type="button" class="btn btn-primary" data-toggle="button" id = "btns" title ='<%= @counter %>'><%= idea.title %></button>
+          <%@counter = @counter + 1%>
         <% end %>
+      </pre>
+      <pre class = "bulbContainer">
+        <div id = "img">
+        </div>
+        <div id = "titles">
+        </div>
       </pre>
     </div>
     <% if @user.type == "Committee" %>
     <div id="pane2" class="tab-pane">
-      <pre class = "ideaList">
+      <pre class = "ideaList" id = "comm">
+        <h4 style = "display:inline"> My Ideas </h4>
         <% @approved_ideas.each do |idea| %>
-          <%= idea.title %>
+          <button type="button" class="btn btn-primary" data-toggle="button" id = "btns" title ='<%= @counter %>' value = "0"><%= idea.title %></button>
+          <%@counter = @counter + 1%>
         <% end %>
+      </pre>
+      <pre class = "bulbContainer">
+        <div id = "img">
+        </div>
+        <div id = "titles">
+        </div>
       </pre>
     </div>
     <% end %>
   </div><!-- /.tab-content -->
 </div>
 </div><!-- /.tabbable -->
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#comm #btns').click(function() {
+
+      var thresholds_temp = '<%= @approved_thresholds%>'
+      var counter = '<%= @counter%>'
+      thresholds_temp = thresholds_temp.replace("]", "");
+      thresholds_temp = thresholds_temp.replace("[", "");
+      thresholds_temp = thresholds_temp.replace(" ", "");
+      var thresholds = thresholds_temp.split(',');
+      var this_threshold = thresholds[this.title - counter];
+
+      var idea_titles = '<%= @approved_ideas.pluck(:title)%>'
+      idea_titles = idea_titles.replace("&quot;", "");
+      idea_titles = idea_titles.replace("]", "");
+      idea_titles = idea_titles.replace("[", "");
+      var idea_titles_final = idea_titles.split(',');
+
+        if(this_threshold == 1){
+        $('#pane2 .bulbContainer #img').append('<%= image_tag "0.jpg" %>');
+        }
+        else if(this_threshold == 2){
+         $('#pane2 .bulbContainer #img').append('<%= image_tag "1.jpg" %>');
+        }
+
+        else if(this_threshold == 3){
+         $('#pane2 .bulbContainer #img').append('<%= image_tag "2.jpg" %>');
+        }
+
+        $('#pane2 .bulbContainer #titles').append(idea_titles[this.title]);
+      alert(threshold);
+      this.value = 1;
+
+  });
+
+  $('#own #btns').click(function() {
+
+      var thresholds_temp = '<%= @own_thresholds%>'
+      thresholds_temp = thresholds_temp.replace("]", "");
+      thresholds_temp = thresholds_temp.replace("[", "");
+      thresholds_temp = thresholds_temp.replace(" ", "");
+      var thresholds = thresholds_temp.split(',');
+      var this_threshold = thresholds[this.title - 1];
+
+      var idea_titles = '<%= @own_ideas.pluck(:title)%>'
+      idea_titles = idea_titles.replace("&quot;", "");
+      idea_titles = idea_titles.replace("]", "");
+      idea_titles = idea_titles.replace("[", "");
+      var idea_titles_final = idea_titles.split(',');
+
+      if(this_threshold == 1){
+      $('#pane1 .bulbContainer #img').append('<%= image_tag "0.jpg" %>');
+      }
+      else if(this_threshold == 2){
+       $('#pane1 .bulbContainer #img').append('<%= image_tag "1.jpg" %>');
+      }
+
+      else if(this_threshold == 3){
+       $('#pane1 .bulbContainer #img').append('<%= image_tag "2.jpg" %>');
+      }
+
+      $('#pane1 .bulbContainer #titles').append(idea_titles[this.title]);
+      this.value = 1;
+ });
+
+});
+</script>
