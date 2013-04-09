@@ -6,7 +6,9 @@ $(document).ready(function() {
 	});
 
 	$('div.idea').click(function () {
-		window.location.href='/users/confirm_deactivate';
+
+		var idea = this.getAttribute('data-notification')
+		window.location.href='/ideas/' + idea;
 	});
 
 	$('.unread').hover(function () {
@@ -18,6 +20,8 @@ $(document).ready(function() {
 	});
 
 	$('div.approve-committee').click(function () {
-		window.location.href='/users/confirm_deactivate';
+		window.location.href='/committees/review';
 	});
 })
+var plant = document.getElementById('strawberry-plant');
+var fruitCount = plant.getAttribute('data-fruit');
