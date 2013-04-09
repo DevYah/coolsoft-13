@@ -141,7 +141,7 @@ end
 #Author: Hesham Nabil.
 def update
   @user = User.find(params[:id])
-  if @user.update_attributes(:about_me => params[:user][:about_me])
+  if @user.update_attributes(:about_me => params[:user][:about_me] , :photo => params[:user][:photo])
      redirect_to @user
   else
      render 'edit'

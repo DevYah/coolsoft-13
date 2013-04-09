@@ -1,4 +1,5 @@
 <h1><%= @user.username %>'s Profile</h1>
+<%= image_tag @user.photo.url(:medium) %>
 <%if @user.banned == true %>
   <p class="text-error">This User is currently banned!</p>
   <%elsif @user.active == false%>
