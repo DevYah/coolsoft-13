@@ -12,7 +12,8 @@
 <ul class="nav pull-right">
   <% if not user_signed_in? %>
     <li>
-    <%= link_to('Login via Twitter', user_omniauth_authorize_path(:twitter))  %>
+    <%= link_to 'Login via Twitter', user_omniauth_authorize_path(:twitter),
+                :class => 'popup', "data-width" => 600, "data-height" => 500  %>
     </li>
     <li>
     <%= link_to('Register', new_user_session_path)  %>
