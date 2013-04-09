@@ -1,6 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
   include OmniauthHandlerMixin
 
+  # Allow the user to choose a different username if user's twitter screen name
+  # is already used as a username locally
+  #
+  # Params:
+  # +session['devise.twitter_data']+:: Saved twitter oauth data from login request
+  # +params[:username]+:: New username that has been chosen by user
+  #
+  # Author: Mina Nagy
   def twitter_screen_name_clash
     auth = session['devise.twitter_data']
     raise ActiveResource::UnauthorizedAccess.new('Unauthorized') unless auth
