@@ -87,6 +87,7 @@ class IdeasController < ApplicationController
       @list_of_voters = Vote.find_by_idea_id(@idea.id)
       @idea.destroy
       
+      @list_of_comments = [].append(@list_of_comments).flatten!
       @list_of_commenters = []
       
       if @list_of_comments != nil
