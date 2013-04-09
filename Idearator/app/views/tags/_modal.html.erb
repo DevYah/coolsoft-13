@@ -1,9 +1,30 @@
 <div id="example" class="modal hide fade in" style="display: none; ">  
 <div class="modal-header">  
 <a class="close" data-dismiss="modal">×</a>  
-<h3>New Synonym</h3>  
+<h3>@tag.name</h3>  
 </div>  
-<div class="modal-body">  
+<div class="modal-body">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Synonym</th>
+	  <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= link_to tag.name, tag_path(tag) %></td>
+        <td><%=l tag.created_at %></td>
+        <td>
+          <%= link_to 'x', :controller => 'tags', :action => 'delsym', :id => tag.id, :class => "btn btn-danger"%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ 
 	<%= form_for @tag, :html => { :class => 'form-horizontal' }, :url =>  url_for(:controller => 'tags',  :action => 'addsym') do |f| %>
 	  <div class="control-group">
 	    <%= f.label :name, :class => 'control-label' %>
@@ -11,18 +32,14 @@
 	      <%= f.text_field :name, :class => 'text_field'%>
 	    </div>
 	  </div>
-
-	  <div class="alert">  
-	    <a id = notice class="close" data-dismiss="alert">×</a>  
-	    <strong>Info:</strong> <p id="notice"><%= notice %></p>
-	  </div>  
-</div>  
-<div class="modal-footer">  
+	  </div> 
+	  <div class="modal-footer">  
 <%= f.submit "New Synonym", :class => 'btn btn-primary' %>
 <a href="#" class="btn" data-dismiss="modal">Close</a>  
-</div>  
-</div>  
 <% end %>
+</div>  
+</div>  
+ 
 
 
 
