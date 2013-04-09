@@ -30,13 +30,8 @@ class User < ActiveRecord::Base
   def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
-      # username may already be taken, user will have to enter another one
-      if not User.where(username: auth.extra.raw_info.screen_name).empty?
-        # FIXME handle failure
-        user = create_user_from_twitter_oauth(auth)
-      else
-        auth.redirect = { controller: '/registrations', action: 'twitter_screen_name_clash' }
-      end
+      # FIXME handle failure
+      user = create_user_from_twitter_oauth(auth)
     end
     user
   end
@@ -48,8 +43,8 @@ class User < ActiveRecord::Base
                        provider: auth.provider,
                        uid: auth.uid,
                        # this is an invalid email, but uniqueness is guaranteed
-                       email: "#{auth.extra.raw_info.screen_name}@twitter.com",
-                       username: (auth.chosen_user_name or auth.extra.raw_info.screen_name),
+                       email: "#{auth.info.nickname}@twitter.com",
+                       username: (auth.chosen_user_name or auth.info.nickname),
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end

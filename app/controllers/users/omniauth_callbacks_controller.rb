@@ -1,31 +1,44 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def default_oauth_callback(provider, &block)
+  include OmniauthHandlerMixin
+
+  def default_oauth_callback(&on_fail)
     auth = request.env['omniauth.auth']
 
-    @user = User.send("find_for_#{provider.to_s}_oauth", auth, current_user)
-    unless @user && @user.persisted?
+    @user = User.send("find_for_#{auth.provider.to_s}_oauth", auth, current_user)
+    unless @user.persisted?
       # save oauth data if user creation failed
-      session["devise.#{provider.to_s}_data"] = auth
+      session["devise.#{auth.provider.to_s}_data"] = auth.except(:extra)
     end
+    auth.fail_redirect ||= new_user_registration_path
 
-    if block
-      yield auth
-    else
-      if @user && @user.persisted?
-        @user.confirm!
-        sign_in_and_redirect @user, :event => :authentication # this will throw if @user is not activated
-        set_flash_message(:notice, :success, :kind => provider.to_s.capitalize) if is_navigational_format?
+    unless handle_oauth_login
+      if on_fail
+        yield auth
       else
-        redirect_to auth.redirect if auth.redirect
+        default_oauth_fail
       end
     end
   end
 
+  def default_oauth_fail
+    auth = request.env['omniauth.auth']
+    session.delete("devise.#{auth.provider.to_s}_data")
+    flash[:alert] = @user.errors.to_a[0] if @user.errors
+    redirect_to auth.fail_redirect
+  end
+
   def facebook
-    default_oauth_callback(:facebook)
+    default_oauth_callback
   end
 
   def twitter
-    default_oauth_callback(:twitter)
+    default_oauth_callback do |auth|
+      # username may already be taken, user will have to enter another one
+      if User.exists? username: auth.info.nickname
+        redirect_to controller: '/registrations', action: 'twitter_screen_name_clash'
+      else
+        default_oauth_fail
+      end
+    end
   end
 end
