@@ -119,7 +119,13 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == @idea.user_id
       @idea.archive_status = false
       @idea.save
-        
+
+      @list_of_commenters = []
+      @idea.comments.each do |c|
+        @list_of_commenters.append(User.find_by_id(c.user_id))
+      end
+      ArchiveNotification.send_notification(current_user, @idea, @list_of_commenters)
+   
       respond_to do |format|
         format.html { redirect_to @idea, alert: 'Idea has been successfully unarchived.' }
         format.json { head :no_content }
