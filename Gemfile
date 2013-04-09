@@ -32,7 +32,9 @@ gem 'faker'
 gem 'kaminari'
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.0"
+  gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
+  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
+  gem 'rspec-rails', '~> 2.0'
 end
 
 # To use ActiveModel has_secure_password
@@ -49,4 +51,5 @@ end
 
 # To use debugger
 # gem 'debugger'
+
 
