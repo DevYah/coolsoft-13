@@ -1,7 +1,7 @@
  
 
 class UsersController < ApplicationController
-	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag]
+	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :invite_member, :reject_invitation]
   
 	# displays a form where the user enters his password to confrim deactivation.
 	# Params: none
@@ -157,5 +157,21 @@ class UsersController < ApplicationController
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  # Invites existing member to become a committee 
+  # by initiating him into the database and then sending him a notification
+  # Params: 
+  # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+  # Author: Mohammad Abdulkhaliq
+  def invite_member
+    @user = User.find(params[:id])
+    @user.type = 'Committee'
+    @user.save
+    InviteCommitteeNotification.send_notification(current_user, [User.find(params[:id])])
+    respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'Successfully invited member' }
+        format.json { head :no_content }
+      end
   end
 end
