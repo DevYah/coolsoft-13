@@ -1,5 +1,4 @@
 class CommitteesController < ApplicationController
-before_filter :authenticate_user!
 #generates list of ideas to be reviewed by the committee
 #Author : Omar Kassem
   def review_ideas 
@@ -13,10 +12,16 @@ before_filter :authenticate_user!
   end
 #sets the approved status of the idea reviewed by the committee member
 #Author : Omar Kassem  
-  def Disapprove
-    @idea=Idea.find(session[:idea_id])
-    @idea.approved = false
-    @idea.save
+  def disapprove
+        puts "hash 2 "
+
+    @idea=Idea.find(params[:id])
+    @idea.update_attributes(:approved => false)  
+    #@idea.save
+    puts "hash 2 "
+    #DisapproveIdeaNotification.send_notification(current_user, @idea, [@idea.user])
+    flash[:notice] = 'The idea has been disapproved'
+    redirect_to :controller => 'committees', :action => 'review_ideas'
   end  
 
   def test
@@ -25,10 +30,11 @@ before_filter :authenticate_user!
 #adds the rating prespectives taken from the user to the idea reviewed
 #Author : Omar Kassem  
   def add_rating
-    @idea=Idea.find(session[:idea_id])
+    @idea=Idea.find(params[:id])
     @idea.approved = true
     @idea.save
     @rating = params[:rating]
+    puts params[:rating]
     @rating.each do |rate|
       r = @idea.ratings.build
       r.name=rate
