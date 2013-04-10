@@ -1,9 +1,1 @@
-<% if current_user.type == 'Admin' %>
-  <% if @user.banned == true %>
-    <h1>The user is banned </h1>
-  <% else %>
-    <h1>the user is unbanned</h1>
-  <% end %>
-<% else %>
-  <h1>Only admins could ban or unban users</h1>
-<% end %> 
+<h1>You are not an admin to ban or unban users</h1>
