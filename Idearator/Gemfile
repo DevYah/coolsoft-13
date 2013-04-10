@@ -11,7 +11,8 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'tlsmail'
-gem 'factory_girl_rails'
+
+
 
 
 # Gems used only for assets and not required
@@ -34,6 +35,13 @@ group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
+  gem 'factory_girl_rails'
+end
+group :test do
+	gem 'faker'
+	gem 'capybara'
+	gem 'guard-rspec'
+	gem 'launchy'
 end
 
 # To use ActiveModel has_secure_password
