@@ -21,7 +21,7 @@
  <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%> 
 <!--! add here archive and delete buttons -->
 </div>
-<h2><%= @username%></h2>
+<h2><%=link_to @username, @idea.user%></h2>
 <%end%>
 <%end%>
 </p>
