@@ -145,9 +145,11 @@ class UsersController < ApplicationController
 		else
 			s= User.find(current_user)
 			s.own_idea_notifications= false
-	    s.participated_idea_notifications= false
-	    s.save
+	   	s.participated_idea_notifications= false
+			s.save
 	  end
-	  format.js
+	  respond_to do |format|
+	  	format.js {}
+	  end
 	end
 end
