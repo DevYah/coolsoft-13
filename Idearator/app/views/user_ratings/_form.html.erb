@@ -2,7 +2,7 @@
 <b>Name:</b>
 <div><%= therating.name %></div>
 <b>Value:</b>
-<div><%= therating.value %></div>      
+<div><%= therating.value %></div>  
 <%= form_for(rating_ballot(therating.id), :remote => true, :html => { :class => 'rating_ballot form-inline' }) do |f| %>
   <%= f.label('value_1', content_tag(:span, '1'), {:class => 'rating', :id => '1'}) %>
   <%= radio_button_tag('rating[value]', 1, current_user_rating(therating.id) == 1, :class => 'rating_button') %>
@@ -17,6 +17,7 @@
 
   <%= hidden_field_tag('idea_id', @idea.id) %>
   <%= hidden_field_tag('rating_id', therating.id) %>
+  
   <% #f.submit :Submit %>
   </span>
 <% end %>
