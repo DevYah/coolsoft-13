@@ -9,7 +9,6 @@ def show
     @user = current_user.id
     @username = current_user.username
    @idea = Idea.find(params[:id])
-   @commentliked = @current_user.like.detect { |w|w.id == @comment.id }
 end
 #create new Comment
 #Params:
@@ -47,6 +46,7 @@ end
 def update
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
+    @comment.num_likes= 0;
      respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
