@@ -16,6 +16,11 @@ Sprint0::Application.routes.draw do
   default_url_options :host => "localhost:3000"
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
+  devise_scope :user do
+  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+end
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -38,7 +43,6 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -65,11 +69,8 @@ Sprint0::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
 
-  match "/review_ideas" => "committees#review_ideas"
-    
-
+  match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-
 
 end
