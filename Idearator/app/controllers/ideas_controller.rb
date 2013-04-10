@@ -80,40 +80,30 @@ class IdeasController < ApplicationController
   # +id+:: is used to specify which instance of +Idea+ will be deleted
   # Author: Mahmoud Abdelghany Hashish
   def destroy
-    @idea = Idea.find(params[:id])
+    idea = Idea.find(params[:id])
 
-    if current_user.id == @idea.user_id
-      @list_of_comments = Comment.find_by_idea_id(@idea.id)
-      @list_of_voters = Vote.find_by_idea_id(@idea.id)
-      @idea.destroy
-
-      @list_of_comments = [].append(@list_of_comments).flatten!
-      @list_of_commenters = []
-
-      if @list_of_comments != nil
-        @list_of_comments.each do |c|
-          @list_of_commenters.append(User.find(c.user_id)).flatten!
-        end
+    if current_user.id == idea.user_id
+      list_of_comments = Comment.where(idea_id: idea.id)
+      list_of_commenters = []
+      list_of_voters = Vote.where(idea_id: idea.id)
+      idea.destroy
+      
+      list_of_comments.each do |c|
+        list_of_commenters.append(User.find(c.user_id)).flatten!
       end
-
-      if @list_of_commenters != nil
-        @list = @list_of_commenters.append(@list_of_voters).flatten!
-      else
-        @list = @list_of_voters
-      end
-
-      if @list != nil
-        DeleteNotification.send_notification(current_user, @idea, @list)
+      
+      list = list_of_commenters.append(list_of_voters).flatten!
+      
+      if list != nil
+        DeleteNotification.send_notification(current_user, idea, list)
       end
 
       respond_to do |format|
-        format.html { redirect_to '/', alert: 'Idea is successfully deleted.' }
-        format.json { head :no_content }
+        format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
     else
       respond_to do |format|
-        format.html { redirect_to @idea, alert: "Deleting failed, you don't own the idea." }
-        format.json { head :no_content }
+        format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
       end
     end
   end
