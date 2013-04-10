@@ -1,20 +1,20 @@
 <%= form_for(current_user, remote: true, url: url_for(controller: 'users', action: 'change_settings'), :html => { :class => "form-horizontal" } ) do |form| %>
-<div class="well">
-  <label class="checkbox">
-  <%= check_box_tag 'user[]', '1', current_user.own_idea_notifications %>
-  Recieve Notifications on your own submitted Ideas
-</label>
-<p class="muted">This allows you to recieve notifications whenever anyone comments on or votes for any of your ideas.</p>
-</div>
-<div class="well">
-<label class="checkbox">
-  <%= check_box_tag 'user[]', '2', current_user.participated_idea_notifications%>
-  Recieve Notifications for any updates on ideas you commented on or liked
-</label>
-<p class="muted">This allows you to stay up to date with what's happening with the ideas that interest you. </p>
-</div>
- <div class="form-actions">
-    	<input id="submit" class="btn btn-primary" name="commit" type="submit" value="Save Changes">
-    	<input id="cancel" class="btn" type="reset" name="reset" value="Cancel">
- </div>
+	<div class="well">
+	  <label class="checkbox">
+		  <%= check_box_tag 'user[]', '1', current_user.own_idea_notifications %>
+		  Recieve Notifications on your own submitted Ideas
+		</label>
+		<p class="muted">This allows you to recieve notifications whenever anyone comments on or votes for any of your ideas.</p>
+	</div>
+	<div class="well">
+		<label class="checkbox">
+		  <%= check_box_tag 'user[]', '2', current_user.participated_idea_notifications%>
+		  Recieve Notifications for any updates on ideas you commented on or liked
+		</label>
+		<p class="muted">This allows you to stay up to date with what's happening with the ideas that interest you. </p>
+	</div>
+	<div class="form-actions">
+	  <input id="submit" class="btn btn-primary" name="commit" type="submit" value="Save Changes">
+	  <input id="cancel" class="btn" type="reset" name="reset" value="Cancel">
+	</div>
 <% end %>
