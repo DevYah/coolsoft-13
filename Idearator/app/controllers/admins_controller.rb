@@ -6,8 +6,6 @@ class AdminsController < ApplicationController
   end
 ##
 # redirects to the index page
-  def index
-  end
 
   def invite
   end
