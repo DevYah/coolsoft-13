@@ -45,16 +45,14 @@ class UserRatingsController < ApplicationController
     if @user_rating.update_attributes(params[:rating])
       @rating = Rating.find_by_id(params[:rating_id])
       @saved_r = UserRating.find_by_rating_id(params[:rating_id])
-      if @saved_r == 1
+
+      if @saved_r.class != Array
         @rating.value = @user_rating.value.to_f
       else
-        @rating.value = ((2 * @rating.value) - @val + @user_rating.value).to_f / (2).to_f
+        @rating.value = ((@saved_r.size * @rating.value) - @val + @user_rating.value).to_f / (@saved_r.size).to_f
       end
+      
       @rating.save
-      respond_to do |format|
-        format.html { redirect_to idea_path(@idea), :notice => 'Your rating has been updated' }
-        format.js
-      end
     else 
       respond_to do |format|
         format.html { redirect_to idea_path(@idea), :notice => 'Your rating has not been updated, please retry!' }
