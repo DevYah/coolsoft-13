@@ -1,10 +1,12 @@
+
 Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
-  match '/test' => 'committees#test'
-  get '/add_rating' => 'committees#add_rating'
-  match '/Disapprove' => 'committees#Disapprove'
+  match '/ideas/:id/test' => 'committees#test'
+  get '/ideas/:id/add_rating' => 'committees#add_rating'
+  match '/ideas/:id/disapprove' => 'committees#disapprove'
+
   #get "ideas/new"
   resources :ideas
 

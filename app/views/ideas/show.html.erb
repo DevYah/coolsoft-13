@@ -2,8 +2,8 @@
     <% if @user.type == "Committee" %>
         <% if (@user.tags & @idea.tags).count > 0 %>
 	        <% session[:idea_id]=params[:id] %>
-	        <%= link_to 'Approve', { :controller => "committees", :action => "test" }, :confirm => "Are you sure you want to approve this idea?",:class => 'btn btn-success' %>
-	        <%= link_to 'Disapprove', { :controller => "committees", :action => "Disapprove" }, :confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
+	        <%= link_to 'Approve', { :controller => "committees", :action => "test" }, :id=> params[:id],:confirm => "Are you sure you want to approve this idea?",:class => 'btn btn-success' %>
+	        <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id=> params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
 	    <% end %>
     <% end %>
 <% end %>    
