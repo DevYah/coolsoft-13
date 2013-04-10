@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 	#+page+:: the parameter is the page user is currently browsing.
 	#Author: Hesham Nabil
 	def index
-		@approved = Idea.order(:created_at).page(params[:page]).per(10)
+        @approved = Idea.order(:created_at).page(params[:page]).per(10)
         @top= Idea.find(:all,:order=> "num_votes DESC",:limit=>10)
         
         respond_to do |format|
