@@ -25,6 +25,7 @@ end
 def create
    @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.create(params[:comment])
+    @comment.user_id = current_user.id
     @comment.update_attributes(:idea_id => @idea.id)
     respond_to do |format|
       if @comment.save
@@ -64,9 +65,14 @@ def update
 #+idea_id+ :: the parameter is an instance of +Idea+ to get the idea's id in order to modify it after deleting the comment
 #author dayna
 def destroy
-    @idea = Idea.find(params[:idea_id])
-    @comment = @idea.comments.find(params[:id])
+  @idea = Idea.find(params[:idea_id])
+  @comment = @idea.comments.find(params[:id])
+  
+  if @comment.class != NilClass && @comment.user_id==current_user.id
     @comment.destroy
-    redirect_to idea_path(@idea) ,:notice => "Deleted the comment"
+    redirect_to idea_path(@idea), :notice => "Deleted the comment"
+  else
+    redirect_to idea_path(@idea), :notice => 'Didnot delete the comment'
   end
+end
 end
