@@ -5,14 +5,14 @@
 <p>
 <!--!<h2>Title:</h2>-->
 <h3><%= @idea.title %></h3>
-<div class = 'pull-right'>
-<span class='help-inline'><h2><%= @idea.num_votes %></h2></span> 
+<div>
 <%=form_for @idea do |f| %>
-<div id ='change_vote'>
+<div id ='change_vote' class = 'pull-right'>
+<span><h2><%= @idea.num_votes %></h2></span> 
 <%if @ideavoted.nil? %>
-<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,:class => 'btn btn-inverse' %>
+<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
 <% else %>
-<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",:class => 'btn btn-danger' %>
+<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-danger' %>
 <%end%>
 </div>
  </div>
