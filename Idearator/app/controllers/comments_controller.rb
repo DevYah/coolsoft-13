@@ -46,7 +46,6 @@ end
 def update
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
-    @comment.num_likes= 0;
      respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
