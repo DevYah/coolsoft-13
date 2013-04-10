@@ -3,8 +3,6 @@ require 'factory_girl_rails'
 
 FactoryGirl.define do
   factory :comment do |f|
-    f.title 'Test'
-    f.description 'Test'
-    f.problem_solved 'Test'
+    f.content 'Test'
   end
 end
