@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :authenticate_user!, :only => [:load_notifications, :update_nav_bar]
   before_filter :load_notifications
   protect_from_forgery
   # redirect committee members to controller user action expertise for their first sign in
