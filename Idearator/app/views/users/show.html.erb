@@ -7,11 +7,11 @@
 <% end %>
 <% if @admin.type == "Admin" && @user.active==true && @user.banned==false%>
   <% session[:user_id]=params[:id] %>
-  <%= link_to 'Ban', { :controller => "admins", :action => "ban_unban" }, :confirm => "Are you sure you want to Ban this user?",:class => 'btn btn-danger' %>
+  <%= link_to 'Ban', { :controller => "admins", :action => "ban_unban" },:id =>params[:id], :confirm => "Are you sure you want to Ban this user?",:class => 'btn btn-danger' %>
 <% end %>
 <% if @admin.type == "Admin" && @user.banned==true%>
   <% session[:user_id]=params[:id] %>
- <%= link_to 'Unban', { :controller => "admins", :action => "ban_unban" }, :confirm => "Are you sure you want to Unban this user?",:class => 'btn btn-success' %>
+ <%= link_to 'Unban', { :controller => "admins", :action => "ban_unban" }, :id =>params[:id], :confirm => "Are you sure you want to Unban this user?",:class => 'btn btn-success' %>
 <% end %>
 <% if @admin == @user %>
  <button class="btn">Edit Profile</button>
