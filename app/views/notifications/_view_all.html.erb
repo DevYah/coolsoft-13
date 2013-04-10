@@ -6,7 +6,7 @@
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
       <% else %>
-        <div class = 'well notification idea read'>
+        <div class = 'well notification idea read' data-notification = <%= notification.idea.id %>>
           <span>Your idea  <%= notification.idea.title %> got a vote.</span>
           <div class = 'link'><%= link_to 'view idea', notification.idea %></div>
         </div>
