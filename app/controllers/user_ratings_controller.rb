@@ -12,18 +12,18 @@ class UserRatingsController < ApplicationController
     @user_rating = UserRating.new(params[:rating])
     @user_rating.rating_id = params[:rating_id]
     @user_rating.user_id = current_user.id
+    
     if @user_rating.save
       @rating = Rating.find_by_id(params[:rating_id])
-      if @rating.value != 0
-        @rating.value = (@rating.value + @user_rating.value).to_f / (2).to_f
+      @saved_r = UserRating.find_by_rating_id(params[:rating_id])
+
+      if @saved_r.class != Array
+        @rating.value = @user_rating.value.to_f
       else
-        @rating.value = @user_rating.value
+        @rating.value = ((@saved_r.size * @rating.value) + @user_rating.value).to_f / (@saved_r.size).to_f
       end
+
       @rating.save
-      respond_to do |format|
-        format.html { redirect_to idea_path(@idea), :notice => 'Your rating has been added' }
-        format.js
-      end
     else
       respond_to do |format|
         format.html { redirect_to @idea, :notice => 'Your rating has not been saved, please retry!' }
@@ -42,6 +42,7 @@ class UserRatingsController < ApplicationController
     @idea = Idea.find_by_id(params[:idea_id])
     @user_rating = current_user.user_ratings.find_by_rating_id(params[:rating_id])
     @val = @user_rating.value
+    
     if @user_rating.update_attributes(params[:rating])
       @rating = Rating.find_by_id(params[:rating_id])
       @saved_r = UserRating.find_by_rating_id(params[:rating_id])
@@ -51,12 +52,12 @@ class UserRatingsController < ApplicationController
       else
         @rating.value = ((@saved_r.size * @rating.value) - @val + @user_rating.value).to_f / (@saved_r.size).to_f
       end
-      
+
       @rating.save
     else 
       respond_to do |format|
         format.html { redirect_to idea_path(@idea), :notice => 'Your rating has not been updated, please retry!' }
-        format.js
+        format.js 
       end
     end
   end
