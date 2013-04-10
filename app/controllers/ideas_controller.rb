@@ -86,16 +86,16 @@ class IdeasController < ApplicationController
       @list_of_comments = Comment.find_by_idea_id(@idea.id)
       @list_of_voters = Vote.find_by_idea_id(@idea.id)
       @idea.destroy
-      
+
       @list_of_comments = [].append(@list_of_comments).flatten!
       @list_of_commenters = []
-      
+
       if @list_of_comments != nil
         @list_of_comments.each do |c|
           @list_of_commenters.append(User.find(c.user_id)).flatten!
         end
       end
-      
+
       if @list_of_commenters != nil
         @list = @list_of_commenters.append(@list_of_voters).flatten!
       else
