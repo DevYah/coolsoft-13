@@ -77,12 +77,12 @@
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification %>
       <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification invite-committee unread'>
+        <div class = 'well notification invite-committee unread' data-notification = <%= notification.user.id %>>
           <span>You have been invited to become a committee member.</span>
           <div class = 'link'><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div>
         </div>
       <% else %>
-        <div class = 'well notification invite-committee read'>
+        <div class = 'well notification invite-committee read' data-notification = <%= notification.user.id %>>
           <span>You have been invited to become a committee member.</span>
           <div class = 'link'><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div>
         </div>
@@ -90,12 +90,12 @@
     <% end %>
     <% if notification.is_a? ApproveCommitteeNotification %>
       <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
-        <div class = 'well notification approve-committee unread'>
+        <div class = 'well notification approve-committee unread' data-notification = <%= notification.user.id %>>
           <span><%= notification.user.username %> has signed up as a committee member</span>
           <div class = 'link'><%= link_to 'review committee', {controller: 'committees', action: 'review' }  %></div>
         </div>
       <% else %>
-        <div class = 'well notification approve-committee read'>
+        <div class = 'well notification approve-committee read' data-notification = <%= notification.user.id %>>
           <span><%= notification.user.username %> has signed up as a committee member</span>
           <div class = 'link'><%= link_to 'review committee', {controller: 'committees', action: 'review' } %></div>
         </div>
