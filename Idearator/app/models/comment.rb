@@ -3,5 +3,5 @@ class Comment < ActiveRecord::Base
 
   belongs_to :idea
   belongs_to :user
-  has_and_belongs_to_many :likes, :class_name => 'User', :join_table => :likes
+  has_and_belongs_to_many :users, join_table: :likes
 end
