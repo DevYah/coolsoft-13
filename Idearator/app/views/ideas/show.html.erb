@@ -1,5 +1,5 @@
-<p id='notice'><%= notice %></p>
-<script type ='text/javascript" src="//assets.pinterest.com/js/pinit.js'></script>
+<div id="fb-root"></div>
+<p id="notice"><%= notice %></p>
 <div class='media'>
 <a  class="pull-left" href="#">
 <%= image_tag @idea.photo.url(:medium) %>
@@ -24,10 +24,17 @@
 <p>
 <b>Problem Solved:</b>
 <div><%= @idea.problem_solved  %>
-	<a href="http://pinterest.com/pin/create/button/?url=http://localhost:3000/ideas/8&media=<%= @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
-	
-</p>
+	</p>
 </div>
+<td><%= link_to 'Back', '/',:class => "btn" %></td>
+<%if @idea.archive_status == false%>
+	<button id="share" class="btn btn-primary" type="button">Share</button>	
+	<div id="show" class="container"> 
+		<%= image_tag("f_logo.jpg", :id => "fbk")%>
+		<%= image_tag("twitter-bird-white-on-blue.jpg", :id => "tw")%>
+		<a href="http://pinterest.com/pin/create/button/?url=http://localhost:3000/ideas/8&media=<%= @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+	</div>		
+<%end%>
 
 <h5>Comments</h5>
 <table>
