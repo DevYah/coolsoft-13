@@ -10,6 +10,7 @@ def show
      format.xml  { render :xml => @comment }
    end
 end
+
 def new
    @comment = Comment.new
    respond_to do |format|
@@ -22,6 +23,7 @@ end
 #+idea_id+ :: the parameter is an instance of +Idea+ passed to get the id of the idea to build the comments 
 #+comment_id+ :: the parameter is an instance of +Comment+ and it's used to show the comments after posting it 
 #author dayna 
+
 def create
    @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.create(params[:comment])
@@ -42,10 +44,12 @@ end
 #Params:
 #+comment_id+ :: the parameter is an instance of +Comment+ to get the comment's id in order to modify it  
 #author dayna
+
 def edit
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
 end
+
 def update
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
@@ -64,6 +68,7 @@ def update
 #+comment_id+ :: the parameter is an instance of +Comment+ to get the comment's id in order to delete it
 #+idea_id+ :: the parameter is an instance of +Idea+ to get the idea's id in order to modify it after deleting the comment
 #author dayna
+
 def destroy
   @idea = Idea.find(params[:idea_id])
   @comment = @idea.comments.find(params[:id])
