@@ -68,7 +68,7 @@ Sprint0::Application.routes.draw do
 
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-  match '/admins/ban_unban' => 'admins#ban_unban'
+  match '/users/:id/ban_unban' => 'admins#ban_unban'
 
   resources :users
 
