@@ -1,5 +1,3 @@
-
-
 class UsersController < ApplicationController
 	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag]
 
@@ -125,7 +123,7 @@ class UsersController < ApplicationController
 
   # Enter chosen notification settings chosen by user in table User
 	# Params:
-	# +user[]+:: the parameter is ana instance of +user+ passed through the form from settings action
+	# +user[]+:: the parameter is an instance of +user+ passed through the form from settings action
 	# Author: Mohamed Sameh
   def change_settings
 		if params[:user] != nil
