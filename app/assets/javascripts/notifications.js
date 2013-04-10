@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function add_notification_event_handlers() {
 	$('div.invite-committee').click(function () {
 		$(this).removeClass('unread')
 		$(this).addClass('read')
@@ -22,6 +22,6 @@ $(document).ready(function() {
 	$('div.approve-committee').click(function () {
 		window.location.href='/committees/review';
 	});
-})
-var plant = document.getElementById('strawberry-plant');
-var fruitCount = plant.getAttribute('data-fruit');
+}
+
+$(document).ready(add_notification_event_handlers);
