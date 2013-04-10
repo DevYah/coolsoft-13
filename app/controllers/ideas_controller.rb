@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
 # +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
 # Author: muhammed hassan
   def filter()
-  @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).page(params[:page]).per(10)
+  @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
   @tags = params[:myTags]  
     respond_to do |format|
         format.js
