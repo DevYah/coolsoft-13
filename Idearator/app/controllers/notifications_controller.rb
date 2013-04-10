@@ -54,7 +54,7 @@ class NotificationsController < ApplicationController
     user_not.read = true
     user_not.save
     respond_to do |format|
-        format.html { redirect_to UserNotification.find(params[:not_id]).user }
+        format.html { redirect_to UserNotification.find(params[:not_id]).user.becomes(User) }
         format.json { head :no_content }
     end
   end
