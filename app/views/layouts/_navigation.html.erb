@@ -28,10 +28,10 @@
   <% end %>
   <% end %>
   <li>
-    <%= form_tag "/", :method => :get, :class => 'input-append',:id => 'searchdiv', :remote => true do %>
-  <p>
-    <%= text_field_tag :search, params[:search], :placeholder => "Search....."%>
-    <button class='btn btn-info'>
+    <%= form_tag "/", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
+  <p class = "input-append">
+    <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
+     <button class='btn btn-info'>
         <i class="icon-search icon-white"></i>
     </button>
   </p>

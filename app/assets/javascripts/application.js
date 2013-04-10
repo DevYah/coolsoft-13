@@ -15,4 +15,16 @@
 //= require autocomplete-rails
 //= require bootstrap
 //= require_tree .
-
+$(function() {
+	$("#searchdiv input").keyup(function(){
+		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+		if (!this.val){
+			 $.ajax({
+        url: '/home/index?page=' + 1,
+        type: 'get',
+        dataType: 'script'
+       });
+	}
+		return false;
+	});
+});
