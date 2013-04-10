@@ -93,7 +93,7 @@ describe NotificationsController do
       @user_not_1.reload
       @user_not_1.read.should eq(true)
 
-      response.should redirect_to @u2
+      response.should redirect_to @u2.becomes(User)
 
     end
   end
