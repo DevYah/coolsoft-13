@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
       if i.valid? 
         mail = Inviter.invite_email(params[:email])
         mail.deliver
-        @messege = 'sucess'
+        @messege = 'success'
       else
         @messege = i.errors.full_messages
       end
