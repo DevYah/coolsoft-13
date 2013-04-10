@@ -1,20 +1,6 @@
 class AdminsController < ApplicationController
   
-	# Invites existing member to become a committee 
-	# by initiating him into the database and then sending him a notification
-	# Params: 
-	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
-	# Author: Mohammad Abdulkhaliq
-	def invite_member
-		@user = User.find(params[:id])
-		@user.type = 'Committee'
-		@user.save
-		InviteCommitteeNotification.send_notification(current_user, [User.find(params[:id])])
-		respond_to do |format|
-        format.html { redirect_to  '/' , notice: 'Successfully invited member' }
-        format.json { head :no_content }
-      end
-	end
+	
 
 	# Sends mail confirming registration 
 	# 
