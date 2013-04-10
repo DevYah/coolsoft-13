@@ -24,11 +24,11 @@
       <div class="container">
         <div class="content">
            <div class="row">
-            <div class="span8">
+            <div class="span8" id="searchresult">
               <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
-            <div class ="row">
+          <div class ="row" id="toptenideas">
               <div id="sidebar" class="span4"></div>
             <div id="sidebar" class="span4">
               <%= yield :sidebar %></div>

@@ -8,10 +8,9 @@ class HomeController < ApplicationController
     @approved = Idea.find(:all, :conditions => { :approved => true })
     @user = current_user
     @top = Idea.find(:all, :order => 'num_votes', :limit => 10).reverse
-    @search = Idea.search do
-      fulltext params[:search]
-    end
-    @approved = @search.results
+    @approved = Idea.search(params[:search])
+    @all = Idea.find(:all, :conditions => { :approved => true })
+    @top = Idea.find(:all, :order => 'num_votes', :limit => 10).reverse
     respond_to do |format|
         format.html
         format.js
