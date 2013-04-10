@@ -67,6 +67,6 @@ def destroy
     @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.find(params[:id])
     @comment.destroy
-    redirect_to idea_path(@idea)
+    redirect_to idea_path(@idea) ,:notice => "Deleted the comment"
   end
 end
