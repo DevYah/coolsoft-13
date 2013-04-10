@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   #username is unique
   validates :username, :uniqueness => true
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :title, :body
   attr_accessible :email, :password, :password_confirmation, :remember_me,
@@ -28,10 +27,17 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>",:thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
+  has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
-#this method compares the user's email with the one they log in with using Facebook
-#for authorization and returns the user
-#Params: auth, sign_in_resource=nil (not signed in)
+# this method finds the +User+ using the hash and creates a new +User+ 
+# if no users with this email exist
+#
+# Params:
+#
+# +auth+:: omniauth authentication hash
+# +signed_in_resource+:: Currently signed in resource. Unused.
+#
 #Author: Menna Amr
 def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(:provider => auth.provider, :uid => auth.uid).first
@@ -44,6 +50,40 @@ def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
                          )
   end
   user
+  end
+
+  # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
+  # find the user.
+  # Params:
+  # +auth+:: omniauth authentication hash
+  # +signed_in_resource+:: Currently signed in resource. Unused.
+  #
+  # Author: Mina Nagy
+  def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
+    user = User.where(provider: auth.provider, uid: auth.uid).first
+    unless user
+      # FIXME handle failure
+      user = create_user_from_twitter_oauth(auth)
+    end
+    user
+  end
+
+  # Try to create a +User+ from the twitter authentication hash
+  # Params:
+  # +auth+:: omniauth authentication hash
+  #
+  # Author: Mina Nagy
+  def self.create_user_from_twitter_oauth(auth)
+    name = auth.info.name.split(' ', 2)
+    user = User.create(first_name: name[0],
+                       last_name: name[1],
+                       provider: auth.provider,
+                       uid: auth.uid,
+                       # this is an invalid email, but uniqueness is guaranteed
+                       email: "#{auth.info.nickname}@twitter.com",
+                       username: (auth.chosen_user_name or auth.info.nickname),
+                       # random password, won't hurt
+                       password: Devise.friendly_token[0, 20])
   end
 end
 

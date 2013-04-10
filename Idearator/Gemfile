@@ -10,10 +10,11 @@ gem 'sqlite3'
 
 gem 'devise'
 
-
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'tlsmail'
+gem 'omniauth-twitter'
+
 
 
 # Gems used only for assets and not required
