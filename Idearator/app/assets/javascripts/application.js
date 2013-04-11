@@ -17,9 +17,8 @@
 //= require_tree .
 $(function() {
 	$("#searchdiv input").keyup(function(){
-	$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		return false;
-			if (this.val() ==null){
+		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+		if (this.length()==0){
 			 $.ajax({
         url: '/home/index?page=' + 1,
         type: 'get',
