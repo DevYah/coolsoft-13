@@ -74,12 +74,26 @@ describe CommitteesController do
     end
     describe "disapprove" do
       it "changes the approved status of the idea" do
+        @user=User.new
+        @user.email='x@gmail.com'
+        @user.password=123123123
+        @user.confirm!
+        @user.save
+        @committee=Committee.new
+        @committee.email='c@gmail.com'
+        @committee.password=123123123
+        @committee.username='c' 
+        @committee.confirm!
+        @committee.save
         @idea=Idea.new
         @idea.title='bla'
         @idea.problem_solved='bla'
         @idea.description='bla'
         @idea.save
+        @idea.user=@user  
         @idea.approved=true
+        @idea.save
+        sign_in(@committee)
         get :disapprove, :id => @idea.id
         @idea.reload
         (@idea.approved).should eql(false)
@@ -87,12 +101,19 @@ describe CommitteesController do
     end
     describe "add_rating" do
       it "approves the idea" do
-        @idea=Idea.new 
+        @committee=Committee.new
+        @committee.email='c@gmail.com'
+        @committee.password=123123123
+        @committee.username='c'
+        @committee.approved=true
+        @committee.confirm!
+        @committee.save @idea=Idea.new 
         @idea.title='bla'
         @idea.problem_solved='bla'
         @idea.description='bla'
         @idea.save  
-        puts "hash 1 "
+        session[:idea_id]=@idea.id
+        sign_in(@committee)
         get :add_rating , :id => @idea.id, :rating => ['ay 7aga']
         @idea.reload
         (@idea.approved).should eql(true)
