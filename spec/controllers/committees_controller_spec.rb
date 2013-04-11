@@ -118,6 +118,24 @@ describe CommitteesController do
         @idea.reload
         (@idea.approved).should eql(true)
       end
+      it "approves the idea" do
+        @committee=Committee.new
+        @committee.email='c@gmail.com'
+        @committee.password=123123123
+        @committee.username='c'
+        @committee.approved=true
+        @committee.confirm!
+        @committee.save @idea=Idea.new 
+        @idea.title='bla'
+        @idea.problem_solved='bla'
+        @idea.description='bla'
+        @idea.save  
+        session[:idea_id]=@idea.id
+        sign_in(@committee)
+        get :add_rating , :id => @idea.id, :rating => ['ay 7aga']
+        @idea.reload
+        (@idea.ratings.count).should eql(1)
+      end
     end
   end
 #end
