@@ -131,12 +131,12 @@ class IdeasController < ApplicationController
       idea.save
 
       respond_to do |format|
-        format.html { redirect_to @idea, alert: 'Idea has been successfully unarchived.' }
+        format.html { redirect_to idea, alert: 'Idea has been successfully unarchived.' }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to @idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
         format.json { head :no_content }
       end
     end
