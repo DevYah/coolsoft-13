@@ -1,4 +1,3 @@
-
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -11,7 +10,7 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'tlsmail'
-
+gem "google_visualr", "~> 2.1.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,6 +36,9 @@ group :test, :development do
   gem 'rspec-rails', '~> 2.0'
 end
 
+
+ gem 'rails3-jquery-autocomplete'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -51,5 +53,3 @@ end
 
 # To use debugger
 # gem 'debugger'
-
-

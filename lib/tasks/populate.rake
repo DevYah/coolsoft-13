@@ -45,9 +45,13 @@ namespace :db do
 			it2.tag_id = rand(1..12)
 			it2.save
 		end
+<<<<<<< HEAD
 
 
 
 	end	
 
+=======
+	end
+>>>>>>> C4_LinaBasheer_#92_Graph
 end
