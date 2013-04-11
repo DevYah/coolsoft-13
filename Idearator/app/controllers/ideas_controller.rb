@@ -26,6 +26,8 @@ class IdeasController < ApplicationController
    @like.user_id = current_user.id
    @like.comment_id = @commentid
    @like.save
+     redirect_to @idea
+
   end
     @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
   end
