@@ -15,7 +15,7 @@
           <% if top.user.active == true and top.user.banned == false%>
             <div class="topten_idea">
               <a class="pull-left" href="#">
-                <span><%= image_tag top.photo.url(:thumb) %></span>
+                <span><%= image_tag(top.photo.url(:thumb), :size => "30x20") %></span>
               </a>
               <div class="media-body">
                 <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
