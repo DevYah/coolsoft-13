@@ -12,7 +12,7 @@
  <button class="btn btn-primary btn-large">Invite</button>
 <% end %>
 <% if current_user.type == "Admin" && @user.active==true%>
- <%= link_to "Invite", :controller => "admins", :action => "invite_member", :id => @user, :class => "btn btn-primary btn-large" %>
+ <%= link_to "Invite", :controller => "users", :action => "invite_member", :id => @user, :class => "btn btn-primary btn-large" %>
  <%end%>
 <div>
 <% if current_user.type == "Admin" and @user.banned==false and @invited%>
@@ -23,10 +23,6 @@
  <%= render :partial => 'modal_reject'%>
  <p style="display-inline;"><a data-toggle="modal" href="#reject" class="btn btn-primary btn-large btn-danger">Reject</a></p>  
 <% end %>
-<% if @user.banned==false and @user.active==true and current_user.is_a? Committee and @tags != nil %>
-<%= render :partial => 'modal_expertise'%>
-<p><a data-toggle="modal" href="#expertise" class="btn btn-primary btn-large">Choose Area of Expertise</a></p>  
-<%end%>
 <% if current_user == @user %>
  <button class="btn">Edit Profile</button>
 <% end %>

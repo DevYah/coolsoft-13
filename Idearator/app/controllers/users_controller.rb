@@ -94,10 +94,12 @@ class UsersController < ApplicationController
 			@tags.each do |tag|
 				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
 			end
+      notf = InviteCommitteeNotification.where(:user_id => current_user.id)[0]
       if InviteCommitteeNotification.where(:user_id => current_user.id).exists?
-      @inviter_id = InviteCommitteeNotification.where(:user_id => current_user.id)[0].id
-      @admin = Admin.find(@inviter_id) 
+        notf = InviteCommitteeNotification.where(:user_id => current_user.id)[0]
+        @admin = Admin.find(notf.user_id) 
       InviteCommitteeNotification.send_notification(User.find(current_user.id), @admin) 
+      InviteCommitteeNotification.find(notf).destroy
     end
 			respond_to do |format|
 				format.html{
@@ -132,9 +134,10 @@ class UsersController < ApplicationController
     @user.type = nil
     @user.save
     current_user = User.find(id)
-    #InviteCommitteeNotification.send_notification(User.find(id), Admin.all)
+    InviteCommitteeNotification.send_notification(current_user, Admin.all)
+    InviteCommitteeNotification.where(:user_id => id)[0].destroy
 		respond_to do |format|
-        format.html { redirect_to controller: 'users', action: 'show' , notice: 'Rejected Invitation to become Committee' }
+        format.html { redirect_to controller: 'home', action: 'index' , notice: 'Rejected Invitation to become Committee' }
         format.json { head :no_content }
       end
     end
@@ -167,8 +170,9 @@ class UsersController < ApplicationController
   def invite_member
     @user = User.find(params[:id])
     @user.type = 'Committee'
+    @user.approved = true
     @user.save
-    InviteCommitteeNotification.send_notification(current_user, [User.find(params[:id])])
+    InviteCommitteeNotification.send_notification(current_user, [@user])
     respond_to do |format|
         format.html { redirect_to  '/' , notice: 'Successfully invited member' }
         format.json { head :no_content }

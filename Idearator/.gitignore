@@ -1,0 +1,8 @@
+# rails specific files
+tmp/*
+log/*
+*sqlite3
+db/schema.rb
+
+# project specific files
+public/system/*

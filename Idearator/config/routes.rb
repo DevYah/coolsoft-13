@@ -7,12 +7,14 @@ Sprint0::Application.routes.draw do
   resources :ideas
 
 
-  default_url_options :host => 'localhost:3000'
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+
+
+  default_url_options :host => "localhost:3000"
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
 
 
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
+  devise_for :committees, :controllers => { :registrations => "registrations" }
 
 
   # The priority is based upon order of creation:
@@ -36,6 +38,7 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
+  #root:to =>'ideas#index'
   root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
@@ -63,14 +66,18 @@ Sprint0::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
 
-  match '/review_ideas' => 'committees#review_ideas'
-  match 'admins/:id/reject_committee' => 'admins#reject_committee'
-  match '/admins/:id/approve_committee' => 'admins#approve_committee'
-  match '/users/reject_invitation' => 'user#reject_invitation'
-  match '/users/:id/invite_member' => 'admins#invite_member'
+  match "/review_ideas" => "committees#review_ideas"
+    
+  match '/users/invite_member/:id' => 'users#invite_member'
+  match '/users/reject_invitation' => 'users#reject_invitation'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-  match '/notifications/view_notifications' => 'notifications#view_notifications'
+  match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
+  match '/all_notifications.js' => 'notifications#view_all_notifications'
+  match '/notifications.js' => 'application#update_nav_bar'
+  match '/notifications/redirect_idea' => 'notifications#redirect_idea'
+  match '/notifications/redirect_review' => 'notifications#redirect_review'
+  match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
 
   resources :users
 
