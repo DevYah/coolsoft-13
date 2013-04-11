@@ -1,27 +1,12 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
-<ul class='nav'>
-  <% if user_signed_in? %>
-    <li class="dropdown">
-      <a id = "count" class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <%if @count == 0%>
-          <span class="badge badge-inverse"><%= @count %></span>
-        <%else%>
-          <span class="badge badge-important"><%= @count %></span>
-        <%end%>
-        <b class="caret"></b>
-      </a>
-      <ul id = "update-dropdown" class="dropdown-menu">
-        <%= render 'notifications/view_notifications' %>
-      </ul>
-    </li>
-  <% end %>
+<ul class="nav">
   <% if user_signed_in? %>
     <li>
     <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
     </li>
   <% else %>
     <li>
-    <%= link_to('Login', new_user_session_path)  %>
+    <%= link_to('Register', new_user_session_path)  %>
     </li>
   <% end %>
   <% if user_signed_in? %>

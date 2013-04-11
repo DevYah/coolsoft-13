@@ -1,0 +1,36 @@
+<ul>
+  <% @notifications.each do |notification| %>
+    <% if notification.is_a? VoteNotification %>
+      <li><div>Your idea  <%= notification.idea.title %>  got a vote.</div>
+        <div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+    <% end %>
+    <% if notification.is_a? CommentNotification %>
+      <li><div><%= notification.user.username %>  commented on you idea <%= notification.idea.title %>.</div>
+        <div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div>--></li>
+    <% end %>
+    <% if notification.is_a? DeleteNotification %>
+      <li><div><%= notification.user.username %>  deleted his idea <%= notification.idea.title %>.</div></li>
+    <% end %>
+    <% if notification.is_a? EditNotification %>
+      <li><div><%= notification.user.username %> edited his idea <%= notification.idea.title %>.</div>
+        <div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+    <% end %>
+    <% if notification.is_a? ArchiveNotification %>
+      <li><div>The idea  <%= notification.idea.title %>  got a archived.</div>
+        <div><%=link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+    <% end %>
+    <% if notification.is_a? DisapproveIdeaNotification %>
+      <li><div>Your idea  <%= notification.idea.title %>  got a vote.
+      </div><div><%= link_to 'view', {controller: 'ideas', action: 'show'} %></div></li>
+    <% end %>
+    <% if notification.is_a? InviteCommitteeNotification %>
+      <li><div>Your idea  <%= notification.user.username %>  got a vote.</div>
+        <div><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div></li>
+    <% end %>
+    <% if notification.is_a? ApproveCommitteeNotification %>
+      <li><div><%= notification.user.username %> has signed up as a committee member.</div>
+        <div><%=link_to 'review', {controller: 'committees', action: 'review_committee'} %></div></li>
+    <% end %>
+  <% end %>
+
+</ul>
