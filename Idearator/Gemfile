@@ -10,7 +10,7 @@ gem 'sqlite3'
 
 gem 'devise'
 
-#gem 'tlsmail'
+gem 'tlsmail'
 
 
 # Gems used only for assets and not required
@@ -24,14 +24,15 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem 'therubyracer', :platforms => :ruby
 gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
 group :test, :development do
+
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
-  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
+# gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
 end
 
