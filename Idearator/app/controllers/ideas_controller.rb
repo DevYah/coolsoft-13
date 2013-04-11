@@ -85,7 +85,7 @@ class IdeasController < ApplicationController
     if current_user.id == idea.user_id
       list_of_comments = Comment.where(idea_id: idea.id)
       list_of_commenters = []
-      list_of_voters = Vote.where(idea_id: idea.id)
+      list_of_voters = idea.votes
       idea.destroy
 
       list_of_comments.each do |c|
