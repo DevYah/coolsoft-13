@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
     @user = current_user
     @threshold = Threshold.last
     if @user.type == 'Committee'
-      @approved_ideas = Idea.where(:committee_id => @user.id)
+      @approved_ideas = Idea.find(:all, :conditions => { :committee_id => @user.id})
       @approved_thresholds = Array.new
       @approved_ideas.each do |idea|
         @v = VoteCount.find(:first, :conditions => { :idea_id => idea.id})
@@ -39,6 +39,7 @@ class DashboardController < ApplicationController
           @own_thresholds << 3
         end
     end
-    @counter = 1
+    @approved_counter = 0
+    @own_counter = 0
   end
 end

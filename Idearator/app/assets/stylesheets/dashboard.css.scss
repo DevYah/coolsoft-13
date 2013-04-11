@@ -1,3 +1,47 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bulb-img {
+  background-image: url('bulb.png');
+  width:200px;
+  height:260px;
+}
+.threshold-1 {
+  margin: auto;
+  width: 0px;
+  height: 0px;
+  background-color: #1f5afe;
+}
+
+.threshold-2 {
+  width: 0px;
+  height:0px;
+  box-shadow:40px 20px 15px #f00; 
+}
+
+.threshold-3 {
+  width: 0px;
+  height:0px;
+  box-shadow:0 0 15px #f00; 
+}
+
+.threshold-4 {
+  width: 0px;
+  height:0px;
+  box-shadow:0 0 15px #f00; 
+}
+
+.threshold-5 {
+  width: 0px;
+  height:0px;
+  box-shadow:0 0 15px #f00; 
+}
+
+.bulb-container-comm {
+  display:inline;
+}
+
+.bulb-container {
+  display:inline-block;
+}
