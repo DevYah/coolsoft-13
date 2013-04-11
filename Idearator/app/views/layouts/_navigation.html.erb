@@ -12,18 +12,18 @@
 
   </ul>
   <%if user_signed_in? and current_user.is_a? Admin%>
-	<ul class="nav pull-right">  
- 	   <li class="dropdown">  
+<ul class="nav pull-right">  
+ 	<li class="dropdown">  
     <a href="#"  
-          class="dropdown-toggle"  
-          data-toggle="dropdown">  
-          Admin  
-          <b class="caret"></b>  
+        class="dropdown-toggle"  
+        data-toggle="dropdown">  
+        Admin  
+        <b class="caret"></b>  
     </a>  
-    <ul class="dropdown-menu">  
-     <li><a href="#">Invite</a></li>  
-  	 <li><%= link_to "Tag Management", tags_path %></li>  
-  	 <li><%= link_to "New Tag", new_tag_path %></li>   
- </ul>
+  <ul class="dropdown-menu">  
+    <li><a href="#">Invite</a></li>  
+  	<li><%= link_to "Tag Management", tags_path %></li>  
+  	<li><%= link_to "New Tag", new_tag_path %></li>   
+  </ul>
 </ul>
-  <%end%>
+<%end%>

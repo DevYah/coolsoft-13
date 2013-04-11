@@ -1,6 +1,7 @@
 # spec/controllers/tags_controller_spec.rb
 require 'spec_helper'
 
+#Author: Mohammad Abdulkhaliq
 describe TagsController do
   include Devise::TestHelpers
   before :each do
@@ -10,9 +11,9 @@ describe TagsController do
     @a1.password = '123123123'
     @a1.confirm!
     @a1.save
-
     sign_in @a1
   end
+  
   describe "GET #index" do
     it "populates an array of tags" do
       tag = []
@@ -58,14 +59,14 @@ describe TagsController do
     
     context "with invalid attributes" do
       it "does not save the new contact in the database" do
-      t = Tag.new
-        expect{
-        post :create, tag: t, name: ''
-      }.to_not change(Tag,:count)
-    end
+        t = Tag.new
+          expect{
+          post :create, tag: t, name: ''
+        }.to_not change(Tag,:count)
+      end
       it "re-renders the new method" do
-      post :create, t
-      response.should render_template ("new")
+        post :create, t
+        response.should render_template ("new")
       end
     end 
   end
