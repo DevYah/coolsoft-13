@@ -87,16 +87,18 @@ class IdeasController < ApplicationController
       list_of_commenters = []
       list_of_voters = Vote.where(idea_id: idea.id)
       idea.destroy
+
+      list_of_comments.each do |c|
+        c.destroy
+      end  
       
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
       
       list = list_of_commenters.append(list_of_voters).flatten!
-      
-      if list != nil
-        DeleteNotification.send_notification(current_user, idea, list)
-      end
+ 
+      DeleteNotification.send_notification(current_user, idea, list)
 
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
