@@ -20,6 +20,7 @@ class IdeasController < ApplicationController
     if params[:commentid] != nil
    @commentid = params[:commentid]
    @comment = Comment.find(:first, :conditions => {:id => @commentid})
+if Comment.exists?(:id => @commentid)
    @comment.num_likes = @comment.num_likes + 1
    @comment.save
    @like = Like.new
@@ -27,7 +28,9 @@ class IdeasController < ApplicationController
    @like.comment_id = @commentid
    @like.save
      redirect_to @idea
-
+   else
+    redirect_to @idea , :notice => "No Comment to delete"
+end 
   end
     @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
   end
