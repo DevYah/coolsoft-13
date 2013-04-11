@@ -1,22 +1,25 @@
 
 class TagsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user! 
+  
   # GET /tags
   # GET /tags.json
+  # Author: Mohammad Abdulkhaliq
   def index
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
       return
     end
-      @tags = Tag.all
-  
+    @tags = Tag.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tags }
     end
   end
+  
   # GET /tags/1
   # GET /tags/1.json
+  # Author: Mohammad Abdulkhaliq
   def show
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -29,8 +32,10 @@ class TagsController < ApplicationController
       format.json { render json: @tag }
     end
   end
+  
   # GET /tags/new
   # GET /tags/new.json
+  # Author: Mohammad Abdulkhaliq
   def new
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -42,7 +47,9 @@ class TagsController < ApplicationController
       format.json { render json: @tag }
     end
   end
+  
   # GET /tags/1/edit
+  # Author: Mohammad Abdulkhaliq
   def edit
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -50,6 +57,7 @@ class TagsController < ApplicationController
     end
     @tag = Tag.find(params[:id])
   end
+  
   # POST /tags
   # POST /tags.json
   #Create A new Tag
@@ -61,13 +69,13 @@ class TagsController < ApplicationController
   # * *Raises* :
   #   - +PresenceError+ ->If nothing is entered on submit
   #   - +UniquenessError+ -> If Tag added is not unique	
+  # Author: Mohammad Abdulkhaliq
   def create
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
       return
     end
     @tag = Tag.new(params[:tag])
-
     respond_to do |format|
       if @tag.save
         format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
@@ -78,6 +86,7 @@ class TagsController < ApplicationController
       end
     end
   end
+  
   # PUT /tags/1
   # PUT /tags/1.json
   # * *Args*    :
@@ -87,6 +96,7 @@ class TagsController < ApplicationController
   # * *Raises* :
   #   - +PresenceError+ ->If nothing is entered on submit
   #   - +UniquenessError+ -> If new Tag name is not unique	
+  # Author: Mohammad Abdulkhaliq
   def update
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -103,8 +113,14 @@ class TagsController < ApplicationController
       end
     end
   end
+
   # DELETE /tags/1
   # DELETE /tags/1.json
+  # * *Args*    :
+  #   - +tag.id+ ->
+  # * *Returns* :
+  #   - Show#Tag view
+  #Author: Mohammad Abdulkhaliq
   def destroy
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -118,27 +134,22 @@ class TagsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  ##
-    # Adds a Synonym with the name entered in the form
-    #
-    # If the entered name does not have an associated tag with the same name
-    # a new tag is created with the name and a connection is made
-    #
-    # Else if the entered name already has a tag but without a connection  
-    # a connection is made but a new tag is not created 
-    #
-    # Else if the entered name already has a tag and a connection to the  
-    # parent tag nothing is done and the user is informed so that the 
-    # synonym already exists
-    #
-    #
-    # * *Args*    :
-    #   - +tag.id+ -> Tag id to add synonyms to
-    # * *Returns* :
-    #   - The updated Show#Tags/:id view 
-    # * *Raises* :
-    #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
-    #
+
+  # Adds a Synonym with the name entered in the form
+  # If the entered name does not have an associated tag with the same name
+  # a new tag is created with the name and a connection is made
+  # Else if the entered name already has a tag but without a connection  
+  # a connection is made but a new tag is not created 
+  # Else if the entered name already has a tag and a connection to the  
+  # parent tag nothing is done and the user is informed so that the 
+  # synonym already exists
+  # * *Args*    :
+  #   - +tag.id+ -> Tag id to add synonyms to
+  # * *Returns* :
+  #   - The updated Show#Tags/:id view 
+  # * *Raises* :
+  #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
+  #
   def addsym
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -181,8 +192,8 @@ class TagsController < ApplicationController
     @tag.tags.destroy(@tag2)
     @tag2.tags.destroy(@tag)
     respond_to do |format|
-    format.html { redirect_to @tag , notice: 'Synonym list was successfully updated.' }
-    format.json { head :no_content }
-  end
+      format.html { redirect_to @tag , notice: 'Synonym list was successfully updated.' }
+      format.json { head :no_content }
+    end
   end
 end
