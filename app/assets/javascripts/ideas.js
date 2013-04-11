@@ -10,8 +10,8 @@ $(document).ready(function() {
 	});
 	$("#tw").click(function() {
  		var pathname = window.location;
-  	var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Checkout this idea on idearator';
-  	var win=window.open(tweeturl, 'popup');
+  		var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Checkout this idea on idearator';
+  		var win=window.open(tweeturl, 'popup');
  		win.focus();
 	});
 	$("#fbk").tooltip({
