@@ -1,13 +1,15 @@
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!, :only => [:show, :create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update]
   # view idea of current user
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
   def show
+    @idea = Idea.find(params[:id])
+    if user_signed_in?
     @user = current_user.id
     @username = current_user.username
-    @idea = Idea.find(params[:id])
+  end
     rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
@@ -40,19 +42,24 @@ class IdeasController < ApplicationController
     @ideacommenters = @idea.comments
     @userVreceivers = []
     @userCreceivers = []
-    @ideavoters.each {|user|
+    @usersthatcommented = []
+    if !@idea.votes.nil?
+    @ideavoters.each { |user|
        if user.participated_idea_notifications
         @userVreceivers << user 
       end }
-    
-    
-      @ideacommenters.each {|user|
-       if user.participated_idea_notifications
-        @userCreceivers << user 
-      end}
-    EditNotification.send_notification(current_user,@idea,@userVreceivers)
-    EditNotification.send_notification(current_user,@idea,@userCreceivers)
- end
+      EditNotification.send_notification(current_user, @idea, @userVreceivers)
+    end
+    list_of_comments = Comment.where(idea_id: @idea.id)
+    list_of_commenters = []
+    list_of_comments.each do |c|
+      list_of_commenters.append(User.find(c.user_id)).flatten!
+    end
+    list = list_of_commenters
+    if list != nil
+      EditNotification.send_notification(current_user, @idea, list)
+    end
+  end
 
   # updating Idea
   # Params
