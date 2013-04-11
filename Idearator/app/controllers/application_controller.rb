@@ -18,10 +18,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
+	
+	
 
+	# Checks if there is an invitation notification sent from an admin
+	# Then it throws the tags list to the view in order to render
+	# a partial for choosing area of expertise
+	# If the user is an admin checks if the InviteCommitteeNotifications
+	# Contain certain information regarding state of invitation that is
+	# if there is only one reciever of the notification and sender is user
+	# Then user rejected invitation
+	# else if recivers are more than on then the user accepted the invitation
+	# it sends boolean attributes to the view accordingly
   # gets first 10 current users notifications and the number of unread notificaations.
   # Params: none.
-  # Author: Amina Zoheir
+  # Author: Amina Zoheir, Mohammad Abdulkhaliq
   def load_notifications
     if user_signed_in?
       idea_notifications = current_user.idea_notifications
@@ -30,14 +41,14 @@ class ApplicationController < ActionController::Base
       unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
       @invited = user_notifications.where(:type => 'InviteCommitteeNotification').exists?
       if(@invited)
-      @tags = Tag.all
-      invitation = user_notifications.where(:type => 'InviteCommitteeNotification')[0]
-      @accepted = invitation.user == current_user and invitation.users.count > 1
-      @rejected = invitation.user == current_user and invitation.users.count == 1
-      if @accepted or @invited
-       @invited = false
-       @user = User.find(invitation.user_id).username  
-     end
+				@tags = Tag.all
+				invitation = user_notifications.where(:type => 'InviteCommitteeNotification')[0]
+				@accepted = invitation.user == current_user and invitation.users.count > 1
+				@rejected = invitation.user == current_user and invitation.users.count == 1
+				if @accepted or @invited
+					@invited = false
+					@user = User.find(invitation.user_id).username  
+				end
       end
       not1 = idea_notifications + user_notifications
       not2 = not1.sort_by &:created_at

@@ -137,10 +137,10 @@ class UsersController < ApplicationController
     InviteCommitteeNotification.send_notification(current_user, Admin.all)
     InviteCommitteeNotification.where(:user_id => id)[0].destroy
 		respond_to do |format|
-        format.html { redirect_to controller: 'home', action: 'index' , notice: 'Rejected Invitation to become Committee' }
-        format.json { head :no_content }
-      end
+			format.html { redirect_to controller: 'home', action: 'index' , notice: 'Rejected Invitation to become Committee' }
+			format.json { head :no_content }
     end
+	end
     
 	# POST /users
   # POST /users.json
@@ -148,7 +148,6 @@ class UsersController < ApplicationController
   #Author: Menna Amr
   def create
     @user = User.new(params[:user])
- 
     respond_to do |format|
       if @user.save
         # Tell the UserMailer to send a welcome Email after save
@@ -174,8 +173,8 @@ class UsersController < ApplicationController
     @user.save
     InviteCommitteeNotification.send_notification(current_user, [@user])
     respond_to do |format|
-        format.html { redirect_to  '/' , notice: 'Successfully invited member' }
-        format.json { head :no_content }
-      end
+      format.html { redirect_to  '/' , notice: 'Successfully invited member' }
+			format.json { head :no_content }
+    end
   end
 end
