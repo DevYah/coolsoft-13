@@ -1,17 +1,33 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
 <ul class="nav">
   <% if user_signed_in? %>
-    <li>
+  <li>
     <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
-    </li>
+  </li>
   <% else %>
-    <li>
+  <li>
     <%= link_to('Register', new_user_session_path)  %>
-    </li>
+  </li>
   <% end %>
   <% if user_signed_in? %>
-    <li>
+  <li>
     <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
-    </li>
+  </li>
   <% end %>
+  <%if user_signed_in? and current_user.is_a? Admin%>
+  <ul class="nav pull-right">
+    <li class="dropdown">
+      <a href="#"
+      class="dropdown-toggle"
+      data-toggle="dropdown">
+      Admin
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/admins/invite">Invite</a></li>
+      <li><%= link_to "Tag Management", tags_path %></li>
+      <li><%= link_to "New Tag", new_tag_path %></li>
+    </ul>
+  </ul>
+  <%end%>
 </ul>
