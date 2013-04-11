@@ -18,9 +18,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-	
-	
-
 	# Checks if there is an invitation notification sent from an admin
 	# Then it throws the tags list to the view in order to render
 	# a partial for choosing area of expertise
@@ -39,17 +36,20 @@ class ApplicationController < ActionController::Base
       user_notifications = current_user.user_notifications
       unread_ideas = IdeaNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
       unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
-      @invited = user_notifications.where(:type => 'InviteCommitteeNotification').exists?
-      if(@invited)
+      invitations = user_notifications.where(:type => 'InviteCommitteeNotification')
+      if(not invitations.empty? and current_user.is_a? Committee)
 				@tags = Tag.all
-				invitation = user_notifications.where(:type => 'InviteCommitteeNotification')[0]
-				@accepted = invitation.user == current_user and invitation.users.count > 1
-				@rejected = invitation.user == current_user and invitation.users.count == 1
-				if @accepted or @invited
-					@invited = false
-					@user = User.find(invitation.user_id).username  
+			end
+			if(not invitations.empty? and current_user.is_a? Admin)
+				@stat = {}
+				invitations.each do |i|
+					if i.users.count > 1 
+						@stat.merge!(i.id => [true, User.find(i.user_id).username])
+					else
+						@stat.merge!(i.id => [false, User.find(i.user_id).username])
+					end
 				end
-      end
+			end
       not1 = idea_notifications + user_notifications
       not2 = not1.sort_by &:created_at
       @notifications = not2.reverse.first(10)

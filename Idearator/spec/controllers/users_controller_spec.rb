@@ -47,7 +47,7 @@ describe UsersController do
    	it "inititates the user to the committees table" do
    		put :invite_member, :id => @u1.id
    		@u1.reload
-   		assigns(@u1.type).should eq("Committee")
+   		@u1.type.should eq("Committee")
    	end
    	it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
    		expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
