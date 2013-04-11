@@ -12,7 +12,6 @@ gem 'devise'
 
 gem 'tlsmail'
 
-gem 'jquery-tokeninput-rails'
 
 
 # Gems used only for assets and not required
@@ -31,8 +30,6 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
-gem 'kaminari'
-
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
@@ -60,4 +57,3 @@ end
 
 # To use debugger
 # gem 'debugger'
-
