@@ -9,6 +9,7 @@ Sprint0::Application.routes.draw do
   match '/users/deactivate' => 'users#deactivate'
   match '/dashboard/gettags' => 'dashboard#gettags'
   match '/dashboard/getideas' => 'dashboard#getideas'
+  match '/home/search' => 'home#search'
 
 default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
