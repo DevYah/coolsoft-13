@@ -15,7 +15,7 @@ div.notification{
 	cursor: pointer;
 }
 
-div.unread{
+.unread{
 	background: rgba(0,153,153, 0.25);
 }
 
@@ -49,9 +49,14 @@ h3.title{
 .link{
   display: none;
   float: right;
-  padding-right: 30px;
 }
 
 div.padding_right{
 	padding-right: 20px;
+}
+
+.date{
+	font-size: 10px;
+	color:#686868;
+	float: right;
 }
