@@ -6,12 +6,11 @@ Sprint0::Application.routes.draw do
   match '/ideas/:id/add_prespectives' => 'committees#add_prespectives'
   get '/add_rating' => 'committees#add_rating'
   match '/ideas/:id/disapprove' => 'committees#disapprove'
-
+  match '/ideas/filter' => 'ideas#filter'
   #get "ideas/new"
   resources :ideas
 
-
-
+  get '/tags/ajax'
 
   default_url_options :host => "localhost:3000"
   devise_for :users, :controllers => { :registrations => "registrations" }
