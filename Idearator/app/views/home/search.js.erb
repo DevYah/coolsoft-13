@@ -1,5 +1,5 @@
 <% if params[:search] == "" %>
-$("#searchresult").empty();
+$("#IdeaStream").html("<%= escape_javascript(render(:partial => "stream")) %>");
 <% else %>
-$("#searchresult").html("<%= escape_javascript(render(:partial => "index")) %>");
+$("#IdeaStream").html("<%= escape_javascript(render(:partial => "index")) %>");
 <% end %>
