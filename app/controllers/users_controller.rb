@@ -141,7 +141,7 @@ class UsersController < ApplicationController
   # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
   # Author: Mohammad Abdulkhaliq
   def approve_committee
-	  if(not current_user.is_a Admin)
+	  if(not current_user.is_a? Admin)
       redirect_to '/', :notice => 'Please sign in as an admin' 
       return
     end
@@ -150,7 +150,7 @@ class UsersController < ApplicationController
     @user.save
     respond_to do |format|
       Inviter.committee_accept(@user.email).deliver
-      format.html  { redirect_to(admins_path, :notice => 'User successfully initiated as a Committee.') }
+      format.html  { redirect_to('/', :notice => 'User successfully initiated as a Committee.') }
       format.json  { head :no_content }
     end
   end
@@ -161,7 +161,7 @@ class UsersController < ApplicationController
   # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
   # Author: Mohammad Abdulkhaliq
    def reject_committee
-    if(not current_user.is_a Admin)
+    if(not current_user.is_a? Admin)
       redirect_to '/', :notice => 'Please sign in as an admin'
       return
     end
@@ -170,10 +170,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         Inviter.committee_reject(@user.email).deliver
-        format.html  { redirect_to(admins_path, :notice => 'User successfully rejected as a Committee.') }
+        format.html  { redirect_to('/', :notice => 'User successfully rejected as a Committee.') }
         format.json  { head :no_content }
       else
-        format.html  { redirect_to(admins_path, :notice => @user.errors.full_messages) }
+        format.html  { redirect_to('/', :notice => @user.errors.full_messages) }
         format.json  { render :json => :no_content }
       end
     end
