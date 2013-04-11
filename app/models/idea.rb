@@ -8,7 +8,5 @@ class Idea < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :votes, :class_name => 'User', :join_table => :votes
   has_attached_file :photo, :styles => { :small => '60x60>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
-  searchable do
-    text :title, :description
-  end
+  
 end

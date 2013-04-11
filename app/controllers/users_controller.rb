@@ -32,7 +32,8 @@ class UsersController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to action: 'confirm_deactivate' flash[:notice] = ' Wrong password' }
+        format.html { redirect_to action: 'confirm_deactivate' 
+        flash[:notice] = ' Wrong password' }
         format.json { head :no_content }
       end
     end
@@ -76,7 +77,9 @@ class UsersController < ApplicationController
   # Author: Mohamed Sameh
   def new_committee_tag
     if params[:user] == nil
-      respond_to do |format|format.html { flash[:notice] = 'You must choose at least 1 area of expertise'redirect_to action: 'expertise' }
+      respond_to do |format|
+        format.html { flash[:notice] = 'You must choose at least 1 area of expertise'
+        redirect_to action: 'expertise' }
     end
     else
       @tags = params[:user][:tags]

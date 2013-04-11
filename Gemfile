@@ -27,16 +27,15 @@ end
 gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
+gem 'faker'
 
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
 end
-gem 'sunspot_rails'
- group :development do
-   gem 'sunspot_solr'
- end
+
+
  gem 'rails3-jquery-autocomplete'
 
 # To use ActiveModel has_secure_password
