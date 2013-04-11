@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(window).load(function(){
   var page = 1,
   loading = false;
 
