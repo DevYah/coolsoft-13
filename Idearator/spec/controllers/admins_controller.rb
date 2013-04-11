@@ -4,6 +4,8 @@ describe AdminsController do
 
   describe "GET invite committee" do
 
+# tests existing users validation
+# Author: muhammed hassan
     it 'checks existing users' do
       u = Admin.new
       u.email = 'abuali@yahoo.com'
@@ -17,6 +19,9 @@ describe AdminsController do
       get :invite_committee , :email => u.email
       assigns(:messege).should == 'user already exists'
     end
+
+# tests existing invtation validation
+# Author: muhammed hassan
     it 'checks existing invitations' do
       u = Admin.new
       u.email = 'abuali@yahoo.com'
@@ -31,6 +36,9 @@ describe AdminsController do
       get :invite_committee , :email => 'sayed@yahoo.com'
       assigns(:messege).should_not == 'success'
     end
+
+# tests successful invitations
+# Author: muhammed hassan
     it 'sends invitation' do
       u = Admin.new
       u.email = 'abuali@yahoo.com'

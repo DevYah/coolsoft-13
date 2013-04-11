@@ -1,6 +1,9 @@
 require "spec_helper"
 
   describe "admins/invite.html.erb" do
+
+# tests invitation form is rendered
+# Author: muhammed hassan
     it "displays invitation form" do
 
       render
