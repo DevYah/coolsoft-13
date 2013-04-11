@@ -3,6 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 `$(document).ready(function () { 
-	if($('div.modal-backdrop').length==0)
-			$('div#example').modal()
-	})`
+   if($('div.modal-backdrop').length==0)
+     $('div#example').modal()
+ })`
