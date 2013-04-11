@@ -1,28 +1,11 @@
-<div class = "well" id = "graph">
-  <% if @ideaid ==nil and @tagid==nil %>
+<div id="graph">
+</div>
+<div id="tagsall">
+</div>
+<div id="ideas" class="table table-bordered">
 	<table>
 	<% @ideas.each do |i|%>
-<tr><td><%= link_to i.title, :controller => 'dashboard', :action => 'index', :ideaid => i.id, :remote => true %></td></tr>
+<tr><td><%= link_to i.title, :controller => 'dashboard', :action => 'gettags', :ideaid => i.id, :remote => true %></td></tr>
 <% end %>
 </table %>
-<% else %>
-<% if  @tagid != nil %>
-<script src='http://www.google.com/jsapi'></script>
-
- <%= render_chart(@chart, 'graph') %>
- <% end %>
- <% end %>
-</div>
-<div class = "well" id = "tagsall">
-  <% if @ideaid !=nil and @tagid==nil %>
-  <table class = "table table-bordered">
-  <th>Tags</th>
-<% @ideatags.each do |it| %>
-<tr class = "info">
-<td><i class="icon-tag"></i><%= link_to it.name, :controller=> "dashboard", :action => "index", :tagid => it.id, :remote => true %>
-  </td>
-</tr>
-<% end %>
-</table>
-<% end %>
 </div>

@@ -1,38 +1,46 @@
 <div id = "IdeaStream">
-   <% @approved.each do |approved| %>
-     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
-        <tr>
-      <br>
-      <td>
-      <%= link_to "Title: " + approved.title , approved %>
-	  </td>
-      <br>
-      <td>
-      <%= "Description: " + approved.description %>
-      <br>
-      <%= "Number of votes " + approved.num_votes.to_s %>
-      <br>
-      <%= "Problem Solved " + approved.problem_solved %>
-      <br>
-      <%= "Posted at " + approved.created_at.to_s %>
-      </td>
-      <td><%= image_tag approved.photo.url(:thumb) %></td>
-      <br>
-      </tr>
-     <% end %>
-  <% end %>
+      <%= render :partial => "stream" %>
  </div>
+ <script type="text/javascript">
+(function() {
 
-<p id="notice"><%= notice %></p>
+  var page = 1,
+      loading = false;
 
+  function nearBottomOfPage() {
+    return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
+  }
 
+  $(window).scroll(function(){
+    if (loading) {
+      return;
+    }
+    if(nearBottomOfPage() && $("#search").val() == "") {
+      loading=true;
+      page++;
+      $.ajax({
+        url: '/home/index?page=' + page,
+        type: 'get',
+        dataType: 'script',
+        success: function() {
+          loading=false;
+          
+        }
+
+      });
+    }
+  });
+}());
+</script>
+<% content_for :sidebar do %>
 <div id="topten">
-<h1>Top Ten Ideas</h1>
+<h3>Top Ten Ideas</h3>
 <% @top.each do |top| %>
 <div class="topten_idea">
-	<span><%= link_to top.title ,top %></span>
+	<strong><%= link_to top.title ,top %></strong>
 	<span><%= top.num_votes %></span>
 	<span><%= top.user.first_name %></span>
 </div>
 <% end %>
 </div>
+<% end %>

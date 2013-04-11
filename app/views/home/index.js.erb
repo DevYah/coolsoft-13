@@ -1,1 +1,4 @@
-$("#main").html("<%= escape_javascript(render(:partial => "index")) %>");
+<% if params[:search] == "" %>
+$("#searchresult").empty();
+<% end %>
+$("#searchresult").append("<%= escape_javascript(render(:partial => "stream")) %>");
