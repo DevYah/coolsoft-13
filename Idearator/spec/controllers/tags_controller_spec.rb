@@ -26,7 +26,8 @@ describe TagsController do
       get :index
       assigns(:tags).should eq(tag)
     end
-    it "renders the template view" do 
+    it "renders the template view" do
+	   get :index
        response.should be_successful
        response.should render_template("index")
      end
@@ -35,7 +36,7 @@ describe TagsController do
   describe "GET #new" do
     it "assigns a new Tag to @tag" do
       get :new
-      assigns(:tag).should eq(Tag.new)
+      assigns(:tag).should_not eq(nil)
     end
     it "renders the :new template" do
       response.should be_successful
@@ -46,26 +47,27 @@ describe TagsController do
   describe "POST #create" do
     context "with valid attributes" do
       it "saves the new tag in the database" do
-        t = Tag.new
         expect{
-        post :create, tag: t, name: 'Software'
+        post :create, tag: Factory.attributes_for(:tag)
       }.to change(Tag,:count).by(1)
     end
-      it "redirects to the :index view" do
+      it "redirects to the :show view" do
+		post :create, :tag => 'Software'
         response.should be_successful
-        response.should render_template ("index")
+        response.should redirect_to(:action => 'show')
      end
     end
     
     context "with invalid attributes" do
       it "does not save the new contact in the database" do
-        t = Tag.new
+        t = Tag.new(:name => 'Software')
           expect{
-          post :create, tag: t, name: ''
+          post :create, tag: 'Software'
         }.to_not change(Tag,:count)
       end
       it "re-renders the new method" do
-        post :create, t
+		t = Tag.new(:name => 'Software')
+        post :create, :tag => 'Software'
         response.should render_template ("new")
       end
     end 
