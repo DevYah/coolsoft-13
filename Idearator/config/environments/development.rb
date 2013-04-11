@@ -20,6 +20,24 @@ Sprint0::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
+  
+  ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.perform_deliveries = true  
+##
+# configure gmail account for development mailing
+# Author: muhammed hassan
+#--
+ActionMailer::Base.smtp_settings = {
+ :address => "smtp.gmail.com",
+ :port => 587,
+ :domain => 'gmail.com',
+ :authentication => :plain,
+ :user_name=> 'coolsoftc2',
+ :password=>'coolsoft',
+ :enable_starttls_auto => true
+}
+
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
