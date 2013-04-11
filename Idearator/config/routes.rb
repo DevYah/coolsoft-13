@@ -5,6 +5,7 @@ Sprint0::Application.routes.draw do
   match '/home/index' => 'home#index'
   match '/dashboard/index' => 'dashboard#index'
   match 'dashboard/getallideas' => 'dashboard#getallideas'
+  match '/dashboard/graph' => 'dashboard#graph'
 
   #get "ideas/new"
   resources :ideas, :dashboard

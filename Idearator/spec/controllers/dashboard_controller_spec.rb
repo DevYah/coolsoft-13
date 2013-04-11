@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe DashboardController do
+  include Devise::TestHelpers
 
   describe 'GET #graph' do
     it 'returns chart  ' do
@@ -12,7 +13,8 @@ describe DashboardController do
       tag = Tag.new
       tag.name = "tag"
       tag.save
-      ideas = []
+      sign_in l
+
       20.times do
         i = Idea.new
         i.user_id = l.id
@@ -22,14 +24,14 @@ describe DashboardController do
         i.approved = 'true'
         i.num_votes = rand(1..500)
         i.save
-        ideas+=[i]
+      
         tagidea = IdeasTags.new
         tagidea.tag_id = tag.id
         tagidea.idea_id = i.id
         tagidea.save
-      end
-      get :graph, :ideas => ideas
-      assigns(:data_table).should have(20).items
+      end 
+      get :graph, :tagid => tag.id
+      assigns(:no).should eq(20)
     end
   end
 end
