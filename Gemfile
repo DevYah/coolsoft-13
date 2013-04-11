@@ -10,7 +10,7 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'tlsmail'
-
+gem "google_visualr", "~> 2.1.0"
 
 
 # Gems used only for assets and not required
@@ -42,11 +42,6 @@ group :test do
 	gem 'guard-rspec'
 	gem 'launchy'
 end
-gem 'sunspot_rails'
- group :development do
-   gem 'sunspot_solr'
- end
- gem 'rails3-jquery-autocomplete'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
