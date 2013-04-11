@@ -16,12 +16,7 @@ describe UserRatingsController do
       end
 
       it 'creates the rating' do
-        expect { post :create, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 5 } }.to change(UserRating, :count).by(1)
-      end
-
-      it 'redirects to idea' do
-        post :create, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 5 }
-        response.should redirect_to @idea
+        expect { post :create, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 5 }, :format => 'js' }.to change(UserRating, :count).by(1)
       end
     end
   end
@@ -46,14 +41,9 @@ describe UserRatingsController do
 
       it 'updates the rating' do
         @val = @user_rating.value
-        post :update, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 3 }
+        put :update, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 3 }, :format => 'js'
         @user_rating.reload
         (@user_rating.value).should_not eql(@val)
-      end
-
-      it 'redirects to idea' do
-        put :update, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 3 }
-        response.should redirect_to @idea
       end
     end
   end
