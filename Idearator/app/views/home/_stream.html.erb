@@ -1,10 +1,5 @@
-<div id='content' class="span8">
-               <div id = "IdeaStream">
-                <% @no = 0 %>
-  <% if params[:search] != ""%>
-      <% @search.each do |approved| %>
+     <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
-     <% @no = @no + 1 %>
       <div class ="row block span10">
       <div class = "wrapper">  
       <div class = "span2 in-line"><%= image_tag approved.photo.url(:medium)  %></div>
@@ -25,15 +20,9 @@
       </div>
      <% end %>
      <% end %>
-  <br>
-  <br>
-  <% if @no > 1%>
-  <div class = "alert alert-success"> <% @no %> Ideas Found</div>
-  <% else %>
-  <% if @no == 1%>
-  <div class = "alert alert-success">1 Idea Found</div>
-    <% else %>
-    <div class = "alert alert-block">No ideas Found :( </div>
-    <% end %>
-    <% end %>
-    <% end %>
+  
+
+
+
+
+
