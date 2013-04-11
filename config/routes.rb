@@ -5,7 +5,7 @@ Sprint0::Application.routes.draw do
 
   #get "ideas/new"
   resources :ideas
-
+  resources :users
 
 
 
