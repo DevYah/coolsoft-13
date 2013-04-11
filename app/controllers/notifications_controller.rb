@@ -8,13 +8,6 @@ class NotificationsController < ApplicationController
     if user_signed_in?
       idea_notifications = current_user.idea_notifications
       user_notifications = current_user.user_notifications
-      @invited = user_notifications.where(:type => 'InviteCommitteeNotification').exists?
-      if(@invited)
-      @tags = Tag.all
-      invitation = user_notifications.where(:type => 'InviteCommitteeNotification')[0]
-      @accepted = invitation.user == current_user and invitation.users.count > 1
-      @rejected = invitation.user == current_user and invitation.users.count == 1  
-      end
       not1 = idea_notifications + user_notifications
       not2 = not1.sort_by &:created_at
       @all_notifications = not2.reverse

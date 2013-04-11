@@ -33,11 +33,14 @@ class ApplicationController < ActionController::Base
       @tags = Tag.all
       invitation = user_notifications.where(:type => 'InviteCommitteeNotification')[0]
       @accepted = invitation.user == current_user and invitation.users.count > 1
-      @rejected = invitation.user == current_user and invitation.users.count == 1  
+      @rejected = invitation.user == current_user and invitation.users.count == 1
+      if @accepted or @invited
+       @invited = false
+       @user = User.find(invitation.user_id).username  
+     end
       end
       not1 = idea_notifications + user_notifications
       not2 = not1.sort_by &:created_at
-      @tags = Tag.all
       @notifications = not2.reverse.first(10)
       @count = unread_users + unread_ideas
     end
