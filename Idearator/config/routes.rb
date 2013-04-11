@@ -12,15 +12,12 @@ Sprint0::Application.routes.draw do
   match '/dashboard/getideas' => 'dashboard#getideas'
   match '/home/search' => 'home#search'
 
-
 default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :committees, :controllers => { :registrations => 'registrations' }
   #get "ideas/new"
   resources :ideas, :dashboard
-  resources :home do
-  get :autocomplete_idea_title, :on => :collection
-end
+  resources :users
   
 
   # The priority is based upon order of creation:
@@ -71,4 +68,3 @@ end
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
-
