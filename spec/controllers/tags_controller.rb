@@ -16,7 +16,7 @@ describe TagsController do
       t2.save
 
       get :ajax, :q => 'te' 
-      response.body.should ==  "[{\"name\":\"computer science\"}]"
+      response.body.should ==  "[{\"id\":1,\"name\":\"computer science\"}]"
     end
 
   end
