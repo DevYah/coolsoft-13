@@ -14,11 +14,21 @@
   <p>
     <%= f.file_field :photo %>
   </p>
+  <br/>
   <div class="field">
-    <%= f.label :about_me %><br />
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :about_me %>
     <%= f.text_area :about_me %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

@@ -23,7 +23,7 @@
   <%= image_tag @user.photo.url(:medium) %>
   </div>
   <div style = "display:inline-block;position:relative;left:340px;down:60px;">
-    <h3> About the User </h3>
+    <h3> About <%= @user.username %> </h3>
     <strong>Email</strong><br>
     <%= @user.email %><br>
     <strong>First Name</strong><br>
@@ -34,8 +34,10 @@
     <%= @user.gender %><br>
   </div>
   <div style = "float:right">
-    <strong>About <%= @user.username %></strong><br>
+    <strong style = "padding-left:1cm;">About <%= @user.username %></strong><br>
+    <div style = "padding-left: 1cm; ">
     <%= @user.about_me %><br>
+    </div>
   </div>
   <br>
   <h2> User Ideas </h2>

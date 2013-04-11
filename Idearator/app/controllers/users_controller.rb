@@ -147,10 +147,18 @@ end
 #Author: Hesham Nabil.
 def update
   @user = User.find(params[:id])
-  if @user.update_attributes(:about_me => params[:user][:about_me] , :photo => params[:user][:photo])
-     redirect_to @user
-  else
-     render 'edit'
+  if(params[:user][:photo] != nil)
+    if @user.update_attributes(:about_me => params[:user][:about_me] , :photo => params[:user][:photo] , :first_name => params[:user][:first_name] , :last_name => params[:user][:last_name])
+       redirect_to @user
+    else
+       render 'edit'
+    end
+  else 
+  if @user.update_attributes(:about_me => params[:user][:about_me] , :first_name => params[:user][:first_name] , :last_name => params[:user][:last_name])
+       redirect_to @user
+    else
+       render 'edit'
+    end  
   end
 end
 
