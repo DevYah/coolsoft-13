@@ -4,14 +4,16 @@ before_filter :authenticate_user!
 #Author : Omar Kassem
   def review_ideas 
     @committee=current_user
-    if current_user
-      if @committee.type == "Committee"
-        @ideas=Idea.find(:all, :conditions =>{:approved => false})
-        @ideas.reject! do |i|
-          (i.tags & @committee.tags).empty?         
-        end
+    if @committee.type == "Committee"
+      @ideas=Idea.find(:all, :conditions =>{:approved => false})
+      @ideas.reject! do |i|
+        (i.tags & @committee.tags).empty?         
       end
-    end    	
+    end
+    respond_to do |format|
+      format.html { redirect_to  '/' , notice: 'You can not review ideas' }
+      format.json { head :no_content }
+    end     	
   end
 #sets the approved status of the idea reviewed by the committee member
 #Author : Omar Kassem  

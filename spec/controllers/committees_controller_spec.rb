@@ -11,7 +11,6 @@ describe CommitteesController do
         @committee.email='c@gmail.com'
         @committee.password=123123123
         @committee.username='c'
-        @committee.approved=true
         @committee.confirm!
         @committee.save
         @idea=Idea.new
@@ -32,8 +31,7 @@ describe CommitteesController do
         @committee=Committee.new
         @committee.email='c@gmail.com'
         @committee.password=123123123
-        @committee.username='c'
-        @committee.approved=true
+        @committee.username ='c'
         @committee.confirm!
         @committee.save
         @idea=Idea.new
@@ -54,7 +52,6 @@ describe CommitteesController do
         @committee.email='c@gmail.com'
         @committee.password=123123123
         @committee.username='c'
-        @committee.approved=true
         @committee.confirm!
         @committee.save
         @idea=Idea.new
@@ -105,7 +102,6 @@ describe CommitteesController do
         @committee.email='c@gmail.com'
         @committee.password=123123123
         @committee.username='c'
-        @committee.approved=true
         @committee.confirm!
         @committee.save @idea=Idea.new 
         @idea.title='bla'
@@ -123,7 +119,6 @@ describe CommitteesController do
         @committee.email='c@gmail.com'
         @committee.password=123123123
         @committee.username='c'
-        @committee.approved=true
         @committee.confirm!
         @committee.save @idea=Idea.new 
         @idea.title='bla'
