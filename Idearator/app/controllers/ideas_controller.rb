@@ -80,37 +80,41 @@ class IdeasController < ApplicationController
   # +id+:: is used to specify the instance of +Idea+ to be archived
   # Author: Mahmoud Abdelghany Hashish
   def archive
-    @idea = Idea.find(params[:id])
+    idea = Idea.find(params[:id])
     
-    if current_user.type == 'Admin' || current_user.id == @idea.user_id
-      @idea.archive_status = true
-      @idea.save
+    if current_user.type == 'Admin' || current_user.id == idea.user_id
+      idea.archive_status = true
+      idea.save
 
-      @list_of_voters = @idea.votes
-      @list_of_commenters = []
+      list_of_commenters = []
+
+      idea.comments.each do |c|
+        list_of_commenters.append(User.find(c.user_id)).flatten!
+      end
+
+      list = list_of_commenters.append(idea.votes).flatten!
       
-      @idea.comments.each do |c|
-        @list_of_commenters.append(User.find_by_id(c.user_id))
+      if current_user.type == 'Admin'
+        list.append(User.find(idea.user_id)).flatten!
       end
       
-      @list = @list_of_voters.append(@list_of_commenters).flatten!
-      ArchiveNotification.send_notification(current_user, @idea, @list)
+      ArchiveNotification.send_notification(current_user, idea, list)
 
-      @votes = Vote.find_by_idea_id(@idea.id)
-
-      if @votes != nil
-        @vote.each do |v|
-          v.destroy
-        end
+      idea.votes.each do |u|
+        idea.votes.delete(u)
       end
+
+      idea.comments.each do |c|
+        c.destroy
+      end  
 
       respond_to do |format|
-        format.html { redirect_to @idea, alert: 'Idea has been successfully archived.' }
+        format.html { redirect_to idea, alert: 'Idea has been successfully archived.' }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to @idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
         format.json { head :no_content }
       end
     end
@@ -120,19 +124,11 @@ class IdeasController < ApplicationController
   # +id+:: is used to specify the instance of +Idea+ to be unarchived
   # Author: Mahmoud Abdelghany Hashish    
   def unarchive
-    @idea = Idea.find(params[:id])
+    idea = Idea.find(params[:id])
 
-    if current_user.type == 'Admin' || current_user.id == @idea.user_id
-      @idea.archive_status = false
-      @idea.save
-
-      @list_of_commenters = []
-
-      @idea.comments.each do |c|
-        @list_of_commenters.append(User.find_by_id(c.user_id))
-      end
-
-      ArchiveNotification.send_notification(current_user, @idea, @list_of_commenters)
+    if current_user.type == 'Admin' || current_user.id == idea.user_id
+      idea.archive_status = false
+      idea.save
 
       respond_to do |format|
         format.html { redirect_to @idea, alert: 'Idea has been successfully unarchived.' }
