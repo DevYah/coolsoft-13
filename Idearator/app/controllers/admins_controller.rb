@@ -4,12 +4,10 @@ class AdminsController < ApplicationController
       redirect_to '/home/index'
     end
   end
-##
-# redirects to the index page
 
   def invite
   end
-##
+
 # checks invitation is valid and delivers the email
 # +email+:: the email of the  guest
 # Author: muhammed hassan
