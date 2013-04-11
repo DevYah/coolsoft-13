@@ -1,0 +1,78 @@
+<head>
+ 	<src >
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<style type="text/css">
+small{
+color: #33C;
+
+}
+
+	</style>
+</head>
+	<div class='media'>
+		<a  class='pull-left' href='#'>
+			<%= image_tag @idea.photo.url(:medium) %>
+		</a>
+		<p>
+			<h3 class = "lead"><%= @idea.title %>
+			</h3>
+			<%=form_for(@idea, :action=>'update') do |f| %>
+			<%if @user==@idea.user_id%>
+				<div class='btn-group'>
+					<%= link_to "<i></i>".html_safe, edit_idea_path(@idea), :id => "button_id", :class => "icon-edit"%>
+				</div>
+				<h2><%= @username%></h2>
+			<%end%>
+			<%end%>
+		</p>
+	</div>
+<div class='media-body'>
+		<p>
+			<h4>Description</h4>
+			<div><%= @idea.description %></div>
+		</p>
+		<p>
+			<h4>Problem Solved:</h4>
+			<div><%= @idea.problem_solved%></div>
+		</p>
+</div>
+	<legend><h4>Comments</h4></legend>
+		<table>
+			<% @idea.comments.each do |comment| %>
+				<tr>
+    			<td>
+    				<blockquote>
+    					<label>
+    						<%= comment.content %>
+    					</label>
+    					<small> 
+    						added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago
+    					</small>
+    				</blockquote> 
+    			</td>
+					<td>
+						<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
+						<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
+							<%= link_to "+1", :controller => 'ideas', :action => 'show', :commentid => comment.id %>
+						<% end %> 
+							<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
+						<small>
+							<%= comment.num_likes %> likes
+						</small>
+					</td>
+				</tr>
+					<% end %>
+		</table>
+<h5>Add a comment:</h5>
+<%= form_for([@idea, @idea.comments.create]) do |f| %>
+
+  <div class="controls">
+  	<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+	</div>
+  	<%= f.submit nil, :class => 'btn btn-small btn-primary'%>
+		<% end %>
+<td>
+ <%= link_to 'Back', '/',:class => "btn" %>
+</td>
+
+

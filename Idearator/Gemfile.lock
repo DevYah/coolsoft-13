@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: 1aaf8b0c26c093a88973817e2e2db7f8e6dbe720
+  revision: d343279ed7bb0b13be2f97b97b627f6a50297bc9
   specs:
-    rubocop (0.3.1)
+    rubocop (0.3.2)
+      term-ansicolor
 
 GIT
   remote: https://github.com/mnzaki/pre-commit.git
@@ -43,7 +44,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bcrypt-ruby (3.0.1-x86-mingw32)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
@@ -118,7 +118,7 @@ GEM
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.0)
+    rspec-mocks (2.13.1)
     rspec-rails (2.13.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -137,7 +137,7 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.7)
-    sqlite3 (1.3.7-x86-mingw32)
+    term-ansicolor (1.1.4)
     thor (0.18.1)
     tilt (1.3.6)
     tlsmail (0.0.1)
@@ -145,7 +145,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (1.3.0)
+    uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
@@ -153,7 +153,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   bootstrap-sass
