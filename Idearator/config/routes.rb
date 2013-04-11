@@ -20,7 +20,6 @@ Sprint0::Application.routes.draw do
   match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
 end
 
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
 
