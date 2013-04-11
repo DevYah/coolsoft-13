@@ -126,9 +126,9 @@
     <% idea_not = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id })
     idea_not.read = true
     idea_not.save %>
+  <% end %>
   <% unread_ideas = IdeaNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
     unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
     @count = unread_users + unread_ideas
   %>
-  <% end %>
 <% end %>
