@@ -1,5 +1,4 @@
 Sprint0::Application.routes.draw do
-
   default_url_options :host => "localhost:3000"
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :ideas, :controller =>'ideas'
@@ -8,8 +7,8 @@ Sprint0::Application.routes.draw do
   match '/home/index' => 'home#index'
   match '/ideas/update' => 'ideas#update'
   devise_for :committees, :controllers => { :registrations => "registrations" }
-
-
+match '/ideas/filter' => 'ideas#filter'
+get '/tags/ajax'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
