@@ -1,8 +1,23 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
-<ul class="nav">
+<ul class='nav'>
+  <% if user_signed_in? %>
+    <li class="dropdown">
+      <a id = "count" class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <%if @count == 0%>
+          <span class="badge badge-inverse"><%= @count %></span>
+        <%else%>
+          <span class="badge badge-important"><%= @count %></span>
+        <%end%>
+        <b class="caret"></b>
+      </a>
+      <ul id = "update-dropdown" class="dropdown-menu">
+        <%= render 'notifications/view_notifications' %>
+      </ul>
+    </li>
+  <% end %>
   <% if user_signed_in? %>
     <li>
-    <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
+      <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
     </li>
     <li>
     <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
@@ -12,14 +27,14 @@
 <ul class="nav pull-right">
   <% if not user_signed_in? %>
     <li>
-    <%= link_to 'Login via Twitter', user_omniauth_authorize_path(:twitter),
+      <%= link_to 'Login via Twitter', user_omniauth_authorize_path(:twitter),
                 :class => 'popup', "data-width" => 600, "data-height" => 500  %>
     </li>
-        <li>
-    <%= link_to 'Login via Facebook', user_omniauth_authorize_path(:facebook) %>
+    <li>
+      <%= link_to 'Login via Facebook', user_omniauth_authorize_path(:facebook) %>
     </li>
     <li>
-    <%= link_to('Register', new_user_registration_path)  %>
+      <%= link_to('Register', new_user_registration_path)  %>
     </li>
   <% end %>
 </ul>

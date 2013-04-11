@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
                   :gender, :about_me, :recieve_vote_notification,
                   :recieve_comment_notification, :provider, :uid , :photo, :approved
 
-  has_many :idea_notifications
-  has_many :user_notifications
+  has_many :sent_idea_notifications, class_name: 'IdeaNotification'
+  has_many :sent_user_notifications, class_name: 'UserNotification'
   has_many :ideas
   has_many :comments
   has_many :user_ratings
@@ -24,11 +24,11 @@ class User < ActiveRecord::Base
   has_many :user_notifications_users
   has_many :user_notifications, :through => :user_notifications_users
   has_and_belongs_to_many :comments, :join_table => :likes
-  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
+  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :votes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
-  has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>",:thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+  has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 
-# this method finds the +User+ using the hash and creates a new +User+ 
+# this method finds the +User+ using the hash and creates a new +User+
 # if no users with this email exist
 #
 # Params:
@@ -37,14 +37,14 @@ class User < ActiveRecord::Base
 # +signed_in_resource+:: Currently signed in resource. Unused.
 #
 #Author: Menna Amr
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.find_for_facebook_oauth(auth, signed_in_resource = nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(username:auth.extra.raw_info.username,
-                         provider:auth.provider,
-                         uid:auth.uid,
-                         email:auth.info.email,
-                         password:Devise.friendly_token[0,20])
+      user = User.create(username: auth.extra.raw_info.username,
+                         provider: auth.provider,
+                         uid: auth.uid,
+                         email: auth.info.email,
+                         password: Devise.friendly_token[0,20])
   end
   user
   end

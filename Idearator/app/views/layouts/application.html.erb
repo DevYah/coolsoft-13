@@ -11,10 +11,10 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
+  <body data-devise=<%= user_signed_in? %>>
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
-        <div class="container">
+        <div id = "update-nav" class="container">
           <!--! Add/edit the navigation links in the _navigation partial-->
           <%= render 'layouts/navigation' %>
         </div>
