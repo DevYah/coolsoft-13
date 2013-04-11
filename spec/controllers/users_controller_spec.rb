@@ -22,36 +22,39 @@ describe UsersController do
   end
    describe "PUT #reject_invitation" do 
    	it "retrieves the user instance from :id" do
-   		put :reject_invitation, @u1.id
-   		assigns(:user).should eq(@u1.id)
+			current_user = @u1
+   		put :reject_invitation
+   		assigns(:user).should eq(@u1)
    	end
    	it "removes the user from the committees table" do
-   		put :reject_invitation, @u1.id 
+			current_user = @u1
+   		put :reject_invitation
    		@u1.reload
-   		assigns(@u1.type).should eq(nil)
+   		@u1.type.should eq(nil)
    	end
    	it "redirects to user's profile page" do
-   		response.should redirect to @u1
+			current_user = @u1
+   		put :reject_invitation
+   		response.should redirect_to controller: 'home', action: 'index' , notice: 'Rejected Invitation to become Committee'
    	end
    end
-
-
+   
    describe "PUT #invite_member" do 
    	it "retrieves the user instance from :id" do
-   		put :invite_member, @u1.id
-   		assigns(:user).should eq(@u1.id)
+   		put :invite_member, :id => @u1.id
+   		assigns(:user).should eq(@u1)
    	end
-
    	it "inititates the user to the committees table" do
-   		put :invite_member, @u1.id
+   		put :invite_member, :id => @u1.id
    		@u1.reload
    		assigns(@u1.type).should eq("Committee")
    	end
    	it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
-   		expect{ put :invite_member, @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
+   		expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
    	end
-   	it "redirects to admin's index page" do
-   		response.should redirect to 'admins/index' 
+   	it "redirects to home page" do
+			put :invite_member, :id => @u1.id
+   		response.should redirect_to '/' 
    end
  end
 end
