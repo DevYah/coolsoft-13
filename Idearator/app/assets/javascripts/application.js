@@ -13,4 +13,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-
+//= require notification_polling
