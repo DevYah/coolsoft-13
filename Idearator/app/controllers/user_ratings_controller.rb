@@ -20,10 +20,10 @@ class UserRatingsController < ApplicationController
       if saved_r.class != Array
         rating.value = user_rating.value.to_f
       else
-        rating.value = ((saved_r.size * @rating.value) + user_rating.value).to_f / (saved_r.size).to_f
+        rating.value = ((saved_r.size * rating.value) + user_rating.value).to_f / (saved_r.size).to_f
       end
 
-      @rating.save
+      rating.save
     else
       respond_to do |format|
         format.html { redirect_to idea, :notice => 'Your rating has not been saved, please retry!' }
