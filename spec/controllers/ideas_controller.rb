@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-
 describe IdeasController do
-
 
   describe "Post Filter" do
 
+# tests multitag filtering
+# Author: muhammed hassan
     it "filters on multiple tags" do
 
       i = Idea.new
@@ -56,6 +56,9 @@ describe IdeasController do
       post :filter, :myTags => [t.name,t2.name] 
       assigns(:approved).should have(2).items
     end
+
+# tests rendered json
+# Author: muhammed hassan
     it "renders ideas as json" do
       i = Idea.new
       i.user_id = rand(1..40)
@@ -79,6 +82,9 @@ describe IdeasController do
       response.body.should == assigns(:approved).to_json
 
     end
+
+# tests rendered js file
+# Author: muhammed hassan
     it "renders js file" do
 
       i = Idea.new

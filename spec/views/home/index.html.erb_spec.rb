@@ -1,5 +1,7 @@
 require "spec_helper"
 
+# tests the index view
+# Author: muhammed hassan
   describe "home/index.html.erb" do
     it "displays current tags" do
       assign(:tags2, [
