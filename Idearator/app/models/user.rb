@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :username, :date_of_birth, :type, :active, :first_name, :last_name,
                   :gender, :about_me, :recieve_vote_notification,
-                  :recieve_comment_notification, :provider, :uid , :photo
+                  :recieve_comment_notification, :provider, :uid , :photo, :approved
 
   has_many :idea_notifications
   has_many :user_notifications
