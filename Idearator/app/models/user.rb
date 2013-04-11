@@ -23,16 +23,10 @@ class User < ActiveRecord::Base
   has_many :idea_notifications, :through => :idea_notifications_users
   has_many :user_notifications_users
   has_many :user_notifications, :through => :user_notifications_users
-  has_and_belongs_to_many :idea_notifications
-  has_and_belongs_to_many :user_notifications
   has_and_belongs_to_many :comments, :join_table => :likes
-  has_and_belongs_to_many :ideas, :join_table => :votes
-  has_many :authorizations
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>",:thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
-  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
-  has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
 # this method finds the +User+ using the hash and creates a new +User+ 
 # if no users with this email exist
