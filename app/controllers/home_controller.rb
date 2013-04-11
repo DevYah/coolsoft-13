@@ -17,13 +17,19 @@ class HomeController < ApplicationController
 
   def search
     if params[:search].length > 0
-       @search = Idea.search(params[:search])
-     else
-      redirect_to :controller => :home, :action => :index and return
-     end
+      @search = Idea.search(params[:search])
       respond_to do |format|
         format.html
         format.js
+      end
+    else
+        @approved = Idea.order(:created_at).page(1).per(10)
+        @top= Idea.find(:all,:order=> "num_votes DESC",:limit=>10)
+        respond_to do |format|
+         format.html
+         format.js
+        end
     end
+
   end
 end

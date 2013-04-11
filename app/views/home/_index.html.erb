@@ -1,11 +1,9 @@
-<div id='content' class="span8">
-               <div id = "IdeaStream">
                 <% @no = 0 %>
   <% if params[:search] != ""%>
       <% @search.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
      <% @no = @no + 1 %>
-      <div class ="row block span10">
+      <div class ="row block span8">
       <div class = "wrapper">  
       <div class = "span2 in-line"><%= image_tag approved.photo.url(:medium)  %></div>
       <div class = "span6">
