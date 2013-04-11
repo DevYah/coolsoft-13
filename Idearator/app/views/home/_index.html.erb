@@ -1,7 +1,6 @@
 <div id='content' class="span8">
                <div id = "IdeaStream">
                 <% @no = 0 %>
-  <% if params[:search] != ""%>
   <% if @approved.count > 0 %>
    <% @approved.each do |approved| %>
      <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
@@ -35,9 +34,6 @@
     <% end %>
   <% else %>
  <div class = "alert alert-error">Your searching criterias didn't match our database</div>
- <% end %>
- <% else %>
- <div class = "alert alert-block">There is nothing written in the search field, If you want to go back to the main ideastream click on HOME</div>
  <% end %>
  </div>
 </div>
