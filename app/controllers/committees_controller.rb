@@ -9,11 +9,12 @@ before_filter :authenticate_user!
       @ideas.reject! do |i|
         (i.tags & @committee.tags).empty?         
       end
-    end
-    respond_to do |format|
-      format.html { redirect_to  '/' , notice: 'You can not review ideas' }
-      format.json { head :no_content }
-    end     	
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not review ideas' }
+        format.json { head :no_content }
+      end
+    end       	
   end
 #sets the approved status of the idea reviewed by the committee member
 #Author : Omar Kassem  
@@ -32,26 +33,37 @@ before_filter :authenticate_user!
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
       session[:idea_id]=params[:id]
-    end
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
+        format.json { head :no_content }
+      end
+    end  
   end  
 #adds the rating prespectives taken from the user from the add_prespectives view 
 #to the idea reviewed and approvesthe idea
 #Author : Omar Kassem  
   def add_rating
-    @idea=Idea.find(session[:idea_id])
-    @idea.approved = true
-    @idea.save
-    @rating = params[:rating]
-    @rating.each do |rate|
-      r = @idea.ratings.build
-      r.name=rate
-      r.value=0
-      r.save
-    end  
-    respond_to do |format|
-      format.js {render "add_rating"}
+    if current_user.type == 'Committee'
+      @idea=Idea.find(session[:idea_id])
+      @idea.approved = true
+      @idea.save
+      @rating = params[:rating]
+      @rating.each do |rate|
+        r = @idea.ratings.build
+        r.name=rate
+        r.value=0
+        r.save
+      end  
+      respond_to do |format|
+        format.js {render "add_rating"}
+      end
+    else  
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
+        format.json { head :no_content }
+      end
     end
-
-  end
   	
-end
+  end
+end  
