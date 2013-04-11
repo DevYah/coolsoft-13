@@ -5,6 +5,6 @@ class TagsController < ApplicationController
 # Author: muhammed hassan
   def ajax
     @tags = Tag.find(:all, conditions: ['name LIKE(?)', "%#{ params[:q] }%"]).take(5)
-    render :json => @tags , only: [:name]
-  end 
+    render :json => @tags , only: [:name,:id]
+  end
 end
