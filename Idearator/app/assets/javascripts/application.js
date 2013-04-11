@@ -8,8 +8,14 @@
 // the compiled file.
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
+//GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+<<<<<<< HEAD
  require bootstrap
+=======
+//= require jquery-ui
+//= require autocomplete-rails
+//= require bootstrap
+>>>>>>> C4_LinaBasheer_#92_Graph
 //= require_tree .

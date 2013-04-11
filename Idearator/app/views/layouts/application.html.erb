@@ -7,12 +7,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <%= stylesheet_link_tag "application", :media => "screen" %>
+<<<<<<< HEAD
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
   <body>
     <header class="navbar navbar-fixed-top">
+=======
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body class>
+    <header class="navbar navbar-fixed-top" id = "bar">
+>>>>>>> C4_LinaBasheer_#92_Graph
       <nav class="navbar-inner">
         <div class="container">
           <!--! Add/edit the navigation links in the _navigation partial-->
@@ -24,6 +32,7 @@
       <div class="container">
         <div class="content">
            <div class="row">
+<<<<<<< HEAD
             <div class="span8">
               <%= render 'layouts/messages' %>
               <%= yield %>
@@ -33,12 +42,24 @@
             <div id="sidebar" class="span4">
               <%= yield :sidebar %></div>
           </div>
+=======
+            <div class="span12">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+>>>>>>> C4_LinaBasheer_#92_Graph
           </div>
           <footer>
           </footer>
         </div>
       </div> <!--! end of .container -->
+<<<<<<< HEAD
     </div> <!--! end of #main -->
   </body>
 </html>
 
+=======
+    </div>
+  </body>
+</html>
+>>>>>>> C4_LinaBasheer_#92_Graph
