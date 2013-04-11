@@ -29,6 +29,14 @@
       <li><a data-toggle="modal" href="#expertise" class="btn">You have been invited to become a committee</a></li>
       <li class="divider"></li>
     <% end %>
+     <% if notification.is_a? InviteCommitteeNotification and @accepted %>
+      <li><%= @user %> has accepted the invitation to become a committee member</li>
+      <li class="divider"></li>
+    <% end %>
+     <% if notification.is_a? InviteCommitteeNotification and @rejected %>
+        <li><%= @user %> has rejected the invitation to become a committee member</li>
+      <li class="divider"></li>
+    <% end %>
     <% if notification.is_a? ApproveCommitteeNotification %>
       <li><%=link_to notification.user.username + ' has signed up as a committee member.', {controller: 'notifications', action: 'redirect_review', not_id: notification.id} %></li>
       <li class="divider"></li>
