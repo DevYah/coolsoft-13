@@ -1,3 +1,4 @@
+
 Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
@@ -10,6 +11,7 @@ Sprint0::Application.routes.draw do
   match '/dashboard/gettags' => 'dashboard#gettags'
   match '/dashboard/getideas' => 'dashboard#getideas'
   match '/home/search' => 'home#search'
+
 
 default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
@@ -69,3 +71,4 @@ end
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+

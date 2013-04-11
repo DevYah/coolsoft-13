@@ -1,1 +1,5 @@
+<% if params[:search] == "" %>
+$("#searchresult").empty();
+<% else %>
 $("#searchresult").html("<%= escape_javascript(render(:partial => "index")) %>");
+<% end %>
