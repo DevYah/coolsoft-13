@@ -6,11 +6,7 @@
     </li>
   <% else %>
     <li>
-<<<<<<< HEAD
     <%= link_to('Login', new_user_session_path)  %>
-=======
-    <%= link_to('Register', new_user_session_path)  %>
->>>>>>> C4_LinaBasheer_#92_Graph
     </li>
   <% end %>
   <% if user_signed_in? %>
@@ -18,31 +14,4 @@
     <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
     </li>
   <% end %>
-<<<<<<< HEAD
 </ul>
-=======
-  <% if user_signed_in? %>
-  <% if current_user.is_a? Committee%>
-  <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% else %>
-  <% if current_user.ideas != nil %>
-    <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% end %>
-  <% end %>
-  <% end %>
-  <li>
-    <%= form_tag "/", :method => :get, :class => 'input-append',:id => 'searchdiv', :remote => true do %>
-  <p>
-    <%= text_field_tag :search, params[:search], :placeholder => "Search....."%>
-    <button class='btn btn-info'>
-        <i class="icon-search icon-white"></i>
-    </button>
-  </p>
-<% end %>
-  </li>
-</ul>
->>>>>>> C4_LinaBasheer_#92_Graph

@@ -1,14 +1,9 @@
-
 Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
-  match '/dashboard/index' => 'dashboard#index'
-  match 'dashboard/getallideas' => 'dashboard#getallideas'
-  match '/dashboard/graph' => 'dashboard#graph'
 
   #get "ideas/new"
-<<<<<<< HEAD
   resources :ideas
   resources :userss
 
@@ -20,14 +15,6 @@ Sprint0::Application.routes.draw do
 
 
 
-=======
-  resources :ideas, :dashboard
-  resources :home do
-  get :autocomplete_idea_title, :on => :collection
-end
-  default_url_options :host => 'localhost:3000'
-  devise_for :users, :controllers => { :registrations => 'registrations' }
->>>>>>> C4_LinaBasheer_#92_Graph
   devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
@@ -77,16 +64,12 @@ end
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-<<<<<<< HEAD
 
 
   match '/review_ideas' => 'committees#review_ideas'
 
-=======
-  match '/review_ideas' => 'committees#review_ideas'
->>>>>>> C4_LinaBasheer_#92_Graph
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
 
-end
 
+end

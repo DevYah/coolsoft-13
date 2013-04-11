@@ -1,7 +1,0 @@
-<% if @tagid == nil and @ideaid != nil%>
-$("#tagsall").html("<%= escape_javascript(render(:partial => "form"))%>");
-<% else %>
-<% if @tagid != nil %>
-$("#graph").html("<%= escape_javascript(render(:partial => "graph"))%>");
-<% end %>
-<% end %>
