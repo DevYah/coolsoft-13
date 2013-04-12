@@ -238,8 +238,8 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
-  capybara
   bot-away
+  capybara
   coffee-rails (~> 3.2.1)
   devise
   factory_girl_rails
