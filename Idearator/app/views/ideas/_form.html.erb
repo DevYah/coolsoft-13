@@ -40,8 +40,8 @@
   <div>
     <% @tags.each do |tag|%>
       <div><%= check_box_tag 'ideas_tags[tags][]', tag.id, @chosentags.include?(tag) %><%= tag.name %> </div>
-    <% end %> 
-<span class = 'help-inline'>Please check the relative tags</span> 
+    <% end %>
+<span class = 'help-inline'>Please check the relative tags</span>
   </div>
   <div class = 'actions'>
     <%= i.submit nil, :class => 'btn btn-primary'%>
@@ -57,7 +57,3 @@
   <%end%>
   </fieldset>
 <% end %>
-
-
-
-

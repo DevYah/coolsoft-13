@@ -2,7 +2,7 @@ class IdeaNotification < ActiveRecord::Base
 
   belongs_to :idea
   belongs_to :user
-  has_many :idea_notifications_users
+  has_many :idea_notifications_users, :dependent => :destroy
   has_many :users, :through => :idea_notifications_users
   attr_accessible :link, :type, :user, :idea, :users
 
