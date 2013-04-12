@@ -31,8 +31,10 @@ describe 'PUT update' do
       @comment.idea_id = @idea.id
       @idea.save
       @comment.save
-      put :update,:id => @comment.id, :idea_id => @idea.id
+      put :update,:id => @comment.id, :idea_id => @idea.id , :comment => { :content => "dayna "}
       @idea.reload
+      @comment.reload
+      @comment.content.should eq("dayna ")
     end
   end
 
