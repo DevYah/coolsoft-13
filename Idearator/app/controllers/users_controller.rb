@@ -178,7 +178,8 @@ class UsersController < ApplicationController
   end
   
   def send_expertise
-		tags = Tag.all
+		@user = current_user
+		@tags = Tag.all
 		render :partial => "modal_expertise"
 	end
 end
