@@ -46,10 +46,10 @@ class IdeasController < ApplicationController
     @userCreceivers = []
     @usersthatcommented = []
     if !@idea.votes.nil?
-    @ideavoters.each { |user|
-       if user.participated_idea_notifications
-        @userVreceivers << user 
-      end }
+      @ideavoters.each { |user|
+         if user.participated_idea_notifications
+          @userVreceivers << user 
+        end }
       EditNotification.send_notification(current_user, @idea, @userVreceivers)
     end
     list_of_comments = Comment.where(idea_id: @idea.id)
@@ -148,37 +148,84 @@ class IdeasController < ApplicationController
       end
     end
   end
-  # Deletes all records related to a specific idea
+
+  # Archives a specific idea
   # Params:
-  # +id+:: is used to specify which instance of +Idea+ will be deleted
+  # +id+:: is used to specify the instance of +Idea+ to be archived
   # Author: Mahmoud Abdelghany Hashish
   def destroy
     idea = Idea.find(params[:id])
-
     if current_user.id == idea.user_id
       list_of_comments = Comment.where(idea_id: idea.id)
       list_of_commenters = []
       list_of_voters = idea.votes
       idea.destroy
-
       list_of_comments.each do |c|
         c.destroy
       end  
-      
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
-      
       list = list_of_commenters.append(list_of_voters).flatten!
- 
       DeleteNotification.send_notification(current_user, idea, list)
-
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
+      end
+    end
+  end
+    def archive
+      idea = Idea.find(params[:id])
+      if current_user.type == 'Admin' || current_user.id == idea.user_id
+        idea.archive_status = true
+        idea.save
+        list_of_commenters = []
+        idea.comments.each do |c|
+          list_of_commenters.append(User.find(c.user_id)).flatten!
+        end
+        list = list_of_commenters.append(idea.votes).flatten!
+        if current_user.type == 'Admin'
+          list.append(User.find(idea.user_id)).flatten!
+        end
+        ArchiveNotification.send_notification(current_user, idea, list)
+        idea.votes.each do |u|
+          idea.votes.delete(u)
+        end
+        idea.comments.each do |c|
+          c.destroy
+        end  
+        respond_to do |format|
+          format.html { redirect_to idea, alert: 'Idea has been successfully archived.' }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+          format.json { head :no_content }
+        end
+      end
+    end
+
+  # Unarchives a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be unarchived
+  # Author: Mahmoud Abdelghany Hashish    
+  def unarchive
+    idea = Idea.find(params[:id])
+    if current_user.type == 'Admin' || current_user.id == idea.user_id
+      idea.archive_status = false
+      idea.save
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'Idea has been successfully unarchived.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.json { head :no_content }
       end
     end
   end
