@@ -8,8 +8,8 @@ class DashboardController < ApplicationController
     @user = current_user
     @ideas = Idea.find(:all, :conditions => {:user_id => @user.id})
     respond_to do |format|
-    format.html
-    format.js
+      format.html
+      format.js
     end
   end
   def getideas
@@ -24,25 +24,25 @@ class DashboardController < ApplicationController
     @no = 0
     @ideasall.each do |i|
       @no = @no + 1
-    data_table.add_rows([
-    [i.title, i.created_at, i.user_id, i.num_votes]
-    ])
+      data_table.add_rows([
+      [i.title, i.created_at, i.user_id, i.num_votes]
+      ])
     end
-       opts   = { :width => 900, :height => 500 }
-       @chart = GoogleVisualr::Interactive::MotionChart.new(data_table, opts)
-       respond_to do |format|
-        format.html
-        format.js
-      end 
+    opts   = { :width => 900, :height => 500 }
+    @chart = GoogleVisualr::Interactive::MotionChart.new(data_table, opts)
+    respond_to do |format|
+      format.html
+      format.js
+    end 
   end 
      
-    def gettags
+  def gettags
     @ideaid = params[:ideaid]
     @ideatagsthen = IdeasTags.find(:all, :conditions => {:idea_id => @ideaid})
     @ideatags = Tag.where(:id => @ideatagsthen.map(&:tag_id))
     respond_to do |format|
-    format.html
-    format.js
+      format.html
+      format.js
     end
   end
 end
