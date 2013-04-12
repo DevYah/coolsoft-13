@@ -5,7 +5,7 @@ Sprint0::Application.routes.draw do
 
   #get "ideas/new"
   resources :ideas
-  resources :userss
+
 
 
 
@@ -70,6 +70,6 @@ Sprint0::Application.routes.draw do
 
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-
+  resources :users
 
 end
