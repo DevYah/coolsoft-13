@@ -4,7 +4,7 @@ Sprint0::Application.routes.draw do
   match '/home/index' => 'home#index'
   match '/ideas/filter' => 'ideas#filter'
   #get "ideas/new"
-  resources :ideas
+  resources :ideas, :controller =>'ideas'
   devise_for :committees, :controllers => { :registrations => 'registrations' }
 
   get '/tags/ajax'
