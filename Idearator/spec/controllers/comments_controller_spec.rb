@@ -5,49 +5,49 @@ describe CommentsController do
     include Devise::TestHelpers
     
     context 'comment creator wants to delete' do
-      before :each do
-        @user = FactoryGirl.build(:user)
+       it 'deletes the comment' do
+        @user = User.new
+        @user.email = "Dayna@gmail.com"
         @user.confirm!
-        @idea = FactoryGirl.create(:idea)
-        @comment = FactoryGirl.create(:comment)
+        @user.save
+        @idea = Idea.new
+        @idea.description=@idea.problem_solved=@idea.title= "Daynaaa's Idea"
+        @idea.save
+        @comment = Comment.new
+        @comment.content ="Dayna's comment"
         @comment.user_id = @user.id
         @comment.idea_id = @idea.id
         @comment.save
         sign_in @user
-      end
-
-      it 'deletes the comment' do
         expect { delete :destroy, :id => @comment.id, :idea_id => @idea.id }.to change(Comment, :count).by(-1)
+        response.should redirect_to @idea
+
+      end
       end
 
-      it 'redirects to home' do
-        delete :destroy, :id => @comment.id, :idea_id => @idea.id
-          response.should redirect_to @idea
-      end
-    end
+      
 
     context 'normal user wants to delete comment' do
-      before :each do
-        @userone = FactoryGirl.build(:user)
+      it 'does not delete the comment' do
+        @userone = User.new
+        @userone.email = "One"
         @userone.confirm!
-        @usertwo = FactoryGirl.build(:user_two)
+        @userone.save
+        @usertwo = User.new
+        @usertwo.email = "Two"
         @usertwo.confirm!
-        @idea = FactoryGirl.create(:idea)
-        @comment = FactoryGirl.create(:comment)
+        @usertwo.save
+        @idea = Idea.new
+        @idea.description=@idea.problem_solved=@idea.title="Daynaaaaaa"
+        @comment = Comment.new
+        @comment.content = "Dayna's comment"
         @comment.user_id = @userone.id
         @comment.idea_id = @idea.id
         @comment.save
         sign_in @usertwo
-      end
-
-      it 'does not delete the comment' do
-        expect { delete :destroy, :id => @comment.id , :idea_id => @idea.id }.to change(Comment, :count).by(0)
-      end
-
-      it 'redirects to idea' do
-        delete :destroy, :id => @comment.id , :idea_id => @idea.id
+        expect { delete :destroy, :id => @comment.id, :idea_id => @idea.id }.to change(Comment, :count).by(0)
         response.should redirect_to @idea
+      end  
       end
-    end
   end
 end
