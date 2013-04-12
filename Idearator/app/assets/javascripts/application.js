@@ -13,3 +13,15 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+$(document).bind("ajaxError", function(){
+	$('#signedout').modal('show');
+});
+
+$(document).ready(function() {
+  $("#sign").click(function() {
+    window.location= "/users/sign_in";
+  });
+});
+

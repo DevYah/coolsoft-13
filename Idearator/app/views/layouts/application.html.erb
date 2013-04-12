@@ -12,6 +12,28 @@
     <%= yield(:head) %>
   </head>
   <body class>
+    <% if user_signed_in? %>
+      <div id="myModal" class="modal hide fade">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 id="myModalLabel">Notification Settings</h2>
+        </div>
+        <div class="modal-body">
+          <%= render 'users/settings' %>
+        </div>
+      </div>   
+    <%end%>
+    <div id="signedout" class="modal hide fade" data-backdrop="static" data-keyboard="false">
+      <div class="modal-header">
+        <h2 id="myModalLabel">Oooops !!</h2>
+        </div>
+         <div class="modal-body">
+          <h4>It looks like you're currently not signed in</h4>
+        </div>
+        <div class="modal-footer">
+          <button id="sign" class="btn">Ok</button>
+      </div>
+    </div>   
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
         <div class="container">
