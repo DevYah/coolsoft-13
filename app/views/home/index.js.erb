@@ -1,4 +1,4 @@
 <% if params[:search] == "" %>
-$("#searchresult").empty();
+$("#div.row.block.span8").remove();
 <% end %>
-$("#searchresult").append("<%= escape_javascript(render(:partial => "stream")) %>");
+$("#IdeaStream").append("<%= escape_javascript(render(:partial => "stream")) %>");

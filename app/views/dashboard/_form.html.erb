@@ -1,9 +1,0 @@
-<table class = "table table-bordered">
-	<th>Tags</th>
-<% @ideatags.each do |it| %>
-<tr class = "info">
-<td><i class="icon-tag"></i><%= link_to it.name, :controller=> "dashboard", :action => "index", :tagid => it.id, :remote => true %>
-	</td>
-</tr>
-<% end %>
-</table>

@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13.rc1'
@@ -12,6 +13,7 @@ gem 'devise'
 gem 'tlsmail'
 gem "google_visualr", "~> 2.1.0"
 
+gem 'jquery-tokeninput-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,18 +32,26 @@ gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
 gem 'kaminari'
+
 group :test, :development do
+
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails', '~> 4.0'
+
 end
+
 group :test do
-	gem 'faker'
-	gem 'capybara'
-	gem 'guard-rspec'
-	gem 'launchy'
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+  gem 'rspec-html-matchers'
 end
+
+gem 'whenever', :require => false
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -57,3 +67,4 @@ end
 
 # To use debugger
 # gem 'debugger'
+
