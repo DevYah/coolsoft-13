@@ -1,5 +1,5 @@
 class EditIdeaApprovedColumn < ActiveRecord::Migration
   def change
-    change_column :committees, :approved, :integer, :default => 0
+    change_column :ideas, :approved, :integer, :default => 0
   end
 end
