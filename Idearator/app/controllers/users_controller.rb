@@ -108,7 +108,7 @@ def show
   @user = User.find(params[:id])
   @ideas = Idea.where(:user_id => @user.id, :approved => true)
   @approved = @ideas.order(:created_at).page(params[:page]).per(10)
-
+  @admin = current_user
   respond_to do |format|
      format.html # show.html.erb
      format.json { render json: @user }
