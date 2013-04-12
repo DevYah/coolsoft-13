@@ -39,6 +39,7 @@ describe CommentsController do
         @usertwo.save
         @idea = Idea.new
         @idea.description=@idea.problem_solved=@idea.title="Daynaaaaaa"
+        @idea.save
         @comment = Comment.new
         @comment.content = "Dayna's comment"
         @comment.user_id = @userone.id
