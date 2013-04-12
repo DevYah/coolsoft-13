@@ -133,7 +133,7 @@ class UsersController < ApplicationController
   end
 
   before_filter :authenticate_user!, :only => [:approve_committee, :reject_committee]
-  # Sends mail confirming registration
+  # Sends mail confirming registration and if the user is not even a committee member the admin is notified of so
   # Params: 
   # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
   # Author: Mohammad Abdulkhaliq
@@ -143,13 +143,20 @@ class UsersController < ApplicationController
       return
     end
 	  @user = User.find(params[:id])
-    @user.approved = true
-    @user.save
-    respond_to do |format|
-      Inviter.committee_accept(@user.email).deliver
-      format.html  { redirect_to('/', :notice => 'User successfully initiated as a Committee.') }
-      format.json  { head :no_content }
-    end
+	  if @user.is_a? Committee
+			 @user.approved = true
+			 @user.save
+			respond_to do |format|
+				UserMailer.committee_accept(@user).deliver
+				format.html  { redirect_to('/', :notice => 'User successfully initiated as a Committee.') }
+				format.json  { head :no_content }
+			end
+		else
+			respond_to do |format|
+				format.html  { redirect_to('/', :notice => 'User not a Committee.') }
+				format.json  { head :no_content }
+			end
+		end
   end
   
   # Remove the user's status as a committtee
@@ -163,16 +170,19 @@ class UsersController < ApplicationController
       return
     end
     @user = User.find(params[:id])
-    @user.type = nil
-    respond_to do |format|
-      if @user.save
-        Inviter.committee_reject(@user.email).deliver
-        format.html  { redirect_to('/', :notice => 'User successfully rejected as a Committee.') }
-        format.json  { head :no_content }
+      if @user.is_? Committee 
+				@user.type = nil
+				@user.save
+        UserMailer.committee_reject(@user).deliver
+        respond_to do |format|
+					format.html  { redirect_to('/', :notice => 'User successfully rejected as a Committee.') }
+					format.json  { head :no_content }
+				end
       else
-        format.html  { redirect_to('/', :notice => @user.errors.full_messages) }
-        format.json  { render :json => :no_content }
-      end
+			respond_to do |format|
+				format.html  { redirect_to('/', :notice => 'User not a Committee.') }
+				format.json  { head :no_content }
+			end
     end
   end
 end

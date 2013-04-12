@@ -7,10 +7,14 @@ class ApplicationController < ActionController::Base
   # none
   # Author: Mohamed Sameh
   def after_sign_in_path_for(resource)
-    if current_user.sign_in_count == 1
-      if current_user.is_a? Committee
-        '/users/expertise'
+    if current_user.is_a? Committee
+      if current_user.sign_in_count == 1 
+				ApproveCommitteeNotification.send_notification(resource,Admin.all)
+				'/users/expertise'
       else
+				unless ApproveCommitteeNotification.where(:user_id => resource.id)
+					ApproveCommitteeNotification.send_notification(resource,Admin.all)
+				end
         '/'
       end
     else
