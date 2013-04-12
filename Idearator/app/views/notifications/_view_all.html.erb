@@ -106,13 +106,13 @@
       <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
         <div class = 'well notification approve-committee unread' data-notification = <%= notification.user.id %>>
           <span><%= notification.user.username %> has signed up as a committee member</span>
-          <div class = 'link'><%= link_to 'review committee', {controller: 'committees', action: 'review' }  %></div>
+          <div class = 'link'><%= link_to 'review committee', notification.user%></div>
           <br><span class = 'date'><%= notification.created_at.to_s(:long)%></span>
         </div>
       <% else %>
         <div class = 'well notification approve-committee read' data-notification = <%= notification.user.id %>>
           <span><%= notification.user.username %> has signed up as a committee member</span>
-          <div class = 'link'><%= link_to 'review committee', {controller: 'committees', action: 'review' } %></div>
+          <div class = 'link'><%= link_to 'review committee', notification.user %></div>
           <br><span class = 'date'><%= notification.created_at.to_s(:long)%></span>
         </div>
       <% end %>
