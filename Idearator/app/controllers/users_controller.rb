@@ -1,3 +1,5 @@
+
+
 class UsersController < ApplicationController
 	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag]
 
@@ -7,7 +9,6 @@ class UsersController < ApplicationController
 	def confirm_deactivate
 		@user = current_user
 	end
-  
 	#method checks the entered password if it's the current users password 
 	#it changes the value of his active field to false and signs him out. 
 	#Params: 
@@ -37,7 +38,6 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-
 	#method sets the active field of the current user to true
 	#Params: none
 	#Author: Amina Zoheir
@@ -47,53 +47,5 @@ class UsersController < ApplicationController
 			format.html { falsh[:notice] = 'Successfully reactivated' }
 			format.json { head :no_content }
 		end
-
-	# POST /users
-  # POST /users.json
-  def create
-    @user = User.new(params[:user])
- 
-    respond_to do |format|
-      if @user.save
-        # Tell the UserMailer to send a welcome Email after save
-        UserMailer.welcome_email(@user).deliver
- 
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.json { render :json => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # Enter chosen notification settings chosen by user in table User
-	# Params:
-	# +user[]+:: the parameter is an instance of +user+ passed through the form from settings action
-	# Author: Mohamed Sameh
-  def change_settings
-		if params[:user] != nil
-			settings= params[:user]
-			s= User.find(current_user)
-			if settings.include?('1')
-				s.own_idea_notifications= true
-			else
-				s.own_idea_notifications= false
-			end
-			if settings.include?('2')
-				s.participated_idea_notifications= true
-			else
-				s.participated_idea_notifications= false
-			end
-			s.save
-		else
-			s= User.find(current_user)
-			s.own_idea_notifications= false
-	   	s.participated_idea_notifications= false
-			s.save
-	  end
-	  respond_to do |format|
-	  	format.js {}
-	  end
 	end
 end

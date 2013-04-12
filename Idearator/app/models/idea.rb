@@ -6,8 +6,6 @@ class Idea < ActiveRecord::Base
   has_many :ratings
   belongs_to :committee
   has_and_belongs_to_many :tags
-  has_and_belongs_to_many :users, :join_table => :votes
-  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   has_and_belongs_to_many :votes, :class_name => 'User', :join_table => :votes
   has_attached_file :photo, :styles => { :small => '60x60>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 end
