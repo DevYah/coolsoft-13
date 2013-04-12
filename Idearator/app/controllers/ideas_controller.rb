@@ -27,11 +27,24 @@ class IdeasController < ApplicationController
     end
   end
 
+# filters the ideas that have one or more of given tags
+# Params:
+# +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
+# Author: muhammed hassan
+  def filter()
+    @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
+    @tags = params[:myTags]
+    respond_to do |format|
+      format.js
+      format.json  { render :json => @approved }
+    end
+  end
+
   # editing Idea
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
-  def edit   
+  def edit
     @idea = Idea.find(params[:id])
     @tags = Tag.all
     @chosentags = Idea.find(params[:id]).tags
@@ -94,6 +107,40 @@ class IdeasController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  # Deletes all records related to a specific idea
+  # Params:
+  # +id+:: is used to specify which instance of +Idea+ will be deleted
+  # Author: Mahmoud Abdelghany Hashish
+  def destroy
+    idea = Idea.find(params[:id])
+
+    if current_user.id == idea.user_id
+      list_of_comments = Comment.where(idea_id: idea.id)
+      list_of_commenters = []
+      list_of_voters = idea.votes
+      idea.destroy
+
+      list_of_comments.each do |c|
+        c.destroy
+      end
+
+      list_of_comments.each do |c|
+        list_of_commenters.append(User.find(c.user_id)).flatten!
+      end
+
+      list = list_of_commenters.append(list_of_voters).flatten!
+
+      DeleteNotification.send_notification(current_user, idea, list)
+
+      respond_to do |format|
+        format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
       end
     end
   end
