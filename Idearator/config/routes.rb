@@ -1,5 +1,4 @@
 Sprint0::Application.routes.draw do
-<<<<<<< HEAD
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
