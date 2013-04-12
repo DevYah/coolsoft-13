@@ -67,7 +67,7 @@ Sprint0::Application.routes.draw do
 
 
   match "/review_ideas" => "committees#review_ideas"
-    
+  match "/users/send_expertise" => "users#send_expertise"
   match '/users/:id/invite_member' => 'users#invite_member'
   match '/users/reject_invitation' => 'users#reject_invitation'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
