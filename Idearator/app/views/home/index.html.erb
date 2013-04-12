@@ -1,8 +1,21 @@
-        
-  <%= render :partial => 'stream' %>
-<p id="notice"><%= notice %></p>
+
+<div id='tags'>
+  <% if @tags2 %>
+    <% @tags2.each do |tag| %>
+      <label><%= tag %></label>
+    <% end %>
+  <% end %>
+</div>
+
+<%= render 'ideas/show' %>
+<div id = "IdeaStream">
+  <div class = "page">
+    <%= render :partial => 'stream' %>
+  </div>
+</div>
+
   <% content_for :sidebar do %>
-    <div class="topten pull-right">
+    <div class="topten">
       <h1>Top Ten Ideas</h1>
       <div class="media">
         <% @top.each do |top| %>
@@ -10,11 +23,12 @@
             <div class="topten_idea">
               <a class="pull-left" href="#">
                 <span><%= image_tag(top.photo.url(:thumb), :size => "30x20") %></span>
+
               </a>
               <div class="media-body">
                 <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
                 <span><%= top.num_votes %></span>
-                <span><%= link_to  top.user.username, top  %></span>
+                <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
               </div>
             </div>
           <% end %>
