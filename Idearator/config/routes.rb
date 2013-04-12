@@ -10,7 +10,8 @@ Sprint0::Application.routes.draw do
   devise_for :committees, :controllers => { :registrations => "registrations" }
   match '/ideas/:id/vote' => 'ideas#vote'
   match '/ideas/:id/unvote' => 'ideas#unvote'
-
+  match "/ideas/:id/archive" => "ideas#archive"
+  match "/ideas/:id/unarchive" => "ideas#unarchive"
 
 
   # The priority is based upon order of creation:
