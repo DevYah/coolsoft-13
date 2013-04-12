@@ -29,6 +29,13 @@ namespace :db do
 			t.save
 		end
 
+		50.times do |n|
+			r = Rating.new
+			r.name = Faker::Name.name
+			r.save
+		end
+
+
 
 		50.times do |n|
 			it = IdeasTags.new

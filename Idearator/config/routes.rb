@@ -10,6 +10,7 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
   get '/tags/ajax'
+  get '/ratings/ajax'
   default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :committees, :controllers => { :registrations => 'registrations' }
