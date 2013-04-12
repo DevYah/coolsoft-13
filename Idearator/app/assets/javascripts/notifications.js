@@ -1,6 +1,6 @@
 function add_notification_event_handlers() {
   $('div.invite-committee').click(function () {
-    window.location.href='/users/_modal_expertise';
+    $.getScript("/users/expertise")
   });
 
   $('div.idea').click(function () {
