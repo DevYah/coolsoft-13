@@ -34,6 +34,10 @@ group :test, :development do
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.0'
 end
+group :test do
+	gem 'capybara'
+	gem 'rspec-html-matchers'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
