@@ -8,13 +8,12 @@ Sprint0::Application.routes.draw do
 
 
 
-
-  default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :registrations => "registrations" }
-
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
 
 
-  devise_for :committees, :controllers => { :registrations => "registrations" }
+
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
   # The priority is based upon order of creation:
@@ -38,7 +37,6 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  #root:to =>'ideas#index'
   root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do

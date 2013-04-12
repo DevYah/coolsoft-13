@@ -1,2 +1,5 @@
+// updates the drop down list of notifications and updates the displayed number of unread notifications.
+// Params: none
+// Author: Amina Zoheir
 $("#update-dropdown").html("<%= escape_javascript(render(:partial => "notifications/view_notifications")) %>");
 $("#count").html("<%= escape_javascript(render(:partial => "notifications/count_notifications")) %>");
