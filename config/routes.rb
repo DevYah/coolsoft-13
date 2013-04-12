@@ -27,10 +27,17 @@ default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :committees, :controllers => { :registrations => 'registrations' }
 
+
   #get "ideas/new"
   resources :ideas, :dashboard, :users
    resources :ideas, :controller =>'ideas'
 
+  #get "ideas/new"
+  resources :ideas, :dashboard, :users
+
+ 
+  resources :ideas, :dashboard
+  resources :users
   #get "ideas/new"
 
   get '/tags/ajax'

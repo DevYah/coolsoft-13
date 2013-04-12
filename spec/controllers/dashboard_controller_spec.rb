@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 require 'spec_helper'
-
+include Devise::TestHelpers
 describe DashboardController do
   describe 'GET #gettags' do
     it 'populates one tags' do
