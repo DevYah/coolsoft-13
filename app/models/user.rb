@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :username, :date_of_birth, :type, :active, :first_name, :last_name,
                   :gender, :about_me, :recieve_vote_notification,
-                  :recieve_comment_notification, :provider, :uid , :photo
+                  :recieve_comment_notification, :provider, :uid , :photo, :approved
 
-  has_many :idea_notifications
-  has_many :user_notifications
+  has_many :sent_idea_notifications, class_name: 'IdeaNotification'
+  has_many :sent_user_notifications, class_name: 'UserNotification'
   has_many :ideas
   has_many :comments
   has_many :user_ratings
@@ -26,5 +26,5 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :comments, :join_table => :likes
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
-  has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>",:thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+  has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 end
