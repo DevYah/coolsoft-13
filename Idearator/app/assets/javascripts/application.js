@@ -14,8 +14,10 @@
 //= require bootstrap
 //= require_tree .
 
-$(document).bind("ajaxError", function(){
-	$('#signedout').modal('show');
+$(document).bind("ajaxError", function(e, xhr){
+	if(xhr.status == 401){
+		$('#signedout').modal('show');
+	}
 });
 
 $(document).ready(function() {
