@@ -143,13 +143,10 @@ class TagsController < ApplicationController
   # Else if the entered name already has a tag and a connection to the  
   # parent tag nothing is done and the user is informed so that the 
   # synonym already exists
-  # * *Args*    :
-  #   - +tag.id+ -> Tag id to add synonyms to
-  # * *Returns* :
-  #   - The updated Show#Tags/:id view 
-  # * *Raises* :
-  #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
-  #
+  # Params:
+  # +id+:: The parameter is an instance of +Tag+ passed through params[:id] sent from the show view
+  # +name+:: The parameter is an instance of +String+ passed through params[:tag][:name] sent from the show view
+  # Author: Mohammad Abdulkhaliq
   def addsym
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -185,7 +182,12 @@ class TagsController < ApplicationController
       end
     end
   end
-  
+
+  # This method deletes the selected synonym from particular tag tags lis
+  # Params:
+  # +id+:: The parameter is an instance of +Tag+ passed through params[:id] sent from the show view
+  # +sym+:: The parameter is an instance of +Tag+ passed through params[:sym] sent from the show view
+  # Author: Mohammad Abdulkhaliq
   def delsym
     @tag = Tag.find(params[:id])
     @tag2 = Tag.find(params[:sym])
