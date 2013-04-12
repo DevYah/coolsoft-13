@@ -81,7 +81,7 @@ class IdeasController < ApplicationController
   # Author: Mahmoud Abdelghany Hashish
   def archive
     idea = Idea.find(params[:id])
-    
+
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = true
       idea.save
@@ -93,11 +93,11 @@ class IdeasController < ApplicationController
       end
 
       list = list_of_commenters.append(idea.votes).flatten!
-      
+
       if current_user.type == 'Admin'
         list.append(User.find(idea.user_id)).flatten!
       end
-      
+
       ArchiveNotification.send_notification(current_user, idea, list)
 
       idea.votes.each do |u|
@@ -106,7 +106,7 @@ class IdeasController < ApplicationController
 
       idea.comments.each do |c|
         c.destroy
-      end  
+      end
 
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea has been successfully archived.' }
@@ -122,7 +122,7 @@ class IdeasController < ApplicationController
   # Unarchives a specific idea
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be unarchived
-  # Author: Mahmoud Abdelghany Hashish    
+  # Author: Mahmoud Abdelghany Hashish
   def unarchive
     idea = Idea.find(params[:id])
 
