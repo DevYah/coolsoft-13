@@ -1,4 +1,5 @@
 Sprint0::Application.routes.draw do
+
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
@@ -6,13 +7,19 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
 
+  get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
 
-  default_url_options :host => 'localhost:3000'
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+  root :to => 'home#index'
 
+  default_url_options :host => "localhost:3000"
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
+  devise_scope :user do
+  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+end
 
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
   # The priority is based upon order of creation:
@@ -36,7 +43,6 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
