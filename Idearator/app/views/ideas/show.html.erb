@@ -1,3 +1,5 @@
+<div id="fb-root"></div>
+<p id="notice"><%= notice %></p>
 <div class='media'>
 	<a  class="pull-left" href="#">
 		<%= image_tag @idea.photo.url(:medium) %>
@@ -25,3 +27,10 @@
 	</p>
 </div>
 <td><%= link_to 'Back', '/',:class => "btn" %></td>
+<%if @idea.archive_status == false%>
+	<button id="share" class="btn btn-primary" type="button">Share</button>	
+	<div id="show" class="container"> 
+		<%= image_tag("f_logo.jpg", :id => "fbk")%>
+		<%= image_tag("twitter-bird-white-on-blue.jpg", :id => "tw")%>
+	</div>		
+<%end%>
