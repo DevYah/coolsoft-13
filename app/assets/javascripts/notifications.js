@@ -1,10 +1,5 @@
 function add_notification_event_handlers() {
-  
-  $.get("ajax_request", function(data, status){
-		if(status=="success"){
-    $('div#expertise').appendTo("body").modal()
-	}
-  });
+	
 
   $('div.idea').click(function () {
     var idea = this.getAttribute('data-notification')
