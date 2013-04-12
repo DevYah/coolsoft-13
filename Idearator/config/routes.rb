@@ -3,17 +3,18 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
   match '/ideas/filter' => 'ideas#filter'
+  match '/users/change_settings' => 'users#change_settings'
+
   #get "ideas/new"
-  resources :ideas, :controller =>'ideas'
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
-
-  get '/tags/ajax'
-
+  resources :ideas
 
   default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
+  resources :ideas, :controller =>'ideas'
 
+  #get "ideas/new"
 
+  get '/tags/ajax'
 
   devise_for :committees, :controllers => { :registrations => 'registrations' }
 
