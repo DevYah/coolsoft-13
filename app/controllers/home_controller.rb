@@ -24,7 +24,6 @@ class HomeController < ApplicationController
           format.html # index.html.erb
           format.xml  { render :xml => @approved }
         end
-    end 
-  end
+  end 
 end
 
