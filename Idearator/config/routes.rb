@@ -25,11 +25,13 @@ Sprint0::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks', :registrations => 'registrations' }
 
   devise_scope :user do
-  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
-end
+    match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+  end
 
 
   match '/ideas/update' => 'ideas#update'
+
+  resources :ideas, :controller =>'ideas'
 
 
 
@@ -54,6 +56,8 @@ end
   #     resources :comments, :sales
   #     resource :seller
   #   end
+  #root:to =>'ideas#index'
+  root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -71,7 +75,7 @@ end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
- #root :to => 'ideas#show'
+ #root :to => 'ideas#index'
 
   # See how all your routes lay out with "rake routes"
 

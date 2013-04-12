@@ -10,4 +10,8 @@ class CreateVoteCounts < ActiveRecord::Migration
       t.column :curr_day_votes, :integer, :default => 0
     end
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> parent of 051299b... Revert "Merge branch 'C3_Marwa_39_SubmitEditIdea' into C1_AminaZoheir_#73_ViewNotifications"

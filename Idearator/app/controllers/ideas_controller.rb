@@ -33,7 +33,7 @@ class IdeasController < ApplicationController
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
-  def edit   
+  def edit
     @idea = Idea.find(params[:id])
     @tags = Tag.all
     @chosentags = Idea.find(params[:id]).tags
