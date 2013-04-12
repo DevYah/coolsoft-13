@@ -25,7 +25,7 @@
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Committee %>
-      <li><%=link_to 'You have been invited!', :url => {:controller => 'users', :action => 'send_expertise' }, :method => 'get', :remote => true %></li>
+      <%= link_to 'You have been invited', {controller: 'users', action: 'send_expertise'},remote: true%>
       <li class="divider"></li>
     <% end %>
      <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Admin and @stat[notification.id][0] and not invitations.empty?%>
