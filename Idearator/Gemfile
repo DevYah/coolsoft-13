@@ -36,6 +36,7 @@ group :test, :development do
 end
 group :test do
 	gem 'capybara'
+	gem 'rspec-html-matchers'
 end
 
 # To use ActiveModel has_secure_password
