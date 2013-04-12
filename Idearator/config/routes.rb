@@ -21,6 +21,9 @@ Sprint0::Application.routes.draw do
 end
 
 
+  match '/ideas/update' => 'ideas#update'
+  devise_for :committees, :controllers => { :registrations => "registrations" }
+
 
 
   # The priority is based upon order of creation:
@@ -81,5 +84,7 @@ end
   match '/notifications/redirect_idea' => 'notifications#redirect_idea'
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+
+  resources :users
 
 end
