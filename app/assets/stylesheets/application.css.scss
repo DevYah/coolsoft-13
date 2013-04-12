@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require token-input-facebook
  *= require_tree .
  */
 .content {
@@ -35,4 +36,11 @@
 
 .bulbContainer{
   width: 780px;
+}
+#myModal{
+	display:none;
+}
+
+.icon-user{
+  padding-right:10px;
 }
