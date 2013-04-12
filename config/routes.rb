@@ -22,11 +22,15 @@ default_url_options :host => 'localhost:3000'
   match '/users/change_settings' => 'users#change_settings'
 
 
+  default_url_options :host => 'localhost:3000'
+ 
   resources :ideas, :controller =>'ideas'
+
 
   #get "ideas/new"
 
   get '/tags/ajax'
+
 
 
 
@@ -83,6 +87,7 @@ default_url_options :host => 'localhost:3000'
   match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
+  match '/users/:id/ban_unban' => 'admins#ban_unban'
   match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
   match '/all_notifications.js' => 'notifications#view_all_notifications'
   match '/notifications.js' => 'application#update_nav_bar'
@@ -90,6 +95,5 @@ default_url_options :host => 'localhost:3000'
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
   resources :users
-
 
 end

@@ -102,8 +102,26 @@ class UsersController < ApplicationController
 		end
 	end
 
+
+  #This method is used to generate the view of each User Profile. A specific user and his ideas are made
+  #available to the view to be presented in the appropriate manner.
+  #Author: Hisham ElGezeery
+  def show
+    @user = User.find(params[:id])
+    @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
+    @admin = current_user
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @user }
+  	end
+  end 
+
+
 	# POST /users
   # POST /users.json
+	
+  # This method creates a new User and calls UserMailer to send a confirmation email.
+  #Author: Menna Amr
   def create
     @user = User.new(params[:user])
  
