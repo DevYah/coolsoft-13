@@ -93,7 +93,7 @@ describe CommitteesController do
         sign_in(@committee)
         get :disapprove, :id => @idea.id
         @idea.reload
-        (@idea.approved).should eql(false)
+        (@idea.approved).should eql(-1)
       end
     end
     describe "add_rating" do
@@ -112,9 +112,9 @@ describe CommitteesController do
         sign_in(@committee)
         get :add_prespectives , :id => @idea.id
         @idea.reload
-        (@idea.approved).should eql(true)
+        (@idea.approved).should eql(1)
       end
-      it "approves the idea" do
+      it "add rating prespectives to the idea" do
         @committee=Committee.new
         @committee.email='c@gmail.com'
         @committee.password=123123123

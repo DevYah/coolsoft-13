@@ -5,7 +5,7 @@ before_filter :authenticate_user!
   def review_ideas 
     @committee=current_user
     if @committee.type == "Committee"
-      @ideas=Idea.find(:all, :conditions =>{:approved => false})
+      @ideas=Idea.find(:all, :conditions =>{:approved => 0})
       @ideas.reject! do |i|
         (i.tags & @committee.tags).empty?         
       end
@@ -21,7 +21,7 @@ before_filter :authenticate_user!
   def disapprove
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
-      @idea.approved = false
+      @idea.approved = -1
       @idea.save
       DisapproveIdeaNotification.send_notification(current_user, @idea, [@idea.user])
       flash[:notice] = 'The idea has been disapproved'
@@ -33,7 +33,7 @@ before_filter :authenticate_user!
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
       session[:idea_id]=params[:id]
-      @idea.approved = true
+      @idea.approved = 1
       @idea.save
     else
       respond_to do |format|
