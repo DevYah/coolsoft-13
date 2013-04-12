@@ -1,5 +1,4 @@
 namespace :db do
-
 	desc "Fill Users and Ideas."
 	task :populate => :environment do
 
@@ -49,5 +48,4 @@ namespace :db do
 
 
 	end	
-
 end

@@ -1,7 +1,5 @@
-
-
 class UsersController < ApplicationController
-	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag]
+	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
 
 
 	# displays a form where the user enters his password to confrim deactivation.
@@ -104,7 +102,6 @@ class UsersController < ApplicationController
 		end
 	end
 
-
 	# POST /users
   # POST /users.json
   def create
@@ -123,4 +120,34 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  # Enter chosen notification settings chosen by user in table User
+	# Params:
+	# +user[]+:: the parameter is an instance of +user+ passed through the form from settings action
+	# Author: Mohamed Sameh
+  def change_settings
+		if params[:user] != nil
+			settings= params[:user]
+			s= User.find(current_user)
+			if settings.include?('1')
+				s.own_idea_notifications= true
+			else
+				s.own_idea_notifications= false
+			end
+			if settings.include?('2')
+				s.participated_idea_notifications= true
+			else
+				s.participated_idea_notifications= false
+			end
+			s.save
+		else
+			s= User.find(current_user)
+			s.own_idea_notifications= false
+	   	s.participated_idea_notifications= false
+			s.save
+	  end
+	  respond_to do |format|
+	  	format.js {}
+	  end
+	end
 end

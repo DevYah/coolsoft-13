@@ -10,7 +10,7 @@ Sprint0::Application.configure do
   #for windows
   #Paperclip.options[:command_path] = "C:\Program Files (x86)\ImageMagick-6.8.4-Q16"
   #for ubuntu
-  Paperclip.options[:command_path] = "/usr/local/bin/"
+  Paperclip.options[:command_path] = '/usr/local/bin/'
 
 
   config.cache_classes = false
