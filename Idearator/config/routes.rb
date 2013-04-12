@@ -4,25 +4,34 @@ Sprint0::Application.routes.draw do
   match '/home/index' => 'home#index'
   match '/admins/invite' => 'admins#invite'
   match '/admins/invite_committee' => 'admins#invite_committee'
+  match '/dashboard/index' => 'dashboard#index'
+  match 'dashboard/getallideas' => 'dashboard#getallideas'
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+  match '/dashboard/gettags' => 'dashboard#gettags'
+  match '/dashboard/getideas' => 'dashboard#getideas'
+  match '/home/search' => 'home#search'
+
+default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
+  resources :ideas, :dashboard
+  resources :users
   
   match '/ideas/filter' => 'ideas#filter'
   match '/users/change_settings' => 'users#change_settings'
 
-  #get "ideas/new"
-  resources :ideas
-  resources :tags
 
-
-  default_url_options :host => 'localhost:3000'
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+ 
   resources :ideas, :controller =>'ideas'
 
 
+  #get "ideas/new"
 
   get '/tags/ajax'
 
 
-  devise_for :committees, :controllers => { :registrations => "registrations" }
 
 
   # The priority is based upon order of creation:
@@ -68,8 +77,10 @@ Sprint0::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # This is a legacy wild controller route that's not recommended
+  # for RESTful applications.
+  # Note: This route will make all actions in every controller
+  # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
 

@@ -83,6 +83,7 @@ GEM
     faker (1.1.2)
       i18n (~> 0.5)
     formatador (0.2.4)
+    google_visualr (2.1.7)
     guard (1.7.0)
       formatador (>= 0.2.4)
       listen (>= 0.6.0)
@@ -114,7 +115,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.22)
     multi_json (1.7.2)
-    nokogiri (1.5.9)
+    nokogiri (1.5.9-x86-mingw32)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
@@ -123,10 +124,11 @@ GEM
       cocaine (~> 0.5.0)
       mime-types
     polyglot (0.3.3)
-    pry (0.9.12)
+    pry (0.9.12-x86-mingw32)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+      win32console (~> 1.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -195,6 +197,8 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    win32console (1.3.2-x86-mingw32)
+
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -208,6 +212,7 @@ DEPENDENCIES
   devise
   factory_girl_rails (~> 4.0)
   faker
+  google_visualr (~> 2.1.0)
   guard-rspec
   jquery-rails
   jquery-tokeninput-rails
