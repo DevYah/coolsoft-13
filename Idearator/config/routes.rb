@@ -1,4 +1,3 @@
-
 Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
@@ -11,14 +10,31 @@ Sprint0::Application.routes.draw do
   match '/dashboard/gettags' => 'dashboard#gettags'
   match '/dashboard/getideas' => 'dashboard#getideas'
   match '/home/search' => 'home#search'
+  match '/users/:id/ban_unban' => 'admins#ban_unban'
+  match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
+  match '/all_notifications.js' => 'notifications#view_all_notifications'
+  match '/notifications.js' => 'application#update_nav_bar'
+  match '/notifications/redirect_idea' => 'notifications#redirect_idea'
+  match '/notifications/redirect_review' => 'notifications#redirect_review'
+  match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  match '/ideas/filter' => 'ideas#filter'
+  match '/users/change_settings' => 'users#change_settings'
 
 default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :committees, :controllers => { :registrations => 'registrations' }
   #get "ideas/new"
-  resources :ideas, :dashboard
-  resources :users
-  
+  resources :ideas, :dashboard, :users
+
+ 
+  default_url_options :host => 'localhost:3000'
+ 
+  resources :ideas, :controller =>'ideas'
+
+
+  #get "ideas/new"
+
+  get '/tags/ajax'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -41,7 +57,6 @@ default_url_options :host => 'localhost:3000'
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  #root:to =>'ideas#index'
   root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
@@ -60,11 +75,14 @@ default_url_options :host => 'localhost:3000'
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
- #root :to => 'ideas#index'
+ #root :to => 'ideas#show'
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # This is a legacy wild controller route that's not recommended
+  # for RESTful applications.
+  # Note: This route will make all actions in every controller
+  # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
 end

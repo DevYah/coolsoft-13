@@ -1,7 +1,7 @@
 class DropCommitteeIdeas < ActiveRecord::Migration
-  #Drop redundant table.
+	#Drop redundant table.
   def up
-    drop_table :committee_ideas
+  	drop_table :committee_ideas
   end
 
   def down

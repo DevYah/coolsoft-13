@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require 'spec_helper'
 include Devise::TestHelpers
 describe DashboardController do
@@ -59,15 +60,14 @@ describe DashboardController do
       assigns(:ideatags).size.should eq(0)
     end
   end
+end
+  include Devise::TestHelpers
 
-
-  
-
-  describe 'GET #getideas' do
-    it 'returns chart  ' do
-      l=User.new
-      l.email = "lina@gmail.com"
-      l.password = "123123123"
+  describe 'GET #graph' do
+   it 'returns chart  ' do
+     l=User.new
+     l.email = "lina@gmail.com"
+     l.password = "123123123"
       l.first_name = "lina"
       l.save
       tag = Tag.new
@@ -76,9 +76,9 @@ describe DashboardController do
       sign_in l
 
       20.times do
-        i = Idea.new
-        i.user_id = l.id
-        i.title = Faker::Name.name
+       i = Idea.new
+       i.user_id = l.id
+       i.title = Faker::Name.name
         i.description = Faker::Lorem.paragraph
         i.problem_solved = Faker::Lorem.paragraph
         i.approved = 'true'
@@ -90,7 +90,7 @@ describe DashboardController do
         tagidea.idea_id = i.id
         tagidea.save
       end 
-      get :getideas, :tagid => tag.id
+      get :graph, :tagid => tag.id
       assigns(:no).should eq(20)
     end
   end
