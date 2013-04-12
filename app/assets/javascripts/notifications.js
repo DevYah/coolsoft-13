@@ -1,5 +1,5 @@
 function add_notification_event_handlers() {
-  $('div.invite-committee').click(function () {
+  $('btn').click(function () {
     $('div#expertise').appendTo("body").modal()
   });
 
