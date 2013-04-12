@@ -110,7 +110,7 @@ describe CommitteesController do
         @idea.save  
         session[:idea_id]=@idea.id
         sign_in(@committee)
-        get :add_rating , :id => @idea.id, :rating => ['ay 7aga']
+        get :add_prespectives , :id => @idea.id
         @idea.reload
         (@idea.approved).should eql(true)
       end

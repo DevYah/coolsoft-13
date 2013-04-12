@@ -33,6 +33,8 @@ before_filter :authenticate_user!
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
       session[:idea_id]=params[:id]
+      @idea.approved = true
+      @idea.save
     else
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
@@ -46,8 +48,6 @@ before_filter :authenticate_user!
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(session[:idea_id])
-      @idea.approved = true
-      @idea.save
       @rating = params[:rating]
       @rating.each do |rate|
         r = @idea.ratings.build
