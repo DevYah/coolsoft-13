@@ -128,12 +128,12 @@ class UsersController < ApplicationController
 	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
 	# Author: Mohammad Abdulkhaliq
   def reject_invitation
-    @user = User.find(current_user.id)
+    @user = User.find(current_user)
     id = current_user.id
     @user.type = nil
     @user.save
     current_user = User.find(id)
-    current_user sign_in
+    #current_user sign_in
     InviteCommitteeNotification.send_notification(current_user, Admin.all)
 		respond_to do |format|
 			format.html { redirect_to '/', notice: 'Rejected Invitation to become Committee' }
@@ -176,10 +176,16 @@ class UsersController < ApplicationController
 			format.json { head :no_content }
     end
   end
-  
+  # Sends tags and current user as an ajax response
+  # to whoever calls it
+  # Params: 
+  # +current_user+:: this parameter is an instance of +User+ passed through the devise gem 
+  # Author: Mohammad Abdulkhaliq
   def send_expertise
 		@user = current_user
 		@tags = Tag.all
-		render :partial => "modal_expertise"
+		respond_to do |format|
+			format.js{}
+		end
 	end
 end
