@@ -6,6 +6,7 @@ Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
+  match '/ideas/update' => 'ideas#update'
   devise_for :committees, :controllers => { :registrations => "registrations" }
 
 
@@ -63,6 +64,6 @@ Sprint0::Application.routes.draw do
 
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-
+  resources :users
 
 end

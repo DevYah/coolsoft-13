@@ -1,28 +1,26 @@
 <div class='media'>
-<a  class="pull-left" href="#">
-<%= image_tag @idea.photo.url(:medium) %>
-</a>
-<p>
-<!--!<h2>Title:</h2>-->
-<h3><%= @idea.title %></h3>
-<% if @user == @idea.user_id %>
-<div class="btn-group">
-<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
-<!--! add here archive and delete buttons -->
-</div>
-<h2><%= @username %></h2>
-<%end%>
-</p>
+	<a  class="pull-left" href="#">
+		<%= image_tag @idea.photo.url(:medium) %>
+	</a>
+	<p>
+		<h3><%= @idea.title %></h3>
+		<% if @user == @idea.user_id %>
+			<div class="btn-group">
+				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
+			</div>
+			<h2><%= link_to @username ,@idea.user.becomes(User) %></h2>
+		<%end%>
+	</p>
 </div>
 <div class="media-body">
-<p>
-<h3>Description:</h3>
-<div><%= @idea.description %></div>
-</p>
-<p>
-<h3>Problem Solved:</h3>
-<div><%= @idea.problem_solved  %></div>
-</p>
+	<p>
+		<h3>Description:</h3>
+		<div><%= @idea.description %></div>
+	</p>
+	<p>
+		<h3>Problem Solved:</h3>
+		<div><%= @idea.problem_solved  %></div>
+	</p>
 </div>
 <td><%= link_to 'Back', '/',:class => "btn" %></td>
 
