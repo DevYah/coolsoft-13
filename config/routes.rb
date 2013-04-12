@@ -25,11 +25,20 @@ Sprint0::Application.routes.draw do
 default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :committees, :controllers => { :registrations => 'registrations' }
+
+
   #get "ideas/new"
   resources :ideas, :dashboard, :users
 
  
   default_url_options :host => 'localhost:3000'
+
+  resources :ideas, :dashboard
+  
+  
+  match '/ideas/filter' => 'ideas#filter'
+  match '/users/change_settings' => 'users#change_settings'
+
  
   resources :ideas, :controller =>'ideas'
 
@@ -86,5 +95,5 @@ default_url_options :host => 'localhost:3000'
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
+  resources :users
 end
