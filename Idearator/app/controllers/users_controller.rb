@@ -106,10 +106,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
-    @invited = ApproveCommitteeNotification.where(:user_id => params[:id]).exists?
-    if(Committee.where(:id => params[:id]).exists?)
-      @tags = Tag.all
-    end
+    @registered = @user.approved == false
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
