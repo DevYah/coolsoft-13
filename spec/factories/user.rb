@@ -13,6 +13,7 @@ FactoryGirl.define do
   end
 
   factory :user_two, :class => User do |f|
-  	f.email 'ay7aga2'
+    f.email 'ay7aga'
+    f.password 'mahmoudhashish'
   end
 end

@@ -12,6 +12,7 @@ Sprint0::Application.routes.draw do
   match '/ideas/:id/unvote' => 'ideas#unvote'
   match "/ideas/:id/archive" => "ideas#archive"
   match "/ideas/:id/unarchive" => "ideas#unarchive"
+  resources :user_ratings, :controller => 'user_ratings'
 
 
   # The priority is based upon order of creation:
@@ -67,4 +68,6 @@ Sprint0::Application.routes.draw do
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
   resources :users
+  match '/user_ratings/create' => 'user_ratings#create', :defaults => { :format => 'js' }
+  match '/user_ratings/update' => 'user_ratings#update', :defaults => { :format => 'js' }
 end
