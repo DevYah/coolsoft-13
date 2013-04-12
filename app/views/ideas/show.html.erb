@@ -37,6 +37,7 @@ color: #33C;
 		</p>
 </div>
 	<legend><h4>Comments</h4></legend>
+		<div id='like'>
 		<table>
 			<% @idea.comments.each do |comment| %>
 				<tr>
@@ -52,9 +53,9 @@ color: #33C;
     			</td>
 					<td>
 						<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
-						<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
-							<%= link_to "+1", :controller => 'ideas', :action => 'show', :commentid => comment.id %>
-						<% end %> 
+							<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
+								<%= link_to "+1", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
+							<% end %> 
 							<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
 						<small>
 							<%= comment.num_likes %> likes
@@ -63,6 +64,7 @@ color: #33C;
 				</tr>
 					<% end %>
 		</table>
+		</div>
 <h5>Add a comment:</h5>
 <%= form_for([@idea, @idea.comments.create]) do |f| %>
 
