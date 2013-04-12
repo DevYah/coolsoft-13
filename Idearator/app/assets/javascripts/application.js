@@ -14,7 +14,6 @@
 //= require jquery-ui
 //= require bootstrap
 //= require_tree .
-<<<<<<< HEAD
 
 
 $(document).bind("ajaxError", function(){
@@ -27,7 +26,6 @@ $(document).ready(function() {
   });
 });
 
-=======
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
@@ -41,4 +39,4 @@ $(function() {
 
 	});
 });
->>>>>>> C4_master_preview
+

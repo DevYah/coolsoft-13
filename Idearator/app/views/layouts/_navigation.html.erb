@@ -1,4 +1,39 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
+<% if !user_signed_in? %>
+  <ul class="nav">
+      <li>
+        <%= link_to('Register', new_user_session_path)  %>
+      </li>
+    <li>
+    <%= link_to('Login', new_user_session_path)  %>
+    </li>
+<% end %>
+<% if user_signed_in? %>
+  <% if current_user.is_a? Committee%>
+    <ul class="nav">
+      <li>
+        <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+      </li>
+  <% else %>
+    <ul class="nav">
+      <% if current_user.ideas != nil %>
+        <li>
+        <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+      </li>
+  <% end %>
+<% end %>
+  <li>
+    <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
+  <p class = "input-append">
+    <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
+     <button class='btn btn-info'>
+        <i class="icon-search icon-white"></i>
+    </button>
+  </p>
+<% end %>
+  </li>
+</ul>
+<% end %> 
 <% if user_signed_in? %>
   <ul class="nav pull-right">
     <li class="dropdown">
@@ -19,41 +54,4 @@
       </ul>
     </li>
   </ul>
-<% else %>
-  <ul class="nav">
-      <li>
-        <%= link_to('Register', new_user_session_path)  %>
-      </li>
-    <li>
-    <%= link_to('Login', new_user_session_path)  %>
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-  <% if current_user.is_a? Committee%>
-  <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% else %>
-  <% if current_user.ideas != nil %>
-    <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% end %>
-  <% end %>
-  <% end %>
-  <li>
-    <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
-  <p class = "input-append">
-    <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
-     <button class='btn btn-info'>
-        <i class="icon-search icon-white"></i>
-    </button>
-  </p>
 <% end %>
-  </li>
-</ul>
