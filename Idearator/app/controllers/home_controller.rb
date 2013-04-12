@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 	#of 10 ideas.
 	#Params:
 	#+page+:: the parameter is the page user is currently browsing.
-	#Author: Hesham Nabil
+	#Author: Hesham Nabil ,Muhammed Hassan
 	def index
     if(params[:myTags])
       if(params[:myTags].length>0)
