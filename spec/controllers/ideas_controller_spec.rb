@@ -74,8 +74,8 @@ describe IdeasController do
         expect { delete :destroy, :id => @idea.id }.to change(Vote, :count).by(0)
       end
     end
-  end
-  describe "GET #show" do
+
+    describe "GET #show" do
     before :each do
       @user = FactoryGirl.build(:user)
       @user.confirm!
@@ -93,6 +93,7 @@ describe IdeasController do
       response.should render_template :show
     end
   end
+
   describe "GET #new" do
     before :each do
       @user = FactoryGirl.build(:user)
@@ -102,20 +103,25 @@ describe IdeasController do
     it "assigns a new Idea to @idea" do
       @idea = FactoryGirl.create(:idea)
       get :new
+      assigns(:idea).should equal(@idea)
     end
     it "renders the #new view" do
       get :new, :format => "html"
+      response.should render_template 'new'
     end
   end
+
   describe "POST #create" do
    it "creates a new idea" do
       @idea=Idea.new
       @idea.title=@idea.description=@idea.problem_solved="ay7aga"
       @idea.save
-      post :create
+      post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
       @idea.reload
+      Idea.last.should eq(@idea)
     end
   end
+
   describe "POST #edit" do
     it "edits an idea" do
       @idea1=Idea.new
@@ -124,22 +130,12 @@ describe IdeasController do
       @tag1.name="blah"
       @tag1.save
       @idea1.save
-      @idea2=Idea.new
-      @idea2.title=@idea2.description=@idea2.problem_solved="this"
-      @tag2=@idea2.tags.new
-      @tag2.name="blah"
-      @tag2.save
-      @idea2.save
-      @idea1.title=@idea2.title
-      @idea1.description=@idea2.description
-      @idea1.problem_solved=@idea2.problem_solved
-      @tag1=@tag2
-      @tag1.save
-      @idea1.save
-      put :update
+      put :update, :id => @idea1.id, :idea => { :title => "ay title" }
       @idea1.reload
+      @idea1.title.should eq('ay title')
     end
-  end
+  end 
+
   context 'user wants to vote' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -166,7 +162,7 @@ describe IdeasController do
         (@numvotes).should eql(@idea.num_votes)
       end
     end
-    
+
     context 'user wants to unvote' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -194,8 +190,8 @@ describe IdeasController do
         (@numvotes).should eql(@idea.num_votes)
       end
     end
-  end
-   context 'idea creator wants to archive' do
+
+    context 'idea creator wants to archive' do
       before :each do
         @user = FactoryGirl.build(:user)
         @user.confirm!
@@ -273,6 +269,7 @@ describe IdeasController do
       end
     end
 
+
     context 'normal user wants to archive' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -301,11 +298,6 @@ describe IdeasController do
         expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(0)
       end
     end
-  end
-
-  describe 'PUT unarchive' do
-    include Devise::TestHelpers
-    
     context 'idea creator wants to unarchive' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -327,7 +319,6 @@ describe IdeasController do
         response.should redirect_to @idea
       end
     end
-
     context 'admin wants to unarchive' do
       before :each do
         @admin = FactoryGirl.build(:admin)
@@ -368,5 +359,4 @@ describe IdeasController do
         response.should redirect_to @idea
       end
     end
-  end
 end
