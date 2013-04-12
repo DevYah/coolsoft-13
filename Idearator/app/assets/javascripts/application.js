@@ -15,6 +15,7 @@
 //= require_tree .
 //= require notification_polling
 
+
 function popupCenter(url, width, height, name) {
   var left = (screen.width/2)-(width/2);
   var top = (screen.height/2)-(height/2);
@@ -31,3 +32,15 @@ $(function() {
     return false;
   });
 });
+
+$(document).bind("ajaxError", function(){
+	$('#signedout').modal('show');
+});
+
+$(document).ready(function() {
+  $("#sign").click(function() {
+    window.location= "/users/sign_in";
+  });
+});
+
+
