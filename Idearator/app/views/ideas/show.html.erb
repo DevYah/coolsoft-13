@@ -6,35 +6,31 @@ small{
 color: #33C;
 
 }
-
 	</style>
 </head>
-	<div class='media'>
-		<a  class='pull-left' href='#'>
-			<%= image_tag @idea.photo.url(:medium) %>
-		</a>
-		<p>
-			<h3 class = "lead"><%= @idea.title %>
-			</h3>
-			<%=form_for(@idea, :action=>'update') do |f| %>
-			<%if @user==@idea.user_id%>
-				<div class='btn-group'>
-					<%= link_to "<i></i>".html_safe, edit_idea_path(@idea), :id => "button_id", :class => "icon-edit"%>
-				</div>
-				<h2><%= @username%></h2>
-			<%end%>
-			<%end%>
-		</p>
-	</div>
-<div class='media-body'>
-		<p>
-			<h4>Description</h4>
-			<div><%= @idea.description %></div>
-		</p>
-		<p>
-			<h4>Problem Solved:</h4>
-			<div><%= @idea.problem_solved%></div>
-		</p>
+<div class='media'>
+	<a  class="pull-left" href="#">
+		<%= image_tag @idea.photo.url(:medium) %>
+	</a>
+	<p>
+		<h3><%= @idea.title %></h3>
+		<% if @user == @idea.user_id %>
+			<div class="btn-group">
+				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
+			</div>
+			<h2><%= link_to @username ,@idea.user.becomes(User) %></h2>
+		<%end%>
+	</p>
+</div>
+<div class="media-body">
+	<p>
+		<h3>Description:</h3>
+		<div><%= @idea.description %></div>
+	</p>
+	<p>
+		<h3>Problem Solved:</h3>
+		<div><%= @idea.problem_solved  %></div>
+	</p>
 </div>
 	<legend><h4>Comments</h4></legend>
 		<table>

@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!, :only => [:show, :create, :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update]
   # view idea of current user
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
@@ -15,8 +15,12 @@ class IdeasController < ApplicationController
 #author dayna
 
   def show
+   @idea = Idea.find(params[:id])
+    if user_signed_in?
+    @user = current_user.id
+    @username = current_user.username
+   end
     @user=current_user.id
-    @idea = Idea.find(params[:id])
     if params[:commentid] != nil
    @commentid = params[:commentid]
    @comment = Comment.find(:first, :conditions => {:id => @commentid})
@@ -31,19 +35,10 @@ if Comment.exists?(:id => @commentid)
    else
     redirect_to @idea , :notice => "No Comment to delete"
 end 
-  end
     @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
+
   end
-  # making new Idea
-  #Marwa Mehanna
-  def new
-    @idea=Idea.new
-    @tags= Tag.all
-    @chosentags=[]
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @idea }
-    end
+
   end
 
   # making new Idea
@@ -57,17 +52,43 @@ end
       format.json { render json: @idea }
     end
   end
-
   # editing Idea
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
-  def edit
-      @idea = Idea.find(params[:id])
-      @tags = Tag.all
-      @chosentags = Idea.find(params[:id]).tags
+  def edit   
+    @idea = Idea.find(params[:id])
+    @tags = Tag.all
+    @chosentags = Idea.find(params[:id]).tags
+    @boolean = true
+    @ideavoters = @idea.votes
+    @ideacommenters = @idea.comments
+    @userVreceivers = []
+    @userCreceivers = []
+    @usersthatcommented = []
+    if !@idea.votes.nil?
+    @ideavoters.each { |user|
+       if user.participated_idea_notifications
+        @userVreceivers << user 
+      end }
+      EditNotification.send_notification(current_user, @idea, @userVreceivers)
     end
+    list_of_comments = Comment.where(idea_id: @idea.id)
+    list_of_commenters = []
+    list_of_comments.each do |c|
+      list_of_commenters.append(User.find(c.user_id)).flatten!
+    end
+    list = list_of_commenters
+    if list != nil
+      EditNotification.send_notification(current_user, @idea, list)
+    end
+  end
 
+  # updating Idea
+  # Params
+  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
     puts(params[:ideas_tags][:tags])
@@ -81,9 +102,8 @@ end
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
-  end 
+  end
 
-  
   # creating new Idea
   # Params
   # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
