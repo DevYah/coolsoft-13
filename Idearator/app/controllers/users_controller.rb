@@ -97,3 +97,4 @@ class UsersController < ApplicationController
 	  end
 	end
 end
+end
