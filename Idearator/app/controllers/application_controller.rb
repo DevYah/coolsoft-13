@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 			if(not invitations.empty? and current_user.is_a? Admin)
 				@stat = {}
 				invitations.each do |i|
-					if i.users.count > 1 
+					if i.user.is_a? Committee
 						@stat.merge!(i.id => [true, User.find(i.user_id).username])
 					else
 						@stat.merge!(i.id => [false, User.find(i.user_id).username])

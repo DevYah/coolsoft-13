@@ -115,8 +115,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
-    @invited = InviteCommitteeNotification.where(:user_id => params[:id]).exists?
-    @tags = Tag.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -134,10 +132,10 @@ class UsersController < ApplicationController
     @user.type = nil
     @user.save
     current_user = User.find(id)
+    current_user sign_in
     InviteCommitteeNotification.send_notification(current_user, Admin.all)
-    InviteCommitteeNotification.where(:user_id => id)[0].destroy
 		respond_to do |format|
-			format.html { redirect_to controller: 'home', action: 'index' , notice: 'Rejected Invitation to become Committee' }
+			format.html { redirect_to '/', notice: 'Rejected Invitation to become Committee' }
 			format.json { head :no_content }
     end
 	end
