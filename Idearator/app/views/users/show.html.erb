@@ -1,38 +1,26 @@
 <h1><%= @user.username %>'s Profile</h1>
 
-<%if @user.banned == true %>
-  <p class="text-error">This User is currently banned!</p>
-  <%elsif @user.active == false%>
-    <p class="text-error">This User is currently deactivated!</p>
+<% if @user.banned == true %>
+  <p class='text-error'>This User is currently banned!</p>
+<% elsif @user.active == false %>
+  <p class='text-error'>This User is currently deactivated!</p>
 <% end %>
-<div style = "display:block">
+<div class='options'>
   <% if current_user == @user %>
-  <div class= "btn"><%= link_to "Edit" , edit_user_path %></div>
+    <div class= 'btn'><%= link_to "Edit" , edit_user_path %></div>
     <% end %>
-  <% if current_user == @user and @user.active%>
-   <button class="btn">Deactivate</button>
-  <% end %>
 </div>
-<% if @admin.type == "Admin" && @user.active==true && @user.banned==false%>
-  <% session[:user_id]=params[:id] %>
-  <%= link_to 'Ban', { :controller => "admins", :action => "ban_unban" },:id =>params[:id], :confirm => "Are you sure you want to Ban this user?",:class => 'btn btn-danger' %>
+<% if @admin.type == "Admin" && @user.active==true && @user.banned==false %>
+  <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
 <% end %>
-<% if @admin.type == "Admin" && @user.banned==true%>
-  <% session[:user_id]=params[:id] %>
- <%= link_to 'Unban', { :controller => "admins", :action => "ban_unban" }, :id =>params[:id], :confirm => "Are you sure you want to Unban this user?",:class => 'btn btn-success' %>
+<% if @admin.type == "Admin" && @user.banned==true %>
+ <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?',:class => 'options btn btn-success' %>
 <% end %>
-<% if @admin == @user %>
- <button class="btn">Edit Profile</button>
-<% end %>
-<% if @admin == @user and @user.active%>
- <button class="btn">Deactivate</button>
-<% end %>
->>>>>>> C2_omar-kassem_#94_ban_unban
 <% if @user.banned == false and @user.active == true %>
-  <div style = "display:inline-block;position:absolute;">
-  <%= image_tag @user.photo.url(:medium) %>
+  <div class='user-photo'>
+    <%= image_tag @user.photo.url(:medium) %>
   </div>
-  <div style = "display:inline-block;position:relative;left:340px;down:60px;">
+  <div class = 'user-details'>
     <h3> About the User </h3>
     <strong>Email</strong><br>
     <%= @user.email %><br>
@@ -43,7 +31,7 @@
     <strong>Gender</strong><br>
     <%= @user.gender %><br>
   </div>
-  <div style = "float:right">
+  <div class='user-about'>
     <strong>About <%= @user.username %></strong><br>
     <%= @user.about_me %><br>
   </div>
@@ -55,32 +43,17 @@
       <%= render :partial => '/home/stream' %>
     </div>  
   </div>
-<% end %>
+</div>
+</div>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<%= link_to 'Create new Idea!', "/ideas/new", :class => 'btn btn-large btn-block btn-primary' %>
-<br>
-<div> 
+<div class='new-idea'>
+  <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
+</div>
+<div>
+<br> 
   <ul class="pager">
     <li><%= link_to 'Back', :back %></li>
   </ul>
 </div>
+<% end %>

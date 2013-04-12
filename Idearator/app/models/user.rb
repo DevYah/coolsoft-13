@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
                   :gender, :about_me, :recieve_vote_notification,
                   :recieve_comment_notification, :provider, :uid , :photo, :approved
 
->>>>>>> master
   has_many :idea_notifications
   has_many :user_notifications
   has_many :ideas
