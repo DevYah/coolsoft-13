@@ -4,7 +4,13 @@ class HomeController < ApplicationController
   #Calls the action index but with the search parameters filtering
   #the @approved to the ideas matching this search
   #Author: Mohamed Salah Nazir
-  def index
+	#Used to display the idea stream, top ten and trending ideas.
+	#returns a list of ideas ordered by the date of creation in pages 
+	#of 10 ideas.
+	#Params:
+	#+page+:: the parameter is the page user is currently browsing.
+	#Author: Hesham Nabil
+	def index
         @approved = Idea.order(:created_at).page(params[:page]).per(10)
         @top= Idea.find(:all,:order=> "num_votes DESC",:limit=>10)
         
@@ -31,6 +37,5 @@ class HomeController < ApplicationController
         #end
         index
     end
-
   end
 end

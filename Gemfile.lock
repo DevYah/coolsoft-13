@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: c366ab719b27f4b98aec1b16bed34b68c501fe0d
+  revision: a53dd4eb8c50c0675bb03aa8b3dabdcdde8f68e5
   specs:
     rubocop (0.4.0)
       term-ansicolor
@@ -71,7 +71,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.2)
+    diff-lcs (1.2.3)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -90,7 +90,7 @@ GEM
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
       thor (>= 0.14.6)
-    guard-rspec (2.5.2)
+    guard-rspec (2.5.3)
       guard (>= 1.1)
       rspec (~> 2.11)
     hike (1.2.2)
