@@ -96,14 +96,14 @@ class IdeasController < ApplicationController
 
       list_of_comments.each do |c|
         c.destroy
-      end  
-      
+      end
+
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
-      
+
       list = list_of_commenters.append(list_of_voters).flatten!
- 
+
       DeleteNotification.send_notification(current_user, idea, list)
 
       respond_to do |format|
