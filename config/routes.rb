@@ -74,6 +74,9 @@ Sprint0::Application.routes.draw do
   match '/notifications/redirect_idea' => 'notifications#redirect_idea'
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  match '/users/:id/ban_unban' => 'admins#ban_unban'
 
+
+  resources :users
 
 end
