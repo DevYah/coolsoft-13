@@ -2,6 +2,7 @@ Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
+  match '/ideas/like' => 'ideas#like'
   resources :ideas do
     resources :comments do
       member do
