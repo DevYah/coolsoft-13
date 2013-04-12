@@ -7,7 +7,6 @@ class HomeController < ApplicationController
 	#Author: Hesham Nabil
 	def index
 		@approved = Idea.order(:created_at).page(params[:page]).per(10)
-		@user = current_user
         @top= Idea.find(:all,:order=> "num_votes DESC",:limit=>10)
         
         respond_to do |format|
