@@ -14,3 +14,5 @@
 //= require jquery.tokeninput
 //= require bootstrap
 //= require_tree .
+//= require notification_polling
+
