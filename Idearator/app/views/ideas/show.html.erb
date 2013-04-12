@@ -10,19 +10,19 @@
 		<% if @user == @idea.user_id %>
 			<div class="btn-group">
 				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
-				<span class="caret"></span>
-				<!--! add here archive and delete buttons -->
+				<%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 			</div>
+			<h2><%= @username %></h2>
 		<%end%>
 	</p>
 </div>
 <div class="media-body">
 	<p>
-		<b>Description:</b>
+		<h3>Description:</h3>
 		<div><%= @idea.description %></div>
 	</p>
 	<p>
-		<b>Problem Solved:</b>
+		<h3>Problem Solved:</h3>
 		<div><%= @idea.problem_solved  %></div>
 	</p>
 </div>
@@ -34,4 +34,3 @@
 		<%= image_tag("twitter-bird-white-on-blue.jpg", :id => "tw")%>
 	</div>		
 <%end%>
-
