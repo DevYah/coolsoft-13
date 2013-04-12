@@ -1,21 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Idearator" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Myapp" %></title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <%= stylesheet_link_tag "application", :media => "screen" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body data-devise=<%= user_signed_in? %>>
+  <body data-devise=<%= user_signed_in? %> >
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
-        <div id = "update-nav" class="container">
-          <!--! Add/edit the navigation links in the _navigation partial-->
+        <div class="container">
           <%= render 'layouts/navigation' %>
         </div>
       </nav>
@@ -25,14 +24,13 @@
         <div class="content">
            <div class="row">
             <div class="span8">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-            <div class ="row">
-              <div id="sidebar" class="span4"><!--! Trending view rendered here--></div>
-            <div id="sidebar" class="span4">
-              <%= yield :sidebar %></div>
-          </div>
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+        </div>
+        <div class="row">
+          <div id="sidebar" class="span4"><!--! Trending view rendered here--></div>
+          <div id="sidebar" class="span4"><%= yield :sidebar %></div>
+        </div>
           </div>
           <footer>
           </footer>
@@ -41,4 +39,3 @@
     </div> <!--! end of #main -->
   </body>
 </html>
-
