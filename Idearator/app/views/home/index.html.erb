@@ -25,7 +25,7 @@
 
 <p id="notice"><%= notice %></p>
 
-
+<% content_for :sidebar do %>
 <div id="topten">
 <h1>Top Ten Ideas</h1>
 <% @top.each do |top| %>
@@ -36,3 +36,4 @@
 </div>
 <% end %>
 </div>
+<% end %>
