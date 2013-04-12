@@ -1,21 +1,23 @@
 Sprint0::Application.routes.draw do
+<<<<<<< HEAD
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
+  match '/ideas/filter' => 'ideas#filter'
   match '/users/change_settings' => 'users#change_settings'
 
   #get "ideas/new"
   resources :ideas
 
-
   default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   resources :ideas, :controller =>'ideas'
-  match '/users/expertise' => 'users#expertise'
-  match '/users/new_committee_tag' => 'users#new_committee_tag'
-  match '/home/index' => 'home#index'
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
+  #get "ideas/new"
+
+  get '/tags/ajax'
+
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
   # The priority is based upon order of creation:
@@ -39,7 +41,6 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  #root:to =>'ideas#index'
   root:to => 'home#index'
   # Sample resource route with more complex sub-resources
   #   resources :products do
@@ -58,7 +59,7 @@ Sprint0::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
- #root :to => 'ideas#index'
+ #root :to => 'ideas#show'
 
   # See how all your routes lay out with "rake routes"
 
@@ -70,8 +71,6 @@ Sprint0::Application.routes.draw do
 
 
   match '/review_ideas' => 'committees#review_ideas'
-
-
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
   match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
