@@ -2,15 +2,28 @@ Sprint0::Application.routes.draw do
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
+  match '/dashboard/index' => 'dashboard#index'
+  match 'dashboard/getallideas' => 'dashboard#getallideas'
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+  match '/dashboard/gettags' => 'dashboard#gettags'
+  match '/dashboard/getideas' => 'dashboard#getideas'
+  match '/home/search' => 'home#search'
+
+default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
+  #get "ideas/new"
+  resources :ideas, :dashboard
+  resources :users
+  
   match '/ideas/filter' => 'ideas#filter'
   match '/users/change_settings' => 'users#change_settings'
 
-  #get "ideas/new"
-  resources :ideas
-
 
   default_url_options :host => 'localhost:3000'
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+ 
   resources :ideas, :controller =>'ideas'
 
 
@@ -19,7 +32,6 @@ Sprint0::Application.routes.draw do
   get '/tags/ajax'
 
 
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
 
   # The priority is based upon order of creation:

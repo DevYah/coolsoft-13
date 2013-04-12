@@ -11,6 +11,7 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'tlsmail'
+gem "google_visualr", "~> 2.1.0"
 
 gem 'jquery-tokeninput-rails'
 
@@ -49,6 +50,7 @@ group :test do
   gem 'rspec-html-matchers'
 end
 
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -63,3 +65,4 @@ end
 
 # To use debugger
 # gem 'debugger'
+
