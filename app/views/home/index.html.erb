@@ -35,7 +35,7 @@
               <div class="media-body">
                 <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
                 <span><%= top.num_votes %></span>
-                <span><%= link_to  top.user.first_name, top.user.becomes(User)  %></span>
+                <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
               </div>
             </div>
           <% end %>
