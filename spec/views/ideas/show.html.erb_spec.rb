@@ -12,4 +12,12 @@ describe "ideas/show.html.erb" do
 		render :template => "/ideas/show", :locals => {:idea => @idea}
 		rendered.should have_button ('Share')
 	end
+	it "has a facebook image" do
+		render :template => "/ideas/show", :locals => {:idea => @idea}
+		response.should have_tag("img", :id => "fbk")
+	end 
+	it "has a twitter image" do
+		render :template => "/ideas/show", :locals => {:idea => @idea}
+		response.should have_tag("img", :id => "tw")
+	end 
 end
