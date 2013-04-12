@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   # is sent to the admin informing of user acceptance of invitation.
 	# Params:
 	# +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
-	# Author: Mohamed Sameh
+	# Author: Mohamed Sameh, Mohammad Abdulkhaliq
 	def new_committee_tag
 		if params[:user] == nil
 			respond_to do |format|
@@ -161,6 +161,9 @@ class UsersController < ApplicationController
   # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
   # Author: Mohammad Abdulkhaliq
   def invite_member
+		unless current_user.is_a? Admin 
+			redirect_to  'users/sign_in' , notice: 'Please sign in as an admin'
+		end
     @user = User.find(params[:id])
     @user.type = 'Committee'
     @user.approved = true
@@ -171,6 +174,7 @@ class UsersController < ApplicationController
 			format.json { head :no_content }
     end
   end
+  
   # Sends tags and current user as an ajax response
   # to whoever calls it
   # Params: 
@@ -179,13 +183,20 @@ class UsersController < ApplicationController
   def send_expertise
 		@user = current_user 
 		@tags = Tag.all
-		if current_user.is_a Committee and current_user.tags < 0
-		respond_to do |format|
-			format.js{}
-		end
-		else 
+		if current_user.is_a? Committee 
+			if current_user.tags.count > 0
+				respond_to do |format|
+					format.js{}
+				end
+			else 
+				respond_to do |format|
+					format.html { redirect_to  '/' , notice: 'You have already chosen your expertise' }
+				end
+			end
+		else
 			respond_to do |format|
-				format.html { redirect_to  '/' , notice: 'You have already chosen your expertise' }
+				format.html { redirect_to  '/' , notice: 'You cannot choose your expertise' }
+			end
 		end
 	end
 end

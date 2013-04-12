@@ -13,20 +13,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-
-$(function() {
-  if($("#notifications").length > 0){
-    setTimeout(updateNotifications, 5000);
-  }
-  setTimeout(updateNavBar, 5000);
-});
-
-function updateNotifications(){
-	$.getScript("/all_notifications.js")
-  setTimeout(updateNotifications, 5000);
-}
-
-function updateNavBar(){
-  $.getScript("/notifications.js")
-  setTimeout(updateNavBar, 5000);
-}
+//= require notification_polling

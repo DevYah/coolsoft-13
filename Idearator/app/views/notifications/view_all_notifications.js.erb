@@ -1,3 +1,5 @@
-
+// renders the view_all partial updating the view_all_notifications view
+// Params: none
+// Author: Amina Zoheir
 $("#notifications").html("<%= escape_javascript(render(:partial => "view_all")) %>");
 add_notification_event_handlers();
