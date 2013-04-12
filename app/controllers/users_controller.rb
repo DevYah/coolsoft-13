@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     end
   end
   
+  respond_to :html, :xml, :json
 	# Pass the current_user and all the tags to the  expertise view
 	# Params:
 	# none
@@ -60,7 +61,7 @@ class UsersController < ApplicationController
 				@user= current_user
 				@tags= Tag.all
 			else
-				respond_to do |format|
+				respond_to do |format|				
 				format.html{
 					redirect_to controller: 'home', action: 'index'
 				}
@@ -175,4 +176,9 @@ class UsersController < ApplicationController
 			format.json { head :no_content }
     end
   end
+  
+  def send_expertise
+		tags = Tag.all
+		render :partial => "modal_expertise"
+	end
 end

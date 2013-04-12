@@ -25,8 +25,7 @@
       <li class="divider"></li>
     <% end %>
     <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Committee %>
-      <%= render 'users/modal_expertise' %>
-      <li><a data-toggle="modal" href="#expertise" class="btn">You have been invited to become a committee</a></li>
+      <li><%=link_to 'You have been invited!', :url => {:controller => 'users', :action => 'send_expertise' }, :method => 'get', :remote => true %></li>
       <li class="divider"></li>
     <% end %>
      <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Admin and @stat[notification.id][0] and not invitations.empty?%>
