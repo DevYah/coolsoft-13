@@ -1,6 +1,9 @@
 function add_notification_event_handlers() {
-  $('btn').click(function () {
+  
+  $.get("ajax_request", function(data, status){
+		if(status=="success"){
     $('div#expertise').appendTo("body").modal()
+	}
   });
 
   $('div.idea').click(function () {
