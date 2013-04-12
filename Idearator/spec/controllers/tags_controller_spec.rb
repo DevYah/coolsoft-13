@@ -39,6 +39,7 @@ describe TagsController do
       assigns(:tag).should_not eq(nil)
     end
     it "renders the :new template" do
+			get :new
       response.should be_successful
       response.should render_template("new")
     end
@@ -48,28 +49,40 @@ describe TagsController do
     context "with valid attributes" do
       it "saves the new tag in the database" do
         expect{
-        post :create, tag: Factory.attributes_for(:tag)
+        post :create, tag: {:name => 'Software'}
       }.to change(Tag,:count).by(1)
     end
       it "redirects to the :show view" do
-		post :create, :tag => 'Software'
+				post :create, tag: {:name => 'Software'}
         response.should be_successful
-        response.should redirect_to(:action => 'show')
      end
     end
-    
     context "with invalid attributes" do
       it "does not save the new contact in the database" do
-        t = Tag.new(:name => 'Software')
+        t = Tag.new(:name => 'Software').save
           expect{
-          post :create, tag: 'Software'
+          post :create, tag: {:name => 'Software'}
         }.to_not change(Tag,:count)
       end
       it "re-renders the new method" do
-		t = Tag.new(:name => 'Software')
-        post :create, :tag => 'Software'
+				t = Tag.new(:name => 'Software').save
+        post :create, tag: {:name => 'Software'}
         response.should render_template ("new")
       end
     end 
   end
-end
+  
+  describe "PUT #update" do
+		  it "updates the tag name in the database" do
+				t = Tag.new(:name => 'Soft').save
+        expect{
+        put :update,:id=>t.id, tag: {:name => 'Software'}
+      }.to change(t,:name).to('Software')
+			end
+      it "redirects to the :show view" do
+				t = Tag.new(:name => 'Soft').save
+				put :update, :id=> t.id, tag: {:name => 'Software'}
+        response.should be_successful
+     end
+    end
+	end
