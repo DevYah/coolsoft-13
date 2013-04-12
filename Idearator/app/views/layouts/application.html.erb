@@ -11,10 +11,10 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body class>
+  <body data-devise=<%= user_signed_in? %>>
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
-        <div class="container">
+        <div id = "update-nav" class="container">
           <!--! Add/edit the navigation links in the _navigation partial-->
           <%= render 'layouts/navigation' %>
         </div>
@@ -24,15 +24,10 @@
       <div class="container">
         <div class="content">
            <div class="row">
-            <div class="span8">
+            <div class="span12">
               <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
-            <div class ="row">
-              <div id="sidebar" class="span4"><!--! Trending view rendered here--></div>
-            <div id="sidebar" class="span4">
-              <%= yield :sidebar %></div>
-          </div>
           </div>
           <footer>
           </footer>
