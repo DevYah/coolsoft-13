@@ -27,15 +27,17 @@
 <% content_for :sidebar do %>
   <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
 <% end %>
+
 <% content_for :sidebar do %>
-<div id="topten">
-<h1>Top Ten Ideas</h1>
-<% @top.each do |top| %>
-<div class="topten_idea">
-	<span><%= link_to top.title ,top %></span>
-	<span><%= top.num_votes %></span>
-	<span><%= top.user.first_name %></span>
-</div>
+  <div id="topten">
+  <h1>Top Ten Ideas</h1>
+  <% @top.each do |top| %>
+  <div class="topten_idea">
+  	<span><%= link_to top.title ,top %></span>
+  	<span><%= top.num_votes %></span>
+  	<span><%= top.user.first_name %></span>
+  </div>
+  <% end %>
 <% end %>
 </div>
 

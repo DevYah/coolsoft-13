@@ -22,7 +22,6 @@ end
 
 
   match '/ideas/update' => 'ideas#update'
-  devise_for :committees, :controllers => { :registrations => "registrations" }
 
 
 
@@ -85,6 +84,5 @@ end
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
 
-  resources :users
 
 end
