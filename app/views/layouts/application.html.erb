@@ -34,9 +34,10 @@
           <button id="sign" class="btn">Ok</button>
       </div>
     </div>   
+  <body data-devise=<%= user_signed_in? %>>
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
-        <div class="container">
+        <div id = "update-nav" class="container">
           <!--! Add/edit the navigation links in the _navigation partial-->
           <%= render 'layouts/navigation' %>
         </div>
@@ -46,10 +47,15 @@
       <div class="container">
         <div class="content">
            <div class="row">
-            <div class="span12">
+            <div class="span8">
               <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
+            <div class ="row">
+              <div id="sidebar" class="span4"><!--! Trending view rendered here--></div>
+            <div id="sidebar" class="span4">
+              <%= yield :sidebar %></div>
+          </div>
           </div>
           <footer>
           </footer>
