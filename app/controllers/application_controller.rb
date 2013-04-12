@@ -37,9 +37,6 @@ class ApplicationController < ActionController::Base
       unread_ideas = IdeaNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
       unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
       invitations = user_notifications.where(:type => 'InviteCommitteeNotification')
-      if(not invitations.empty? and current_user.is_a? Committee)
-				@tags = Tag.all
-			end
 			if(not invitations.empty? and current_user.is_a? Admin)
 				@stat = {}
 				invitations.each do |i|
