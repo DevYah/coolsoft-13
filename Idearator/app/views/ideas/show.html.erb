@@ -19,6 +19,7 @@
 			<%if @user==@idea.user_id%>
 				<div class='btn-group'>
 				 <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%> 
+				 <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 				<!--! add here archive and delete buttons -->
 				</div>
 				<h2><%=link_to @username, @idea.user%></h2>
