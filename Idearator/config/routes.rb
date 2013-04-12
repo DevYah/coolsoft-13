@@ -5,6 +5,7 @@ Sprint0::Application.routes.draw do
   match '/ideas/filter' => 'ideas#filter'
   #get "ideas/new"
   resources :ideas
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
 
   get '/tags/ajax'
 
@@ -60,8 +61,10 @@ Sprint0::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # This is a legacy wild controller route that's not recommended
+  # for RESTful applications.
+  # Note: This route will make all actions in every controller
+  # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
 
@@ -74,6 +77,7 @@ Sprint0::Application.routes.draw do
   match '/notifications/redirect_idea' => 'notifications#redirect_idea'
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  resources :users
 
 
 end
