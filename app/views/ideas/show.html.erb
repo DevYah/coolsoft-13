@@ -1,40 +1,59 @@
-<head>
-	<src >
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<style type="text/css">
-				small{
-  			color: #33C;
 
-				}		
-
-		  </style>	
-</head>
-	<body>
-		<div class='media'>
-			<a  class='pull-left' href='#'>
-				<%= image_tag @idea.photo.url(:medium) %>
-			</a>
-				<p>
-					<h3 class = "lead"><%= @idea.title %></h3>
-					<%=form_for(@idea, :action=>'update') do |f| %>
-					<%if @user==@idea.user_id%>
-							<div class='btn-group'>
- 								<%= link_to "<i></i>".html_safe, edit_idea_path(@idea), :id => "button_id", :class => "icon-edit"%>
-							</div>
-						<h2><%= @username%></h2>
-					<%end%>
-					<%end%>
-				</p>
-		</div>
+<div class='media'>
+	<a  class='pull-left' href='#'>
+	<%= image_tag @idea.photo.url(:medium) %>
+	</a>
+	<p>
+	<!--!<h2>Title:</h2>-->
+		<h3><%= @idea.title %></h3>
+		<div>
+			<!--!<%=form_for @idea do |f| %>-->
+			<div id ='change_vote' class = 'pull-right'>
+				<span><h2><%= @idea.num_votes %></h2></span> 
+				<%if @ideavoted.nil? %>
+					<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
+				<% else %>
+					<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-danger' %>
+				<%end%>
+			</div>
+		  </div>
+			<%if @user==@idea.user_id%>
+				<div class='btn-group'>
+				 <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%> 
+				 <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+				 <% if @idea.archive_status == true %>
+					<%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+				<% else %>
+					<%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+				<% end %>
+				<!--! add here archive and delete buttons -->
+				</div>
+				<h2><%=link_to @username, @idea.user%></h2>
+			<%end%>
+<!--!<%end%>-->
+	</p>
+</div>
 <div class='media-body'>
 	<p>
-		<h4>Description</h4>
-			<div><%= @idea.description %></div>
+		<h3>Description:</h3>
+		<div><%= @idea.description %></div>
 	</p>
-  <p>
-		<h4>Problem Solved:</h4>
+	<p>
+		<h3>Problem Solved:</h3>
 		<div><%= @idea.problem_solved%></div>
 	</p>
+	<p>
+    <% if @idea.ratings.size > 0 %>
+      <b>Ratings:-</b>
+      <% @idea.ratings.each do |therating| %>
+        <p>
+          <div>
+            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+          </div>
+        </p>
+      <% end %>
+    <% end %>
+  </p>
 </div>
 <legend><h4>Comments</h4></legend>
 	<table>
@@ -69,4 +88,3 @@
     <%= f.submit nil, :class => 'btn btn-small btn-primary'%>
 <% end %>
 <td><%= link_to 'Back', '/',:class => "btn" %></td>
-</body>
