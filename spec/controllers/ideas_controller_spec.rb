@@ -21,7 +21,7 @@ describe IdeasController do
         @like.comment_id = @comment.id
         @like.save
         sign_in @user
-        get :show , :id => idea.id , :commentid => @comment.id
+        get :like , :id => idea.id , :commentid => @comment.id
         @comment.reload
         @comment.num_likes.should eq(1)
 
