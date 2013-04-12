@@ -95,13 +95,9 @@ class UsersController < ApplicationController
 			@tags.each do |tag|
 				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
 			end
-      notf = InviteCommitteeNotification.where(:user_id => current_user.id)[0]
       if InviteCommitteeNotification.where(:user_id => current_user.id).exists?
-        notf = InviteCommitteeNotification.where(:user_id => current_user.id)[0]
-        @admin = Admin.find(notf.user_id) 
-      InviteCommitteeNotification.send_notification(User.find(current_user.id), @admin) 
-      InviteCommitteeNotification.find(notf).destroy
-    end
+				InviteCommitteeNotification.send_notification(User.find(current_user.id), Admin.all) 
+			end
 			respond_to do |format|
 				format.html{
 					redirect_to controller: 'home', action: 'index'
@@ -133,7 +129,6 @@ class UsersController < ApplicationController
     @user.type = nil
     @user.save
     current_user = User.find(id)
-    #current_user sign_in
     InviteCommitteeNotification.send_notification(current_user, Admin.all)
 		respond_to do |format|
 			format.html { redirect_to '/', notice: 'Rejected Invitation to become Committee' }
@@ -182,10 +177,15 @@ class UsersController < ApplicationController
   # +current_user+:: this parameter is an instance of +User+ passed through the devise gem 
   # Author: Mohammad Abdulkhaliq
   def send_expertise
-		@user = current_user
+		@user = current_user 
 		@tags = Tag.all
+		if current_user.is_a Committee and current_user.tags < 0
 		respond_to do |format|
 			format.js{}
+		end
+		else 
+			respond_to do |format|
+				format.html { redirect_to  '/' , notice: 'You have already chosen your expertise' }
 		end
 	end
 end
