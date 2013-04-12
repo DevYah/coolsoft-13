@@ -1,3 +1,6 @@
+// initiates the polling if there is a signed in user.
+// Params: none
+// Author: Amina Zoheir
 $(function() {
   if($('body').attr('data-devise') == "true"){
     if($("#notifications").length > 0){
@@ -7,11 +10,19 @@ $(function() {
   }
 });
 
+// updates the notifications in the "view_all_notifications" view,
+// and continues the polling.
+// Params: none
+// Author: Amina Zoheir
 function updateNotifications(){
   $.getScript("/all_notifications.js")
    setTimeout(updateNotifications, 5000);
 }
 
+// updates the notifications in the navigation bar drop down,
+// and continues the polling.
+// Params: none
+// Author: Amina Zoheir
 function updateNavBar(){
   $.getScript("/notifications.js")
   setTimeout(updateNavBar, 5000);
