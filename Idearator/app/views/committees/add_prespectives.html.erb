@@ -1,5 +1,5 @@
 <% if current_user.type == 'Committee' %>
-  <input name="keywords" type="text" id="keywords" size="50"  onkeypress="handleKeyPress(event)">
+  <input type="text" id="rating_complete" name="blah2" />
   <h1>Add Prespectives</h1>
   <ul id="rating">
   </ul>
@@ -12,13 +12,13 @@
     function sendAjax(){
       var list = "";
       var i=0;
-      $('ul#rating').children().each(function(){
+      $('.token-input-list-facebook li p').each(function(){
         list += "rating[]="+$(this).text()+"&";
         i=i+1;
       
-      });	
+      }); 
    
       $.ajax("/add_rating?"+list);
-    }	
+    } 
   </script>
 <% end %>

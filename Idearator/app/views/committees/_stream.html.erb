@@ -16,6 +16,8 @@
                     <br>
                         <button class = "btn btn-large btn-success inline pull-right margin " type = "button"> Vote! </button>
                 </div>
+                <%= link_to 'Approve', { :controller => "committees", :action => "add_prespectives", :id => approved.id },:confirm => "Are you sure you want to approve this idea?",:class => 'btn btn-success' %>
+                <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove", :id => approved.id} ,:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
             </div>  
         </div>
     <% end %>
