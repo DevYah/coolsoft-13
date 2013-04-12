@@ -12,8 +12,9 @@ Sprint0::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
 
+ 
 
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
+
 
 
   # The priority is based upon order of creation:
@@ -67,6 +68,8 @@ Sprint0::Application.routes.draw do
 
 
   match '/review_ideas' => 'committees#review_ideas'
+
+
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
   match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
@@ -75,6 +78,7 @@ Sprint0::Application.routes.draw do
   match '/notifications/redirect_idea' => 'notifications#redirect_idea'
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  resources :users
 
 
 end
