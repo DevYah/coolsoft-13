@@ -15,18 +15,35 @@
       </ul>
     </li>
   <% end %>
-  <% if user_signed_in? %>
+</ul>
+<ul class="nav pull-right">
+  <% if not user_signed_in? %>
     <li>
-      <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
+      <%= link_to('Login', new_user_session_path)  %>
     </li>
-  <% else %>
     <li>
-      <%= link_to('Register', new_user_session_path)  %>
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li>
-      <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
+      <%= link_to('Register', new_user_registration_path)  %>
     </li>
   <% end %>
 </ul>
+<% if user_signed_in? %>
+  <ul class="nav pull-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><%= current_user.username %> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i> Account Settings</a>
+        </li>                
+        <li>
+          <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
+        </li>
+        <li>
+          <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
+        </li> 
+      </ul>
+    </li>
+  </ul>
+<% end %>
+
+
+

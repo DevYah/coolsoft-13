@@ -12,6 +12,7 @@ gem 'devise'
 
 gem 'tlsmail'
 
+gem 'jquery-tokeninput-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,6 +30,8 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
+gem 'kaminari'
+
 group :test, :development do
 
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
@@ -37,12 +40,15 @@ group :test, :development do
   gem 'factory_girl_rails', '~> 4.0'
 
 end
+
 group :test do
   gem 'faker'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'rspec-html-matchers'
 end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
