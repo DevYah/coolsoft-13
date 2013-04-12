@@ -2,8 +2,8 @@
 class TagsController < ApplicationController
   before_filter :authenticate_user! 
   
-  # GET /tags
-  # GET /tags.json
+  # This is displays the tag managment page
+  # Params: None
   # Author: Mohammad Abdulkhaliq
   def index
     if not user_signed_in? or current_user.type != 'Admin'
@@ -17,8 +17,9 @@ class TagsController < ApplicationController
     end
   end
   
-  # GET /tags/1
-  # GET /tags/1.json
+  # This displays the show page while sending the tags synonyms
+  # Params: 
+  # +id+:: This is an instance of +Tag+ passed through the index view
   # Author: Mohammad Abdulkhaliq
   def show
     if not user_signed_in? or current_user.type != 'Admin'
@@ -33,8 +34,8 @@ class TagsController < ApplicationController
     end
   end
   
-  # GET /tags/new
-  # GET /tags/new.json
+  # This displays the new page to create a new tag
+  # Params: None
   # Author: Mohammad Abdulkhaliq
   def new
     if not user_signed_in? or current_user.type != 'Admin'
@@ -48,7 +49,8 @@ class TagsController < ApplicationController
     end
   end
   
-  # GET /tags/1/edit
+  # This displays the new form to enter the tag's new name
+  # +id+:: This is an instance of +Tag+ passed through the index view
   # Author: Mohammad Abdulkhaliq
   def edit
     if not user_signed_in? or current_user.type != 'Admin'
@@ -58,17 +60,8 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
   end
   
-  # POST /tags
-  # POST /tags.json
-  #Create A new Tag
-  #
-  # * *Args*    :
-  #   - +void+ ->
-  # * *Returns* :
-  #   - Show#Tag view
-  # * *Raises* :
-  #   - +PresenceError+ ->If nothing is entered on submit
-  #   - +UniquenessError+ -> If Tag added is not unique	
+  # Create A new Tag using the params[:name] sent from the view
+  # +name+:: This is an instance of +String+ passed through params[:tag][:name] from the new view
   # Author: Mohammad Abdulkhaliq
   def create
     if not user_signed_in? or current_user.type != 'Admin'
@@ -87,15 +80,8 @@ class TagsController < ApplicationController
     end
   end
   
-  # PUT /tags/1
-  # PUT /tags/1.json
-  # * *Args*    :
-  #   - +tag.id+ ->
-  # * *Returns* :
-  #   - Show#Tag view
-  # * *Raises* :
-  #   - +PresenceError+ ->If nothing is entered on submit
-  #   - +UniquenessError+ -> If new Tag name is not unique	
+  # Updates the selected Tag using the params[:name] sent from the view
+  # +name+:: This is an instance of +String+ passed through params[:tag][:name] from the new view
   # Author: Mohammad Abdulkhaliq
   def update
     if not user_signed_in? or current_user.type != 'Admin'
@@ -114,13 +100,9 @@ class TagsController < ApplicationController
     end
   end
 
-  # DELETE /tags/1
-  # DELETE /tags/1.json
-  # * *Args*    :
-  #   - +tag.id+ ->
-  # * *Returns* :
-  #   - Show#Tag view
-  #Author: Mohammad Abdulkhaliq
+  # Deletes the selected Tag using the params[:id] sent from the index view
+  # +id+:: This is an instance of +Tag+ passed through params[:id] from the index view
+  # Author: Mohammad Abdulkhaliq
   def destroy
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
@@ -143,13 +125,8 @@ class TagsController < ApplicationController
   # Else if the entered name already has a tag and a connection to the  
   # parent tag nothing is done and the user is informed so that the 
   # synonym already exists
-  # * *Args*    :
-  #   - +tag.id+ -> Tag id to add synonyms to
-  # * *Returns* :
-  #   - The updated Show#Tags/:id view 
-  # * *Raises* :
-  #   - +SynonymExistsNotice+ -> If Synonym added already exists in @tag.tags
-  #
+  # +name+:: This is an instance of +String+ passed through params[:tag][:name] from the show view
+  # Author: Mohammad Abdulkhaliq
   def addsym
     if not user_signed_in? or current_user.type != 'Admin'
       render :text => "You Need To sign in as An Admin"
