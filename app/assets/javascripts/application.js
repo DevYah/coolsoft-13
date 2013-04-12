@@ -11,8 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require jquery-ui
 //= require bootstrap
+//= require notification_polling
 //= require_tree .
 $(function() {
 	$("#searchdiv input").keyup(function(){
@@ -27,3 +29,20 @@ $(function() {
 
 	});
 });
+
+
+$(document).bind("ajaxError", function(e, xhr){
+	if(xhr.status == 401){
+		$('#signedout').modal('show');
+	}
+});
+
+$(document).ready(function() {
+  $("#sign").click(function() {
+    window.location= "/users/sign_in";
+  });
+});
+
+
+
+
