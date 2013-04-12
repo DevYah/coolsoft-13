@@ -28,6 +28,8 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'factory_girl_rails' , "~> 4.0"
+gem 'faker'
+gem 'capybara'
 
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
