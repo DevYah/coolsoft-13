@@ -41,5 +41,17 @@
 		<h3>Problem Solved:</h3>
 		<div><%= @idea.problem_solved%></div>
 	</p>
+	<p>
+    <% if @idea.ratings.size > 0 %>
+      <b>Ratings:-</b>
+      <% @idea.ratings.each do |therating| %>
+        <p>
+          <div>
+            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+          </div>
+        </p>
+      <% end %>
+    <% end %>
+  </p>
 </div>
 <td><%= link_to'Back', '/',:class=>'btn'%></td>
