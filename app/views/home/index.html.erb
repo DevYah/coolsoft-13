@@ -5,8 +5,32 @@
     <% end %>
   <% end %>
 </div>
+
 <%= render 'ideas/show' %>
 <div id = "IdeaStream">
   <div class = "page">
     <%= render :partial => 'stream' %>
   </div>
+</div>
+
+  <% content_for :sidebar do %>
+    <div class="topten">
+      <h1>Top Ten Ideas</h1>
+      <div class="media">
+        <% @top.each do |top| %>
+          <% if top.user.active == true and top.user.banned == false%>
+            <div class="topten_idea">
+              <a class="pull-left" href="#">
+                <span><%= image_tag top.photo.url(:thumb) %></span>
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
+                <span><%= top.num_votes %></span>
+                <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+              </div>
+            </div>
+          <% end %>
+        <%end%>
+      </div>
+    </div>
+  <% end %>
