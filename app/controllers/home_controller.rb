@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-	#Used to display the idea stream, top ten and trending ideas.
 	#returns a list of ideas ordered by the date of creation in pages 
 	#of 10 ideas.
 	#Params:
