@@ -148,4 +148,38 @@ class IdeasController < ApplicationController
       end
     end
   end
+  # Deletes all records related to a specific idea
+  # Params:
+  # +id+:: is used to specify which instance of +Idea+ will be deleted
+  # Author: Mahmoud Abdelghany Hashish
+  def destroy
+    idea = Idea.find(params[:id])
+
+    if current_user.id == idea.user_id
+      list_of_comments = Comment.where(idea_id: idea.id)
+      list_of_commenters = []
+      list_of_voters = idea.votes
+      idea.destroy
+
+      list_of_comments.each do |c|
+        c.destroy
+      end  
+      
+      list_of_comments.each do |c|
+        list_of_commenters.append(User.find(c.user_id)).flatten!
+      end
+      
+      list = list_of_commenters.append(list_of_voters).flatten!
+ 
+      DeleteNotification.send_notification(current_user, idea, list)
+
+      respond_to do |format|
+        format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
+      end
+    end
+  end
 end
