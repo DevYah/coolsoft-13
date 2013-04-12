@@ -1,4 +1,5 @@
 namespace :db do
+
 	desc "Fill Users and Ideas."
 	task :populate => :environment do
 
@@ -44,5 +45,9 @@ namespace :db do
 			it2.tag_id = rand(1..12)
 			it2.save
 		end
-	end
+
+
+
+	end	
+
 end
