@@ -34,7 +34,7 @@
           <button id="sign" class="btn">Ok</button>
       </div>
     </div>   
-    <header class="navbar navbar-fixed-top">
+    <header class="navbar navbar-fixed-top" id = "bar">
       <nav class="navbar-inner">
         <div class="container">
           <!--! Add/edit the navigation links in the _navigation partial-->
@@ -46,16 +46,18 @@
       <div class="container">
         <div class="content">
            <div class="row">
-            <div class="span12">
+            <div class="span8">
               <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
+            <div class ="row">
+              <div id="sidebar" class="span4"><!--! Trending view rendered here--></div>
+            <div id="sidebar" class="span4">
+              <%= yield :sidebar %></div>
           </div>
-          <footer>
-          </footer>
+          </div>
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
   </body>
 </html>
-

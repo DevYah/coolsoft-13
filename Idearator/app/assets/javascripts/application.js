@@ -11,8 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require_tree .
+<<<<<<< HEAD
 
 
 $(document).bind("ajaxError", function(){
@@ -25,3 +27,18 @@ $(document).ready(function() {
   });
 });
 
+=======
+$(function() {
+	$("#searchdiv input").keyup(function(){
+		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+		if (this.length()==0){
+			 $.ajax({
+        url: '/home/index?page=' + 1,
+        type: 'get',
+        dataType: 'script'
+       });
+	}
+
+	});
+});
+>>>>>>> C4_master_preview

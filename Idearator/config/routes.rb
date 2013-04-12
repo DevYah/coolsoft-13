@@ -1,22 +1,26 @@
 Sprint0::Application.routes.draw do
+<<<<<<< HEAD
   match '/users/expertise' => 'users#expertise'
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
+  match '/users/expertise' => 'users#expertise'
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'home#index'
+  match '/dashboard/index' => 'dashboard#index'
+  match 'dashboard/getallideas' => 'dashboard#getallideas'
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+  match '/dashboard/gettags' => 'dashboard#gettags'
+  match '/dashboard/getideas' => 'dashboard#getideas'
+  match '/home/search' => 'home#search'
   match '/users/change_settings' => 'users#change_settings'
 
+default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :committees, :controllers => { :registrations => 'registrations' }
   #get "ideas/new"
-  resources :ideas
-
-
-
-  default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :registrations => "registrations" }
-  resources :ideas, :controller =>'ideas'
-  match '/users/expertise' => 'users#expertise'
-  match '/users/new_committee_tag' => 'users#new_committee_tag'
-  match '/home/index' => 'home#index'
-  devise_for :committees, :controllers => { :registrations => "registrations" }
-
+  resources :ideas, :dashboard  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -66,7 +70,6 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-
   match '/review_ideas' => 'committees#review_ideas'
 
 
@@ -75,5 +78,4 @@ Sprint0::Application.routes.draw do
   match '/users/:id/ban_unban' => 'admins#ban_unban'
 
   resources :users
-
 end
