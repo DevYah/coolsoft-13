@@ -49,7 +49,23 @@ class IdeasController < ApplicationController
     @tags = Tag.all
     @chosentags = Idea.find(params[:id]).tags
     @boolean = true
-  end
+    @ideavoters = @idea.votes
+    @ideacommenters = @idea.comments
+    @userVreceivers = []
+    @userCreceivers = []
+    @ideavoters.each {|user|
+       if user.participated_idea_notifications
+        @userVreceivers << user 
+      end }
+    
+    
+      @ideacommenters.each {|user|
+       if user.participated_idea_notifications
+        @userCreceivers << user 
+      end}
+    EditNotification.send_notification(current_user,@idea,@userVreceivers)
+    EditNotification.send_notification(current_user,@idea,@userCreceivers)
+ end
 
   # updating Idea
   # Params
