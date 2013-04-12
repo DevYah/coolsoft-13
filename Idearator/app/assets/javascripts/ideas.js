@@ -14,12 +14,6 @@ $(document).ready(function() {
   	var win=window.open(tweeturl, 'popup');
  		win.focus();
 	});
-	$("#pin").click(function() {
- 		var pathname = window.location;
-  	var tweeturl = 'http://pinterest.com/pin/create/button/?url='+encodeURI(pathname)+'&media=<%= @idea.photo.url %>' + '&description=<%= @idea.description%>';
-  	var win=window.open(tweeturl, 'popup');
- 		win.focus();
-	});
 	$("#fbk").tooltip({
 		toggle: "tooltip",
 		title: "Share on Facebook",
