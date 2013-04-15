@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <%= stylesheet_link_tag "application", :media => "screen" %>
-
     <%= javascript_include_tag  "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
     <%= javascript_include_tag  "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js" %>
     <%= javascript_include_tag "application" %>
@@ -38,7 +37,7 @@
       </div>
     </div>   
   <body data-devise=<%= user_signed_in? %>>
-    <header class="navbar navbar-fixed-top">
+      <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
         <div id = "update-nav" class="container">
           <!--! Add/edit the navigation links in the _navigation partial-->

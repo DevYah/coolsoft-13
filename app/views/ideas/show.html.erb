@@ -1,48 +1,101 @@
 <div id="fb-root"></div>
 <p id="notice"><%= notice %></p>
 <div class='media'>
-	<a  class="pull-left" href="#">
-		<%= image_tag @idea.photo.url(:medium) %>
+	<a  class='pull-left' href='#'>
+	<%= image_tag @idea.photo.url(:medium) %>
 	</a>
 	<p>
-		<b>Title:</b>
-		<div><%= @idea.title %></div>
-		<% if @user == @idea.user_id %>
-			<div class="btn-group">
-				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
-				<%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+		<h3><%= @idea.title %></h3>
+		<div>
+			<!--!<%=form_for @idea do |f| %>-->
+			<div id ='change_vote' class = 'pull-right'>
+				<span><h2><%= @idea.num_votes %></h2></span> 
+				<%if @ideavoted.nil? %>
+					<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
+				<% else %>
+					<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-danger' %>
+				<%end%>
 			</div>
+			<%if @user==@idea.user_id%>
+				<div class='btn-group'>
+				 <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%> 
+				 <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+				 <% if @idea.archive_status == true %>
+					<%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+				<% else %>
+					<%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+				<% end %>
+				<!--! add here archive and delete buttons -->
+				</div>
+				<h2><%=link_to @username, @idea.user%></h2>
+			<%end%>
+<!--!<%end%>-->
+	</p>
+</div>
 			<h2><%= @username %></h2>
 		<%end%>
 	</p>
 </div>
 <div class="media-body">
-	<p>
+		 	<p>
 		<h3>Description:</h3>
 		<div><%= @idea.description %></div>
 	</p>
 	<p>
 		<h3>Problem Solved:</h3>
-		<div><%= @idea.problem_solved  %></div>
-		<h5>Comments</h5> </p></div>
-
-<table>
-<% @idea.comments.each do |comment| %>
-<tr>
-<td><blockquote><p><%= comment.content %></p><small> created <%= time_ago_in_words comment.created_at %> ago </small></blockquote> </td>
-<td><%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
-	<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> <%= comment.num_likes %> likes</td><td><td>
-  </tr>
- <% end %>
-</table><br>
+<div><%= @idea.problem_solved%></div>
+	</p>
+	<p>
+    <% if @idea.ratings.size > 0 %>
+      <b>Ratings:-</b>
+      <% @idea.ratings.each do |therating| %>
+        <p>
+          <div>
+            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+          </div>
+        </p>
+      <% end %>
+    <% end %>
+  </p>
+</div>
+<legend><h4>Comments</h4></legend>
+		<div id='like'>
+		<table>
+			<% @idea.comments.each do |comment| %>
+				<tr>
+    			<td>
+    				<blockquote>
+    					<label>
+    						<%= comment.content %>
+    					</label>
+    					<small> 
+    						added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago
+    					</small>
+    				</blockquote> 
+    			</td>
+					<td>
+						<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
+							<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
+								<%= link_to "+1", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
+							<% end %> 
+							<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
+						<small>
+							<%= comment.num_likes %> likes
+						</small>
+					</td>
+				</tr>
+					<% end %>
+		</table>
+		</div>
 <h5>Add a comment:</h5>
 <%= form_for([@idea, @idea.comments.create]) do |f| %>
- <div class="controls">
-    <%= f.text_area :content ,:class => 'text_area',:placeholder=>"Write comment here..." , :size => "5x5"%>
-  </div>
-    <%= f.submit nil, :class => 'btn btn-small btn-primary'%>
 
-<% end %>
+  <div class="controls">
+  	<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+	</div>
+  	<%= f.submit nil, :class => 'btn btn-small btn-primary'%>
+		<% end %>
+
 <td><%= link_to 'Back', '/',:class => "btn" %></td>
 <%if @idea.archive_status == false%>
 	<button id="share" class="btn btn-primary" type="button">Share</button>	
@@ -51,4 +104,4 @@
 		<%= image_tag("twitter-bird-white-on-blue.jpg", :id => "tw")%>
 		<a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
 	</div>		
-
+<%end%>
