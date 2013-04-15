@@ -28,7 +28,8 @@ Sprint0::Application.routes.draw do
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
   match '/ideas/filter' => 'ideas#filter'
   match '/users/change_settings' => 'users#change_settings'
-   match '/ideas/filter' => 'ideas#filter'
+  match '/ideas/filter' => 'ideas#filter'
+  match '/ideas/like' => 'ideas#like'
   match '/users/change_settings' => 'users#change_settings'
 default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
@@ -43,6 +44,19 @@ default_url_options :host => 'localhost:3000'
   #get "ideas/new"
 
   get '/tags/ajax'
+
+
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+
+  match '/ideas/update' => 'ideas#update'
+  devise_for :committees, :controllers => { :registrations => "registrations" }
+  match '/ideas/:id/vote' => 'ideas#vote'
+  match '/ideas/:id/unvote' => 'ideas#unvote'
+  match "/ideas/:id/archive" => "ideas#archive"
+  match "/ideas/:id/unarchive" => "ideas#unarchive"
+  resources :user_ratings, :controller => 'user_ratings'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -98,4 +112,14 @@ default_url_options :host => 'localhost:3000'
 
 
   resources :users
+
+
+
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+
+  resources :users
+  match '/user_ratings/create' => 'user_ratings#create', :defaults => { :format => 'js' }
+  match '/user_ratings/update' => 'user_ratings#update', :defaults => { :format => 'js' }
 end

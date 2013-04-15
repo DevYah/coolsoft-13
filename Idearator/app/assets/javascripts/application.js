@@ -11,13 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
-//= require jquery.tokeninput
-//= require jquery-ui
-//= require bootstrap
-//= require notification_polling
-//= require_tree .
-<<<<<<< HEAD
-=======
+
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
@@ -44,8 +38,3 @@ $(document).ready(function() {
     window.location= "/users/sign_in";
   });
 });
-
-
-
-
->>>>>>> master
