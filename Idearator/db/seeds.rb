@@ -10,7 +10,7 @@ user.save
 
 #Admin User
 admin = Admin.create(email: "hishameladmin@gmail.com", password: 123123123, first_name: "Hisham",
-last_name: "ElGezeery", username: "geezo", about_me: "Lorem ipsum dolor sit
+last_name: "ElGezeery", username: "geezoi", about_me: "Lorem ipsum dolor sit
 amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
