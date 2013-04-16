@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: ebdaf2a36811d23845ae289646d1b3ae3b22b4fd
+  revision: e008fb1aeeb026727ea6f879d9380235d65f7cd9
   specs:
-    rubocop (0.4.0)
+    rubocop (0.4.6)
       term-ansicolor
 
 GIT
@@ -42,7 +42,7 @@ GEM
     activesupport (3.2.13.rc1)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
-    addressable (2.3.3)
+    addressable (2.3.4)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.1.0)
@@ -54,6 +54,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chronic (0.9.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -83,6 +84,7 @@ GEM
     faker (1.1.2)
       i18n (~> 0.5)
     formatador (0.2.4)
+    google_visualr (2.1.7)
     guard (1.7.0)
       formatador (>= 0.2.4)
       listen (>= 0.6.0)
@@ -103,7 +105,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    launchy (2.2.0)
+    launchy (2.3.0)
       addressable (~> 2.3)
     listen (0.7.3)
     lumberjack (1.0.3)
@@ -159,6 +161,9 @@ GEM
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
+    rspec-html-matchers (0.4.1)
+      nokogiri (>= 1.4.4)
+      rspec (>= 2.0.0)
     rspec-mocks (2.13.1)
     rspec-rails (2.13.0)
       actionpack (>= 3.0)
@@ -172,6 +177,10 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simplecov (0.7.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -192,6 +201,9 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -205,6 +217,7 @@ DEPENDENCIES
   devise
   factory_girl_rails (~> 4.0)
   faker
+  google_visualr (~> 2.1.0)
   guard-rspec
   jquery-rails
   jquery-tokeninput-rails
@@ -213,9 +226,12 @@ DEPENDENCIES
   paperclip
   pre-commit!
   rails (= 3.2.13.rc1)
+  rspec-html-matchers
   rspec-rails (~> 2.0)
   rubocop!
   sass-rails (~> 3.2.3)
+  simplecov
   sqlite3
   tlsmail
   uglifier (>= 1.0.3)
+  whenever

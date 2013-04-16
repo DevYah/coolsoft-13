@@ -11,6 +11,7 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'tlsmail'
+gem "google_visualr", "~> 2.1.0"
 
 gem 'jquery-tokeninput-rails'
 
@@ -40,12 +41,17 @@ group :test, :development do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'simplecov', :require => false
 end
+
 group :test do
   gem 'faker'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'rspec-html-matchers'
 end
+
+
+gem 'whenever', :require => false
 
 
 

@@ -10,10 +10,38 @@ Sprint0::Application.routes.draw do
   #get "ideas/new"
   resources :ideas
   get '/tags/ajax'
-  default_url_options :host => 'localhost:3000'
+  get '/ratings/ajax'
+  match '/admins/invite' => 'admins#invite'
+  match '/admins/invite_committee' => 'admins#invite_committee'
+  match '/dashboard/index' => 'dashboard#index'
+  match 'dashboard/getallideas' => 'dashboard#getallideas'
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+  match '/dashboard/gettags' => 'dashboard#gettags'
+  match '/dashboard/getideas' => 'dashboard#getideas'
+  match '/home/search' => 'home#search'
+  match '/users/:id/ban_unban' => 'admins#ban_unban'
+  match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
+  match '/all_notifications.js' => 'notifications#view_all_notifications'
+  match '/notifications.js' => 'application#update_nav_bar'
+  match '/notifications/redirect_idea' => 'notifications#redirect_idea'
+  match '/notifications/redirect_review' => 'notifications#redirect_review'
+  match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  match '/ideas/filter' => 'ideas#filter'
+  match '/users/change_settings' => 'users#change_settings'
+default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_for :committees, :controllers => { :registrations => 'registrations' }
-  get '/ratings/ajax'
+
+  #get "ideas/new"
+  resources :ideas, :dashboard, :users
+   resources :ideas, :controller =>'ideas'
+
+  #get "ideas/new"
+
+  #get "ideas/new"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -65,18 +93,11 @@ Sprint0::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
 
-  match '/review_ideas' => 'committees#review_ideas'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
-  match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
-  match '/all_notifications.js' => 'notifications#view_all_notifications'
-  match '/notifications.js' => 'application#update_nav_bar'
-  match '/notifications/redirect_idea' => 'notifications#redirect_idea'
-  match '/notifications/redirect_review' => 'notifications#redirect_review'
-  match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+
+  
   match '/users/:id/ban_unban' => 'admins#ban_unban'
 
 
-  resources :users
 
+  resources :users
 end
