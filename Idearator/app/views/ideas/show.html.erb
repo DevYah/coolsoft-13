@@ -1,13 +1,11 @@
 <% if current_user %>
     <% if current_user.type == "Committee" %>
-        <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == 0 %>
+        <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false %>
 	        <%= link_to 'Approve', { :controller => "committees", :action => "add_prespectives" }, :id => params[:id],:confirm => "Are you sure you want to approve this idea?",:class => 'btn btn-success' %>
-	        <p>  OR  </p>
 	        <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
 	    <% end %>
     <% end %>
-<% end %>    
- 
+<% end %> 
 
 <div id="fb-root"></div>
 <p id="notice"><%= notice %></p>
@@ -45,3 +43,5 @@
 		<%= image_tag("twitter-bird-white-on-blue.jpg", :id => "tw")%>
 	</div>		
 <%end%>
+   
+
