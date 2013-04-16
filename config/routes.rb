@@ -110,15 +110,6 @@ default_url_options :host => 'localhost:3000'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
 
-
-  resources :users
-
-
-
-  match '/review_ideas' => 'committees#review_ideas'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
-
   resources :users
   match '/user_ratings/create' => 'user_ratings#create', :defaults => { :format => 'js' }
   match '/user_ratings/update' => 'user_ratings#update', :defaults => { :format => 'js' }
