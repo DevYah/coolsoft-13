@@ -31,5 +31,6 @@ FileUtils.cd '..' do
   system('git config core.fileMode false')
   system('git config core.eol lf')
   system('git config core.autocrlf true')
+  system('git config core.whitespace "space-before-tab,tab-in-indent,trailing-space,tabwidth=2"')
 end
 
