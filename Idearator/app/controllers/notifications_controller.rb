@@ -39,7 +39,7 @@ class NotificationsController < ApplicationController
     user_not.read = true
     user_not.save
     respond_to do |format|
-      format.html { redirect_to controller: 'users', action: 'expertise' }
+      format.html { redirect_to controller: 'users', action: 'send_expertise' }
       format.json { head :no_content }
     end
   end
