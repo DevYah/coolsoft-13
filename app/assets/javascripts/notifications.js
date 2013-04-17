@@ -1,6 +1,6 @@
 function add_notification_event_handlers() {
   $('div.invite-committee').click(function () {
-    $.getScript("/users/expertise")
+    $.getScript("/users/send_expertise")
   });
 
   $('div.idea').click(function () {
