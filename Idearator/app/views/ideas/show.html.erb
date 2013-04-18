@@ -12,7 +12,7 @@
 				<span><h2><%= @idea.num_votes %></h2></span> 
 				<%if @ideavoted.nil? %>
 					<%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
-				<% else %>
+				 <% else %>
 					<%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-danger' %>
 				<%end%>
 			</div>
@@ -22,14 +22,13 @@
 				 <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 				 <% if @idea.archive_status == true %>
 					<%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse' %>
-				<% else %>
+				 <% else %>
 					<%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 				<% end %>
 				<!--! add here archive and delete buttons -->
 				</div>
 				<h2><%=link_to @username, @idea.user%></h2>
 			<%end%>
-<!--!<%end%>-->
 	</p>
 </div>
 			<h2><%= @username %></h2>
@@ -84,17 +83,17 @@
 						</small>
 					</td>
 				</tr>
-					<% end %>
+		    <% end %>
 		</table>
 		</div>
 <h5>Add a comment:</h5>
 <%= form_for([@idea, @idea.comments.create]) do |f| %>
 
-  <div class="controls">
-  	<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
-	</div>
-  	<%= f.submit nil, :class => 'btn btn-small btn-primary'%>
-		<% end %>
+   	<div class="controls">
+ 		 <%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+  	</div>
+   		 <%= f.submit nil, :class => 'btn btn-small btn-primary'%>
+  <% end %>
 
 <td><%= link_to 'Back', '/',:class => "btn" %></td>
 <%if @idea.archive_status == false%>
@@ -105,3 +104,4 @@
 		<a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
 	</div>		
 <%end%>
+
