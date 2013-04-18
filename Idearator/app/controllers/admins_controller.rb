@@ -28,9 +28,9 @@ class AdminsController < ApplicationController
       @messege = 'user already exists'
     end
   end
+
   # toggles the ban status of the selected user
   # Author: Omar Kassem
-
   def ban_unban
     if current_user
       if current_user.type == 'Admin'
