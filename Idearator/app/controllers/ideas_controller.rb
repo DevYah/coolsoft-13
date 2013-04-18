@@ -135,8 +135,11 @@ class IdeasController < ApplicationController
         respond_to do|format|
           format.js
         end
+      end 
       else
         redirect_to @idea , :notice => "This comment was removed by the user"
+    end 
+  end 
 
   # Deletes all records related to a specific idea
   # Params:
