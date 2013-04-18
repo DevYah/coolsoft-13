@@ -172,6 +172,10 @@ end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
+      end
+    end
+  end
+
   #create new like
   #Params:
   #+comment_id+ :: the parameter is an instance   
@@ -200,5 +204,8 @@ end
         redirect_to @idea , :notice => "This comment was removed by the user"
       end
     end
+  end
+end
+
   
 
