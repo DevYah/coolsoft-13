@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe AdminsController do
   describe 'PUT ban_unban' do
     include Devise::TestHelpers
