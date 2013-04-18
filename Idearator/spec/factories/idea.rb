@@ -8,8 +8,6 @@ FactoryGirl.define do
     f.problem_solved 'problem solved of idea 1'
   end
   factory :invalid_idea, parent: :idea do |f|
-  f.title nil
+    f.title nil
   end
 end
-
-
