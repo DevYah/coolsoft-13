@@ -12,6 +12,7 @@ gem 'devise'
 
 gem "google_visualr", "~> 2.1.0"
 
+gem 'bot-away'
 gem 'jquery-tokeninput-rails'
 
 # Gems used only for assets and not required
@@ -66,4 +67,3 @@ gem 'whenever', :require => false
 
 # To use debugger
 # gem 'debugger'
-
