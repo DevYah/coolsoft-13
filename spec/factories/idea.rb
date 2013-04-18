@@ -11,5 +11,5 @@ FactoryGirl.define do
   factory :invalid_idea, parent: :idea do |f|
     f.title nil
   end
-end
+
 end
