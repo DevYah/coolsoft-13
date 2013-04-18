@@ -11,10 +11,5 @@ FactoryGirl.define do
   factory :invalid_idea, parent: :idea do |f|
     f.title nil
   end
-<<<<<<< HEAD
 end
-
-
-=======
 end
->>>>>>> C3_dayna161193_#83_likeComments
