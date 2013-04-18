@@ -146,6 +146,7 @@ describe IdeasController do
         response.should redirect_to Idea.last
       end
     end
+
     context 'with invalid attributes' do
       it 'does not save the new idea in the database' do
         expect {
