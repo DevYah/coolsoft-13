@@ -55,16 +55,19 @@ class IdeasController < ApplicationController
     @ideacommenters = @idea.comments
     @userVreceivers = []
     @userCreceivers = []
-    @ideavoters.each { |user|
+
+    @ideavoters.each do |user|
       if user.participated_idea_notifications
         @userVreceivers << user
-    end }
+      end
+    end
 
-
-    @ideacommenters.each { |user|
+    @ideacommenters.each do |user|
       if user.participated_idea_notifications
         @userCreceivers << user
-      end }
+      end
+    end
+
     EditNotification.send_notification(current_user, @idea, @userVreceivers)
     EditNotification.send_notification(current_user, @idea, @userCreceivers)
   end
@@ -76,8 +79,8 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
-    puts(params[:ideas_tags][:tags])
     @idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
+
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
@@ -98,6 +101,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
+
     respond_to do |format|
       if @idea.save
         @tags = params[:ideas_tags][:tags]
