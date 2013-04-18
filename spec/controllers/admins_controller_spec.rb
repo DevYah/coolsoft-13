@@ -21,6 +21,7 @@ describe AdminsController do
         @user.reload
         (@user.banned).should eql(true)
       end
+
       it 'can not change the status of the user ' do
         @admin=User.new
         @admin.email='o@gmail.com'
