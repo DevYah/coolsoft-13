@@ -4,10 +4,12 @@ class AdminsController < ApplicationController
       redirect_to '/home/index'
     end
   end
+
   # display invitation form
   # Author: muhammed hassan
   def invite
   end
+
   # checks invitation is valid and delivers the email
   # +email+:: the email of the  guest
   # Author: muhammed hassan
@@ -28,6 +30,7 @@ class AdminsController < ApplicationController
   end
   # toggles the ban status of the selected user
   # Author: Omar Kassem
+
   def ban_unban
     if current_user
       if current_user.type == 'Admin'
