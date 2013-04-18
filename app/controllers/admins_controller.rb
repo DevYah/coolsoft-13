@@ -1,14 +1,8 @@
-
 class AdminsController < ApplicationController
     before_filter do 
     unless current_user and current_user.is_a? Admin
       redirect_to '/home/index'
     end
-  end
-
-# display invitation form 
-# Author: muhammed hassan
-  def invite
   end
 
 # checks invitation is valid and delivers the email
@@ -21,13 +15,14 @@ class AdminsController < ApplicationController
       if i.valid? 
         mail = Inviter.invite_email(params[:email])
         mail.deliver
-        @messege = 'success'
+        flash[:notice] = 'success'
       else
-        @messege = i.errors.full_messages
+        flash[:error] = i.errors.full_messages
       end
     else
-      @messege = 'user already exists'
+      flash[:error] = 'user already exists'
     end
+    redirect_to :controller => 'home',:action => 'index'     
   end
 
 # toggles the ban status of the selected user
