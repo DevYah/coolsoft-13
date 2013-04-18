@@ -10,7 +10,6 @@ gem 'sqlite3'
 
 gem 'devise'
 
-gem 'tlsmail'
 gem "google_visualr", "~> 2.1.0"
 
 gem 'jquery-tokeninput-rails'
