@@ -24,8 +24,8 @@ Sprint0::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.perform_deliveries = true
-  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.perform_deliveries = false
+  ActionMailer::Base.raise_delivery_errors = false
   ActionMailer::Base.default from: "idearator.cool@gmail.com"
   ActionMailer::Base.smtp_settings = {
     :address => 'smtp.gmail.com',
