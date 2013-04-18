@@ -17,10 +17,5 @@ FactoryGirl.define do
    f.type 'Admin'
    f.password 'mahmoudhashish'
   end
-
-  factory :user_two, :class => User do |f|
-    f.email 'ay7aga'
-    f.password 'mahmoudhashish'
-  end
 end
 
