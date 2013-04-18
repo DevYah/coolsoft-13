@@ -8,6 +8,8 @@ class IdeasController < ApplicationController
     @user = current_user.id
     @username = current_user.username
     @idea = Idea.find(params[:id])
+    @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
+
     rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
