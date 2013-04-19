@@ -17,9 +17,9 @@
 //= require notification_polling
 //= require_tree .
 $(function() {
-	$("#searchdiv input").keyup(function(){
-		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		if (this.length()==0){
+  $("#searchdiv input").keyup(function(){
+    $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+    if (this.length()==0){
       $.ajax({
         url: '/home/index?page=' + 1,
         type: 'get',
@@ -32,9 +32,9 @@ $(function() {
 
 
 $(document).bind("ajaxError", function(e, xhr){
-	if(xhr.status == 401){
-		$('#signedout').modal('show');
-	}
+  if(xhr.status == 401){
+    $('#signedout').modal('show');
+  }
 });
 
 $(document).ready(function() {
@@ -42,7 +42,3 @@ $(document).ready(function() {
     window.location= "/users/sign_in";
   });
 });
-
-
-
-
