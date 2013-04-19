@@ -1,11 +1,12 @@
 class Invited < ActiveRecord::Base
+
   # attr_accessible :title, :body
   attr_accessible :email, :admin_id
-  validates :email ,  
-            :presence => true,   
-            :uniqueness => true,   
-            :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
-  validates :admin_id,  :presence => true   
+  validates :email ,
+    :presence => true,
+    :uniqueness => true,
+    :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+  validates :admin_id,  :presence => true
   belongs_to :admin
 
   # checks the validations and creates new +Invited+ object
@@ -20,4 +21,5 @@ class Invited < ActiveRecord::Base
     end
     return i
   end
+
 end

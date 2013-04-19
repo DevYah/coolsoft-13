@@ -22,14 +22,14 @@ $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
 		if (this.length()==0){
-			 $.ajax({
+      $.ajax({
         url: '/home/index?page=' + 1,
         type: 'get',
         dataType: 'script'
-       });
-	}
+      });
+    }
 
-	});
+  });
 });
 
 

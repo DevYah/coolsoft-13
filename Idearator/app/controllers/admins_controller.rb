@@ -1,5 +1,5 @@
-
 class AdminsController < ApplicationController
+
   before_filter do
     unless current_user and current_user.is_a? Admin
       redirect_to '/home/index'
@@ -48,4 +48,5 @@ class AdminsController < ApplicationController
       end
     end
   end
+
 end
