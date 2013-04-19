@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+respond_to :html, :json
+
 #Show all Comments
 #Params:
 #+idea_id+ :: the parameter is an instance of +Idea+

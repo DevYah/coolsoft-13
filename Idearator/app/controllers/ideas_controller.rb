@@ -9,13 +9,20 @@ class IdeasController < ApplicationController
     @username = current_user.username
     @idea = Idea.find(params[:id])
     @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
-
     rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
     end
   end
+
+  #gets all the comments for a certain idea 
+  #author : dayna
+  def comments
+    @idea = Idea.find(params[:idea_id])
+    @comment = @idea.comments.find(params[:id])
+
+  end 
 
   # making new Idea
   #Marwa Mehanna
@@ -124,7 +131,6 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     @commentid = params[:commentid]
     if params[:commentid] != nil
-      @commentid = params[:commentid]
       @comment = Comment.find(:first, :conditions => {:id => @commentid})
       if Comment.exists?(:id => @commentid)
         @comment.num_likes = @comment.num_likes + 1
