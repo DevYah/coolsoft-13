@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+
   include OmniauthHandlerMixin
 
   # Allow the user to choose a different username if user's twitter screen name
@@ -25,6 +26,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
   def after_sign_up_path_for(resource)
     if resource.type.is_a? Committee
       '/users/expertise'
@@ -40,4 +42,5 @@ class RegistrationsController < Devise::RegistrationsController
       '/'
     end
   end
+
 end
