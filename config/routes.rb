@@ -49,12 +49,13 @@ Sprint0::Application.routes.draw do
   end
 
   # Notifications routes
-  match 'notifications/view_all_notifications' => 'notifications#view_all_notifications'
-  match 'all_notifications.js' => 'notifications#view_all_notifications'
-  match 'notifications.js' => 'application#update_nav_bar'
-  match 'notifications/redirect_idea' => 'notifications#redirect_idea'
-  match 'notifications/redirect_review' => 'notifications#redirect_review'
-  match 'notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  controller :notifications do
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+  end
+  match 'notifications' => 'application#update_nav_bar'
 
   # Tag routes
   match 'tags/ajax'
