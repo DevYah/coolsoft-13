@@ -32,17 +32,19 @@
 			<% @idea.comments.each do |comment| %>
 				<tr>
     			<td>
+    				    	     <div class="alert alert-info">
+
     				<blockquote>
+
     					<label class="text-success">
-    						<%= @comment = comment %>
-                          <%= best_in_place @comment, :content %>
+                          <%= comment.content %>
     					</label>
     					<small> 
     						added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago 
     					</small>
     				</blockquote> 
-    			</td>
-					<td>
+    			
+					
 						<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
 							<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
 								<%= link_to "<i>+1</i>".html_safe ,:class => " icon-thumbs-up", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
@@ -56,6 +58,7 @@
 					<% end %>
 		</table>
 		</div>
+	</div>
 <div>
 	<h5>Add a comment:</h5>
 	<%= form_for([@idea, @idea.comments.create]) do |f| %>
