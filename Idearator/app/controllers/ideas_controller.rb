@@ -28,7 +28,7 @@ class IdeasController < ApplicationController
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
-  def edit   
+  def edit
     @idea = Idea.find(params[:id])
     @tags= Tag.all
     @chosentags= Idea.find(params[:id]).tags
@@ -75,6 +75,7 @@ class IdeasController < ApplicationController
       end
     end
   end
+
   # Archives a specific idea
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be archived
@@ -107,18 +108,14 @@ class IdeasController < ApplicationController
       idea.comments.each do |c|
         c.destroy
       end
-
-      respond_to do |format|
-        format.html { redirect_to idea, alert: 'Idea has been successfully archived.' }
-        format.json { head :no_content }
-      end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
-        format.json { head :no_content }
+        format.js { head :no_content }
       end
     end
   end
+
   # Unarchives a specific idea
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be unarchived
@@ -129,15 +126,10 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = false
       idea.save
-
-      respond_to do |format|
-        format.html { redirect_to idea, alert: 'Idea has been successfully unarchived.' }
-        format.json { head :no_content }
-      end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
-        format.json { head :no_content }
+        format.js { head :no_content }
       end
     end
   end
