@@ -12,8 +12,6 @@ gem 'devise'
 
 gem 'tlsmail'
 
-
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -27,6 +25,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'best_in_place'
 gem 'paperclip'
 gem 'bootstrap-sass'
 gem 'faker'
