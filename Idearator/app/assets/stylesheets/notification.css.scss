@@ -49,6 +49,13 @@ h3.title{
   display: inline;
 }
 
+.notification.read:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.notification.unread:hover {
+  background: rgba(0,153,153, 0.50);
+}
 
 .link{
   display: none;

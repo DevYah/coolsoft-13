@@ -8,14 +8,6 @@ function add_notification_event_handlers() {
     window.location.href='/ideas/' + idea;
   });
 
-  $('.unread').hover(function () {
-    $(this).toggleClass('unread-select');
-  });
-
-  $('.read').hover(function () {
-    $(this).toggleClass('read-select');
-  });
-
   $('div.approve-committee').click(function () {
     var user = this.getAttribute('data-notification')
     window.location.href='/users/' + user;
