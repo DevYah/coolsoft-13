@@ -40,7 +40,6 @@ class CommitteesController < ApplicationController
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
       session[:idea_id]=params[:id]
-      @idea.approved = true
       @idea.save
     else
       respond_to do |format|
@@ -58,6 +57,8 @@ class CommitteesController < ApplicationController
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(session[:idea_id])
+      @idea.approved = true
+      @idea.save
       @rating = params[:rating]
       @rating.each do |rate|
         r = @idea.ratings.build
@@ -66,7 +67,8 @@ class CommitteesController < ApplicationController
         r.save
       end
       respond_to do |format|
-        format.js {render "add_rating"}
+        format.html { redirect_to  '/review_ideas' , notice: 'You rating prespectives have been added successfully' }
+        format.json { head :no_content }
       end
     else
       respond_to do |format|
