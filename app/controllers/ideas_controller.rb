@@ -175,36 +175,6 @@ end
       end
     end
   end
-
-  #create new like
-  #Params:
-  #+comment_id+ :: the parameter is an instance   
-  # of +Comment+ and it's used to build the like after clicking like
-  #The def checks if the user liked the comment before if not the num_likes is incremented
-  #by 1 else nothing happens
-  #author dayna
-  def like
-    @idea = Idea.find(params[:id])
-    @commentid = params[:commentid]
-    if params[:commentid] != nil
-      @commentid = params[:commentid]
-      @comment = Comment.find(:first, :conditions => {:id => @commentid})
-      if Comment.exists?(:id => @commentid)
-        @comment.num_likes = @comment.num_likes + 1
-        @comment.save
-        @like = Like.new
-        @like.user_id = current_user.id
-        @like.comment_id = @commentid
-        @like.save
-        @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
-        respond_to do|format|
-          format.js
-        end
-      else
-        redirect_to @idea , :notice => "This comment was removed by the user"
-      end
-    end
-  end
 end
 
   
