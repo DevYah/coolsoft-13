@@ -72,6 +72,7 @@ Sprint0::Application.routes.draw do
   match '/notifications/redirect_idea' => 'notifications#redirect_idea'
   match '/notifications/redirect_review' => 'notifications#redirect_review'
   match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
+  match '/new_notifications.js' => 'notifications#view_new_notifications'
   resources :users
 
 
