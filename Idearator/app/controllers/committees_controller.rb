@@ -28,7 +28,9 @@ class CommitteesController < ApplicationController
       @idea.save
       DisapproveIdeaNotification.send_notification(current_user, @idea, [@idea.user])
       flash[:notice] = 'The idea has been disapproved'
-      redirect_to :controller => 'committees', :action => 'review_ideas'
+      respond_to do |format|
+        format.js {render "disapprove"}
+      end
     end
   end
 
@@ -67,8 +69,7 @@ class CommitteesController < ApplicationController
         r.save
       end
       respond_to do |format|
-        format.html { redirect_to  '/review_ideas' , notice: 'You rating prespectives have been added successfully' }
-        format.json { head :no_content }
+        format.js {render "add_rating"}
       end
     else
       respond_to do |format|
