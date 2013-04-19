@@ -10,9 +10,9 @@
 			<div class="btn-group">
 				<%= link_to 'Edit', edit_idea_path(@idea) ,:class => "btn btn-inverse" %>
 				<% if @idea.archive_status == true %>
-					<%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+					<%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse unarchive', :remote => true %>
 				<% else %>
-					<%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+					<%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger archive', :remote => true %>
 				<% end %>
 				<%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
 			</div>
