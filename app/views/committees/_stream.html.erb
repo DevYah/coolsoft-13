@@ -1,6 +1,6 @@
 <% @ideas.each do |approved| %>
   <% if approved.user.active == true and approved.user.banned == false %>
-    <div class ="row block span10">
+    <div class ="row block span10" id='idea-<%= approved.id %>'>
       <div class = "wrapper">
         <div class = "span2 in-line"><%= image_tag approved.photo.url(:medium)  %></div>
         <div class = "span6">
@@ -28,22 +28,24 @@ data-backdrop='true' data-keyboard='true' data-show='true' data-remote='false'>A
           <div id="MyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h1>New Modal</h1>
+              <h1>Add your prespectives</h1>
               <% session[:idea_id]= approved.id %>
-              <h3 id="MyModalLabel">Modal header</h3>
             </div>
             <div class="modal-body">
               <% if current_user.type == 'Committee' %>
                 <input type="text" id="rating_complete" name="blah2" />
-                <h1>Add Prespectives</h1>
                 <ul id="rating">
                 </ul>
                 <div id ="flash">
                 </div>
                 <div id ="ratings">
-                  <%= button_to_function "Submit Prespectives" , "sendAjax()" %>
                 </div>
-                <script type="text/javascript">
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <%= button_to_function "Submit Prespectives" , "sendAjax()" ,:class => 'btn btn-primary'%>
+               <script type="text/javascript">
                   function sendAjax(){
                     var list = "";
                     var i=0;
@@ -56,12 +58,6 @@ data-backdrop='true' data-keyboard='true' data-show='true' data-remote='false'>A
                     $.ajax("/add_rating?"+list);
                   }
                 </script>
-              <% end %>
-              <p>One fine body…</p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-              <button class="btn btn-primary">Save changes</button>
             </div>
           </div>
           <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove", :id => approved.id} ,:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
