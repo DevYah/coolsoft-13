@@ -63,13 +63,6 @@ GEM
     cocaine (0.5.1)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.0.9)
-    coffee-rails (3.2.2)
-      coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
-    coffee-script (2.2.0)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.6.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -218,26 +211,25 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bootstrap-sass
-  bot-away
-  capybara
-  coffee-rails (~> 3.2.1)
-  devise
-  factory_girl_rails (~> 4.0)
-  faker
-  google_visualr (~> 2.1.0)
-  guard-rspec
-  jquery-rails
-  jquery-tokeninput-rails
-  kaminari
-  launchy
-  paperclip
+  bootstrap-sass (= 2.3.1.0)
+  bot-away (= 2.0.1)
+  capybara (= 2.1.0)
+  devise (= 2.2.3)
+  factory_girl_rails (= 4.2.1)
+  faker (= 1.1.2)
+  google_visualr (= 2.1.7)
+  guard-rspec (= 2.5.3)
+  jquery-rails (= 2.2.1)
+  jquery-tokeninput-rails (= 1.6.0)
+  kaminari (= 0.14.1)
+  launchy (= 2.2.0)
+  paperclip (= 3.4.1)
   pre-commit!
   rails (= 3.2.13.rc1)
-  rspec-html-matchers
-  rspec-rails (~> 2.0)
+  rspec-html-matchers (= 0.4.1)
+  rspec-rails (= 2.13.0)
   rubocop!
-  sass-rails (~> 3.2.3)
-  sqlite3
-  uglifier (>= 1.0.3)
-  whenever
+  sass-rails (= 3.2.6)
+  sqlite3 (= 1.3.7)
+  uglifier (= 2.0.1)
+  whenever (= 0.8.2)
