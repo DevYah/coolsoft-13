@@ -1,0 +1,2 @@
+$('.unarchive').replaceWith('<%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @id, :confirm => "Are you sure?", :class => 'btn btn-danger archive', :remote => true %>');
+$('#notice').text('Idea has been successfully Unarchived!');
