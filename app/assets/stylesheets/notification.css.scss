@@ -19,14 +19,6 @@ div.notification{
 	background: rgba(0,153,153, 0.25);
 }
 
-div.unread-select{
-	background: rgba(0,153,153, 0.50);
-}
-
-div.read-select{
-	background: rgba(0, 0, 0, 0.20);
-}
-
 .read{
   background: rgba(0, 0, 0, 0.10);
 }
@@ -70,4 +62,8 @@ div.padding_right{
 	font-size: 10px;
 	color:#686868;
 	float: right;
+}
+
+.custom-dropdown{
+  width: 400px;
 }
