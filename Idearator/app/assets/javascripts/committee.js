@@ -5,3 +5,4 @@ $("#rating_complete").tokenInput('/ratings/ajax', {
     tokenLimit: 5
   });
 });
+$('#myModal').modal();
