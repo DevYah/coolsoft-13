@@ -26,17 +26,17 @@
 		<div><%= @idea.problem_solved  %></div>
 	</p>
 </div>
-<legend><h4>Comments</h4></legend>
+<legend><h4 class ="title2">Comments</h4></legend>
 		<div id='like'>
 		<table>
 			<% @idea.comments.each do |comment| %>
 				<tr>
     			<td>
-    				    	     <div class="alert alert-info">
+    				   <div class="alert alert-info">
 
     				<blockquote>
 
-    					<label class="text-success">
+    					<label class="commentContent">
                           <%= comment.content %>
     					</label>
     					<small> 
@@ -45,27 +45,29 @@
     				</blockquote> 
     			
 					
-						<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
+					<p class ="buttons">	<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' %>
 							<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
 								<%= link_to "<i>+1</i>".html_safe ,:class => " icon-thumbs-up", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
 							<% end %> 
 							<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
 						<small class = "text-info">
 							<%= comment.num_likes %> likes
-						</small>
+						</small></p>
 					</td>
 				</tr>
 					<% end %>
 		</table>
 		</div>
 	</div>
-<div>
-	<h5>Add a comment:</h5>
+<div class = "addComment">
+	<h5 class = "title1">Add a comment:</h5>
 	<%= form_for([@idea, @idea.comments.create]) do |f| %>
 
   		<div class="controls">
-  		<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..." %>
-		</div>
+     <div class ="textArea1" >
+  		<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+		</div> 
+	</div>
   		<%= f.submit nil, :class => 'btn btn-small btn-primary'%>
 	<% end %>
 
