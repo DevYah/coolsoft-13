@@ -3,17 +3,16 @@
     <div class="modal-header">
       <a class="close" data-dismiss="modal">×</a>
       <h3>invite Committee members</h3>
-    </div> 
+    </div>
     <div class="modal-body">
       <h4>enter the email below</h4>
       <%= form_tag( '/admins/invite_committee', :method => "get") do %>
-      <%= text_field_tag(:email,nil,:placeholder => 'enter email here' , :class => 'spann3') %></p>
+        <%= text_field_tag(:email,nil,:placeholder => 'enter email here' , :class => 'spann3') %></p>
     </div>
     <div class="modal-footer">
       <%= submit_tag("send invitation",:class => 'btn btn-success') %>
-      <% end %>
-      <a href="#" class="btn" data-dismiss="modal">Close</a>
-    </div>
+    <% end %>
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
   </div>
-  <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">invite a committe member</a></p>
 </div>
+<p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">invite a committe member</a></p>
