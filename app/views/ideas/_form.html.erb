@@ -3,6 +3,7 @@
 
     <% if @idea.errors.any? %>
       <div id = 'error_explanation'>
+
         <h2><%= pluralize(@idea.errors.count, 'error') %>
           prohibited this idea from being saved:</h2>
         <ul>
@@ -16,6 +17,7 @@
     <p>
       <%= i.file_field :photo %>
     </p>
+
 
     <div class = 'control-group' >
       <%= i.label :title , :class => 'control-label'%>
