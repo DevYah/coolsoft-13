@@ -15,6 +15,12 @@ div.notification{
 	cursor: pointer;
 }
 
+div.notification-nav{
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
 .unread{
 	background: rgba(0,153,153, 0.25);
 }
@@ -49,6 +55,18 @@ h3.title{
   background: rgba(0,153,153, 0.50);
 }
 
+.notification-nav:hover .link{
+  display: inline;
+}
+
+.notification-nav.read:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.notification-nav.unread:hover {
+  background: rgba(0,153,153, 0.50);
+}
+
 .link{
   display: none;
   float: right;
@@ -66,4 +84,9 @@ div.padding_right{
 
 .custom-dropdown{
   width: 400px;
+}
+
+.date-nav{
+  font-size: 10px;
+  color:#686868;
 }
