@@ -4,7 +4,7 @@
     		<blockquote> 
     			<div id = "<%=comment.id%>">
     				<label class="commentContent">
-                        <%= comment.content %>
+                        <%= best_in_place comment, :content  , :type => :input, :path => edit_idea_comment_path(@idea,comment) %>
     				</label>
     				<small> 
     					added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago 
