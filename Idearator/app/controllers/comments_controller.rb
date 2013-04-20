@@ -21,17 +21,19 @@ class CommentsController < ApplicationController
   #author dayna
   def create
     @idea = Idea.find(params[:idea_id])
+    @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
     @comment = @idea.comments.create(params[:comment])
     @comment.update_attributes(:idea_id => @idea.id)
-    respond_to do |format|
-     if @comment.save
-       format.html { redirect_to(@idea, :notice => 'Comment was successfully created.') }
-       format.xml  { render :xml => @idea, :status => :created, :location => @idea }
+    if @comment.save
+      respond_to do |format|
+        format.js
+      end    
     else
-       format.html { redirect_to(@idea, :notice => 'Comment could not be saved. Please fill in all fields') }
+      respond_to do |format|
+        format.html { redirect_to(@idea, :notice => 'Comment could not be saved. Please fill in all fields') }
         format.xml { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
-     end
+    end
   end
 
   #edit comment and update it
