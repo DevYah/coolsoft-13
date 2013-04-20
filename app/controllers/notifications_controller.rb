@@ -13,13 +13,13 @@ class NotificationsController < ApplicationController
   # Params: none.
   # Author: Amina Zoheir
   def view_all_notifications
-    if user_signed_in?
-      idea_notifications = current_user.idea_notifications
-      user_notifications = current_user.user_notifications
-      not1 = idea_notifications + user_notifications
-      not2 = not1.sort_by &:created_at
-      @all_notifications = not2.reverse
-    end
+    #if user_signed_in?
+      #idea_notifications = current_user.idea_notifications
+      #user_notifications = current_user.user_notifications
+      #not1 = idea_notifications + user_notifications
+      #not2 = not1.sort_by &:created_at
+      #@all_notifications = not2.reverse
+    #end
   end
 
 
@@ -47,7 +47,7 @@ class NotificationsController < ApplicationController
     user_not.read = true
     user_not.save
     respond_to do |format|
-      format.html { redirect_to controller: 'users', action: 'send_expertise' }
+      format.js { redirect_to controller: 'users', action: 'send_expertise' }
       format.json { head :no_content }
     end
   end
