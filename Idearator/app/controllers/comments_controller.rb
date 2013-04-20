@@ -46,12 +46,16 @@ class CommentsController < ApplicationController
     @idea = Idea.find(params[:idea_id])
   end
 
-def update
+ def update
   @comment = Comment.find(params[:id])
   @idea = Idea.find(params[:idea_id])
    if @comment.update_attributes(params[:comment])
-      respond_with @comment
-   end
+      format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
+      format.json 
+    else
+      format.html { render :action => "edit" }
+      format.json
+    end  
  end
 
   #delete comment
