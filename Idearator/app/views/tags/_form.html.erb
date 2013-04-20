@@ -1,14 +1,5 @@
-<%= form_for @tag, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                tags_path, :class => 'btn' %>
+<%= form_for @tag , :remote => true do |f|%>
+  <div class="new-tag span12", id='new-tag'>
+    <%= f.text_field :name, :class => 'text_field span12', :placeholder => 'Create a new tag here', :data => { :provide => "typeahead" } %>
   </div>
 <% end %>
