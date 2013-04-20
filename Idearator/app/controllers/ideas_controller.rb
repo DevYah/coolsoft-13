@@ -14,8 +14,7 @@ class IdeasController < ApplicationController
       # @tags = Tag.all
       #@chosentags = Idea.find(params[:id]).tags
     end
-    @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }
-  rescue ActiveRecord::RecordNotFound
+    @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
@@ -31,6 +30,19 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @idea }
+    end
+  end
+
+  # filters the ideas that have one or more of given tags
+  # Params:
+  # +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
+  # Author: muhammed hassan
+  def filter
+    @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
+    @tags = params[:myTags]
+    respond_to do |format|
+      format.js
+      format.json  { render :json => @approved }
     end
   end
 
@@ -98,6 +110,7 @@ class IdeasController < ApplicationController
     if @ideaowner.own_idea_notifications
       VoteNotification.send_notification(current_user, @idea, [@ideaowner])
     end
+    #@idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Thank you for voting' }
@@ -137,6 +150,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
+
     respond_to do |format|
       if @idea.save
         @tags = params[:ideas_tags][:tags]
@@ -152,7 +166,8 @@ class IdeasController < ApplicationController
     end
   end
 
-  # Archives a specific idea
+
+  # Deletes all records related to a specific idea
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be archived
   # Author: Mahmoud Abdelghany Hashish
@@ -166,10 +181,14 @@ class IdeasController < ApplicationController
       list_of_comments.each do |c|
         c.destroy
       end
+
+
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
+
       list = list_of_commenters.append(list_of_voters).flatten!
+
       DeleteNotification.send_notification(current_user, idea, list)
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
@@ -180,6 +199,7 @@ class IdeasController < ApplicationController
       end
     end
   end
+
 
   def archive
     idea = Idea.find(params[:id])
@@ -233,5 +253,4 @@ class IdeasController < ApplicationController
       end
     end
   end
-
 end
