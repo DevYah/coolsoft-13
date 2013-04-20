@@ -9,16 +9,19 @@ p.same_line{
 	display: inline;
 }
 
-div.notification{
+.row .notification{
 	border-radius: 5px;
 	margin: 10px;
 	cursor: pointer;
+  position:relative
 }
 
-div.notification-nav{
+.nav .notification{
   border-radius: 5px;
   margin: 5px;
   cursor: pointer;
+  min-height: 40px;
+  position:relative
 }
 
 .unread{
@@ -43,27 +46,27 @@ h3.title{
 }
 
 
-.notification:hover .link{
+.row .notification:hover .link{
   display: inline;
 }
 
-.notification.read:hover {
+.row .notification.read:hover {
   background: rgba(0, 0, 0, 0.20);
 }
 
-.notification.unread:hover {
+.row .notification.unread:hover {
   background: rgba(0,153,153, 0.50);
 }
 
-.notification-nav:hover .link{
+.nav .notification:hover .link{
   display: inline;
 }
 
-.notification-nav.read:hover {
+.nav .notification.read:hover {
   background: rgba(0, 0, 0, 0.20);
 }
 
-.notification-nav.unread:hover {
+.nav .notification.unread:hover {
   background: rgba(0,153,153, 0.50);
 }
 
@@ -79,7 +82,10 @@ div.padding_right{
 .date{
 	font-size: 10px;
 	color:#686868;
-	float: right;
+  position:absolute; 
+  bottom:0;
+  right:0;
+  padding-right: 20px;
 }
 
 .custom-dropdown{
