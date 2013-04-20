@@ -46,13 +46,16 @@
       </div>
     </div>
 
-    <div>
-      <% @tags.each do |tag|%>
-        <div><%= check_box_tag 'ideas_tags[tags][]', tag.id, @chosentags.include?(tag) %><%= tag.name %>
+    <div id="idea-tags">
+      <% Tag.all.each do |tag|%>
+        <div class='idea-tag'>
+          <%= check_box_tag 'idea[tag_ids][]', tag.id, @idea.tags.include?(tag), data: {tag_name: tag.name } %>
+          <%= tag.name %>
         </div>
       <% end %>
       <span class = 'help-inline'>Please check the relative tags</span>
     </div>
+     <%= hidden_field_tag 'idea[tag_ids][]', '' %>
 
     <div class = 'actions'>
       <%= i.submit nil, :class => 'btn btn-primary'%>
