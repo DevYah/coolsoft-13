@@ -49,14 +49,8 @@ class CommentsController < ApplicationController
 def update
   @comment = Comment.find(params[:id])
   @idea = Idea.find(params[:idea_id])
-  respond_to do |format|
    if @comment.update_attributes(params[:comment])
-      format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
-      format.xml  { head :no_content }
-   else
-      format.html { render :action => 'edit' }
-      format.xml  { render :xml => @idea.errors, :status => :unprocessable_entity }
-   end
+      respond_with @comment
    end
  end
 
