@@ -1,17 +1,5 @@
 <% @all_notifications.each do |notification| %>
-  <%@notification = notification%>
-  <%= render 'notifications/view' %>
-  <% if notification.is_a? UserNotification %>
-    <% user_not = UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id })
-    user_not.read = true
-    user_not.save %>
-  <% else %>
-    <% idea_not = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id })
-    idea_not.read = true
-    idea_not.save %>
-  <% end %>
-  <% unread_ideas = IdeaNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
-    unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
-    @count = unread_users + unread_ideas
-  %>
+  <%= render partial: 'view', locals: {notification: notification} %>
+  <% notification.read_for current_user %>
+  <% @count = 0 %>
 <% end %>
