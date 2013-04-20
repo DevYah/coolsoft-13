@@ -7,7 +7,7 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
   devise_for :committees, :controllers => { :registrations => "registrations" }
-  match "/ideas/:id/archive" => "ideas#archive", :defaults => { :format => 'js'}
+  match "/ideas/:id/archive" => "ideas#archive"
   match "/ideas/:id/unarchive" => "ideas#unarchive", :defaults => { :format => 'js' }
 
 
