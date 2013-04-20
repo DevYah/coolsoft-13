@@ -55,7 +55,9 @@ $(document).ready(function() {
     prePopulate: prePopulate
   });
 
+
   $('.best_in_place').best_in_place();
+  $('#image-edit-link,.best_in_place').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
 
   $('.best_in_place').bind("ajax:success", function(){
     $('#edited-check-mark').remove();
