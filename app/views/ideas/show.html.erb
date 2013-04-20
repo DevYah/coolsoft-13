@@ -27,48 +27,23 @@
 	</p>
 </div>
 <legend><h4 class ="title2">Comments</h4></legend>
-		<div id='like'>
-		<table>
+	<div id='like'>
+		<table id='comments'>
 			<% @idea.comments.each do |comment| %>
-				<tr>
-    			<td>
-    				   <div class="alert alert-info">
-
-    				<blockquote> 
-    			      <div id = "<%=comment.id%>">
-    					  <label class="commentContent">
-                           	 <%= comment.content %>
-    					   </label>
-    					   <small> 
-    						  added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago 
-    					    </small>
-    				  	</div>
-    				</blockquote> 
-    			    
-					<p class ="buttons">	<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' , :remote => true %>
-							<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
-								<%= link_to "<i>+1</i>".html_safe ,:class => " icon-thumbs-up", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
-							<% end %> 
-							<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
-						<small class = "text-info">
-							<%= comment.num_likes %> likes
-						</small></p>
-					</td>
-				</tr>
-					<% end %>
+				<%= render partial: '/comments/comment', locals: { comment: comment }	%>
+			<% end %>
 		</table>
-		</div>
 	</div>
 <div class = "addComment">
 	<h5 class = "title1">Add a comment:</h5>
-	<%= form_for([@idea, @idea.comments.create]) do |f| %>
+	<%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
 
   		<div class="controls">
      <div class ="textArea1" >
   		<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
 		</div> 
 	</div>
-  		<%= f.submit nil, :class => 'btn btn-small btn-primary'%>
+  		<%= f.submit nil, :class => 'btn btn-small btn-primary' %>
 	<% end %>
 
 	<td><%= link_to 'Back', '/',:class => "btn" %></td>
