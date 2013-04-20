@@ -4,4 +4,8 @@ class DisapproveIdeaNotification < IdeaNotification
     disapprove_notification = DisapproveIdeaNotification.create(user: user_sender, idea: idea, users: users_receivers)
   end
 
+  def text
+    "Your " + Idea.find(self.idea_id).title + " wasn't approved by the committee." 
+  end
+
 end
