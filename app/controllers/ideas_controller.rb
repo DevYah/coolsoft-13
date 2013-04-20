@@ -108,6 +108,11 @@ class IdeasController < ApplicationController
       idea.comments.each do |c|
         c.destroy
       end
+
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'Idea has been successfully archived!' }
+        format.js
+      end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
