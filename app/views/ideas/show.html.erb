@@ -1,12 +1,11 @@
 <div id='fb-root'></div>
-
-<p id='notice'><%= notice %></p>
-
 <div class='media'>
   <a  class='pull-left' href='#'>
-    <%= image_tag @idea.photo.url(:medium) %>
+    <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
   </a>
-
+  <script>
+    $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
+  </script>
   <p>
     <!--!<h2>Title:</h2>-->
     <h3><%= @idea.title %></h3>
@@ -37,8 +36,16 @@
     <%end%>
     <!--!<%end%>-->
   </p>
-
 </div>
+
+<div>
+  <%if @chosentags != nil %>
+  <% @chosentags.each do |tag|%>
+    <span class="label label-info "><%= tag.name %></span>
+  <% end %>
+  <% end %>
+</div>
+
 <div class='media-body'>
   <p>
     <h3>Description:</h3>
@@ -49,9 +56,9 @@
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
+
   <%if @idea.archive_status == false%>
     <button id='share' class='btn btn-primary' type='button'>Share</button>
-
     <div id='show' class='container'>
       <%= image_tag('f_logo.jpg', :id => 'fbk')%>
       <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
