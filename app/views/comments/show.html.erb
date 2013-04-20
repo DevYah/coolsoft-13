@@ -7,8 +7,7 @@
           <td>
             <blockquote>
               <label class="text-success">
-                <%= @comment = comment %>
-                          <%= best_in_place @comment, :content %>
+                     <%= best_in_place @comment, :content %>
               </label>
               <small> 
                 added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago 
