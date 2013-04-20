@@ -11,13 +11,14 @@ class IdeasController < ApplicationController
     if user_signed_in?
       @user = current_user.id
       @username = current_user.username
-      # @tags = Tag.all
-      #@chosentags = Idea.find(params[:id]).tags
+      @tags = Tag.all
+      @chosentags = Idea.find(params[:id]).tags
     end
     @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
+      format.js
     end
   end
 
@@ -84,8 +85,6 @@ class IdeasController < ApplicationController
   # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
   # Author: Marwa Mehanna
   def update
-    #puts(params[:ideas_tags][:tags])
-    #@idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
     @idea = Idea.find(params[:id])
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
@@ -110,7 +109,6 @@ class IdeasController < ApplicationController
     if @ideaowner.own_idea_notifications
       VoteNotification.send_notification(current_user, @idea, [@ideaowner])
     end
-    #@idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Thank you for voting' }
@@ -150,13 +148,8 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
-
     respond_to do |format|
       if @idea.save
-        @tags = params[:ideas_tags][:tags]
-        @tags.each do |tag|
-          IdeasTags.create(:idea_id => @idea.id, :tag_id => tag)
-        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
