@@ -4,10 +4,10 @@ Sprint0::Application.routes.draw do
   match '/home/index' => 'home#index'
   match '/ideas/like' => 'ideas#like'
   resources :ideas do
-    resources :comments do
+    resources :comments do 
       member do
-      get 'like'
-      end
+      put :update
+    end
     end 
   end
 
