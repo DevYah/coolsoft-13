@@ -1,0 +1,5 @@
+<div class = 'well notification invite-committee <%= notification.read_by?(current_user) ? 'read' : 'unread' %>' data-notification = <%= notification.user.id %> data-time=<%= notification.created_at.to_i %>>
+  <span><%= notification.text %></span>
+  <div class = 'link'><%= link_to 'choose area of expertise', {controller: 'users', action: 'expertise'} %></div>
+  <span class = 'date'><%= notification.created_at.to_s(:long)%></span>
+</div>
