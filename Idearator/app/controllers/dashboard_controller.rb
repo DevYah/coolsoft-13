@@ -13,15 +13,19 @@ class DashboardController < ApplicationController
     @user = current_user
     @threshold = Threshold.last
     if @user.type == 'Committee'
-      @approved_ideas = Idea.find(:all, :conditions => { :committee_id => @user.id})
+      @approved_ideas = Idea.find(:all, :conditions => { :committee_id => @user.id, :archive_status => false})
+
       @approved_thresholds = Array.new
       @approved_ideas.each do |idea|
-        @v = VoteCount.find(:first, :conditions => { :idea_id => idea.id})
-        @approved_threshold = ((@v.prev_day_votes * 100) / @threshold.threshold)
-        @approved_thresholds << @approved_threshold
+        user = idea.user
+        if !user.banned && user.active
+          @v = VoteCount.find(:first, :conditions => { :idea_id => idea.id})
+          @approved_threshold = ((@v.prev_day_votes * 100) / @threshold.threshold)
+          @approved_thresholds << @approved_threshold
+        end
       end
     end
-    @own_ideas = Idea.find(:all, :conditions => { :user_id => @user.id})
+    @own_ideas = Idea.find(:all, :conditions => { :user_id => @user.id, :archive_status => false})
     @own_thresholds = Array.new
     @own_ideas.each do |idea|
       @v = VoteCount.find(:first, :conditions => { :idea_id => idea.id})
