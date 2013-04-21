@@ -234,7 +234,6 @@ describe IdeasController do
     end
 
     it 'assigns the requested idea to @idea' do
-      #idea = Factory(:idea)
       get :show, :id => @idea.id
       assigns(:idea).should eq(@idea)
     end
@@ -249,59 +248,105 @@ describe IdeasController do
     before :each do
       @user = FactoryGirl.build(:user)
       @user.confirm!
-      #@idea = FactoryGirl.create(:idea)
-      #@idea.user_id = @user.id
-      #@idea.save
       sign_in @user
     end
 
     it 'assigns a new Idea to @idea' do
       @idea = FactoryGirl.create(:idea)
       get :new
+      assigns(:idea).should equal(@idea)
     end
 
     it 'renders the #new view' do
       get :new, :format => 'html'
-      #response.should render_template :new
+      response.should render_template 'new'
     end
   end
 
   describe 'POST #create' do
+
+    it 'creates a new idea' do
+      @idea = Idea.new
+      @idea.title = @idea.description = @idea.problem_solved = 'ay7aga'
+      @idea.save
+      post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
+      @idea.reload
+      Idea.last.should eq(@idea)
+    end
+  end
+
+  describe 'POST #edit' do
+
+    it 'edits an idea' do
+      @idea1 = Idea.new
+      @idea1.title = @idea1.description = @idea1.problem_solved = 'ay7aga'
+      @tag1 = @idea1.tags.new
+      @tag1.name = 'blah'
+      @tag1.save
+      @idea1.save
+      put :update, :id => @idea1.id, :idea => { :title => 'ay title' }
+      @idea1.reload
+      @idea1.title.should eq('ay title')
+    end
+  end
+
+  context 'user wants to vote' do
     before :each do
       @user = FactoryGirl.build(:user)
       @user.confirm!
-      @idea = FactoryGirl.build(:idea)
+      @idea = FactoryGirl.create(:idea)
       @idea.user_id = @user.id
       @idea.save
       sign_in @user
     end
 
-    context 'with valid attributes' do
-      it 'creates a new idea' do
-        attributes = FactoryGirl.attributes_for(:idea)
-        puts @attribues
-        expect {
-          post :create, idea: FactoryGirl.attributes_for(:idea)
-        }.to change(Idea, :count).by(1)
-      end
-
-      it 'redirects to the new contact' do
-        post :create, idea: FactoryGirl.attributes_for(:idea)
-        response.should redirect_to Idea.last
-      end
+    it 'idea id in user.votes' do
+      put :vote, :id => @idea.id
+      @idea.reload
+      @voted = @user.votes.find(@idea)
+      (@voted.id).should eql(@idea.id)
     end
 
-    context 'with invalid attributes' do
-      it 'does not save the new idea in the database' do
-        expect {
-          post :create, idea: FactoryGirl.attributes_for(:invalid_idea)
-        }.to_not change(Idea, :count)
-      end
+    it 'redirects to idea' do
+      put :vote, :id => @idea.id
+      response.should redirect_to @idea
+    end
 
-      it 're-renders the new method' do
-        post :create, idea: FactoryGirl.attributes_for(:invalid_idea)
-        response.should render_template :new
-      end
+    it 'increase idea votes' do
+      @numvotes = @idea.num_votes + 1
+      put :vote, :id => @idea.id
+      @idea.reload
+      (@numvotes).should eql(@idea.num_votes)
+    end
+  end
+
+  context 'user wants to unvote' do
+    before :each do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      @idea = FactoryGirl.create(:idea)
+      @idea.user_id = @user.id
+      @idea.save
+      sign_in @user
+    end
+
+    it 'idea id deleted from user.votes' do
+      put :unvote, :id => @idea.id
+      @idea.reload
+      @voted = @user.votes.find(:first, :conditions => {id: @idea_id})
+      (@voted).should eql(nil)
+    end
+
+    it 'redirects to idea' do
+      put :unvote, :id => @idea.id
+      response.should redirect_to @idea
+    end
+
+    it 'increase idea votes' do
+      @numvotes = @idea.num_votes - 1
+      put :unvote, :id => @idea.id
+      @idea.reload
+      (@numvotes).should eql(@idea.num_votes)
     end
   end
 end
