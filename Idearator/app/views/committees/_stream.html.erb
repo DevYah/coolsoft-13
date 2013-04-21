@@ -18,49 +18,39 @@
           </ul>
           <span class = "idea-vote inline "><%=  approved.num_votes.to_s %></span>
           <br>
-            <button class = "btn btn-large btn-success inline pull-right margin " type = "button">
+            <button class = "btn btn-large btn-success inline pull-right margin " type = "button" disabled>
               Vote!
             </button>
           </div>
-          <a href="#MyModal" role="button" class="btn btn-success" data-toggle="modal"
-data-backdrop='true' data-keyboard='true' data-show='true' data-remote='false'>Approve</a>
-          <!-- Modal -->
-          <div id="MyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h1>Add your prespectives</h1>
-              <% session[:idea_id]= approved.id %>
-            </div>
-            <div class="modal-body">
-              <% if current_user.type == 'Committee' %>
-                <input type="text" id="rating_complete" name="blah2" />
-                <ul id="rating">
-                </ul>
-                <div id ="flash">
-                </div>
-                <div id ="ratings">
-                </div>
-              <% end %>
-            </div>
-            <div class="modal-footer">
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-              <%= button_to_function "Submit Prespectives" , "sendAjax()" ,:class => 'btn btn-primary'%>
-               <script type="text/javascript">
-                  function sendAjax(){
-                    var list = "";
-                    var i=0;
-                    $('.token-input-list-facebook li p').each(function(){
-                      list += "rating[]="+$(this).text()+"&";
-                      i=i+1;
-                  
-                    });
-                    $('#MyModal').modal('hide');
-                    $.ajax("/add_rating?"+list);
-                  }
-                </script>
-            </div>
+          <button class = 'btn btn-success add-rating'>Approve</button>
+          <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove", :id => approved.id} ,:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger', remote: true %>
+          <div class='add-ratings'style="display: none;" >
+            <% session[:idea_id]= approved.id %>
+            <% if current_user.type == 'Committee' %>
+              <input type="text" class="rating_complete" name="blah2" />
+              <h1>Add Prespectives</h1>
+              <ul id="rating">
+              </ul>
+              <div id ="flash">
+              </div>
+              <div id ="ratings">
+                <%= button_to_function "Submit Prespectives" , "sendAjax()" , :class => 'btn btn-primary'%>
+              </div>
+              <script type="text/javascript">
+                function sendAjax(){
+                  var list = "";
+                  var i=0;
+                  $('.token-input-list-facebook li p').each(function(){
+                    list += "rating[]="+$(this).text()+"&";
+                    i=i+1;
+                
+                  });
+                
+                  $.ajax("/add_rating?"+list);
+                }
+              </script>
+            <% end %>
           </div>
-          <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove", :id => approved.id} ,:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
         </div>
       </div>
     <% end %>
