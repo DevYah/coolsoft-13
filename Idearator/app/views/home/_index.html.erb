@@ -3,6 +3,23 @@
   <% @search.each do |approved| %>
     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
       <% @no = @no + 1 %>
+    <% end %>
+  <% end %>
+<% end %>
+<% if @no > 0%>
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong><%= @no %></strong> Ideas Found
+</div>
+<% else %>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>No Results Found</strong>
+</div>
+<% end %>
+<% if params[:search] != ""%>
+  <% @search.each do |approved| %>
+    <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
        <div class="span8 row">
         <div class="wrapper row">  
           <div class="span2"><%= image_tag approved.photo.url(:medium) %></div>
