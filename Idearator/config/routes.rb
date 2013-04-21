@@ -1,4 +1,7 @@
 Sprint0::Application.routes.draw do
+  match '/users/expertise' => 'users#expertise'
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'home#index'
 
   default_url_options :host => 'localhost:3000'
 
@@ -74,6 +77,8 @@ Sprint0::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+
+
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -95,6 +100,10 @@ Sprint0::Application.routes.draw do
   #     resources :products
   #   end
 
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+ #root :to => 'ideas#show'
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended
@@ -102,4 +111,7 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  resources :users
+
 end

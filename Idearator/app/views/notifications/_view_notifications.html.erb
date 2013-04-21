@@ -1,74 +1,46 @@
-<%if @notifications.length > 0 %>  
-  <%if user_signed_in?%>
-    <% @notifications.each do |notification| %>
-      <% if notification.is_a? VoteNotification %>
-        <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
-        <%else%>
-          <li><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
-        <%end%>  
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? CommentNotification %>
-        <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
-        <%else%>
-          <li><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? DeleteNotification %>
-        <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class="disabled unread-drop"><a><%= notification.user.username %>  deleted his idea <%= notification.idea.title %>.</a></li> 
-        <%else%>
-          <li class="disabled"><a><%= notification.user.username %>  deleted his idea <%= notification.idea.title %>.</a></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? EditNotification %>
-        <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id}%></li>
-        <%else%>
-          <li><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id}%></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? ArchiveNotification %>
-        <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%=link_to 'The idea ' + notification.idea.title + ' got archived.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
-        <%else%>
-          <li><%=link_to 'The idea ' + notification.idea.title + ' got archived.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? DisapproveIdeaNotification %>
-        <% if ! IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id}%></li>
-        <%else%>
-          <li><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id}%></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? InviteCommitteeNotification %>
-        <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%= link_to 'You have been invited to become a committee member.', {controller: 'notifications', action: 'redirect_expertise', not_id: notification.id} %></li>
-        <%else%>
-           <li><%= link_to 'You have been invited to become a committee member.', {controller: 'notifications', action: 'redirect_expertise', not_id: notification.id} %></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
-      <% if notification.is_a? ApproveCommitteeNotification %>
-        <% if ! UserNotificationsUser.find(:first, :conditions => {user_notification_id: notification.id, user_id: current_user.id }).read? %>
-          <li class = 'unread-drop'><%=link_to notification.user.username + ' has signed up as a committee member.', {controller: 'notifications', action: 'redirect_review', not_id: notification.id} %></li>
-        <%else%>
-          <li><%=link_to notification.user.username + ' has signed up as a committee member.', {controller: 'notifications', action: 'redirect_review', not_id: notification.id} %></li>
-        <%end%>
-        <li class="divider"></li>
-      <% end %>
+<%if user_signed_in?%>
+  <% @notifications.each do |notification| %>
+    <% if notification.is_a? VoteNotification %>
+      <li><%= link_to 'Your idea ' + notification.idea.title + ' got a vote.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
+      <li class="divider"></li>
     <% end %>
-    <li><div class = "text-right padding_right"><%= link_to('view all', controller: 'notifications',
-          action: 'view_all_notifications')%></div></li>
+    <% if notification.is_a? CommentNotification %>
+      <li><%= link_to notification.user.username + ' commented on you idea ' + notification.idea.title + '.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
+      <li class="divider"></li>
+    <% end %>
+    <% if notification.is_a? DeleteNotification %>
+      <li class="disabled"><a><%= notification.user.username %>  deleted his idea <%= notification.idea.title %>.</a></li>
+      <li class="divider"></li>
+    <% end %>
+    <% if notification.is_a? EditNotification %>
+      <li><%= link_to notification.user.username + ' edited his idea ' + notification.idea.title + '.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id}%></li>
+      <li class="divider"></li>
+    <% end %>
+    <% if notification.is_a? ArchiveNotification %>
+      <li><%=link_to 'The idea ' + notification.idea.title + ' got archived.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id} %></li>
+      <li class="divider"></li>
+    <% end %>
+    <% if notification.is_a? DisapproveIdeaNotification %>
+      <li><%= link_to 'Your idea ' + notification.user.username + ' was not approved by committee.', {controller: 'notifications', action: 'redirect_idea', not_id: notification.id}%></li>
+      <li class="divider"></li>
+    <% end %>
+    <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Committee %>
+      <%= link_to 'You have been invited', {controller: 'users', action: 'send_expertise'},remote: true%>
+      <li class="divider"></li>
+    <% end %>
+     <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Admin and @stat[notification.id][0] and not invitations.empty?%>
+      <li><%= @stat[notification.id][1] %> has accepted the invitation to become a committee member</li>
+      <li class="divider"></li>
+    <% end %>
+     <% if notification.is_a? InviteCommitteeNotification and current_user.is_a? Admin and not @stat[notification.id][0] and %>
+        <li><%= @stat[notification.id][1]  %> has rejected the invitation to become a committee member</li>
+      <li class="divider"></li>
+    <% end %>
+    <% if notification.is_a? ApproveCommitteeNotification %>
+      <li><%=link_to notification.user.username + ' has signed up as a committee member.', {controller: 'notifications', action: 'redirect_review', not_id: notification.id} %></li>
+      <li class="divider"></li>
+    <% end %>
   <% end %>
-<%else%>
-  <li class="disabled"><a> You dont have any notifications</a></li>
-<%end%>
+  <li><div class = "text-right padding_right"><%= link_to('view all', controller: 'notifications',
+        action: 'view_all_notifications')%></div></li>
+<% end %>
