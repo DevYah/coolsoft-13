@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe IdeasController do
-  describe 'PUT archive' do
-    include Devise::TestHelpers
+  include Devise::TestHelpers
 
+  describe 'PUT archive' do
     context 'idea creator wants to archive' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -23,17 +23,17 @@ describe IdeasController do
       end
 
       it 'archives the idea' do
-        put :archive, :id => @idea.id, :format => 'js'
+        put :archive, :id => @idea.id
         @idea.reload
         (@idea.archive_status).should eql(true)
       end
 
       it 'deletes idea comments' do
-        expect { put :archive, :id => @idea.id, :format => 'js' }.to change(Comment, :count).by(-1)
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
       end
 
       it 'deletes idea votes' do
-        expect { put :archive, :id => @idea.id, :format => 'js' }.to change(Vote, :count).by(-1)
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
       end
     end
 
@@ -58,17 +58,17 @@ describe IdeasController do
       end
 
       it 'archives the idea' do
-        put :archive, :id => @idea.id, :format => 'js'
+        put :archive, :id => @idea.id
         @idea.reload
         (@idea.archive_status).should eql(true)
       end
 
       it 'deletes idea comments' do
-        expect { put :archive, :id => @idea.id, :format => 'js' }.to change(Comment, :count).by(-1)
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
       end
 
       it 'deletes idea votes' do
-        expect { put :archive, :id => @idea.id, :format => 'js' }.to change(Vote, :count).by(-1)
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
       end
     end
 
@@ -82,24 +82,22 @@ describe IdeasController do
 
       it 'does not archive the idea' do
         @arch_stat = @idea.archive_status
-        put :archive, :id => @idea.id, :format => 'js'
+        put :archive, :id => @idea.id
         @idea.reload
         (@idea.archive_status).should eql(@arch_stat)
       end
 
       it 'does not delete idea votes' do
-        expect { put :archive, :id => @idea.id, :format => 'js' }.to change(Vote, :count).by(0)
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(0)
       end
 
       it 'does not delete idea comments' do
-        expect { put :archive, :id => @idea.id, :format => 'js' }.to change(Comment, :count).by(0)
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(0)
       end
     end
   end
 
   describe 'PUT unarchive' do
-    include Devise::TestHelpers
-
     context 'idea creator wants to unarchive' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -150,8 +148,6 @@ describe IdeasController do
   end
 
   describe 'DELETE destroy' do
-    include Devise::TestHelpers
-
     context 'idea creator wants to delete' do
       before :each do
         @user = FactoryGirl.build(:user)
