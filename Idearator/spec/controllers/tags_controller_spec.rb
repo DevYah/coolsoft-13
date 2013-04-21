@@ -13,7 +13,7 @@ describe TagsController do
     @a1.save
     sign_in @a1
   end
-  
+
   describe "GET #index" do
     it "populates an array of tags" do
       tag = []
@@ -27,62 +27,40 @@ describe TagsController do
       assigns(:tags).should eq(tag)
     end
     it "renders the template view" do
-	   get :index
-       response.should be_successful
-       response.should render_template("index")
-     end
+      get :index
+      response.should be_successful
+      response.should render_template("index")
+    end
   end
-   
+
   describe "GET #new" do
     it "assigns a new Tag to @tag" do
       get :new
       assigns(:tag).should_not eq(nil)
     end
     it "renders the :new template" do
-			get :new
+      get :new
       response.should be_successful
       response.should render_template("new")
     end
   end
-  
+
   describe "POST #create" do
     context "with valid attributes" do
       it "saves the new tag in the database" do
         expect{
-        post :create, tag: {:name => 'Software'}
-      }.to change(Tag,:count).by(1)
-    end
-      it "redirects to the :show view" do
-				post :create, tag: {:name => 'Software'}
-        response.should be_successful
-     end
+          post :create, tag: {:name => 'Software'}
+        }.to change(Tag,:count).by(1)
+      end
     end
     context "with invalid attributes" do
       it "does not save the new contact in the database" do
         t = Tag.new(:name => 'Software').save
-          expect{
+        expect{
           post :create, tag: {:name => 'Software'}
         }.to_not change(Tag,:count)
       end
-      it "re-renders the new method" do
-				t = Tag.new(:name => 'Software').save
-        post :create, tag: {:name => 'Software'}
-        response.should render_template ("new")
-      end
-    end 
-  end
-  
-  describe "PUT #update" do
-		  it "updates the tag name in the database" do
-				t = Tag.new(:name => 'Soft').save
-        expect{
-        put :update,:id=>t.id, tag: {:name => 'Software'}
-      }.to change(t,:name).to('Software')
-			end
-      it "redirects to the :show view" do
-				t = Tag.new(:name => 'Soft').save
-				put :update, :id=> t.id, tag: {:name => 'Software'}
-        response.should be_successful
-     end
     end
-	end
+  end
+
+end
