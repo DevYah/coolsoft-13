@@ -6,10 +6,10 @@
 		    		<blockquote> 
 		    			<div id = "<%=comment.id%>">
 		    				<label class="commentContent">
-		                        <%= best_in_place comment, :content  , :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id} ,:cancel_button => 'Cancel' %>
+		                        <%= best_in_place comment, :content  , :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id}%>
 		    				</label>
 		    				<small> 
-		    					added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago 
+		    					added <%= time_ago_in_words comment.created_at %> ago  
 		    				</small>
 		    			</div>
 		    		</blockquote> 
