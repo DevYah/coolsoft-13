@@ -5,13 +5,16 @@
 <% elsif @user.active == false %>
   <p class='text-error'>This User is currently deactivated!</p>
 <% end %>
-<div class='options'>
-  <% if current_user == @user %>
-    <div class= 'btn'><%= link_to "Edit" , edit_user_path %></div>
-    <% end %>
-</div>
-<% if @admin !=nil && @admin.type == "Admin" && @user.active==true && @user.banned==false %>
-  <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
+<% if current_user %>
+  <% if @admin.type == "Admin" && @user.active==true && @user.banned==false%>
+    <%= link_to 'Ban', { :controller => "admins", :action => "ban_unban" },:id =>params[:id], :confirm => "Are you sure you want to Ban this user?",:class => 'btn btn-danger' %>
+  <% end %>
+  <% if @admin.type == "Admin" && @user.active==true && @user.banned==true%>
+    <%= link_to 'Unban', { :controller => "admins", :action => "ban_unban" }, :id =>params[:id], :confirm => "Are you sure you want to Unban this user?",:class => 'btn btn-success' %>
+  <% end %>
+<% end %>
+<% if @admin == @user %>
+ <button class="btn">Edit Profile</button>
 <% end %>
 <% if @admin !=nil && @admin.type == "Admin" && @user.banned==true %>
  <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?',:class => 'options btn btn-success' %>

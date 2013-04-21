@@ -1,14 +1,32 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
-<% if !user_signed_in? %>
-  <ul class="nav">
-      <li>
-        <%= link_to('Register', new_user_session_path)  %>
-      </li>
+<ul class='nav'>
+  <% if user_signed_in? %>
+    <li class="dropdown">
+      <a id = "count" class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <%if @count == 0%>
+          <span class="badge badge-inverse"><%= @count %></span>
+        <%else%>
+          <span class="badge badge-important"><%= @count %></span>
+        <%end%>
+        <b class="caret"></b>
+      </a>
+      <ul id = "update-dropdown" class="dropdown-menu">
+        <%= render 'notifications/view_notifications' %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+<ul class="nav pull-right">
+  <% if not user_signed_in? %>
     <li>
     <%= link_to('Login', new_user_session_path)  %>
+
     </li>
-<% end %>
-<% if user_signed_in? %>
+    <li>
+      <%= link_to('Register', new_user_registration_path)  %>
+    </li>
+  <% end %>
+  <% if user_signed_in? %>
   <% if current_user.is_a? Committee%>
     <ul class="nav">
       <li>
@@ -33,7 +51,6 @@
 <% end %>
   </li>
 </ul>
-<% end %> 
 <% if user_signed_in? %>
   <ul class="nav pull-right">
     <li class="dropdown">
@@ -41,17 +58,30 @@
       <ul class="dropdown-menu">
         <li>
           <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i> Account Settings</a>
-        </li>
-         <li>
-          <%= link_to('My profile', current_user.becomes(User)) %>
-        </li>                 
+        </li>                
         <li>
           <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
         </li>
         <li>
           <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
-        </li>
+        </li> 
       </ul>
     </li>
   </ul>
 <% end %>
+
+<%if user_signed_in? and current_user.is_a? Admin%>
+  <ul class="nav pull-right">
+    <li class="dropdown">
+      <a href="#"
+      class="dropdown-toggle"
+      data-toggle="dropdown">
+      Admin
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/admins/invite">Invite</a></li>
+    </ul>
+  </ul>
+  <%end%>
+

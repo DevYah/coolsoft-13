@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag]
+	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
 
 
 # displays a form where the user enters his password to confrim deactivation.
@@ -75,23 +75,14 @@ def expertise
   end
 end
 
-# Enter chosen tags sent from expertise view, in committeestags table 
-# Params:
-# +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
-# Author: Mohamed Sameh
-def new_committee_tag
-  if params[:user] == nil
-    respond_to do |format|
-      format.html{
-        flash[:notice] = 'You must choose at least 1 area of expertise'
-        redirect_to action: 'expertise'
-      }
-    end
-  else
-    @tags= params[:user][:tags]
-    @tags.each do |tag|
-      CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
-    end
+
+  #This method is used to generate the view of each User Profile. A specific user and his ideas are made
+  #available to the view to be presented in the appropriate manner.
+  #Author: Hisham ElGezeery
+  def show
+    @user = User.find(params[:id])
+    @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
+    @admin = current_user
     respond_to do |format|
       format.html{
         redirect_to controller: 'home', action: 'index'
@@ -100,19 +91,9 @@ def new_committee_tag
   end
 end
 
-#This method is used to generate the view of each User Profile. A specific user and his ideas are made
-#available to the view to be presented in the appropriate manner.
-#Author: Hisham ElGezeery
-def show
-  @user = User.find(params[:id])
-  @ideas = Idea.where(:user_id => @user.id, :approved => true)
-  @approved = @ideas.order(:created_at).page(params[:page]).per(10)
-  @admin = current_user
-  respond_to do |format|
-     format.html # show.html.erb
-     format.json { render json: @user }
- end
-end
+
+	# POST /users
+  # POST /users.json
 	
 # This method creates a new User and calls UserMailer to send a confirmation email.
 #Author: Menna Amr

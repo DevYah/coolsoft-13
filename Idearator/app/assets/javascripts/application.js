@@ -11,13 +11,20 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require jquery-ui
 //= require bootstrap
+//= require notification_polling
 //= require_tree .
 
+	});
+});
 
-$(document).bind("ajaxError", function(){
-	$('#signedout').modal('show');
+
+$(document).bind("ajaxError", function(e, xhr){
+	if(xhr.status == 401){
+		$('#signedout').modal('show');
+	}
 });
 
 $(document).ready(function() {
@@ -26,17 +33,6 @@ $(document).ready(function() {
   });
 });
 
-$(function() {
-	$("#searchdiv input").keyup(function(){
-		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		if (this.length()==0){
-			 $.ajax({
-        url: '/home/index?page=' + 1,
-        type: 'get',
-        dataType: 'script'
-       });
-	}
 
-	});
-});
+
 
