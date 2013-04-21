@@ -1,10 +1,12 @@
 
 <div id='tags'>
+  <ul class="tags inline">
   <% if @tags2 %>
     <% @tags2.each do |tag| %>
-      <label><%= tag %></label>
+      <li><label><%= tag %></label></li>
     <% end %>
   <% end %>
+  </ul>
 </div>
 
 <%= render 'ideas/show' %>
@@ -39,7 +41,7 @@
 
 
 <style type = "text/css">
-  
+
   .idea-vote{
     padding-left: 500px;
     font-size: 35px;
@@ -84,7 +86,7 @@
         dataType: 'script',
         success: function() {
             loading=false;
-          
+
         }
 
       });
