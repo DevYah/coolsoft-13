@@ -11,7 +11,7 @@
   <p>
     <h3><%= @idea.title %></h3>
     <div>
-      <div id ='change_vote' class = 'pull-right'>
+      <div id='change_vote' class='pull-right'>
         <span><h2><%= @idea.num_votes %></h2></span>
         <%if @ideavoted.nil? %>
           <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
