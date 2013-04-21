@@ -3,14 +3,14 @@
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
   </a>
+
   <script>
     $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
   </script>
+
   <p>
-    <!--!<h2>Title:</h2>-->
     <h3><%= @idea.title %></h3>
     <div>
-      <!--!<%=form_for @idea do |f| %>-->
       <div id ='change_vote' class = 'pull-right'>
         <span><h2><%= @idea.num_votes %></h2></span>
         <%if @ideavoted.nil? %>
@@ -20,6 +20,7 @@
         <%end%>
       </div>
     </div>
+
     <%if @user==@idea.user_id%>
       <div class='btn-group'>
         <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%>
@@ -29,13 +30,13 @@
         <% else %>
           <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
         <% end %>
-        <!--! add here archive and delete buttons -->
       </div>
       <h2><%=link_to @username, @idea.user%></h2>
     <%end%>
-    <!--!<%end%>-->
+
   </p>
 </div>
+
 <div>
   <%if @chosentags != nil %>
     <% @chosentags.each do |tag|%>
@@ -43,15 +44,18 @@
     <% end %>
   <% end %>
 </div>
+
 <div class='media-body'>
   <p>
     <h3>Description:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
   </p>
+
   <p>
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
+
   <%if @idea.archive_status == false%>
     <button id='share' class='btn btn-primary' type='button'>Share</button>
     <div id='show' class='container'>
@@ -59,6 +63,7 @@
       <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
     </div>
   <%end%>
+
   <p>
     <% if @idea.ratings.size > 0 %>
       <b>Ratings:-</b>
