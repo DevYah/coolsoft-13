@@ -14,7 +14,7 @@ $(function() {
 function updateNotifications(){
   if($("#notifications").length > 0){
     var after = $('.notification:first').attr('data-time');
-    $.getScript("/new_notifications.js?&after=" + after);
+    $.getScript("/view_new_notifications.js?&after=" + after);
   }
   $.getScript("/notifications.js")
   setTimeout(updateNotifications, 5000);

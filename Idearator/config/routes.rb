@@ -60,9 +60,10 @@ Sprint0::Application.routes.draw do
     match 'redirect_idea'
     match 'redirect_review'
     match 'redirect_expertise'
+    match 'set_read'
+    match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
-  match '/new_notifications.js' => 'notifications#view_new_notifications'
 
   # Tag routes
   match 'tags/ajax'
