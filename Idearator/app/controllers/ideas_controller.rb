@@ -55,6 +55,15 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     @tags = Tag.all
     @chosentags = Idea.find(params[:id]).tags
+  end
+
+  # updating Idea
+  # Params
+  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
+  def update
+    @idea = Idea.find(params[:id])
     @boolean = true
     @ideavoters = @idea.votes
     @ideacommenters = @idea.comments
@@ -77,15 +86,6 @@ class IdeasController < ApplicationController
     if list != nil
       EditNotification.send_notification(current_user, @idea, list)
     end
-  end
-
-  # updating Idea
-  # Params
-  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
-  # Author: Marwa Mehanna
-  def update
-    @idea = Idea.find(params[:id])
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
