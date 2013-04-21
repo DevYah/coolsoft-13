@@ -25,14 +25,17 @@
   </p>
   <p>
     <% if @idea.ratings.size > 0 %>
-      <b>Ratings:-</b>
-      <% @idea.ratings.each do |therating| %>
-        <p>
-          <div>
+      <table>
+        <tr>
+          <th style='text-align: left;'><b>Ratings:-</b></th>
+          <th></th>
+        </tr>
+        <% @idea.ratings.each do |therating| %>
+          <tr>
             <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
-          </div>
-        </p>
-      <% end %>
+          </tr>
+        <% end %>
+      </table>
     <% end %>
   </p>
 </div>
