@@ -1,3 +1,5 @@
+
+
 class UsersController < ApplicationController
 	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
 
@@ -110,6 +112,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
     @admin = current_user
+    @registered = @user.approved == false && @user.type == 'Committee'
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -168,4 +171,50 @@ class UsersController < ApplicationController
 	  	format.js {}
 	  end
 	end
+
+# Invites existing member to become a committee 
+  # by initiating him into the database and then sending him a notification
+  # Params: 
+  # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+  # Author: Mohammad Abdulkhaliq
+  def invite_member
+		unless current_user.is_a? Admin 
+			redirect_to  'users/sign_in' , notice: 'Please sign in as an admin'
+		end
+    @user = User.find(params[:id])
+    @user.type = 'Committee'
+    @user.approved = true
+    @user.save
+    InviteCommitteeNotification.send_notification(current_user, [@user])
+    respond_to do |format|
+      format.html { redirect_to  '/' , notice: 'Successfully invited member' }
+			format.json { head :no_content }
+    end
+  end
+
+  # Sends tags and current user as an ajax response
+  # to whoever calls it
+  # Params: 
+  # +current_user+:: this parameter is an instance of +User+ passed through the devise gem 
+  # Author: Mohammad Abdulkhaliq
+  def send_expertise
+		@user = current_user 
+		@tags = Tag.all
+		if current_user.is_a? Committee 
+			if current_user.tags.count == 0
+				respond_to do |format|
+					format.js{}
+				end
+			else 
+				respond_to do |format|
+					format.html { redirect_to  '/' , notice: 'You have already chosen your expertise' }
+				end
+			end
+		else
+			respond_to do |format|
+				format.html { redirect_to  '/' , notice: 'You cannot choose your expertise' }
+			end
+		end
+	end
 end
+
