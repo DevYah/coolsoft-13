@@ -1,5 +1,7 @@
-<% if params[:search] == "" %>
-  $("#IdeaStream").html("<%= escape_javascript(render(:partial => "stream")) %>");
-<% else %>
-  $("#IdeaStream").html("<%= escape_javascript(render(:partial => "index")) %>");
+<% if params[:controller] == 'home'%>
+  <% if params[:search] == "" %>
+    $("#IdeaStream").html("<%= escape_javascript(render(:partial => "stream")) %>");
+  <% else %>
+    $("#IdeaStream").html("<%= escape_javascript(render(:partial => "index")) %>");
+  <% end %>
 <% end %>

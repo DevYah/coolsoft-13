@@ -12,6 +12,7 @@ Sprint0::Application.routes.draw do
   match '/dashboard/gettags' => 'dashboard#gettags'
   match '/dashboard/getideas' => 'dashboard#getideas'
   match '/home/search' => 'home#search'
+  match '/home/searchelse' => 'home#searchelse'
   match '/users/:id/ban_unban' => 'admins#ban_unban'
   match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
   match '/all_notifications.js' => 'notifications#view_all_notifications'
