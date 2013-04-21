@@ -28,10 +28,10 @@ class ApplicationController < ActionController::Base
       user_notifications = current_user.user_notifications
       unread_ideas = IdeaNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
       unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
-      not1 = idea_notifications + user_notifications
-      not2 = not1.sort_by &:created_at
-      @all_notifications = not2.reverse
-      @notifications = not2.reverse.first(7)
+      notifications = idea_notifications + user_notifications
+      sorted_notifications = notifications.sort_by &:created_at
+      @all_notifications = sorted_notifications.reverse
+      @notifications = sorted_notifications.reverse.first(7)
       @count = unread_users + unread_ideas
     end
   end
