@@ -44,5 +44,14 @@ class HomeController < ApplicationController
       index
     end
   end
+   def searchelse
+    if params[:search].length > 0
+    @search = Idea.search(params[:search])
+    respond_to do |format|
+        format.html
+        format.js
+      end
+      end
+  end
 end
 

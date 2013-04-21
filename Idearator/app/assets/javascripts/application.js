@@ -16,17 +16,25 @@
 //= require bootstrap
 //= require notification_polling
 //= require_tree .
+before_search = false;
+var original;
 $(function() {
 	$("#searchdiv input").keyup(function(){
+		//alert(this.value);
+		if (window.location == "http://localhost:3000/"){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		if (this.length()==0){
-			 $.ajax({
-        url: '/home/index?page=' + 1,
-        type: 'get',
-        dataType: 'script'
-       });
+}else{
+	if (!before_search){
+			before_search = true;
+			original = $("#main").clone();
+		}
+		if (this.value!=""){
+			$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+	}else{
+		before_search = false;
+		$("#main").replaceWith(original);
 	}
-
+	  }
 	});
 });
 

@@ -1,18 +1,6 @@
-
-<div id='tags'>
-  <% if @tags2 %>
-    <% @tags2.each do |tag| %>
-      <label><%= tag %></label>
-    <% end %>
-  <% end %>
-</div>
-
 <%= render 'ideas/show' %>
-<div id = "IdeaStream">
-  <div class = "page">
-    <%= render :partial => 'stream' %>
-  </div>
-</div>
+<%= render :partial => 'stream' %>
+
 
   <% content_for :sidebar do %>
     <div class="topten">
@@ -74,8 +62,7 @@
     if (loading) {
       return;
     }
-
-    if(nearBottomOfPage() && $("#search").val() == "") {
+    if(nearBottomOfPage() && $("#search").val() == '') {
       loading=true;
       page++;
       $.ajax({
