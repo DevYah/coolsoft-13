@@ -57,13 +57,13 @@
       <ul class="dropdown-menu">
         <li>
           <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i> Account Settings</a>
-        </li>                
+        </li>
         <li>
           <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
         </li>
         <li>
           <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
-        </li> 
+        </li>
       </ul>
     </li>
   </ul>
