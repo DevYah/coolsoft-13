@@ -1,4 +1,3 @@
-
 <div id='tags'>
   <% if @tags2 %>
     <% @tags2.each do |tag| %>
@@ -8,6 +7,7 @@
 </div>
 
 <%= render 'ideas/show' %>
+
 <div id = "IdeaStream">
   <div class = "page">
     <%= render :partial => 'stream' %>
@@ -15,7 +15,7 @@
 </div>
 
   <% content_for :sidebar do %>
-    <div class="topten">
+    <div class="topten" style="padding-left: 10%;">
       <h1>Top Ten Ideas</h1>
       <div class="media">
         <% @top.each do |top| %>
@@ -35,13 +35,25 @@
         <%end%>
       </div>
     </div>
+    <div class="" style="padding-left: 12%;">
+      <button class="btn btn-medium btn-primary backtotop affix totop" type="button">To Top <i class = 'icon-white icon-hand-up'> </i></button>
+    </div>
+    <script type="text/javascript">
+      $('.backtotop').click(function(){
+         $('html, body').animate({scrollTop:0}, 'slow');
+      });
+    </script>
   <% end %>
 
 
 <style type = "text/css">
+
+  .totop{
+    margin: auto;
+  }
   
   .idea-vote{
-    padding-left: 500px;
+    padding-left: 87%;
     font-size: 35px;
   }
 
@@ -60,8 +72,8 @@
   }
 </style>
 
-
 <script type="text/javascript">
+
 (function() {
   var page = 1,
       loading = false;
@@ -75,11 +87,11 @@
       return;
     }
 
-    if(nearBottomOfPage() && $("#search").val() == "") {
+    if(nearBottomOfPage()  && $("#search").val() == "") {
       loading=true;
       page++;
       $.ajax({
-        url: '/home/index?page=' + page,
+        url: '/?page=' + page,
         type: 'get',
         dataType: 'script',
         success: function() {

@@ -21,10 +21,10 @@ class HomeController < ApplicationController
         tags.map! { |e| e.delete(' ') }
         @approved = Idea.joins(:tags).where(:tags => {:name => tags}).page(params[:myPage].to_i).per(10)
       else
-        @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
+        @approved = Idea.order(:created_at).page(params[:page]).per(10)
       end
     else
-        @approved = Idea.order(:created_at).page(params[:myPage]).per(10) 
+        @approved = Idea.order(:created_at).page(params[:page]).per(10) 
     end
         respond_to do |format|
           format.js
@@ -41,7 +41,6 @@ class HomeController < ApplicationController
         format.js
       end
     else
-      index
     end
   end
 end
