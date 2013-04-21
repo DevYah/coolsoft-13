@@ -187,8 +187,7 @@ class UsersController < ApplicationController
     @user.save
     InviteCommitteeNotification.send_notification(current_user, [@user])
     respond_to do |format|
-      format.html { redirect_to  '/' , notice: 'Successfully invited member' }
-			format.json { head :no_content }
+      format.html { redirect_to controller: 'home', action: 'index', notice: 'Successfully invited member' } and return
     end
   end
 
