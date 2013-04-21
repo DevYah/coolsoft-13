@@ -1,6 +1,6 @@
 <table>
-			<% @idea.comments.each do |comment| %>
-				<tr>
+	<% @idea.comments.each do |comment| %>
+		<tr>
 		    <td>
 		    	<div class="alert alert-info">
 		    		<blockquote> 
@@ -16,14 +16,14 @@
 		    			    
 					<p class ="buttons">	<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' , :remote => true %>
 						<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
-                    <%= link_to "<i class='icon-thumbs-up'></i>".html_safe,:controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true, class: 'btn' %>
+                           <%= link_to "<i class='icon-thumbs-up'></i>".html_safe,:controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true, class: 'btn' %>
 						<% end %> 
 						<small class = "text-info">
 							<%= comment.num_likes %> likes
 						</small>
 					</p>
 				</div>
-			</td>
+			</td>dd
 		</tr>
 	<% end %>
 </table>
