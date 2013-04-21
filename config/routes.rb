@@ -60,12 +60,12 @@ Sprint0::Application.routes.draw do
 
 
   match "/review_ideas" => "committees#review_ideas"
-    
+
 
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-  match '/user_ratings/create' => 'user_ratings#create', :defaults => { :format => 'js' }
-  match '/user_ratings/update' => 'user_ratings#update', :defaults => { :format => 'js' }
+  match '/user_ratings/create' => 'user_ratings#create'
+  match '/user_ratings/update' => 'user_ratings#update'
 
 
 end
