@@ -33,21 +33,20 @@ $(window).load(function(){
         beforeSend:function(){
         // this is where we append a loading image
         //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-        },
-        success:function(array){
-          loading = false;
-        },
-        error:function(){
+      },
+      success:function(array){
+        loading = false;
+      },
+      error:function(){
         // failed request; give feedback to user
-        }
-      });
+      }
+    });
     }
   });
 
   $('#click').click(function(){
     $('#fil').toggleClass('hidden');
   });
-
 
   $("#input-facebook-theme").tokenInput('/tags/ajax', {
     theme: "facebook",
@@ -69,12 +68,10 @@ $(window).load(function(){
       beforeSend:function(){
       // this is where we append a loading image
       //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-      },
-      success:function(array){
-
-      },
-      error:function(){
-
+    },
+    success:function(array){
+    },
+    error:function(){
         // failed request; give feedback to user
         alert('failure');
       }
