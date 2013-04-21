@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
@@ -10,9 +9,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :title, :body
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :username, :date_of_birth, :type, :active, :first_name, :last_name,
-                  :gender, :about_me, :recieve_vote_notification,
-                  :recieve_comment_notification, :provider, :uid , :photo, :approved
+    :username, :date_of_birth, :type, :active, :first_name, :last_name,
+    :gender, :about_me, :recieve_vote_notification,
+    :recieve_comment_notification, :provider, :uid , :photo, :approved
 
   has_many :idea_notifications
   has_many :user_notifications
@@ -34,15 +33,15 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
-# this method finds the +User+ using the hash and creates a new +User+ 
-# if no users with this email exist
-#
-# Params:
-#
-# +auth+:: omniauth authentication hash
-# +signed_in_resource+:: Currently signed in resource. Unused.
-#
-#Author: Menna Amr
+  # this method finds the +User+ using the hash and creates a new +User+
+  # if no users with this email exist
+  #
+  # Params:
+  #
+  # +auth+:: omniauth authentication hash
+  # +signed_in_resource+:: Currently signed in resource. Unused.
+  #
+  #Author: Menna Amr
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
@@ -51,8 +50,8 @@ class User < ActiveRecord::Base
                          uid:auth.uid,
                          email:auth.info.email,
                          password:Devise.friendly_token[0,20])
-  end
-  user
+    end
+    user
   end
 
   # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
@@ -89,4 +88,3 @@ class User < ActiveRecord::Base
                        password: Devise.friendly_token[0, 20])
   end
 end
-
