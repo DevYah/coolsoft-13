@@ -1,42 +1,42 @@
 Sprint0::Application.configure do
 
 
-  # Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.4-Q16'
+#  Paperclip.options[:command_path] = "C:\Program Files (x86)\ImageMagick-6.8.4-Q16"
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  #for windows
-  #Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.4-Q16'
-  #for ubuntu
-  Paperclip.options[:command_path] = '/usr/local/bin/'
-
-
+  Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.4-Q16'
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local = true
+  config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.perform_deliveries = false
-  ActionMailer::Base.raise_delivery_errors = false
-  ActionMailer::Base.default from: 'idearator.cool@gmail.com'
-  ActionMailer::Base.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    :port => 587,
-    :domain => 'localhost:3000',
-    :user_name => 'idearator.cool@gmail.com',
-    :password => 'idearator13',
-    :authentication => 'plain',
-    :enable_starttls_auto => true
-  }
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+require 'tlsmail'       
+Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)   
+ActionMailer::Base.delivery_method = :smtp   
+ActionMailer::Base.perform_deliveries = true   
+ActionMailer::Base.raise_delivery_errors = true
+ActionMailer::Base.default from: "idearator.cool@gmail.com"
+ActionMailer::Base.smtp_settings = {
+  :address              => 'smtp.gmail.com',
+  :port                 => 587,
+  :domain               => 'localhost:3000',
+  :user_name            => "idearator.cool@gmail.com",
+  :password             => "idearator13",
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 

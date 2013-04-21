@@ -1,14 +1,26 @@
 Sprint0::Application.routes.draw do
+  match '/users/expertise' => 'users#expertise'
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'home#index'
+
+
+
+  get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
 
   default_url_options :host => 'localhost:3000'
 
   root :to => 'home#index'
 
+  default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'approve_committee' => 'users#approve_committee'
+      match 'reject_committee' => 'users#reject_committee'
     end
 
     collection do
@@ -74,6 +86,8 @@ Sprint0::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+
+
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -95,6 +109,10 @@ Sprint0::Application.routes.draw do
   #     resources :products
   #   end
 
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  #root :to => 'ideas#show'
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended
@@ -102,4 +120,7 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+
+
 end

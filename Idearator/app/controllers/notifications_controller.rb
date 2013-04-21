@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:view_all_notifications]
+  before_filter :authenticate_user!, :only => [:view_notifications]
 
   # gets all current users notifications.
   # Params: none.
