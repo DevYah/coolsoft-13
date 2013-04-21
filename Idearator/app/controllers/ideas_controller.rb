@@ -146,6 +146,8 @@ class IdeasController < ApplicationController
         idea.votes.delete(u)
       end
 
+      idea.num_votes = 0
+
       idea.comments.each do |c|
         c.destroy
       end
