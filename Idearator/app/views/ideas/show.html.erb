@@ -22,6 +22,12 @@
 </div>
 
 <div class='media-body'>
+  <%if @idea.archive_status == false%>
+      <div id='show' class='container'>
+        <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+        <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+      </div>
+  <%end%>
   <p>
     <h3>Description:</h3>
     <div><%= @idea.description %></div>
@@ -32,12 +38,3 @@
     <div><%= @idea.problem_solved  %></div>
   </p>
 </div>
-
-<%if @idea.archive_status == false%>
-  <button id='share' class='btn btn-primary' type='button'>Share</button>
-
-  <div id='show' class='container'>
-    <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-    <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-  </div>
-<%end%>

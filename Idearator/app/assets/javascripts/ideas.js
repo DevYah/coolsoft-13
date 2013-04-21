@@ -1,11 +1,8 @@
 // When The user clicks on facebook share or twitter share button, this method gets the current URL of the current page and apends it to the default
-// facebook and twitter sharing URLs.  
-// This page's URl is then shared on The user's facebook or twitter account. 
+// facebook and twitter sharing URLs.
+// This page's URl is then shared on The user's facebook or twitter account.
 // Author: Mohamed Sameh
 $(document).ready(function() {
-	$("#share").click(function() {
-		$("#show").toggle("slow");
-	});
 	$("#fbk").click(function() {
 		var pathname = window.location;
  		var fburl = 'http://www.facebook.com/sharer.php?u='+encodeURI(pathname);
@@ -24,6 +21,6 @@ $(document).ready(function() {
 	});
 	$("#tw").tooltip({
 		toggle: "tooltip",
-		title: "Share on Twitter" 
+		title: "Share on Twitter"
 	});
 });
