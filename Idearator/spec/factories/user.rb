@@ -9,4 +9,4 @@ FactoryGirl.define do
   factory :user_two, :class => User do |f|
     f.email 'ay7aga2'
   end
-end
+end 
