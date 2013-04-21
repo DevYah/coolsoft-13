@@ -42,7 +42,7 @@ Sprint0::Application.routes.draw do
 
   # Dashboard routes
   controller :dashboard do
-    match 'index'
+    match 'dashboard/index'
     match 'getallideas'
     match 'gettags'
     match 'getideas'
