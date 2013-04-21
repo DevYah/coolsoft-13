@@ -15,6 +15,10 @@ gem 'paperclip', '3.4.1'
 gem 'kaminari', '0.14.1'
 
 gem 'bot-away', '2.0.1'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 
 group :assets do
   gem 'sass-rails', '3.2.6'
