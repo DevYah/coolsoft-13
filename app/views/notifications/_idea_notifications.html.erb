@@ -1,10 +1,10 @@
 <%if !notification.has_link?%>
-  <div class='well notification <%= notification.read_by?(current_user) ? 'read' : 'unread' %>' data-time=<%= notification.created_at.to_i %>>
+  <div class='well notification delete <%= notification.read_by?(current_user) ? 'read' : 'unread' %>' data-time=<%= notification.created_at.to_i %> data-notification = <%= notification.id %>>
     <span><%= notification.text %></span>
     <span class='date'><%= notification.created_at.to_s(:long)%></span>
   </div>
 <%else%>
-  <div class='well notification idea <%= notification.read_by?(current_user) ? 'read' : 'unread' %>' data-notification=<%= notification.idea.id %> data-time=<%= notification.created_at.to_i %>>
+  <div class='well notification idea <%= notification.read_by?(current_user) ? 'read' : 'unread' %>' data-time=<%= notification.created_at.to_i %> data-notification = <%= notification.id %>>
     <span><%= notification.text %></span>
     <div class='link'><%= link_to 'view idea', notification.idea %></div>
     <span class='date'><%= notification.created_at.to_s(:long)%></span>
