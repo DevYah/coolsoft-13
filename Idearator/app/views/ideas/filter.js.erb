@@ -1,0 +1,6 @@
+$("#IdeaStream").empty();
+$("#tags").empty();
+<% @tags.each do |tag| %>
+  $("#tags").append("<label> <%= escape_javascript(tag) %> </label")
+<% end %>
+$("#IdeaStream").append("<div class='page'><%= escape_javascript(render :partial => '/home/stream') %></div>");
