@@ -17,7 +17,7 @@
   <%= f.text_field :username %></p>
 
   <p><%= f.label :date_of_birth %>
-  <%= f.date_select :date_of_birth, {:order => [:day, :month, :year], 
+  <%= f.date_select :date_of_birth, {:order => [:day, :month, :year],
                                      :start_year => Time.now.year - 16,
                                      :end_year => 1940,
                                      :prompt => {:month => 'Month', :day => 'Day', :year => 'Year'}},
@@ -28,7 +28,7 @@
   <div id= "all-tags"> Choose your area(s) of expertise: <% @tags.each do |tag|%>
     <div> <%= check_box_tag 'tags[]', tag.id, false %><%= tag.name %> </div>
   <% end %> </div>
- 
+
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
