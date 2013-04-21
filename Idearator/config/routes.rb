@@ -42,7 +42,7 @@ Sprint0::Application.routes.draw do
 
   # Dashboard routes
   controller :dashboard do
-    match 'index'
+    match 'home/index'
     match 'getallideas'
     match 'gettags'
     match 'getideas'
@@ -58,7 +58,9 @@ Sprint0::Application.routes.draw do
   match 'notifications' => 'application#update_nav_bar'
 
   # Tag routes
-  match 'tags/ajax'
+  controller :tags do
+    match 'tags/ajax'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
