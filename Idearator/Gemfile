@@ -21,7 +21,6 @@ group :assets do
   gem 'uglifier', '2.0.1'
 end
 
-gem 'faker'
 gem 'jquery-star-rating-rails'
 
 group :test, :development do
