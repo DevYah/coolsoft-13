@@ -1,72 +1,49 @@
+
 class IdeasController < ApplicationController
+
   before_filter :authenticate_user!, :only => [:show, :create , :edit, :update]
+
   # view idea of current user
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
+  def show
+    @user = current_user.id
+    @username = current_user.username
+    @idea = Idea.find(params[:id])
+    @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
+    rescue ActiveRecord::RecordNotFound
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @idea }
+    end
+  end
 
-def show
-  @user=current_user.id
-  @idea = Idea.find(params[:id])
-  @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
-end
+  #gets all the comments for a certain idea 
+  #author : dayna
+  def comments
+    @idea = Idea.find(params[:idea_id])
+    @comment = @idea.comments.find(params[:id])
+
+  end 
+
   # making new Idea
   #Marwa Mehanna
   def new
-    @idea=Idea.new
-    @tags= Tag.all
-    @chosentags=[]
+    @idea = Idea.new
+    @tags = Tag.all
+    @chosentags = []
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @idea }
     end
   end
-  # Votes for a specific idea
-# Params:
-# +id+:: is used to specify the instance of +Idea+ to be voted
-# Author: Marwa Mehannna
-def vote
-@idea = Idea.find(params[:id])
-current_user.votes << @idea
-@idea.num_votes = @idea.num_votes + 1
-@ideaowner = User.find(@idea.user_id)
-if @ideaowner.own_idea_notifications
-VoteNotification.send_notification(current_user, @idea, [@ideaowner])
-end
-respond_to do |format|
-if @idea.update_attributes(params[:idea])
-format.html { redirect_to @idea, :notice =>'Thank you for voting' }
-format.json { head :no_content }
-else
-format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
-format.json { head :no_content }
-end
-end
-end
-# UnVotes for a specific idea
-# Params:
-# +id+:: is used to specify the instance of +Idea+ to be unvoted
-# Author: Marwa Mehannna
-def unvote
-@idea = Idea.find(params[:id])
-current_user.votes.delete(@idea)
-@idea.num_votes = @idea.num_votes - 1
-respond_to do |format|
-if @idea.update_attributes(params[:idea])
-format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-format.json { head :no_content }
-else
-format.html { redirect_to @idea, alert: 'Idea is still voted' }
-format.json { head :no_content }
-end
-end 
-end
 
-# filters the ideas that have one or more of given tags
-# Params:
-# +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
-# Author: muhammed hassan
-  def filter()
+  # filters the ideas that have one or more of given tags
+  # Params:
+  # +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
+  # Author: muhammed hassan
+  def filter
     @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
     @tags = params[:myTags]
     respond_to do |format|
@@ -88,24 +65,32 @@ end
     @ideacommenters = @idea.comments
     @userVreceivers = []
     @userCreceivers = []
-    @ideavoters.each {|user|
-       if user.participated_idea_notifications
-        @userVreceivers << user 
-      end }
-    
-    
-      @ideacommenters.each {|user|
-       if user.participated_idea_notifications
-        @userCreceivers << user 
-      end}
-    EditNotification.send_notification(current_user,@idea,@userVreceivers)
-    EditNotification.send_notification(current_user,@idea,@userCreceivers)
- end
 
+    @ideavoters.each do |user|
+      if user.participated_idea_notifications
+        @userVreceivers << user
+      end
+    end
+
+    @ideacommenters.each do |user|
+      if user.participated_idea_notifications
+        @userCreceivers << user
+      end
+    end
+
+    EditNotification.send_notification(current_user, @idea, @userVreceivers)
+    EditNotification.send_notification(current_user, @idea, @userCreceivers)
+  end
+
+  # updating Idea
+  # Params
+  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
+  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
-    puts(params[:ideas_tags][:tags])
     @idea.tag_ids = params['ideas_tags']['tags'].collect { |t|t.to_i }
+
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, notice: 'Idea was successfully updated' }
@@ -115,9 +100,8 @@ end
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
-  end 
+  end
 
-  
   # creating new Idea
   # Params
   # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
@@ -127,6 +111,7 @@ end
   def create
     @idea = Idea.new(params[:idea])
     @idea.user_id = current_user.id
+
     respond_to do |format|
       if @idea.save
         @tags = params[:ideas_tags][:tags]
@@ -141,6 +126,36 @@ end
       end
     end
   end
+
+  #create new like
+  #Params:
+  #+comment_id+ :: the parameter is an instance   
+  # of +Comment+ and it's used to build the like after clicking like
+  #The def checks if the user liked the comment before if not the num_likes is incremented
+  #by 1 else nothing happens
+  #author dayna
+  def like
+    @idea = Idea.find(params[:id])
+    @commentid = params[:commentid]
+    if params[:commentid] != nil
+      @comment = Comment.find(:first, :conditions => {:id => @commentid})
+      if Comment.exists?(:id => @commentid)
+        @comment.num_likes = @comment.num_likes + 1
+        @comment.save
+        @like = Like.new
+        @like.user_id = current_user.id
+        @like.comment_id = @commentid
+        @like.save
+        @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
+        respond_to do|format|
+          format.js
+        end
+      end 
+      else
+        redirect_to @idea , :notice => "This comment was removed by the user"
+    end 
+  end 
+  
   # Deletes all records related to a specific idea
   # Params:
   # +id+:: is used to specify which instance of +Idea+ will be deleted
@@ -175,7 +190,5 @@ end
       end
     end
   end
+
 end
-
-  
-

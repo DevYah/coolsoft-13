@@ -1,0 +1,22 @@
+<table>
+			<% @idea.comments.each do |comment| %>
+				<tr>
+    			<td>
+    				<blockquote>
+    					<label class="text-success">
+    						<%= comment.content %>
+    					</label>
+    					<small> 
+    						added <%= time_ago_in_words comment.created_at %> ago  and updated <%= time_ago_in_words comment.updated_at %> ago
+    					</small>
+    				</blockquote> 
+    			</td>
+					<td>
+							<%= link_to "<i></i>".html_safe, edit_idea_comment_path(@idea,comment), :id => "button_id", :class => "icon-edit" %> 
+						<small class = "text-info">
+							<%= comment.num_likes %> likes
+						</small>
+					</td>
+				</tr>
+					<% end %>
+		</table>
