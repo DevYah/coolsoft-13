@@ -22,9 +22,9 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
-    match "/ideas/:id/archive" => "ideas#archive"
-    match "/ideas/:id/unarchive" => "ideas#unarchive", :defaults => { :format => 'js' }
   end
+  match "/ideas/:id/archive" => "ideas#archive"
+  match "/ideas/:id/unarchive" => "ideas#unarchive", :defaults => { :format => 'js' }
 
   controller :home do
     match 'search'
