@@ -20,7 +20,6 @@
         <%end%>
       </div>
     </div>
-
     <%if @user==@idea.user_id%>
       <div class='btn-group'>
         <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%>
@@ -37,26 +36,22 @@
     <!--!<%end%>-->
   </p>
 </div>
-
 <div>
   <%if @chosentags != nil %>
-  <% @chosentags.each do |tag|%>
-    <span class="label label-info "><%= tag.name %></span>
-  <% end %>
+    <% @chosentags.each do |tag|%>
+      <span class="label label-info "><%= tag.name %></span>
+    <% end %>
   <% end %>
 </div>
-
 <div class='media-body'>
   <p>
     <h3>Description:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
   </p>
-
   <p>
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
-
   <%if @idea.archive_status == false%>
     <button id='share' class='btn btn-primary' type='button'>Share</button>
     <div id='show' class='container'>
@@ -64,7 +59,6 @@
       <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
     </div>
   <%end%>
-
   <p>
     <% if @idea.ratings.size > 0 %>
       <b>Ratings:-</b>
@@ -77,5 +71,4 @@
       <% end %>
     <% end %>
   </p>
-
 </div>
