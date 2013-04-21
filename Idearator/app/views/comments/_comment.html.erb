@@ -14,8 +14,9 @@
     			    
 			<p class ="buttons">	<%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' , :remote => true %>
 				<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
-					<%= link_to "<i>+1</i>".html_safe ,:class => " icon-thumbs-up", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
-				<% end %> 
+                    <%= link_to "<i class='icon-thumbs-up'></i>".html_safe,:controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true, class: 'btn' %>
+				<% end %>
+
 				<small class = "text-info">
 					<%= comment.num_likes %> likes
 				</small>
@@ -23,3 +24,5 @@
 		</div>
 	</td>
 </tr>
+
+
