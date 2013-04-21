@@ -1,5 +1,7 @@
 function add_notification_event_handlers() {
-	
+  $('div.invite-committee').click(function () {
+    $.getScript("/users/expertise")
+  });
 
   $('div.idea').click(function () {
     var idea = this.getAttribute('data-notification')

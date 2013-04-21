@@ -1,39 +1,75 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Idearator" %></title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <%= stylesheet_link_tag "application", :media => "screen" %>
-    <%= javascript_include_tag "application" %>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title><%= content_for?(:title) ? yield(:title) : 'Idearator' %></title>
+    <meta name='description' content='' />
+    <meta name='author' content='' />
+    <%= stylesheet_link_tag 'application', :media => 'screen' %>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
+
   <body data-devise=<%= user_signed_in? %>>
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div id = "update-nav" class="container">
+
+    <% if user_signed_in? %>
+      <div id='myModal' class='modal hide fade'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+          <h2 id='myModalLabel'>Notification Settings</h2>
+        </div>
+        <div class='modal-body'>
+          <%= render 'users/settings' %>
+        </div>
+      </div>
+    <%end%>
+
+    <div id='signedout' class='modal hide fade' data-backdrop='static' data-keyboard='false'>
+      <div class='modal-header'>
+        <h2 id='myModalLabel'>Oooops !!</h2>
+      </div>
+      <div class='modal-body'>
+        <h4>It looks like you're currently not signed in</h4>
+      </div>
+      <div class='modal-footer'>
+        <button id='sign' class='btn'>Ok</button>
+      </div>
+    </div>
+
+    <header class='navbar navbar-fixed-top'>
+      <nav class='navbar-inner'>
+        <div id = 'update-nav' class='container'>
           <!--! Add/edit the navigation links in the _navigation partial-->
           <%= render 'layouts/navigation' %>
         </div>
       </nav>
     </header>
-    <div id="main" role="main">
-      <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
+
+    <div id='main' role='main'>
+      <div class='container'>
+        <div class='content'>
+          <div class='row'>
+
+            <div class='span8' id='IdeaStream'>
               <%= render 'layouts/messages' %>
               <%= yield %>
             </div>
+
+            <div class ='row'>
+              <div id='sidebar' class='span4'><!--! Trending view rendered here--></div>
+              <div id='sidebar' class='span4'>
+                <%= yield :sidebar %></div>
+            </div>
+
           </div>
-          <footer>
-          </footer>
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+      </div>
+      <!--! end of .container -->
+    </div>
+
+    <!--! end of #main -->
   </body>
 </html>
-

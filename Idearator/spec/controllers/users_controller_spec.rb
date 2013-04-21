@@ -1,8 +1,34 @@
-# spec/controllers/admins_controller_spec.rb 
 require 'spec_helper'
-
 describe UsersController do 
- 	include Devise::TestHelpers
+	include Devise::TestHelpers
+	describe "PUT change_settings" do
+		it "changes user settings" do
+			u= User.new
+			u.email="test1@gmail.com"
+			u.username= "sameh"
+			u.password= "123123123"
+			u.confirm!
+			u.save
+			sign_in u
+			put :change_settings, :user=> ['1']
+			u.reload
+			u.own_idea_notifications.should eq(true)
+			u.participated_idea_notifications.should eq(false)
+		end
+		it "changes user settings" do
+			u1= User.new
+			u1.email="test1@gmail.com"
+			u1.username= "sameh"
+			u1.password= "123123123"
+			u1.confirm!
+			u1.save
+			sign_in u1
+			put :change_settings, :user=> []
+			u1.reload
+			u1.own_idea_notifications.should eq(false)
+			u1.participated_idea_notifications.should eq(false)
+		end
+	end
  		before :each do
     @a = Admin.new
     @a.email = 'admin@gmail.com'
@@ -20,25 +46,6 @@ describe UsersController do
     @u1.save
     sign_in @u1
   end
-   describe "PUT #reject_invitation" do 
-   	it "retrieves the user instance from :id" do
-			current_user = @u1
-   		put :reject_invitation
-   		assigns(:user).should eq(@u1)
-   	end
-   	it "removes the user from the committees table" do
-			current_user = @u1
-   		put :reject_invitation
-   		@u1.reload
-   		@u1.type.should eq(nil)
-   	end
-   	it "redirects to user's profile page" do
-			current_user = @u1
-   		put :reject_invitation
-   		response.should redirect_to controller: 'home', action: 'index' , notice: 'Rejected Invitation to become Committee'
-   	end
-   end
-   
    describe "PUT #invite_member" do 
    	it "retrieves the user instance from :id" do
    		put :invite_member, :id => @u1.id

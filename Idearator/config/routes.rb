@@ -3,18 +3,65 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
 
-  #get "ideas/new"
-  resources :ideas
-
-
-
   default_url_options :host => 'localhost:3000'
+
+  root :to => 'home#index'
+
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
+  resources :users do
+    member do
+      match 'ban_unban' => 'admins#ban_unban'
+    end
 
+    collection do
+      put 'change_settings'
+      match 'expertise'
+      match 'new_committee_tag'
+      match 'confirm_deactivate'
+      match 'deactivate'
+    end
+  end
 
-  devise_for :committees, :controllers => { :registrations => 'registrations' }
+  resources :ideas do
+    match 'filter', on: :collection
+  end
 
+  controller :home do
+    match 'search'
+    match 'index'
+  end
+
+  # Admin actions routes
+  controller :admins do
+    match 'invite'
+    match 'invite_committee'
+  end
+
+  # Committe actions routes
+  controller :committees do
+    match 'review_ideas'
+  end
+
+  # Dashboard routes
+  controller :dashboard do
+    match 'index'
+    match 'getallideas'
+    match 'gettags'
+    match 'getideas'
+  end
+
+  # Notifications routes
+  controller :notifications do
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+  end
+  match 'notifications' => 'application#update_nav_bar'
+
+  # Tag routes
+  match 'tags/ajax'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -37,7 +84,7 @@ Sprint0::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
-  root:to => 'home#index'
+
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -59,24 +106,16 @@ Sprint0::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # This is a legacy wild controller route that's not recommended
+  # for RESTful applications.
+  # Note: This route will make all actions in every controller
+  # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
 
-  match "/review_ideas" => "committees#review_ideas"
+
   match "/users/send_expertise" => "users#send_expertise"
   match '/users/:id/invite_member' => 'users#invite_member'
-  match '/users/reject_invitation' => 'users#reject_invitation'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
-  match '/notifications/view_all_notifications' => 'notifications#view_all_notifications'
-  match '/all_notifications.js' => 'notifications#view_all_notifications'
-  match '/notifications.js' => 'application#update_nav_bar'
-  match '/notifications/redirect_idea' => 'notifications#redirect_idea'
-  match '/notifications/redirect_review' => 'notifications#redirect_review'
-  match '/notifications/redirect_expertise' => 'notifications#redirect_expertise'
-
-  resources :users
+  
 
 end
