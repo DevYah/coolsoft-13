@@ -41,13 +41,7 @@ class HomeController < ApplicationController
         format.js
       end
     else
-        #@approved = Idea.order(:created_at).page(1).per(10)
-        #@top= Idea.find(:all,:order=> "num_votes DESC",:limit=>10)
-        #respond_to do |format|
-         #format.html
-         #format.js
-        #end
-        index
+      index
     end
   end
 end
