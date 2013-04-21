@@ -198,7 +198,7 @@ class UsersController < ApplicationController
   # +current_user+:: this parameter is an instance of +User+ passed through the devise gem 
   # Author: Mohammad Abdulkhaliq
   def send_expertise
-		@user = current_user 
+		@user = current_user
 		@tags = Tag.all
 		if current_user.is_a? Committee 
 			if current_user.tags.count == 0
@@ -207,11 +207,13 @@ class UsersController < ApplicationController
 				end
 			else 
 				respond_to do |format|
+          flash[:notice] = 'You have already chosen your tags'
 					format.html { redirect_to  '/' , notice: 'You have already chosen your expertise' }
 				end
 			end
 		else
 			respond_to do |format|
+        flash[:notice] = 'You are not eligible for this action !'
 				format.html { redirect_to  '/' , notice: 'You cannot choose your expertise' }
 			end
 		end
