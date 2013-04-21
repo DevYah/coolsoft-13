@@ -21,12 +21,10 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-<<<<<<< HEAD
   Spec.configure do |config|
     config.include Devise::TestHelpers, :type => :controller
   end
-=======
->>>>>>> C1_mnzaki_#74_twitter_login
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -43,8 +41,5 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-<<<<<<< HEAD
-=======
   config.include Devise::TestHelpers, :type => :controller
->>>>>>> C1_mnzaki_#74_twitter_login
 end
