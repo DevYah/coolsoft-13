@@ -91,24 +91,3 @@
   </div>
 <%end%>
 
-  <%if @idea.archive_status == false%>
-    <button id='share' class='btn btn-primary' type='button'>Share</button>
-    <div id='show' class='container'>
-      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-    </div>
-  <%end%>
-
-  <p>
-    <% if @idea.ratings.size > 0 %>
-      <b>Ratings:-</b>
-      <% @idea.ratings.each do |therating| %>
-        <p>
-          <div>
-            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
-          </div>
-        </p>
-      <% end %>
-    <% end %>
-  </p>
-</div>
