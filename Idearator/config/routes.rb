@@ -9,6 +9,8 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'approve_committee' => 'users#approve_committee'
+      match 'reject_committee' => 'users#reject_committee'
     end
 
     collection do
@@ -17,6 +19,7 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'send_expertise'
     end
   end
 
@@ -110,4 +113,7 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  
+  match '/users/:id/invite_member' => 'users#invite_member'
+  
 end
