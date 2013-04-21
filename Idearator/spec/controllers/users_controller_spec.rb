@@ -60,10 +60,5 @@ describe UsersController do
     it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
       expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
     end
-    it "redirects to home page" do
-      put :invite_member, :id => @u1.id
-      response.should redirect_to(:controller => 'home', :action => 'index')
-    end
   end
-
 end
