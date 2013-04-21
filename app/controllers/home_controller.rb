@@ -23,14 +23,14 @@ class HomeController < ApplicationController
         @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
       end
     else
-        @approved = Idea.order(:created_at).page(params[:myPage]).per(10) 
+        @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
     end
         respond_to do |format|
           format.js
           format.html # index.html.erb
           format.xml  { render :xml => @approved }
         end
-  end 
+  end
 
   def search
     if params[:search].length > 0

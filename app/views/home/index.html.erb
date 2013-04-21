@@ -54,7 +54,7 @@
   .totop{
     margin: auto;
   }
-  
+
   .idea-vote{
     padding-left: 87%;
     font-size: 35px;
@@ -74,37 +74,3 @@
     margin-bottom: 15px;
   }
 </style>
-
-
-<script type="text/javascript">
-(function() {
-  var page = 1,
-      loading = false;
-
-  function nearBottomOfPage() {
-    return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
-  }
-
-  $(window).scroll(function(){
-    if (loading) {
-      return;
-    }
-
-    if(nearBottomOfPage() && $("#search").val() == "") {
-      loading=true;
-      page++;
-      $.ajax({
-        url: '/?page=' + page,
-        type: 'get',
-        dataType: 'script',
-        success: function() {
-            loading=false;
-          
-        }
-
-      });
-    }
-  });
-
-}());
-</script>
