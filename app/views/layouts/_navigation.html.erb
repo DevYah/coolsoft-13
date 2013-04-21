@@ -21,7 +21,7 @@
   <% if not user_signed_in? %>
     <li><%= link_to('Sign in', new_user_session_path) %></li>
     <li>
-    <%= link_to 'Sign in with Titter', user_omniauth_authorize_path(:twitter), :id => 'twitter_signin_button',
+    <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter), :id => 'twitter_signin_button',
                 :class => 'popup', 'data-width' => 600, 'data-height' => 500  %>
     </li>
   <% elsif current_user.is_a? Committee || !current_user.ideas.empty? %>
