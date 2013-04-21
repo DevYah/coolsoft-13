@@ -3,24 +3,38 @@ namespace :db do
 	task :populate => :environment do
 
 		@tags = ["Agriculture", "Software", "Fashion", "Development", "Games" , "BigThings" , "SmallThings" , "CamelCase" , "Food" , "TakeAway"]
-		50.times do |n|
+		40.times do |n|
 			u = User.new
 			u.email = Faker::Internet.email
-			u.first_name = Faker::Name.name
+			u.username = Faker::Name.name
 			u.password = 123123123
 			u.confirm!
 			u.save
 		end
 
+		10.times do |n|
+			c = Committee.new
+			c.email = Faker::Internet.email
+			c.username = Faker::Name.name
+			c.password = 123123123
+			c.confirm!
+			c.save
+		end
+
 		50.times do |n|
 			i = Idea.new
-			i.user_id = rand(1..40)
+			i.user_id = rand(1..50)
 			i.title = Faker::Name.name
 			i.description = Faker::Lorem.paragraph
 			i.problem_solved = Faker::Lorem.paragraph
 			i.approved = "true"
+			i.committee = Committee.find(rand(41..50))
 			i.num_votes = rand(1..500)
 			i.save
+			v = VoteCount.new
+			v.idea = i
+			v.prev_day_votes = rand (0..40)
+			v.save
 		end
 
 		10.times do |n|
@@ -45,7 +59,9 @@ namespace :db do
 			it2.save
 		end
 
+		t = Threshold.new
+		t.threshold = 40
+		t.save
 
-
-	end	
+	end
 end
