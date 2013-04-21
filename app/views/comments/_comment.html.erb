@@ -16,7 +16,6 @@
 				<% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
 					<%= link_to "<i>+1</i>".html_safe ,:class => " icon-thumbs-up", :controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true %>
 				<% end %> 
-				<%= link_to "<i></i>".html_safe, best_in_place comment, :content  , :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id}, :id => "button_id", :class => "icon-edit" %> 
 				<small class = "text-info">
 					<%= comment.num_likes %> likes
 				</small>
