@@ -46,21 +46,14 @@ $(document).ready(function() {
       return "<li>" + item.name
            + "<input id='ideas_tags_tags_' type='hidden' value='" + item.id + "' name='idea[tag_ids][]' />"
            + "</li>";
-      //"<li>" + "<img src='" + item.url + "' title='"
-      //+ item.first_name + " " + item.last_name + "' height='25px' width='25px' />"
-      //+ "<div style='display: inline-block; padding-left: 10px;'><div class='full_name'>"
-      //+ item.first_name + " " + item.last_name + "</div><div class='email'>" + item.email
-      //+ "</div></div></li>";
     },
     prePopulate: prePopulate
   });
 
-
   $('.best_in_place').best_in_place();
-  $('#image-edit-link,.best_in_place').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
-
   $('.best_in_place').bind("ajax:success", function(){
     $('#edited-check-mark').remove();
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
 });
+
