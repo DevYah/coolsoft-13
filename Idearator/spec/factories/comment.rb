@@ -2,8 +2,8 @@ require 'faker'
 require 'factory_girl_rails'
 
 FactoryGirl.define do
-  factory :comment do |f|
-    f.content 'c1'
-   
+  factory :comment, :class => Comment do |f|
+    f.user_id 1
+    f.idea_id 1
   end
 end
