@@ -16,41 +16,27 @@
     </li>
   <% end %>
 </ul>
-<ul class="nav pull-right">
+
+<ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
+    <li><%= link_to('Sign in', new_user_session_path) %></li>
     <li>
-    <%= link_to 'Sign in with Titter', user_omniauth_authorize_path(:twitter),
-                :class => 'popup ', 'data-width' => 600, 'data-height' => 500  %>
+    <%= link_to 'Sign in with Titter', user_omniauth_authorize_path(:twitter), :id => 'twitter_signin_button',
+                :class => 'popup', 'data-width' => 600, 'data-height' => 500  %>
     </li>
-    <li>
-    <%= link_to('Login', new_user_session_path)  %>
-    </li>
-    <li>
-      <%= link_to('Register', new_user_registration_path)  %>
-    </li>
+  <% elsif current_user.is_a? Committee || !current_user.ideas.empty? %>
+    <li><%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %></li>
   <% end %>
-  <% if user_signed_in? %>
-  <% if current_user.is_a? Committee%>
-  <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% else %>
-  <% if current_user.ideas != nil %>
-    <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% end %>
-  <% end %>
-  <% end %>
+
   <li>
     <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
-  <p class = "input-append">
-    <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
-     <button class='btn btn-info'>
-        <i class="icon-search icon-white"></i>
-    </button>
-  </p>
-<% end %>
+      <p class = "input-append">
+        <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
+        <button class='btn btn-info'>
+          <i class="icon-search icon-white"></i>
+        </button>
+      </p>
+    <% end %>
   </li>
 </ul>
 
@@ -61,13 +47,13 @@
       <ul class="dropdown-menu">
         <li>
           <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i> Account Settings</a>
-        </li>                
+        </li>
         <li>
           <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
         </li>
         <li>
           <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
-        </li> 
+        </li>
       </ul>
     </li>
   </ul>

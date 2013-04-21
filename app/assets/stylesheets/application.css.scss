@@ -48,3 +48,16 @@
 .icon-user {
   padding-right: 10px;
 }
+
+#nav_login {
+  border: solid #ddd;
+  border-width: 0px 1px;
+  padding: 0 5px;
+}
+
+#twitter_signin_button {
+  display: block;
+  background: url('/assets/bird_blue_32.png') center no-repeat;
+  width: 32px; height: 20px;
+  font-size: 0;
+}

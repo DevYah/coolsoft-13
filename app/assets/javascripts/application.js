@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require notification_polling
 //= require_tree .
+
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
@@ -30,7 +31,6 @@ $(function() {
 	});
 });
 
-
 $(document).bind("ajaxError", function(e, xhr){
 	if(xhr.status == 401){
 		$('#signedout').modal('show');
@@ -42,9 +42,6 @@ $(document).ready(function() {
     window.location= "/users/sign_in";
   });
 });
-
-
-
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width/2)-(width/2);
@@ -60,5 +57,12 @@ $(function() {
                 $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
     e.stopPropagation();
     return false;
+  });
+
+  $("#twitter_signin_button").tooltip({
+    placement: 'bottom',
+    trigger: 'click',
+    title: 'Trying to sign in using twitter, please interact with the popup!',
+    container: 'header'
   });
 });
