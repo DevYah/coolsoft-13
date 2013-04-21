@@ -88,7 +88,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
       else
-        format.html { render :action => 'edit'}
+        format.html { render :action => 'edit' }
         format.json { respond_with_bip(@idea) }
       end
     end
@@ -150,7 +150,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
-        format.html { render action: 'new'}
+        format.html { render action: 'new' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
@@ -171,14 +171,10 @@ class IdeasController < ApplicationController
       list_of_comments.each do |c|
         c.destroy
       end
-
-
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
-
       list = list_of_commenters.append(list_of_voters).flatten!
-
       DeleteNotification.send_notification(current_user, idea, list)
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
