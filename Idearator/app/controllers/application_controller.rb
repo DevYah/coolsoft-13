@@ -49,7 +49,8 @@ class ApplicationController < ActionController::Base
 			end
       not1 = idea_notifications + user_notifications
       not2 = not1.sort_by &:created_at
-      @notifications = not2.reverse.first(10)
+      @all_notifications = not2.reverse
+      @notifications = not2.reverse.first(7)
       @count = unread_users + unread_ideas
     end
   end

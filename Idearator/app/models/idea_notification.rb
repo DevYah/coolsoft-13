@@ -9,4 +9,25 @@ class IdeaNotification < ActiveRecord::Base
   def self.send_notification(user_sender, idea, users_receivers)
   end
 
+  def text 
+  end
+
+  def has_link?
+    true
+  end
+
+  def read_by?(user)
+    if IdeaNotificationsUser.find(:first, :conditions => { idea_notification_id: self.id, user_id: user.id }).read?
+      true
+    else
+      false
+    end
+  end
+
+  def set_read_for(user)
+    notification = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: self.id, user_id: user.id })
+    notification.read = true
+    notification.save
+  end
+
 end
