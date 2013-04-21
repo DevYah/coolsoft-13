@@ -24,7 +24,7 @@ class IdeaNotification < ActiveRecord::Base
     end
   end
 
-  def read_for(user)
+  def set_read_for(user)
     notification = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: self.id, user_id: user.id })
     notification.read = true
     notification.save
