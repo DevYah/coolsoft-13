@@ -16,24 +16,25 @@
 
   <% content_for :sidebar do %>
     <div class="topten">
-      <h1>Top Ten Ideas</h1>
-      <div class="media">
+      <h1 class="title">Top Ten </h1>
+      
         <% @top.each do |top| %>
           <% if top.user.active == true and top.user.banned == false%>
-            <div class="topten_idea">
+            <div class="topten_idea media">
               <a class="pull-left" href="#">
-                <span><%= image_tag(top.photo.url(:thumb), :size => "30x20") %></span>
+                <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
 
               </a>
               <div class="media-body">
-                <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
-                <span><%= top.num_votes %></span>
                 <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+                <h4 class="media-heading idea"> <%= link_to top.title ,top %> </h4>
+                <span class="badge"><%= top.num_votes %> votes</span> 
+               
               </div>
             </div>
           <% end %>
         <%end%>
-      </div>
+      
     </div>
   <% end %>
 
