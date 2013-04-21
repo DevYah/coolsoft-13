@@ -3,13 +3,20 @@ Sprint0::Application.routes.draw do
   match '/users/new_committee_tag' => 'users#new_committee_tag'
   match '/home/index' => 'home#index'
 
-  default_url_options :host => 'localhost:3000'
+ 
+
+  get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
 
   root :to => 'home#index'
 
   default_url_options :host => 'localhost:3000'
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
+  devise_scope :user do
+  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+end
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
@@ -41,30 +48,6 @@ Sprint0::Application.routes.draw do
     match 'invite_committee'
   end
 
-  # Committe actions routes
-  controller :committees do
-    match 'review_ideas'
-  end
-
-  # Dashboard routes
-  controller :dashboard do
-    match 'index'
-    match 'getallideas'
-    match 'gettags'
-    match 'getideas'
-  end
-
-  # Notifications routes
-  controller :notifications do
-    match 'view_all_notifications'
-    match 'redirect_idea'
-    match 'redirect_review'
-    match 'redirect_expertise'
-  end
-  match 'notifications' => 'application#update_nav_bar'
-
-  # Tag routes
-  match 'tags/ajax'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -114,5 +97,7 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+
 
 end
