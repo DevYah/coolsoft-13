@@ -3,14 +3,9 @@
 
     <% if @idea.errors.any? %>
       <div id = 'error_explanation'>
-
-        <h2><%= pluralize(@idea.errors.count, 'error') %>
-          prohibited this idea from being saved:</h2>
-        <ul>
-          <% @idea.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
+        <% @idea.errors.full_messages.each do |msg| %>
+          <span><%= msg %></span>
+        <% end %>
       </div>
     <% end %>
 
@@ -26,7 +21,7 @@
           <%= i.text_field :title, :class => 'text_field', :placeholder=>'Write title here...',:readonly => 'true'%>
           <span class = 'help-inline'>Sorry you can't change the title</span>
         <%else%>
-          <%= i.text_field :title, :class => 'text_field', :placeholder=>'Write title here...'%>
+          <%= i.text_field :title, :class => 'text_field', :placeholder=>'Write title here...',:required => true %>
           <span class = 'help-inline'>Please make it short and descriptive</span>
         <%end%>
       </div>
@@ -35,14 +30,14 @@
     <div class = 'control-group'>
       <%= i.label :description, :class => 'control-label'%>
       <div class="controls">
-        <%= i.text_field :description, :class => 'text_field', :placeholder=>"Write description here..."%>
+        <%= i.text_area :description, :class => 'text_field', :size => "5x5", :placeholder=>"Write description here...",:required => true %>
       </div>
     </div>
 
     <div class="control-group">
       <%= i.label :problem_solved,:class => 'control-label'%>
       <div class="controls">
-        <%= i.text_field :problem_solved,:class => 'text_field',:placeholder=>'Write problem solved here...'%>
+        <%= i.text_area :problem_solved,:class => 'text_field', :size => "5x5", :placeholder=>'Write problem solved here...'%>
       </div>
     </div>
 
