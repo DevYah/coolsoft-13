@@ -1,6 +1,9 @@
 class Idea < ActiveRecord::Base
 
   attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user_id, :approved, :tag_ids
+  validates_length_of :title, :maximum => 50
+  validates_length_of :description, :maximum => 1000
+  validates_length_of :problem_solved, :maximum => 1000
 
   belongs_to :user
   has_one :vote_count
