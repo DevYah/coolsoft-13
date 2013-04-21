@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  respond_to :html, :json
 
   #Show all Comments
   #Params:
@@ -45,17 +44,19 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
   end
-
+  
  def update
   @comment = Comment.find(params[:id])
   @idea = Idea.find(params[:idea_id])
+  respond_to do |format|
    if @comment.update_attributes(params[:comment])
       format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
-      format.json 
+      format.json { respond_with_bip(@comment) }
     else
       format.html { render :action => "edit" }
-      format.json
+      format.json { respond_with_bip(@comment) }
     end  
+  end
  end
 
   #delete comment
