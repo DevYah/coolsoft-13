@@ -1,15 +1,17 @@
- 
+
 
 class UsersController < ApplicationController
-	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :invite_member, :reject_invitation]
-  
+	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
+
+
 	# displays a form where the user enters his password to confrim deactivation.
 	# Params: none
 	# Author: Amina Zoheir
 	def confirm_deactivate
 		@user = current_user
 	end
-  
+
+
 	# checks the entered password if it's the current users password 
 	# it changes the value of his active field to false and signs him out. 
 	# Params: 
@@ -20,7 +22,8 @@ class UsersController < ApplicationController
       @password = params[:committee][:password]
     else
       @password = params[:user][:password]
-    end  
+    end
+    
     if current_user.valid_password?(@password)
       current_user.active = false
       current_user.save
@@ -38,7 +41,8 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
+
   # sets the active field of the current user to true
   # Params: none
   # Author: Amina Zoheir
@@ -49,8 +53,8 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  respond_to :html, :xml, :json
+
+
 	# Pass the current_user and all the tags to the  expertise view
 	# Params:
 	# none
@@ -61,27 +65,24 @@ class UsersController < ApplicationController
 				@user= current_user
 				@tags= Tag.all
 			else
-				respond_to do |format|				
-				format.html{
-					redirect_to controller: 'home', action: 'index'
-				}
-			  end
-      end
-			else
 				respond_to do |format|
 				format.html{
 					redirect_to controller: 'home', action: 'index'
 				}
-			   end
-			 end
 			end
-  
+			end
+		else
+			respond_to do |format|
+				format.html{
+					redirect_to controller: 'home', action: 'index'
+				}
+			end
+		end
+	end
 	# Enter chosen tags sent from expertise view, in committeestags table 
-  # If the current user of the action is invited then a notification 
-  # is sent to the admin informing of user acceptance of invitation.
 	# Params:
 	# +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
-	# Author: Mohamed Sameh, Mohammad Abdulkhaliq
+	# Author: Mohamed Sameh
 	def new_committee_tag
 		if params[:user] == nil
 			respond_to do |format|
@@ -95,9 +96,6 @@ class UsersController < ApplicationController
 			@tags.each do |tag|
 				CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
 			end
-      if InviteCommitteeNotification.where(:user_id => current_user.id).exists?
-				InviteCommitteeNotification.send_notification(User.find(current_user.id), Admin.all) 
-			end
 			respond_to do |format|
 				format.html{
 					redirect_to controller: 'home', action: 'index'
@@ -105,47 +103,36 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-  
+
+
   #This method is used to generate the view of each User Profile. A specific user and his ideas are made
   #available to the view to be presented in the appropriate manner.
   #Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
     @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
+    @admin = current_user
+    @registered = @user.approved == false && @user.type == 'Committee'
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
   	end
-  end
-	
-  # Rejects an admin invitaion to become a committee and the committee record is removed from db
-	# by removing his committee status
-	# Params: 
-	# +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
-	# Author: Mohammad Abdulkhaliq
-  def reject_invitation
-    @user = User.find(current_user)
-    id = current_user.id
-    @user.type = nil
-    @user.save
-    current_user = User.find(id)
-    InviteCommitteeNotification.send_notification(current_user, Admin.all)
-		respond_to do |format|
-			format.html { redirect_to '/', notice: 'Rejected Invitation to become Committee' }
-			format.json { head :no_content }
-    end
-	end
-    
+  end 
+
+
 	# POST /users
   # POST /users.json
+	
   # This method creates a new User and calls UserMailer to send a confirmation email.
   #Author: Menna Amr
   def create
     @user = User.new(params[:user])
+ 
     respond_to do |format|
       if @user.save
         # Tell the UserMailer to send a welcome Email after save
         UserMailer.welcome_email(@user).deliver
+ 
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
@@ -155,7 +142,37 @@ class UsersController < ApplicationController
     end
   end
 
-  # Invites existing member to become a committee 
+  # Enter chosen notification settings chosen by user in table User
+	# Params:
+	# +user[]+:: the parameter is an instance of +user+ passed through the form from settings action
+	# Author: Mohamed Sameh
+  def change_settings
+		if params[:user] != nil
+			settings= params[:user]
+			s= User.find(current_user)
+			if settings.include?('1')
+				s.own_idea_notifications= true
+			else
+				s.own_idea_notifications= false
+			end
+			if settings.include?('2')
+				s.participated_idea_notifications= true
+			else
+				s.participated_idea_notifications= false
+			end
+			s.save
+		else
+			s= User.find(current_user)
+			s.own_idea_notifications= false
+	   	s.participated_idea_notifications= false
+			s.save
+	  end
+	  respond_to do |format|
+	  	format.js {}
+	  end
+	end
+
+# Invites existing member to become a committee 
   # by initiating him into the database and then sending him a notification
   # Params: 
   # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
@@ -174,7 +191,7 @@ class UsersController < ApplicationController
 			format.json { head :no_content }
     end
   end
-  
+
   # Sends tags and current user as an ajax response
   # to whoever calls it
   # Params: 
@@ -184,7 +201,7 @@ class UsersController < ApplicationController
 		@user = current_user 
 		@tags = Tag.all
 		if current_user.is_a? Committee 
-			if current_user.tags.count > 0
+			if current_user.tags.count == 0
 				respond_to do |format|
 					format.js{}
 				end
@@ -200,3 +217,4 @@ class UsersController < ApplicationController
 		end
 	end
 end
+
