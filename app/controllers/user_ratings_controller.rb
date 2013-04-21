@@ -14,17 +14,17 @@ class UserRatingsController < ApplicationController
     user_rating.user_id = current_user.id
 
     if user_rating.save
-      saved_rating = UserRating.find_by_rating_id(params[:rating_id])
+      saved_rating = UserRating.where('rating_id' => params[:rating_id])
 
       if saved_rating.size != 0
         rating = Rating.find_by_id(params[:rating_id])
         average_rating = 0
 
         saved_rating.each do |sr|
-          average_rating = average_rating + sr.value
+          average_rating = average_rating.to_i + sr.value.to_i
         end
 
-        rating.value = average_rating
+        rating.value = average_rating.to_f / saved_rating.size.to_f
         rating.save
       end
 
@@ -51,17 +51,17 @@ class UserRatingsController < ApplicationController
     user_rating = current_user.user_ratings.find_by_rating_id(params[:rating_id])
 
     if user_rating.update_attributes(params[:rating])
-      saved_rating = UserRating.find_by_rating_id(params[:rating_id])
+      saved_rating = UserRating.where('rating_id' => params[:rating_id])
 
       if saved_rating.size != 0
         rating = Rating.find_by_id(params[:rating_id])
         average_rating = 0
 
         saved_rating.each do |sr|
-          average_rating = average_rating + sr.value
+          average_rating = average_rating.to_i + sr.value.to_i
         end
 
-        rating.value = average_rating
+        rating.value = average_rating.to_f / saved_rating.size.to_f
         rating.save
       end
 
