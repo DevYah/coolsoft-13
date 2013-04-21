@@ -17,7 +17,7 @@ class DashboardController < ApplicationController
       @approved_thresholds = Array.new
       @approved_ideas.each do |idea|
         @v = VoteCount.find(:first, :conditions => { :idea_id => idea.id})
-        @approved_threshold = ((@v.prev_day_votes * 100) / @threshold.threshold) / 10
+        @approved_threshold = ((@v.prev_day_votes * 100) / @threshold.threshold)
         @approved_thresholds << @approved_threshold
       end
     end
@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
     @own_thresholds = Array.new
     @own_ideas.each do |idea|
       @v = VoteCount.find(:first, :conditions => { :idea_id => idea.id})
-      @own_threshold = ((@v.prev_day_votes * 100) / @threshold.threshold) / 10
+      @own_threshold = ((@v.prev_day_votes * 100) / @threshold.threshold)
       @own_thresholds << @own_threshold
     end
     @approved_counter = 0
