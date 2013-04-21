@@ -1,0 +1,102 @@
+#tagsall{
+	max-height: 200px;
+	height: auto;
+	width: 150px;
+	overflow:auto;
+}
+#graph{
+	width: 850px;
+}
+#ideas{
+	padding-left: 2cm;
+	max-height: 150px;
+	height: auto;
+	width: 200px;
+	overflow:auto;
+	}
+
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bulb-img {
+  background-image: url('bulb.png');
+  width:150px;
+  height:128px;
+  display: inline-block;
+}
+
+
+.threshold-10 {
+  box-shadow: 60px 50px 100px 13px #FFFF66;
+  width:20px;
+  position: relative;
+}
+
+.threshold-20 {
+  box-shadow: 60px 50px 100px 19px #FFFF66;
+  width:20px;
+  position: relative;
+}
+
+.threshold-30 {
+  box-shadow: 60px 50px 100px 23px #FFFF66;
+  width:20px;
+  position: relative;
+}
+
+.threshold-40 {
+  box-shadow: 60px 50px 100px 27px #FFFF66;
+  width:20px;
+  position: relative;
+}
+
+.threshold-50 {
+  box-shadow: 60px 50px 100px 30px #FFFF66;
+  width:20px;
+}
+
+.threshold-60 {
+  box-shadow: 60px 50px 100px 32px #FFFF66;
+  width:20px;
+}
+
+.threshold-70 {
+  box-shadow: 60px 50px 100px 34px #FFFF66;
+  width:20px;
+}
+
+.threshold-80 {
+  box-shadow: 60px 50px 100px 39px #FFFF66;
+  width:20px;
+}
+
+.threshold-90 {
+  box-shadow: 60px 50px 100px 45px #FFFF66;
+  width:20px;
+}
+.threshold-100 {
+  box-shadow: 60px 50px  100px 50px #FFFF66;
+  width:20px;
+}
+
+.idea-title {
+  width: 150px;
+  height: 60px;
+}
+
+.bulb-container-comm {
+  float: left;
+}
+
+.bulb-container {
+  width: 800px;
+  height: 200px;
+ 
+}
+
+.idea-list {
+  float:right;
+  width: 180px;
+
+}
