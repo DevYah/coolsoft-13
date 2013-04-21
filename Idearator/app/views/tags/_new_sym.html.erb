@@ -1,5 +1,5 @@
 <div>
-<%= form_for @tag, :html => { :class => 'form-horizontal' }, :url =>  url_for(:controller => 'tags',  :action => 'addsym'), :remote => true do |f| %>
+<%= form_for @tag, :html => { :class => 'form-horizontal' }, :url =>  url_for(:controller => 'tags',  :action => 'addsym') do |f| %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">

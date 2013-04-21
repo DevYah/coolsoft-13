@@ -155,21 +155,20 @@ class TagsController < ApplicationController
         if @sym.save
           @sym.tags << @tag
           @tag.tags << @sym
-          #format.html { redirect_to tags_path, notice: 'Tag was successfully created. and Sym List appended' }
-          #format.json { render json: @tag, status: :created, location: @sym }
-          format.js
+          format.html { redirect_to tags_path, notice: 'Tag was successfully created. and Sym List appended' }
+          format.json { render json: @tag, status: :created, location: @sym }
+          # format.js
         else
           format.html { redirect_to tags_path, notice: @sym.errors.full_messages[0] }
           format.json { head :no_content }
         end
-
-      elsunless @tag.tags.all.include?(tag_query[0]) and @tag != tag_query[0]
+        @tag.tags.all.include?(tag_query[0]) and @tag != tag_query[0]
         @sym = tag_query[0]
         @sym.tags << @tag
         @tag.tags << @sym
-        #format.html { redirect_to tags_path, notice: 'Synonym list was successfully updated.' }
-        #format.json { head :no_content }
-        format.js
+        format.html { redirect_to tags_path, notice: 'Synonym list was successfully updated.' }
+        format.json { head :no_content }
+        # format.js
       else
         format.html { redirect_to tags_path, notice: 'Synonym already exits !' }
         format.json { head :no_content }
