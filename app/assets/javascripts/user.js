@@ -27,5 +27,4 @@ function toggle_all_tags(committee) {
 		$("#all-tags").slideDown();
 	}
 
-
 }
