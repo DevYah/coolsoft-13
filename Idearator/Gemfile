@@ -16,12 +16,12 @@ gem 'kaminari', '0.14.1'
 
 gem 'bot-away', '2.0.1'
 
+gem 'best_in_place'
+
 group :assets do
   gem 'sass-rails', '3.2.6'
   gem 'uglifier', '2.0.1'
 end
-
-gem 'best_in_place'
 
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
@@ -29,7 +29,6 @@ group :test, :development do
   gem 'rspec-rails', '2.13.0'
   gem 'factory_girl_rails', '4.2.1'
 end
-
 
 group :test do
   
