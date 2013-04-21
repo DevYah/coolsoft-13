@@ -19,8 +19,7 @@
 <ul class="nav pull-right">
   <% if not user_signed_in? %>
     <li>
-    <%= link_to('Login', new_user_session_path)  %>
-
+      <%= link_to('Login', new_user_session_path)  %>
     </li>
   <% else %>
     <li>
@@ -28,14 +27,16 @@
     </li>
   <% end %>
   <% if user_signed_in? %>
-  <% if current_user.is_a? Committee%>
-  <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
-  <% else %>
-  <% if current_user.ideas != nil %>
-    <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
+    <% if current_user.is_a? Committee%>
+      <li>
+        <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+      </li>
+    <% else %>
+      <% if current_user.ideas != nil %>
+        <li>
+          <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+        </li>
+      <% end %>
+    <% end %>
   <% end %>
 </ul>

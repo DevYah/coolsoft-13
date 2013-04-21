@@ -31,6 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
       if resource.type == "Committee"
         UserMailer.committee_signup("menna.amr2@gmail.com").deliver
+        ApproveCommitteeNotification.send_notification(resource, Admin.all)
         resource.becomes(Committee).tag_ids = params[:tags]
       end 
 
