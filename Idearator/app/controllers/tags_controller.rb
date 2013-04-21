@@ -152,17 +152,13 @@ class TagsController < ApplicationController
     respond_to do |format|
       if tag_query.empty?
         @sym = Tag.new(:name => y)
-        if @sym.save
-          @sym.tags << @tag
-          @tag.tags << @sym
-          format.html { redirect_to tags_path, notice: 'Tag was successfully created. and Sym List appended' }
-          format.json { render json: @tag, status: :created, location: @sym }
-          # format.js
-        else
-          format.html { redirect_to tags_path, notice: @sym.errors.full_messages[0] }
-          format.json { head :no_content }
-        end
-        @tag.tags.all.include?(tag_query[0]) and @tag != tag_query[0]
+        @sym.save
+        @sym.tags << @tag
+        @tag.tags << @sym
+        format.html { redirect_to tags_path, notice: 'Tag was successfully created. and Sym List appended' }
+        format.json { render json: @tag, status: :created, location: @sym }
+        # format.js
+      elsif !@tag.tags.all.include?(tag_query[0]) && @tag != tag_query[0]
         @sym = tag_query[0]
         @sym.tags << @tag
         @tag.tags << @sym
@@ -176,14 +172,14 @@ class TagsController < ApplicationController
     end
   end
 
-  def delsym
-    @tag = Tag.find(params[:id])
-    @tag2 = Tag.find(params[:sym])
-    @tag.tags.destroy(@tag2)
-    @tag2.tags.destroy(@tag)
-    respond_to do |format|
-      format.html { redirect_to tags_path , notice: 'Synonym list was successfully updated.' }
-      format.json { head :no_content }
-    end
+def delsym
+  @tag = Tag.find(params[:id])
+  @tag2 = Tag.find(params[:sym])
+  @tag.tags.destroy(@tag2)
+  @tag2.tags.destroy(@tag)
+  respond_to do |format|
+    format.html { redirect_to tags_path , notice: 'Synonym list was successfully updated.' }
+    format.json { head :no_content }
   end
+end
 end
