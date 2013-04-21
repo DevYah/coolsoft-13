@@ -32,8 +32,30 @@
     <div><%= @idea.problem_solved  %></div>
   </p>
 </div>
+<legend><h4 class ="title2">Comments</h4></legend>
+	<div id='like'>
+		<table id='comments'>
+			<% @idea.comments.each do |comment| %>
+				<%= render partial: '/comments/comment', locals: { comment: comment }	%>
 
-<%if @idea.archive_status == false%>
+			<% end %>
+		</table>
+	</div>
+<div class = "addComment">
+	<h5 class = "title1">Add a comment:</h5>
+	<%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
+
+  		<div class="controls">
+     <div class ="textArea1" >
+  		<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+		</div> 
+	</div>
+  		<%= f.submit nil, :class => 'btn btn-small btn-primary' %>
+	<% end %>
+
+	<td><%= link_to 'Back', '/',:class => "btn" %></td>
+
+  <%if @idea.archive_status == false%>
   <button id='share' class='btn btn-primary' type='button'>Share</button>
 
   <div id='show' class='container'>
