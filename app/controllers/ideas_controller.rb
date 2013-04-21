@@ -127,6 +127,7 @@ class IdeasController < ApplicationController
     @idea.num_votes = @idea.num_votes - 1
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
+        VoteCount.where(:idea_id => 51).first.increment(:curr_day_votes)
         format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
         format.json { head :no_content }
       else
@@ -147,6 +148,7 @@ class IdeasController < ApplicationController
     @idea.user_id = current_user.id
     respond_to do |format|
       if @idea.save
+        VoteCount.create(idea_id: @idea.id)
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
