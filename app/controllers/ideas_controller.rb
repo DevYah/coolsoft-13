@@ -152,6 +152,8 @@ class IdeasController < ApplicationController
         c.destroy
       end
 
+      idea.save
+
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea has been successfully archived!' }
         format.js
