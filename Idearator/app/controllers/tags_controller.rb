@@ -139,6 +139,7 @@ class TagsController < ApplicationController
   # parent tag nothing is done and the user is informed so that the
   # synonym already exists
   # +name+:: This is an instance of +String+ passed through params[:tag][:name] from the show view
+  # +id+:: This is an instance of +Tag+ passed through params[:id] from the index view
   # Author: Mohammad Abdulkhaliq
   def addsym
     unless user_signed_in? || current_user.type != 'Admin'
@@ -172,14 +173,18 @@ class TagsController < ApplicationController
     end
   end
 
-def delsym
-  @tag = Tag.find(params[:id])
-  @tag2 = Tag.find(params[:sym])
-  @tag.tags.destroy(@tag2)
-  @tag2.tags.destroy(@tag)
-  respond_to do |format|
-    format.html { redirect_to tags_path , notice: 'Synonym list was successfully updated.' }
-    format.json { head :no_content }
+  # Delete a synonym from a specific tag tag's list
+  # +sym+:: This is an instance of +String+ passed through params[:tag][:name] from the show view
+  # +id+:: This is an instance of +Tag+ passed through params[:id] from the index view
+  # Author: Mohammad Abdulkhaliq
+  def delsym
+    @tag = Tag.find(params[:id])
+    @tag2 = Tag.find(params[:sym])
+    @tag.tags.destroy(@tag2)
+    @tag2.tags.destroy(@tag)
+    respond_to do |format|
+      format.html { redirect_to tags_path , notice: 'Synonym list was successfully updated.' }
+      format.json { head :no_content }
+    end
   end
-end
 end
