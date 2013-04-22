@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like]
 
   # view idea of current user
   # Params
