@@ -9,6 +9,8 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'approve_committee' => 'users#approve_committee'
+      match 'reject_committee' => 'users#reject_committee'
     end
 
     collection do
@@ -17,11 +19,18 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'send_expertise'
     end
   end
 
   resources :ideas do
     match 'filter', on: :collection
+    member do
+      match 'vote'
+      match 'unvote'
+      match 'archive'
+      match 'unarchive'
+    end
   end
 
   controller :home do
@@ -31,8 +40,8 @@ Sprint0::Application.routes.draw do
 
   # Admin actions routes
   controller :admins do
-    match 'admins/invite'
-    match 'admins/invite_committee'
+    match 'invite'
+    match 'invite_committee'
   end
 
   # Committe actions routes
@@ -50,10 +59,12 @@ Sprint0::Application.routes.draw do
 
   # Notifications routes
   controller :notifications do
-    match 'notifications/view_all_notifications'
-    match 'notifications/redirect_idea'
-    match 'notifications/redirect_review'
-    match 'notifications/redirect_expertise'
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+    match 'set_read'
+    match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
 
@@ -102,4 +113,7 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  
+  match '/users/:id/invite_member' => 'users#invite_member'
+  
 end

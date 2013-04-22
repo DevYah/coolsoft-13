@@ -4,4 +4,8 @@ class CommentNotification < IdeaNotification
     comment_notification = CommentNotification.create(user: user_sender, idea: idea, users: users_receivers)
   end
 
+  def text
+    User.find(self.user_id).username + " commented on your idea " + Idea.find(self.idea_id).title + "." 
+  end
+
 end
