@@ -44,8 +44,6 @@ namespace :db do
 			it2.tag_id = rand(1..12)
 			it2.save
 		end
-
-
-
+		
 	end	
 end

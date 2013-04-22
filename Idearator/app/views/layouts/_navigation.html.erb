@@ -28,17 +28,18 @@
   <% end %>
   <% if user_signed_in? %>
   <% if current_user.is_a? Committee%>
-  <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
+    <ul class="nav">
+      <li>
+        <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+      </li>
   <% else %>
-  <% if current_user.ideas != nil %>
-    <li>
-    <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-  </li>
+    <ul class="nav">
+      <% if current_user.ideas != nil %>
+        <li>
+        <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
+      </li>
   <% end %>
-  <% end %>
-  <% end %>
+<% end %>
   <li>
     <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
   <p class = "input-append">
