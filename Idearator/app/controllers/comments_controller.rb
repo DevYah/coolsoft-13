@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     if @comment.save
       respond_to do |format|
         format.js
-      end    
+      end
     else
       respond_to do |format|
         format.html { redirect_to(@idea, :notice => 'Comment could not be saved. Please fill in all fields') }
@@ -45,20 +45,20 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
   end
-  
- def update
-  @comment = Comment.find(params[:id])
-  @idea = Idea.find(params[:idea_id])
-  respond_to do |format|
-   if @comment.update_attributes(params[:comment])
-      format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
-      format.json { respond_with_bip(@comment) }
-    else
-      format.html { render :action => "edit" }
-      format.json { respond_with_bip(@comment) }
-    end  
+
+  def update
+    @comment = Comment.find(params[:id])
+    @idea = Idea.find(params[:idea_id])
+    respond_to do |format|
+      if @comment.update_attributes(params[:comment])
+        format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
+        format.json { respond_with_bip(@comment) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@comment) }
+      end
+    end
   end
- end
 
   #delete comment
   #Params:
@@ -71,8 +71,8 @@ class CommentsController < ApplicationController
     @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.find(params[:id])
     @comment.destroy
-      respond_to do|format|
-        format.js
-      end
+    respond_to do|format|
+      format.js
+    end
   end
 end
