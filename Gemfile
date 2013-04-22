@@ -1,4 +1,6 @@
-source 'https://rubygems.org/'
+
+source 'https://rubygems.org'
+
 
 gem 'rails', '3.2.13.rc1'
 gem 'sqlite3', '1.3.7'
@@ -15,6 +17,10 @@ gem 'paperclip', '3.4.1'
 gem 'kaminari', '0.14.1'
 
 gem 'bot-away', '2.0.1'
+
+gem 'whenever', '0.8.2', :require => false
+
+gem 'best_in_place','2.1.0'
 
 group :assets do
   gem 'sass-rails', '3.2.6'
@@ -38,7 +44,7 @@ group :test do
 end
 
 
-gem 'whenever', '0.8.2', :require => false
+
 
 
 # To use ActiveModel has_secure_password
