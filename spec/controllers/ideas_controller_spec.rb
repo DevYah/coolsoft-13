@@ -1,7 +1,151 @@
 require 'spec_helper'
-describe IdeasController do
 
-      include Devise::TestHelpers
+describe IdeasController do
+  include Devise::TestHelpers
+
+  describe 'PUT archive' do
+    context 'idea creator wants to archive' do
+      before :each do
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.save
+        @comment = FactoryGirl.build(:comment)
+        @comment.user_id = @user.id
+        @comment.idea_id = @idea.id
+        @comment.save
+        @vote = FactoryGirl.build(:vote)
+        @vote.user_id = @user.id
+        @vote.idea_id = @idea.id
+        @vote.save
+        sign_in @user
+      end
+
+      it 'archives the idea' do
+        put :archive, :id => @idea.id
+        @idea.reload
+        (@idea.archive_status).should eql(true)
+      end
+
+      it 'deletes idea comments' do
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
+      end
+
+      it 'deletes idea votes' do
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
+      end
+    end
+
+    context 'admin wants to archive' do
+      before :each do
+        @admin = FactoryGirl.build(:admin)
+        @admin.confirm!
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.save
+        @comment = FactoryGirl.build(:comment)
+        @comment.user_id = @user.id
+        @comment.idea_id = @idea.id
+        @comment.save
+        @vote = FactoryGirl.build(:vote)
+        @vote.user_id = @user.id
+        @vote.idea_id = @idea.id
+        @vote.save
+        sign_in @admin
+      end
+
+      it 'archives the idea' do
+        put :archive, :id => @idea.id
+        @idea.reload
+        (@idea.archive_status).should eql(true)
+      end
+
+      it 'deletes idea comments' do
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
+      end
+
+      it 'deletes idea votes' do
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
+      end
+    end
+
+    context 'normal user wants to archive' do
+      before :each do
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        sign_in @user
+      end
+
+      it 'does not archive the idea' do
+        @arch_stat = @idea.archive_status
+        put :archive, :id => @idea.id
+        @idea.reload
+        (@idea.archive_status).should eql(@arch_stat)
+      end
+
+      it 'does not delete idea votes' do
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(0)
+      end
+
+      it 'does not delete idea comments' do
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(0)
+      end
+    end
+  end
+
+  describe 'PUT unarchive' do
+    context 'idea creator wants to unarchive' do
+      before :each do
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.save
+        sign_in @user
+      end
+
+      it 'unarchives the idea' do
+        put :unarchive, :id => @idea.id, :format => 'js'
+        @idea.reload
+        (@idea.attributes['archive_status']).should eql(false)
+      end
+    end
+
+    context 'admin wants to unarchive' do
+      before :each do
+        @admin = FactoryGirl.build(:admin)
+        @admin.confirm!
+        @idea = FactoryGirl.create(:idea)
+        sign_in @admin
+      end
+
+      it 'unarchives the idea' do
+        put :unarchive, :id => @idea.id, :format => 'js'
+        @idea.reload
+        (@idea.archive_status).should eql(false)
+      end
+    end
+
+    context 'normal user wants to unarchive' do
+      before :each do
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        sign_in @user
+      end
+
+      it 'does not unarchive the idea' do
+        @arch_stat = @idea.archive_status
+        put :unarchive, :id => @idea.id, :format => 'js'
+        @idea.reload
+        (@idea.archive_status).should eql(@arch_stat)
+      end
+    end
+  end
 
    it 'show ' do
         @user = User.new
@@ -12,7 +156,7 @@ describe IdeasController do
         idea.title = idea.description = idea.problem_solved = "Dayna"
         idea.save
         @comment = Comment.new
-        @comment.content = "dayna" 
+        @comment.content = "dayna"
         @comment.idea_id = idea.id
         @comment.num_likes = 0
         @comment.save
@@ -25,10 +169,8 @@ describe IdeasController do
         @comment.reload
         @comment.num_likes.should eq(1)
     end
- 
-  describe 'DELETE destroy' do
-    include Devise::TestHelpers
 
+  describe 'DELETE destroy' do
     context 'idea creator wants to delete' do
       before :each do
         @user = FactoryGirl.build(:user)
@@ -63,30 +205,6 @@ describe IdeasController do
       it 'deletes idea votes' do
         expect { delete :destroy, :id => @idea.id }.to change(Vote, :count).by(-1)
       end
-       it 'likes a comment ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna" 
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
-
-   end
-
     end
 
     context 'normal user wants to delete idea' do
@@ -125,10 +243,35 @@ describe IdeasController do
       it 'does not delete idea votes' do
         expect { delete :destroy, :id => @idea.id }.to change(Vote, :count).by(0)
       end
-
     end
   end
-describe 'GET #show' do
+
+         it 'likes a comment ' do
+        @user = User.new
+        @user.email = "119ggpkkkkkq@gmail.com"
+        @user.confirm!
+        @user.save
+        idea = Idea.new
+        idea.title = idea.description = idea.problem_solved = "Dayna"
+        idea.save
+        @comment = Comment.new
+        @comment.content = "dayna"
+        @comment.idea_id = idea.id
+        @comment.num_likes = 0
+        @comment.save
+         @like = Like.new
+         @like.user_id = @user.id
+        @like.comment_id = @comment.id
+        @like.save
+        sign_in @user
+        get :like , :id => idea.id , :commentid => @comment.id
+        @comment.reload
+        @comment.num_likes.should eq(1)
+
+   end
+
+
+  describe 'GET #show' do
     before :each do
       @user = FactoryGirl.build(:user)
       @user.confirm!
@@ -252,178 +395,6 @@ describe 'GET #show' do
       put :unvote, :id => @idea.id
       @idea.reload
       (@numvotes).should eql(@idea.num_votes)
-    end
-  end
-
-  context 'idea creator wants to archive' do
-    before :each do
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      @idea.user_id = @user.id
-      @idea.save
-      @comment = FactoryGirl.build(:comment)
-      @comment.user_id = @user.id
-      @comment.idea_id = @idea.id
-      @comment.save
-      @vote = FactoryGirl.build(:vote)
-      @vote.user_id = @user.id
-      @vote.idea_id = @idea.id
-      @vote.save
-      sign_in @user
-    end
-
-    it 'archives the idea' do
-      put :archive, :id => @idea.id
-      @idea.reload
-      (@idea.archive_status).should eql(true)
-    end
-
-    it 'redirects to idea' do
-      put :archive, :id => @idea.id
-      response.should redirect_to @idea
-    end
-
-    it 'deletes idea comments' do
-      expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
-    end
-
-    it 'deletes idea votes' do
-      expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
-    end
-  end
-
-  context 'admin wants to archive' do
-    before :each do
-      @admin = FactoryGirl.build(:admin)
-      @admin.confirm!
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      @idea.user_id = @user.id
-      @idea.save
-      @comment = FactoryGirl.build(:comment)
-      @comment.user_id = @user.id
-      @comment.idea_id = @idea.id
-      @comment.save
-      @vote = FactoryGirl.build(:vote)
-      @vote.user_id = @user.id
-      @vote.idea_id = @idea.id
-      @vote.save
-      sign_in @admin
-    end
-
-    it 'archives the idea' do
-      put :archive, :id => @idea.id
-      @idea.reload
-      (@idea.archive_status).should eql(true)
-    end
-
-    it 'redirects to idea' do
-      put :archive, :id => @idea.id
-      response.should redirect_to @idea
-    end
-
-    it 'deletes idea comments' do
-      expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
-    end
-
-    it 'deletes idea votes' do
-      expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
-    end
-  end
-
-
-  context 'normal user wants to archive' do
-    before :each do
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      sign_in @user
-    end
-
-    it 'does not archive the idea' do
-      @arch_stat = @idea.archive_status
-      put :archive, :id => @idea.id
-      @idea.reload
-      (@idea.archive_status).should eql(@arch_stat)
-    end
-
-    it 'redirects to idea' do
-      put :archive, :id => @idea.id
-      response.should redirect_to @idea
-    end
-
-    it 'does not delete idea votes' do
-      expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(0)
-    end
-
-    it 'does not delete idea comments' do
-      expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(0)
-    end
-  end
-
-  context 'idea creator wants to unarchive' do
-    before :each do
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      @idea.user_id = @user.id
-      @idea.save
-      sign_in @user
-    end
-
-
-    it 'unarchives the idea' do
-      put :unarchive, :id => @idea.id
-      @idea.reload
-      (@idea.attributes['archive_status']).should eql(false)
-    end
-
-    it 'redirects to idea' do
-      put :unarchive, :id => @idea.id
-      response.should redirect_to @idea
-    end
-  end
-
-  context 'admin wants to unarchive' do
-    before :each do
-      @admin = FactoryGirl.build(:admin)
-      @admin.confirm!
-      @idea = FactoryGirl.create(:idea)
-      sign_in @admin
-    end
-
-    it 'unarchives the idea' do
-      put :unarchive, :id => @idea.id
-      @idea.reload
-      (@idea.archive_status).should eql(false)
-    end
-
-    it 'redirects to idea' do
-      put :unarchive, :id => @idea.id
-      response.should redirect_to @idea
-    end
-  end
-
-  context 'normal user wants to unarchive' do
-    before :each do
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      sign_in @user
-    end
-
-    it 'does not unarchive the idea' do
-      @arch_stat = @idea.archive_status
-      put :unarchive, :id => @idea.id
-      @idea.reload
-      (@idea.archive_status).should eql(@arch_stat)
-    end
-
-    it 'redirects to idea' do
-      put :unarchive, :id => @idea.id
-      response.should redirect_to @idea
     end
   end
 end
