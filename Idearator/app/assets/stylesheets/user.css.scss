@@ -5,3 +5,44 @@
 p{
 	padding-left:20px;
 }
+
+.options {
+  display: block;
+  width: 40px;
+}
+
+.user-photo {
+  display: inline-block;
+  position: absolute;
+}
+
+.user-details {
+  display: inline-block;
+  position: relative;
+  left: 250px;
+  down: 60px;
+}
+
+#user-about {
+  position: relative;
+  left: 55px;
+}
+
+.new-idea {
+  position: relative;
+  display: block;
+  width: 300px;
+}
+
+dt {
+  font-size: 20px;
+}
+
+dd {
+  font-size: 18px;
+}
+
+#user {
+  width: 900px;
+  height: 300px;
+}
