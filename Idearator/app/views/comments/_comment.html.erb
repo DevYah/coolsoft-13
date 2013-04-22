@@ -16,7 +16,6 @@
             </div>
           </blockquote>
           <p class ="buttons" data-toggle="tooltip" title="Like button and Delete button">
-            <h3>Hash<%= current_user.id %>     Dayna<%= comment.user_id %></h3>
             <% if current_user.id == comment.user_id %>
               <%= link_to "<i class='icon-remove'></i>".html_safe, [idea, comment], :method=>:delete, :confirm => 'Are you sure?' , :remote => true %>
             <% end %>

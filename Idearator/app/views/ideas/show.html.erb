@@ -1,4 +1,26 @@
-<div id='fb-root'></div>
+<% if current_user %>
+  <% if current_user.type == "Committee" %>
+    <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
+      <div id='approve-btns'>
+        <button class = 'btn btn-success add-rating'>Approve</button>
+        <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
+      </div>
+      <div class='add-ratings'style="display: none;" >
+        <h3>Add Prespectives</h3>
+        <input type="text" class="rating_complete" name="blah2" />
+        <ul id="rating">
+        </ul>
+        <div id ="flash">
+        </div>
+        <div id ="ratings">
+          <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<div id="fb-root"></div>
+<p id="notice"><%= notice %></p>
 <div class='media'>
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
@@ -74,3 +96,29 @@
       <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
     </div>
   <%end%>
+  <p>
+    <% if @idea.ratings.size > 0 %>
+      <b>Ratings:-</b>
+      <% @idea.ratings.each do |therating| %>
+        <p>
+          <div>
+            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+          </div>
+        </p>
+      <% end %>
+    <% end %>
+  </p>
+</div>
+<script type="text/javascript">
+  function sendAjax(idea_id){
+    var list = "";
+    var i=0;
+    $('.token-input-list-facebook li p').each(function(){
+      list += "rating[]="+$(this).text()+"&";
+      i=i+1;
+
+    });
+
+    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+  }
+</script>
