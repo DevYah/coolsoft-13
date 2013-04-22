@@ -25,14 +25,14 @@ Sprint0::Application.routes.draw do
   end
 
   controller :home do
-    match 'search'
-    match 'index'
+    match 'home/search'
+    match 'home/index'
   end
 
   # Admin actions routes
   controller :admins do
-    match 'invite'
-    match 'invite_committee'
+    match 'admins/invite'
+    match 'admins/invite_committee'
   end
 
   # Committe actions routes
@@ -42,18 +42,18 @@ Sprint0::Application.routes.draw do
 
   # Dashboard routes
   controller :dashboard do
-    match 'index'
-    match 'getallideas'
-    match 'gettags'
-    match 'getideas'
+    match 'dashboard/index'
+    match 'dashboard/getallideas'
+    match 'dashboard/gettags'
+    match 'dashboard/getideas'
   end
 
   # Notifications routes
   controller :notifications do
-    match 'view_all_notifications'
-    match 'redirect_idea'
-    match 'redirect_review'
-    match 'redirect_expertise'
+    match 'notifications/view_all_notifications'
+    match 'notifications/redirect_idea'
+    match 'notifications/redirect_review'
+    match 'notifications/redirect_expertise'
   end
   match 'notifications' => 'application#update_nav_bar'
 
