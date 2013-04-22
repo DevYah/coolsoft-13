@@ -10,7 +10,7 @@ class IdeasController < ApplicationController
   def show
     @user = current_user.id
     @username = current_user.username
-    @idea = Idea.find(params[:id])rescue ActiveRecord::RecordNotFound
+  @idea = Idea.find(params[:id])rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
@@ -41,6 +41,7 @@ class IdeasController < ApplicationController
       format.json  { render :json => @approved }
     end
   end
+
 
   # editing Idea
   # Params
@@ -150,6 +151,35 @@ class IdeasController < ApplicationController
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
       end
     end
+  end
+
+  #adds the rating prespectives taken from the user from the add_prespectives view
+  #to the idea reviewed
+  # Params
+  #+params[:ratings]+ ratings prespectives taken from the user
+  #+session[:idea_id] id of the idea to be reviewed
+  #Author : Omar Kassem
+  def add_rating
+    if current_user.type == 'Committee'
+      @idea=Idea.find(params[:id])
+      @idea.approved = true
+      @idea.save
+      @rating = params[:rating]
+      @rating.each do |rate|
+        r = Rating.find(:all, :conditions => {:name => rate})
+        @idea.ratings << r
+        @idea.save
+      end
+      respond_to do |format|
+        format.js {render "add_rating"}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
+        format.json { head :no_content }
+      end
+    end
+
   end
 
 end
