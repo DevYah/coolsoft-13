@@ -1,11 +1,11 @@
 <table>
-			<% @idea.comments.each do |comment| %>
-				<tr>
+	<% @idea.comments.each do |comment| %>
+		<tr>
 		    <td>
 		    	<div class="alert alert-info">
 		    		<blockquote> 
 		    			<div id = "<%=comment.id%>">
-		    				<label class="commentContent">
+		    				<label class="commentContent" data-toggle="tooltip" title="To edit click on line">
 		                        <%= best_in_place comment, :content  , :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id}%>
 		    				</label>
 		    				<small> 
