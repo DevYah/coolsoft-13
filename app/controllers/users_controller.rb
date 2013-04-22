@@ -10,9 +10,9 @@ class UsersController < ApplicationController
 	end
 
 
-	# checks the entered password if it's the current users password 
-	# it changes the value of his active field to false and signs him out. 
-	# Params: 
+	# checks the entered password if it's the current users password
+	# it changes the value of his active field to false and signs him out.
+	# Params:
 	# +password+:: the parameter is an instance of +User+ passed through the form form confirm deactivate.
 	# Author: Amina Zoheir
   def deactivate
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     else
       @password = params[:user][:password]
     end
-    
+
     if current_user.valid_password?(@password)
       current_user.active = false
       current_user.save
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-	# Enter chosen tags sent from expertise view, in committeestags table 
+	# Enter chosen tags sent from expertise view, in committeestags table
 	# Params:
 	# +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
 	# Author: Mohamed Sameh
@@ -108,28 +108,28 @@ class UsersController < ApplicationController
   #Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
-    @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
+    @approved = Idea.find(:all, :conditions => { :user_id => @user.id })
     @admin = current_user
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
   	end
-  end 
+  end
 
 
 	# POST /users
   # POST /users.json
-	
+
   # This method creates a new User and calls UserMailer to send a confirmation email.
   #Author: Menna Amr
   def create
     @user = User.new(params[:user])
- 
+
     respond_to do |format|
       if @user.save
         # Tell the UserMailer to send a welcome Email after save
         UserMailer.welcome_email(@user).deliver
- 
+
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
