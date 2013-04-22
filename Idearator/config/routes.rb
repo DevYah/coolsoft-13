@@ -27,10 +27,15 @@ Sprint0::Application.routes.draw do
         put 'update', on: :member
       end
     member do
+
       match 'vote'
       match 'unvote'
       match 'archive'
       match 'unarchive', :defaults => { :format => 'js' }
+      match 'add_prespectives' => 'committees#add_prespectives'
+      match 'disapprove' => 'committees#disapprove'
+      match 'add_rating'
+
     end
   end
 
@@ -69,6 +74,7 @@ Sprint0::Application.routes.draw do
 
   # Tag routes
   match 'tags/ajax'
+  match 'ratings/ajax'
 
 
   default_url_options :host => 'localhost:3000'
