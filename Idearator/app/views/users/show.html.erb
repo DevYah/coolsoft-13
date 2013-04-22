@@ -1,11 +1,10 @@
 <h1>
   <% if @user.username %>
-   <%= @user.username %>
+    <%= @user.username %>
   <% else %>
-   User
+    User
   <% end %>'s Profile
 </h1>
-
 <% if @user.banned == true %>
   <p class='text-error'>This User is currently banned!</p>
 <% elsif @user.active == false %>
@@ -14,65 +13,88 @@
 <div class='options'>
   <% if current_user == @user %>
     <div class= 'btn'><%= link_to "Edit" , edit_user_path %></div>
-    <% end %>
+  <% end %>
 </div>
 <% if @admin !=nil && @admin.type == "Admin" && @user.active==true && @user.banned==false %>
   <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
 <% end %>
 <% if @admin !=nil && @admin.type == "Admin" && @user.banned==true %>
- <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?',:class => 'options btn btn-success' %>
+  <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?',:class => 'options btn btn-success' %>
 <% end %>
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
     <div class='user-photo'>
-    <%= image_tag @user.photo.url(:medium) %>
+      <%= image_tag @user.photo.url(:medium) %>
     </div>
     <div class = 'user-details'>
       <dl class='dl-horizontal'>
         <dt>Email</dt>
         <dd><%= @user.email %></dd>
         <br>
-        <dt>First Name</dt>
-        <dd><% if @user.first_name %><%= @user.first_name %>  <% else %> not specified <% end %></dd>
-        <br>
-        <dt>Last Name</dt>
-        <dd><% if @user.last_name %><%= @user.last_name %>  <% else %> not specified <% end %></dd>
-        <br>
-        <dt>Gender</dt>
-        <dd><% if @user.gender %><%= @user.gender %>  <% else %> not specified <% end %></dd>
+          <dt>First Name</dt>
+          <dd>
+            <% if @user.first_name %>
+              <%= @user.first_name %>
+            <% else %>
+              not specified
+            <% end %>
+          </dd>
+          <br>
+          <dt>Last Name</dt>
+          <dd>
+            <% if @user.last_name %>
+              <%= @user.last_name %>
+            <% else %>
+              not specified
+            <% end %>
+          </dd>
+          <br>
+          <dt>Gender</dt>
+          <dd>
+            <% if @user.gender %>
+              <%= @user.gender %>
+            <% else %>
+              not specified
+            <% end %>
+          </dd>
       </dl>
       <dl id='user-about'>
         <dt>About User</dt>
         <br>
-        <dd><% if @user.about_me %><%= @user.about_me %>  <% else %> not specified <% end %></dd>
+        <dd>
+          <% if @user.about_me %>
+            <%= @user.about_me %>
+          <% else %>
+              not specified
+          <% end %>
+        </dd>
       </dl>
     </div>
   </div>
-
-
   <br />
   <br />
   <br />
   <br />
-
-  <h2> User Ideas </h2>
+  <h2>
+    User Ideas
+  </h2>
   <br />
   <div id = "IdeaStream">
     <div class = "page">
       <%= render :partial => '/home/stream' %>
     </div>
   </div>
-<br />
-<br />
-</div>
-</div>
-<div class='new-idea'>
-  <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
-</div>
-<div>
-<br />
-  <ul class="pager">
-    <li><%= link_to 'Back', :back %></li>
-  </ul>
-</div>
+  <br />
+  <br />
+  </div>
+  </div>
+  <div class='new-idea'>
+    <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
+  </div>
+  <div>
+    <br />
+    <ul class="pager">
+      <li><%= link_to 'Back', :back %></li>
+    </ul>
+  </div>
 <% end %>
