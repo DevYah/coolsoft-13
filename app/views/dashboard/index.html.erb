@@ -28,9 +28,11 @@
             <td>
               <% @own_ideas.each do |idea| %>
                 <% @own_counter = @own_counter + 1 %>
-                <li class='idea-link' data-idea-id='<%= @own_counter %>' value='0' data-link="<%= (url_for :controller => 'dashboard', :action => 'gettags', :ideaid => idea.id, :remote => true).html_safe %>">
-                  <%= idea.title %>
-                </li>
+                <% if idea.user.active == true && idea.user.banned == false %>
+                  <li class='idea-link' data-idea-id='<%= @own_counter %>' value='0' data-link="<%= (url_for :controller => 'dashboard', :action => 'gettags', :ideaid => idea.id, :remote => true).html_safe %>">
+                    <%= idea.title %>
+                  </li>
+                <% end %>
               <% end %>
             </td>
           </tr>
@@ -52,9 +54,11 @@
               <td>
                 <% @approved_ideas.each do |idea| %>
                   <% @approved_counter = @approved_counter + 1 %>
-                  <li class='idea-link' data-idea-id='<%= @approved_counter %>' value='0' data-link="<%= (url_for :controller => 'dashboard', :action => 'gettags', :ideaid => idea.id, :remote => true).html_safe %>">
-                    <%= idea.title %>
-                  </li>
+                  <% if idea.user.active == true && idea.user.banned == false %>
+                    <li class='idea-link' data-idea-id='<%= @approved_counter %>' value='0' data-link="<%= (url_for :controller => 'dashboard', :action => 'gettags', :ideaid => idea.id, :remote => true).html_safe %>">
+                      <%= idea.title %>
+                    </li>
+                  <% end %>
                 <% end %>
               </td>
             </tr>
