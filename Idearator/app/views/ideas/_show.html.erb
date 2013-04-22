@@ -1,13 +1,14 @@
 <div id='tags'>
   <ul class="tags inline">
-  <% if @tags %>
-    <% @tags.each do |tag| %>
-      <li><label class="tag"><%= tag %></label></li>
+    <% if @tags %>
+      <% @tags.each do |tag| %>
+        <li><label class="tag"><%= tag %></label></li>
+      <% end %>
     <% end %>
-  <% end %>
   </ul>
 </div>
-<a id ="click" class="btn btn-success pull-right"><i class="icon-chevron-down"></i> Filter</a>
+<a id ="click" class="btn btn-success pull-right"><i class="icon-chevron-down"></i>
+  Filter</a>
 <br/>
 <br/>
 <div id ="fil" class="hidden pull-right" height="300px">
