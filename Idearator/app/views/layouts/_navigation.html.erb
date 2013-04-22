@@ -60,11 +60,6 @@
 <% end %>
 <% end %>
   </li>
-  <li>
-    <% if params[:controller] == 'home'%>
-     <button class="btn btn-primary backtotop" type="button">To Top <i class = 'icon-white icon-hand-up'> </i></button>
-    <%end%>
- </li>
 </ul>
 <% if user_signed_in? %>
   <ul class="nav pull-right">
@@ -73,13 +68,13 @@
       <ul class="dropdown-menu">
         <li>
           <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i> Account Settings</a>
-        </li>                
+        </li>
         <li>
           <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
         </li>
         <li>
           <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
-        </li> 
+        </li>
       </ul>
     </li>
   </ul>
