@@ -22,6 +22,17 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
+    member do
+
+      match 'vote'
+      match 'unvote'
+      match 'archive'
+      match 'unarchive'
+      match 'add_prespectives' => 'committees#add_prespectives'
+      match 'disapprove' => 'committees#disapprove'
+      match 'add_rating'
+
+    end
   end
 
   controller :home do

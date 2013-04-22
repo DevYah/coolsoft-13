@@ -15,6 +15,8 @@
 //= require jquery-ui
 //= require bootstrap
 //= require notification_polling
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 before_search = false;
 var original;
@@ -33,7 +35,7 @@ $(function() {
 		before_search = false;
 		$("#main > .container").replaceWith(original);
 	}
-	  }
+
 	});
 });
 
