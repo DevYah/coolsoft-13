@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: a2a5945e3168767b8182559e8bfc0784753cabc3
+  revision: ec5599653accb6460b8bbce9d2feaeff02a739f0
   specs:
     rubocop (0.5.0)
       term-ansicolor
@@ -45,6 +45,9 @@ GEM
     addressable (2.3.4)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (~> 3.1)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     bot-away (2.0.1)
@@ -103,7 +106,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.2.0)
       addressable (~> 2.3)
-    listen (1.0.0)
+    listen (1.0.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
@@ -214,6 +217,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  best_in_place (= 2.1.0)
   bootstrap-sass (= 2.3.1.0)
   bot-away (= 2.0.1)
   capybara (= 2.1.0)
