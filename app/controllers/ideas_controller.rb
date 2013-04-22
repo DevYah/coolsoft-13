@@ -166,10 +166,9 @@ class IdeasController < ApplicationController
       @idea.save
       @rating = params[:rating]
       @rating.each do |rate|
-        r = @idea.ratings.build
-        r.name=rate
-        r.value=0
-        r.save
+        r = Rating.find(:all, :conditions => {:name => rate})
+        @idea.ratings << r
+        @idea.save
       end
       respond_to do |format|
         format.js {render "add_rating"}

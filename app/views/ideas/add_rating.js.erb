@@ -5,3 +5,8 @@ if (remaining == 0){
   var z = $('<h1>No more ideas to review</h1>');
   $('div.content').append(z);
 }
+var btns = $('div#approve-btns').length;
+if (btns == 1){
+  $('div#approve-btns').remove();
+  $('div.add-ratings').remove();
+}

@@ -30,8 +30,8 @@ class CommitteesController < ApplicationController
       @idea.rejected = true
       @idea.save
       DisapproveIdeaNotification.send_notification(current_user, @idea, [@idea.user])
-      flash[:notice] = 'The idea has been disapproved'
       respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'The idea has been disapproved' }
         format.js
       end
     end
