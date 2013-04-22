@@ -6,7 +6,10 @@
     <% end %>
   <% end %>
 <% end %>
-<% if @no > 0%>
+
+            <div class='row'>
+              <div class='span8'>
+               <% if @no > 0%>
 <div class="alert alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong><%= @no %></strong> Ideas Found
@@ -41,3 +44,5 @@
     <% end %>
   <% end %>
 <% end %>
+            </div>
+          </div>

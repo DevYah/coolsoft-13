@@ -36,6 +36,7 @@ class HomeController < ApplicationController
   def search
     if params[:search].length > 0
       @search = Idea.search(params[:search])
+      @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
       respond_to do |format|
         format.html
         format.js
