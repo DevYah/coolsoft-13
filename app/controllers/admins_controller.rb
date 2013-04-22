@@ -1,6 +1,6 @@
 
 class AdminsController < ApplicationController
-  before_filter do 
+  before_filter do
     unless current_user and current_user.is_a? Admin
       redirect_to '/home/index'
     end
@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
     else
       flash[:error] = 'user already exists'
     end
-    redirect_to :controller => 'home',:action => 'index'     
+    redirect_to :controller => 'home', :action => 'index'
   end
 
 # toggles the ban status of the selected user
@@ -34,7 +34,7 @@ class AdminsController < ApplicationController
         @user=User.find(params[:id])
         @user.toggle(:banned)
         @user.save
-        redirect_to :controller => 'users',:action => 'show' 
+        redirect_to :controller => 'users', :action => 'show'
       end
     else
     respond_to do |format|
