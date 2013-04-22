@@ -20,23 +20,18 @@ before_search = false;
 var original;
 $(function() {
 	$("#searchdiv input").keyup(function(){
-		//alert(this.value);
 		if (window.location == "http://localhost:3000/"){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
 }else{
 	if (!before_search){
 			before_search = true;
-			original = $("#main").clone();
+			original = $("#main > .container").detach();
 		}
 		if (this.value!=""){
 			$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
 	}else{
 		before_search = false;
-		$("#main").replaceWith(original);
-		apply_dashboard_ideas_js();
-		add_notification_event_handlers();
-		add_sharing_handlers();
-		add_modal_handlers();
+		$("#main > .container").replaceWith(original);
 	}
 	  }
 	});
