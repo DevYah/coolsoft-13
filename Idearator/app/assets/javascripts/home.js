@@ -78,5 +78,15 @@ $(window).load(function(){
       }
     });
   });
+});
 
+$(document).ready(function() {
+  $(".facebook").tooltip({
+    toggle: "tooltip",
+    title: "Share on Facebook",
+  });
+  $(".twitter").tooltip({
+    toggle: "tooltip",
+    title: "Share on Twitter"
+  });
 });

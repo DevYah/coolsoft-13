@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
-	
-  #returns a list of ideas ordered by the date of creation in pages 
+
+  #returns a list of ideas ordered by the date of creation in pages
   #of 10 ideas.
   #Params:
   #+page+:: the parameter is the page user is currently browsing.
@@ -24,14 +24,14 @@ class HomeController < ApplicationController
         @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
       end
     else
-        @approved = Idea.order(:created_at).page(params[:myPage]).per(10) 
+        @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
     end
         respond_to do |format|
           format.js
           format.html # index.html.erb
           format.xml  { render :xml => @approved }
         end
-  end 
+  end
 
   def search
     if params[:search].length > 0
