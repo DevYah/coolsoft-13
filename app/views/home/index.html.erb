@@ -1,35 +1,34 @@
-
-
 <%= render :partial => 'ideas/show' %>
-  <%= render :partial => 'stream' %>
-
-  <% content_for :sidebar do %>
-    <div class="topten">
-      <h1 class="title">Top Ten </h1>
-        <% @top.each do |top| %>
-          <% if top.user.active == true and top.user.banned == false%>
-            <div class="topten_idea media">
-              <a class="pull-left" href="#">
-                <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
-              </a>
-              <div class="media-body">
-                <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
-                <h4 class="media-heading idea"> <%= link_to top.title ,top %> </h4>
-                <span class="badge"><%= top.num_votes %> votes</span>
-              </div>
-            </div>
-          <% end %>
-        <%end%>
-    </div>
-    <% end %>
-    <script type="text/javascript">
-      $('.backtotop').click(function(){
-         $('html, body').animate({scrollTop:0}, 'slow');
-      });
-    </script>
+<%= render :partial => 'stream' %>
+<% content_for :sidebar do %>
+  <div class="topten">
+    <h1 class="title">Top Ten
+    </h1>
+    <% @top.each do |top| %>
+      <% if top.user.active == true and top.user.banned == false%>
+        <div class="topten_idea media">
+          <a class="pull-left" href="#">
+            <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
+          </a>
+          <div class="media-body">
+            <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+            <h4 class="media-heading idea">
+              <%= link_to top.title ,top %>
+            </h4>
+            <span class="badge"><%= top.num_votes %>
+              votes</span>
+          </div>
+        </div>
+      <% end %>
+    <%end%>
+  </div>
+<% end %>
+<script type="text/javascript">
+  $('.backtotop').click(function(){
+   $('html, body').animate({scrollTop:0}, 'slow');
+   });
+</script>
 <style type = "text/css">
-
-
   .totop{
     margin: auto;
   }
