@@ -47,6 +47,7 @@ class IdeasController < ApplicationController
     end
   end
 
+
   # editing Idea
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
@@ -190,7 +191,6 @@ class IdeasController < ApplicationController
     end
   end
 
-
   def archive
     idea = Idea.find(params[:id])
     if current_user.type == 'Admin' || current_user.id == idea.user_id
@@ -239,6 +239,34 @@ class IdeasController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  #adds the rating prespectives taken from the user from the add_prespectives view
+  #to the idea reviewed
+  # Params
+  #+params[:ratings]+ ratings prespectives taken from the user
+  #+session[:idea_id] id of the idea to be reviewed
+  #Author : Omar Kassem
+  def add_rating
+    if current_user.type == 'Committee'
+      @idea=Idea.find(params[:id])
+      @idea.approved = true
+      @idea.save
+      @rating = params[:rating]
+      @rating.each do |rate|
+        r = Rating.find(:all, :conditions => {:name => rate})
+        @idea.ratings << r
+        @idea.save
+      end
+      respond_to do |format|
+        format.js {render "add_rating"}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
         format.json { head :no_content }
       end
     end
