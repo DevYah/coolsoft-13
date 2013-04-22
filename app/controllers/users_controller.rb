@@ -108,7 +108,7 @@ class UsersController < ApplicationController
   #Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
-    @approved = Idea.find(:all, :conditions => { :user_id => @user.id })
+    @approved = Idea.where(:user_id => @user.id, :archive_status => false).all
     @admin = current_user
     respond_to do |format|
       format.html # show.html.erb
