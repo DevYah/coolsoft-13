@@ -14,6 +14,8 @@
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require bootstrap
+//= require_tree .
+//= require notification_polling
 //= require notification_polling
 //= require jquery.purr
 //= require best_in_place
@@ -22,14 +24,14 @@ $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
 		if (this.length()==0){
-			 $.ajax({
+      $.ajax({
         url: '/home/index?page=' + 1,
         type: 'get',
         dataType: 'script'
-       });
-	}
+      });
+    }
 
-	});
+  });
 });
 
 
@@ -44,7 +46,5 @@ $(document).ready(function() {
     window.location= "/users/sign_in";
   });
 });
-
-
 
 
