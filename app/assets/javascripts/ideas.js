@@ -2,7 +2,7 @@
 // facebook and twitter sharing URLs.  
 // This page's URl is then shared on The user's facebook or twitter account. 
 // Author: Mohamed Sameh
-$(document).ready(function() {
+function add_sharing_handlers() {
 	$("#share").click(function() {
 		$("#show").toggle("slow");
 	});
@@ -26,4 +26,5 @@ $(document).ready(function() {
 		toggle: "tooltip",
 		title: "Share on Twitter" 
 	});
-});
+}
+$(document).ready(add_sharing_handlers);

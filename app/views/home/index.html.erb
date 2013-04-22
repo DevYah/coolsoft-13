@@ -9,13 +9,9 @@
   </ul>
 </div>
 
-<%= render 'ideas/show' %>
+<%= render :partial => 'ideas/show' %>
 
-<div id = "IdeaStream">
-  <div class = "page">
-    <%= render :partial => 'stream' %>
-  </div>
-</div>
+  <%= render :partial => 'stream' %>
 
   <% content_for :sidebar do %>
     <div class="topten">
@@ -35,15 +31,14 @@
           <% end %>
         <%end%>
     </div>
-    <div class="" style="padding-left: 12%;">
-      <button class="btn btn-medium btn-primary backtotop affix totop" type="button">To Top <i class = 'icon-white icon-hand-up'> </i></button>
-    </div>
+    <% end %>
+
     <script type="text/javascript">
       $('.backtotop').click(function(){
          $('html, body').animate({scrollTop:0}, 'slow');
       });
     </script>
-  <% end %>
+
 <style type = "text/css">
 
 
