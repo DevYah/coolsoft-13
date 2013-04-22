@@ -26,6 +26,8 @@ group :assets do
   gem 'uglifier', '2.0.1'
 end
 
+gem 'jquery-star-rating-rails'
+
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'

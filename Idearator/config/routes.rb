@@ -30,9 +30,13 @@ Sprint0::Application.routes.draw do
       match 'vote'
       match 'unvote'
       match 'archive'
-      match 'unarchive'
+      match 'unarchive', :defaults => { :format => 'js' }
     end
   end
+
+  resources :user_ratings, :controller => 'user_ratings'
+  match '/user_ratings/create' => 'user_ratings#create'
+  match '/user_ratings/update' => 'user_ratings#update'
 
   controller :home do
     match 'home/search'

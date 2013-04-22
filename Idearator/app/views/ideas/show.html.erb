@@ -20,13 +20,26 @@
     </div>
     <%if @user==@idea.user_id%>
       <div class='btn-group'>
-        <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%>
-        <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+        <%= link_to 'Edit', edit_idea_path(@idea) ,:class => 'btn btn-inverse' %>
         <% if @idea.archive_status == true %>
-          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
         <% else %>
-          <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+          <a data-toggle='modal' data-target='#archive-modal' class='btn btn-danger btn-archive'>Archive</a>
         <% end %>
+        <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+      </div>
+      <div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3>Are you sure you want to archive?!</h3>
+        </div>
+        <div class="modal-body">
+          <p>If you Archive the idea, all votes and comments will be deleted!</p>
+        </div>
+        <div class="modal-footer">
+            <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
+            <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal' %>
+        </div>
       </div>
       <h2><%=link_to @username, @idea.user.becomes(User)%></h2>
     <%end%>
@@ -48,6 +61,34 @@
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
+<<<<<<< HEAD
+=======
+
+  <%if @idea.archive_status == false%>
+    <p>
+      <% if @idea.ratings.size > 0 %>
+        <table>
+          <tr>
+            <th style='text-align: left;'><b>Ratings:-</b></th>
+            <th></th>
+          </tr>
+          <% @idea.ratings.each do |therating| %>
+            <tr>
+              <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </p>
+
+    <button id='share' class='btn btn-primary' type='button'>Share</button>
+
+    <div id='show' class='container'>
+      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+    </div>
+  <%end%>
+>>>>>>> 11492d0774f2ebb0f196979984e7000a403ad581
 </div>
 <legend><h4 class ="title2">Comments</h4></legend>
 <div id='like'>
@@ -58,6 +99,7 @@
   </table>
 </div>
 <div class = "addComment">
+<<<<<<< HEAD
   <h5 class = "title1">Add a comment:</h5>
   <%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
     <div class="controls">
@@ -76,3 +118,19 @@
       <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
     </div>
   <%end%>
+=======
+	<h5 class = "title1">Add a comment:</h5>
+	<%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
+
+  		<div class="controls">
+     <div class ="textArea1" >
+  		<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+		</div>
+	</div>
+  		<%= f.submit nil, :class => 'btn btn-small btn-primary' %>
+	<% end %>
+
+	<td><%= link_to 'Back', '/',:class => "btn" %></td>
+
+</div>
+>>>>>>> 11492d0774f2ebb0f196979984e7000a403ad581

@@ -16,6 +16,7 @@
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require bootstrap
+//= require jquery-star-rating
 //= require notification_polling
 //= require_tree .
 $(function() {
