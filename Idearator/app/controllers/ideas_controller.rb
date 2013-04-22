@@ -16,7 +16,7 @@ class IdeasController < ApplicationController
       @ideavoted = current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
       @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
     end
-    
+
     @likes = Like.find(:all)
     respond_to do |format|
       format.html # show.html.erb
@@ -25,13 +25,13 @@ class IdeasController < ApplicationController
     end
   end
 
-  #gets all the comments for a certain idea 
+  #gets all the comments for a certain idea
   #author : dayna
   def comments
     @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.find(params[:id])
 
-  end 
+  end
 
   # making new Idea
   #Marwa Mehanna
@@ -169,7 +169,7 @@ class IdeasController < ApplicationController
 
   #create new like
   #Params:
-  #+comment_id+ :: the parameter is an instance   
+  #+comment_id+ :: the parameter is an instance
   # of +Comment+ and it's used to build the like after clicking like
   #The def checks if the user liked the comment before if not the num_likes is incremented
   #by 1 else nothing happens
@@ -190,12 +190,12 @@ class IdeasController < ApplicationController
         respond_to do|format|
           format.js
         end
-      end 
+      end
       else
         redirect_to @idea , :notice => "This comment was removed by the user"
-    end 
-  end 
-  
+    end
+  end
+
   # Deletes all records related to a specific idea
   # Params:
   # +id+:: is used to specify which instance of +Idea+ will be deleted
