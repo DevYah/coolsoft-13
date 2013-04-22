@@ -13,5 +13,5 @@
 <div id ="fil" class="hidden pull-right" height="300px">
   <input type="text" id="input-facebook-theme" name="blah2" />
   <a id="filter" class="btn btn-success pull-right">apply</a>
-  <a id="cancelfilter" class="btn btn-danger pull-right">cancel</a>
+  <%= button_to "cancel" ,{:controller => 'home', :action => "index" }, {:class => "btn btn-danger pull-right" } %>
 </div>
