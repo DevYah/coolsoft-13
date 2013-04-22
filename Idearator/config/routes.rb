@@ -22,6 +22,16 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
+    match 'like', on: :member
+    resources :comments do
+        put 'update', on: :member
+      end
+    member do
+      match 'vote'
+      match 'unvote'
+      match 'archive'
+      match 'unarchive'
+    end
   end
 
   controller :home do
@@ -60,6 +70,19 @@ Sprint0::Application.routes.draw do
   # Tag routes
   match 'tags/ajax'
 
+
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+
+  match '/ideas/update' => 'ideas#update'
+  devise_for :committees, :controllers => { :registrations => "registrations" }
+  match '/ideas/:id/vote' => 'ideas#vote'
+  match '/ideas/:id/unvote' => 'ideas#unvote'
+  match "/ideas/:id/archive" => "ideas#archive"
+  match "/ideas/:id/unarchive" => "ideas#unarchive"
+  resources :user_ratings, :controller => 'user_ratings'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -94,6 +117,9 @@ Sprint0::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
 
   # See how all your routes lay out with "rake routes"
 
