@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like ,:vote ,:unvote]
 
   # view idea of current user
   # Params
@@ -13,9 +13,11 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @ideavoted = current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
       @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
     end
-    @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
+    
+    @likes = Like.find(:all)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
