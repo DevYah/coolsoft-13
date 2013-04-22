@@ -1,4 +1,4 @@
-$(window).load(function(){
+function apply_infinite_scrolling() {
 
   var page = 1,
   loading = false;
@@ -15,7 +15,7 @@ $(window).load(function(){
     if (loading) {
       return;
     }
-    if(nearBottomOfPage()) {
+    if(nearBottomOfPage() && $("#search").val() == '') {
       loading=true;
       page++;
       var array = [];
@@ -126,4 +126,5 @@ $('#cancelfilter').click(function() {
     });
   }
 });
-});
+}
+$(document).ready(apply_infinite_scrolling);

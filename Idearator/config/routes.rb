@@ -25,8 +25,9 @@ Sprint0::Application.routes.draw do
   end
 
   controller :home do
-    match 'search'
-    match 'index'
+    match 'home/search'
+    match 'home/searchelse'
+    match 'home/index'
   end
 
   # Admin actions routes
@@ -42,7 +43,7 @@ Sprint0::Application.routes.draw do
 
   # Dashboard routes
   controller :dashboard do
-    match 'home/index'
+    match 'index'
     match 'getallideas'
     match 'gettags'
     match 'getideas'
