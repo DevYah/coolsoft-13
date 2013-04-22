@@ -20,14 +20,14 @@ $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
 		if (this.length()==0){
-			 $.ajax({
+      $.ajax({
         url: '/home/index?page=' + 1,
         type: 'get',
         dataType: 'script'
-       });
-	}
+      });
+    }
 
-	});
+  });
 });
 
 
@@ -44,21 +44,3 @@ $(document).ready(function() {
 });
 
 
-
-
-function popupCenter(url, width, height, name) {
-  var left = (screen.width/2)-(width/2);
-  var top = (screen.height/2)-(height/2);
-  return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
-                                ",height=" + height + ",toolbar=no,left=" + left +
-                                ",top=" + top);
-}
-
-$(function() {
-  $("a.popup").click(function(e) {
-    popupCenter($(this).attr("href") + '?state=popup',
-                $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
-    e.stopPropagation();
-    return false;
-  });
-});

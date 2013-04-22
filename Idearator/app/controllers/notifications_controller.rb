@@ -14,7 +14,6 @@ class NotificationsController < ApplicationController
     end
   end
 
-
   # sets the read field to true for the specified notification and redirects to ideas#show.
   # Params:
   # +not_id+:: the parameter is an instance of +IdeaNotification+ passed through the view_notifications view.
@@ -29,7 +28,6 @@ class NotificationsController < ApplicationController
     end
   end
 
-
   # sets the read field to true for the specified notification and redirects to users#expertise.
   # Params:
   # +not_id+:: the parameter is an instance of +UserNotification+ passed through the view_notifications view.
@@ -43,7 +41,6 @@ class NotificationsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 
   # sets the read field to true for the specified notification and redirects to committees#review.
   # Params:
