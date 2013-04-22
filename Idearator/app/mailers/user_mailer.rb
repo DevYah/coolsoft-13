@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
   #Params: admin
   #Author: Menna Amr
   def committee_signup(admin)
-  	mail(:to => admin, :subject => "New Committee Member Sign Up")
+    mail(:to => admin, :subject => "New Committee Member Sign Up")
   end
 
   # Sends mail confirming registration
@@ -29,5 +29,5 @@ class UserMailer < ActionMailer::Base
     @url  = "http://localhost:3000/users/login"
     mail(:to => user.email, :subject => "Idearator")
   end
-  
+
 end
