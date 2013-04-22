@@ -1,3 +1,4 @@
+
 ###Users###
 #Normal user
 user = User.create(email: 'hishamelkbeer@gmail.com', password: 123123123, first_name: 'Hisham',
@@ -161,4 +162,5 @@ v.prev_day_votes = 20
 v.save
 #-----------------------------------------------------------------------------------------#
 t = Threshold.create(threshold: 24)
+
 t.save
