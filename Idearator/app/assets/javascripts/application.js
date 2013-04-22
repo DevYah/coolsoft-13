@@ -23,6 +23,7 @@ var original;
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		if (window.location == "http://localhost:3000/"){
+			alert(1);
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
 }else{
 	if (!before_search){
@@ -36,7 +37,8 @@ $(function() {
 		$("#main > .container").replaceWith(original);
 	}
 
-	});
+	}
+});
 });
 
 
