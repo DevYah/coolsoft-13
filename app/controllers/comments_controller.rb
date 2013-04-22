@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:create , :edit, :update]
 
   #Show all Comments
   #Params:
