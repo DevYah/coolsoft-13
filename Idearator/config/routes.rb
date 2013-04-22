@@ -22,6 +22,15 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
+    member do
+      match 'vote'
+      match 'unvote'
+      match 'archive'
+      match 'unarchive'
+      match 'add_prespectives' => 'committees#add_prespectives'
+      match 'disapprove' => 'committees#disapprove'
+      match 'add_rating'
+    end
   end
 
   controller :home do
@@ -61,6 +70,10 @@ Sprint0::Application.routes.draw do
   # Tag routes
   controller :tags do
     match 'tags/ajax'
+  end
+
+  controller :ratings do
+  	match 'ratings/ajax'
   end
 
   # The priority is based upon order of creation:
