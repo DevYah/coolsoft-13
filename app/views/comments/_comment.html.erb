@@ -4,7 +4,7 @@
       <blockquote>
         <div id = "<%=comment.id%>">
           <label class="commentContent" data-toggle="tooltip" title="To edit click on line">
-            <%= best_in_place comment, :content  , :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id}%>
+            <%= best_in_place_if @user==comment.user_id, comment , :content, :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id}%>
           </label>
           <small>
             added
