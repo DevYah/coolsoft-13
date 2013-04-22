@@ -3,6 +3,7 @@ $(document).ready(function() {
       $('#myModal').modal('hide');
     });
     $("#cancel").click(function() {
-      $('#myModal').modal('hide'); 
+      $('#myModal').modal('hide');
     });
+    $('.best_in_place').best_in_place()
 });
