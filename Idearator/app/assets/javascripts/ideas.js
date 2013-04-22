@@ -26,6 +26,9 @@ $(document).ready(function() {
 		toggle: "tooltip",
 		title: "Share on Twitter"
 	});
+  $('.btn-success.add-rating').click(function(){
+  $('.add-ratings').show();
+});
 });
 
 $(document).ready(function() {

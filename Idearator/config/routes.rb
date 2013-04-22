@@ -31,6 +31,11 @@ Sprint0::Application.routes.draw do
       match 'archive'
       match 'unarchive'
     end
+    member do
+      match 'add_prespectives' => 'committees#add_prespectives'
+      match 'disapprove' => 'committees#disapprove'
+      match 'add_rating'
+    end
   end
 
   controller :home do
@@ -59,17 +64,16 @@ Sprint0::Application.routes.draw do
 
   # Notifications routes
   controller :notifications do
-    match 'view_all_notifications'
-    match 'redirect_idea'
-    match 'redirect_review'
-    match 'redirect_expertise'
-    match 'set_read'
-    match 'view_new_notifications'
+    match 'notifications/view_all_notifications'
+    match 'notifications/redirect_idea'
+    match 'notifications/redirect_review'
+    match 'notifications/redirect_expertise'
   end
   match 'notifications' => 'application#update_nav_bar'
 
   # Tag routes
   match 'tags/ajax'
+  match 'ratings/ajax'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
