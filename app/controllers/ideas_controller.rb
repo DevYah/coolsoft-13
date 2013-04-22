@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like ,:vote ,:unvote]
 
   # view idea of current user
   # Params
@@ -13,13 +13,23 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @ideavoted = current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
+      @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
     end
-  @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
+    @likes = Like.find(:all)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
       format.js
     end
+  end
+
+  #gets all the comments for a certain idea
+  #author : dayna
+  def comments
+    @idea = Idea.find(params[:idea_id])
+    @comment = @idea.comments.find(params[:id])
+
   end
 
   # making new Idea
@@ -156,12 +166,43 @@ class IdeasController < ApplicationController
     end
   end
 
+  #create new like
+  #Params:
+  #+comment_id+ :: the parameter is an instance
+  # of +Comment+ and it's used to build the like after clicking like
+  #The def checks if the user liked the comment before if not the num_likes is incremented
+  #by 1 else nothing happens
+  #author dayna
+  def like
+    @idea = Idea.find(params[:id])
+    @commentid = params[:commentid]
+    if params[:commentid] != nil
+      @comment = Comment.find(:first, :conditions => {:id => @commentid})
+      if Comment.exists?(:id => @commentid)
+        @comment.num_likes = @comment.num_likes + 1
+        @comment.save
+        @like = Like.new
+        @like.user_id = current_user.id
+        @like.comment_id = @commentid
+        @like.save
+        @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
+        respond_to do|format|
+          format.js
+        end
+      end
+      else
+        redirect_to @idea , :notice => "This comment was removed by the user"
+    end
+  end
+
+
   # Deletes all records related to a specific idea
   # Params:
-  # +id+:: is used to specify the instance of +Idea+ to be archived
+  # +id+:: is used to specify which instance of +Idea+ will be deleted
   # Author: Mahmoud Abdelghany Hashish
   def destroy
     idea = Idea.find(params[:id])
+
     if current_user.id == idea.user_id
       list_of_comments = Comment.where(idea_id: idea.id)
       list_of_commenters = []
@@ -186,7 +227,6 @@ class IdeasController < ApplicationController
       end
     end
   end
-
 
   # Archives a specific idea
   # Params:

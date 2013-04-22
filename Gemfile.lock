@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: a2a5945e3168767b8182559e8bfc0784753cabc3
+  revision: 0f443cc363ace636505365dce4524c0d90574cb1
   specs:
     rubocop (0.5.0)
       term-ansicolor
