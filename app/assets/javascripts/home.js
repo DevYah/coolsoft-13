@@ -6,7 +6,12 @@ function apply_infinite_scrolling() {
   function nearBottomOfPage() {
     return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
   }
-
+  function passedPage1() {
+    return $(window).scrollTop() > 600;
+  }
+  function backToTop() {
+    return $(window).scrollTop() < 600;
+  }
   $('#filter').click(function() {
     page = 1;
   });
@@ -14,6 +19,12 @@ function apply_infinite_scrolling() {
   $(window).scroll(function(){
     if (loading) {
       return;
+    }
+    if(passedPage1()){
+      $('.backtotop').show();
+    }
+    if(backToTop()){
+      $('.backtotop').hide();
     }
     if(nearBottomOfPage() && $("#search").val() == '') {
       loading=true;
