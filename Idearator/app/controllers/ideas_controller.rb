@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update, :vote, :unvote]
 
   # view idea of current user
   # Params
@@ -13,8 +13,8 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     end
-    @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
@@ -88,7 +88,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
       else
-        format.html { render :action => 'edit'}
+        format.html { render :action => 'edit' }
         format.json { respond_with_bip(@idea) }
       end
     end
@@ -150,7 +150,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
-        format.html { render action: 'new'}
+        format.html { render action: 'new' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
