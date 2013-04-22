@@ -69,24 +69,38 @@
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
 
-  <%if @idea.archive_status == false%>
-    <button id='share' class='btn btn-primary' type='button'>Share</button>
-    <div id='show' class='container'>
-      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-    </div>
-  <%end%>
-
-  <p>
-    <% if @idea.ratings.size > 0 %>
-      <b>Ratings:-</b>
-      <% @idea.ratings.each do |therating| %>
-        <p>
-          <div>
-            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
-          </div>
-        </p>
-      <% end %>
-    <% end %>
-  </p>
 </div>
+<legend><h4 class ="title2">Comments</h4></legend>
+	<div id='like'>
+		<table id='comments'>
+			<% @idea.comments.each do |comment| %>
+				<%= render partial: '/comments/comment', locals: { comment: comment }	%>
+
+			<% end %>
+		</table>
+	</div>
+<div class = "addComment">
+	<h5 class = "title1">Add a comment:</h5>
+	<%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
+
+  		<div class="controls">
+     <div class ="textArea1" >
+  		<%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+		</div> 
+	</div>
+  		<%= f.submit nil, :class => 'btn btn-small btn-primary' %>
+	<% end %>
+
+	<td><%= link_to 'Back', '/',:class => "btn" %></td>
+
+  <%if @idea.archive_status == false%>
+  <button id='share' class='btn btn-primary' type='button'>Share</button>
+
+  <div id='show' class='container'>
+    <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+    <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+    <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+
+  </div>
+<%end%>
+
