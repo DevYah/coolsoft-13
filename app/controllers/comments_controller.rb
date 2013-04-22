@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update , :delete]
 
   #Show all Comments
   #Params:
@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
     @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
     @comment = @idea.comments.create(params[:comment])
     @comment.update_attributes(:idea_id => @idea.id)
+    @comment.user_id = current_user.id
     if @comment.save
       respond_to do |format|
         format.js
@@ -50,7 +51,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.user_id == current_user.id && @comment.update_attributes(params[:comment])
         format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
         format.json { respond_with_bip(@comment) }
       else
@@ -70,9 +71,11 @@ class CommentsController < ApplicationController
   def destroy
     @idea = Idea.find(params[:idea_id])
     @comment = @idea.comments.find(params[:id])
-    @comment.destroy
-    respond_to do|format|
-      format.js
+    if current_user.id == @comment.user_id
+      @comment.destroy
+      respond_to do|format|
+        format.js
+      end
     end
   end
 end
