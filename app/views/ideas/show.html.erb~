@@ -1,12 +1,13 @@
-<h1> Ideas </h1>
+<h1>
+  Ideas
+</h1>
 <p id="notice"><%= notice %></p>
-
 <p>
-<%= image_tag @idea.photo.url(:thumb) %>
+  <%= image_tag @idea.photo.url(:thumb) %>
 </p>
 <p>
-   <b>Title:</b>
-   <%= @idea.title %>
+  <b>Title:</b>
+  <%= @idea.title %>
 </p>
 <p>
   <b>Description:</b>
@@ -16,30 +17,23 @@
   <b>Problem Solved:</b>
   <%= @idea.problem_solved  %>
 </p>
-
 <% if @user == @idea.user_id %>
-<td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
+  <td><%= link_to 'Edit', edit_idea_path(@idea) %></td>
 <%end%>
-
 <h2>Comments</h2>
 <table>
   <% @idea.comments.each do |comment| %>
-  <tr>
+    <tr>
       <td><%= comment.content %></td>
-   <td><%= link_to "Edit", edit_idea_comment_path(@idea,comment) %> </td>
-  </tr>
- <% end %>
+      <td><%= link_to "Edit", edit_idea_comment_path(@idea,comment) %>
+      </td>
+    </tr>
+  <% end %>
 </table><br>
- 
-<h2>Add a comment:</h2>
-<%= form_for([@idea, @idea.comments.create]) do |f| %>
-
+  <h2>Add a comment:</h2>
+  <%= form_for([@idea, @idea.comments.create]) do |f| %>
     <%= f.label :content %><br />
     <%= f.text_area :content %>
     <%= f.submit 'Post comment'%>
-
-<% end %>
-<td><%= link_to 'Back', '/' %></td>
-
-
-
+  <% end %>
+  <td><%= link_to 'Back', '/' %></td>
