@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
   # of +Comment+ and it's used to show the comments after posting it
   #author dayna
   def create
+    @user = current_user.id
     @idea = Idea.find(params[:idea_id])
     @likes = Like.find(:all, :conditions => {:user_id => current_user.id})
     @comment = @idea.comments.create(params[:comment])
