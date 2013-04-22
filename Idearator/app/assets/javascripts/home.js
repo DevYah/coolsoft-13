@@ -1,4 +1,4 @@
-$(window).load(function(){
+function apply_infinite_scrolling() {
 
   var page = 1,
   loading = false;
@@ -15,12 +15,12 @@ $(window).load(function(){
     if (loading) {
       return;
     }
-    if(nearBottomOfPage()) {
+    if(nearBottomOfPage() && $("#search").val() == '') {
       loading=true;
       page++;
       var array = [];
       var i = 0;
-      $('#tags label').each(function() {
+      $('.tags li label').each(function() {
         array[i] = $(this).text();
         i++;
       });
@@ -42,6 +42,7 @@ $(window).load(function(){
         // failed request; give feedback to user
       }
     });
+
     }
   });
 
@@ -62,11 +63,12 @@ $(window).load(function(){
       array[i] = $(this).text();
       i++;
     });
-    $.ajax({
-      type: 'POST',
-      url: '/ideas/filter',
-      data: { myTags : array },
-      beforeSend:function(){
+    if(array.length>0){
+      $.ajax({
+        type: 'POST',
+        url: '/ideas/filter',
+        data: { myTags : array },
+        beforeSend:function(){
       // this is where we append a loading image
       //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
     },
@@ -77,6 +79,52 @@ $(window).load(function(){
         alert('failure');
       }
     });
+    }else{
+      $.ajax({
+        type: 'POST',
+        url: '/home/index',
+        beforeSend:function(){
+          $('#IdeaStream').empty();
+          $('.tags').empty();
+      // this is where we append a loading image
+      //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+    },
+    success:function(array){
+    },
+    error:function(){
+        // failed request; give feedback to user
+        alert('failure');
+      }
+    });
+    }
   });
-
+$('#cancelfilter').click(function() {
+  $('#fil').addClass('hidden');
+  $('.token-input-token-facebook').remove();
+  var array = [];
+  var i = 0;
+  $('.tags li label').each(function() {
+    array[i] = $(this).text();
+    i++;
+  });
+  if(array.length>0){
+    $.ajax({
+      type: 'POST',
+      url: '/home/index',
+      beforeSend:function(){
+        $('#IdeaStream').empty();
+        $('.tags').empty();
+      // this is where we append a loading image
+      //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+    },
+    success:function(array){
+    },
+    error:function(){
+        // failed request; give feedback to user
+        alert('failure');
+      }
+    });
+  }
 });
+}
+$(document).ready(apply_infinite_scrolling);
