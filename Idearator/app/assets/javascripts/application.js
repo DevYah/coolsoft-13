@@ -23,19 +23,19 @@ var original;
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		if (window.location == "http://localhost:3000/"){
-		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-}else{
-	if (!before_search){
-			before_search = true;
-			original = $("#main > .container").detach();
-		}
-		if (this.value!=""){
 			$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-	}else{
-		before_search = false;
-		$("#main > .container").replaceWith(original);
-	}
-	  }
+		}else{
+			if (!before_search){
+				before_search = true;
+				original = $("#main > .container").detach();
+			}
+			if (this.value!=""){
+				$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+			}else{
+				before_search = false;
+				$("#main > .container").replaceWith(original);
+			}
+		}
 	});
 });
 
@@ -47,9 +47,9 @@ $(document).bind("ajaxError", function(e, xhr){
 });
 
 $(document).ready(function() {
-  $("#sign").click(function() {
-    window.location= "/users/sign_in";
-  });
+	$("#sign").click(function() {
+		window.location= "/users/sign_in";
+	});
 });
 
 
