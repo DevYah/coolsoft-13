@@ -23,4 +23,8 @@ $(document).ready(function() {
 		toggle: "tooltip",
 		title: "Share on Twitter"
 	});
+	$("#pin").tooltip({
+		toggle: "tooltip",
+		title: "Share on pin",
+	});
 });
