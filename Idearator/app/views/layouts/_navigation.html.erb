@@ -40,7 +40,7 @@
       <%= link_to('Register', new_user_registration_path)  %>
     </li>
   <% end %>
-  <li>
+<li>
     <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
       <p class = "input-append">
       <% end %>
@@ -49,5 +49,4 @@
         <i class="icon-search icon-white"></i>
       </button>
     </p>
-  <% end %>
 </li>
