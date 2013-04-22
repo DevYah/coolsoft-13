@@ -1,28 +1,35 @@
-<tr>
-  <td>
-    <div class="alert alert-info">
-      <blockquote>
-        <div id = "<%=comment.id%>">
-          <label class="commentContent" data-toggle="tooltip" title="To edit click on line">
-            <%= best_in_place_if @user==comment.user_id, comment , :content, :type => :input, :path => {controller: :comments, action: :update, :idea_id => @idea.id, :id => comment.id}%>
-          </label>
-          <small>
-            added
-            <%= time_ago_in_words comment.created_at %>
-            ago
-          </small>
+<table id='comments-table'>
+  <% idea.comments.each do |comment| %>
+    <tr>
+      <td>
+        <div class="alert alert-info">
+          <blockquote>
+            <div id = "<%=comment.id%>">
+              <label class="commentContent" data-toggle="tooltip" title="To edit click on line">
+                <%= best_in_place_if current_user.id==comment.user_id, comment , :content, :type => :input, :path => {controller: :comments, action: :update, :idea_id => idea.id, :id => comment.id}%>
+              </label>
+              <small>
+                added
+                <%= time_ago_in_words comment.created_at %>
+                ago
+              </small>
+            </div>
+          </blockquote>
+          <p class ="buttons" data-toggle="tooltip" title="Like button and Delete button">
+            <h3>Hash<%= current_user.id %>     Dayna<%= comment.user_id %></h3>
+            <% if current_user.id == comment.user_id %>
+              <%= link_to "<i class='icon-remove'></i>".html_safe, [idea, comment], :method=>:delete, :confirm => 'Are you sure?' , :remote => true %>
+            <% end %>
+            <% if comment.likes.detect { |x| x.id == current_user.id }.nil? %>
+              <%= link_to "<i class='icon-thumbs-up'></i>".html_safe,:controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>idea.id, :remote => true, class: 'btn' %>
+            <% end %>
+            <small class = "text-info">
+              <%= comment.num_likes %>
+              likes
+            </small>
+          </p>
         </div>
-      </blockquote>
-      <p class ="buttons" data-toggle="tooltip" title="Like button and Delete button">
-        <%= link_to "<i></i>".html_safe, [@idea, comment], :method=>:delete, :class=> "icon-remove", :confirm => 'Are you sure?' , :remote => true %>
-        <% if @likes.detect {|x| x.comment_id == comment.id}.nil? %>
-          <%= link_to "<i class='icon-thumbs-up'></i>".html_safe,:controller => 'ideas', :action => 'like', :commentid => comment.id,:id =>@idea.id, :remote => true, class: 'btn' %>
-        <% end %>
-        <small class = "text-info">
-          <%= comment.num_likes %>
-          likes
-        </small>
-      </p>
-    </div>
-  </td>
-</tr>
+      </td>
+    </tr>
+  <% end %>
+</table>
