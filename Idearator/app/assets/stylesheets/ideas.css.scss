@@ -4,12 +4,14 @@
 #show{
   padding-top:40px;
 }
+
 #fbk{
 	width:40px;
 	height:40px;
 	cursor: pointer;
 	padding-right:10px;
 }
+
 #tw{
 	width:40px;
 	height:40px;
@@ -21,3 +23,14 @@
 	cursor:pointer;
     padding-right:10px;
     }
+
+.purr {
+  position: fixed;
+  top: 30px;
+  right: 100px;
+  width: 250px;
+  padding: 20px;
+  background-color: #FCC;
+  border: solid 2px #666;
+  &:first-letter { text-transform: uppercase };
+}
