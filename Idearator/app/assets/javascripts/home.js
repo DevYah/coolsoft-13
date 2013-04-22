@@ -46,6 +46,11 @@ function apply_infinite_scrolling() {
     }
   });
 
+  apply_filter();
+}
+
+function apply_filter() {
+  if($('.token-input-list-facebook').length==0){
   $('#click').click(function(){
     $('#fil').toggleClass('hidden');
   });
@@ -80,51 +85,10 @@ function apply_infinite_scrolling() {
       }
     });
     }else{
-      $.ajax({
-        type: 'POST',
-        url: '/home/index',
-        beforeSend:function(){
-          $('#IdeaStream').empty();
-          $('.tags').empty();
-      // this is where we append a loading image
-      //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-    },
-    success:function(array){
-    },
-    error:function(){
-        // failed request; give feedback to user
-        alert('failure');
-      }
-    });
+      alert('please choose a tag');
     }
   });
-$('#cancelfilter').click(function() {
-  $('#fil').addClass('hidden');
-  $('.token-input-token-facebook').remove();
-  var array = [];
-  var i = 0;
-  $('.tags li label').each(function() {
-    array[i] = $(this).text();
-    i++;
-  });
-  if(array.length>0){
-    $.ajax({
-      type: 'POST',
-      url: '/home/index',
-      beforeSend:function(){
-        $('#IdeaStream').empty();
-        $('.tags').empty();
-      // this is where we append a loading image
-      //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-    },
-    success:function(array){
-    },
-    error:function(){
-        // failed request; give feedback to user
-        alert('failure');
-      }
-    });
-  }
-});
+
+}
 }
 $(document).ready(apply_infinite_scrolling);
