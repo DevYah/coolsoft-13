@@ -88,12 +88,11 @@ before_filter :authenticate_user!, :only => [:index]
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Idea')
     data_table.new_column('number', 'Number of votes')
-    data_table.new_column('number', 'Idea number')
     @no = 0
     @ideasall.each do |i|
       @no = @no + 1
       data_table.add_rows([
-      [i.title, i.num_votes ,i.user_id]
+      [i.title,i.num_votes ]
       ])
     end
     opts   = { :width => 900, :height => 500 }
