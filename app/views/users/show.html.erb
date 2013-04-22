@@ -9,7 +9,7 @@
   <% if @admin.type == "Admin" && @user.active==true && @user.banned==false && @admin.id != @user.id %>
     <%= link_to 'Ban', { :controller => "admins", :action => "ban_unban" },:id =>params[:id], :confirm => "Are you sure you want to Ban this user?",:class => 'btn btn-danger' %>
   <% end %>
-  <% if @admin.type == "Admin" && @user.active==true && @user.banned==true @admin.id != @user.id%>
+  <% if @admin.type == "Admin" && @user.active==true && @user.banned==true &&@admin.id != @user.id %>
     <%= link_to 'Unban', { :controller => "admins", :action => "ban_unban" }, :id =>params[:id], :confirm => "Are you sure you want to Unban this user?",:class => 'btn btn-success' %>
   <% end %>
   <% if @admin.type == "Committee" && @admin.id == @user.id %>
