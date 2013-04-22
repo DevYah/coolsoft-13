@@ -1,0 +1,3 @@
+$('#like').html('<%= escape_javascript(render(partial: 'like')) %>');
+$('.best_in_place').bind("ajax:success");
+$('#comment_content').val('');
