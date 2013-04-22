@@ -1,0 +1,3 @@
+<% if params[:search] != "" %>
+	$(".content").html("<%= escape_javascript(render(:partial => "index")) %>");
+<% end %>
