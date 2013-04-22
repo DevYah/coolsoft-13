@@ -87,17 +87,17 @@ before_filter :authenticate_user!, :only => [:index]
     @ideasall = Idea.where(:id => @ideastagsall.map(&:idea_id))
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Idea')
-    data_table.new_column('number', 'Idea number')
     data_table.new_column('number', 'Number of votes')
+    data_table.new_column('number', 'Idea number')
     @no = 0
     @ideasall.each do |i|
       @no = @no + 1
       data_table.add_rows([
-      [i.title, i.user_id, i.num_votes]
+      [i.title, i.num_votes ,i.user_id]
       ])
     end
     opts   = { :width => 900, :height => 500 }
-    @chart = GoogleVisualr::Interactive::BarChart.new(data_table, opts)
+    @chart = GoogleVisualr::Interactive::ColumnChart.new(data_table, opts)
     
 
     respond_to do |format|
