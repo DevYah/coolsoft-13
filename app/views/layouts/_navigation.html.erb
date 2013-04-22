@@ -10,7 +10,7 @@
         <%end%>
         <b class="caret"></b>
       </a>
-      <ul id = "update-dropdown" class="dropdown-menu">
+      <ul id="update-dropdown" class="dropdown-menu">
         <%= render 'notifications/view_notifications' %>
       </ul>
     </li>
@@ -67,7 +67,8 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><%= current_user.username %> <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li>
-          <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i> Account Settings</a>
+          <a href="#myModal" data-toggle="modal"><i class="icon-wrench"></i>
+            Account Settings</a>
         </li>
         <li>
           <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
