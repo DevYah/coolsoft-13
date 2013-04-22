@@ -11,14 +11,14 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+//= require jquery.purr
+//= require best_in_place
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require bootstrap
 //= require_tree .
 //= require notification_polling
 //= require notification_polling
-//= require jquery.purr
-//= require best_in_place
 //= require_tree .
 $(function() {
 	$("#searchdiv input").keyup(function(){

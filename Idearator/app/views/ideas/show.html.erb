@@ -33,10 +33,10 @@
   <p>
     <h3><%= @idea.title %></h3>
     <div>
-      <div id ='change_vote' class = 'pull-right'>
+      <div id ='change_vote' class = 'pull-right archive_status'>
         <span><h2><%= @idea.num_votes %></h2></span>
         <%if @ideavoted.nil? %>
-          <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
+          <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-success' %>
         <% else %>
           <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-danger' %>
         <%end%>
@@ -45,13 +45,26 @@
 
     <%if @user==@idea.user_id%>
       <div class='btn-group'>
-        <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%>
-        <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+        <%= link_to 'Edit', edit_idea_path(@idea) ,:class => 'btn btn-inverse' %>
         <% if @idea.archive_status == true %>
-          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse' %>
+          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
         <% else %>
-          <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+          <a data-toggle='modal' data-target='#archive-modal' class='btn btn-danger btn-archive'>Archive</a>
         <% end %>
+        <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+      </div>
+      <div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3>Are you sure you want to archive?!</h3>
+        </div>
+        <div class="modal-body">
+          <p>If you Archive the idea, all votes and comments will be deleted!</p>
+        </div>
+        <div class="modal-footer">
+            <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
+            <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal' %>
+        </div>
       </div>
       <h2><%=link_to @username, @idea.user.becomes(User)%></h2>
     <%end%>
@@ -76,28 +89,48 @@
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
+  <div class='archive_status'>
+    <p>
+      <% if @idea.ratings.size > 0 %>
+        <b>Ratings:-</b>
+        <% @idea.ratings.each do |therating| %>
+          <p>
+            <div>
+              <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+            </div>
+          </p>
+        <% end %>
+      <% end %>
+    </p>
 
-
-  <%if @idea.archive_status == false%>
     <button id='share' class='btn btn-primary' type='button'>Share</button>
+
     <div id='show' class='container'>
       <%= image_tag('f_logo.jpg', :id => 'fbk')%>
       <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+      <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
     </div>
-  <%end%>
 
-  <p>
-    <% if @idea.ratings.size > 0 %>
-      <b>Ratings:-</b>
-      <% @idea.ratings.each do |therating| %>
-        <p>
-          <div>
-            <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+    <legend><h4 class ="title2">Comments</h4></legend>
+    <div id='like'>
+      <table id='comments'>
+        <% @idea.comments.each do |comment| %>
+          <%= render partial: '/comments/comment', locals: { comment: comment } %>
+        <% end %>
+      </table>
+    </div>
+    <div class = "addComment">
+      <h5 class = "title1">Add a comment:</h5>
+      <%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
+        <div class="controls">
+          <div class ="textArea1" >
+            <%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
           </div>
-        </p>
+        </div>
+        <%= f.submit nil, :class => 'btn btn-small btn-primary' %>
       <% end %>
-    <% end %>
-  </p>
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
   function sendAjax(idea_id){
@@ -112,4 +145,8 @@
     $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
   }
 </script>
-
+<% if @idea.archive_status == true %>
+  <script type='text/javascript'>
+    $('.archive_status').toggle();
+  </script>
+<% end %>
