@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: 0f82a26f5b841f6cddb36cff633ed0d50b3614ce
+  revision: 0f443cc363ace636505365dce4524c0d90574cb1
   specs:
     rubocop (0.5.0)
       term-ansicolor
@@ -127,7 +127,7 @@ GEM
       cocaine (~> 0.5.0)
       mime-types
     polyglot (0.3.3)
-    pry (0.9.12)
+    pry (0.9.12.1)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -213,7 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_in_place
+  best_in_place (= 2.1.0)
   bootstrap-sass (= 2.3.1.0)
   bot-away (= 2.0.1)
   capybara (= 2.1.0)
