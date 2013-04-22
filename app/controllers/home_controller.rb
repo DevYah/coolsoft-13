@@ -24,13 +24,13 @@ class HomeController < ApplicationController
         @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
       end
     else
-        @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
+      @approved = Idea.order(:created_at).page(params[:myPage]).per(10)
     end
-        respond_to do |format|
-          format.js
-          format.html # index.html.erb
-          format.xml  { render :xml => @approved }
-        end
+    respond_to do |format|
+      format.js
+      format.html # index.html.erb
+      format.xml  { render :xml => @approved }
+    end
   end
 
   def search
@@ -45,4 +45,3 @@ class HomeController < ApplicationController
     end
   end
 end
-
