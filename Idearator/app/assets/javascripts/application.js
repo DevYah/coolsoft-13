@@ -14,24 +14,31 @@
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require bootstrap
-//= require_tree .
-//= require notification_polling
 //= require notification_polling
 //= require jquery.purr
 //= require best_in_place
 //= require_tree .
+before_search = false;
+var original;
 $(function() {
 	$("#searchdiv input").keyup(function(){
+		if (window.location == "http://localhost:3000/"){
+			alert(1);
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		if (this.length()==0){
-      $.ajax({
-        url: '/home/index?page=' + 1,
-        type: 'get',
-        dataType: 'script'
-      });
-    }
+}else{
+	if (!before_search){
+			before_search = true;
+			original = $("#main > .container").detach();
+		}
+		if (this.value!=""){
+			$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+	}else{
+		before_search = false;
+		$("#main > .container").replaceWith(original);
+	}
 
-  });
+	}
+});
 });
 
 
@@ -46,5 +53,7 @@ $(document).ready(function() {
     window.location= "/users/sign_in";
   });
 });
+
+
 
 
