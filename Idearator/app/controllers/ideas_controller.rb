@@ -13,7 +13,7 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
-      ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
+      @ideavoted = current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     end
     respond_to do |format|
       format.html # show.html.erb
