@@ -1,1 +1,4 @@
+
+<% @chart.add_listener("select", "function(e) {pieUrlLauncher(e, chart, data_table); }")%>
+
 $("#graph").html("<%= escape_javascript(render(:partial => "getideas"))%>");
