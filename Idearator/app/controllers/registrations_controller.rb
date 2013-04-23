@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  include OmniauthHandlerMixin
 
   # This method overrides the original devise method in order to show the list of tags the user can choose
   # from if they signed up as a committee member
@@ -49,7 +50,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  include OmniauthHandlerMixin
+  protected
 
   # Allow the user to choose a different username if user's twitter screen name
   # is already used as a username locally
@@ -73,4 +74,5 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
+
 end

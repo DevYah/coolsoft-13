@@ -8,8 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require token-input-facebook
+ *= require_self
  *= require_tree .
  *
  */
@@ -55,11 +55,11 @@
   padding: 0 5px;
 }
 
-.social-media-login.twitter {
+.social-media-login.twitter-nav-login {
   background: url('/assets/bird_blue_32.png') center no-repeat;
 }
 
-.social-media-login.facebook {
+.social-media-login.facebook-nav-login {
   background: url('/assets/facebook-button-small.jpg') center no-repeat;
 }
 
