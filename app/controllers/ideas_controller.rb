@@ -222,7 +222,6 @@ class IdeasController < ApplicationController
           format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
           format.json { head :no_content }
         end
->>>>>>> master
       end
     end
 
