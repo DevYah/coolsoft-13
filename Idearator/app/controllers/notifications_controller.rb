@@ -2,9 +2,7 @@ class NotificationsController < ApplicationController
   before_filter :authenticate_user!, :only => [:view_all_notifications]
 
   def view_new_notifications
-    idea_notifications = IdeaNotification.joins(:idea_notifications_users).where('idea_notifications_users.user_id = ? and created_at > ?', current_user, Time.at(params[:after].to_i + 1))
-    user_notifications = UserNotification.joins(:user_notifications_users).where('user_notifications_users.user_id = ? and created_at > ?', current_user, Time.at(params[:after].to_i + 1))
-    notifications = idea_notifications + user_notifications
+    notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', current_user, Time.at(params[:after].to_i + 1))
     sorted_notifications = notifications.sort_by &:created_at
     @new_notifications = sorted_notifications.reverse
   end
@@ -37,7 +35,7 @@ class NotificationsController < ApplicationController
     notification = UserNotification.find(params[:notification])
     notification.set_read_for current_user
     respond_to do |format|
-      format.js { render 'users/send_expertise' }
+      format.js { render 'redirect_expertise' }
       format.json { head :no_content }
     end
   end
@@ -57,7 +55,7 @@ class NotificationsController < ApplicationController
   end
 
   def set_read
-    notification = IdeaNotification.find(params[:notification])
+    notification = DeleteNotification.find(params[:notification])
     notification.set_read_for current_user
     respond_to do |format|
       format.js { render 'layouts/update_nav_bar' }
