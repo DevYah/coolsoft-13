@@ -18,10 +18,16 @@
                 <li style = "color: #0060ff;"><%= tag.name %></li>
               <% end %>
             </ul>
-            <span class="idea-vote inline"><%=  approved.num_votes.to_s %></span>
-            <br>
-            <button class="btn btn-large btn-success inline pull-right margin" type="button">Vote!
-            </button>
+            <span class="idea-votes inline pull-right"><%=  approved.num_votes %></span>
+            <% @approve=approved %>
+            <%if user_signed_in?%>
+              <% @ideavotehome= current_user.votes.detect { |w|w.id == @approve.id } %>
+            <%end%>
+            <%if @ideavotehome.nil? %>
+              <%= link_to 'Vote', { :controller => "ideas", :action => "vote", :id => @approve.id },remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
+            <% else %>
+              <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" , :id => @approve.id},:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
+            <%end%>
           </div>
         </div>
       </div>
