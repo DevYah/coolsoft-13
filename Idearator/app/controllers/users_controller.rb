@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
+  before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :change_settings]
 
   # displays a form where the user enters his password to confrim deactivation.
   # Params: none
@@ -31,8 +31,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to action: 'confirm_deactivate'
-                flash[:notice] = '
-                Wrong password' }
+                      flash[:notice] = 'Wrong password' }
         format.json { head :no_content }
       end
     end
@@ -46,55 +45,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { falsh[:notice] = 'Successfully reactivated' }
       format.json { head :no_content }
-    end
-  end
-
-  # Pass the current_user and all the tags to the  expertise view
-  # Params:
-  # none
-  # Author: Mohamed Sameh
-  def expertise
-    if current_user.is_a? Committee
-      if Tag.all.count > 0
-        @user = current_user
-        @tags = Tag.all
-      else
-        respond_to do |format|
-          format.html {
-            redirect_to controller: 'home', action: 'index'
-          }
-        end
-      end
-    else
-      respond_to do |format|
-        format.html {
-          redirect_to controller: 'home', action: 'index'
-        }
-      end
-    end
-  end
-  # Enter chosen tags sent from expertise view, in committeestags table
-  # Params:
-  # +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
-  # Author: Mohamed Sameh
-  def new_committee_tag
-    if params[:user] == nil
-      respond_to do |format|
-        format.html {
-          flash[:notice] = 'You must choose at least 1 area of expertise'
-          redirect_to action: 'expertise'
-        }
-      end
-    else
-      @tags = params[:user][:tags]
-      @tags.each do |tag|
-        CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
-      end
-      respond_to do |format|
-        format.html {
-          redirect_to controller: 'home', action: 'index'
-        }
-      end
     end
   end
 
@@ -165,7 +115,7 @@ class UsersController < ApplicationController
   #None
   #Author: Hisham ElGezeery.
   def edit
-   @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   #is used to update a user's info.
