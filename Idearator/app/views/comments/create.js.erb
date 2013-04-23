@@ -1,0 +1,4 @@
+//$('.best_in_place').bind("ajax:success");
+$('#comments-table').remove();
+$('div#comments').append("<%= escape_javascript(render(partial: 'comment', locals: { idea: @idea } )) %>");
+$('#comment_content').val('');
