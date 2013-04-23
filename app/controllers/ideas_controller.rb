@@ -18,7 +18,6 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
-      format.js
     end
   end
 
@@ -111,6 +110,7 @@ class IdeasController < ApplicationController
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Thank you for voting' }
         format.json { head :no_content }
+        format.js
       else
         format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
         format.json { head :no_content }
@@ -130,6 +130,7 @@ class IdeasController < ApplicationController
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
         format.json { head :no_content }
+        format.js
       else
         format.html { redirect_to @idea, alert: 'Idea is still voted' }
         format.json { head :no_content }
@@ -252,17 +253,17 @@ class IdeasController < ApplicationController
   #Author : Omar Kassem
   def add_rating
     if current_user.type == 'Committee'
-      @idea=Idea.find(params[:id])
+      @idea = Idea.find(params[:id])
       @idea.approved = true
       @idea.save
       @rating = params[:rating]
       @rating.each do |rate|
-        r = Rating.find(:all, :conditions => {:name => rate})
+        r = Rating.find(:all, :conditions => { :name => rate })
         @idea.ratings << r
         @idea.save
       end
       respond_to do |format|
-        format.js {render "add_rating"}
+        format.js { render "add_rating" }
       end
     else
       respond_to do |format|
