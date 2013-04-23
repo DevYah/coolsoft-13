@@ -2,7 +2,7 @@
 <ul class='nav'>
   <% if user_signed_in? %>
     <li class="dropdown">
-      <a id="count" class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <a id = "count" class="dropdown-toggle" data-toggle="dropdown" href="#">
         <%if @count == 0%>
           <span class="badge badge-inverse"><%= @count %></span>
         <%else%>
@@ -14,6 +14,18 @@
         <%= render 'notifications/view_notifications' %>
       </ul>
     </li>
+  <% end %>
+</ul>
+<ul class="nav pull-right">
+  <% if not user_signed_in? %>
+    <li>
+      <%= link_to('Login', new_user_session_path)  %>
+    </li>
+    <li>
+      <%= link_to('Register', new_user_registration_path)  %>
+    </li>
+  <% end %>
+  <% if user_signed_in? %>
     <% if current_user.is_a? Committee%>
       <li>
         <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
@@ -26,24 +38,25 @@
       <% end %>
     <% end %>
   <% end %>
-</ul>
-<ul class="nav pull-right">
-  <% if not user_signed_in? %>
-    <li>
-      <%= link_to('Login', new_user_session_path)  %>
-    </li>
-    <li>
-      <%= link_to('Register', new_user_registration_path)  %>
-    </li>
-  <% end %>
   <li>
-    <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
-      <p class="input-append">
-        <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
-        <button class='btn btn-info'>
-          <i class="icon-search icon-white"></i>
-        </button>
-      </p>
+    <% if params[:controller] == 'home' %>
+      <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
+        <p class = "input-append">
+          <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
+          <button class='btn btn-info'>
+            <i class="icon-search icon-white"></i>
+          </button>
+        </p>
+      <% end %>
+    <% else %>
+      <%= form_tag "/home/searchelse", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
+        <p class = "input-append">
+          <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
+          <button class='btn btn-info'>
+            <i class="icon-search icon-white"></i>
+          </button>
+        </p>
+      <% end %>
     <% end %>
   </li>
 </ul>
@@ -70,10 +83,7 @@
 <%if user_signed_in? and current_user.is_a? Admin%>
   <ul class="nav pull-right">
     <li class="dropdown">
-      <a href="#"
-      class="dropdown-toggle"
-      data-toggle="dropdown">
-        Admin
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">

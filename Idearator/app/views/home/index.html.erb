@@ -7,90 +7,93 @@
 </div>
 <div id = "IdeaStream">
   <div class = "page">
+    <%= render :partial => 'ideas/show' %>
     <%= render :partial => 'stream' %>
-  </div>
-</div>
-
-  <% content_for :sidebar do %>
-    <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
-  <% end %>
-
-  <% content_for :sidebar do %>
-    <div class="topten">
-      <h1>Top Ten Ideas</h1>
-      <div class="media">
+    <% content_for :sidebar do %>
+      <div class="topten">
+        <h1 class="title">Top Ten
+        </h1>
         <% @top.each do |top| %>
           <% if top.user.active == true and top.user.banned == false%>
-            <div class="topten_idea">
+            <div class="topten_idea media">
               <a class="pull-left" href="#">
-                <span><%= image_tag(top.photo.url(:thumb), :size => "30x20") %></span>
-
+                <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
               </a>
               <div class="media-body">
-                <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
-                <span><%= top.num_votes %></span>
                 <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+                <h4 class="media-heading idea">
+                  <%= link_to top.title ,top %>
+                </h4>
+                <span class="badge"><%= top.num_votes %>
+                  votes</span>
               </div>
             </div>
           <% end %>
         <%end%>
       </div>
-    </div>
-  <% end %>
+      <div class="affix" data-spy='affix'>
+        <button class="btn backtotop" type="button">To Top
+          <i class = 'icon-black icon-hand-up'>
+          </i></button>
+      </div>
+      <script type="text/javascript">
+        (function() {
+          var page = 1,
+              loading = false;
+
+          function nearBottomOfPage() {
+            return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
+          }
+
+          $(window).scroll(function(){
+            if (loading) {
+              return;
+            }
+
+            if(nearBottomOfPage() && $("#search").val() == "") {
+              loading=true;
+              page++;
+              $.ajax({
+                url: '/?page=' + page,
+                type: 'get',
+                dataType: 'script',
+                success: function() {
+                    loading=false;
+
+                }
+
+              });
+            }
+          });
+
+        }());
+      </script>
+    <% end %>
+    <style type = "text/css">
+      .totop{
+        margin: auto;
+      }
 
 
-<style type = "text/css">
 
-  .idea-vote{
-    padding-left: 500px;
-    font-size: 35px;
-  }
+      .idea-vote{
+        padding-left: 87%;
+        font-size: 35px;
+      }
 
-  .block{
-    box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
-    margin-bottom: 20px;
-  }
+      .block{
+        box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
+        margin-bottom: 20px;
+      }
 
-  .wrapper{
-    margin-top: 20px;
-  }
+      .wrapper{
+        margin-top: 20px;
+      }
 
-  .margin{
-    margin-top: 10px;
-    margin-bottom: 15px;
-  }
-</style>
-
-
-<script type="text/javascript">
-(function() {
-  var page = 1,
-      loading = false;
-
-  function nearBottomOfPage() {
-    return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
-  }
-
-  $(window).scroll(function(){
-    if (loading) {
-      return;
-    }
-
-    if(nearBottomOfPage() && $("#search").val() == "") {
-      loading=true;
-      page++;
-      $.ajax({
-        url: '/?page=' + page,
-        type: 'get',
-        dataType: 'script',
-        success: function() {
-            loading=false;
-
-        }
-
-      });
-    }
-  });
-
-}());
-</script>
+      .margin{
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+    </style>
+    =======
+>>>>>>> master
