@@ -55,9 +55,16 @@
   padding: 0 5px;
 }
 
-#twitter_signin_button {
-  display: block;
+.social-media-login.twitter {
   background: url('/assets/bird_blue_32.png') center no-repeat;
+}
+
+.social-media-login.facebook {
+  background: url('/assets/facebook-button-small.jpg') center no-repeat;
+}
+
+.social-media-login {
+  display: block;
   width: 32px; height: 20px;
   font-size: 0;
 }
