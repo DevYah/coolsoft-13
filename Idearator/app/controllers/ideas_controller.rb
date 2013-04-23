@@ -149,6 +149,7 @@ class IdeasController < ApplicationController
       @idea.user_id = current_user.id
       respond_to do |format|
         if @idea.save
+          VoteCount.create(idea_id: @idea.id)
           format.html { redirect_to @idea, notice: 'idea was successfully created.' }
           format.json { render json: @idea, status: :created, location: @idea }
         else
