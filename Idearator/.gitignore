@@ -6,4 +6,3 @@ db/schema.rb
 
 # project specific files
 public/system/*
-solr/*
