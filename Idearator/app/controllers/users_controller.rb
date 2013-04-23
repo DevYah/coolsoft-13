@@ -1,7 +1,6 @@
-
-
 class UsersController < ApplicationController
-	before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
+  before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :change_settings]
+
 
 
 	# displays a form where the user enters his password to confrim deactivation.
@@ -110,7 +109,7 @@ class UsersController < ApplicationController
   #Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
-    @ideas = Idea.find(:all, :conditions => { :user_id => @user.id })
+    @approved = Idea.where(:user_id => @user.id, :archive_status => false).all
     @admin = current_user
     @registered = @user.approved == false && @user.type == 'Committee'
     respond_to do |format|
@@ -218,5 +217,29 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-end
+  
+  #is used to edit a specific user profile.
+  #Params:
+  #None
+  #Author: Hisham ElGezeery.
+  def edit
+    @user = User.find(params[:id])
+  end
 
+  #is used to update a user's info.
+  #Params:
+  #+about_me+:: the parameter is an instance of +User+ passed through the form 'form'.
+  #Author: Hisham ElGezeery.
+  def update
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.becomes(User).update_attributes(params[:user])
+        format.html { redirect_to(@user.becomes(User), :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@user.becomes(User)) }
+      else
+        format.html { render :action => 'edit' }
+        format.json { respond_with_bip(@user.becomes(User)) }
+      end
+    end
+  end
