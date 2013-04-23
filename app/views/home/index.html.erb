@@ -1,38 +1,64 @@
-<div id = "IdeaStream">
-   <% @approved.each do |approved| %>
-     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
-        <tr>
-      <br>
-      <td>
-      <%= link_to "Title: " + approved.title , approved %>
-	  </td>
-      <br>
-      <td>
-      <%= "Description: " + approved.description %>
-      <br>
-      <%= "Number of votes " + approved.num_votes.to_s %>
-      <br>
-      <%= "Problem Solved " + approved.problem_solved %>
-      <br>
-      <%= "Posted at " + approved.created_at.to_s %>
-      </td>
-      <td><%= image_tag approved.photo.url(:thumb) %></td>
-      <br>
-      </tr>
-     <% end %>
-  <% end %>
- </div>
-
-<p id="notice"><%= notice %></p>
-
-
-<div id="topten">
-<h1>Top Ten Ideas</h1>
-<% @top.each do |top| %>
-<div class="topten_idea">
-	<span><%= link_to top.title ,top %></span>
-	<span><%= top.num_votes %></span>
-	<span><%= top.user.first_name %></span>
-</div>
+<%= render :partial => 'ideas/show' %>
+<%= render :partial => 'stream' %>
+<% content_for :sidebar do %>
+ <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
 <% end %>
-</div>
+<% content_for :sidebar do %>
+  <div class="topten">
+    <h1 class="title">Top Ten
+    </h1>
+    <% @top.each do |top| %>
+      <% if top.user.active == true and top.user.banned == false%>
+        <div class="topten_idea media">
+          <a class="pull-left" href="#">
+            <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
+          </a>
+          <div class="media-body">
+            <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+            <h4 class="media-heading idea">
+              <%= link_to top.title ,top %>
+            </h4>
+            <span class="badge"><%= top.num_votes %>
+              votes</span>
+          </div>
+        </div>
+      <% end %>
+    <%end%>
+  </div>
+   <div class="affix" data-spy='affix'>
+    <button class="btn backtotop" type="button">To Top
+      <i class = 'icon-black icon-hand-up'></i></button>
+  </div>
+   <script type="text/javascript">
+    $('.backtotop').click(function(){
+      $('html, body').animate({scrollTop:0}, 'slow');
+      });
+     $(document).ready(function(){
+      $('.backtotop').hide();
+    });
+  </script>
+<% end %>
+<style type = "text/css">
+  .totop{
+    margin: auto;
+  }
+
+  .idea-vote{
+    padding-left: 87%;
+    font-size: 35px;
+  }
+
+  .block{
+    box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
+    margin-bottom: 20px;
+  }
+
+  .wrapper{
+    margin-top: 20px;
+  }
+
+  .margin{
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+</style>
