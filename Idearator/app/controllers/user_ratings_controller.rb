@@ -34,7 +34,7 @@ class UserRatingsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to idea, :notice => 'Your rating has not been saved, please retry!' }
+        format.html { redirect_to idea, :alert => 'Your rating has not been saved, please retry!' }
         format.js
       end
     end
@@ -71,7 +71,7 @@ class UserRatingsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to idea_path(idea), :notice => 'Your rating has not been updated, please retry!' }
+        format.html { redirect_to idea_path(idea), :alert => 'Your rating has not been updated, please retry!' }
         format.js { render text: "" }
       end
     end

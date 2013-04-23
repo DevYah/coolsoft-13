@@ -259,6 +259,17 @@ class IdeasController < ApplicationController
           c.destroy
         end
 
+        list_of_ratings = Rating.where(:idea_id => idea.id)
+        list_of_user_ratings = []
+
+        list_of_ratings.each do |r|
+          list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
+        end
+
+        list_of_user_ratings.each do |ur|
+          ur.destroy
+        end
+
         idea.save
 
         respond_to do |format|
@@ -290,3 +301,32 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+  #adds the rating prespectives taken from the user from the add_prespectives view
+  #to the idea reviewed
+  # Params
+  #+params[:ratings]+ ratings prespectives taken from the user
+  #+session[:idea_id] id of the idea to be reviewed
+  #Author : Omar Kassem
+  def add_rating
+    if current_user.type == 'Committee'
+      @idea=Idea.find(params[:id])
+      @idea.approved = true
+      @idea.save
+      @rating = params[:rating]
+      @rating.each do |rate|
+        r = Rating.find(:all, :conditions => {:name => rate})
+        @idea.ratings << r
+        @idea.save
+      end
+      respond_to do |format|
+        format.js {render "add_rating"}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
+        format.json { head :no_content }
+      end
+    end
+  end
+

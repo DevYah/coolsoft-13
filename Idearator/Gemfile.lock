@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: 0f443cc363ace636505365dce4524c0d90574cb1
+  revision: ec5599653accb6460b8bbce9d2feaeff02a739f0
   specs:
     rubocop (0.5.0)
       term-ansicolor
@@ -108,7 +108,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.2.0)
       addressable (~> 2.3)
-    listen (1.0.0)
+    listen (1.0.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
@@ -186,6 +186,10 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simplecov (0.7.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
     slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -220,7 +224,7 @@ DEPENDENCIES
   bot-away (= 2.0.1)
   capybara (= 2.1.0)
   devise (= 2.2.3)
-  factory_girl_rails (= 4.2.1)
+  factory_girl_rails (~> 4.2.1)
   faker (= 1.1.2)
   google_visualr (= 2.1.7)
   guard-rspec (= 2.5.3)
@@ -233,9 +237,10 @@ DEPENDENCIES
   pre-commit!
   rails (= 3.2.13.rc1)
   rspec-html-matchers (= 0.4.1)
-  rspec-rails (= 2.13.0)
+  rspec-rails (~> 2.13.0)
   rubocop!
   sass-rails (= 3.2.6)
+  simplecov
   sqlite3 (= 1.3.7)
   uglifier (= 2.0.1)
   whenever (= 0.8.2)
