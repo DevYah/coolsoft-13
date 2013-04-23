@@ -49,6 +49,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+
+  protected
+
   include OmniauthHandlerMixin
 
   # Allow the user to choose a different username if user's twitter screen name

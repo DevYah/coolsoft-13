@@ -11,23 +11,35 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+
 //= require jquery.tokeninput
 //= require jquery-ui
+//= require jquery_purr
+//= require best_in_place
 //= require bootstrap
 //= require notification_polling
+//= require jquery.purr
+s//= require best_in_place
 //= require_tree .
 
+before_search = false;
+var original;
 $(function() {
 	$("#searchdiv input").keyup(function(){
-		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		if (this.length()==0){
-			 $.ajax({
-        url: '/home/index?page=' + 1,
-        type: 'get',
-        dataType: 'script'
-       });
-	}
-
+		if (window.location == "http://localhost:3000/"){
+			$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+		}else{
+			if (!before_search){
+				before_search = true;
+				original = $("#main > .container").detach();
+			}
+			if (this.value!=""){
+				$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+			}else{
+				before_search = false;
+				$("#main > .container").replaceWith(original);
+			}
+		}
 	});
 });
 
@@ -38,9 +50,9 @@ $(document).bind("ajaxError", function(e, xhr){
 });
 
 $(document).ready(function() {
-  $("#sign").click(function() {
-    window.location= "/users/sign_in";
-  });
+	$("#sign").click(function() {
+		window.location= "/users/sign_in";
+	});
 });
 
 function popupCenter(url, width, height, name) {
@@ -53,7 +65,7 @@ function popupCenter(url, width, height, name) {
 
 $(function() {
   $("a.popup").click(function(e) {
-    popupCenter($(this).attr("href") + '?state=popup',
+    popupCenter($(this).attr("href") ,
                 $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
     e.stopPropagation();
     return false;

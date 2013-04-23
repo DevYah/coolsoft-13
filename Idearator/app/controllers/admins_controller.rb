@@ -44,6 +44,7 @@ class AdminsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You cant ban/unban users' }
         format.json { head :no_content }
+
       end
     end
   end
