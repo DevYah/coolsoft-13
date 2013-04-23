@@ -46,7 +46,7 @@ h3.title{
 }
 
 
-.row .notification:hover .link{
+.row .notification:hover .notification-link{
   display: inline;
 }
 
@@ -58,7 +58,7 @@ h3.title{
   background: rgba(0,153,153, 0.50);
 }
 
-.nav .notification:hover .link{
+.nav .notification:hover .notification-link{
   display: inline;
 }
 
@@ -70,7 +70,7 @@ h3.title{
   background: rgba(0,153,153, 0.50);
 }
 
-.link{
+.notification-link{
   display: none;
   float: right;
 }
@@ -79,7 +79,7 @@ div.padding_right{
 	padding-right: 20px;
 }
 
-.date{
+.notification-date{
 	font-size: 10px;
 	color:#686868;
   position:absolute; 
@@ -90,9 +90,4 @@ div.padding_right{
 
 .custom-dropdown{
   width: 400px;
-}
-
-.date-nav{
-  font-size: 10px;
-  color:#686868;
 }
