@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to action: 'confirm_deactivate'
-                flash[:notice] = '
+                      flash[:notice] = '
                 Wrong password' }
         format.json { head :no_content }
       end
@@ -165,7 +165,7 @@ class UsersController < ApplicationController
   #None
   #Author: Hisham ElGezeery.
   def edit
-   @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   #is used to update a user's info.

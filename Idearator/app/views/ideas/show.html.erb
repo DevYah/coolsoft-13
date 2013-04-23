@@ -25,11 +25,9 @@
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
   </a>
-
   <script>
     $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
   </script>
-
   <p>
     <h3><%= @idea.title %></h3>
     <div>
@@ -42,7 +40,6 @@
         <%end%>
       </div>
     </div>
-
     <%if @user==@idea.user_id%>
       <div class='btn-group'>
         <%= link_to 'Edit',edit_idea_path(@idea),:class=>'btn btn-inverse'%>
@@ -55,10 +52,8 @@
       </div>
       <h2><%=link_to @username, @idea.user.becomes(User)%></h2>
     <%end%>
-
   </p>
 </div>
-
 <div>
   <%if @chosentags != nil %>
     <% @chosentags.each do |tag|%>
@@ -66,8 +61,14 @@
     <% end %>
   <% end %>
 </div>
-
 <div class='media-body'>
+  <%if @idea.archive_status == false%>
+    <div id='show' class='container'>
+      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+      <a class="popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+    </div>
+  <%end%>
   <p>
     <h3>Description:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
@@ -76,16 +77,6 @@
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
-
-
-  <%if @idea.archive_status == false%>
-    <button id='share' class='btn btn-primary' type='button'>Share</button>
-    <div id='show' class='container'>
-      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-    </div>
-  <%end%>
-
   <p>
     <% if @idea.ratings.size > 0 %>
       <b>Ratings:-</b>
@@ -99,17 +90,3 @@
     <% end %>
   </p>
 </div>
-<script type="text/javascript">
-  function sendAjax(idea_id){
-    var list = "";
-    var i=0;
-    $('.token-input-list-facebook li p').each(function(){
-      list += "rating[]="+$(this).text()+"&";
-      i=i+1;
-
-    });
-
-    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
-  }
-</script>
-

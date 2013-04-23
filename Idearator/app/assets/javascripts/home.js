@@ -95,6 +95,20 @@ function apply_filter() {
         alert('failure');
       }
     });
+  });
+});
+
+$(document).ready(function() {
+  $(".facebook").tooltip({
+    toggle: "tooltip",
+    title: "Share on Facebook",
+  });
+  $(".twitter").tooltip({
+    toggle: "tooltip",
+    title: "Share on Twitter"
+  });
+});
+
       }else{
         alert('please choose a tag');
       }
