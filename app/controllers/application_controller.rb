@@ -24,15 +24,12 @@ class ApplicationController < ActionController::Base
   # Author: Amina Zoheir
   def load_notifications
     if user_signed_in?
-      idea_notifications = current_user.idea_notifications
-      user_notifications = current_user.user_notifications
-      unread_ideas = IdeaNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
-      unread_users = UserNotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
-      notifications = idea_notifications + user_notifications
+      unread_notifications = NotificationsUser.find(:all, :conditions => {user_id: current_user.id, read: false }).length
+      notifications = current_user.notifications
       sorted_notifications = notifications.sort_by &:created_at
       @all_notifications = sorted_notifications.reverse
       @notifications = sorted_notifications.reverse.first(7)
-      @count = unread_users + unread_ideas
+      @count = unread_notifications
     end
   end
 
