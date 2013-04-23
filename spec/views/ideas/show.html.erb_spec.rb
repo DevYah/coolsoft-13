@@ -8,16 +8,12 @@ describe "ideas/show.html.erb" do
 		@idea.problem_solved= "ay nila"
 		@idea.save
 	end
-	it "has a share button" do
-		render :template => "/ideas/show", :locals => {:idea => @idea}
-		rendered.should have_button ('Share')
-	end
 	it "has a facebook image" do
 		render :template => "/ideas/show", :locals => {:idea => @idea}
 		response.should have_tag("img", :id => "fbk")
-	end 
+	end
 	it "has a twitter image" do
 		render :template => "/ideas/show", :locals => {:idea => @idea}
 		response.should have_tag("img", :id => "tw")
-	end 
+	end
 end
