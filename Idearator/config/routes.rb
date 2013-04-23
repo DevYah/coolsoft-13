@@ -1,25 +1,14 @@
 Sprint0::Application.routes.draw do
 
-  match '/users/expertise' => 'users#expertise'
-  match '/users/new_committee_tag' => 'users#new_committee_tag'
-  match '/home/index' => 'home#index'
-
-  #get "ideas/new"
-  resources :ideas
-
   default_url_options :host => 'localhost:3000'
-  devise_for :users, :controllers => { :registrations => 'registrations',
-                                       :omniauth_callbacks => 'users/omniauth_callbacks' }
-
-  devise_scope :user do
-    match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
-  end
-
-  default_url_options :host => 'localhost:3000'
-
   root :to => 'home#index'
 
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
+                                       :registrations => 'registrations' }
+
+  devise_scope :user do
+    match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+  end
 
   resources :users do
     member do

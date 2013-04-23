@@ -19,10 +19,12 @@
 //= require bootstrap
 //= require notification_polling
 //= require jquery.purr
-s//= require best_in_place
+//= require best_in_place
 //= require_tree .
+
 before_search = false;
 var original;
+
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		if (window.location == "http://localhost:3000/"){
@@ -42,7 +44,6 @@ $(function() {
 	});
 });
 
-
 $(document).bind("ajaxError", function(e, xhr){
 	if(xhr.status == 401){
 		$('#signedout').modal('show');
@@ -54,7 +55,6 @@ $(document).ready(function() {
 		window.location= "/users/sign_in";
 	});
 });
-
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width/2)-(width/2);
@@ -70,5 +70,12 @@ $(function() {
                 $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
     e.stopPropagation();
     return false;
+  });
+
+  $("#twitter_signin_button").tooltip({
+    placement: 'bottom',
+    trigger: 'click',
+    title: 'Trying to sign in using twitter, please interact with the popup!',
+    container: 'header'
   });
 });
