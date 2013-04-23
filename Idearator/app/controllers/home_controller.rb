@@ -14,9 +14,10 @@ class HomeController < ApplicationController
   #the @approved to the ideas matching this search
   #Author: Mohamed Salah Nazir
   def index
+    @page_number = params[:myPage]
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     if(params[:myTags])
-      if(params[:myTags].length>0)
+      if(params[:myTags].length > 0)
         tags = Array(params[:myTags])
         tags.map! { |e| e.delete(' ') }
         @approved = Idea.joins(:tags).where(:tags => {:name => tags}).page(params[:myPage].to_i).per(10)
@@ -36,12 +37,23 @@ class HomeController < ApplicationController
   def search
     if params[:search].length > 0
       @search = Idea.search(params[:search])
+      @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
       respond_to do |format|
         format.html
         format.js
       end
     else
       index
+    end
+  end
+
+  def searchelse
+    if params[:search].length > 0
+      @search = Idea.search(params[:search])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 end

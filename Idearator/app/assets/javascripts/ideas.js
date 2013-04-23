@@ -3,6 +3,10 @@
 // This page's URl is then shared on The user's facebook or twitter account.
 // Author: Mohamed Sameh
 $(document).ready(function() {
+function add_sharing_handlers() {
+	$("#share").click(function() {
+		$("#show").toggle("slow");
+	});
 	$("#fbk").click(function() {
 		var pathname = window.location;
  		var fburl = 'http://www.facebook.com/sharer.php?u='+encodeURI(pathname);
@@ -28,6 +32,9 @@ $(document).ready(function() {
 		title: "Share on pin",
 
 	});
+}
+$(document).ready(add_sharing_handlers);
+
   $('.btn-success.add-rating').click(function(){
   $('.add-ratings').show();
 });
