@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   #returns a list of ideas ordered by the date of creation in pages
   #of 10 ideas.
   #Params:
