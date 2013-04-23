@@ -17,6 +17,10 @@ gem 'paperclip', '3.4.1'
 gem 'kaminari', '0.14.1'
 
 gem 'bot-away', '2.0.1'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 
 gem 'whenever', '0.8.2', :require => false
 

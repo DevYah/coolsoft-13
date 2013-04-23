@@ -27,6 +27,7 @@ RSpec.configure do |config|
   Spec.configure do |config|
     config.include Devise::TestHelpers, :type => :controller
   end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -43,4 +44,5 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include Devise::TestHelpers, :type => :controller
 end
