@@ -18,7 +18,6 @@ class IdeasController < ApplicationController
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
-        format.js
       end
     end
 
@@ -95,48 +94,49 @@ class IdeasController < ApplicationController
       end
     end
 
-    # Votes for a specific idea
-    # Params:
-    # +id+:: is used to specify the instance of +Idea+ to be voted
-    # Author: Marwa Mehannna
-    def vote
-      @idea = Idea.find(params[:id])
-      current_user.votes << @idea
-      @idea.num_votes = @idea.num_votes + 1
-      @ideaowner = User.find(@idea.user_id)
-      if @ideaowner.own_idea_notifications
-        VoteNotification.send_notification(current_user, @idea, [@ideaowner])
-      end
-      respond_to do |format|
-        if @idea.update_attributes(params[:idea])
-          format.html { redirect_to @idea, :notice =>'Thank you for voting' }
-          format.json { head :no_content }
-        else
-          format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
-          format.json { head :no_content }
-        end
+  # Votes for a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be voted
+  # Author: Marwa Mehannna
+  def vote
+    @idea = Idea.find(params[:id])
+    current_user.votes << @idea
+    @idea.num_votes = @idea.num_votes + 1
+    @ideaowner = User.find(@idea.user_id)
+    if @ideaowner.own_idea_notifications
+      VoteNotification.send_notification(current_user, @idea, [@ideaowner])
+    end
+    respond_to do |format|
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, :notice =>'Thank you for voting' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
+        format.json { head :no_content }
       end
     end
+  end
 
-    # UnVotes for a specific idea
-    # Params:
-    # +id+:: is used to specify the instance of +Idea+ to be unvoted
-    # Author: Marwa Mehannna
-    def unvote
-      @idea = Idea.find(params[:id])
-      current_user.votes.delete(@idea)
-      @idea.num_votes = @idea.num_votes - 1
-      respond_to do |format|
-        if @idea.update_attributes(params[:idea])
-           VoteCount.where(:idea_id => @idea.id).first.increment(:curr_day_votes)
-          format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-          format.json { head :no_content }
-        else
-          format.html { redirect_to @idea, alert: 'Idea is still voted' }
-          format.json { head :no_content }
-        end
+  # UnVotes for a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be unvoted
+  # Author: Marwa Mehannna
+  def unvote
+    @idea = Idea.find(params[:id])
+    current_user.votes.delete(@idea)
+    @idea.num_votes = @idea.num_votes - 1
+    respond_to do |format|
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { redirect_to @idea, alert: 'Idea is still voted' }
+        format.json { head :no_content }
       end
     end
+  end
 
     # creating new Idea
     # Params
