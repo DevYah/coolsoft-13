@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#all-tags {
+	display: none;
+}
+
+select.date-select {
+  width: 80px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+}
+
 p{
 	padding-left:20px;
 }

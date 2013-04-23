@@ -41,10 +41,23 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     flash[:alert] = @user.errors.to_a[0] if @user.errors
     redirect_to auth.fail_redirect
   end
-
+  # Finds User's authentication and redirects them to homepage.
+  #
+  # Params: None
+  #
   # Author: Menna Amr
   def facebook
-    default_oauth_callback
+    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+
+    if @user.persisted?
+      @user
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+    else
+      request.env["omniauth.auth"]
+      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
   end
 
   # Twitter oauth callback. Gets redirected to from twitter.com after

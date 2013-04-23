@@ -5,14 +5,13 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   #username is unique
   validates :username, :uniqueness => true
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  # Setup accessible (or protected) attributes for your model
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
+
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-    :username, :date_of_birth, :type, :active, :first_name, :last_name,
-    :gender, :about_me, :recieve_vote_notification, :banned,
-    :recieve_comment_notification, :provider, :uid , :photo, :approved
+                  :username, :date_of_birth, :type, :active, :first_name, :last_name,
+                  :gender, :about_me, :recieve_vote_notification, :banned,
+                  :recieve_comment_notification, :provider, :uid, :photo, :approved
 
   has_many :sent_idea_notifications, class_name: 'IdeaNotification'
   has_many :sent_user_notifications, class_name: 'UserNotification'
@@ -26,10 +25,33 @@ class User < ActiveRecord::Base
   has_many :user_notifications_users
   has_many :user_notifications, :through => :user_notifications_users
   has_and_belongs_to_many :comments, :join_table => :likes
+  has_and_belongs_to_many :ideas, :join_table => :votes
+  has_many :authorizations
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
+
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 
+  # this method finds the +User+ using the hash and creates a new +User+
+  # if no users with this email exist
+  #
+  # Params:
+  #
+  # +auth+:: omniauth authentication hash
+  # +signed_in_resource+:: Currently signed in resource. Unused.
+  #
+  #Author: Menna Amr
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(username:auth.extra.raw_info.username,
+                         provider:auth.provider,
+                         uid:auth.uid,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20])
+    end
+    user
+  end
 
   # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
   # find the user.
