@@ -22,6 +22,10 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
+    match 'like', on: :member
+    resources :comments do
+        put 'update', on: :member
+      end
     member do
       match 'vote'
       match 'unvote'
@@ -75,6 +79,19 @@ Sprint0::Application.routes.draw do
   controller :ratings do
   	match 'ratings/ajax'
   end
+
+
+  default_url_options :host => 'localhost:3000'
+  devise_for :users, :controllers => { :registrations => 'registrations' }
+
+  match '/ideas/update' => 'ideas#update'
+  devise_for :committees, :controllers => { :registrations => "registrations" }
+  match '/ideas/:id/vote' => 'ideas#vote'
+  match '/ideas/:id/unvote' => 'ideas#unvote'
+  match "/ideas/:id/archive" => "ideas#archive"
+  match "/ideas/:id/unarchive" => "ideas#unarchive"
+  resources :user_ratings, :controller => 'user_ratings'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
