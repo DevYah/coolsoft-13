@@ -98,7 +98,7 @@
             "<div class='bulb-container-comm' id='" + parseInt($(this).attr('data-idea-id')) + "'>" +
               "<div class='bulb-img'><div class='threshold-" + Math.round(this_threshold / 10) * 10 + "'></div></div>"+
               "<span class='badge badge-inverse'>" + this_threshold + "%</span>"+
-              "<p class='idea-title'>" + "<a data-remote='true' href='" + $(this).attr('data-link') + "'>" + title + "</a>" + "</p></div>"
+              "<div class='idea-title'>" + "<a data-remote='true' href='" + $(this).attr('data-link') + "'>" + title + "</a>" + "</div></div>"
             );
           this.value = 1;
           $(this).css({
@@ -143,7 +143,7 @@
             "<div class='bulb-container-own' id='" + parseInt($(this).attr('data-idea-id')) + "'>" +
               "<div class='bulb-img'><div class='threshold-" + Math.round(this_threshold / 10) * 10 + "'></div></div>"+
               "<span class='badge badge-inverse'>" + this_threshold + "%</span>"+
-              "<p class='idea-title'>" + "<a data-remote='true' href='" + $(this).attr('data-link') + "'>" + title + "</a>" + "</p></div>"
+              "<div class='idea-title'>" + "<a data-remote='true' href='" + $(this).attr('data-link') + "'>" + title + "</a>" + "</div></div>"
             );
 
           this.value = 1;
