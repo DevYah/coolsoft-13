@@ -88,7 +88,7 @@ Sprint0::Application.routes.draw do
   end
 
   controller :ratings do
-  	match 'ratings/ajax'
+    match 'ratings/ajax'
   end
 
   # The priority is based upon order of creation:
