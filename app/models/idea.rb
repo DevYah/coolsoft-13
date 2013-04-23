@@ -5,7 +5,8 @@ class Idea < ActiveRecord::Base
   belongs_to :user
   has_one :vote_count
   has_many :comments
-  has_many :idea_notifications
+  has_many :idea_notifications, :dependent => :destroy
+  has_many :delete_notifications
   has_many :ratings
   belongs_to :committee
   has_and_belongs_to_many :tags

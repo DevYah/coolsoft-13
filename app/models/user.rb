@@ -15,17 +15,15 @@ class User < ActiveRecord::Base
                   :gender, :about_me, :recieve_vote_notification, :banned,
                   :recieve_comment_notification, :provider, :uid , :photo, :approved
 
-  has_many :idea_notifications
-  has_many :user_notifications
-  has_many :sent_idea_notifications, class_name: 'IdeaNotification'
-  has_many :sent_user_notifications, class_name: 'UserNotification'
+  has_many :idea_notifications, :dependent => :destroy
+  has_many :user_notifications, :dependent => :destroy
+  has_many :delete_notifications, :dependent => :destroy
+  has_many :sent_notifications, class_name: 'Notification'
   has_many :ideas
   has_many :comments
   has_many :user_ratings
-  has_many :idea_notifications_users
-  has_many :idea_notifications, :through => :idea_notifications_users
-  has_many :user_notifications_users
-  has_many :user_notifications, :through => :user_notifications_users
+  has_many :notifications_users
+  has_many :notifications, :through => :notifications_users
   has_and_belongs_to_many :comments, :join_table => :likes
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
