@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CommentNotification do
-  it 'adds comment notification to idea_notifications table'do 
+  it 'adds comment notification to idea_notifications table'do
     user1 = User.create(email: 'amina@gmail.com', password: '123123123', username: 'amina')
     user2 = User.create(email: 'marwa@gmail.com', password: '123123123', username: 'marwa')
     idea = Idea.create(title: 'Idea', description: 'Idea Description', problem_solved: 'Problem')
