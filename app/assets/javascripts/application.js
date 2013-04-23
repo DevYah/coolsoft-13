@@ -43,7 +43,3 @@ $(document).ready(function() {
     window.location= "/users/sign_in";
   });
 });
-
-
-
-
