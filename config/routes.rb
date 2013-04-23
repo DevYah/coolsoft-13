@@ -1,13 +1,19 @@
 Sprint0::Application.routes.draw do
-  default_url_options :host => 'localhost:3000'
 
+  match '/users/new_committee_tag' => 'users#new_committee_tag'
+  match '/home/index' => 'home#index'
+  default_url_options :host => 'localhost:3000'
   root :to => 'home#index'
 
-  devise_for :users, :controllers => { :registrations => 'registrations',
-                                       :omniauth_callbacks => 'users/omniauth_callbacks' }
+  get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
+
+  default_url_options :host => "localhost:3000"
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
   devise_scope :user do
-    match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
   end
 
   resources :users do
@@ -106,4 +112,8 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
 end

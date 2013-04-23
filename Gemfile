@@ -12,11 +12,9 @@ gem 'jquery-rails', '2.2.1'
 gem 'jquery-tokeninput-rails', '1.6.0'
 gem 'bootstrap-sass', '2.3.1.0'
 gem 'google_visualr', '2.1.7'
-
 gem 'paperclip', '3.4.1'
-
+gem 'tlsmail'
 gem 'kaminari', '0.14.1'
-
 gem 'bot-away', '2.0.1'
 
 group :assets do

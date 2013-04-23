@@ -21,8 +21,14 @@
   <% if not user_signed_in? %>
     <li><%= link_to('Sign in', new_user_session_path) %></li>
     <li>
-    <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter), :id => 'twitter_signin_button',
-                :class => 'popup', 'data-width' => 600, 'data-height' => 500  %>
+    <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
+                 :class => 'popup social-media-login facebook',
+                 "data-width" => 600, "data-height" => 500 %>
+    </li>
+    <li>
+    <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
+                :class => 'popup social-media-login twitter',
+                'data-width' => 600, 'data-height' => 500  %>
     </li>
   <% elsif current_user.is_a? Committee || !current_user.ideas.empty? %>
     <li><%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %></li>
