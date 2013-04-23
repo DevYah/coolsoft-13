@@ -1,0 +1,18 @@
+*           text=auto
+
+*.html      text diff=html eol=lf
+*.html.erb  text diff=html eol=lf
+*.htm       text diff=html eol=lf
+*.css       text eol=lf
+*.js        text eol=lf
+*.js.erb    text eol=lf
+*.rb        text diff=ruby eol=lf
+*.yml       text eol=lf
+
+*.jpg      -text
+*.JPG      -text
+*.png      -text
+*.PNG      -text
+*.bmp      -text
+*.BMP      -text
+*.pdf      -text
