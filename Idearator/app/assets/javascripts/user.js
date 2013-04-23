@@ -4,12 +4,12 @@
 //Author: Menna Amr
 
 $(function() {
-	$("#is-committee").on("change", function(){
+  $("#is-committee").on("change", function(){
 
-		c = $(this).is(":checked");
-		toggle_all_tags(c);
-	})
-}) 
+    c = $(this).is(":checked");
+    toggle_all_tags(c);
+  })
+})
 
 //This method handles the visibility of the tags
 //of which the user can choose from, depending on
@@ -18,13 +18,12 @@ $(function() {
 //Author: Menna Amr
 function toggle_all_tags(committee) {
 
-	if (!committee){
+  if (!committee){
 
-		$("#all-tags").slideUp();
-	}
-	else {
+    $("#all-tags").slideUp();
+  }
+  else {
 
-		$("#all-tags").slideDown();
-	}
-
+    $("#all-tags").slideDown();
+  }
 }
