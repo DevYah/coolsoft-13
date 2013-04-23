@@ -1,4 +1,26 @@
-<div id='fb-root'></div>
+<% if current_user %>
+  <% if current_user.type == "Committee" %>
+    <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
+      <div id='approve-btns'>
+        <button class = 'btn btn-success add-rating'>Approve</button>
+        <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
+      </div>
+      <div class='add-ratings'style="display: none;" >
+        <h3>Add Prespectives</h3>
+        <input type="text" class="rating_complete" name="blah2" />
+        <ul id="rating">
+        </ul>
+        <div id ="flash">
+        </div>
+        <div id ="ratings">
+          <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<div id="fb-root"></div>
+<p id="notice"><%= notice %></p>
 <div class='media'>
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
@@ -50,11 +72,11 @@
     <h3>Description:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
   </p>
-
   <p>
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
+
 
   <%if @idea.archive_status == false%>
     <button id='share' class='btn btn-primary' type='button'>Share</button>
@@ -77,3 +99,17 @@
     <% end %>
   </p>
 </div>
+<script type="text/javascript">
+  function sendAjax(idea_id){
+    var list = "";
+    var i=0;
+    $('.token-input-list-facebook li p').each(function(){
+      list += "rating[]="+$(this).text()+"&";
+      i=i+1;
+
+    });
+
+    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+  }
+</script>
+

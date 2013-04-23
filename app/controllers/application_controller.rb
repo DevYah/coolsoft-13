@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!, :only => [:load_notifications, :update_nav_bar]
   before_filter :load_notifications
   protect_from_forgery
+
   # redirect committee members to controller user action expertise for their first sign in
   # Params:
   # none
@@ -17,7 +18,6 @@ class ApplicationController < ActionController::Base
       '/'
     end
   end
-
 
   # gets first 10 current users notifications and the number of unread notificaations.
   # Params: none.

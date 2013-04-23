@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update, :vote, :unvote]
 
   # view idea of current user
   # Params
@@ -13,8 +13,8 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @ideavoted = current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     end
-    @ideavoted = @current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @idea }
@@ -46,6 +46,7 @@ class IdeasController < ApplicationController
       format.json  { render :json => @approved }
     end
   end
+
 
   # editing Idea
   # Params
@@ -88,7 +89,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
       else
-        format.html { render :action => 'edit'}
+        format.html { render :action => 'edit' }
         format.json { respond_with_bip(@idea) }
       end
     end
@@ -152,7 +153,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
-        format.html { render action: 'new'}
+        format.html { render action: 'new' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
@@ -191,7 +192,6 @@ class IdeasController < ApplicationController
       end
     end
   end
-
 
   def archive
     idea = Idea.find(params[:id])
@@ -241,6 +241,34 @@ class IdeasController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  #adds the rating prespectives taken from the user from the add_prespectives view
+  #to the idea reviewed
+  # Params
+  #+params[:ratings]+ ratings prespectives taken from the user
+  #+session[:idea_id] id of the idea to be reviewed
+  #Author : Omar Kassem
+  def add_rating
+    if current_user.type == 'Committee'
+      @idea=Idea.find(params[:id])
+      @idea.approved = true
+      @idea.save
+      @rating = params[:rating]
+      @rating.each do |rate|
+        r = Rating.find(:all, :conditions => {:name => rate})
+        @idea.ratings << r
+        @idea.save
+      end
+      respond_to do |format|
+        format.js {render "add_rating"}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
         format.json { head :no_content }
       end
     end
