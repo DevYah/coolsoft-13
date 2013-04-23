@@ -1,13 +1,14 @@
-// Place all the styles related to the idea controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+p{
+	display: inline ;
+}
 
 .addthis_button_facebook, .addthis_button_twitter {
   padding-left:10px;
 }
 
 #facebook, #twitter {
-	display:none; 
+	display:none;
 	padding-left:100px;
 	padding-top:0px;
 	padding-bottom:0px;
@@ -17,4 +18,15 @@
 #show{
 	padding-top:0px;
 	padding-left:60px;
+}
+
+.purr {
+  position: fixed;
+  top: 30px;
+  right: 100px;
+  width: 250px;
+  padding: 20px;
+  background-color: #FCC;
+  border: solid 2px #666;
+  &:first-letter { text-transform: uppercase };
 }
