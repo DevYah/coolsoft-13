@@ -38,7 +38,7 @@ $(document).ready(add_sharing_handlers);
   $('.btn-success.add-rating').click(function(){
   $('.add-ratings').show();
 });
-});
+
 
 $(document).ready(function() {
   var prePopulate = [];
