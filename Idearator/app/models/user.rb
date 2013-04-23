@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
 
-  has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+  has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => 'user-default.png'
 
   # this method finds the +User+ using the hash and creates a new +User+
   # if no users with this email exist
