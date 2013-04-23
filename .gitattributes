@@ -9,10 +9,10 @@
 *.rb        text diff=ruby eol=lf
 *.yml       text eol=lf
 
-*.jpg      -text
-*.JPG      -text
-*.png      -text
-*.PNG      -text
-*.bmp      -text
-*.BMP      -text
-*.pdf      -text
+*.jpg       binary
+*.JPG       binary
+*.png       binary
+*.PNG       binary
+*.bmp       binary
+*.BMP       binary
+*.pdf       binary
