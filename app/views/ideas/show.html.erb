@@ -25,10 +25,11 @@
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
   </a>
-
+<% if @user == @idea.user_id%>
   <script>
     $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
   </script>
+  <% end %>
 
   <p>
     <h3><%= @idea.title %></h3>
