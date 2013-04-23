@@ -57,9 +57,9 @@ Sprint0::Application.routes.draw do
   # Dashboard routes
   controller :dashboard do
     match 'dashboard/index'
-    match 'dashboard/getallideas'
-    match 'dashboard/gettags'
-    match 'dashboard/getideas'
+    match 'getallideas'
+    match 'gettags'
+    match 'getideas'
   end
 
   # Notifications routes
