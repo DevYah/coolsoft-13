@@ -49,7 +49,6 @@ class CommentsController < ApplicationController
     @idea = Idea.find(params[:idea_id])
   end
 
-<<<<<<< HEAD
   def update
     @comment = Comment.find(params[:id])
     @idea = Idea.find(params[:idea_id])
@@ -61,18 +60,6 @@ class CommentsController < ApplicationController
         format.html { render :action => "edit" }
         format.json { respond_with_bip(@comment) }
       end
-=======
- def update
-  @comment = Comment.find(params[:id])
-  @idea = Idea.find(params[:idea_id])
-  respond_to do |format|
-   if @comment.update_attributes(params[:comment])
-      format.html { redirect_to(@idea, :notice => 'Comment was successfully updated.') }
-      format.json { respond_with_bip(@comment) }
-    else
-      format.html { render :action => "edit" }
-      format.json { respond_with_bip(@comment) }
->>>>>>> 11492d0774f2ebb0f196979984e7000a403ad581
     end
   end
 
