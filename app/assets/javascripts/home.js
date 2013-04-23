@@ -1,4 +1,4 @@
-$(window).load(function(){
+function apply_infinite_scrolling() {
 
   var page = 1,
   loading = false;
@@ -6,7 +6,12 @@ $(window).load(function(){
   function nearBottomOfPage() {
     return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
   }
-
+  function passedPage1() {
+    return $(window).scrollTop() > 600;
+  }
+  function backToTop() {
+    return $(window).scrollTop() < 600;
+  }
   $('#filter').click(function() {
     page = 1;
   });
@@ -15,12 +20,18 @@ $(window).load(function(){
     if (loading) {
       return;
     }
-    if(nearBottomOfPage()) {
+    if(passedPage1()){
+      $('.backtotop').show();
+    }
+    if(backToTop()){
+      $('.backtotop').hide();
+    }
+    if(nearBottomOfPage() && $("#search").val() == '') {
       loading=true;
       page++;
       var array = [];
       var i = 0;
-      $('#tags label').each(function() {
+      $('.tags li label').each(function() {
         array[i] = $(this).text();
         i++;
       });
@@ -42,31 +53,38 @@ $(window).load(function(){
         // failed request; give feedback to user
       }
     });
+
     }
   });
 
-  $('#click').click(function(){
-    $('#fil').toggleClass('hidden');
-  });
+  apply_filter();
+}
 
-  $("#input-facebook-theme").tokenInput('/tags/ajax', {
-    theme: "facebook",
-    preventDuplicates: true,
-    tokenLimit: 5
-  });
-
-  $('#filter').click(function() {
-    var array = [];
-    var i = 0;
-    $('.token-input-list-facebook li p').each(function() {
-      array[i] = $(this).text();
-      i++;
+function apply_filter() {
+  if($('.token-input-list-facebook').length==0){
+    $('#click').click(function(){
+      $('#fil').toggleClass('hidden');
     });
-    $.ajax({
-      type: 'POST',
-      url: '/ideas/filter',
-      data: { myTags : array },
-      beforeSend:function(){
+
+    $("#input-facebook-theme").tokenInput('/tags/ajax', {
+      theme: "facebook",
+      preventDuplicates: true,
+      tokenLimit: 5
+    });
+
+    $('#filter').click(function() {
+      var array = [];
+      var i = 0;
+      $('.token-input-list-facebook li p').each(function() {
+        array[i] = $(this).text();
+        i++;
+      });
+      if(array.length>0){
+        $.ajax({
+          type: 'POST',
+          url: '/ideas/filter',
+          data: { myTags : array },
+          beforeSend:function(){
       // this is where we append a loading image
       //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
     },
@@ -90,3 +108,12 @@ $(document).ready(function() {
     title: "Share on Twitter"
   });
 });
+
+      }else{
+        alert('please choose a tag');
+      }
+    });
+
+  }
+}
+$(document).ready(apply_infinite_scrolling);
