@@ -13,9 +13,10 @@
 //= require jquery_ujs
 //= require jquery.tokeninput
 //= require jquery-ui
+//= require best_in_place
+//= require notification_polling
 //= require bootstrap
 //= require_tree .
-//= require notification_polling
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
