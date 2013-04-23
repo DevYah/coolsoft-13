@@ -1,6 +1,7 @@
 
 source 'https://rubygems.org'
 
+
 gem 'rails', '3.2.13.rc1'
 gem 'sqlite3', '1.3.7'
 
@@ -31,8 +32,9 @@ gem 'jquery-star-rating-rails'
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
-  gem 'rspec-rails', '2.13.0'
-  gem 'factory_girl_rails', '4.2.1'
+  gem 'rspec-rails', '~> 2.13.0'
+  gem 'factory_girl_rails', '~> 4.2.1'
+  gem 'simplecov', :require => false
 end
 
 group :test do
@@ -43,6 +45,9 @@ group :test do
   gem 'launchy', '2.2.0'
   gem 'rspec-html-matchers', '0.4.1'
 end
+
+
+
 
 
 # To use ActiveModel has_secure_password

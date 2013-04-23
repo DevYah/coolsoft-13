@@ -1,4 +1,25 @@
-<div id='fb-root'></div>
+<% if current_user %>
+  <% if current_user.type == "Committee" %>
+    <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
+      <div id='approve-btns'>
+        <button class = 'btn btn-success add-rating'>Approve</button>
+        <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
+      </div>
+      <div class='add-ratings'style="display: none;" >
+        <h3>Add Prespectives</h3>
+        <input type="text" class="rating_complete" name="blah2" />
+        <ul id="rating">
+        </ul>
+        <div id ="flash">
+        </div>
+        <div id ="ratings">
+          <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<div id="fb-root"></div>
 <div class='media'>
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
@@ -9,10 +30,10 @@
   <p>
     <h3><%= @idea.title %></h3>
     <div>
-      <div id ='change_vote' class = 'pull-right'>
+      <div id ='change_vote' class = 'pull-right archive_status'>
         <span><h2><%= @idea.num_votes %></h2></span>
         <%if @ideavoted.nil? %>
-          <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-inverse' %>
+          <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class => 'btn btn-success' %>
         <% else %>
           <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-danger' %>
         <%end%>
@@ -24,9 +45,9 @@
         <% if @idea.archive_status == true %>
           <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
         <% else %>
-          <a data-toggle='modal' data-target='#archive-modal' class='btn btn-danger btn-archive'>Archive</a>
+          <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
         <% end %>
-        <%= link_to 'Delete', idea_path(@idea), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+        <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
       </div>
       <div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
         <div class="modal-header">
@@ -34,11 +55,24 @@
           <h3>Are you sure you want to archive?!</h3>
         </div>
         <div class="modal-body">
-          <p>If you Archive the idea, all votes and comments will be deleted!</p>
+          <p>If you Archive the idea, all votes, comments and ratings will be deleted!</p>
         </div>
         <div class="modal-footer">
-            <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
-            <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal' %>
+          <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
+          <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+        </div>
+      </div>
+      <div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3>Are you sure you want to delete?!</h3>
+        </div>
+        <div class="modal-body">
+          <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
+        </div>
+        <div class="modal-footer">
+          <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
+          <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
         </div>
       </div>
       <h2><%=link_to @username, @idea.user.becomes(User)%></h2>
@@ -61,8 +95,7 @@
     <h3>Problem Solved:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
   </p>
-
-  <%if @idea.archive_status == false%>
+  <div class='archive_status'>
     <p>
       <% if @idea.ratings.size > 0 %>
         <table>
@@ -78,38 +111,53 @@
         </table>
       <% end %>
     </p>
-
     <button id='share' class='btn btn-primary' type='button'>Share</button>
-
     <div id='show' class='container'>
       <%= image_tag('f_logo.jpg', :id => 'fbk')%>
       <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
     </div>
-  <%end%>
-</div>
-<legend><h4 class ="title2">Comments</h4></legend>
-<div id='comments'>
-  <div id='comment-partial'>
-    <%= render partial: '/comments/comment', locals: { user: @user, idea: @idea } %>
   </div>
-</div>
-<div class = "addComment">
-  <h5 class = "title1">Add a comment:</h5>
-  <%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
-    <div class="controls">
-      <div class ="textArea1" >
-        <%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+  <legend><h4 class ="title2 archive_status">Comments</h4></legend>
+  <div id='comments' class='archive_status'>
+    <div id='comment-partial'>
+      <%= render partial: '/comments/comment', locals: { user: @user, idea: @idea } %>
+    </div>
+  </div>
+  <div class = "addComment archive_status">
+    <h5 class = "title1">Add a comment:</h5>
+    <%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
+      <div class="controls">
+        <div class ="textArea1" >
+          <%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
+        </div>
       </div>
-    </div>
-    <%= f.submit nil, :class => 'btn btn-small btn-primary' %>
+      <%= f.submit nil, :class => 'btn btn-small btn-primary' %>
+    <% end %>
+    <td><%= link_to 'Back', '/',:class => "btn" %></td>
+    <%if @idea.archive_status == false%>
+      <button id='share' class='btn btn-primary' type='button'>Share</button>
+      <div id='show' class='container'>
+        <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+        <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+        <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+      </div>
+    <%end%>
+  </div>
+  <script type="text/javascript">
+    function sendAjax(idea_id){
+      var list = "";
+      var i=0;
+      $('.token-input-list-facebook li p').each(function(){
+        list += "rating[]="+$(this).text()+"&";
+        i=i+1;
+
+      });
+
+      $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+    }
+  </script>
+  <% if @idea.archive_status == true %>
+    <script type='text/javascript'>
+      $('.archive_status').toggle();
+    </script>
   <% end %>
-  <td><%= link_to 'Back', '/',:class => "btn" %></td>
-  <%if @idea.archive_status == false%>
-    <button id='share' class='btn btn-primary' type='button'>Share</button>
-    <div id='show' class='container'>
-      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-      <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
-    </div>
-  <%end%>
-</div>
