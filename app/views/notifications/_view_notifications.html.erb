@@ -1,4 +1,4 @@
-<%if @notifications.length > 0 %>  
+<%if @notifications.length > 0 %>
   <%if user_signed_in?%>
     <% @notifications.each do |notification| %>
       <%= render partial: 'notifications/view', locals: {notification: notification} %>
@@ -7,5 +7,6 @@
           action: 'view_all_notifications')%></div></li>
   <% end %>
 <%else%>
-  <li class="disabled"><a> You dont have any notifications</a></li>
+  <li class="disabled"><a>
+      You dont have any notifications</a></li>
 <%end%>

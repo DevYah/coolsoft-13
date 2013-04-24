@@ -5,12 +5,14 @@ gem 'rails', '3.2.13.rc1'
 gem 'sqlite3', '1.3.7'
 
 gem 'devise', '2.2.3'
+gem 'omniauth', '1.1.3'
+gem 'omniauth-facebook', '1.4.1'
+gem 'omniauth-twitter', '0.0.16'
 
 gem 'jquery-rails', '2.2.1'
 gem 'jquery-tokeninput-rails', '1.6.0'
 gem 'bootstrap-sass', '2.3.1.0'
 gem 'google_visualr', '2.1.7'
-
 gem 'paperclip', '3.4.1'
 
 gem 'kaminari', '0.14.1'
@@ -31,8 +33,8 @@ end
 group :test, :development do
   gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
-  gem 'rspec-rails', '2.13.0'
-  gem 'factory_girl_rails', '4.2.1'
+  gem 'rspec-rails', '~> 2.13.0'
+  gem 'factory_girl_rails', '~> 4.2.1'
 end
 
 group :test do
@@ -41,8 +43,8 @@ group :test do
   gem 'guard-rspec', '2.5.3'
   gem 'launchy', '2.2.0'
   gem 'rspec-html-matchers', '0.4.1'
+  gem 'simplecov', '0.7.1'
 end
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
