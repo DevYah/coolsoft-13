@@ -117,47 +117,22 @@
       <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
     </div>
   </div>
-  <legend><h4 class ="title2 archive_status">Comments</h4></legend>
-  <div id='comments' class='archive_status'>
-    <div id='comment-partial'>
-      <%= render partial: '/comments/comment', locals: { user: @user, idea: @idea } %>
-    </div>
-  </div>
-  <div class = "addComment archive_status">
-    <h5 class = "title1">Add a comment:</h5>
-    <%= form_for([@idea, @idea.comments.create], remote: true) do |f| %>
-      <div class="controls">
-        <div class ="textArea1" >
-          <%= f.text_area :content ,:size => "6x6",:class => 'text_area',:placeholder=>"Write comment here..."%>
-        </div>
-      </div>
-      <%= f.submit nil, :class => 'btn btn-small btn-primary' %>
-    <% end %>
-    <td><%= link_to 'Back', '/',:class => "btn" %></td>
-    <%if @idea.archive_status == false%>
-      <button id='share' class='btn btn-primary' type='button'>Share</button>
-      <div id='show' class='container'>
-        <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-        <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-        <a href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
-      </div>
-    <%end%>
-  </div>
-  <script type="text/javascript">
-    function sendAjax(idea_id){
-      var list = "";
-      var i=0;
-      $('.token-input-list-facebook li p').each(function(){
-        list += "rating[]="+$(this).text()+"&";
-        i=i+1;
+</div>
+<script type="text/javascript">
+  function sendAjax(idea_id){
+    var list = "";
+    var i=0;
+    $('.token-input-list-facebook li p').each(function(){
+      list += "rating[]="+$(this).text()+"&";
+      i=i+1;
 
-      });
+    });
 
-      $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
-    }
+    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+  }
+</script>
+<% if @idea.archive_status == true %>
+  <script type='text/javascript'>
+    $('.archive_status').toggle();
   </script>
-  <% if @idea.archive_status == true %>
-    <script type='text/javascript'>
-      $('.archive_status').toggle();
-    </script>
-  <% end %>
+<% end %>
