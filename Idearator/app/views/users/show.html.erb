@@ -14,18 +14,24 @@
   <p class='text-error'>This User is currently deactivated!</p>
 <% end %>
 
-<div class='options'>
+<div class='options' style="display: inline">
   <% if current_user == @user %>
     <div class= 'btn'><%= link_to "Edit" , edit_user_registration_path %></div>
   <% end %>
 </div>
 
-<% if @admin != nil && @admin.type == 'Admin' && @user.active == true && @user.banned == false %>
+<% if @admin != nil && @admin.type == 'Admin' && @user.active == true && @user.banned == false && @admin.id != @user.id%>
   <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
 <% end %>
-<% if @admin != nil && @admin.type == 'Admin' && @user.banned==true %>
+<% if @admin != nil && @admin.type == 'Admin' && @user.banned==true && @admin.id != @user.id%>
   <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?', :class => 'options btn btn-success' %>
 <% end %>
+<div style="display: inline">
+  <% if @admin != nil && @admin.type == 'Committee' && @admin.id == @user.id%>
+    <%= link_to 'Review Ideas', { :controller => 'committees', :action => 'review_ideas' }, :class => 'btn' %>
+  <% end %>
+</div>  
+
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
     <div class='user-photo'>
@@ -113,7 +119,7 @@
     User Ideas
   </h2>
   <%= render :partial => "stream" %>
-  <div class='new-idea'>
+  <div class='new-idea' >
     <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
   </div>
   <div>
