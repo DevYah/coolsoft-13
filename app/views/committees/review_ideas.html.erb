@@ -1,6 +1,6 @@
 <% if current_user %>
   <% if @committee.type == "Committee" %>
-    <%= render :partial => "stream" %>
+    <%= render '/ideas/unapproved_stream_component' %>
     <% if @ideas.count == 0 %>
       <h2>No ideas to review</h2>
     <% end %>
