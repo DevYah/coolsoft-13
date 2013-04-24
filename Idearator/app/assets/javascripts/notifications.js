@@ -5,13 +5,11 @@ function add_notification_event_handlers() {
   });
 
   $('div.idea-notification').click(function () {
-    //var idea = this.getAttribute('data-idea');
     var notification = $(this).data('notification');
     $.getScript("/redirect_idea.js?&notification=" + notification);
   });
 
   $('div.approve-committee-notification').click(function () {
-    //var user = this.getAttribute('data-user');
     var notification = $(this).data('notification');
     $.getScript("/redirect_review.js?&notification=" + notification);
   });
