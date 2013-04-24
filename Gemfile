@@ -31,8 +31,6 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
-  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails', '~> 4.2.1'
 end
