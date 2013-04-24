@@ -6,10 +6,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 p.same_line{
-	display: inline;
+  display: inline;
 }
 
-.row .notification{
+.content .notification{
 	border-radius: 5px;
 	margin: 10px;
 	cursor: pointer;
@@ -33,28 +33,27 @@ p.same_line{
 }
 
 div.centered{
-	padding: 8px;
+  padding: 8px;
 }
 
 h3.title{
-	margin: 11px;
-	font-size: 20px;
+  margin: 11px;
+  font-size: 20px;
 }
 
 .unread-drop{
-	background: rgba(0,153,153, 0.05);
+  background: rgba(0,153,153, 0.05);
 }
 
-
-.row .notification:hover .notification-link{
+.content .notification:hover .notification-link{
   display: inline;
 }
 
-.row .notification.read:hover {
+.content .notification.read:hover {
   background: rgba(0, 0, 0, 0.20);
 }
 
-.row .notification.unread:hover {
+.content .notification.unread:hover {
   background: rgba(0,153,153, 0.50);
 }
 
@@ -76,7 +75,7 @@ h3.title{
 }
 
 div.padding_right{
-	padding-right: 20px;
+  padding-right: 20px;
 }
 
 .notification-date{
