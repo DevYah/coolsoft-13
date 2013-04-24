@@ -84,4 +84,21 @@ class User < ActiveRecord::Base
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end
+
+  def new_notifications(after)
+    notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', self.becomes(User), Time.at(after.to_i + 1))
+    sorted_notifications = notifications.sort_by &:created_at
+    new_notifications = sorted_notifications.reverse
+  end
+
+  def get_notifications
+    notifications = self.notifications
+    sorted_notifications = notifications.sort_by &:created_at
+    all_notifications = sorted_notifications.reverse
+  end
+
+  def unread_notifications_count
+    NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
 end
