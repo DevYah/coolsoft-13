@@ -2,7 +2,7 @@
   <% @ideas.each do |approved| %>
     <% if approved.user.active == true and approved.user.banned == false %>
       <div id='idea-<%= approved.id %>'>
-        <div class="span8 row" id="share">
+        <div class="row" id="share">
           <div class="wrapper row">
             <div class="span2"><%= image_tag approved.photo.url(:medium) %></div>
             <div class="span6">

@@ -7,19 +7,16 @@
     User's Profile
   <% end %>
 </h1>
-
 <% if @user.banned == true %>
   <p class='text-error'>This User is currently banned!</p>
 <% elsif @user.active == false %>
   <p class='text-error'>This User is currently deactivated!</p>
 <% end %>
-
 <div class='options' style="display: inline">
   <% if current_user == @user %>
     <div class= 'btn'><%= link_to "Edit" , edit_user_registration_path %></div>
   <% end %>
 </div>
-
 <% if @admin != nil && @admin.type == 'Admin' && @user.active == true && @user.banned == false && @admin.id != @user.id%>
   <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
 <% end %>
@@ -30,8 +27,7 @@
   <% if @admin != nil && @admin.type == 'Committee' && @admin.id == @user.id%>
     <%= link_to 'Review Ideas', { :controller => 'committees', :action => 'review_ideas' }, :class => 'btn' %>
   <% end %>
-</div>  
-
+</div>
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
     <div class='user-photo'>
@@ -41,7 +37,7 @@
       <dl class='dl-horizontal'>
         <dt>Email</dt>
         <dd><%= @user.email %></dd>
-        <br>
+        <br />
         <% if @user != current_user %>
           <dt>First Name</dt>
           <dd>
@@ -51,7 +47,7 @@
               Not specified
             <% end %>
           </dd>
-          <br>
+          <br />
           <dt>Last Name</dt>
           <dd>
             <% if @user.last_name != "" and @user.last_name %>
@@ -60,8 +56,9 @@
               Not specified
             <% end %>
           </dd>
-          <br>
-          <dt>Date of birth </dt>
+          <br />
+          <dt>Date of birth
+          </dt>
           <dd>
             <% if @user.date_of_birth != "" and @user.date_of_birth %>
               <%= @user.date_of_birth %>
@@ -69,7 +66,7 @@
               Not specified
             <% end %>
           </dd>
-          <br>
+          <br />
           <dt>Gender</dt>
           <dd>
             <% if @user.gender != "" and @user.gender %>
@@ -83,17 +80,18 @@
           <dd>
             <%= best_in_place @user.becomes(User), :first_name, :nil => 'click to specify your first name' %>
           </dd>
-          <br>
+          <br />
           <dt>Last Name</dt>
           <dd>
             <%= best_in_place @user.becomes(User), :last_name, :nil => 'click to specify your last name' %>
           </dd>
-          <br>
-          <dt>Date of birth </dt>
+          <br />
+          <dt>Date of birth
+          </dt>
           <dd>
             <%= best_in_place @user.becomes(User), :date_of_birth, :type => 'date', :nil => 'not specified' %>
           </dd>
-          <br>
+          <br />
           <dt>Gender</dt>
           <dd>
             <%= best_in_place @user.becomes(User), :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
@@ -102,7 +100,7 @@
       </dl>
       <dl id='user-about'>
         <dt>About User</dt>
-        <br>
+        <br />
         <dd>
           <% if current_user == @user %>
             <%= best_in_place @user.becomes(User), :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
@@ -110,7 +108,7 @@
             <%= @user.about_me %>
           <% else %>
             Not specified
-          <% end %>
+            <% end %>
         </dd>
       </dl>
     </div>
@@ -119,7 +117,7 @@
     User Ideas
   </h2>
   <%= render :partial => "stream" %>
-  <div class='new-idea' >
+  <div class='new-idea'>
     <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
   </div>
   <div>
