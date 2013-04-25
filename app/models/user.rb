@@ -101,4 +101,25 @@ class User < ActiveRecord::Base
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
   end
 
+def vote_for(idea)
+  self.votes << idea
+  if idea.user.own_idea_notifications
+  VoteNotification.send_notification(self, idea, [idea.user])
+  end
+  idea.save
+end
+
+def unvote_for(idea)
+  self.votes.delete(idea)
+  idea.save
+end
+
+def voted_for?(idea)
+  if self.votes.detect { |w|w.id == idea.id }
+    false
+  else
+    true
+  end
+end
+
 end
