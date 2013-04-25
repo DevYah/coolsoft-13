@@ -3,6 +3,7 @@
 // This page's URl is then shared on The user's facebook or twitter account.
 // Author: Mohamed Sameh
 $(document).ready(function() {
+function add_sharing_handlers() {
 	$("#share").click(function() {
 		$("#show").toggle("slow");
 	});
@@ -29,11 +30,15 @@ $(document).ready(function() {
 	$("#pin").tooltip({
 		toggle: "tooltip",
 		title: "Share on pin",
+
 	});
+}
+$(document).ready(add_sharing_handlers);
+
   $('.btn-success.add-rating').click(function(){
-    $('.add-ratings').show();
-  });
+  $('.add-ratings').show();
 });
+
 
 $(document).ready(function() {
   var prePopulate = [];
@@ -63,4 +68,3 @@ $(document).ready(function() {
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
 });
-
