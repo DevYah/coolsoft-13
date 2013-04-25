@@ -7,7 +7,7 @@ class Idea < ActiveRecord::Base
   validates_length_of :problem_solved, :maximum => 1000
 
   belongs_to :user
-  has_one :vote_count
+  has_one :daily_vote_count, class_name: 'VoteCount'
   has_many :comments
   has_many :idea_notifications, :dependent => :destroy
   has_many :delete_notifications
