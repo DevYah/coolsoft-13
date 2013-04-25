@@ -24,6 +24,7 @@
 
 before_search = false;
 var original;
+
 $(function() {
 	$("#searchdiv input").keyup(function(){
 		if (window.location == "http://localhost:3000/"){

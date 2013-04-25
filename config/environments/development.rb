@@ -26,6 +26,7 @@ Sprint0::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
+
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   require 'tlsmail'
   Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)

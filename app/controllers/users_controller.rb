@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-
-  before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :new_committee_tag, :change_settings]
+  before_filter :authenticate_user!, :only => [:deactivate, :confirm_deactivate, :activate, :expertise, :change_settings]
 
   # displays a form where the user enters his password to confrim deactivation.
   # Params: none
@@ -20,6 +19,7 @@ class UsersController < ApplicationController
     else
       @password = params[:user][:password]
     end
+
     if current_user.valid_password?(@password)
       current_user.active = false
       current_user.save
@@ -31,10 +31,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to action: 'confirm_deactivate'
-                flash[:notice] = '
-                Wrong password'}
-                      flash[:notice] = '
-                Wrong password' }
+                      flash[:notice] = 'Wrong password' }
         format.json { head :no_content }
       end
     end
@@ -64,7 +61,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # This method creates a new User and calls UserMailer to send a confirmation email.
+  #Author: Menna Amr
+  def create
+    @user = User.new(params[:user])
 
+    respond_to do |format|
+      if @user.save
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(@user).deliver
+
+        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+        format.json { render :json => @user, :status => :created, :location => @user }
+      else
+        format.html { render :action => 'new' }
+        format.json { render :json => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 
   # Enter chosen notification settings chosen by user in table User
   # Params:
@@ -72,27 +86,27 @@ class UsersController < ApplicationController
   # Author: Mohamed Sameh
   def change_settings
     if params[:user] != nil
-      settings= params[:user]
-      s= User.find(current_user)
+      settings = params[:user]
+      s = User.find(current_user)
       if settings.include?('1')
-        s.own_idea_notifications= true
+        s.own_idea_notifications = true
       else
-        s.own_idea_notifications= false
+        s.own_idea_notifications = false
       end
       if settings.include?('2')
-        s.participated_idea_notifications= true
+        s.participated_idea_notifications = true
       else
-        s.participated_idea_notifications= false
+        s.participated_idea_notifications = false
       end
       s.save
     else
       s= User.find(current_user)
-      s.own_idea_notifications= false
-       s.participated_idea_notifications= false
+      s.own_idea_notifications = false
+      s.participated_idea_notifications = false
       s.save
     end
     respond_to do |format|
-      format.js {}
+      format.js { }
     end
   end
 
@@ -121,4 +135,5 @@ class UsersController < ApplicationController
       end
     end
   end
+
 end
