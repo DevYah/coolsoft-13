@@ -68,4 +68,3 @@ $(document).ready(function() {
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
 });
-
