@@ -11,16 +11,14 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require jquery_purr
 //= require best_in_place
-//= require bootstrap
 //= require notification_polling
 //= require jquery.purr
-//= require best_in_place
-//= require_tree .
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
