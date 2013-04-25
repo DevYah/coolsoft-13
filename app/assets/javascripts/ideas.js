@@ -33,14 +33,13 @@ function add_sharing_handlers() {
 
 	});
 }
- $('.btn-success.add-rating').click(function(){
-  $('.add-rating').parent().find('.add-ratings').hide();
-  $(this).parent().find('.add-ratings').show();
-});
+  $('.btn-success.add-rating').click(function(){
+    $('.add-ratings').show();
+  });
 });
 $(document).ready(add_sharing_handlers);
 
- 
+
 
 
 $(document).ready(function() {
@@ -71,3 +70,4 @@ $(document).ready(function() {
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
 });
+

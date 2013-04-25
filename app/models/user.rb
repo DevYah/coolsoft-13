@@ -13,17 +13,15 @@ class User < ActiveRecord::Base
                   :gender, :about_me, :recieve_vote_notification, :banned,
                   :recieve_comment_notification, :provider, :uid, :photo, :approved
 
-  has_many :sent_idea_notifications, class_name: 'IdeaNotification'
-  has_many :sent_user_notifications, class_name: 'UserNotification'
-  has_many :idea_notifications
-  has_many :user_notifications
+  has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
+  has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
+  has_many :delete_notifications, :dependent => :destroy
+  has_many :sent_notifications, class_name: 'Notification'
   has_many :ideas
   has_many :comments
   has_many :user_ratings
-  has_many :idea_notifications_users
-  has_many :idea_notifications, :through => :idea_notifications_users
-  has_many :user_notifications_users
-  has_many :user_notifications, :through => :user_notifications_users
+  has_many :notifications_users
+  has_many :notifications, :through => :notifications_users
   has_and_belongs_to_many :comments, :join_table => :likes
   has_and_belongs_to_many :ideas, :join_table => :votes
   has_many :authorizations
@@ -86,4 +84,21 @@ class User < ActiveRecord::Base
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end
+
+  def new_notifications(after)
+    notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', self.becomes(User), Time.at(after.to_i + 1))
+    sorted_notifications = notifications.sort_by &:created_at
+    new_notifications = sorted_notifications.reverse
+  end
+
+  def get_notifications
+    notifications = self.notifications
+    sorted_notifications = notifications.sort_by &:created_at
+    all_notifications = sorted_notifications.reverse
+  end
+
+  def unread_notifications_count
+    NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
 end
