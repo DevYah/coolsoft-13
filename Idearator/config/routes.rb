@@ -4,15 +4,11 @@ Sprint0::Application.routes.draw do
   default_url_options :host => 'localhost:3000'
   root :to => 'home#index'
 
-  get   '/login', :to => 'sessions#new', :as => :login
-  match '/auth/:provider/callback', :to => 'sessions#create'
-  match '/auth/failure', :to => 'sessions#failure'
-
-  default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
+                                       :registrations => 'registrations' }
 
   devise_scope :user do
-  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+    match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
   end
 
   resources :users do

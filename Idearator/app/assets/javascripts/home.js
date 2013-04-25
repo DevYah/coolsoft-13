@@ -45,15 +45,14 @@ function apply_infinite_scrolling() {
         beforeSend:function(){
         // this is where we append a loading image
         //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-      },
-      success:function(array){
-        loading = false;
-      },
-      error:function(){
-        // failed request; give feedback to user
-      }
-    });
-
+        },
+        success:function(array){
+          loading = false;
+        },
+        error:function(){
+          // failed request; give feedback to user
+        }
+      });
     }
   });
 
@@ -85,18 +84,25 @@ function apply_filter() {
           url: '/ideas/filter',
           data: { myTags : array },
           beforeSend:function(){
-      // this is where we append a loading image
-      //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-    },
-    success:function(array){
-    },
-    error:function(){
-        // failed request; give feedback to user
-        alert('failure');
+            // this is where we append a loading image
+            //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+          },
+          success:function(array){
+          },
+          error:function(){
+              // failed request; give feedback to user
+              alert('failure');
+          }
+        });
       }
     });
-  });
-});
+
+  } else {
+    alert('please choose a tag');
+  }
+}
+
+$(document).ready(apply_infinite_scrolling);
 
 $(document).ready(function() {
   $(".facebook").tooltip({
@@ -109,11 +115,3 @@ $(document).ready(function() {
   });
 });
 
-      }else{
-        alert('please choose a tag');
-      }
-    });
-
-  }
-}
-$(document).ready(apply_infinite_scrolling);

@@ -1,7 +1,6 @@
 
 source 'https://rubygems.org'
 
-
 gem 'rails', '3.2.13.rc1'
 gem 'sqlite3', '1.3.7'
 
@@ -16,13 +15,14 @@ gem 'bootstrap-sass', '2.3.1.0'
 gem 'google_visualr', '2.1.7'
 gem 'paperclip', '3.4.1'
 gem 'tlsmail'
+
 gem 'kaminari', '0.14.1'
+
 gem 'bot-away', '2.0.1'
 
 gem 'whenever', '0.8.2', :require => false
 
 gem 'best_in_place','2.1.0'
-
 
 group :assets do
   gem 'sass-rails', '3.2.6'
@@ -34,7 +34,6 @@ group :test, :development do
   gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails', '~> 4.2.1'
-  gem 'simplecov', :require => false
 end
 
 group :test do
@@ -44,10 +43,6 @@ group :test do
   gem 'launchy', '2.2.0'
   gem 'rspec-html-matchers', '0.4.1'
 end
-
-
-
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
