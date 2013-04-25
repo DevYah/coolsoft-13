@@ -90,3 +90,16 @@
     <% end %>
   </p>
 </div>
+<script type="text/javascript">
+  function sendAjax(idea_id){
+    var list = "";
+    var i=0;
+    $('.token-input-list-facebook li p').each(function(){
+      list += "rating[]="+$(this).text()+"&";
+      i=i+1;
+
+    });
+
+    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+  }
+</script>
