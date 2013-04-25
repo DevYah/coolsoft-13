@@ -10,9 +10,9 @@
     <p>
       <%= i.file_field :photo %>
     </p>
-    <div class = 'control-group' >
-      <%= i.label :title , :class => 'control-label'%>
-      <div class = 'controls'>
+    <div class='control-group' >
+      <%= i.label :title , :class=> 'control-label'%>
+      <div class='controls'>
         <% if @boolean%>
           <%= i.text_field :title, :class=> 'text_field', :placeholder=>'Write title here...',:readonly => 'true'%>
           <span class='help-inline'>Sorry you can't change the title</span>
@@ -22,8 +22,8 @@
         <%end%>
       </div>
     </div>
-    <div class = 'control-group'>
-      <%= i.label :description, :class => 'control-label'%>
+    <div class='control-group'>
+      <%= i.label :description, :class=> 'control-label'%>
       <div class="controls">
         <%= i.text_area :description, :class=> 'text_field', :size => "5x5", :placeholder=>"Write description here...",:required => true %>
       </div>
@@ -41,11 +41,11 @@
           <%= tag.name %>
         </div>
       <% end %>
-      <span class='help-inline'>Please check the relative tags</span>
+      <span class = 'help-inline'>Please check the relative tags</span>
     </div>
     <%= hidden_field_tag 'idea[tag_ids][]', '' %>
-    <div class = 'actions'>
-      <%= i.submit nil, :class => 'btn btn-primary'%>
+    <div class='actions'>
+      <%= i.submit nil, :class=> 'btn btn-primary'%>
     </div>
     <% content_for :sidebar do %>
       <h2>Hints</h2>

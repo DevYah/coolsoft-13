@@ -1,0 +1,3 @@
+vote_btn = $("a[href='<%= url_for controller: :ideas, action: :vote, id: @idea.id %>']");
+vote_btn.siblings(".idea-votes").text("<%= @idea.num_votes %>");
+vote_btn.replaceWith("<%= escape_javascript(link_to "Unvote", {controller: :ideas, action: :unvote, id: @idea.id}, class: "btn btn-large btn-danger inline pull-right margin", remote: true) %>")
