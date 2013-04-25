@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
+//= require ideas/popover
 
 //= require jquery.tokeninput
 //= require jquery-ui
