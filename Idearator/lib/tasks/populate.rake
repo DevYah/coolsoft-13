@@ -1,8 +1,10 @@
 namespace :db do
-	desc "Fill Users and Ideas."
-	task :populate => :environment do
 
-		@tags = ["Agriculture", "Software", "Fashion", "Development", "Games" , "BigThings" , "SmallThings" , "CamelCase" , "Food" , "TakeAway"]
+  desc "Fill Users and Ideas."
+  task :populate => :environment do
+
+    @tags = ["Agriculture", "Software", "Fashion", "Development", "Games" , "BigThings" , "SmallThings" , "CamelCase" , "Food" , "TakeAway"]
+
 		40.times do |n|
 			u = User.new
 			u.email = Faker::Internet.email
@@ -43,7 +45,6 @@ namespace :db do
 			t.save
 		end
 
-
 		50.times do |n|
 			it = IdeasTags.new
 			it.idea_id = n+1
@@ -64,4 +65,5 @@ namespace :db do
 		t.save
 
 	end
+
 end

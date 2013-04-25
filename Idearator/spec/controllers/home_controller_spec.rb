@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe HomeController do
   describe 'GET #index' do
+
     it 'populates 1 idea' do
       idea = Idea.new
       idea.title = "idea1"
@@ -11,6 +11,7 @@ describe HomeController do
       get :index, :search => "idea1"
       assigns(:approved).size.should eq(1)
     end
+
     it 'populates 0 ideas' do
       idea = Idea.new
       idea.title = "idea1"
@@ -20,6 +21,7 @@ describe HomeController do
       get :index, :search => "idea23"
       assigns(:approved).size.should eq(0)
     end
+
   end
 
   describe "GET index" do
@@ -45,5 +47,7 @@ describe HomeController do
       assigns(:top).should have(10).items
       assigns(:approved).should have(10).items
     end
+
   end
+
 end
