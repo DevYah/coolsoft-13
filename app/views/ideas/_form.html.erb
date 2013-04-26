@@ -10,7 +10,7 @@
     <p>
       <%= i.file_field :photo %>
     </p>
-    <div class='control-group' >
+<div class='control-group' >
       <%= i.label :title , :class=> 'control-label'%>
       <div class='controls'>
         <% if @boolean%>
@@ -41,7 +41,7 @@
           <%= tag.name %>
         </div>
       <% end %>
-      <span class='help-inline'>Please check the relative tags</span>
+      <span class = 'help-inline'>Please check the relative tags</span>
     </div>
     <%= hidden_field_tag 'idea[tag_ids][]', '' %>
     <div class='actions'>
