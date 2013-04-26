@@ -30,7 +30,7 @@ class CommentsController extends AppController{
     if ($this->request->is('post') || $this->request->is('put')) {
         $this->Comment->id = $id;
         if ($this->Comment->save($this->request->data)) {
-          
+
             $this->redirect(array("controller"=>"Posts", 'action' => 'view', $this->Comment->field("post_id")));
               $this->Session->setFlash('Your comment has been updated.');
         } else {

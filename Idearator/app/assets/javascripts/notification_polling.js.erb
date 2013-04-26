@@ -3,27 +3,19 @@
 // Author: Amina Zoheir
 $(function() {
   if($('body').attr('data-devise') == "true"){
-    if($("#notifications").length > 0){
-      setTimeout(updateNotifications, 5000);
-    }
-    setTimeout(updateNavBar, 5000);
+    setTimeout(updateNotifications, 5000);
   }
 });
 
-// updates the notifications in the "view_all_notifications" view,
+// updates the notifications in navigation bar and in all notifications view,
 // and continues the polling.
 // Params: none
 // Author: Amina Zoheir
 function updateNotifications(){
-  $.getScript("/all_notifications.js")
-   setTimeout(updateNotifications, 5000);
-}
-
-// updates the notifications in the navigation bar drop down,
-// and continues the polling.
-// Params: none
-// Author: Amina Zoheir
-function updateNavBar(){
+  if($("#notifications").length > 0){
+    var after = $('.notification:first').attr('data-time');
+    $.getScript("/view_new_notifications.js?&after=" + after);
+  }
   $.getScript("/notifications.js")
-  setTimeout(updateNavBar, 5000);
+  setTimeout(updateNotifications, 5000);
 }
