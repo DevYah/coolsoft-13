@@ -16,6 +16,8 @@ class Idea < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :votes
   has_many :voters, :through => :votes, :source => :user
+  has_and_belongs_to_many :competitions
+  has_many :winning_competitions, :class_name => 'Competition'
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 
