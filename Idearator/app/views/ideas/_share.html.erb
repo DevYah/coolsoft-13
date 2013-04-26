@@ -1,0 +1,8 @@
+<%if @idea.archive_status == false%>
+  <div id='show'>
+    <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+    <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+    <a class="popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+  </div>
+
+<%end%>
