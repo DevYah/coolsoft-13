@@ -15,7 +15,8 @@ class Idea < ActiveRecord::Base
   belongs_to :committee
   has_and_belongs_to_many :tags
   has_many :votes
-  has_many :users, :through => :votes
+  has_many :voters, :through => :votes, :source => :user
+
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 
   def self.search(search)

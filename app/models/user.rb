@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :comments, :through => :likes
   has_many :votes
-  has_many :ideas, :through => :votes
+  has_many :voted_ideas, :through => :votes, :source => :idea
+
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => 'user-default.png'
 
