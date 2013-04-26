@@ -8,7 +8,7 @@ describe CommentNotification do
   idea.user = user1
   notification = CommentNotification.create(user: user2, idea: idea, users: [user1])
 
-  it 'adds comment notification to idea_notifications table'do 
+  it 'adds comment notification to idea_notifications table'do
     CommentNotification.send_notification(user1, idea, [user2])
     expect(IdeaNotification.last.type).to eq('CommentNotification')
     expect(IdeaNotification.last.idea_id).to eq(idea.id)
