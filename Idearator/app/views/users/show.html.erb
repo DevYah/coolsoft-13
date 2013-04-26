@@ -26,17 +26,16 @@
 <% if @admin != nil && @admin.type == 'Admin' && @user.banned==true %>
   <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?', :class => 'options btn btn-success' %>
 <% end %>
-<div class="btn-group pull-right">
-    <% if @admin.type == "Admin" and @registered and @user.banned==false%>
+  <% if @admin.type == "Admin" and @registered and @user.banned==false%>
       <%= render :partial => 'modal_approve'%>
-      <p><a data-toggle="modal" href="#approve" class="btn btn-large btn-success">Approve</a></p>
+      <p><a data-toggle="modal" href="#approve" class="btn btn-success">Approve</a></p>
     <% end %>
     <% if @admin.type == "Admin" and @registered and @user.banned==false%>
       <%= render :partial => 'modal_reject'%>
-      <p><a data-toggle="modal" href="#reject" class="btn btn-large btn-danger">Reject</a></p>
+      <p><a data-toggle="modal" href="#reject" class="btn btn-danger">Reject</a></p>
     <% end %>
     <% if @admin.type == "Admin" && @user.active==true && !@registered %>
-      <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "btn btn-primary btn-large" %>
+      <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "btn btn-primary" %>
     <%end%>
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
