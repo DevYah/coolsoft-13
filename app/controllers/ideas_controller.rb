@@ -83,6 +83,7 @@ class IdeasController < ApplicationController
   def vote
     @idea = Idea.find(params[:id])
     current_user.vote_for @idea
+    @idea.num_votes = @idea.num_votes + 1
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, :notice =>'Thank you for voting' }
@@ -102,7 +103,7 @@ class IdeasController < ApplicationController
   def unvote
     @idea = Idea.find(params[:id])
     current_user.unvote_for @idea
-    #@idea.num_votes = @idea.num_votes - 1
+    @idea.num_votes = @idea.num_votes - 1
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
