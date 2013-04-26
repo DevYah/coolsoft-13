@@ -25,4 +25,16 @@ class Idea < ActiveRecord::Base
     end
   end
 
+  def self.best_idea_for_month(date)
+    start_date = date
+    start_date = start_date - (start_date.day - 1).days
+    end_date = start_date + 1.month
+    #FIXME num_votes changed to vote count
+    ideas = Idea.where(:created_at => start_date..end_date).reorder('num_votes')
+    idea = MonthlyWinner.new
+    idea.date = ideas.last.created_at
+    idea.idea = ideas.last
+    idea.save
+  end
+
 end

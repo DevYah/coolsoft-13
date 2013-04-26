@@ -15,6 +15,8 @@ class HomeController < ApplicationController
   #Author: Mohamed Salah Nazir
   def index
     @page_number = params[:myPage]
+    @first=Idea.find(1)
+    @second=Idea.find(2)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     if(params[:myTags])
       if(params[:myTags].length > 0)
