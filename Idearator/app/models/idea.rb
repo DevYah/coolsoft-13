@@ -20,7 +20,6 @@ class Idea < ActiveRecord::Base
   has_many :winning_competitions, :class_name => 'Competition'
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
-
   def self.search(search)
     if search
       where('title LIKE ?', "%#{search}%")
@@ -28,5 +27,4 @@ class Idea < ActiveRecord::Base
       find(:all)
     end
   end
-
 end
