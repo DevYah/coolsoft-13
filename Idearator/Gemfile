@@ -30,12 +30,15 @@ group :assets do
   gem 'uglifier', '2.0.1'
 end
 
+gem 'jquery-star-rating-rails'
+
 group :test, :development do
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails', '~> 4.2.1'
 end
 
 group :test do
+
   gem 'faker', '1.1.2'
   gem 'capybara', '2.1.0'
   gem 'guard-rspec', '2.5.3'
