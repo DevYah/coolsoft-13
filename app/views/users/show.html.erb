@@ -23,7 +23,7 @@
 <% if @admin != nil && @admin.type == 'Admin' && @user.banned==true %>
   <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?', :class => 'options btn btn-success' %>
 <% end %>
-<% if @admin.type == "Admin" && @user.active==true && !@registered %>
+<% if @admin.type == "Admin" && @user.active==true && !@registered and @user.banned == false %>
   <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "options btn btn-primary" %>
 <%end%>
 <% if @user.banned == false and @user.active == true %>
