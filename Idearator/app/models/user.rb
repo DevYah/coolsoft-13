@@ -22,11 +22,11 @@ class User < ActiveRecord::Base
   has_many :user_ratings
   has_many :notifications_users
   has_many :notifications, :through => :notifications_users
-  has_and_belongs_to_many :comments, :join_table => :likes
-  has_and_belongs_to_many :ideas, :join_table => :votes
   has_many :authorizations
-  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
-  has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
+  has_many :likes
+  has_many :comments, :through => :likes
+  has_many :votes
+  has_many :ideas, :through => :votes
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => 'user-default.png'
 
