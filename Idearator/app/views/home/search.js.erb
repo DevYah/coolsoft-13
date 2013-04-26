@@ -1,6 +1,6 @@
 <% if params[:controller] == 'home'%>
   <% if params[:search] == "" %>
-  	$("#IdeaStream").html("<%= escape_javascript(render("ideas/show")) %>");
+    $("#IdeaStream").html("<%= escape_javascript(render("ideas/show")) %>");
     $("#IdeaStream").append("<%= escape_javascript(render(:partial => "stream")) %>");
     apply_infinite_scrolling();
   <% else %>

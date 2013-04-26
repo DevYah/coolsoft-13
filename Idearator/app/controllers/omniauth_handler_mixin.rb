@@ -23,4 +23,3 @@ module OmniauthHandlerMixin
     end
   end
 end
-

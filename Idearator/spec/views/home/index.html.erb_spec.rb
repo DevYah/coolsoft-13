@@ -30,4 +30,3 @@ describe "home/index.html.erb" do
   end
 
 end
-

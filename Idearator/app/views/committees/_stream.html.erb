@@ -48,9 +48,9 @@
     $('.token-input-list-facebook li p').each(function(){
       list += "rating[]="+$(this).text()+"&";
       i=i+1;
-  
+
     });
-  
+
     $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
   }
 </script>

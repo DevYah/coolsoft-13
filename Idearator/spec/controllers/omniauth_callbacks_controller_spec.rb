@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Users::OmniauthCallbacksController do
   context "user wants to login using a social network" do
-    before do 
+    before do
       OmniAuth.config.test_mode = true
 
       OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
@@ -14,8 +14,8 @@ describe Users::OmniauthCallbacksController do
         })
       })
 
-      request.env["devise.mapping"] = Devise.mappings[:user] 
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] 
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
     end
 
     describe "login via twitter" do

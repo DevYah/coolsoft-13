@@ -17,14 +17,14 @@ describe UserRatingsHelper do
 
   describe 'rating ballot' do
     include Devise::TestHelpers
-    
+
     context 'user wants to rate an idea' do
       it 'returns an existing rating ballot' do
-      	((helper.rating_ballot(@rating.id)).rating_id).should eql(@rating.id)
+        ((helper.rating_ballot(@rating.id)).rating_id).should eql(@rating.id)
       end
 
       it 'returns a new rating ballot' do
-      	@user_rating.destroy
+        @user_rating.destroy
         (helper.rating_ballot(@rating.id)).should be_an_instance_of(UserRating)
       end
     end
@@ -32,7 +32,7 @@ describe UserRatingsHelper do
 
   describe 'current user rating' do
     include Devise::TestHelpers
-    
+
     context 'user wants to view his rating' do
       it 'returns current rating value if any' do
         (helper.current_user_rating(@rating.id)).should eql(@user_rating.value)

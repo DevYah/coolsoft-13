@@ -6,6 +6,6 @@ class UserMailer < ActionMailer::Base
   #Params: admin
   #Author: Menna Amr
   def committee_signup(admin)
-  	mail(:to => admin, :subject => "New Committee Member Sign Up")
+    mail(:to => admin, :subject => "New Committee Member Sign Up")
   end
 end

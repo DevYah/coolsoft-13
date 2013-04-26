@@ -3,13 +3,13 @@ require 'spec_helper'
 describe UserRatingsController do
   describe 'POST create' do
     include Devise::TestHelpers
-    
+
     context 'user wants to rate an idea' do
       before :each do
         @user = FactoryGirl.build(:user)
         @user.confirm!
         @idea = FactoryGirl.create(:idea)
-       	@rating = FactoryGirl.create(:rating)
+         @rating = FactoryGirl.create(:rating)
         @rating.idea_id = @idea.id
         @rating.save
         sign_in @user
@@ -23,13 +23,13 @@ describe UserRatingsController do
 
   describe 'PUT update' do
     include Devise::TestHelpers
-    
+
     context 'user wants to update his rating' do
       before :each do
         @user = FactoryGirl.build(:user)
         @user.confirm!
         @idea = FactoryGirl.create(:idea)
-       	@rating = FactoryGirl.create(:rating)
+         @rating = FactoryGirl.create(:rating)
         @rating.idea_id = @idea.id
         @rating.save
         @user_rating = FactoryGirl.create(:user_rating)

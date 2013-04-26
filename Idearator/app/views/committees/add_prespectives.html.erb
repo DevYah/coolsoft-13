@@ -15,10 +15,10 @@
       $('.token-input-list-facebook li p').each(function(){
         list += "rating[]="+$(this).text()+"&";
         i=i+1;
-      
-      }); 
-   
+
+      });
+
       $.ajax("/add_rating?"+list);
-    } 
+    }
   </script>
 <% end %>

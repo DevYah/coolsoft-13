@@ -14,9 +14,9 @@
     $('ul#rating').children().each(function(){
       list += "rating[]="+$(this).text()+"&";
       i=i+1;
-      
-    });	
-   
+
+    });
+
     $.ajax("/add_rating?"+list);
-  }	
+  }
 </script>
