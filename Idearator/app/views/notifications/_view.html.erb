@@ -1,0 +1,4 @@
+<% partial = [notification.class, notification.class.superclass].map { |klass| klass.name.tableize }.detect do |p|
+     lookup_context.template_exists?(p, "notifications", true)
+   end %>
+<%= render partial: "notifications/"+partial, locals: {notification: notification} %>
