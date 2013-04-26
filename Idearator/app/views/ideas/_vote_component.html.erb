@@ -1,0 +1,10 @@
+<div class='span4 vote-component'>
+  <div class='span4 vote-count'><%= idea.num_votes %></div>
+  <div class='span4'>
+    <%if current_user.voted_for? idea %>
+      <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => idea.id,remote: true, :class =>"btn btn-success margin" %>
+    <% else %>
+      <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => idea.id,remote:true, :class => 'btn  btn-danger margin' %>
+    <% end %>
+  </div>
+</div>
