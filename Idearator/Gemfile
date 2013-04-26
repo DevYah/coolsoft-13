@@ -23,19 +23,22 @@ gem 'whenever', '0.8.2', :require => false
 
 gem 'best_in_place','2.1.0'
 
+gem 'multiple_table_inheritance', '~> 0.2.1'
+
 group :assets do
   gem 'sass-rails', '3.2.6'
   gem 'uglifier', '2.0.1'
 end
 
+gem 'jquery-star-rating-rails'
+
 group :test, :development do
-  gem 'pre-commit', :git => 'https://github.com/mnzaki/pre-commit.git'
-  gem 'rubocop', :git => 'https://github.com/bbatsov/rubocop.git'
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails', '~> 4.2.1'
 end
 
 group :test do
+
   gem 'faker', '1.1.2'
   gem 'capybara', '2.1.0'
   gem 'guard-rspec', '2.5.3'
