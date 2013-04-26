@@ -10,7 +10,7 @@ class DeleteNotification < ActiveRecord::Base
   end
 
   def text
-    User.find(self.user_id).username + " deleted his idea " + self.idea_title + "." 
+    User.find(self.user_id).username + " deleted his idea " + self.idea_title + "."
   end
 
   def read_by?(user)
