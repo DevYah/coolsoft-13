@@ -1,17 +1,3 @@
-GIT
-  remote: https://github.com/bbatsov/rubocop.git
-  revision: 1665508d65b3169bcc2a991affe015c9dcad539a
-  specs:
-    rubocop (0.5.0)
-      term-ansicolor (~> 1.1)
-
-GIT
-  remote: https://github.com/mnzaki/pre-commit.git
-  revision: 3580cf86a3510f51e22cfc2310156c25f0a22c38
-  specs:
-    pre-commit (0.8.0)
-      execjs
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,7 +31,6 @@ GEM
     addressable (2.3.4)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bcrypt-ruby (3.0.1-x86-mingw32)
     best_in_place (2.1.0)
       jquery-rails
       rails (~> 3.1)
@@ -71,7 +56,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.3)
+    diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -84,11 +69,12 @@ GEM
       i18n (~> 0.5)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    ffi (1.8.1)
     formatador (0.2.4)
     google_visualr (2.1.7)
-    guard (1.7.0)
+    guard (1.8.0)
       formatador (>= 0.2.4)
-      listen (>= 0.6.0)
+      listen (>= 1.0.0)
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
       thor (>= 0.14.6)
@@ -103,6 +89,8 @@ GEM
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-star-rating-rails (4.0.4)
+      rails (>= 3.1.0)
     jquery-tokeninput-rails (1.6.0)
     json (1.7.7)
     jwt (0.1.8)
@@ -112,18 +100,23 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.2.0)
       addressable (~> 2.3)
-    listen (0.7.3)
+    listen (1.0.2)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      rb-kqueue (>= 0.2)
     lumberjack (1.0.3)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
-    mime-types (1.22)
+    mime-types (1.23)
     multi_json (1.7.2)
     multipart-post (1.2.0)
+    multiple_table_inheritance (0.2.1)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     nokogiri (1.5.9)
-    nokogiri (1.5.9-x86-mingw32)
     oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -153,15 +146,10 @@ GEM
       cocaine (~> 0.5.0)
       mime-types
     polyglot (0.3.3)
-    pry (0.9.12)
+    pry (0.9.12.1)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pry (0.9.12-x86-mingw32)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-      win32console (~> 1.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -185,6 +173,11 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.0.4)
+    rb-fsevent (0.9.3)
+    rb-inotify (0.9.0)
+      ffi (>= 0.5.0)
+    rb-kqueue (0.2.0)
+      ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
     rspec (2.13.0)
@@ -205,7 +198,7 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
-    sass (3.2.7)
+    sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -221,8 +214,6 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.7)
-    sqlite3 (1.3.7-x86-mingw32)
-    term-ansicolor (1.1.5)
     thor (0.18.1)
     tilt (1.3.7)
     treetop (1.4.12)
@@ -237,13 +228,11 @@ GEM
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
-    win32console (1.3.2-x86-mingw32)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   best_in_place (= 2.1.0)
@@ -256,18 +245,18 @@ DEPENDENCIES
   google_visualr (= 2.1.7)
   guard-rspec (= 2.5.3)
   jquery-rails (= 2.2.1)
+  jquery-star-rating-rails
   jquery-tokeninput-rails (= 1.6.0)
   kaminari (= 0.14.1)
   launchy (= 2.2.0)
+  multiple_table_inheritance (~> 0.2.1)
   omniauth (= 1.1.3)
   omniauth-facebook (= 1.4.1)
   omniauth-twitter (= 0.0.16)
   paperclip (= 3.4.1)
-  pre-commit!
   rails (= 3.2.13.rc1)
   rspec-html-matchers (= 0.4.1)
   rspec-rails (~> 2.13.0)
-  rubocop!
   sass-rails (= 3.2.6)
   simplecov (= 0.7.1)
   sqlite3 (= 1.3.7)
