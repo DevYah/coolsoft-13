@@ -4,7 +4,12 @@ Sprint0::Application.routes.draw do
 
   root :to => 'home#index'
 
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
+                                       :registrations => 'registrations' }
+
+  devise_scope :user do
+    match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+  end
 
   resources :users do
     member do
@@ -22,21 +27,28 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
+    match 'like', on: :member
+    resources :comments do
+        put 'update', on: :member
+      end
     member do
-
       match 'vote'
       match 'unvote'
       match 'archive'
-      match 'unarchive'
+      match 'unarchive', :defaults => { :format => 'js' }
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
-
     end
   end
 
+  resources :user_ratings, :controller => 'user_ratings'
+  match '/user_ratings/create' => 'user_ratings#create'
+  match '/user_ratings/update' => 'user_ratings#update'
+
   controller :home do
     match 'home/search'
+    match 'home/searchelse'
     match 'home/index'
   end
 
@@ -54,23 +66,30 @@ Sprint0::Application.routes.draw do
   # Dashboard routes
   controller :dashboard do
     match 'dashboard/index'
-    match 'dashboard/getallideas'
-    match 'dashboard/gettags'
-    match 'dashboard/getideas'
+    match 'getallideas'
+    match 'gettags'
+    match 'getideas'
   end
 
   # Notifications routes
   controller :notifications do
-    match 'notifications/view_all_notifications'
-    match 'notifications/redirect_idea'
-    match 'notifications/redirect_review'
-    match 'notifications/redirect_expertise'
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+    match 'set_read'
+    match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
 
   # Tag routes
-  match 'tags/ajax'
-  match 'ratings/ajax'
+  controller :tags do
+    match 'tags/ajax'
+  end
+
+  controller :ratings do
+    match 'ratings/ajax'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

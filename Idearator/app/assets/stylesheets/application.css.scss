@@ -8,9 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require token-input-facebook
  *= require_self
- *= require_tree .
+ *
+ *= require bootstrap_and_overrides
+ *= require token-input-facebook
+ *= require jquery-star-rating
+ *= require notification
+ *= require ideas
  *
  */
 
@@ -47,4 +51,24 @@
 
 .icon-user {
   padding-right: 10px;
+}
+
+#nav_login {
+  border: solid #ddd;
+  border-width: 0px 1px;
+  padding: 0 5px;
+}
+
+.social-media-login.twitter-nav-login {
+  background: url('/assets/bird_blue_32.png') center no-repeat;
+}
+
+.social-media-login.facebook-nav-login {
+  background: url('/assets/facebook-button-small.jpg') center no-repeat;
+}
+
+.social-media-login {
+  display: block;
+  width: 32px; height: 20px;
+  font-size: 0;
 }
