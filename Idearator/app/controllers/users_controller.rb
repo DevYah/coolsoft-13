@@ -183,6 +183,7 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
     @user.type = 'Committee'
+    @user.approved = true
     @user.save
     InviteCommitteeNotification.send_notification(current_user, [@user])
     respond_to do |format|
@@ -197,8 +198,6 @@ class UsersController < ApplicationController
   # Author: Mohammad Abdulkhaliq
   def send_expertise
     @user = current_user
-    @user.approved = true
-    @user.save
     @tags = Tag.all
     if current_user.is_a? Committee
       if current_user.tags.count == 0
