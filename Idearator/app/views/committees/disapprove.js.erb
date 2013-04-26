@@ -1,6 +1,6 @@
-$('div#idea-<%= @idea.id %>').remove()
+$('div#idea--<%= @idea.id %>').remove();
 var remaining = $('.btn-success.add-rating').length ;
 if (remaining == 0){
-  var z = $('<h1>No more ideas to review</h1>');
+  var z = $('<h1>No ideas to review</h1>');
   $('div.content').append(z);
 } 

@@ -1,6 +1,15 @@
 
 $(document).ready(function() {
 
+
+  $('.btn-success.add-rating').click(function(){
+    $('.add-ratings').show();
+  });
+
+
+
+
+
   // When The user clicks on facebook share or twitter share button, this method
   // gets the current URL of the current page and apends it to the default facebook
   // and twitter sharing URLs.
@@ -10,6 +19,7 @@ $(document).ready(function() {
   $("#share").click(function() {
     $("#show").toggle("slow");
   });
+
 
   $("#fbk").click(function() {
     var pathname = window.location;
@@ -51,7 +61,7 @@ $(document).ready(function() {
 
   $("#idea-tags").html('<input type="text" id="tag_token_input" name="blah2" />')
 
-  $("#tag_token_input").tokenInput('/tags/ajax', {
+$("#tag_token_input").tokenInput('/tags/ajax', {
     theme: "facebook",
     preventDuplicates: true,
     tokenLimit: 5,
@@ -62,7 +72,11 @@ $(document).ready(function() {
     },
     prePopulate: prePopulate
   });
-
+$(".rating_complete").tokenInput('/ratings/ajax', {
+    theme: "facebook",
+    preventDuplicates: true,
+    tokenLimit: 5
+  });
   $('.best_in_place').best_in_place();
   $('.best_in_place').bind("ajax:success", function(){
     $('#edited-check-mark').remove();
@@ -70,3 +84,4 @@ $(document).ready(function() {
   });
 
 });
+
