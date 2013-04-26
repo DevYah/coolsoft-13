@@ -77,7 +77,7 @@ describe IdeasController do
       end
     end
   end
-describe 'GET #show' do
+  describe 'GET #show' do
     before :each do
       @user = FactoryGirl.build(:user)
       @user.confirm!
@@ -372,6 +372,17 @@ describe 'GET #show' do
     it 'redirects to idea' do
       put :unarchive, :id => @idea.id
       response.should redirect_to @idea
+    end
+  end
+
+  ## Popover method to get the idea_id and renders a popover
+  ## Author : Dayna
+  context 'User hovers on idea' do
+    it 'gets the idea_id and renders to partial form' do
+      @idea_id = @idea.id
+      get :popover , :id => @idea.id
+      expect(view).to render_template(:partial => "_popover")
+
     end
   end
 end
