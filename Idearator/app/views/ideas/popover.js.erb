@@ -2,7 +2,8 @@ $('a[data-popover-idea-id]').popover({
   animation: true,
   html: true,
   content:'<%= escape_javascript(render(:partial => "popover")) %>',
-  container: 'body'
+  container: 'body',
+  placement: 'bottom'
 });
 
 $('a[data-popover-idea-id]').popover('show')

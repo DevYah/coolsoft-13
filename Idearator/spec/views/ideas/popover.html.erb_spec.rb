@@ -5,18 +5,14 @@ describe "ideas/popover" do
 # Author: Dayna
 before :each do
 @user = FactoryGirl.build(:user)
-        @user.confirm!
-        @idea = FactoryGirl.create(:idea)
-        @idea.user_id = @user.id
-        @idea.save
-        @comment = FactoryGirl.build(:comment)
-        @comment.user_id = @user.id
-        @comment.idea_id = @idea.id
-        @comment.save
-        @vote = FactoryGirl.build(:vote)
-        @vote.user_id = @user.id
-        @vote.idea_id = @idea.id
-        @vote.save
+@user.confirm!
+@idea = FactoryGirl.create(:idea)
+@idea.user_id = @user.id
+@idea.save
+@vote = FactoryGirl.build(:vote)
+@vote.user_id = @user.id
+@vote.idea_id = @idea.id
+@vote.save
 end
 
 it "displays popover " do
