@@ -1,40 +1,33 @@
-<div class="idea-popover">
-  <%= javascript_include_tag '/ideas/popover' %>
-  <div class="span6">
-    <div class="span4">
-      <%= image_tag @idea.photo.url(:medium) , :size => '200x100' %>
-    </div>
-    <div class="span4">
-      <div class="row">
-        <h3 class="text-info" style = "color: #141B7F;"><%= @idea.title %></h3>
-        <div class="span1 pull-right">
-          <h5 class="text-success"><%=link_to@username ,@idea.user.becomes(User)%></h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="span4">
-          <h5><%= @idea.description %></h5>
-        </div>
-        <div class="span4"  style = "color: #21497A;">
-          <%if @chosentags != nil %>
-            <% @chosentags.each do |tag|%>
-              <span class="label label-info"><%= tag.name %></span>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="span4">
-          <span class="idea-votes inline pull-right" style = "color: #141B7F;">
-            <%=  @idea.num_votes %>
-          </span>
-          <%if @ideavoted.nil? %>
-            <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
-          <% else %>
-            <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
-          <%end%>
-        </div>
-      </div>
-    </div>
+<%= javascript_include_tag '/ideas/popover' %>
+<div class="row">
+  <div class="span8">
+    <h3 class="text-info" style = "color: #141B7F;"><%= @idea.title %></h3>
+  </div>
+  <div class="span2 pull-right">
+    <h5 class="text-success"><%=link_to@username ,@idea.user.becomes(User)%></h5>
+  </div>
+</div>
+<div class="row">
+  <div class="span4" id= 'imageTag'>
+    <%= image_tag @idea.photo.url(:medium) , :size => '200x100'%>
+  </div>
+  <div class="span8 pull-right"><h5 >
+      <%= @idea.description %>
+    </h5>
+  </div>
+  <div class="span8 pull-right">
+    <%if @chosentags != nil %>
+      <% @chosentags.each do |tag|%>
+        <span class="label label-info "><%= tag.name %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="span4 pull-right">
+    <span class="idea-votes inline pull-right" style = "color: #141B7F;"><%=  @idea.num_votes %></span>
+    <%if @ideavoted.nil? %>
+      <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
+    <% else %>
+      <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
+    <%end%>
   </div>
 </div>
