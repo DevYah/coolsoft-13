@@ -23,111 +23,111 @@
 <% if @admin != nil && @admin.type == 'Admin' && @user.banned==true %>
   <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?', :class => 'options btn btn-success' %>
 <% end %>
-<div class="btn-group pull-right">
-  <% if @admin.type == "Admin" and @registered and @user.banned==false%>
-    <%= render :partial => 'modal_approve'%>
-    <p><a data-toggle="modal" href="#approve" class="btn btn-large btn-success">Approve</a></p>
-  <% end %>
-  <% if @admin.type == "Admin" and @registered and @user.banned==false%>
-    <%= render :partial => 'modal_reject'%>
-    <p><a data-toggle="modal" href="#reject" class="btn btn-large btn-danger">Reject</a></p>
-  <% end %>
-  <% if @user.banned == false and @user.active == true %>
-    <div id='user'>
-      <div class='user-photo'>
-        <%= image_tag @user.photo.url(:medium) %>
-      </div>
-      <div class = 'user-details'>
-        <dl class='dl-horizontal'>
-          <dt>Email</dt>
-          <dd><%= @user.email %></dd>
-          <br>
-            <% if @user != current_user %>
-              <dt>First Name</dt>
+<% if @admin.type == "Admin" and @registered and @user.banned==false%>
+  <%= render :partial => 'modal_approve'%>
+  <p><a data-toggle="modal" href="#approve" class="options btn btn-success">Approve</a></p>
+<% end %>
+<% if @admin.type == "Admin" and @registered and @user.banned==false%>
+  <%= render :partial => 'modal_reject'%>
+  <p><a data-toggle="modal" href="#reject" class="options btn btn-danger">Reject</a></p>
+</div>
+<% end %>
+<% if @user.banned == false and @user.active == true %>
+  <div id='user'>
+    <div class='user-photo'>
+      <%= image_tag @user.photo.url(:medium) %>
+    </div>
+    <div class = 'user-details'>
+      <dl class='dl-horizontal'>
+        <dt>Email</dt>
+        <dd><%= @user.email %></dd>
+        <br>
+          <% if @user != current_user %>
+            <dt>First Name</dt>
+            <dd>
+              <% if @user.first_name != "" and @user.first_name %>
+                <%= @user.first_name %>
+              <% else %>
+                Not specified
+              <% end %>
+            </dd>
+            <br>
+              <dt>Last Name</dt>
               <dd>
-                <% if @user.first_name != "" and @user.first_name %>
-                  <%= @user.first_name %>
+                <% if @user.last_name != "" and @user.last_name %>
+                  <%= @user.last_name %>
                 <% else %>
                   Not specified
                 <% end %>
               </dd>
               <br>
-                <dt>Last Name</dt>
+                <dt>Date of birth
+                </dt>
                 <dd>
-                  <% if @user.last_name != "" and @user.last_name %>
-                    <%= @user.last_name %>
+                  <% if @user.date_of_birth != "" and @user.date_of_birth %>
+                    <%= @user.date_of_birth %>
                   <% else %>
                     Not specified
                   <% end %>
                 </dd>
                 <br>
-                  <dt>Date of birth
-                  </dt>
+                  <dt>Gender</dt>
                   <dd>
-                    <% if @user.date_of_birth != "" and @user.date_of_birth %>
-                      <%= @user.date_of_birth %>
+                    <% if @user.gender != "" and @user.gender %>
+                      <%= @user.gender %>
                     <% else %>
                       Not specified
                     <% end %>
                   </dd>
+                <% else %>
+                  <dt>First Name</dt>
+                  <dd>
+                    <%= best_in_place @user.becomes(User), :first_name, :nil => 'click to specify your first name' %>
+                  </dd>
                   <br>
-                    <dt>Gender</dt>
+                    <dt>Last Name</dt>
                     <dd>
-                      <% if @user.gender != "" and @user.gender %>
-                        <%= @user.gender %>
-                      <% else %>
-                        Not specified
-                      <% end %>
-                    </dd>
-                  <% else %>
-                    <dt>First Name</dt>
-                    <dd>
-                      <%= best_in_place @user.becomes(User), :first_name, :nil => 'click to specify your first name' %>
+                      <%= best_in_place @user.becomes(User), :last_name, :nil => 'click to specify your last name' %>
                     </dd>
                     <br>
-                      <dt>Last Name</dt>
+                      <dt>Date of birth
+                      </dt>
                       <dd>
-                        <%= best_in_place @user.becomes(User), :last_name, :nil => 'click to specify your last name' %>
+                        <%= best_in_place @user.becomes(User), :date_of_birth, :type => 'date', :nil => 'not specified' %>
                       </dd>
                       <br>
-                        <dt>Date of birth
-                        </dt>
+                        <dt>Gender</dt>
                         <dd>
-                          <%= best_in_place @user.becomes(User), :date_of_birth, :type => 'date', :nil => 'not specified' %>
+                          <%= best_in_place @user.becomes(User), :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
                         </dd>
-                        <br>
-                          <dt>Gender</dt>
-                          <dd>
-                            <%= best_in_place @user.becomes(User), :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
-                          </dd>
-                        <% end %>
+                      <% end %>
+                    </dl>
+                    <dl id='user-about'>
+                      <dt>About User</dt>
+                      <br>
+                        <dd>
+                          <% if current_user == @user %>
+                            <%= best_in_place @user.becomes(User), :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
+                          <% elsif @user.about_me != "" and @user.about_me %>
+                            <%= @user.about_me %>
+                          <% else %>
+                            Not specified
+                          <% end %>
+                        </dd>
                       </dl>
-                      <dl id='user-about'>
-                        <dt>About User</dt>
-                        <br>
-                          <dd>
-                            <% if current_user == @user %>
-                              <%= best_in_place @user.becomes(User), :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
-                            <% elsif @user.about_me != "" and @user.about_me %>
-                              <%= @user.about_me %>
-                            <% else %>
-                              Not specified
-                            <% end %>
-                          </dd>
-                        </dl>
-                      </div>
                     </div>
-                    <h2>
-                      User Ideas
-                    </h2>
-                    <%= render :partial => "stream" %>
-                    <div class='new-idea'>
-                      <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
-                    </div>
-                    <div>
-                      <br />
-                      <ul class="pager">
-                        <li><%= link_to 'Back', :back %></li>
-                      </ul>
-                    </div>
-                  <% end %>
+                  </div>
+                  <h2>
+                    User Ideas
+                  </h2>
+                  <%= render :partial => "stream" %>
+                  <div class='new-idea'>
+                    <%= link_to 'Create new Idea!', '/ideas/new', :class => 'btn btn-large btn-block' %>
+                  </div>
+                  <div>
+                    <br />
+                    <ul class="pager">
+                      <li><%= link_to 'Back', :back %></li>
+                    </ul>
+                  </div>
+                <% end %>
