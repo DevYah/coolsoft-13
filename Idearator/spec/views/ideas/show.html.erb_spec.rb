@@ -8,6 +8,12 @@ describe "ideas/show.html.erb" do
 		@idea.problem_solved= "ay nila"
 		@idea.save
 	end
+
+	it "has a pinterest image" do
+		render :template => "/ideas/show", :locals => {:idea => @idea}
+		response.should have_tag("img", :id => "pin")
+
+end
 	it "has a facebook image" do
 		render :template => "/ideas/show", :locals => {:idea => @idea}
 		response.should have_tag("img", :id => "fbk")
@@ -17,3 +23,4 @@ describe "ideas/show.html.erb" do
 		response.should have_tag("img", :id => "tw")
 	end
 end
+
