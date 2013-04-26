@@ -92,9 +92,6 @@ class UsersController < ApplicationController
         }
       end
     else
-      user = current_user
-      user.approved = true
-      user.save
       @tags= params[:user][:tags]
       @tags.each do |tag|
         CommitteesTags.create(:committee_id => current_user.id , :tag_id => tag)
@@ -200,6 +197,8 @@ class UsersController < ApplicationController
   # Author: Mohammad Abdulkhaliq
   def send_expertise
     @user = current_user
+    @user.approved = true
+    @user.save
     @tags = Tag.all
     if current_user.is_a? Committee
       if current_user.tags.count == 0
