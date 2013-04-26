@@ -34,12 +34,9 @@ Sprint0::Application.routes.draw do
       match 'unvote'
       match 'archive'
       match 'unarchive'
-<<<<<<< Temporary merge branch 1
-=======
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
->>>>>>> Temporary merge branch 2
     end
   end
 
