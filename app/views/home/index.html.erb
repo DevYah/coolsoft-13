@@ -3,7 +3,7 @@
   <p>The Community that turns your ideas into a Reality</p>
 </div>
 <% content_for :sidebar do %>
-  <div class="well text-center">
+  <div class="well text-center" id="signin">
     <button class="btn btn-large btn-block" type="button">Sign Up</button>
     <div class="hero-unit text-center" id="title">
       <h3>OR</h3>
@@ -41,58 +41,57 @@
       </div>
     </div>
   </div>
-  <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
+<%= render :partial => 'ideas/show' %>
+<%= render :partial => 'stream' %>
+<% content_for :sidebar do %>
+  <div class="topten">
+    <h1 class="title">Top Ten
+    </h1>
+    <% @top.each do |top| %>
+      <% if top.user.active == true and top.user.banned == false%>
+        <div class="topten_idea media">
+          <a class="pull-left" href="#">
+            <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
+          </a>
+          <div class="media-body">
+            <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+            <h4 class="media-heading idea">
+              <%= link_to top.title ,top %>
+            </h4>
+            <span class="badge"><%= top.num_votes %>
+              votes</span>
+          </div>
+        </div>
+      <% end %>
+    <%end%>
 
-<div id='tags'>
-  <% if @tags2 %>
-    <% @tags2.each do |tag| %>
-      <label><%= tag %></label>
-    <% end %>
-  <% end %>
-</div>
-
-<%= render 'ideas/show' %>
-<div id = "IdeaStream">
-  <div class = "page">
-    <%= render :partial => 'stream' %>
   </div>
-</div>
-
-  <% content_for :sidebar do %>
-    <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
-  <% end %>
-
-  <% content_for :sidebar do %>
-    <div class="topten">
-      <h1>Top Ten Ideas</h1>
-      <div class="media">
-        <% @top.each do |top| %>
-          <% if top.user.active == true and top.user.banned == false%>
-            <div class="topten_idea">
-              <a class="pull-left" href="#">
-                <span><%= image_tag(top.photo.url(:thumb), :size => "30x20") %></span>
-
-              </a>
-              <div class="media-body">
-                <h4 class="media-heading"> <%= link_to top.title ,top %> </h4>
-                <span><%= top.num_votes %></span>
-                <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
-              </div>
-            </div>
-          <% end %>
-        <%end%>
-      </div>
-    </div>
-  <% end %>
-
-
+  <div class="affix" data-spy='affix'>
+    <button class="btn backtotop" type="button">To Top
+      <i class = 'icon-black icon-hand-up'>
+      </i></button>
+  </div>
+  <script type="text/javascript">
+    $('.backtotop').click(function(){
+      $('html, body').animate({scrollTop:0}, 'slow');
+      });
+     $(document).ready(function(){
+      $('.backtotop').hide();
+    });
+  </script>
+<% end %>
 <style type = "text/css">
+  .totop{
+    margin: auto;
+  }
+
+
 
   .idea-vote{
-    padding-left: 500px;
+    padding-left: 87%;
     font-size: 35px;
   }
 
@@ -110,37 +109,3 @@
     margin-bottom: 15px;
   }
 </style>
-
-
-<script type="text/javascript">
-(function() {
-  var page = 1,
-      loading = false;
-
-  function nearBottomOfPage() {
-    return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
-  }
-
-  $(window).scroll(function(){
-    if (loading) {
-      return;
-    }
-
-    if(nearBottomOfPage() && $("#search").val() == "") {
-      loading=true;
-      page++;
-      $.ajax({
-        url: '/home/index?page=' + page,
-        type: 'get',
-        dataType: 'script',
-        success: function() {
-            loading=false;
-
-        }
-
-      });
-    }
-  });
-
-}());
-</script>
