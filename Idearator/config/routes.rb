@@ -1,7 +1,6 @@
 Sprint0::Application.routes.draw do
 
   default_url_options :host => 'localhost:3000'
-
   root :to => 'home#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
@@ -35,9 +34,12 @@ Sprint0::Application.routes.draw do
       match 'unvote'
       match 'archive'
       match 'unarchive'
+<<<<<<< Temporary merge branch 1
+=======
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
+>>>>>>> Temporary merge branch 2
     end
   end
 
@@ -68,10 +70,12 @@ Sprint0::Application.routes.draw do
 
   # Notifications routes
   controller :notifications do
-    match 'notifications/view_all_notifications'
-    match 'notifications/redirect_idea'
-    match 'notifications/redirect_review'
-    match 'notifications/redirect_expertise'
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+    match 'set_read'
+    match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
 
@@ -119,6 +123,9 @@ Sprint0::Application.routes.draw do
   #     resources :products
   #   end
 
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended
@@ -127,10 +134,6 @@ Sprint0::Application.routes.draw do
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  match '/review_ideas' => 'committees#review_ideas'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
-  
   match '/users/:id/invite_member' => 'users#invite_member'
   
 end

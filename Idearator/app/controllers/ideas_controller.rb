@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
 
+
   before_filter :authenticate_user!, :only => [:create , :edit, :update, :vote, :unvote]
 
   # view idea of current user
@@ -45,6 +46,7 @@ class IdeasController < ApplicationController
         format.json  { render :json => @approved }
       end
     end
+
 
 
     # editing Idea
@@ -138,6 +140,7 @@ class IdeasController < ApplicationController
     end
   end
 
+
     # creating new Idea
     # Params
     # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
@@ -225,6 +228,40 @@ class IdeasController < ApplicationController
       end
     end
 
+<<<<<<< Temporary merge branch 1
+
+  def archive
+    idea = Idea.find(params[:id])
+    if current_user.type == 'Admin' || current_user.id == idea.user_id
+      idea.archive_status = true
+      idea.save
+      list_of_commenters = []
+      idea.comments.each do |c|
+        list_of_commenters.append(User.find(c.user_id)).flatten!
+      end
+      list = list_of_commenters.append(idea.votes).flatten!
+      if current_user.type == 'Admin'
+        list.append(User.find(idea.user_id)).flatten!
+      end
+      ArchiveNotification.send_notification(current_user, idea, list)
+      idea.votes.each do |u|
+        idea.votes.delete(u)
+      end
+      idea.comments.each do |c|
+        c.destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'Idea has been successfully archived.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
     # Unarchives a specific idea
     # Params:
     # +id+:: is used to specify the instance of +Idea+ to be unarchived
@@ -274,5 +311,4 @@ class IdeasController < ApplicationController
       end
     end
   end
-
-end
+>>>>>>> Temporary merge branch 2
