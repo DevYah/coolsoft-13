@@ -25,7 +25,7 @@
       <%= render :partial => 'modal_reject'%>
       <p><a data-toggle="modal" href="#reject" class="btn btn-large btn-danger">Reject</a></p>
     <% end %>
-    <% if @admin.type == "Admin" && @user.active==true && !@registered %>
+    <% if @admin.type == "Admin" && @user.active==true && !@registered and @user.banned==false %>
       <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "btn btn-primary btn-large" %>
     <%end%>
   <% end %>
