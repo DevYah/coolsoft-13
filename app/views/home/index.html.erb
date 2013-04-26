@@ -1,9 +1,62 @@
 <%= render :partial => 'ideas/show' %>
 <%= render :partial => 'stream' %>
 <% content_for :sidebar do %>
- <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
+  <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
 <% end %>
 <% content_for :sidebar do %>
+  <div class='topten'>
+    <div class='row'>
+      <h3 class='title1'>Idea of the Month</h3>
+    </div>
+    <div id="myCarousel" class="carousel slide">
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        <div class="active item">
+          <div id='idea_of_the_month'>
+            <div class='row'>
+              <h1 class='title'>April</h1>
+            </div>
+            <div class="topten_idea media">
+              <a class="pull-left" href="#">
+                <span class="image"><%= image_tag(@first.photo.url(:thumb), :size => "80x80") %></span>
+              </a>
+              <div class="media-body">
+                <span><%= link_to  @first.user.username, @first.user.becomes(User)  %></span>
+                <h4 class="media-heading idea">
+                  <%= link_to @first.title ,@first %>
+                </h4>
+                <span class="badge"><%= @first.num_votes %>
+                  votes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div id='idea_of_the_mouth'>
+            <div class='row'>
+              <h1 class='title'>March</h1>
+            </div>
+            <div class="topten_idea media">
+              <a class="pull-left" href="#">
+                <span class="image"><%= image_tag(@second.photo.url(:thumb), :size => "80x80") %></span>
+              </a>
+              <div class="media-body">
+                <span><%= link_to  @second.user.username, @second.user.becomes(User)  %></span>
+                <h4 class="media-heading idea">
+                  <%= link_to @second.title ,@second %>
+                </h4>
+                <span class="badge"><%= @second.num_votes %>
+                  votes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+  </div>
   <div class="topten">
     <h1 class="title">Top Ten
     </h1>
@@ -25,11 +78,11 @@
       <% end %>
     <%end%>
   </div>
-   <div class="affix" data-spy='affix'>
+  <div class="affix" data-spy='affix'>
     <button class="btn backtotop" type="button">To Top
       <i class = 'icon-black icon-hand-up'></i></button>
   </div>
-   <script type="text/javascript">
+  <script type="text/javascript">
     $('.backtotop').click(function(){
       $('html, body').animate({scrollTop:0}, 'slow');
       });
