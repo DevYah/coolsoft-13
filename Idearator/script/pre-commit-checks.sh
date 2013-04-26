@@ -84,8 +84,8 @@ if [[ "$check_whitespaces" == "yes" ]] && ! git diff-index --color --check --cac
   if [[ "$autofix_whitespaces" == "yes" ]]; then
     echo "I'm going to try and fix some of them for you automagically, bas mata3melhash tani"
 
-    FILE_LIST=$(git diff-index --check --cached HEAD -- | sed '/^[+-]/d' | sed -r 's/:[0-9]+:.*//' | uniq)
-    for FILE in "$FILE_LIST"; do
+    FILE_LIST=$(git diff-index --check --cached $against -- | sed '/^[+-]/d' | sed -r 's/:[0-9]+:.*//' | uniq)
+    for FILE in $FILE_LIST; do
       perl -i -wpe 's/\r\n/\n/g;s/\ *$//;s/\t/'"$spaces_per_tab"'/g;' "$FILE"
       perl -i -we 'local $/;local $_=<>;s/(\r?\n)*$//; print' "$FILE"
     done
@@ -93,7 +93,7 @@ if [[ "$check_whitespaces" == "yes" ]] && ! git diff-index --color --check --cac
     echo
     echo "Add these files and try to commit again!"
 
-    for FILE in "$FILE_LIST"; do
+    for FILE in $FILE_LIST; do
       echo "  " $(echo_bad_file $FILE)
     done
   fi
