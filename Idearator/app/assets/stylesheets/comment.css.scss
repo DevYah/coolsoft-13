@@ -1,6 +1,7 @@
 // Place all the styles related to the commennt controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .purr {
   position: fixed;
   top: 30px;
@@ -13,29 +14,31 @@
 }
 
 .addComment{
-text-align:center;
-text-shadow:1px 1px 1px #19597E;
-font-family:Palatino
-
-}
-.title1{
-	color: #264093;
-
-}
-.textArea1{
-text-shadow: 4px;
+  text-align:center;
+  text-shadow:1px 1px 1px #19597E;
+  font-family:Palatino
 }
 
-.title2{
+.title1 {
+  color: #264093;
+}
+
+.textArea1 {
+  text-shadow: 4px;
+}
+
+.title2 {
   color: #1C4D3D;
   text-align:left;
-text-shadow:1px 1px 1px #19597E;
+  text-shadow:1px 1px 1px #19597E;
 }
-.commentContent{
+
+.commentContent {
     color: #063425;
     font-family:Monospace
 }
-.buttons{
+
+.buttons {
   text-align:right;
 
 }

@@ -1,5 +1,5 @@
 require 'spec_helper'
-    
+
     context 'comment creator wants to delete' do
        it 'deletes the comment' do
         @user = User.new
@@ -21,7 +21,7 @@ require 'spec_helper'
       end
       end
 
-      
+
 
     context 'normal user wants to delete comment' do
       it 'does not delete the comment' do
@@ -44,12 +44,12 @@ require 'spec_helper'
         sign_in @usertwo
         expect { delete :destroy, :id => @comment.id, :idea_id => @idea.id }.to change(Comment, :count).by(0)
         response.should redirect_to @idea
-      end  
       end
- 
+      end
+
   context "with valid attributes " do
     it "creates a new comment" do
-      i = Idea.new 
+      i = Idea.new
       i.title = "dayna"
       i.description = "description"
       i.problem_solved = "problem"
@@ -58,17 +58,17 @@ require 'spec_helper'
         post :create, :idea_id => i.id , :comment => { :content => "comment"}
       }.to change(Comment,:count).by(1)
     end
-    
-   
+
+
   end
 
 end
 
 
 describe 'PUT update' do
-  
+
     it "changes @comment's attributes" do
-      @idea = Idea.new 
+      @idea = Idea.new
       @idea.title=@idea.description=@idea.problem_solved="Daynaaaaaaa"
       @comment = Comment.new
       @comment.content="Daynaaaa Again"

@@ -9,9 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery-star-rating
+ *
+ *= require bootstrap_and_overrides
  *= require token-input-facebook
- *= require_tree .
+ *= require jquery-star-rating
+ *= require notification
+ *= require ideas
  *
  */
 
