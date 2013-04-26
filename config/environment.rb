@@ -1,6 +1,7 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.perform_deliveries = true
 ActionMailer::Base.raise_delivery_errors = true
