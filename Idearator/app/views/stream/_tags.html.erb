@@ -1,0 +1,17 @@
+  <script>
+  $(".btn-primary").click(function tag_remover(e){
+    e.preventDefault();
+    var curr = $(this);
+    //alert(curr.val());
+    //$("#stream_results").html("");
+    stream_manipulator(1,curr.val(),"",false);
+  });
+  </script>
+
+  <table>
+    <% @filter.each do |current|%>
+      <tr>
+        <td><button class="btn btn-primary" value='<%= current %>'><%= current %></button></td>
+      </tr>
+    <% end %>
+  </table>

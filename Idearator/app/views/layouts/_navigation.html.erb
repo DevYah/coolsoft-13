@@ -36,6 +36,9 @@
 </ul>
 
 <ul class="nav">
+  <li>
+    <%= link_to('stream', controller: 'stream' , action: 'index') %>
+  </li>
   <% if user_signed_in? %>
     <% if current_user.is_a? Committee%>
       <li>
@@ -50,17 +53,17 @@
     <% end %>
   <% end %>
   <li>
-    <% if params[:controller] == 'home' %>
-      <%= form_tag "/home/search", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
-        <p class = "input-append">
-          <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
-          <button class='btn btn-info'>
-            <i class="icon-search icon-white"></i>
-          </button>
-        </p>
-      <% end %>
+    <% if params[:controller] == 'stream' %>
+      <form class="form-search" id="searchdiv">
+        <div class="input-append">
+          <input type="text" class="span2 search-query" id="search" placeholder="Search.....">
+            <button class='btn btn-info' id="search_button">
+              <i class="icon-search icon-white"></i>
+            </button>
+          </div>
+      </form>
     <% else %>
-      <%= form_tag "/home/searchelse", :method => :get,:class => "form-search", :id => 'searchdiv', :remote => true do %>
+      <%= form_tag "stream/index", :method => :get,:class => "form-search" do %>
         <p class = "input-append">
           <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
           <button class='btn btn-info'>
