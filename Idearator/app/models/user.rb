@@ -86,4 +86,11 @@ class User < ActiveRecord::Base
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end
+  def self.search(search)
+    if search
+      where('username LIKE  ? AND banned  = ? AND active = ?', "%#{search}%", false,true)
+    else
+      find(:all)
+    end
+  end
 end

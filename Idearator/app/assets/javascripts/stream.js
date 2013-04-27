@@ -5,14 +5,27 @@ var currentpage = 1;
 var thistag = [];
 var searchtext = "";
 will_insert = true;
+user_search = false;
+var previous_search = "";
 
-function stream_manipulator(page,tag,search,insert){
-  $('#search_button').click(function remove_button_handler(e) {e.preventDefault(); });
+function stream_manipulator(page,tag,search,insert,user){
+  alert(previous_search);
+  $('#user-search-button').click(function remove_button_handler(e) {
+    e.preventDefault(); 
+    var search_value = $("#search").val();
+    stream_manipulator(1,"",search_value,true,true);
+  });
+  $('#idea-search-button').click(function remove_button_handler(e) {
+    e.preventDefault(); 
+    var search_value = $("#search").val();
+    stream_manipulator(1,"",search_value,true,false);
+  });
   currentpage = page;
   searchtext = search+"";
   will_insert = insert;
   inside = 0;
-
+  user_search = user;
+if(!user_search){
   if(will_insert){
   if(tag!=""){
     for (var i = 0; i < thistag.length; i++) {
@@ -35,11 +48,12 @@ function stream_manipulator(page,tag,search,insert){
   //alert(inside+" "+thistag[0]);
   if (inside != 1){
     $("#stream_results").html("");
+    alert(currentpage+"#"+thistag+"#"+searchtext+"#"+user_search);
     $.ajax({
       url: '/stream/index?page=' + currentpage,
       type: 'get',
       dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext},
+      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search},
       success: function() {
       }
     });
@@ -53,7 +67,7 @@ function stream_manipulator(page,tag,search,insert){
           url: '/stream/index?page=' + currentpage,
           type: 'get',
           dataType: 'script',
-          data: { mypage: currentpage, tag: thistag, search: searchtext},
+          data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: false},
           success: function() {
           }
         });
@@ -61,19 +75,37 @@ function stream_manipulator(page,tag,search,insert){
       }
     }
 }
-//alert(currentpage);
+}else{
+  if(previous_search != searchtext){
+  $("#stream_results").html("");
+  thistag = [];
+    $.ajax({
+      url: '/stream/index?page=' + currentpage,
+      type: 'get',
+      dataType: 'script',
+      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: true},
+      success: function() {
+        alert("2ndo");
+        previous_search = searchtext;
+      }
+    });
+  }
 }
-  $(window).scroll (function(){
+
+}
+//alert(currentpage);
+$(window).scroll (function(){
   //alert($(window).scrollTop());
     if($(window).scrollTop()!=0){
       if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
+        alert("3rdo");
         currentpage++;
     //stream_manipulator(currentpage,"",searchtext);
         $.ajax({
           url: '/stream/index?page=' + currentpage,
           type: 'get',
           dataType: 'script',
-          data: { mypage: currentpage, tag: thistag, search: searchtext},
+          data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search},
           success: function() {
           //alert("2nd "+currentpage);
           }
@@ -82,4 +114,4 @@ function stream_manipulator(page,tag,search,insert){
     }
   });
 
-$(document).ready(stream_manipulator(1,"","",true));
+$(document).ready(stream_manipulator(1,"","",true,false));

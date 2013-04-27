@@ -36,9 +36,9 @@
 </ul>
 
 <ul class="nav">
-  <li>
+  <!-- <li>
     <%= link_to('stream', controller: 'stream' , action: 'index') %>
-  </li>
+  </li> -->
   <% if user_signed_in? %>
     <% if current_user.is_a? Committee%>
       <li>
@@ -57,20 +57,42 @@
       <form class="form-search" id="searchdiv">
         <div class="input-append">
           <input type="text" class="span2 search-query" id="search" placeholder="Search.....">
-            <button class='btn btn-info' id="search_button">
-              <i class="icon-search icon-white"></i>
-            </button>
+            <div class="btn-group">
+              <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="search_button">
+                <i class="icon-search icon-white"></i>
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#" id="user-search-button">Find Members</a>
+                </li>
+                <li>
+                  <a href="#" id="idea-search-button">Search for an idea</a>
+                </li>
+              </ul>
+            </div>
           </div>
       </form>
     <% else %>
-      <%= form_tag "stream/index", :method => :get,:class => "form-search" do %>
-        <p class = "input-append">
-          <%= text_field_tag :search, params[:search], :placeholder => "Search....." ,:class => "span2 search-query"%>
-          <button class='btn btn-info'>
-            <i class="icon-search icon-white"></i>
-          </button>
-        </p>
-      <% end %>
+      <form class="form-search">
+        <div class="input-append">
+          <input type="text" class="span2 search-query" id="search-input" placeholder="Search.....">
+            <div class="btn-group">
+              <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="search_button">
+                <i class="icon-search icon-white"></i>
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#" id="user-search-button-redirection">Find Members</a>
+                </li>
+                <li>
+                  <a href="#" id="idea-search-button-redirection">Search for an idea</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </form>
     <% end %>
   </li>
 </ul>

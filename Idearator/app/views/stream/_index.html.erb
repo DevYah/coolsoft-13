@@ -3,10 +3,11 @@
     e.preventDefault();
     var tag = $(this);
     //$("#stream_results").html("");
-    stream_manipulator(1,tag.val(),"",true);
+    stream_manipulator(1,tag.val(),"",true, false);
   });
   </script>
 
+<% if !@search_with_user%>
 <table>
   <% @ideas.each do |idea| %>
     <tr>
@@ -19,3 +20,14 @@
     <br>
   <%end%>
 </table>
+<% else %>
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %>
+      </td>
+    </tr>
+    <br>
+  <%end%>
+</table>
+<% end %>
