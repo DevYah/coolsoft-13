@@ -3,104 +3,99 @@
 
 function initialize_barchart() {
   var tag_id = 6;
-  var options = {
-    chart: {
+  
+  $.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
+    var options = {
+      chart: {
         renderTo: 'bar-chart',
-        defaultSeriesType: 'bar'
-    },
-    title: {
+        defaultSeriesType: 'column'
+      },
+      title: {
         text: 'Number of votes'
-    },
-    xAxis: {
+      },
+      xAxis: {
         categories: []
-    },
-    yAxis: {
+      },
+      yAxis: {
         title: {
-            text: 'Units'
+          text: 'Units'
         }
-    },
-    series: []
+      },
+      plotOptions: {
+        series: {
+          cursor: 'pointer',
+          point: {
+            events: {
+              click: function() {
+                location.href = this.options.url;
+              }
+            }
+          }
+        }
+      },
+      series:  []
+      /*{name: "Boogie",
+      data: [{y:1, url: "http://google.com/?q=boogie"}]}, 
+
+      {data: [{y:2}]},
+
+      {data:[{y:3}]}
+      ]*/
     };
-$.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
-  console.log(data);
+
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
-        var items = line.split(',');
-        if (lineNo == 0) {
-            $.each(items, function(itemNo, item) {
-                if (itemNo > 0) options.xAxis.categories.push(item);
-            });
-        }
-        else {
-            var series = {
-                data: []
-            };
-            $.each(items, function(itemNo, item) {
-                if (itemNo == 0) {
-                    series.name = item;
-                } else {
-                    series.data.push(parseFloat(item));
-                }
-            });
-            options.series.push(series);
-        }
-        
+      if (line == "") return;
+      var items = line.split(',');      
+      var series = {
+        name: items[0],
+        data: [{y: parseInt(items[1]), url: '/ideas/' + items[2]}]
+      };
+
+      options.series.push(series);
     });
-    
-    // Create the chart
+
     var chart = new Highcharts.Chart(options);
-});
+    console.log(options);
+  });
 }
 
 function initialize_bubblechart() {
   var tag_id = 6;
   var options = {
     chart: {
-        renderTo: 'bubble-chart',
-        defaultSeriesType: 'bubble'
+      renderTo: 'bubble-chart',
+      defaultSeriesType: 'bubble'
     },
     title: {
-        text: 'Number of votes'
+      text: 'Number of votes'
     },
     xAxis: {
-        categories: []
+      categories: []
     },
     yAxis: {
-        title: {
-            text: 'Units'
-        }
+      title: {
+        text: 'Units'
+      }
     },
     series: []
-    };
-$.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
-  console.log(data);
+  };
+  $.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
-        var items = line.split(',');
-        if (lineNo == 0) {
-            $.each(items, function(itemNo, item) {
-                if (itemNo > 0) options.xAxis.categories.push(item);
-            });
-        }
-        else {
-            var series = {
-                data: []
-            };
-            $.each(items, function(itemNo, item) {
-                if (itemNo == 0) {
-                    series.name = item;
-                } else {
-                    series.data.push(parseFloat(item));
-                }
-            });
-            options.series.push(series);
-        }
-        
+      if (line == "") return;
+      var items = line.split(',');      
+      var series = {
+        name: items[0],
+        data: [{y: parseInt(items[1]), url: '/ideas/' + items[2]}]
+      };
+
+      options.series.push(series);
     });
-    
-    // Create the chart
+
     var chart = new Highcharts.Chart(options);
-});
+    console.log(options);
+  });
 }  
 
 
@@ -116,4 +111,4 @@ $.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
 //   window.location.href='/ideas/' + idea_no;
 // }
 
-  
+
