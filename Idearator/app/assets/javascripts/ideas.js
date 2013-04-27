@@ -1,9 +1,11 @@
-// When The user clicks on facebook share or twitter share button, this method gets the current URL of the current page and apends it to the default
-// facebook and twitter sharing URLs.
-// This page's URl is then shared on The user's facebook or twitter account.
-// Author: Mohamed Sameh
 
 $(document).ready(function() {
+
+  // When The user clicks on facebook share or twitter share button, this method
+  // gets the current URL of the current page and apends it to the default facebook
+  // and twitter sharing URLs.
+  // This page's URl is then shared on The user's facebook or twitter account.
+  // Author: Mohamed Sameh
 
   $("#share").click(function() {
     $("#show").toggle("slow");
@@ -17,10 +19,12 @@ $(document).ready(function() {
   });
 
   $("#tw").click(function() {
-     var pathname = window.location;
-    var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Checkout this idea on idearator';
-    var win=window.open(tweeturl, 'popup');
-     win.focus();
+    var pathname = window.location;
+    var tweeturl = 'http://twitter.com/share?url='
+                   + encodeURI(pathname)
+                   + '&text=Checkout this idea on idearator';
+    var win = window.open(tweeturl, 'popup');
+    win.focus();
   });
 
   $("#fbk").tooltip({
@@ -36,11 +40,7 @@ $(document).ready(function() {
   $("#pin").tooltip({
     toggle: "tooltip",
     title: "Share on pin",
-
   });
-
-  $('.btn-success.add-rating').click(function(){
-  $('.add-ratings').show();
 
   var prePopulate = [];
 
