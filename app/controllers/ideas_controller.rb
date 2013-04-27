@@ -3,6 +3,7 @@ class IdeasController < ApplicationController
   before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like ,:vote ,:unvote]
 
   # view idea of current user
+
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
@@ -171,6 +172,7 @@ class IdeasController < ApplicationController
       list_of_comments = Comment.where(idea_id: idea.id)
       list_of_commenters = []
       list_of_voters = idea.votes
+
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
         c.destroy
@@ -207,6 +209,7 @@ class IdeasController < ApplicationController
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
       list = list_of_commenters.append(idea.votes).flatten!
+
       if current_user.type == 'Admin'
         list.append(User.find(idea.user_id)).flatten!
       end
