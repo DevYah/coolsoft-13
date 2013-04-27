@@ -3,5 +3,6 @@ class AddCreatedAtToVotes < ActiveRecord::Migration
     change_table :votes do |t|
       t.timestamps
     end
+    add_index :votes, [:idea_id, :user_id], :unique => true
   end
 end
