@@ -21,8 +21,6 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
-      match 'show_sign_in_form'
-      match 'show_sign_up_form'
     end
   end
 
