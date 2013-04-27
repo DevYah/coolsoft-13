@@ -92,6 +92,7 @@ Sprint0::Application.routes.draw do
   resources :competitions
 
   match 'competitions/:id/enroll_idea/id1' => 'competitions#enroll_idea'
+  match 'ideas/:id/enter_competition/:id1' => 'ideas#enter_competition'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
