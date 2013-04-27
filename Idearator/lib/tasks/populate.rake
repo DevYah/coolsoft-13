@@ -55,11 +55,15 @@ namespace :db do
       c.title = Faker::Name.name
       c.description = Faker::Lorem.paragraph
       c.investor = i
-      c.start_date = Date.new(2013,5,rand(1..30))
+      c.start_date = Time.now.to_date + rand(-5..5).days
       c.end_date = c.start_date + rand(1..30).days
       c.tags << Tag.all[rand(0..9)]
       c.tags << Tag.all[rand(0..9)]
       c.tags << Tag.all[rand(0..9)]
+      rand(1..40).times do |p|
+        idea = Idea.all[rand(0..49)]
+        c.ideas << idea
+      end
       c.save
     end
 
