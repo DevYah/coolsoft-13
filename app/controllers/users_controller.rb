@@ -136,4 +136,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_sign_in_form
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def show_sign_up_form
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end
