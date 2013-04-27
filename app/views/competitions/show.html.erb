@@ -2,42 +2,30 @@
   <div class='row'>
     <div class='span12'>
       <h3><%= @competition.title %></h3>
-       <p><a data-toggle="modal" href="#myIdeas" class="btn btn-large btn-primary pull-right">Enroll an Idea</a></p>
-       <div id="myIdeas" class="modal hide fade in" style="display: none; ">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>My Ideas</h3>
-  </div>
-  <div class="modal-body">
-    <%= render :partial => '/home/stream', :locals => { :@approved => Idea.all } %>
-  </div>
-  <div class="modal-footer">
-    <%= link_to "Enroll",  { :controller => "competitions", :action => "enroll_idea", :id =>@competition.id}, :class => 'btn btn-large btn-primary pull-left'%>
-    <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new" } , :class => 'btn btn-large btn-danger pull-center'%>
-    </div>
-  </div>
-  <div class='row'>
-    <div class='span4'>
-      <div id='tags'>
-        <%if @chosen_tags_competition != nil %>
-          <% @chosen_tags_competition.each do |tag|%>
-            <span class="label label-info "><%= tag.name %></span>
+      <p><a data-toggle="modal" href="#myIdeas" class="btn btn-large btn-primary pull-right">Enroll an Idea</a></p>
+      <%= render :partial => 'enroll_idea', :locals => {:@approved => @myIdeas}%>
+      <div class='row'>
+        <div class='span4'>
+          <div id='tags'>
+            <%if @chosen_tags_competition != nil %>
+              <% @chosen_tags_competition.each do |tag|%>
+                <span class="label label-info "><%= tag.name %></span>
+              <% end %>
+            <% end %>
+          </div>
+          <h4>Description</h4>
+          <div><%= @competition.description %></div>
+          <h4>Start date</h4>
+          <div><%= @competition.start_date %></div>
+          <h4>End date</h4>
+          <div><%= @competition.end_date %></div>
+          <% if current_user.id == @competition.investor_id %>
+            <div class='btn-group' id='control'>
+              <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
+            </div>
           <% end %>
-        <% end %>
-      </div>
-      <h4>Description</h4>
-      <div><%= @competition.description %></div>
-      <h4>Start date</h4>
-      <div><%= @competition.start_date %></div>
-      <h4>End date</h4>
-      <div><%= @competition.end_date %></div>
-      <% if current_user.id == @competition.investor_id %>
-        <div class='btn-group' id='control'>
-          <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
         </div>
-      <% end %>
+        <div class='span8'>
+        </div>
+      </div>
     </div>
-    <div class='span8'>
-    </div>
-  </div>
-</div>

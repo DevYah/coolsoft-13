@@ -84,5 +84,12 @@ class CompetitionsController < ApplicationController
   end
 
   def enroll_idea
+    @idea = Idea.find(params[:id])
+    @competition = Competition.find(params[:id1])
+    @competition.ideas << @idea
+     respond_to do |format|
+      format.html { redirect_to @competition, notice: 'Idea Submitted successfully'}
+      format.json { head :no_content }
+    end
   end
 end

@@ -1,13 +1,42 @@
-<div id="approve" class="modal hide fade in" style="display: none; ">
+  <div id="myIdeas" class="modal hide fade in" style="display: none; ">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>My Ideas</h3>
   </div>
   <div class="modal-body">
-    <%= render :partial => 'home/stream', :locals => { :approved => @myIdeas } %>
+   <div id='Stream'>
+  <% @approved.each do |approved| %>
+    <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
+      <div class="span8 row" id="share">
+        <div class="wrapper row">
+          <div class="span2"><%= image_tag approved.photo.url(:medium) %></div>
+          <div class="span6">
+            <div class="span1 pull-right">
+              <%= link_to approved.user.username , approved %>
+            </div>
+            <h3>
+              <%= link_to  approved.title , approved %>
+            </h3>
+            <%= approved.description %>
+            <ul class ="inline">
+              <% approved.tags.each do |tag| %>
+                <li style = "color: #0060ff;"><%= tag.name %></li>
+              <% end %>
+            </ul>
+              <%= link_to 'Enroll', { :controller => "competitions", :action => "enroll_idea", :id => approved.id, :id1 => @competition.id }, :class =>"btn btn-large btn-primary inline pull-right margin" %>
+            <div id='sharing'>
+              <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(approved)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
+              <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(approved)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>
+              <a class= "popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(approved)%>&media=<%=root_url + approved.photo.url %>&description=<%= approved.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
   </div>
   <div class="modal-footer">
-    <%= link_to "Submit",  { :controller => "enroll_idea", :action => "enroll_idea"}, :class => 'btn btn-success pull-center'%>
-    <%= link_to "Enter a New Idea", :controller => "ideas", :action => "new", :class => 'btn btn-success'%>    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new" } , :class => 'btn btn-large btn-danger pull-center'%>
+    </div>
   </div>
-</div>
