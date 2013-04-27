@@ -15,6 +15,7 @@ class CompetitionsController < ApplicationController
   def show
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
+    @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @competition }
@@ -80,5 +81,8 @@ class CompetitionsController < ApplicationController
       format.html { redirect_to competitions_url }
       format.json { head :no_content }
     end
+  end
+
+  def enroll_idea
   end
 end
