@@ -1,0 +1,31 @@
+<div class='competition-page competition-<%= @competition.id %>'>
+  <div class='row'>
+    <div class='span12'>
+      <h3><%= @competition.title %></h3>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='span4'>
+      <div id='tags'>
+        <%if @chosen_tags_competition != nil %>
+          <% @chosen_tags_competition.each do |tag|%>
+            <span class="label label-info "><%= tag.name %></span>
+          <% end %>
+        <% end %>
+      </div>
+      <h4>Description</h4>
+      <div><%= @competition.description %></div>
+      <h4>Start date</h4>
+      <div><%= @competition.start_date %></div>
+      <h4>End date</h4>
+      <div><%= @competition.end_date %></div>
+      <% if current_user.id == @competition.investor_id %>
+        <div class='btn-group' id='control'>
+          <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
+        </div>
+      <% end %>
+    </div>
+    <div class='span8'>
+    </div>
+  </div>
+</div>
