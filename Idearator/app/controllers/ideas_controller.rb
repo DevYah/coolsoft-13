@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update, :vote, :unvote]
+  before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like ,:vote ,:unvote]
 
   # view idea of current user
   # Params
@@ -25,7 +25,13 @@ class IdeasController < ApplicationController
   # making new Idea
   #Marwa Mehanna
   def new
+<<<<<<< HEAD
     @idea = Idea.new
+=======
+    puts 'hashish first print'
+    @idea = Idea.new
+    puts 'hashish    ' + @idea.to_s + ' hashish'
+>>>>>>> master
     @tags = Tag.all
     @chosentags = []
     respond_to do |format|
@@ -47,7 +53,6 @@ class IdeasController < ApplicationController
     end
   end
 
-
   # editing Idea
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
@@ -59,6 +64,20 @@ class IdeasController < ApplicationController
     @boolean = true
   end
 
+<<<<<<< HEAD
+  # editing Idea
+  # Params
+  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
+  # Author: Marwa Mehanna
+  def edit
+    @idea = Idea.find(params[:id])
+    @tags = Tag.all
+    @chosentags = Idea.find(params[:id]).tags
+    @boolean = true
+  end
+
+=======
+>>>>>>> master
   # updating Idea
   # Params
   # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
@@ -160,7 +179,18 @@ class IdeasController < ApplicationController
     end
   end
 
+  # Deletes all records related to a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be archived
+  # Author: Mahmoud Abdelghany Hashish
+  def destroy
+    idea = Idea.find(params[:id])
+    if current_user.id == idea.user_id
+      list_of_comments = Comment.where(idea_id: idea.id)
+      list_of_commenters = []
+      list_of_voters = idea.votes
 
+<<<<<<< HEAD
   # Deletes all records related to a specific idea
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be archived
@@ -173,10 +203,16 @@ class IdeasController < ApplicationController
       list_of_voters = idea.votes
       idea.destroy
       list_of_comments.each do |c|
+=======
+      list_of_comments.each do |c|
+        list_of_commenters.append(User.find(c.user_id)).flatten!
+>>>>>>> master
         c.destroy
       end
 
+      list = list_of_commenters.append(list_of_voters).flatten!
 
+<<<<<<< HEAD
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
@@ -184,6 +220,12 @@ class IdeasController < ApplicationController
       list = list_of_commenters.append(list_of_voters).flatten!
 
       DeleteNotification.send_notification(current_user, idea, list)
+=======
+      DeleteNotification.send_notification(current_user, idea, list)
+
+      idea.destroy
+
+>>>>>>> master
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
@@ -194,8 +236,18 @@ class IdeasController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def archive
     idea = Idea.find(params[:id])
+=======
+  # Archives a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be archived
+  # Author: Mahmoud Abdelghany Hashish
+  def archive
+    idea = Idea.find(params[:id])
+
+>>>>>>> master
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = true
       idea.save
@@ -204,13 +256,22 @@ class IdeasController < ApplicationController
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
       list = list_of_commenters.append(idea.votes).flatten!
+<<<<<<< HEAD
       if current_user.type == 'Admin'
         list.append(User.find(idea.user_id)).flatten!
       end
+=======
+
+      if current_user.type == 'Admin'
+        list.append(User.find(idea.user_id)).flatten!
+      end
+
+>>>>>>> master
       ArchiveNotification.send_notification(current_user, idea, list)
       idea.votes.each do |u|
         idea.votes.delete(u)
       end
+<<<<<<< HEAD
       idea.comments.each do |c|
         c.destroy
       end
@@ -222,6 +283,36 @@ class IdeasController < ApplicationController
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
         format.json { head :no_content }
+=======
+
+      idea.num_votes = 0
+
+      idea.comments.each do |c|
+        c.destroy
+      end
+
+      list_of_ratings = Rating.where(:idea_id => idea.id)
+      list_of_user_ratings = []
+
+      list_of_ratings.each do |r|
+        list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
+      end
+
+      list_of_user_ratings.each do |ur|
+        ur.destroy
+      end
+
+      idea.save
+
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'Idea has been successfully archived!' }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.js { head :no_content }
+>>>>>>> master
       end
     end
   end
@@ -235,6 +326,7 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = false
       idea.save
+<<<<<<< HEAD
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea has been successfully unarchived.' }
         format.json { head :no_content }
@@ -243,6 +335,12 @@ class IdeasController < ApplicationController
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
         format.json { head :no_content }
+=======
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.js { head :no_content }
+>>>>>>> master
       end
     end
   end
@@ -274,6 +372,7 @@ class IdeasController < ApplicationController
       end
     end
   end
+<<<<<<< HEAD
 
   # Popover with idea details
   # Params:
@@ -287,3 +386,6 @@ class IdeasController < ApplicationController
   end
 
 end
+=======
+end
+>>>>>>> master

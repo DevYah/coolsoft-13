@@ -8,6 +8,12 @@
     <meta name='author' content='' />
     <%= stylesheet_link_tag 'application', :media => 'screen' %>
     <%= javascript_include_tag 'application' %>
+
+    <% if params[:controller] %>
+      <%= stylesheet_link_tag params[:controller] %>.
+      <%= javascript_include_tag params[:controller] %>
+    <% end %>
+
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -75,4 +81,3 @@
     </div><!--! end of #main -->
   </body>
 </html>
-
