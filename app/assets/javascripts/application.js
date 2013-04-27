@@ -19,6 +19,7 @@
 //= require best_in_place
 //= require notification_polling
 //= require notifications
+//= require poller
 //= require jquery.purr
 
 function popupCenter(url, width, height, name) {
