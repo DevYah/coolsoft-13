@@ -1,17 +1,20 @@
   <script>
-  $(".btn-primary").click(function tag_remover(e){
+  $(".close").click(function tag_remover(e){
     e.preventDefault();
     var curr = $(this);
+    //$(this).parent().slideToggle();
     //alert(curr.val());
     //$("#stream_results").html("");
+    //var val = curr.attr("value");
+    alert(curr.val());
     stream_manipulator(1,curr.val(),"",false);
   });
   </script>
 
-  <table>
     <% @filter.each do |current|%>
-      <tr>
-        <td><button class="btn btn-primary" value='<%= current %>'><%= current %></button></td>
-      </tr>
+      <div class="well well-small">
+        <i class="icon-tag"></i>
+        <strong class="text-info"><%= current %></strong>
+        <button class="close" value='<%= current %>'>&times;</button>
+      </div>
     <% end %>
-  </table>
