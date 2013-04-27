@@ -293,4 +293,8 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+  def enroll_idea
+
+  end
 end
