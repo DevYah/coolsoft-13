@@ -3,6 +3,7 @@ require 'sinatra/async'
 class Coolster < Sinatra::Base
   register Sinatra::Async
 
+  @@users = {}
   # Create a new HTTP verb called OPTIONS.
   # Browsers (should) send an OPTIONS request to get Access-Control-Allow-* info.
   def self.http_options(path, opts={}, &block)
@@ -10,7 +11,6 @@ class Coolster < Sinatra::Base
   end
 
   def new
-    @users = {}
     super
   end
 
@@ -34,16 +34,19 @@ class Coolster < Sinatra::Base
   end
 
   aget '/poll' do
-    body 'Amina'
-    @users = Mutex.new
-    @users.lock
+    puts "polling"
     puts request.cookies
-    #authenticate
-    #add thread to hash
+    puts request.cookies["_Sprint0_session"]
+    @@users[request.cookies["_Sprint0_session"]] = Proc.new{|script| body script}
   end
 
   apost '/update' do
     puts params[:script]
+    puts @@users
+    @@users.each do |key, value|
+      value.call params[:script]
+    end
+    body "ok"
   end
 
 end
