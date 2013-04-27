@@ -6,25 +6,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 p.same_line{
-	display: inline;
+  display: inline;
 }
 
-div.notification{
-	border-radius: 5px;
-	margin: 10px;
-	cursor: pointer;
+.content .notification{
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  position:relative
+}
+
+.nav .notification{
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  min-height: 40px;
+  position:relative
 }
 
 .unread{
-	background: rgba(0,153,153, 0.25);
-}
-
-div.unread-select{
-	background: rgba(0,153,153, 0.50);
-}
-
-div.read-select{
-	background: rgba(0, 0, 0, 0.20);
+  background: rgba(0,153,153, 0.25);
 }
 
 .read{
@@ -32,35 +33,60 @@ div.read-select{
 }
 
 div.centered{
-	padding: 8px;
+  padding: 8px;
 }
 
 h3.title{
-	margin: 11px;
-	font-size: 20px;
+  margin: 11px;
+  font-size: 20px;
 }
 
 .unread-drop{
-	background: rgba(0,153,153, 0.05);
+  background: rgba(0,153,153, 0.05);
 }
 
-
-.notification:hover .link{
+.content .notification:hover .notification-link{
   display: inline;
 }
 
+.content .notification.read:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
 
-.link{
+.content .notification.unread:hover {
+  background: rgba(0,153,153, 0.50);
+}
+
+.nav .notification:hover .notification-link{
+  display: inline;
+}
+
+.nav .notification.read:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.nav .notification.unread:hover {
+  background: rgba(0,153,153, 0.50);
+}
+
+.notification-link{
   display: none;
   float: right;
 }
 
 div.padding_right{
-	padding-right: 20px;
+  padding-right: 20px;
 }
 
-.date{
-	font-size: 10px;
-	color:#686868;
-	float: right;
+.notification-date{
+  font-size: 10px;
+  color:#686868;
+  position:absolute;
+  bottom:0;
+  right:0;
+  padding-right: 20px;
+}
+
+.custom-dropdown{
+  width: 400px;
 }
