@@ -80,5 +80,13 @@ class DashboardController < ApplicationController
       format.js
     end
   end
+  def chart_data
+    @tagid = params[:tag_id]
+    @ideastagsall = IdeasTags.find(:all, :conditions => {:tag_id => @tagid})
+    @ideasall = Idea.where(:id => @ideastagsall.map(&:idea_id))
+    respond_to do |format|
+      format.csv
+    end  
+  end  
 
 end
