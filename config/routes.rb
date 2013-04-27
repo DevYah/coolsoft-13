@@ -68,6 +68,7 @@ Sprint0::Application.routes.draw do
     match 'getallideas'
     match 'gettags'
     match 'getideas'
+    match 'dashboard/chart_data/:tag_id'=>'dashboard#chart_data'
   end
 
   # Notifications routes
