@@ -29,17 +29,21 @@ class Coolster < Sinatra::Base
   end
 
   aget '/' do
+    body 'Hello'
     puts request.cookies
   end
 
   aget '/poll' do
-    request.cookies
+    body 'Amina'
+    @users = Mutex.new
+    @users.lock
+    puts request.cookies
     #authenticate
     #add thread to hash
   end
 
   apost '/update' do
-
+    puts params[:script]
   end
 
 end
