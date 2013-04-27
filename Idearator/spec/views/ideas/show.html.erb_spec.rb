@@ -1,29 +1,68 @@
 require 'spec_helper'
 
-describe "ideas/show.html.erb" do
-  before :each do
-    @idea= Idea.new
-    @idea.title= "idea1"
-    @idea.description= "blablabla"
-    @idea.problem_solved= "ay nila"
+describe 'ideas/show.html.erb' do
+  include Devise::TestHelpers
+
+  before :all do
+    @user = FactoryGirl.build(:user)
+    @user.confirm!
+    @idea = FactoryGirl.create(:idea)
+    @idea.user_id = @user.id
     @idea.save
   end
 
-  it "has a share button" do
-    render :template => "/ideas/show", :locals => {:idea => @idea}
-    rendered.should have_button ('Share')
+  context 'if idea is not archived' do
+    before :each do
+      render :template => '/ideas/show', :locals => { :idea => @idea }
+    end
+
+    it 'has a pinterest image' do
+      rendered.should have_tag('img#pin', :visible => true)
+    end
+
+    it 'has a facebook image' do
+      rendered.should have_tag('img#fbk', :visible => true)
+    end
+
+    it 'has a twitter image' do
+      rendered.should have_tag('img#tw', :visible => true)
+    end
+
+    it 'has facebook comments' do
+      rendered.should have_tag('div.fb-comments', :visible => true)
+    end
   end
 
-  it "has a pinterest image" do
-    render :template => "/ideas/show", :locals => {:idea => @idea}
-    response.should have_tag("img", :id => "pin")
+  context 'if idea is archived' do
+    before :all do
+      @idea.archive_status = true
+      @idea.save
+    end
 
-  it "has a facebook image" do
-    render :template => "/ideas/show", :locals => {:idea => @idea}
-    response.should have_tag("img", :id => "fbk")
+    before :each do
+      render :template => '/ideas/show', :locals => { :idea => @idea }
+    end
+
+    it 'has a pinterest image' do
+      rendered.should have_tag('img#pin', :visible => false)
+    end
+
+    it 'has a facebook image' do
+      rendered.should have_tag('img#fbk', :visible => false)
+    end
+
+    it 'has a twitter image' do
+      rendered.should have_tag('img#tw', :visible => false)
+    end
+
+    it 'has facebook comments' do
+      rendered.should have_tag('div.fb-comments', :visible => false)
+    end
   end
-  it "has a twitter image" do
-    render :template => "/ideas/show", :locals => {:idea => @idea}
-    response.should have_tag("img", :id => "tw")
+
+  after :all do
+    @user.destroy
+    @idea.destroy
   end
 end
+
