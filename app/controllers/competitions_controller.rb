@@ -83,6 +83,11 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  # Enrolls a chosen Idea into a competition
+  # Params:
+  # +id+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # +id1+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
   def enroll_idea
     @idea = Idea.find(params[:id])
     @competition = Competition.find(params[:id1])
