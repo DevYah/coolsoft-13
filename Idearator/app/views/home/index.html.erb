@@ -1,51 +1,8 @@
-<div class="hero-unit text-center" id="title">
-  <h1>Idearator</h1>
-  <p>The Community that turns your ideas into a Reality</p>
-</div>
-<% content_for :sidebar do %>
-  <div class="well text-center" id="signin">
-    <button class="btn btn-large btn-block" type="button">Sign Up</button>
-    <div class="hero-unit text-center" id="title">
-      <h3>OR</h3>
-    </div>
-    <button class="btn btn-large btn-primary btn-block" type="button">Login</button>
-  </div>
-<% end %>
-
-<div id="myCarousel" class="carousel slide">
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="active item">
-      <%= image_tag('lightbulb-image-for-WEbsite.jpg')%>
-      <div class="carousel-caption text-center">
-        <h4>Have an Awsome Idea ?!</h4>
-        <h4>Decide you want to share your idea with the world.</h4>
-      </div>
-    </div>
-    <div class="item">
-      <%= image_tag('331280.jpg')%>
-      <div class="carousel-caption text-center">
-        <h4>Sign up right now to Idearator</h4>
-      </div>
-    </div>
-    <div class="item">
-      <%= image_tag('bulb.jpg')%>
-      <div class="carousel-caption text-center">
-        <h4>Submit your idea</h4>
-        <h4>Let the community decide the future of your idea</h4>
-        <h4>Turn your idea into a Reality</h4>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
 <%= render :partial => 'ideas/show' %>
 <%= render :partial => 'stream' %>
+<% content_for :sidebar do %>
+ <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
+<% end %>
 <% content_for :sidebar do %>
   <div class="topten">
     <h1 class="title">Top Ten
@@ -69,12 +26,11 @@
     <%end%>
 
   </div>
-  <div class="affix" data-spy='affix'>
+   <div class="affix" data-spy='affix'>
     <button class="btn backtotop" type="button">To Top
-      <i class = 'icon-black icon-hand-up'>
-      </i></button>
+      <i class = 'icon-black icon-hand-up'></i></button>
   </div>
-  <script type="text/javascript">
+   <script type="text/javascript">
     $('.backtotop').click(function(){
       $('html, body').animate({scrollTop:0}, 'slow');
       });
@@ -87,8 +43,6 @@
   .totop{
     margin: auto;
   }
-
-
 
   .idea-vote{
     padding-left: 87%;
