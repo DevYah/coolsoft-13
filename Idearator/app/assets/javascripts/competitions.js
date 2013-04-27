@@ -21,4 +21,10 @@ $(document).ready(function() {
     },
     prePopulate: prePopulate
   });
+  $('.best_in_place').best_in_place();
+  $('.best_in_place').bind("ajax:success", function(){
+    $('#edited-check-mark').remove();
+    $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
+  });
+   $.datepicker.setDefaults({ dateFormat: 'dd M (D)' });
 });
