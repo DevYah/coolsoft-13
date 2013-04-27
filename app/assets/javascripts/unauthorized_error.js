@@ -6,8 +6,8 @@ $(document).bind("ajaxError", function (e, xhr) {
 
 function add_unauthenticated_event_handlers() {
   $('a.unauthorized-sign-up').click(function () {
-    $.getScript("/redirect_expertise.js?&notification=" + notification);
+    $.getScript("/users/show_sign_in_form.js");
   });
 }
 
-$(document).ready(add_notification_event_handlers);
+$(document).ready(add_unauthenticated_event_handlers);
