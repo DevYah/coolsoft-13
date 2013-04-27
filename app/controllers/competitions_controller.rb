@@ -74,11 +74,16 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1.json
   def destroy
     @competition = Competition.find(params[:id])
-    @competition.destroy
+    if current_user.id == @competition.investor_id
+      @competition.destroy
+      respond_to do |format|
+        format.html { redirect_to '/', alert: 'Your Competition has been successfully deleted!' }
+      end
 
-    respond_to do |format|
-      format.html { redirect_to competitions_url }
-      format.json { head :no_content }
+    else
+      respond_to do |format|
+        format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
+      end
     end
   end
 end
