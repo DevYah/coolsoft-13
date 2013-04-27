@@ -1,0 +1,46 @@
+<div class="hero-unit text-center" id="title">
+  <h1>Idearator</h1>
+  <p>The Community that turns your ideas into a Reality</p>
+</div>
+<% content_for :sidebar do %>
+  <div class="well text-center" id="signin">
+    <%= link_to('Sign up', new_user_registration_path, :class =>"btn btn-large btn-block") %>
+    <div class="hero-unit text-center" id="title">
+      <h3>OR</h3>
+    </div>
+    <%= link_to('Sign in', new_user_session_path, :class =>"btn btn-primary btn-large btn-block") %>
+  </div>
+<% end %>
+
+<div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="active item">
+      <%= image_tag('lightbulb-image-for-WEbsite.jpg')%>
+      <div class="carousel-caption text-center">
+        <h4>Have an Awsome Idea ?!</h4>
+        <h4>Decide you want to share your idea with the world.</h4>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag('331280.jpg')%>
+      <div class="carousel-caption text-center">
+        <h4>Sign up right now to Idearator</h4>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag('bulb.jpg')%>
+      <div class="carousel-caption text-center">
+        <h4>Submit your idea</h4>
+        <h4>Let the community decide the future of your idea</h4>
+        <h4>Turn your idea into a Reality</h4>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
