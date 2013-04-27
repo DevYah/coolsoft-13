@@ -34,7 +34,7 @@
     <div class='pull-right archive_status'>
       <span class="idea-votes inline pull-right"><%=  @idea.num_votes %></span>
       <%if @ideavoted.nil? %>
-        <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
+        <%= link_to 'Vote', { :controller => "ideas", :action => "vote", :id => @idea.id },remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
       <% else %>
         <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
       <%end%>
@@ -43,7 +43,7 @@
       <div class='btn-group'>
         <%= link_to 'Edit', edit_idea_path(@idea) ,:class => 'btn btn-inverse' %>
         <% if @idea.archive_status == true %>
-          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
+          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
         <% else %>
           <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
         <% end %>
@@ -59,7 +59,7 @@
         </div>
         <div class="modal-footer">
           <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
-          <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+          <%= link_to 'Archive', { :controller => "ideas", :action => "archive", :id => @idea.id }, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
         </div>
       </div>
       <div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
@@ -87,13 +87,11 @@
   <% end %>
 </div>
 <div class='media-body'>
-  <%if @idea.archive_status == false%>
-    <div id='show' class='container'>
-      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-      <a class="popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
-    </div>
-  <%end%>
+  <div id='show' class='container archive_status'>
+    <%= image_tag('f_logo.jpg', :id => 'fbk')%>
+    <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+    <a class="popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+  </div>
   <p>
     <h3>Description:</h3>
     <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
@@ -117,9 +115,19 @@
           <% end %>
         </table>
       <% end %>
+      <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="470" data-num-posts="10"></div>
     </p>
   </div>
 </div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=446451938769749";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 <script type="text/javascript">
   function sendAjax(idea_id){
     var list = "";
