@@ -1,4 +1,3 @@
-Title,Numberofvotes
-<% @ideasall.each do |x| %>
-<%= x.title %>,<%=x.num_votes %>,url: 'http://bing.com/search?q=foo'
+<% @ideasall.each do |idea| %>
+<%= idea.title %>,<%= idea.num_votes %>,<%= idea.id %>
 <% end %>
