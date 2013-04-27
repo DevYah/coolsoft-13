@@ -61,11 +61,11 @@ class CompetitionsController < ApplicationController
 
     respond_to do |format|
       if @competition.update_attributes(params[:competition])
-        format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to @competition, :notice => 'Competition was successfully updated.' }
+        format.json { respond_with_bip(@competition) }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @competition.errors, status: :unprocessable_entity }
+        format.html { render :action => 'edit' }
+        format.json { respond_with_bip(@competition) }
       end
     end
   end
