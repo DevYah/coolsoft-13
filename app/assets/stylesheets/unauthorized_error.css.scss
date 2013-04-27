@@ -2,13 +2,14 @@
   
 }
 
-.unauthorized-sign-up.span6{
-  width: 270px;
+.unauthorized-sign-up.span4{
+  width: 280px;
   min-height: 340px;
+  margin-left: 0px;
 }
 
-.unauthorized-sign-in-up.span6{
-  width: 270px;
+.unauthorized-sign-in-up.span4{
+  width: 280px;
   min-height: 340px;
 }
 
@@ -31,9 +32,18 @@
 .unauth-buttons{
   min-height: 340px;
   margin-left: 10px;
+  width: 150px;
 }
 
-.unauth-sign-in-button{
-  width: 145px;
-  height: 50px;
+.unauth-min-height{
+  min-height: 340px;
+}
+
+.unauth-width{
+  width: 530px;
+}
+
+.unauth-social-media{
+  margin: 30px;
+  margin-top: 20px;
 }
