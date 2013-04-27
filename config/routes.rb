@@ -80,6 +80,10 @@ Sprint0::Application.routes.draw do
     match 'ratings/ajax'
   end
 
+  controller :stream do
+    match 'stream/index'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -126,4 +130,5 @@ Sprint0::Application.routes.draw do
   match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
+  match 'stream/index' => 'stream#index'
 end

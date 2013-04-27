@@ -1,0 +1,21 @@
+ <script>
+  $(".btn-link").click(function tag_caller(e){
+    e.preventDefault();
+    var tag = $(this);
+    //$("#stream_results").html("");
+    stream_manipulator(1,tag.val(),"",true);
+  });
+  </script>
+
+<table>
+  <% @ideas.each do |idea| %>
+    <tr>
+      <td><%= idea.title %>
+        <% idea.tags.each do |tag|%>
+        <button class="btn btn-link" value='<%= tag.name %>'><%= tag.name %></button>
+        <% end %>
+      </td>
+    </tr>
+    <br>
+  <%end%>
+</table>

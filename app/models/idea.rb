@@ -17,10 +17,21 @@ class Idea < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('title LIKE ?', "%#{search}%")
+      where('title LIKE  ? AND approved  = ?', "%#{search}%", true)
     else
       find(:all)
     end
+  end
+
+  def self.filter(tags)
+    @ideas = []
+    tags.each do |tag|
+      t = Tag.find(:first, :conditions => {:name => tag})
+      ideatags = IdeasTags.find(:all, :conditions => {:tag_id => t.id})
+      ideas = Idea.where(:id => ideatags.map(&:idea_id))
+      @ideas = @ideas + ideas
+    end
+    @ideas
   end
 
 end

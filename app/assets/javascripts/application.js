@@ -22,25 +22,23 @@
 //= require best_in_place
 //= require_tree .
 
-before_search = false;
+var last_search = "";
 var original;
 
 $(function() {
 	$("#searchdiv input").keyup(function(){
-		if (window.location == "http://localhost:3000/"){
-			$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		}else{
-			if (!before_search){
-				before_search = true;
-				original = $("#main > .container").detach();
-			}
-			if (this.value!=""){
-				$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-			}else{
-				before_search = false;
-				$("#main > .container").replaceWith(original);
-			}
-		}
+			//$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+    $("#stream_results").html("");
+    var search = $("#search").val();
+    alert(last_search!=search);
+    // if(last_search!=search){
+      last_search = search;
+      if($("#search").val()!= ""){
+        stream_manipulator(1,"",search,true);
+      }else{
+        stream_manipulator(1,"","",true);
+      }
+    // }
 	});
 });
 
@@ -71,7 +69,7 @@ $(function() {
     e.stopPropagation();
     return false;
   });
-
+  
   $("#twitter_signin_button").tooltip({
     placement: 'bottom',
     trigger: 'click',
