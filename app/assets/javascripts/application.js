@@ -34,13 +34,29 @@ $(function() {
     // if(last_search!=search){
       last_search = search;
       if($("#search").val()!= ""){
-        stream_manipulator(1,"",search,true);
+        stream_manipulator(1,"",search,true, false);
       }else{
-        stream_manipulator(1,"","",true);
+        stream_manipulator(1,"","",true, false);
       }
     // }
 	});
 });
+
+// $(function() {
+//  $("#user-search-button-redirection").click(function remove_search_hander(e){
+//   e.preventDefault();
+//   var search_value = $("#search-input").val();
+//   alert(search);
+//   $.ajax({
+//     url: '/stream/index?page=' + 1,
+//     type: 'get',
+//     dataType: 'script',
+//     data: { mypage: 1, tag: "", search: search_value, search_user: false},
+//     success: function() {
+//     }
+//   });
+//  });
+// });
 
 $(document).bind("ajaxError", function(e, xhr){
 	if(xhr.status == 401){

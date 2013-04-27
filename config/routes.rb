@@ -1,7 +1,7 @@
 Sprint0::Application.routes.draw do
 
   default_url_options :host => 'localhost:3000'
-  root :to => 'home#index'
+  root :to => 'stream#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
                                        :registrations => 'registrations' }
