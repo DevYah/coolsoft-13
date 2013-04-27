@@ -24,6 +24,7 @@ gem 'whenever', '0.8.2', :require => false
 gem 'best_in_place','2.1.0'
 
 gem 'multiple_table_inheritance', '~> 0.2.1'
+gem 'bootstrap-datepicker-rails', '1.0.0.5'
 
 group :assets do
   gem 'sass-rails', '3.2.6'
