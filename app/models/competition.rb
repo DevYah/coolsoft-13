@@ -11,7 +11,7 @@ class Competition < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
   def open
-    return  end_date > Time.now.to_date
+    return  start_date < Time.now.to_date && end_date > Time.now.to_date
   end
 
 end

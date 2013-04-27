@@ -5,8 +5,7 @@ class CompetitionsController < ApplicationController
     @competitions = Competition.all
 
     respond_to do |format|
-      format.html { render '_index' }
-      format.json { render json: @competitions }
+      format.js
     end
   end
 
