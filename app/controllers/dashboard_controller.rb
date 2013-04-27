@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-before_filter :authenticate_user!, :only => [:index]
+  before_filter :authenticate_user!, :only => [:index]
+
   # renders the view of the dashboard for idea submitters and committee members.
   # it checks the value of the current threshold, the user's ideas and committee's
   # approved ideas and calculates the corresponding percentage of the ideas in relation
@@ -7,7 +8,7 @@ before_filter :authenticate_user!, :only => [:index]
   # Params:
   # none
   # Author: Hisham ElGezeery
-  
+
   def index
     @user = current_user
     @threshold = Threshold.last
@@ -38,6 +39,7 @@ before_filter :authenticate_user!, :only => [:index]
       format.js
     end
   end
+
   #Method to add values to rows in table to draw a chart
   #Author:Lina Basheer
 
@@ -62,13 +64,13 @@ before_filter :authenticate_user!, :only => [:index]
     respond_to do |format|
       format.html
       format.js
-    end 
-  end 
+    end
+  end
 
   #Method that gets all tags belonging to an idea,
   #+params[:idea_id]+ is the id of the idea the user clicks on
   #Author: Mohamed Salah Nazir
-     
+
   def gettags
     @ideaid = params[:ideaid]
     @ideatagsthen = IdeasTags.find(:all, :conditions => {:idea_id => @ideaid})
@@ -78,4 +80,5 @@ before_filter :authenticate_user!, :only => [:index]
       format.js
     end
   end
+
 end

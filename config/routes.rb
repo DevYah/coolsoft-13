@@ -27,16 +27,24 @@ Sprint0::Application.routes.draw do
 
   resources :ideas do
     match 'filter', on: :collection
+    match 'like', on: :member
+    resources :comments do
+        put 'update', on: :member
+      end
     member do
       match 'vote'
       match 'unvote'
       match 'archive'
-      match 'unarchive'
+      match 'unarchive', :defaults => { :format => 'js' }
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
     end
   end
+
+  resources :user_ratings, :controller => 'user_ratings'
+  match '/user_ratings/create' => 'user_ratings#create'
+  match '/user_ratings/update' => 'user_ratings#update'
 
   controller :home do
     match 'home/search'
@@ -58,17 +66,19 @@ Sprint0::Application.routes.draw do
   # Dashboard routes
   controller :dashboard do
     match 'dashboard/index'
-    match 'dashboard/getallideas'
-    match 'dashboard/gettags'
-    match 'dashboard/getideas'
+    match 'getallideas'
+    match 'gettags'
+    match 'getideas'
   end
 
   # Notifications routes
   controller :notifications do
-    match 'notifications/view_all_notifications'
-    match 'notifications/redirect_idea'
-    match 'notifications/redirect_review'
-    match 'notifications/redirect_expertise'
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+    match 'set_read'
+    match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
 
@@ -116,6 +126,9 @@ Sprint0::Application.routes.draw do
   #     resources :products
   #   end
 
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended
@@ -123,8 +136,4 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
-  match '/review_ideas' => 'committees#review_ideas'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
 end
