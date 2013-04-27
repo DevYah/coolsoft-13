@@ -1,0 +1,58 @@
+<div>
+  <% if @competitions %>
+    <% @competitions.each do |c| %>
+      <% if c.investor.active and c.investor.banned == false and c.open %>
+        <div class="row-fluid text-center" id='competition-<%= c.id %>'>
+          <div class="competition span8">
+            <div class="row-fluid">
+              <div class="span6">
+                <h2>
+                  <%= link_to  c.title , c %>
+                </h2>
+                <div>
+                  by:
+                  <%= link_to c.investor.username , c %>
+                </div>
+              </div>
+              <div class="span6">
+                <div class="row-fluid">
+                  <div class="span6">
+                    <h4>start date:</h4>
+                    <h4>expiry date:</h4>
+                  </div>
+                  <div class="span6">
+                    <h4 class="green"><%= c.start_date %></h4>
+                    <h4 class="red"><%= c.end_date %></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row-fluid">
+              <div class="description span9">
+                <%= c.description %>
+              </div>
+              <div class="dates span3">
+                <button class="btn btn-large btn-success"  >enroll
+                </button>
+              </div>
+            </div>
+            <br/>
+            <div class="row-fluid">
+              <div class="span6">
+                <ul class="inline">
+                  <% c.tags.each do |tag| %>
+                    <li class="taging"><%= tag.name %></li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class="span6">
+                <h4>current ideas: <%= c.ideas.length %></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
