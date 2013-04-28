@@ -21,6 +21,7 @@
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
+//= require bootstrap-datepicker
 //
 //= require notification_polling
 //= require notifications

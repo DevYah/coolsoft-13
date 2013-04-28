@@ -1,5 +1,10 @@
 class Competition < ActiveRecord::Base
-  # attr_accessible :title, :body
+
+ attr_accessible :title, :description ,:start_date ,:end_date, :tag_ids
+
+  validates_length_of :title, :maximum => 50
+  validates_length_of :description, :maximum => 1000
+
   belongs_to :investor
   has_many :competition_entries
   has_many :ideas, :through => :competition_entries, :source => :idea
