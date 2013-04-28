@@ -1,27 +1,27 @@
- <% if idea.user.active and !idea.user.banned and idea.approved %>
-      <div class="idea-<%= idea.id%> span8 row" id="share">
-        <div class="wrapper row">
-          <div class="span2"><%= image_tag idea.photo.url(:medium) %></div>
-          <div class="span6">
-            <div class="span1 pull-right">
-              <%= link_to idea.user.username , idea %>
-            </div>
-            <h3>
-              <%= link_to  idea.title , idea %>
-            </h3>
-            <%= idea.description %>
-            <ul class ="inline">
-              <% idea.tags.each do |tag| %>
-                <li style = "color: #0060ff;"><%= tag.name %></li>
-              <% end %>
-            </ul>
-           <%= render :partial => "ideas/vote_component", locals: { idea: idea } %>
-            <div id='sharing'>
-              <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(idea)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
-              <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(idea)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>
-              <a class= "popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(idea)%>&media=<%=root_url + idea.photo.url %>&description=<%= idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
-            </div>
-          </div>
-        </div>
+<% if idea.user.active and !idea.user.banned and idea.approved %>
+  <div class='wrapper row'>
+    <div class="idea-<%= idea.id%> span8" id="share">
+      <div class='span6'>
+        <h4 class='inline'><%= link_to  idea.title , idea %></h4>
       </div>
-    <% end %>
+      <div class='span2'>
+        <%= image_tag idea.photo.url(:medium) %>
+        <ul class ="inline">
+          <% idea.tags.each do |tag| %>
+            <span class="label label-info "><%= tag.name %></span>
+          <% end %>
+        </ul>
+         <%= render :partial => 'ideas/share' ,locals: {idea: idea}%>
+      </div>
+      <div class='span4'>
+         <%= 'by' %>
+        <span><%= link_to idea.user.username , idea %></span>
+        <h4> Description</h4>
+        <div><%= idea.description %></div>
+      </div>
+      <div class='span1 pull-right'>
+        <%= render :partial => "ideas/vote_component", locals: { idea: idea ,size: 'span1'} %>
+      </div>
+    </div>
+  </div>
+<% end %>
