@@ -44,6 +44,7 @@
       <span class = 'help-inline'>Please check the relative tags</span>
     </div>
     <%= hidden_field_tag 'idea[tag_ids][]', '' %>
+    <%= hidden_field_tag 'competition', @competition %>
     <div class='actions'>
       <%= i.submit nil, :class=> 'btn btn-primary'%>
     </div>
