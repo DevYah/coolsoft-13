@@ -23,6 +23,29 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def approve
+    @idea = Idea.find(params[:idea_id])
+    @competition = Competition.find(params[:id])
+    @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
+    @entry.first.approved = true
+    @entry.first.save
+    respond_to do |format|
+      format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
+      format.js
+    end
+  end
+
+  def reject
+    @idea = Idea.find(params[:idea_id])
+    @competition = Competition.find(params[:id])
+    @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
+    @entry.first.rejected = true
+    @entry.first.save
+    respond_to do |format|
+      format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
+      format.js
+    end
+  end
   # GET /competitions/1
   # GET /competitions/1.json
   def show
