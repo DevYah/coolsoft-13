@@ -1,3 +1,16 @@
+<div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Are you sure you want to delete?!</h3>
+  </div>
+  <div class="modal-body">
+    <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
+    <%= link_to 'Delete', competition_path(@competition), :method => :delete, :class => 'btn btn-danger' %>
+  </div>
+</div>
 <div class='competition-page competition-<%= @competition.id %>'>
   <div class='row'>
     <div class='span12'>
@@ -14,14 +27,15 @@
         <% end %>
       </div>
       <h4>Description</h4>
-      <div><%= @competition.description %></div>
+      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :description ,  type: :textarea %></div>
       <h4>Start date</h4>
-      <div><%= @competition.start_date %></div>
+      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :start_date , :type => 'date'%></div>
       <h4>End date</h4>
-      <div><%= @competition.end_date %></div>
+      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :end_date , :type => 'date' %></div>
       <% if current_user.id == @competition.investor_id %>
         <div class='btn-group' id='control'>
           <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
+          <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
         </div>
       <% end %>
     </div>
