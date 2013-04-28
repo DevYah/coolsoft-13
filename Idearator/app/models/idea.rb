@@ -29,4 +29,18 @@ class Idea < ActiveRecord::Base
       find(:all)
     end
   end
+
+  def send_edit_notification(user)
+    voters=self.votes
+    voters.each{|u|
+      if u.participated_idea_notifications
+        EditNotification.send_notification(user, self, [u])
+      end
+    }
+    commenters=Comment.where(idea_id: self.id)
+    commenters.each{ |c|
+     if c.participated_idea_notifications
+      EditNotification.send_notification(user, self, [c])
+     end }
+  end
 end
