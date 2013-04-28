@@ -16,6 +16,7 @@ describe CompetitionsController do
         expect { put :enroll_idea, id: @idea.id, id1: @competition.id } .to change(@competition.ideas, :count).by(1)
       end
       it 'redirects to competition show page' do
+        put :enroll_idea, id: @idea.id, id1: @competition.id
         response.should redirect_to(@competition)
       end
     end

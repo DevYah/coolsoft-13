@@ -298,13 +298,26 @@ class IdeasController < ApplicationController
     end
   end
 
+  # Enters the idea into a chosen Competition
+  # Params:
+  # +id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # +id1+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
   def enter_competition
     @idea = Idea.find(params[:id])
     @competition = Competition.find(params[:id1])
-    @competition.ideas << @idea
-    respond_to do |format|
-      format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
-      format.json { head :no_content }
+    if not @idea.competitions.where(:id => @competition.id).exists?
+      @competition.ideas << @idea
+      EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, @competition.investor)
+      respond_to do |format|
+        format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'This idea is already enrolled in this competiton'}
+        format.json { head :no_content }
+      end
     end
   end
 end
