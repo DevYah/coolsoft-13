@@ -1,4 +1,5 @@
 class Idea < ActiveRecord::Base
+  after_save SimilarityEngine::IdeaHooks.new
 
   attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user_id, :approved, :tag_ids
 
@@ -21,7 +22,11 @@ class Idea < ActiveRecord::Base
   has_many :competitions, :through => :competition_entries, :source => :competition
   has_many :winning_competitions, :class_name => 'Competition'
 
+  has_many :similarities
+  has_many :similar_ideas, through: :similarities
+
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+
   def self.search(search)
     if search
       where('title LIKE ?', "%#{search}%")
@@ -29,4 +34,5 @@ class Idea < ActiveRecord::Base
       find(:all)
     end
   end
+
 end
