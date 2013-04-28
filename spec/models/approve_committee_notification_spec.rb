@@ -10,7 +10,7 @@ describe ApproveCommitteeNotification do
     expect(UserNotification.last.user_id).to eq(user1.id)
     expect(UserNotification.last.users).to include(user2)
   end
-  
+
   it 'returns the notifications text'do
     expect(notification.text).to eq('marwa has signed up as a committee member.')
   end
