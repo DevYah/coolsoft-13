@@ -1,0 +1,16 @@
+<div class='similar-ideas'>
+  <% idea.similar_ideas.limit(4).each do |similar_idea| %>
+    <div class="similar-idea media">
+      <a class="pull-left" href="#">
+        <span class="image"><%= image_tag(similar_idea.photo.url(:thumb), :size => "80x80") %></span>
+      </a>
+      <div class="media-body">
+        <span><%= link_to similar_idea.user.username, similar_idea.user.becomes(User)  %></span>
+        <h4 class="media-heading idea">
+          <%= link_to similar_idea.title, similar_idea %>
+        </h4>
+        <span class="badge"><%= similar_idea.votes_count %> votes</span>
+      </div>
+    </div>
+  <% end %>
+</div>
