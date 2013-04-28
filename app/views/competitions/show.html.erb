@@ -29,9 +29,9 @@
       <h4>Description</h4>
       <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :description ,  type: :textarea %></div>
       <h4>Start date</h4>
-      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :start_date ,  :type => 'date'%></div>
+      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :start_date , :type => 'date'%></div>
       <h4>End date</h4>
-      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :end_date ,  :type => 'date' %></div>
+      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :end_date , :type => 'date' %></div>
       <% if current_user.id == @competition.investor_id %>
         <div class='btn-group' id='control'>
           <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
