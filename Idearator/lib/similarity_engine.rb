@@ -1,5 +1,12 @@
 class SimilarityEngine
 
+  class IdeaHooks
+    #FIXME delayed_job?
+    def after_save(idea)
+      SimilarityEngine.recalculate_similarity(idea)
+    end
+  end
+
   WEIGHT = {jaccard: 0.5, k_shingles: 0.5}
 
   def self.calculate_jaccard_similarity(idea1, idea2)
