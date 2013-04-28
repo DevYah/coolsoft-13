@@ -33,7 +33,7 @@ class CoolsterApp < Sinatra::Base
   aget '/poll' do
     puts "polling"
     if env['warden'].authenticated? 
-      @@users[env['warden'].user.id] = Proc.new{|script| body script}
+      @@users[env['warden'].user.id.to_s] = Proc.new{|script| body script}
       EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user.id}
     else
       @@guests << Proc.new{|script| body script}
@@ -44,7 +44,7 @@ class CoolsterApp < Sinatra::Base
 
   apost '/update' do
     puts "updating"
-    if params [:script].nil?
+    if params[:all] == "false"
       params[:scripts].each do |user, script|
         @@users[user].call script
       end
