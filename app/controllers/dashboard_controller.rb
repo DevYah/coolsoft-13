@@ -41,6 +41,7 @@ class DashboardController < ApplicationController
   end
 
   #Method to render chosen tag id to graph 
+  #+params[:tag_id] + id of the tag the user clicks on 
   #Author:Lina Basheer
 
   def getideas
