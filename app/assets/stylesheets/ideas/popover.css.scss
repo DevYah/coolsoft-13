@@ -28,19 +28,22 @@
 }
 .popover{
   max-width: 380px;
-  max-height: 606px;
+  max-height: 654px;
   padding-left: 124px;
   text-align: left;
   background-color: white;
 }
 .popover.fade.bottom.in {
-  top: 68px;
-  left: 253.5px;
+  top: 8px;
+  left: -103px;
   display: block;
   width: 381px;
-  height: 686px;
+  height: 659px;
 }
 .usernameId{
   padding-left: 374px;
 
+}
+.popover.content{
+  padding: 7px 0px;
 }
