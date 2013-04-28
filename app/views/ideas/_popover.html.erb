@@ -31,6 +31,12 @@
           Number of comments
         </span><div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" id='numberCommentsPopover'><h5>0</h5></div>
       </div>
+
+      <%if @chosentags != nil %>
+        <% @chosentags.each do |tag|%>
+          <span class="label label-info "><%= tag.name %></span>
+        <% end %>
+      <% end %>
       <div class="span4 pull-right" id='votesPopover'>
         <span class="idea-votes inline pull-right" style = "color: #141B7F;"><%=  @idea.num_votes %></span>
         <%if @ideavoted.nil? %>
