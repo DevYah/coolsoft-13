@@ -83,6 +83,7 @@ class IdeasController < ApplicationController
   def vote
     @idea = Idea.find(params[:id])
     current_user.vote_for @idea
+    @idea.reload
     respond_to do |format|
       format.html { redirect_to @idea, :notice =>'Thank you for voting' }
       format.json { head :no_content }
@@ -97,6 +98,7 @@ class IdeasController < ApplicationController
   def unvote
     @idea = Idea.find(params[:id])
     current_user.unvote_for @idea
+    @idea.reload
     respond_to do |format|
         format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
         format.json { head :no_content }
