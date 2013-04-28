@@ -1,49 +1,62 @@
-.unauthorized-body{
-  
+.unauthorized-body {
+  overflow: hidden;
 }
 
-.unauthorized-sign-up.span4{
+.unauthorized-sign-up.span4 {
   width: 280px;
-  min-height: 340px;
+  min-height: 360px;
   margin-left: 0px;
 }
 
-.unauthorized-sign-in-up.span4{
+.unauthorized-sign-in-up.span4 {
   width: 280px;
-  min-height: 340px;
+  min-height: 360px;
 }
 
-.unauth-remember-me{
+.unauth-remember-me {
   margin-bottom: 10px;
 }
 
-.unauth-header{
+.unauth-header {
   margin-top: 0px;
 }
 
-.unauth-sign-in{
+.unauth-sign-in {
   height: 30px;
 }
 
-.unauth-hide{
-  display: none;
+.unauth-left {
+  margin-left: 0px;
 }
 
-.unauth-buttons{
-  min-height: 340px;
+.unauth-right {
+  margin-left: -560px;
+}
+
+.unauth-buttons {
+  min-height: 360px;
   margin-left: 10px;
-  width: 150px;
+  width: 160px;
 }
 
-.unauth-min-height{
-  min-height: 340px;
+.unauth-min-height {
+  min-height: 360px;
 }
 
-.unauth-width{
+.unauth-width {
   width: 530px;
 }
 
-.unauth-social-media{
+.unauth-social-media {
   margin: 30px;
   margin-top: 20px;
+}
+
+.unauth-huge {
+  width: 9999px;
+}
+
+.unauth-change-margin{
+  margin-left: 0px;
+  margin-right: 10px;
 }
