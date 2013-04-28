@@ -1,4 +1,5 @@
 class Idea < ActiveRecord::Base
+  after_save SimilarityEngine::IdeaHooks.new
 
   attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user_id, :approved, :tag_ids
 
