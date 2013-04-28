@@ -14,7 +14,12 @@
         <%= render 'notifications/view_notifications' %>
       </ul>
     </li>
+    <%else%>
+      <li>
+    <%= link_to('Competitions', controller: '/competitions' , action: 'index') %>
+  </li>
   <% end %>
+
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
