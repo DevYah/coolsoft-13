@@ -83,8 +83,7 @@ Sprint0::Application.routes.draw do
   end
 
   controller :coolster do
-    match 'who_is_this'
-    match 'add_online_user'
+    match 'coolster/add_online_user'
   end
 
 
