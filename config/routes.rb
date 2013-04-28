@@ -41,6 +41,8 @@ Sprint0::Application.routes.draw do
     end
   end
 
+  match 'ideas/:competition/new' => 'ideas#new'
+
   resources :user_ratings, :controller => 'user_ratings'
   match '/user_ratings/create' => 'user_ratings#create'
   match '/user_ratings/update' => 'user_ratings#update'

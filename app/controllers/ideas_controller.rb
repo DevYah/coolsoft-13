@@ -27,6 +27,7 @@ class IdeasController < ApplicationController
   def new
     puts 'hashish first print'
     @idea = Idea.new
+    @competition = params[:competition]
     puts 'hashish    ' + @idea.to_s + ' hashish'
     @tags = Tag.all
     @chosentags = []
@@ -152,6 +153,9 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
+        if params[:competition] != nil
+          Competition.find(params[:competition]).ideas << @idea
+        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else

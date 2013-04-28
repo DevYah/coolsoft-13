@@ -37,6 +37,6 @@
 </div>
   </div>
   <div class="modal-footer">
-    <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new" } , :class => 'btn btn-large btn-danger pull-center'%>
+    <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new", :competition => @competition.id } , :class => 'btn btn-large btn-danger pull-center'%>
     </div>
   </div>
