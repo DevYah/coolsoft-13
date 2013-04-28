@@ -15,18 +15,18 @@
 </div>
 <!-- delete modal -->
 <div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3>Are you sure you want to delete?!</h3>
-    </div>
-    <div class="modal-body">
-      <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
-    </div>
-    <div class="modal-footer">
-      <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
-      <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
-    </div>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Are you sure you want to delete?!</h3>
   </div>
+  <div class="modal-body">
+    <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
+    <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
+  </div>
+</div>
 <!-- Main Idea Page -->
 <div class='idea-page idea-<%= @idea.id %>'>
   <% if current_user %>
@@ -57,7 +57,7 @@
   </div>
   <div class='row'>
     <div class='span4'>
-      <a  class='pull-left' href='#'>
+      <a  href='#'>
         <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
       </a>
       <% if @user == @idea.user_id %>
@@ -65,15 +65,13 @@
           $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
         </script>
       <% end %>
-      <div id='tags'>
+      <div class='pull-left'>
         <%if @chosentags != nil %>
           <% @chosentags.each do |tag|%>
             <span class="label label-info "><%= tag.name %></span>
           <% end %>
         <% end %>
-      </div>
-      <%= render :partial => 'share'%>
-      <div class='span4'>
+        <%= render :partial => 'share'%>
         <% if @user == @idea.user_id %>
           <div class='btn-group' id='control'>
             <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
