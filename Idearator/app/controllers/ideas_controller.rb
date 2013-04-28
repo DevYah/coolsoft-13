@@ -14,7 +14,7 @@ class IdeasController < ApplicationController
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
       @ideavoted = current_user.votes.detect { |w|w.id == @idea.id } rescue ActiveRecord::RecordNotFound
-
+      @competitions = Competition.all
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
