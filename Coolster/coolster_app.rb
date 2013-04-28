@@ -30,22 +30,31 @@ class CoolsterApp < Sinatra::Base
     halt 200
   end
 
-  aget '/' do
-    body 'Hello'
-  end
-
   aget '/poll' do
     puts "polling"
-    puts env['warden'].user.id
-    @@users[env['warden'].user.id] = Proc.new{|script| body script}
-    RestClient.post 'http://localhost:3000/coolster/add_online_user', {user: env['warden'].user.id, multipart: true}
+    if env['warden'].authenticated? 
+      @@users[env['warden'].user.id] = Proc.new{|script| body script}
+      EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user.id}
+    else
+      @@guests << Proc.new{|script| body script}
+    end
+    puts @@users
+    puts @@guests
   end
 
   apost '/update' do
-    puts params[:script]
-    puts @@users
-    @@users.each do |key, value|
-      value.call params[:script]
+    puts "updating"
+    if params [:script].nil?
+      params[:scripts].each do |user, script|
+        @@users[user].call script
+      end
+    else
+      @@users.each do |key, value|
+        value.call params[:script]
+      end
+      @@guests.each do |guest|
+        guest.call params[:script]
+      end
     end
     body "ok"
   end
