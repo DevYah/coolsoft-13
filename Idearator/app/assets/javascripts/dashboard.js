@@ -1,10 +1,13 @@
 //= require highcharts
 //= require highcharts/highcharts-more
-
-function initialize_barchart() {
-  var tag_id = 6;
+function graph_chooser(tagid) {
+    $('#chart-tabs a:first').tab('show');
+    $("a[href='#bubble-chart']").click(initialize_bubblechart(tagid));
+    $("a[href='#bar-chart']").click(initialize_barchart(tagid));
+  }
+function initialize_barchart(tagid) {
   
-  $.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
+  $.get('/dashboard/chart_data/' + tagid+ '.csv', function(data) {
     var options = {
       chart: {
         renderTo: 'bar-chart',
@@ -78,6 +81,18 @@ function initialize_bubblechart() {
         text: 'Units'
       }
     },
+    plotOptions: {
+        series: {
+          cursor: 'pointer',
+          point: {
+            events: {
+              click: function() {
+                location.href = this.options.url;
+              }
+            }
+          }
+        }
+      },
     series: []
   };
   $.get('/dashboard/chart_data/' + tag_id + '.csv', function(data) {
