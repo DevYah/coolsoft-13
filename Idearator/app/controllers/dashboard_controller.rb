@@ -40,7 +40,7 @@ class DashboardController < ApplicationController
     end
   end
 
-  #Method to add values to rows in table to draw a chart
+  #Method to render chosen tag id to graph 
   #Author:Lina Basheer
 
   def getideas
@@ -64,6 +64,10 @@ class DashboardController < ApplicationController
       format.js
     end
   end
+
+  #Method to get ideas in chosen tag 
+  #+params[:tag_id] + id of the tag the user clicks on 
+  #Author:Lina Basheer
   def chart_data
     @tagid = params[:tag_id]
     @ideastagsall = IdeasTags.find(:all, :conditions => {:tag_id => @tagid})
