@@ -28,8 +28,8 @@ Sprint0::Application.routes.draw do
     match 'filter', on: :collection
     match 'like', on: :member
     resources :comments do
-        put 'update', on: :member
-      end
+      put 'update', on: :member
+    end
     member do
       match 'vote'
       match 'unvote'
@@ -88,6 +88,14 @@ Sprint0::Application.routes.draw do
 
   controller :ratings do
     match 'ratings/ajax'
+  end
+
+  controller :competitions do
+    resources :competitions do
+      member do
+        match 'review_competitions_ideas' => 'competitions#review_competitions_ideas'
+      end
+    end
   end
   resources :competitions
   # The priority is based upon order of creation:

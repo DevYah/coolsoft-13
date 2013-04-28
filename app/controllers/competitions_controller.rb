@@ -10,6 +10,19 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def review_competitions_ideas
+    @competition = Competition.find(params[:id])
+    if current_user != nil && current_user.id == @competition.investor_id
+      @ideas = CompetitionEntry.find(:all,:conditions =>{:approved => false, :rejected => false, :competition_id => @competition.id})
+      @ideas.map!{|id| Idea.find(id)}
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not review ideas' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
   # GET /competitions/1
   # GET /competitions/1.json
   def show

@@ -19,9 +19,10 @@
       <div><%= @competition.start_date %></div>
       <h4>End date</h4>
       <div><%= @competition.end_date %></div>
-      <% if current_user.id == @competition.investor_id %>
-        <div class='btn-group' id='control'>
+      <% if current_user != nil && current_user.id == @competition.investor_id %>
+        <div class='btn-group' id='control' style="display: inline">
           <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
+          <%= link_to 'Review Ideas', { :controller => 'competitions', :action => 'review_competitions_ideas' }, :class => 'btn btn-primary' %>
         </div>
       <% end %>
     </div>
