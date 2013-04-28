@@ -85,6 +85,9 @@ class IdeasController < ApplicationController
     end
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
+        if current_user.provider == 'twitter'
+          current_user.twitter.update("I've updated my idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        end
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
       else
@@ -108,6 +111,9 @@ class IdeasController < ApplicationController
     end
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
+        if current_user.provider == 'twitter'
+          current_user.twitter.update("I've voted to an idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        end
         format.html { redirect_to @idea, :notice =>'Thank you for voting' }
         format.json { head :no_content }
         format.js
@@ -150,6 +156,9 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
+        if current_user.provider == 'twitter'
+          current_user.twitter.update("I've created a new idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
@@ -174,7 +183,6 @@ class IdeasController < ApplicationController
       list_of_comments.each do |c|
         c.destroy
       end
-
 
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
@@ -235,6 +243,9 @@ class IdeasController < ApplicationController
       idea.archive_status = false
       idea.save
       respond_to do |format|
+        if current_user.provider == 'twitter'
+          current_user.twitter.update("My idea is back to life! =D I've unarchived my idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        end
         format.html { redirect_to idea, alert: 'Idea has been successfully unarchived.' }
         format.json { head :no_content }
       end
