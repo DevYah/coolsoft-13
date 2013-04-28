@@ -8,5 +8,6 @@ class Tag < ActiveRecord::Base
                           :join_table => "tag_connections",
                           :foreign_key => "tag_a_id",
                           :association_foreign_key => "tag_b_id")
+  has_and_belongs_to_many :competitions
 
 end
