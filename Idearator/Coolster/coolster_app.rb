@@ -1,9 +1,11 @@
 require 'sinatra/async'
+require 'rest_client'
 
-class Coolster < Sinatra::Base
+class CoolsterApp < Sinatra::Base
   register Sinatra::Async
 
   @@users = {}
+  @@guests = []
   # Create a new HTTP verb called OPTIONS.
   # Browsers (should) send an OPTIONS request to get Access-Control-Allow-* info.
   def self.http_options(path, opts={}, &block)
@@ -30,14 +32,13 @@ class Coolster < Sinatra::Base
 
   aget '/' do
     body 'Hello'
-    puts request.cookies
   end
 
   aget '/poll' do
     puts "polling"
-    puts request.cookies
-    puts request.cookies["_Sprint0_session"]
-    @@users[request.cookies["_Sprint0_session"]] = Proc.new{|script| body script}
+    puts env['warden'].user.id
+    @@users[env['warden'].user.id] = Proc.new{|script| body script}
+    RestClient.post 'http://localhost:3000/coolster/add_online_user', {user: env['warden'].user.id, multipart: true}
   end
 
   apost '/update' do
