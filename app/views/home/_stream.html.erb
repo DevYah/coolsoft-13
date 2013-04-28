@@ -23,7 +23,7 @@
               <% @ideavotehome= current_user.votes.detect { |w|w.id == @approve.id } %>
             <%end%>
             <%if @ideavotehome.nil? %>
-              <%= link_to 'Vote', { :controller => "ideas", :action => "vote", :id => @approve.id },remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
+              <%= link_to 'Vote', { :controller => "ideas", :action => "vote", :id => approved.id},remote: true,:class =>"btn btn-large btn-success inline pull-right margin streamvote", "data-idea-id" => approved.id%>
             <% else %>
               <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" , :id => @approve.id},:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
             <%end%>
