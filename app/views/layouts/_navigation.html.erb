@@ -39,14 +39,14 @@
         <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
       </li>
     <% end %>
-    <%# if current_user.ideas.count != 0 %>
-     <!--  <li> -->
-        <%# link_to('My Ideas', controller: 'users', action: 'my_ideas', :id => current_user.id) %>
-     <!--  </li> -->
-    <%# end %>
-    <%# if current_user.is_a? Investor%>
-      <%# link_to('My Ideas', controller: 'competitions', action: 'index') %>
-    <%#end%>
+    <% if current_user.ideas.count != 0 %>
+      <li>
+        <%= link_to('My Ideas', controller: 'users', action: 'my_ideas', :id => current_user.id) %>
+      </li>
+    <% end %>
+    <% if current_user.is_a? Investor%>
+      <%= link_to('My Competitions', controller: 'competitions', action: 'index') %>
+    <% end %>
   <% end %>
   <li>
     <% if params[:controller] == 'home' %>
