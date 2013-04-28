@@ -14,6 +14,7 @@ gem 'jquery-tokeninput-rails', '1.6.0'
 gem 'bootstrap-sass', '2.3.1.0'
 gem 'google_visualr', '2.1.7'
 gem 'paperclip', '3.4.1'
+gem 'tlsmail'
 
 gem 'kaminari', '0.14.1'
 
@@ -44,7 +45,6 @@ group :test do
   gem 'guard-rspec', '2.5.3'
   gem 'launchy', '2.2.0'
   gem 'rspec-html-matchers', '0.4.1'
-  gem 'simplecov', '0.7.1'
 end
 
 # To use ActiveModel has_secure_password

@@ -1,5 +1,6 @@
 Sprint0::Application.routes.draw do
 
+  match '/home/index' => 'home#index'
   default_url_options :host => 'localhost:3000'
   root :to => 'home#index'
 

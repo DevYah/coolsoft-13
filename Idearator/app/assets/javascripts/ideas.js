@@ -69,4 +69,10 @@ $(document).ready(function() {
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
 
+
+  $("input, select, textarea").on("focus", function(){
+   $(this).siblings("span").css("display", "inline");
+  }).on("blur", function(){
+   $(this).siblings("span").css("display", "none");
+  });
 });

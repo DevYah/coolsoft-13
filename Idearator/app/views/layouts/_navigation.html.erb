@@ -88,7 +88,7 @@
           <%= link_to('Sign out', destroy_user_session_path, :method=>:delete) %>
         </li>
         <li>
-          <%= link_to('Deactivate', controller: 'users' , action: 'confirm_deactivate') %>
+          <a href="#deactivateModal" data-toggle="modal"> Deactivate </a>
         </li>
       </ul>
     </li>
