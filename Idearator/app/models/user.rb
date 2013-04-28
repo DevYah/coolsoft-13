@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
 
   has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
   has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
+  has_many :sent_competition_notifications, class_name: 'CompetitionNotification', :dependent => :destroy
+  has_many :sent_competition_idea_notifications, class_name: 'CompetitionIdeaNotification', :dependent => :destroy
+  has_many :delete_competition_notifications, :dependent => :destroy
   has_many :delete_notifications, :dependent => :destroy
   has_many :sent_notifications, class_name: 'Notification'
   has_many :ideas
