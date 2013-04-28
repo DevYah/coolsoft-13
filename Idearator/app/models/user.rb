@@ -103,6 +103,9 @@ class User < ActiveRecord::Base
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
   end
 
+  # It returns a Twitter Client object, new one if none exists
+  # Params: none
+  # Author: Mahmoud Abdelghany Hashish
   def twitter
     unless @twitter_user
       @twitter_user = Twitter::Client.new(:oauth_token => self.authentication_token, :oauth_token_secret => self.secret) rescue nil
