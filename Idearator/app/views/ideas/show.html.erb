@@ -25,10 +25,10 @@
   <a  class='pull-left' href='#'>
     <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
   </a>
-<% if @user == @idea.user_id%>
-  <script>
-    $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
-  </script>
+  <% if @user == @idea.user_id%>
+    <script>
+      $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
+    </script>
   <% end %>
   <p>
     <h3><%= @idea.title %></h3>
@@ -65,7 +65,8 @@
   <%if @idea.archive_status == false%>
     <div id='show' class='container'>
       <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+      <%# image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-text="Check out this idea on IDEARATOR" data-hashtags="idearator">Tweet</a>
       <a class="popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
     </div>
   <%end%>
@@ -90,3 +91,6 @@
     <% end %>
   </p>
 </div>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
