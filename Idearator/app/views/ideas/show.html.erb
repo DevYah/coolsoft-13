@@ -71,7 +71,7 @@
             <span class="label label-info "><%= tag.name %></span>
           <% end %>
         <% end %>
-        <%= render :partial => 'share'%>
+        <%= render :partial => 'share' ,locals: { idea: @idea }%>
         <% if @user == @idea.user_id %>
           <div class='btn-group' id='control'>
             <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
@@ -94,7 +94,7 @@
     </div>
     <div class='span4'>
       <div class='row'>
-        <%= render :partial => "vote_component", locals: { idea: @idea, large: true } %>
+        <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
         <div class='span4 archive_status'>
           <p>
             <% if @idea.ratings.size > 0 %>
