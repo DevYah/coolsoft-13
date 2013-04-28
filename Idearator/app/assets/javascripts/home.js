@@ -12,6 +12,52 @@ function backToTop() {
 
 $(document).ready(function () {
 
+  var fbAppId = '446451938769749';
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : fbAppId,        // App ID
+      status     : true,           // check login status
+      cookie     : true,           // enable cookies to allow the server to access the session
+      xfbml      : true            // parse page for xfbml or html5 social plugins like login button below
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.beta.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function postVote(i) {
+  FB.api(
+  'me/idearator:vote',
+  'post',
+  {
+    idea: encodeURI(window.location)+"/ideas/"+i
+  },
+       function(response) {
+         if (!response) {
+           alert('Error occurred.');
+         } else if (response.error) {
+          alert(response.error.message);
+         } else {
+          alert("mask");
+          alert('<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>');
+           document.getElementById('result').innerHTML =
+             '<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>';
+         }
+       }
+    );
+  };
+
+  $(".streamvote").click(function(){
+    postVote($(this).data('idea-id'));
+  });
+
   var page = 1;
   var loading = false;
 

@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <meta property="og:type"   content="idearator:idea" />
+  <meta property="og:url"    content="<%=root_url + url_for(@idea)%>"/>
+  <meta property="og:title"  content="<%= @idea.title%>"/>
+  <meta property="og:image"  content="<%= root_url+ @idea.photo.url %>"/>
+<% end %>
 <% if current_user %>
   <% if current_user.type == "Committee" %>
     <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
