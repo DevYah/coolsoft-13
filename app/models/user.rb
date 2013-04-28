@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :username, :date_of_birth, :type, :active, :first_name, :last_name,
-                  :gender, :about_me, :recieve_vote_notification, :banned,
-                  :recieve_comment_notification, :provider, :uid, :photo, :approved
+    :username, :date_of_birth, :type, :active, :first_name, :last_name,
+    :gender, :about_me, :recieve_vote_notification, :banned,
+    :recieve_comment_notification, :provider, :uid, :photo, :approved, :authentication_token, :secret
 
   has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
   has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
@@ -82,7 +82,9 @@ class User < ActiveRecord::Base
                        email: "#{auth.info.nickname}@twitter.com",
                        username: (auth.chosen_user_name or auth.info.nickname),
                        # random password, won't hurt
-                       password: Devise.friendly_token[0, 20])
+                       password: Devise.friendly_token[0, 20],
+                       authentication_token: auth['credentials']['token'],
+                       secret: auth['credentials']['secret'])
   end
 
   def new_notifications(after)
@@ -99,6 +101,13 @@ class User < ActiveRecord::Base
 
   def unread_notifications_count
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
+  def twitter
+    unless @twitter_user
+      @twitter_user = Twitter::Client.new(:oauth_token => self.authentication_token, :oauth_token_secret => self.secret) rescue nil
+    end
+    @twitter_user
   end
 
 end
