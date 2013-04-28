@@ -12,7 +12,6 @@ class TrendsController < ApplicationController
       t = Trend.find_by_idea_id(vote.idea_id)
       t.trending = t.trending + 4
       t.save
-    end
     if diff.to_i <400 && diff.to_i >200
       t = Trend.find_by_idea_id(vote.idea_id)
       t.trending = t.trending + 2
@@ -29,7 +28,7 @@ end
 
 #show the trending ideas
 #author Hesham Nabil
-def self.show
+def index
   @trending = Idea.find(:all, :conditions => { :approved => true }, :order=> 'trending desc', :limit=>4)
 end
 

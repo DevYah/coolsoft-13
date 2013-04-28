@@ -1,0 +1,21 @@
+  <div class="topten">
+    <h2 class="title">Trending Ideas
+    </h2>
+    <% @trending.each do |top| %>
+      <% if top.user.active == true and top.user.banned == false%>
+        <div class="topten_idea media">
+          <a class="pull-left" href="#">
+            <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
+          </a>
+          <div class="media-body">
+            <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
+            <h4 class="media-heading idea">
+              <%= link_to top.title ,top %>
+            </h4>
+            <span class="badge"><%= top.num_votes %>
+              votes</span>
+          </div>
+        </div>
+      <% end %>
+    <%end%>
+  </div>
