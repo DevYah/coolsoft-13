@@ -8,28 +8,32 @@
     </h5>
   </div>
 </div>
-<div class="row">
-  <div class="span4" id= 'imageTag'>
-    <%= image_tag @idea.photo.url(:medium) , :size => '150x90'%>
+<div class="media" id='popoverWhole'>
+  <div class="pull-left" href='#'>
+    <img class='media-object' id= 'imageTag'>
+      <%= image_tag @idea.photo.url(:medium) , :size => '200x100'%>
+    </div>
+    <div class="media-body" id="descriptionTag">
+      <div class='row'>
+        <h5>
+          <%= @idea.description %>
+          <div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>">0</div>
+        </h5>
+      </div>
+    </div>
+    <div class='row'>
+        <%if @chosentags != nil %>
+          <% @chosentags.each do |tag|%>
+            <span class="label label-info "><%= tag.name %></span>
+          <% end %>
+        <% end %>
+      <div class="span4 pull-right">
+        <span class="idea-votes inline pull-right" style = "color: #141B7F;"><%=  @idea.num_votes %></span>
+        <%if @ideavoted.nil? %>
+          <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
+        <% else %>
+          <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
+        <%end%>
+      </div>
+    </div>
   </div>
-  <div class="span8 pull-right" id="descriptionTag"><h5 >
-      <%= @idea.description %>
-      <div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>">0</div>
-    </h5>
-  </div>
-  <div class="span8 pull-right">
-    <%if @chosentags != nil %>
-      <% @chosentags.each do |tag|%>
-        <span class="label label-info "><%= tag.name %></span>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="span4 pull-right">
-    <span class="idea-votes inline pull-right" style = "color: #141B7F;"><%=  @idea.num_votes %></span>
-    <%if @ideavoted.nil? %>
-      <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
-    <% else %>
-      <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
-    <%end%>
-  </div>
-</div>
