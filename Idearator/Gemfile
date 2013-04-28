@@ -25,7 +25,13 @@ gem 'best_in_place','2.1.0'
 
 gem 'multiple_table_inheritance', '~> 0.2.1'
 
+gem 'sinatra', '>= 1.3.2'
+gem 'async_sinatra', '1.1.0'
+gem 'eventmachine', '1.0.3'
 gem 'rest-client', '1.6.7'
+gem 'thin', '1.5.1'
+gem 'rack', '>= 1.0.0'
+gem 'em-http-request', '1.0.3'
 
 group :assets do
   gem 'sass-rails', '3.2.6'
