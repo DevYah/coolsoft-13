@@ -1,4 +1,6 @@
 class CompetitionsController < ApplicationController
+
+  before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update]
   # GET /competitions
   # GET /competitions.json
   def index
@@ -10,8 +12,10 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # GET /competitions/1
-  # GET /competitions/1.json
+  # view competition of current user
+  # Params
+  # +id+:: is passed in params through the new competition view, it is used to identify the instance of +Competition+ to be viewed
+  # Marwa Mehanna
   def show
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
@@ -21,8 +25,8 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # GET /competitions/new
-  # GET /competitions/new.json
+  # making new Competition
+  #Marwa Mehann
   def new
     @competition = Competition.new
     chosen_tags_competition=[]
@@ -32,14 +36,19 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # GET /competitions/1/edit
+  ## editing Idea
+  # Params
+  # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
+  # Author: Marwa Mehanna
   def edit
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
   end
 
-  # POST /competitions
-  # POST /competitions.json
+  # creating new Idea
+  # Params
+  # +competition+ :: this is an instance of +Competition+ passed through _form.html.erb, identifying the competition which will be added to records
+  # Author: Marwa Mehanna
   def create
     @competition = Competition.new(params[:competition])
     @competition.investor_id = current_user.id
@@ -54,8 +63,10 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # PUT /competitions/1
-  # PUT /competitions/1.json
+  # updating Idea
+  # Params
+   # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
+  # Author: Marwa Mehanna
   def update
     @competition = Competition.find(params[:id])
 
@@ -70,8 +81,10 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # DELETE /competitions/1
-  # DELETE /competitions/1.json
+  # Deletes all records related to a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +competition+ to be deleted
+  #Author: Marwa Mehanna
   def destroy
     @competition = Competition.find(params[:id])
     if current_user.id == @competition.investor_id
