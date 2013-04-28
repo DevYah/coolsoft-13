@@ -17,17 +17,21 @@
       <div class='row'>
         <h5>
           <%= @idea.description %>
-          <div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>">0</div>
         </h5>
       </div>
     </div>
     <div class='row'>
-        <%if @chosentags != nil %>
-          <% @chosentags.each do |tag|%>
-            <span class="label label-info "><%= tag.name %></span>
-          <% end %>
+      <%if @chosentags != nil %>
+        <% @chosentags.each do |tag|%>
+          <span class="label label-info "><%= tag.name %></span>
         <% end %>
-      <div class="span4 pull-right">
+      <% end %>
+      <div class='span2' id='commentsPopovers'>
+        <span class='label label-success' id='commentsPopover'>
+          Number of comments
+        </span><div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" id='numberCommentsPopover'><h5>0</h5></div>
+      </div>
+      <div class="span4 pull-right" id='votesPopover'>
         <span class="idea-votes inline pull-right" style = "color: #141B7F;"><%=  @idea.num_votes %></span>
         <%if @ideavoted.nil? %>
           <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
@@ -37,3 +41,4 @@
       </div>
     </div>
   </div>
+</div>
