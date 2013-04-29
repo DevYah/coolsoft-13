@@ -6,7 +6,7 @@ class Idea < ActiveRecord::Base
   validates_length_of :description, :maximum => 1000
   validates_length_of :problem_solved, :maximum => 1000
 
-  after_save ::FacebookApi::IdeaHooks.new
+  after_create ::FacebookApiCreate.new
 
   belongs_to :user
   belongs_to :committee
