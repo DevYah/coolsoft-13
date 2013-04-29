@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.purr
-//
+//= require bootstrap
 //= require best_in_place
 //
 //= require jquery-ui
@@ -22,8 +22,8 @@
 //= require jquery-star-rating
 //= require jquery_purr
 //
-//= require notification_polling
 //= require notifications
+
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
