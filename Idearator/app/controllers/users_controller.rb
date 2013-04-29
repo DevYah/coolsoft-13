@@ -136,6 +136,10 @@ class UsersController < ApplicationController
     end
   end
 
+  #is used to render the page for displaying user's ideas.
+  #Params:
+  #None
+  #Author: Hisham ElGezeery
   def my_ideas
     @user = User.find(params[:id])
     @approved = @user.get_approved_ideas
