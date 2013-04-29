@@ -23,6 +23,7 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match ':id/my_ideas' => 'users#my_ideas'
     end
   end
 
