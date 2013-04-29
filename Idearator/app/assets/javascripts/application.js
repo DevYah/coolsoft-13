@@ -12,9 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //= require jquery.purr
-//
+//= require bootstrap
 //= require best_in_place
 //
 //= require jquery-ui
@@ -24,6 +23,8 @@
 //
 //= require notification_polling
 //= require notifications
+//
+//= require user_modal
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
@@ -78,24 +79,5 @@ $(document).ready(function () {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
-
-  $("#main a[href^='/users/']").each(function(){
-    var href = $(this).attr('href');
-    var href_url = href.split('/users/');
-    if($.isNumeric(href_url[1]) && String(href_url[3])){
-      var user_id = href_url[1];
-      $(this).attr('href', "/users/profile_modal?id="+user_id+"&remote=true");
-      $(this).attr('data-remote', 'true');
-      $(this).bind('click', function(event) {
-        event.preventDefault();
-        $("#user-profile-modal").modal('show');
-      });
-    }
-  });
-
-  $("#modal-close").click(function () {
-    $("#user-profile-modal").modal('hide');
-  });
-
 
 });
