@@ -117,4 +117,20 @@ class User < ActiveRecord::Base
     @twitter_user
   end
 
+  def vote_for(idea)
+    self.votes.create(idea_id: idea.id)
+    if idea.user.own_idea_notifications
+      VoteNotification.send_notification(self, idea, [idea.user])
+    end
+    idea.save
+  end
+
+  def unvote_for(idea)
+    voted_ideas.delete(idea)
+  end
+
+  def voted_for?(idea)
+    votes.where(idea_id: idea.id).exists?
+  end
+
 end
