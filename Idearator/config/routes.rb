@@ -1,26 +1,86 @@
 Sprint0::Application.routes.draw do
 
-  match '/users/expertise' => 'users#expertise'
-  match '/users/new_committee_tag' => 'users#new_committee_tag'
-  match '/home/index' => 'home#index'
+  default_url_options :host => 'localhost:3000'
+  root :to => 'home#landing'
 
-  #get "ideas/new"
-  resources :ideas
-
-  get   '/login', :to => 'sessions#new', :as => :login
-  match '/auth/:provider/callback', :to => 'sessions#create'
-  match '/auth/failure', :to => 'sessions#failure'
-
-  root :to => 'home#index'
-
-  default_url_options :host => "localhost:3000"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
+                                       :registrations => 'registrations' }
 
   devise_scope :user do
-  match '/users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
-end
+    match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
+  end
 
+  resources :users do
+    member do
+      match 'ban_unban' => 'admins#ban_unban'
+    end
 
+    collection do
+      put 'change_settings'
+      match 'expertise'
+      match 'new_committee_tag'
+      match 'confirm_deactivate'
+      match 'deactivate'
+    end
+  end
+
+  resources :ideas do
+    match 'filter', on: :collection
+    member do
+      match 'vote'
+      match 'unvote'
+      match 'archive'
+      match 'unarchive'
+      match 'add_prespectives' => 'committees#add_prespectives'
+      match 'disapprove' => 'committees#disapprove'
+      match 'add_rating'
+    end
+  end
+
+  controller :home do
+    match 'home/search'
+    match 'home/searchelse'
+    match 'home/index'
+  end
+
+  # Admin actions routes
+  controller :admins do
+    match 'admins/invite'
+    match 'admins/invite_committee'
+  end
+
+  # Committe actions routes
+  controller :committees do
+    match 'review_ideas'
+  end
+
+  # Dashboard routes
+  controller :dashboard do
+    match 'dashboard/index'
+    match 'getallideas'
+    match 'gettags'
+    match 'getideas'
+  end
+
+  # Notifications routes
+  controller :notifications do
+    match 'view_all_notifications'
+    match 'redirect_idea'
+    match 'redirect_review'
+    match 'redirect_expertise'
+    match 'set_read'
+    match 'view_new_notifications'
+  end
+  match 'notifications' => 'application#update_nav_bar'
+
+  # Tag routes
+  controller :tags do
+    match 'tags/ajax'
+  end
+
+  controller :ratings do
+    match 'ratings/ajax'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -36,13 +96,12 @@ end
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-
-
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller
   #   end
+
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -60,17 +119,13 @@ end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
- #root :to => 'ideas#show'
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
+  # This is a legacy wild controller route that's not recommended
+  # for RESTful applications.
+  # Note: This route will make all actions in every controller
+  # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
-
-  match '/review_ideas' => 'committees#review_ideas'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
 
 end

@@ -1,3 +1,82 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.idea-votes{
+ padding-left: 87%;
+  font-size: 35px;
+  margin-right: 25px;
+}
+
+.affix{
+    bottom: 5%;
+    padding-left: 5%;
+}
+
+.block{
+  box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
+  margin-bottom: 20px;
+}
+
+.wrapper{
+  margin-top: 20px;
+}
+
+.margin{
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+
+}
+
+.hidden{
+  display: none;
+}
+
+.topten{
+  border-radius: 5px;
+  margin: 10px;
+  background: rgba(0, 0, 0, 0.10);
+}
+.image{
+  margin-left: 10px;
+}
+.title{
+  margin-left: 100px;
+  padding: 10px;
+
+}
+.idea{
+  width: 200px;
+}
+
+
+.tag{
+  color: #0060ff;
+}
+
+#title{
+  margin-top:0px;
+  padding-top:0px;
+  margin-bottom:0px;
+  padding-bottom:10px;
+}
+#signin{
+  margin-top:110px;
+}
+.facebook{
+  width:30px;
+  height:30px;
+  cursor: pointer;
+  padding-right:5px;
+}
+.twitter{
+  width:30px;
+  height:30px;
+  cursor:pointer;
+}
+.landinglogin{
+  height:30px;
+  padding-top:50px;
+}
+

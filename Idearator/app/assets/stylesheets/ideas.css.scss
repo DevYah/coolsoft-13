@@ -1,3 +1,37 @@
 // Place all the styles related to the ideas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#show{
+  padding-top:40px;
+}
+
+#fbk{
+	width:40px;
+	height:40px;
+	cursor: pointer;
+	padding-right:10px;
+}
+
+#tw{
+	width:40px;
+	height:40px;
+	cursor:pointer;
+}
+
+#pin{
+	width:40px;
+	height:40px;
+	cursor:pointer;
+    padding-right:10px;
+    }
+
+.purr {
+  position: fixed;
+  top: 30px;
+  right: 100px;
+  width: 250px;
+  padding: 20px;
+  background-color: #FCC;
+  border: solid 2px #666;
+  &:first-letter { text-transform: uppercase };
+}
