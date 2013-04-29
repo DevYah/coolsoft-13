@@ -4,7 +4,7 @@ end
 
 
 every 3.hours do
- runner 'TrendsController.show'
+ runner 'Trend.del'
 end
 
 # Use this file to easily define all of your cron jobs.
