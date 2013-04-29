@@ -43,7 +43,6 @@ $(document).ready(function () {
          } else if (response.error) {
           alert(response.error.message);
          } else {
-          alert("mask");
           alert('<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
              'Story created.  ID is ' + response.id + '</a>');
            document.getElementById('result').innerHTML =
