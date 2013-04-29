@@ -67,6 +67,9 @@ namespace :db do
       c.save
     end
 
+    t = Threshold.new
+    t.threshold = 40
+    t.save
 
     50.times do |n|
       it = IdeasTags.new
