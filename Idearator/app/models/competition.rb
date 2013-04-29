@@ -13,4 +13,31 @@ class Competition < ActiveRecord::Base
   has_many :competition_notifications, :dependent => :destroy
   has_many :competition_idea_notifications, :dependent => :destroy
   has_many :delete_competition_notifications
+
+   def filter
+    @ideas = []
+    tags=self.tags
+    tags.each do |tag|
+      t = Tag.find(:first, :conditions => {:name => tag.name})
+      ideatags = IdeasTags.find(:all, :conditions => {:tag_id => t.id})
+      ideas = Idea.where(:id => ideatags.map(&:idea_id))
+      @ideas = @ideas + ideas
+    end
+    @ideas
+  end
+
+  def send_create_notification(investor)
+    @users= User.where(:id => @ideas.map(&:user_id))
+    puts @users
+    CreateCompetitionNotification.send_notification(investor,self,@users)
+  end
+
+  def send_edit_notification(investor)
+   users=User.where(:id => self.ideas.map(&:user_id))
+    EditCompetitionNotification.send_notification(investor,self,users)
+  end
+  def send_delete_notification(investor)
+    users=User.where(:id => self.ideas.map(&:user_id))
+    DeleteCompetitionNotification.send_notification(investor,self,users)
+  end
 end
