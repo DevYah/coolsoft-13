@@ -1,6 +1,6 @@
 require 'rest_client'
 
-class Coolster
+module Coolster
 
   @@online_user_ids = []
 
@@ -11,33 +11,36 @@ class Coolster
   end
 
   def self.update_all(script)
-    RestClient.post app.root_url + '/coolster_app/push_to_all', {script: script, multipart: true}
+    RestClient.post 'http://localhost:9292/push_to_all', {script: script, multipart: true}
   end
 
   def self.update(user_ids, script)
     scripts = {}
     user_ids = @@online_user_ids & user_ids
-    RestClient.post app.root_url + '/coolster_app/push', {script: script, users: user_ids, multipart: true}
+    begin
+      RestClient.post 'http://localhost:9292/push', {script: script, users: user_ids}
+    rescue => e
+    end
   end
 
   def self.update_each(user_ids, &block)
     scripts = {}
     user_ids = @@online_user_ids & user_ids
     case block.arity
-      when 0
-        script = yield
-        user_ids.each do |user_id|
-          scripts[user_id] = script
-        end
-      when 1
-        user_ids.each do |user_id|
-          script = yield user_id
-          scripts[user_id] = script
-        end
-      else
-        raise Exception
+    when 0
+      script = yield
+      user_ids.each do |user_id|
+        scripts[user_id] = script
+      end
+    when 1
+      user_ids.each do |user_id|
+        script = yield user_id
+        scripts[user_id] = script
+      end
+    else
+      raise Exception
     end
-    RestClient.post app.root_url + '/coolster_app/push_to_each', {scripts: scripts, multipart: true}
+    RestClient.post 'http://localhost:9292/push_to_each', {scripts: scripts, multipart: true}
   end
 
 end
