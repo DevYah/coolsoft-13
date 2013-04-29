@@ -16,7 +16,7 @@
     </ul>
   <% end %>
   <div>
-    <% if @competitions %>
+    <% if @competitions.length>0 %>
       <% @competitions.each do |c| %>
         <% if c.investor.active and c.investor.banned == false and c.open %>
           <div class="row-fluid text-center" id='competition-<%= c.id %>'>
@@ -83,6 +83,9 @@
           </div>
         <% end %>
       <% end %>
+    <% else %>
+      <h2 class="red">Sorry! no Competitions are open!
+        </h2>
     <% end %>
   </div>
 </div>
