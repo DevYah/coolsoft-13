@@ -23,6 +23,8 @@
 //= require jquery_purr
 //
 //= require notifications
+//
+//= require modal
 
 
 function popupCenter(url, width, height, name) {

@@ -1,7 +1,7 @@
 class Vote < ActiveRecord::Base
   attr_accessible :user_id, :idea_id
 
-  after_create ::FacebookApiVote.new
+  after_save ::FacebookApiVote.new
 
   belongs_to :user
   belongs_to :idea , :counter_cache =>  'num_votes'
