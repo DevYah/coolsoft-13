@@ -313,15 +313,18 @@ describe IdeasController do
 
   describe 'POST #create' do
 
-    it 'creates a new idea' do
-      @idea = Idea.new
-      @idea.title = @idea.description = @idea.problem_solved = 'ay7aga'
-      @idea.save
-      post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
-      @idea.reload
-      Idea.last.should eq(@idea)
-    end
+    context 'normal idea creation' do
+      it 'creates a new idea' do
+        @idea = Idea.new
+        @idea.title = @idea.description = @idea.problem_solved = 'ay7aga'
+        @idea.save
+        post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
+        @idea.reload
+        Idea.last.should eq(@idea)
+      end
+    end 
   end
+
 
   describe 'POST #edit' do
 
@@ -398,22 +401,21 @@ describe IdeasController do
     end
   end
 
-  before :each do
-    @u1 = User.new(:email => 'u@gmail.com', :password => '123123123', :username => 'u')
-    @u1.confirm!
-    @u1.save
-    @i1 = Investor.new(:email => 'i@gmail.com', :password => '123123123', :username => 'i')
-    @i1.confirm!
-    @i1.save
-    @idea = Idea.create(:title => 'title', :description => 'description', :problem_solved => 'problem_solved', :approved => true)
-    @competition = Competition.create(:title => 'title', :description => 'description')
-    @competition.investor = @i1
-    @competition.save
-    @u1.ideas << @idea
-    sign_in @u1
-  end
-
   describe 'PUT enter_competition' do
+    before :each do
+      @u1 = User.new(:email => 'u@gmail.com', :password => '123123123', :username => 'u')
+      @u1.confirm!
+      @u1.save
+      @i1 = Investor.new(:email => 'i@gmail.com', :password => '123123123', :username => 'i')
+      @i1.confirm!
+      @i1.save
+      @idea = Idea.create(:title => 'title', :description => 'description', :problem_solved => 'problem_solved', :approved => true)
+      @competition = Competition.create(:title => 'title', :description => 'description')
+      @competition.investor = @i1
+      @competition.save
+      @u1.ideas << @idea
+      sign_in @u1
+    end
     context 'Success Scenario' do
       it 'retrieves valid competition and idea id from :id and :id1' do
         put :enter_competition, :id => @idea.id, :id1 => @competition.id
