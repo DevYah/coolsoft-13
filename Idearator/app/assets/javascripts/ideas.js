@@ -69,4 +69,24 @@ $(document).ready(function() {
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
 
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=446451938769749";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function sendAjax(idea_id){
+    var list = "";
+    var i=0;
+    $('.token-input-list-facebook li p').each(function(){
+      list += "rating[]="+$(this).text()+"&";
+      i=i+1;
+
+    });
+
+    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+  }
+
 });
