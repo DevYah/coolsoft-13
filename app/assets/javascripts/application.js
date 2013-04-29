@@ -9,17 +9,21 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
+//
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-
-//= require jquery.tokeninput
-//= require jquery-ui
-//= require jquery_purr
-//= require best_in_place
-//= require notifications
-//= require poller
 //= require jquery.purr
+//= require bootstrap
+//= require best_in_place
+//
+//= require jquery-ui
+//= require jquery.tokeninput
+//= require jquery-star-rating
+//= require jquery_purr
+//
+//= require notifications
+>>>>>>> master
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);

@@ -23,7 +23,11 @@ gem 'whenever', '0.8.2', :require => false
 
 gem 'best_in_place','2.1.0'
 
-gem 'multiple_table_inheritance', '~> 0.2.1'
+gem 'multiple_table_inheritance', '0.2.1'
+
+gem 'font-awesome-rails', '3.0.2.0'
+
+gem 'jquery-star-rating-rails', '4.0.4'
 
 gem 'rest-client', '1.6.7'
 gem 'thin', '1.5.1'
@@ -39,6 +43,7 @@ group :test, :development do
 end
 
 group :test do
+
   gem 'faker', '1.1.2'
   gem 'capybara', '2.1.0'
   gem 'guard-rspec', '2.5.3'
