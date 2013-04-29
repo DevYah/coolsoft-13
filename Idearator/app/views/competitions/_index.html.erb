@@ -1,5 +1,7 @@
-<%= javascript_include_tag 'competitions' %>
-<%= stylesheet_link_tag 'competitions'%>
+<% if @firstTime %>
+  <%= javascript_include_tag 'competitions' %>
+  <%= stylesheet_link_tag 'competitions'%>
+<% end %>
 <div>
   <% if @competitions %>
     <% @competitions.each do |c| %>
