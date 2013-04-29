@@ -3,10 +3,11 @@
 
 var currentpage = 1;
 var thistag = [];
-searchtext = "";
+var searchtext = "";
 will_insert = true;
 user_search = false;
 var previous_search = "";
+
 // function change_state(user){
 
 // }
@@ -18,6 +19,7 @@ function stream_manipulator(page,tag,search,insert,user){
   will_insert = insert;
   inside = 0;
   user_search = user;
+
 if(!user_search){
   if(will_insert){
   if(tag!=""){
@@ -84,36 +86,39 @@ if(!user_search){
     });
   }
 }
-
 }
-//alert(currentpage);
-$(window).scroll (function(){
-  //alert($(window).scrollTop());
+//alert(currentpage)
+$(document).ready(function(){
+  alert($("#searchtype").val());
+   $(".btn-link").click(function tag_caller(e){
+    e.preventDefault();
+    var tag = $(this);
+    //$("#stream_results").html("");
+    $("#search").val("");
+    $("#searchtype").val("false");
+    stream_manipulator(1,tag.val(),"",true, false);
+  });
+   $(".close").click(function tag_remover(e){
+    e.preventDefault();
+    var curr = $(this);
+    $("#search").val("");
+    $("#searchtype").val("false");
+    stream_manipulator(1,curr.val(),"",false, false);
+  });
+   $(window).scroll (function(){
     if($(window).scrollTop()!=0){
       if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
         currentpage++;
-    //stream_manipulator(currentpage,"",searchtext);
         $.ajax({
           url: '/stream/index?page=' + currentpage,
           type: 'get',
           dataType: 'script',
-          data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search},
+          data: { mypage: currentpage, tag: thistag, search: $("#search").val(), search_user: $("#searchtype").val()},
           success: function() {
-          //alert("2nd "+currentpage);
+            console.log($("#searchtype").val());
           }
         });
       }
     }
   });
-$(document).ready(function(){
-$("#user-search-button").click(function remove_button_handler(e) {
-    e.preventDefault(); 
-    search_type = true;
-    //alert(search_type);
-});
-  $('#idea-search-button').click(function remove_button_handler(e) {
-    e.preventDefault();
-    search_type = false;
-    //alert(search_type);
-});
 });

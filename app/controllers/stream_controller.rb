@@ -9,6 +9,7 @@ class StreamController < ApplicationController
     @searchtext = params[:search]
     @filter = params[:tag].to_a
     @search_with_user = params[:search_user] == "true"
+    @searching_with = params[:searchtype] == "true"
 
   if @page != nil
     if !@search_with_user
@@ -33,7 +34,7 @@ class StreamController < ApplicationController
     if @searchtext.nil?
       @ideas = Idea.order(:created_at).page(1).per(10)
     else
-      if !@search_with_user
+      if !@searching_with
         @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
       else
         @users = User.search(params[:search]).page(params[:mypage]).per(10)

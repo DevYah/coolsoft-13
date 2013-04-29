@@ -21,30 +21,33 @@
 //= require jquery_purr
 //= require notification_polling
 //= require notifications
-//= require_tree .
 
 
 var last_search = "";
 var original;
 search_type = false;
+//searchvalue = "";
 
 $(function() {
-  $("#searchdiv input").keyup(function(){
+  $("#searchdiv input").keyup(function(e){
+    e.preventDefault();
       //$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+  if(e.which != 13){
     var search = $("#search").val();
-    alert(search+"#"+search_type+"#"+search.length+"#"+search_type);
     // if(last_search!=search){
+      var search_in = $("#searchtype").val();
       last_search = search;
       if($("#search").val()!= ""){
         if(search.length > 2){
         $("#stream_results").html("");
-        stream_manipulator(1,"",search,true, search_type);
+        stream_manipulator(1,"",search,true, search_in);
         }
       }else{
         search_type = false;
         $("#stream_results").html("");
-        stream_manipulator(1,"","",true, search_type);
+        stream_manipulator(1,"","",true, search_in);
       }
+    }
     // }
   });
 });
@@ -71,19 +74,22 @@ $(document).bind("ajaxError", function(e, xhr){
 	}
 });
 
+
 $(document).ready(function() {
 	$("#sign").click(function() {
 		window.location= "/users/sign_in";
 	});
-  $("#user-search-button-redirection").click(function remove_button_handler(e) {
+  $("#user-search-button").click(function remove_button_handler(e) {
     e.preventDefault(); 
     search_type = true;
-    alert(search_type);
+    $("#searchtype").val("true");
+    console.log($("#searchtype").val());
 });
-  $("#idea-search-button-redirection").click(function remove_button_handler(e) {
+  $("#idea-search-button").click(function remove_button_handler(e) {
     e.preventDefault();
     search_type = false;
-    alert(search_type);
+    $("#searchtype").val("false");
+    console.log($("#searchtype").val());
 });
   $("a.popup").click(function (e) {
     popupCenter($(this).attr("href"),
@@ -111,16 +117,12 @@ $(document).ready(function() {
   //   searchtext = searchvalue;
   //   alert(searchtext);
   // }
-
-  $('#searchdivelse').submit(function(e) {
-    e.preventDefault();
-    this.submit();
-    searchvalue = $("#search").val();
-    // $("#search").attr('value', searchvalue);
-    // alert($("#search").attr("value"));
-  });
+   $('#searchdiv').submit(function(e) {
+     if (in_stream){
+      e.preventDefault();
+     }
+    });
 });
-
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
   var top = (screen.height / 2) - (height / 2);
