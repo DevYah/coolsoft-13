@@ -1,4 +1,4 @@
-<%= link_to "Home", root_path, :class => 'brand' %>
+<%= link_to "Home", root_path, :class => 'brand'%>
 <ul class='nav'>
   <% if user_signed_in? %>
     <li class="dropdown">
@@ -36,9 +36,9 @@
 </ul>
 
 <ul class="nav">
-  <!-- <li>
-    <%= link_to('stream', controller: 'stream' , action: 'index') %>
-  </li> -->
+  <li>
+    <%= link_to('stream', controller: 'home' , action: 'index') %>
+  </li>
   <% if user_signed_in? %>
     <% if current_user.is_a? Committee%>
       <li>
@@ -74,9 +74,9 @@
           </div>
       </form>
     <% else %>
-      <form class="form-search">
+      <%= form_tag "/stream/index", :method => :get,:class => "form-search", :id => 'searchdivelse' do %>
         <div class="input-append">
-          <input type="text" class="span2 search-query" id="search-input" placeholder="Search.....">
+          <%= text_field_tag :search, params[:search],:placeholder => "Search....." ,:class => "span2 search-query"%>
             <div class="btn-group">
               <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="search_button">
                 <i class="icon-search icon-white"></i>
@@ -92,7 +92,7 @@
               </ul>
             </div>
           </div>
-      </form>
+        <% end %>
     <% end %>
   </li>
 </ul>

@@ -24,19 +24,24 @@
 
 var last_search = "";
 var original;
+search_type = false;
 
 $(function() {
 	$("#searchdiv input").keyup(function(){
 			//$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-    $("#stream_results").html("");
     var search = $("#search").val();
-    alert(last_search!=search);
+    alert(search+"#"+search_type+"#"+search.length+"#"+search_type);
     // if(last_search!=search){
       last_search = search;
       if($("#search").val()!= ""){
-        stream_manipulator(1,"",search,true, false);
+        if(search.length > 2){
+        $("#stream_results").html("");
+        stream_manipulator(1,"",search,true, search_type);
+        }
       }else{
-        stream_manipulator(1,"","",true, false);
+        search_type = false;
+        $("#stream_results").html("");
+        stream_manipulator(1,"","",true, search_type);
       }
     // }
 	});
@@ -68,6 +73,37 @@ $(document).ready(function() {
 	$("#sign").click(function() {
 		window.location= "/users/sign_in";
 	});
+  $("#user-search-button-redirection").click(function remove_button_handler(e) {
+    e.preventDefault(); 
+    search_type = true;
+    alert(search_type);
+});
+  $("#idea-search-button-redirection").click(function remove_button_handler(e) {
+    e.preventDefault();
+    search_type = false;
+    alert(search_type);
+});
+
+  // $("#searchdivelse input").keyup(function(e){
+  //   if (e.keycode == 13){
+  //     $("#searchdivelse").submit();
+  //     searchvalue = $("#search").val();
+  //     alert(searchvalue);
+  //   }
+  // });
+  
+  // function set_searchtext(searchvalue){
+  //   searchtext = searchvalue;
+  //   alert(searchtext);
+  // }
+
+  $('#searchdivelse').submit(function(e) {
+    e.preventDefault();
+    this.submit();
+    searchvalue = $("#search").val();
+    // $("#search").attr('value', searchvalue);
+    // alert($("#search").attr("value"));
+  });
 });
 
 function popupCenter(url, width, height, name) {
