@@ -18,8 +18,8 @@
   margin-left: 66px;
 }
 #votesPopover {
-  margin-top: -104px;
-  margin-right: 26px;
+  margin-top: -84px;
+  margin-right: -59px;
 }
 
 #userTag {
@@ -29,13 +29,13 @@
 #titleTag {
   margin-left: -131px;
 }
-.descriptionIdea {
-  padding-left: 135px;
+#descriptionTag {
+  width: 205px;
 }
 
 #commentsPopover {
   margin-left: 19px;
-  margin-top: 40px;
+  margin-top: 26px;
 }
 
 #commentsPopovers {
@@ -46,6 +46,9 @@
 }
 .titleIdea{
 
+}
+#votesVotes {
+  font-size: 24px;
 }
 #popoverWhole {
   margin-left: -136px;
