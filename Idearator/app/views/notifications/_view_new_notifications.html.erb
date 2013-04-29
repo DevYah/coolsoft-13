@@ -1,5 +1,0 @@
-<% @new_notifications.each do |notification| %>
-  <%= render partial: 'view', locals: {notification: notification} %>
-  <% notification.set_read_for current_user %>
-  <% @count = 0 %>
-<% end %>
