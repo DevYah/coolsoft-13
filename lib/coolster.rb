@@ -11,7 +11,10 @@ module Coolster
   end
 
   def self.update_all(script)
-    RestClient.post 'http://localhost:9292/push_to_all', {script: script, multipart: true}
+    begin
+      RestClient.post 'http://localhost:9292/push_to_all', {script: script, multipart: true}
+    rescue => e
+    end
   end
 
   def self.update(user_ids, script)
@@ -40,7 +43,10 @@ module Coolster
     else
       raise Exception
     end
-    RestClient.post 'http://localhost:9292/push_to_each', {scripts: scripts, multipart: true}
+    begin
+      RestClient.post 'http://localhost:9292/push_to_each', {scripts: scripts, multipart: true}
+    rescue => e
+    end
   end
 
 end
