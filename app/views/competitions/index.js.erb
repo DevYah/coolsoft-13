@@ -4,5 +4,9 @@ if(!($('.competition').length > 0)){
   $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
 }
 <% else %>
+<% if @filter %>
+  $(".competitions").remove();
+<% end %>
 $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
+apply_script();
 <% end %>
