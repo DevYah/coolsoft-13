@@ -1,4 +1,48 @@
+function postVote(i, s) {
+  FB.api(
+  'me/idearator:vote',
+  'post',
+  {
+    idea: s+"ideas/"+i
+  },
+       function(response) {
+         if (!response) {
+           alert('Error occurred.');
+         } else if (response.error) {
+          alert(response.error.message);
+         } else {
+          alert('<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>');
+           document.getElementById('result').innerHTML =
+             '<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>';
+         }
+       }
+    );
+  };
 
+  function postCreate(i, s) {
+  FB.api(
+  'me/idearator:create',
+  'post',
+  {
+    idea: s+"ideas/"+i
+  },
+       function(response) {
+         if (!response) {
+           alert('Error occurred.');
+         } else if (response.error) {
+          alert(response.error.message);
+         } else {
+          alert('<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>');
+           document.getElementById('result').innerHTML =
+             '<a href=\"https://www.facebook.com/me/activity/' + response.id + '\">' +
+             'Story created.  ID is ' + response.id + '</a>';
+         }
+       }
+    );
+  };
 $(document).ready(function() {
 
   // When The user clicks on facebook share or twitter share button, this method
@@ -7,37 +51,17 @@ $(document).ready(function() {
   // This page's URl is then shared on The user's facebook or twitter account.
   // Author: Mohamed Sameh
 
-  $("#share").click(function() {
-    $("#show").toggle("slow");
-  });
-
-  $("#fbk").click(function() {
-    var pathname = window.location;
-     var fburl = 'http://www.facebook.com/sharer.php?u='+encodeURI(pathname);
-     var win=window.open(fburl, 'popup');
-     win.focus();
-  });
-
-  $("#tw").click(function() {
-    var pathname = window.location;
-    var tweeturl = 'http://twitter.com/share?url='
-                   + encodeURI(pathname)
-                   + '&text=Checkout this idea on idearator';
-    var win = window.open(tweeturl, 'popup');
-    win.focus();
-  });
-
-  $("#fbk").tooltip({
+  $(".fbk").tooltip({
     toggle: "tooltip",
     title: "Share on Facebook",
   });
 
-  $("#tw").tooltip({
+  $(".tw").tooltip({
     toggle: "tooltip",
     title: "Share on Twitter"
   });
 
-  $("#pin").tooltip({
+  $(".pin").tooltip({
     toggle: "tooltip",
     title: "Share on pin",
   });
