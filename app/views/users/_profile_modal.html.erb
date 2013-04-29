@@ -3,7 +3,7 @@
     <%= image_tag @selected_user.photo.url(:medium)%>
   <% end %>
 </div>
-<div class = 'user-details'>
+<div class = 'modal-user-details'>
   <dl class='dl-horizontal'>
     <dt>Email</dt>
     <dd><%= @selected_user.email %></dd>
@@ -46,7 +46,4 @@
     </dd>
   </dl>
 </div>
-<div class="controls">
-  <%= link_to "View Ideas", :class => 'btn btn-primary', :redirect_to => '/users/'+@selected_user.id.to_s+'/my_ideas'  %>
-  <button class="btn" id='modal-close'type="button">Close</button>
-</div>
+<a class="btn btn-primary" type="button" id='idea-count-button' href='/users/<%= @selected_user.id%>/my_ideas'>View Ideas (<%= @selected_user_ideas.count%>)</a>
