@@ -5,7 +5,12 @@ class CompetitionsController < ApplicationController
     @filter = false
     @firstTime = false
     if(params[:myPage])
-      @competitions = Competition.uniq.page(params[:myPage]).per(10)
+      @tags = params[:tags].slice(1,params[:tags].length)
+      if(@tags.length ==0)
+        @competitions = Competition.uniq.page(params[:myPage]).per(10)
+      else
+        @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq.page(params[:myPage]).per(10)
+      end
     else
       if (params[:tags])
         @filter = true
@@ -13,7 +18,7 @@ class CompetitionsController < ApplicationController
         if(@tags.length ==0)
           @competitions = Competition.uniq.page(1).per(10)
         else
-          @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq
+          @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq.page(1).per(10)
         end
       else
         @firstTime = true
