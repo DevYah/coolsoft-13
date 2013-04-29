@@ -29,6 +29,9 @@ gem 'font-awesome-rails', '3.0.2.0'
 
 gem 'jquery-star-rating-rails', '4.0.4'
 
+gem 'rest-client', '1.6.7'
+gem 'thin', '1.5.1'
+
 group :assets do
   gem 'sass-rails', '3.2.6'
   gem 'uglifier', '2.0.1'

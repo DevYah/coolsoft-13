@@ -3,6 +3,11 @@ class CommentNotification < IdeaNotification
 
   def self.send_notification(user_sender, idea, users_receivers)
     comment_notification = CommentNotification.create(user: user_sender, idea: idea, users: users_receivers)
+    user_ids = []
+    users_receivers.each do |user|
+      user_ids << user.id.to_s
+    end
+    NotificationsController::CoolsterPusher.new.push_notification user_ids, comment_notification
   end
 
   def text
