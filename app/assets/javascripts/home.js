@@ -30,12 +30,12 @@ $(document).ready(function () {
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-  function postVote(i) {
+  function postVote(i, s) {
   FB.api(
   'me/idearator:vote',
   'post',
   {
-    idea: encodeURI(window.location)+"/ideas/"+i
+    idea: s+"ideas/"+i
   },
        function(response) {
          if (!response) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
   };
 
   $(".streamvote").click(function(){
-    postVote($(this).data('idea-id'));
+    postVote($(this).data('idea-id'), $(this).data('idea-url'));
   });
 
   var page = 1;
