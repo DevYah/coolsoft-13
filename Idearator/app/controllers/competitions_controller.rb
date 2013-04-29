@@ -9,11 +9,15 @@ class CompetitionsController < ApplicationController
     else
       if (params[:tags])
         @filter = true
-        @tags = params[:tags]
-        @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq
+        @tags = params[:tags].slice(1,params[:tags].length)
+        if(@tags.length ==0)
+          @competitions = Competition.uniq.page(1).per(10)
+        else
+          @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq
+        end
       else
         @firstTime = true
-        @competitions = Competition.uniq.page(1).per(1)
+        @competitions = Competition.uniq.page(1).per(10)
       end
     end
     respond_to do |format|

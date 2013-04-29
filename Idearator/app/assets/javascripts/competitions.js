@@ -88,8 +88,8 @@ $(document).ready(function() {
 
 function apply_script(){
 $('.aTag').click(function(){
-    var array = [];
-    var i = 0;
+    var array = ["a"];
+    var i = 1;
     if($('.tag').length > 0)
      $('.tag').each(function () {
       array[i] = $(this).text();
@@ -120,15 +120,15 @@ $('.aTag').click(function(){
 
 $('.delete-token').click(function(){
     alert('hey');
-    var array = [];
-    var i = 0;
-    if($('.tag').length > 0)
+    var array = ["a"];
+    var i = 1;
+    $(this).parent().remove();
+    if($('.tag').length > 0){
      $('.tag').each(function () {
       array[i] = $(this).text();
       i += 1;
     });
-   array[i] = $(this).text();
-
+   }
    $.ajax({
     type: 'get',
     url: 'competitions',
@@ -136,14 +136,11 @@ $('.delete-token').click(function(){
       tags: array
     },
     beforeSend: function () {
-        // this is where we append a loading image
-        //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
       },
       success: function (array) {
         loading = false;
       },
       error: function () {
-          // failed request; give feedback to user
         }
 
       });
