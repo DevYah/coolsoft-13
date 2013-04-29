@@ -1,5 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+  var Page = 1;
 $(document).ready(function() {
   var prePopulate = [];
 
@@ -42,7 +43,7 @@ $(document).ready(function() {
 
   apply_script();
 
-  var Page = 1;
+
 
   var loading = false;
 
@@ -60,16 +61,23 @@ $(document).ready(function() {
       loading = true;
       Page += 1;
 
-      var array = [];
-      var i = 0;
+      var array = ["a"];
+      var i = 1;
+      if($('.tag').length > 0){
+       $('.tag').each(function () {
+        array[i] = $(this).text();
+        i += 1;
+      });
+     }
 
-      $.ajax({
-        type: 'get',
-        url: 'competitions',
-        data: {
-          myPage: Page
-        },
-        beforeSend: function () {
+     $.ajax({
+      type: 'get',
+      url: 'competitions',
+      data: {
+        myPage: Page,
+        tags: array
+      },
+      beforeSend: function () {
         // this is where we append a loading image
         //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
       },
@@ -81,20 +89,22 @@ $(document).ready(function() {
         }
 
       });
-    }
-  });
+   }
+ });
 
 });
 
 function apply_script(){
-$('.aTag').click(function(){
+  $('.aTag').click(function(){
+    Page = 1 ;
     var array = ["a"];
     var i = 1;
-    if($('.tag').length > 0)
+    if($('.tag').length > 0){
      $('.tag').each(function () {
       array[i] = $(this).text();
       i += 1;
     });
+   }
    array[i] = $(this).text();
 
    $.ajax({
@@ -118,8 +128,8 @@ $('.aTag').click(function(){
 
  });
 
-$('.delete-token').click(function(){
-    alert('hey');
+  $('.delete-token').click(function(){
+    Page = 1 ;
     var array = ["a"];
     var i = 1;
     $(this).parent().remove();
@@ -136,14 +146,14 @@ $('.delete-token').click(function(){
       tags: array
     },
     beforeSend: function () {
-      },
-      success: function (array) {
-        loading = false;
-      },
-      error: function () {
-        }
+    },
+    success: function (array) {
+      loading = false;
+    },
+    error: function () {
+    }
 
-      });
+  });
 
  });
 

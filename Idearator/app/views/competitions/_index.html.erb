@@ -3,16 +3,18 @@
   <%= stylesheet_link_tag 'competitions'%>
 <% end %>
 <div class="competitions">
-  <ul class="currenttags">
-    <% if @tags %>
-      <% @tags.each do |t|%>
-        <li class="taging currenttag">
-          <span class="tag"><%= t %></span>
-          <span class="delete-token">×</span>
-        </li>
+  <% if @filter %>
+    <ul class="currenttags">
+      <% if @tags %>
+        <% @tags.each do |t|%>
+          <li class="taging currenttag">
+            <span class="tag"><%= t %></span>
+            <span class="delete-token">×</span>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+  <% end %>
   <div>
     <% if @competitions %>
       <% @competitions.each do |c| %>
