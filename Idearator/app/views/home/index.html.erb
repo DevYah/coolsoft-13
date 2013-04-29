@@ -1,7 +1,7 @@
 <%= render :partial => 'ideas/show' %>
 <%= render :partial => 'stream' %>
 <% content_for :sidebar do %>
- <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
+  <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
 <% end %>
 <% content_for :sidebar do %>
   <div class="topten">
@@ -26,11 +26,11 @@
     <%end%>
 
   </div>
-   <div class="affix" data-spy='affix'>
+  <div class="affix" data-spy='affix'>
     <button class="btn backtotop" type="button">To Top
       <i class = 'icon-black icon-hand-up'></i></button>
   </div>
-   <script type="text/javascript">
+  <script type="text/javascript">
     $('.backtotop').click(function(){
       $('html, body').animate({scrollTop:0}, 'slow');
       });

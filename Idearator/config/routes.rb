@@ -21,21 +21,30 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match ':id/my_ideas' => 'users#my_ideas'
     end
   end
 
   resources :ideas do
     match 'filter', on: :collection
+    match 'like', on: :member
+    resources :comments do
+        put 'update', on: :member
+      end
     member do
       match 'vote'
       match 'unvote'
       match 'archive'
-      match 'unarchive'
+      match 'unarchive', :defaults => { :format => 'js' }
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
     end
   end
+
+  resources :user_ratings, :controller => 'user_ratings'
+  match '/user_ratings/create' => 'user_ratings#create'
+  match '/user_ratings/update' => 'user_ratings#update'
 
   controller :home do
     match 'home/search'
@@ -127,5 +136,4 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
 end
