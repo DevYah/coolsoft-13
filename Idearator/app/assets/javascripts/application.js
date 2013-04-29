@@ -9,26 +9,28 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
+//
 //= require jquery
 //= require jquery_ujs
-
-//= require jquery.tokeninput
-//= require jquery-ui
-//= require jquery_purr
-//= require best_in_place
 //= require bootstrap
-//= require notification_polling
 //= require jquery.purr
+//= require bootstrap
 //= require best_in_place
+//= require jquery-ui
+//= require jquery.tokeninput
+//= require jquery_purr
+//= require notification_polling
+//= require notifications
 //= require_tree .
+
 
 var last_search = "";
 var original;
 search_type = false;
 
 $(function() {
-	$("#searchdiv input").keyup(function(){
-			//$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+  $("#searchdiv input").keyup(function(){
+      //$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
     var search = $("#search").val();
     alert(search+"#"+search_type+"#"+search.length+"#"+search_type);
     // if(last_search!=search){
@@ -44,7 +46,7 @@ $(function() {
         stream_manipulator(1,"","",true, search_type);
       }
     // }
-	});
+  });
 });
 
 // $(function() {
@@ -83,6 +85,19 @@ $(document).ready(function() {
     search_type = false;
     alert(search_type);
 });
+  $("a.popup").click(function (e) {
+    popupCenter($(this).attr("href"),
+                $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
+    e.stopPropagation();
+    return false;
+  });
+  
+  $("#twitter_signin_button").tooltip({
+    placement: 'bottom',
+    trigger: 'click',
+    title: 'Trying to sign in using twitter, please interact with the popup!',
+    container: 'header'
+  });
 
   // $("#searchdivelse input").keyup(function(e){
   //   if (e.keycode == 13){
@@ -107,25 +122,10 @@ $(document).ready(function() {
 });
 
 function popupCenter(url, width, height, name) {
-  var left = (screen.width/2)-(width/2);
-  var top = (screen.height/2)-(height/2);
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (height / 2);
   return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
                                 ",height=" + height + ",toolbar=no,left=" + left +
                                 ",top=" + top);
 }
 
-$(function() {
-  $("a.popup").click(function(e) {
-    popupCenter($(this).attr("href") ,
-                $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
-    e.stopPropagation();
-    return false;
-  });
-  
-  $("#twitter_signin_button").tooltip({
-    placement: 'bottom',
-    trigger: 'click',
-    title: 'Trying to sign in using twitter, please interact with the popup!',
-    container: 'header'
-  });
-});

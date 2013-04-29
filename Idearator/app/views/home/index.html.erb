@@ -1,6 +1,9 @@
 <%= render :partial => 'ideas/show' %>
 <%= render :partial => 'stream' %>
 <% content_for :sidebar do %>
+  <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
+<% end %>
+<% content_for :sidebar do %>
   <div class="topten">
     <h1 class="title">Top Ten
     </h1>
@@ -35,7 +38,6 @@
     });
   </script>
 <% end %>
-
 <style type = "text/css">
   .totop{
     margin: auto;

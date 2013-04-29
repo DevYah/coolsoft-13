@@ -39,16 +39,13 @@
                     <li style = "color: #0060ff;"><%= tag.name %></li>
                   <% end %>
                 </ul>
-                <span class="idea-vote inline"><%=  approved.num_votes.to_s %></span>
-                <br/>
-                <button class="btn btn-large btn-success inline pull-right margin " type="button">
-                  Vote!
-                </button>
+                <%= approved%>
+                <%= render :partial => "ideas/vote_component", locals: { idea: approved, large: false } %>
                 <div id='sharing'>
-              <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(approved)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
-              <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(approved)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>
-              <a class= "popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(approved)%>&media=<%=root_url + approved.photo.url %>&description=<%= approved.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
-            </div>
+                  <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(approved)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
+                  <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(approved)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>
+                  <a class= "popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(approved)%>&media=<%=root_url + approved.photo.url %>&description=<%= approved.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
+                </div>
               </div>
             </div>
           </div>

@@ -9,28 +9,30 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :username, :date_of_birth, :type, :active, :first_name, :last_name,
-                  :gender, :about_me, :recieve_vote_notification, :banned,
-                  :recieve_comment_notification, :provider, :uid, :photo, :approved
+    :username, :date_of_birth, :type, :active, :first_name, :last_name,
+    :gender, :about_me, :recieve_vote_notification, :banned,
+    :recieve_comment_notification, :provider, :uid, :photo, :approved
 
-  has_many :sent_idea_notifications, class_name: 'IdeaNotification'
-  has_many :sent_user_notifications, class_name: 'UserNotification'
-  has_many :idea_notifications
-  has_many :user_notifications
+  has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
+  has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
+  has_many :sent_competition_notifications, class_name: 'CompetitionNotification', :dependent => :destroy
+  has_many :sent_competition_idea_notifications, class_name: 'CompetitionIdeaNotification', :dependent => :destroy
+  has_many :delete_competition_notifications, :dependent => :destroy
+  has_many :delete_notifications, :dependent => :destroy
+  has_many :sent_notifications, class_name: 'Notification'
   has_many :ideas
   has_many :comments
   has_many :user_ratings
-  has_many :idea_notifications_users
-  has_many :idea_notifications, :through => :idea_notifications_users
-  has_many :user_notifications_users
-  has_many :user_notifications, :through => :user_notifications_users
-  has_and_belongs_to_many :comments, :join_table => :likes
-  has_and_belongs_to_many :ideas, :join_table => :votes
+  has_many :notifications_users
+  has_many :notifications, :through => :notifications_users
   has_many :authorizations
-  has_and_belongs_to_many :likes, :class_name => 'Comment', :join_table => :likes
-  has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
+  has_many :likes
+  has_many :comments, :through => :likes
+  has_many :votes
+  has_many :voted_ideas, :through => :votes, :source => :idea
 
-  has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+
+  has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => 'user-default.png'
 
   # this method finds the +User+ using the hash and creates a new +User+
   # if no users with this email exist
@@ -86,6 +88,7 @@ class User < ActiveRecord::Base
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end
+
   def self.search(search)
     if search
       where('username LIKE  ? AND banned  = ? AND active = ?', "%#{search}%", false,true)
@@ -93,4 +96,37 @@ class User < ActiveRecord::Base
       find(:all)
     end
   end
+
+  def new_notifications(after)
+    notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', self.becomes(User), Time.at(after.to_i + 1))
+    sorted_notifications = notifications.sort_by &:created_at
+    new_notifications = sorted_notifications.reverse
+  end
+
+  def get_notifications
+    notifications = self.notifications
+    sorted_notifications = notifications.sort_by &:created_at
+    all_notifications = sorted_notifications.reverse
+  end
+
+  def unread_notifications_count
+    NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
+  def vote_for(idea)
+    self.votes.create(idea_id: idea.id)
+    if idea.user.own_idea_notifications
+      VoteNotification.send_notification(self, idea, [idea.user])
+    end
+    idea.save
+  end
+
+  def unvote_for(idea)
+    voted_ideas.delete(idea)
+  end
+
+  def voted_for?(idea)
+    votes.where(idea_id: idea.id).exists?
+  end
+  
 end
