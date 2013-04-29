@@ -18,7 +18,8 @@
   margin-left: 66px;
 }
 #votesPopover {
-  margin-top: -68px;
+  margin-top: -104px;
+  margin-right: 26px;
 }
 
 #userTag {
@@ -34,9 +35,12 @@
 
 #commentsPopover {
   margin-left: 19px;
-  margin-top: 42px;
+  margin-top: 40px;
 }
 
+#commentsPopovers {
+  margin-top: 134px;
+}
 .imageIdea {
 
 }
@@ -57,9 +61,9 @@
 .tagsIdea{
   padding-left: 135px;
 }
-.popover{
+.popover {
   max-width: 382px;
-  max-height: 506px;
+  max-height: 477px;
   padding-left: 124px;
   text-align: left;
   background-color: white;
@@ -75,6 +79,6 @@
   padding-left: 374px;
 
 }
-.popover.content{
-  padding: 7px 0px;
+.popover-content {
+  padding: 9px 21px;
 }
