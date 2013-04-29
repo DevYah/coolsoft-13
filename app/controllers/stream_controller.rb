@@ -1,5 +1,9 @@
 class StreamController < ApplicationController
 	
+  #This is the action that controls the stream through having 4 aparameters manipulated in a way that they change the 
+  #value of the @ideas that is sent
+  #+params+:mypage,search,tag,search_user
+  #Mohamed Salah Nazir
   def index
     @page = params[:mypage]
     @searchtext = params[:search]
