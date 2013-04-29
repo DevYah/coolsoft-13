@@ -1,4 +1,4 @@
-<div class='well notification competition-notification <%= notification.read_by?(current_user) ? 'read' : 'unread' %>' data-time=<%= notification.created_at.to_i %> data-notification = <%= notification.id %>>
+<div class='well notification competition-notification <%= read ? 'read' : 'unread' %>' data-time=<%= notification.created_at.to_i %> data-notification = <%= notification.id %>>
   <span><%= notification.text %></span>
   <div class='notification-link'><%= link_to 'view competition', notification.competition %></div>
   <span class='notification-date'><%= notification.created_at.to_s(:long)%></span>
