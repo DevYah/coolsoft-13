@@ -49,6 +49,10 @@
   display: none;
 }
 
+#user-profile-modal {
+  display: none;
+}
+
 .icon-user {
   padding-right: 10px;
 }
@@ -71,4 +75,15 @@
   display: block;
   width: 32px; height: 20px;
   font-size: 0;
+}
+
+#modal-profile-picture {
+  display: inline-block;
+  width: 200px;
+}
+
+.user-details {
+  display: inline-block;
+  position: absolute;
+  right: 15px;
 }
