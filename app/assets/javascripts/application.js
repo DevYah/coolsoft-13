@@ -17,7 +17,6 @@
 //= require jquery-ui
 //= require jquery_purr
 //= require best_in_place
-//= require notification_polling
 //= require notifications
 //= require poller
 //= require jquery.purr
