@@ -11,13 +11,13 @@ class Coolster
   end
 
   def self.update_all(script)
-    RestClient.post 'http://localhost:3000/coolster_app/push_to_all', {script: script, multipart: true}
+    RestClient.post app.root_url + '/coolster_app/push_to_all', {script: script, multipart: true}
   end
 
   def self.update(user_ids, script)
     scripts = {}
     user_ids = @@online_user_ids & user_ids
-    RestClient.post 'http://localhost:3000/coolster_app/push', {script: script, users: user_ids, multipart: true}
+    RestClient.post app.root_url + '/coolster_app/push', {script: script, users: user_ids, multipart: true}
   end
 
   def self.update_each(user_ids, &block)
@@ -37,7 +37,7 @@ class Coolster
       else
         raise Exception
     end
-    RestClient.post 'http://localhost:3000/coolster_app/push_to_each', {scripts: scripts, multipart: true}
+    RestClient.post app.root_url + '/coolster_app/push_to_each', {scripts: scripts, multipart: true}
   end
 
 end
