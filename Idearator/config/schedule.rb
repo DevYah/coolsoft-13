@@ -2,7 +2,10 @@ every 1.day, :at => '12:00 am' do
   runner 'Threshold.threshold_run'
 end
 
-
+every 1.day, :at => '12:00 am' do
+  date = Time.now - 1.days
+  runner 'Idea.best_idea_for_month(date)'
+end
 
 
 
