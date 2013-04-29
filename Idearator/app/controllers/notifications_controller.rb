@@ -1,6 +1,18 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!, :only => [:view_all_notifications]
 
+  class CoolsterPusher < AbstractCoolsterPusher
+
+    def push_notification(user_ids, notification)
+      Coolster.update_each(user_ids) do |user_id|
+        count = User.find(user_id).unread_notifications_count
+       render 'notifications/add_notification',
+              locals: { notification: notification, read: false, count: count}
+      end
+    end
+
+  end
+
   def view_new_notifications
     @new_notifications = current_user.new_notifications(params[:after])
   end
