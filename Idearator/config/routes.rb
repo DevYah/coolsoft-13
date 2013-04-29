@@ -39,6 +39,7 @@ Sprint0::Application.routes.draw do
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
+      match 'popover'
     end
   end
 

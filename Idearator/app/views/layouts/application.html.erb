@@ -18,6 +18,9 @@
     <%= yield(:head) %>
   </head>
   <body data-devise=<%= user_signed_in? %>>
+
+    <a href='/ideas/1' data-popover-idea-id=3> bla </a>
+
     <% if user_signed_in? %>
       <div id='myModal' class='modal hide fade'>
         <div class='modal-header'>

@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
 
 
   # view idea of current user
+
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
@@ -100,9 +101,9 @@ class IdeasController < ApplicationController
     current_user.unvote_for @idea
     @idea.reload
     respond_to do |format|
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-        format.js
+      format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -259,4 +260,17 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+
+  # Popover with idea details
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be displayed
+  # Author: Dayna Hany
+  def popover
+    @idea = Idea.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end
