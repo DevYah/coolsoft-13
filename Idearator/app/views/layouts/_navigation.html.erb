@@ -1,5 +1,6 @@
-<%= link_to "Home", root_path, :class => 'brand' %>
+<a class="brand" href="/home/index"><i class="icon-lightbulb icon-large"></i></a>
 <ul class='nav'>
+  <li class="divider-vertical"></li>
   <% if user_signed_in? %>
     <li class="dropdown">
       <a id = "count" class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -19,7 +20,6 @@
     <%= link_to('Competitions', controller: '/competitions' , action: 'index') %>
   </li>
   <% end %>
-
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
@@ -34,8 +34,6 @@
                 :class => 'popup social-media-login twitter-nav-login',
                 'data-width' => 600, 'data-height' => 500  %>
     </li>
-  <% elsif current_user.is_a? Committee || !current_user.ideas.empty? %>
-    <li><%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %></li>
   <% end %>
 </ul>
 <ul class="nav">
@@ -44,12 +42,11 @@
       <li>
         <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
       </li>
-    <% else %>
-      <% if current_user.ideas != nil %>
-        <li>
-          <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
-        </li>
-      <% end %>
+    <% end %>
+    <% if current_user.ideas.count != 0 %>
+      <li>
+        <%= link_to('My Ideas', controller: 'users', action: 'my_ideas', :id => current_user.id) %>
+      </li>
     <% end %>
     <%if current_user.is_a? Investor %>
       <li class="dropdown">
