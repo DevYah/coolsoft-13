@@ -2,37 +2,37 @@ require 'rest_client'
 
 class Coolster
 
-  @@online_users = [1, 3]
+  @@online_user_ids = []
 
-  def self.add_to_online_users(user)
-    unless @@online_users.include?(user)
-      @@online_users << user
+  def self.add_to_online_users(user_id)
+    unless @@online_user_ids.include?(user_id)
+      @@online_user_ids << user_id
     end
   end
 
-  def self.update_all (script)
+  def self.update_all(script)
     RestClient.post 'http://localhost:3000/coolster_app/push_to_all', {script: script, multipart: true}
   end
 
-  def self.update (user_ids, script)
+  def self.update(user_ids, script)
     scripts = {}
-    users = @@online_users & user_ids
-    RestClient.post 'http://localhost:3000/coolster_app/push', {script: script, users: users, multipart: true}
+    user_ids = @@online_user_ids & user_ids
+    RestClient.post 'http://localhost:3000/coolster_app/push', {script: script, users: user_ids, multipart: true}
   end
 
-  def self.update_each (user_ids, &block)
+  def self.update_each(user_ids, &block)
     scripts = {}
-    users = @@online_users & user_ids
+    user_ids = @@online_user_ids & user_ids
     case block.arity
       when 0
         script = yield
-        users.each do |user|
-          scripts[user] = script
+        user_ids.each do |user_id|
+          scripts[user_id] = script
         end
       when 1
-        users.each do |user|
-          script = yield user
-          scripts[user] = script
+        user_ids.each do |user_id|
+          script = yield user_id
+          scripts[user_id] = script
         end
       else
         raise Exception
