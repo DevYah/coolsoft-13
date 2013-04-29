@@ -28,7 +28,8 @@ function initialize_barchart(tagid) {
           cursor: 'pointer',
           point: {
             events: {
-              click: function() {
+              click: function open_new_tab(e) {
+                e.preventDefault();
                 window.location.href = this.options.url,target="_newtab"
               }
             }

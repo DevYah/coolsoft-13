@@ -72,7 +72,9 @@ class DashboardController < ApplicationController
   def chart_data
     @tagid = params[:tag_id]
     @ideastagsall = IdeasTags.find(:all, :conditions => {:tag_id => @tagid})
-    @ideasall = Idea.where(:id => @ideastagsall.map(&:idea_id)).find(:all,:order=> 'num_votes desc', :limit=>20)
+    @ideasall = Idea.find(:all, :conditions => {:id => @ideastagsall.map(&:idea_id) }, :order=> 'num_votes desc', :limit=>20)
+    @user_ideas = Idea.find(:all, :conditions => {:id => @ideastagsall.map(&:idea_id) , :user_id => current_user.id})
+    @ideasall = (@ideasall + @user_ideas).uniq
     respond_to do |format|
       format.csv
     end  
