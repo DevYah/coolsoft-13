@@ -156,7 +156,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
-        if params[:competition] != ''
+        if params[:competition] != '' and params[:competition] != nil
           Competition.find(params[:competition]).ideas << @idea
         end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
