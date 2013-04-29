@@ -50,12 +50,12 @@ namespace :db do
     i.confirm!
     i.save
 
-    10.times do |n|
+    20.times do |n|
       c = Competition.new
       c.title = Faker::Name.name
       c.description = Faker::Lorem.paragraph
       c.investor = i
-      c.start_date = Time.now.to_date + rand(-5..5).days
+      c.start_date = Time.now.to_date + rand(-10..-1).days
       c.end_date = c.start_date + rand(1..30).days
       c.tags << Tag.all[rand(0..9)]
       c.tags << Tag.all[rand(0..9)]

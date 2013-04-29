@@ -1,2 +1,8 @@
- $("#Searchpreview").empty();
- $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
+<% if @firstTime %>
+if(!($('.competition').length > 0)){
+  $("#Searchpreview").empty();
+  $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
+}
+<% else %>
+$("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
+<% end %>
