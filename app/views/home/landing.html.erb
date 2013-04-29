@@ -2,56 +2,62 @@
   <h1>Idearator</h1>
   <p>The Community that turns your ideas into a Reality</p>
 </div>
-<% content_for :sidebar do %>
-  <div class="well text-center" id="signin">
+<div class='row-fluid'>
+  <div class="span3 well pull-right signinout">
     <%= link_to('Sign up', new_user_registration_path, :class =>"btn btn-large btn-block") %>
     <div class="hero-unit text-center" id="title">
       <h3>OR</h3>
     </div>
     <%= link_to('Sign in', new_user_session_path, :class =>"btn btn-primary btn-large btn-block") %>
-    <ul class='inline unstyled'>
-                  <li><%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
-                   :class => 'popup social-media-login facebook-nav-login inline landinglogin',
-                   "data-width" => 600, "data-height" => 500 %>
-                  </li>
-                  <li>
-                    <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
-                  :class => 'popup social-media-login twitter-nav-login inline landinglogin',
-                  'data-width' => 600, 'data-height' => 500  %>
-                  </li>
+    <ul class='inline unstyled text-center'>
+      <li>
+        <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
+      :class => 'popup social-media-login facebook-nav-login inline landinglogin',
+      "data-width" => 600, "data-height" => 500 %>
+      </li>
+      <li>
+        <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
+      :class => 'popup social-media-login twitter-nav-login inline landinglogin',
+      'data-width' => 600, 'data-height' => 500  %>
+      </li>
     </ul>
   </div>
-<% end %>
-
-<div id="myCarousel" class="carousel slide">
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="active item">
-      <%= image_tag('lightbulb-image-for-WEbsite.jpg')%>
-      <div class="carousel-caption text-center">
-        <h4>Have an Awsome Idea ?!</h4>
-        <h4>Decide you want to share your idea with the world.</h4>
+  <div id="myCarousel" class="carousel slide span9">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner carouselitem text-center">
+      <div class="active item">
+        <div class="text-center">
+          <%= image_tag('lightbulb-image-for-WEbsite1.jpg')%>
+          <div class="carousel-caption text-center">
+            <h4>Have an Awsome Idea ?!</h4>
+            <h4>Decide you want to share your idea with the world.</h4>
+          </div>
+        </div>
+      </div>
+      <div class="item carouselitem">
+        <div class="text-center">
+          <%= image_tag('331281.jpg')%>
+        </div>
+        <div class="carousel-caption text-center">
+          <h4>Sign up right now to Idearator</h4>
+        </div>
+      </div>
+      <div class="item carouselitem">
+        <div class="text-center">
+          <%= image_tag('bulb1.jpg')%>
+        </div>
+        <div class="carousel-caption text-center">
+          <h4>Submit your idea</h4>
+          <h4>Let the community decide the future of your idea</h4>
+          <h4>Turn your idea into a Reality</h4>
+        </div>
       </div>
     </div>
-    <div class="item">
-      <%= image_tag('331280.jpg')%>
-      <div class="carousel-caption text-center">
-        <h4>Sign up right now to Idearator</h4>
-      </div>
-    </div>
-    <div class="item">
-      <%= image_tag('bulb.jpg')%>
-      <div class="carousel-caption text-center">
-        <h4>Submit your idea</h4>
-        <h4>Let the community decide the future of your idea</h4>
-        <h4>Turn your idea into a Reality</h4>
-      </div>
-    </div>
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
   </div>
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>

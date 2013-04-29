@@ -113,5 +113,6 @@ $(document).ready(function() {
     toggle: "tooltip",
     title: "Share on Twitter"
   });
+  $('#myCarousel').carousel();
 });
 
