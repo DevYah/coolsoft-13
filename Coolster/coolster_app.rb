@@ -1,8 +1,14 @@
+require 'warden'
 require 'sinatra/async'
 require 'rest_client'
+require 'em-http-request'
 
 class CoolsterApp < Sinatra::Base
   register Sinatra::Async
+
+  configure do
+    enable :logging, :dump_errors, :raise_errors, :show_exceptions
+  end
 
   @@users = {}
   @@guests = []
@@ -33,8 +39,8 @@ class CoolsterApp < Sinatra::Base
   aget '/poll' do
     puts "polling"
     if env['warden'].authenticated?
-      @@users[env['warden'].user.id.to_s] = Proc.new{|script| body script}
-      EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user.id}
+      @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
+      EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
     else
       @@guests << Proc.new{|script| body script}
     end
@@ -43,30 +49,35 @@ class CoolsterApp < Sinatra::Base
   end
 
   apost '/push' do
-    puts "updating"
+    puts "updating1"
+    puts params[:users]
     params[:users].each do |user|
       @@users[user].call params[:script]
     end
     body "ok"
-    end
-
-    apost '/push_to_all' do
-      puts "updating"
-      @@users.each do |key, value|
-        value.call params[:script]
-      end
-      @@guests.each do |guest|
-        guest.call params[:script]
-      end
-      body "ok"
-    end
-
-    apost '/push_to_each' do
-      puts "updating"
-      params[:scripts].each do |user, script|
-        @@users[user].call script
-      end
-      body "ok"
-    end
-
   end
+
+  apost '/push_to_all' do
+    puts "updating2"
+    @@users.each do |key, value|
+      value.call params[:script]
+    end
+    @@guests.each do |guest|
+      guest.call params[:script]
+    end
+    body "ok"
+  end
+
+  apost '/push_to_each' do
+    puts "updating3"
+    params[:scripts].each do |user, script|
+      @@users[user].call script
+    end
+    body "ok"
+  end
+
+  aget '/' do
+    body "ok"
+  end
+
+end
