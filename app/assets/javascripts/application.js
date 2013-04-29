@@ -24,7 +24,7 @@
 //= require notification_polling
 //= require notifications
 //
-//= require user_modal
+//= require profile_modal
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
