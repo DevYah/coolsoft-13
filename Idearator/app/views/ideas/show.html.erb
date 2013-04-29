@@ -1,8 +1,8 @@
 <% content_for :head do %>
+  <meta property="og:url"    content="<%=root_url + url_for(@idea)%>" />
+  <meta property="og:title"  content="<%= @idea.title%>" />
+  <meta property="og:image"  content="<%= root_url+ @idea.photo.url %>" />
   <meta property="og:type"   content="idearator:idea" />
-  <meta property="og:url"    content="<%=root_url + url_for(@idea)%>"/>
-  <meta property="og:title"  content="<%= @idea.title%>"/>
-  <meta property="og:image"  content="<%= root_url+ @idea.photo.url %>"/>
 <% end %>
 <% if current_user %>
   <% if current_user.type == "Committee" %>
@@ -11,7 +11,7 @@
         <button class = 'btn btn-success add-rating'>Approve</button>
         <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
       </div>
-      <div class='add-ratings'style="display: none;" >
+      <div class='add-ratings' style="display: none;" >
         <h3>Add Prespectives</h3>
         <input type="text" class="rating_complete" name="blah2" />
         <ul id="rating">
