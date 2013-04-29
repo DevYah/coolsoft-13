@@ -40,6 +40,8 @@ $(document).ready(function() {
     return $(window).scrollTop() < 600;
   }
 
+  apply_script();
+
   var Page = 1;
 
   var loading = false;
@@ -83,3 +85,69 @@ $(document).ready(function() {
   });
 
 });
+
+function apply_script(){
+$('.aTag').click(function(){
+    var array = [];
+    var i = 0;
+    if($('.tag').length > 0)
+     $('.tag').each(function () {
+      array[i] = $(this).text();
+      i += 1;
+    });
+   array[i] = $(this).text();
+
+   $.ajax({
+    type: 'get',
+    url: 'competitions',
+    data: {
+      tags: array
+    },
+    beforeSend: function () {
+        // this is where we append a loading image
+        //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+      },
+      success: function (array) {
+        loading = false;
+      },
+      error: function () {
+          // failed request; give feedback to user
+        }
+
+      });
+
+ });
+
+$('.delete-token').click(function(){
+    alert('hey');
+    var array = [];
+    var i = 0;
+    if($('.tag').length > 0)
+     $('.tag').each(function () {
+      array[i] = $(this).text();
+      i += 1;
+    });
+   array[i] = $(this).text();
+
+   $.ajax({
+    type: 'get',
+    url: 'competitions',
+    data: {
+      tags: array
+    },
+    beforeSend: function () {
+        // this is where we append a loading image
+        //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
+      },
+      success: function (array) {
+        loading = false;
+      },
+      error: function () {
+          // failed request; give feedback to user
+        }
+
+      });
+
+ });
+
+}

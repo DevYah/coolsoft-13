@@ -2,12 +2,19 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
+    @filter = false
     @firstTime = false
     if(params[:myPage])
-      @competitions = Competition.page(params[:myPage]).per(10)
+      @competitions = Competition.uniq.page(params[:myPage]).per(10)
     else
-      @firstTime = true
-      @competitions = Competition.page(1).per(10)
+      if (params[:tags])
+        @filter = true
+        @tags = params[:tags]
+        @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq
+      else
+        @firstTime = true
+        @competitions = Competition.uniq.page(1).per(1)
+      end
     end
     respond_to do |format|
       format.js
