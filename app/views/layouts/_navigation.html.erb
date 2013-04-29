@@ -1,6 +1,4 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
-<%= link_to "Competitions", 'competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
-
 <ul class='nav'>
   <% if user_signed_in? %>
     <li class="dropdown">
@@ -16,12 +14,11 @@
         <%= render 'notifications/view_notifications' %>
       </ul>
     </li>
-    <%else%>
-      <li>
-    <%= link_to('Competitions', controller: '/competitions' , action: 'index') %>
-  </li>
+  <%else%>
+    <li>
+      <%= link_to "Competitions", 'competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
+    </li>
   <% end %>
-
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
@@ -61,13 +58,13 @@
           <li>
             <%= link_to('New competition', controller: 'competitions' , action: 'new')%></li>
           <li>
-            <%= link_to('All competitions', controller: 'competitions' , action: 'index') %>
+            <%= link_to "My Competitions", 'competitions' , :id => 'competitionsNav' ,:remote =>true %>
           </li>
         </ul>
       </li>
     <% else %>
       <li>
-        <%= link_to('Competitions', controller: 'competitions' , action: 'index') %>
+        <%= link_to "Competitions", 'competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
       </li>
     <% end %>
   <% end %>

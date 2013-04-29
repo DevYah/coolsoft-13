@@ -2,6 +2,12 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
+    all = Competition.all
+    if (user_signed_in?)
+      if (current_user.is_a? Investor)
+        all = Competition.joins(:Investors).where(:Investors => {:id => current_user.id})
+      end
+    end
     @filter = false
     @firstTime = false
     if(params[:myPage])
@@ -29,6 +35,7 @@ class CompetitionsController < ApplicationController
       format.js
     end
   end
+
 
   # GET /competitions/1
   # GET /competitions/1.json

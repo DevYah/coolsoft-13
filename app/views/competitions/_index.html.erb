@@ -50,8 +50,18 @@
                   <%= c.description %>
                 </div>
                 <div class="dates span3">
-                  <button class="btn btn-large btn-success"  >enroll
-                  </button>
+                  <% if user_signed_in? %>
+                    <%if current_user.is_a? Investor %>
+                      <button class="btn btn-large btn-success"  >approve ideas
+                      </button>
+                    <% else %>
+                      <button class="btn btn-large btn-success"  >enroll
+                      </button>
+                    <% end %>
+                  <% else %>
+                    <button class="btn btn-large btn-success"  >enroll
+                    </button>
+                  <% end %>
                 </div>
               </div>
               <br/>
