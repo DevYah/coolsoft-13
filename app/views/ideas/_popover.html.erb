@@ -1,10 +1,11 @@
 <%= javascript_include_tag '/ideas/popover' %>
+<div class='idea-popover idea-<%= @idea.id %>'>
 <div class="row">
   <div class="span8">
     <h3 class="text-info" style = "color: #141B7F;" id= 'titleTag'><%= @idea.title %></h3>
     <h5 style="
     padding-left: 276px;" id= 'userTag'>
-      <%=link_to@username ,@idea.user.becomes(User)%>
+      <span><%=link_to @username, @idea.user.becomes(User)%></span>
     </h5>
   </div>
 </div>
@@ -31,20 +32,17 @@
           Number of comments
         </span><div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" id='numberCommentsPopover'><h5>0</h5></div>
       </div>
-
       <%if @chosentags != nil %>
         <% @chosentags.each do |tag|%>
           <span class="label label-info "><%= tag.name %></span>
         <% end %>
       <% end %>
       <div class="span4 pull-right" id='votesPopover'>
-        <span class="idea-votes inline pull-right" style = "color: #141B7F;"><%=  @idea.num_votes %></span>
-        <%if @ideavoted.nil? %>
-          <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
-        <% else %>
-          <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
-        <%end%>
+
+           <%= render :partial => "/ideas/vote_component", locals: { idea: @idea ,size: 'span1', large: false} %>
+
       </div>
     </div>
   </div>
+</div>
 </div>
