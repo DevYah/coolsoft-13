@@ -52,6 +52,8 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new(params[:competition])
     @competition.investor_id = current_user.id
+    @competition.filter
+    @competition.send_create_notification current_user
     respond_to do |format|
       if @competition.save
         format.html { redirect_to @competition, notice: 'Competition was successfully created.' }
@@ -69,7 +71,7 @@ class CompetitionsController < ApplicationController
   # Author: Marwa Mehanna
   def update
     @competition = Competition.find(params[:id])
-
+    @competition.send_edit_notification current_user
     respond_to do |format|
       if @competition.update_attributes(params[:competition])
         format.html { redirect_to @competition, :notice => 'Competition was successfully updated.' }
@@ -88,6 +90,7 @@ class CompetitionsController < ApplicationController
   def destroy
     @competition = Competition.find(params[:id])
     if current_user.id == @competition.investor_id
+      @competition.send_delete_notification current_user
       @competition.destroy
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Competition has been successfully deleted!' }
