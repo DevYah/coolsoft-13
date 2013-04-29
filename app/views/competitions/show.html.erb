@@ -2,8 +2,10 @@
   <div class='row'>
     <div class='span12'>
       <h3><%= @competition.title %></h3>
-      <p><a data-toggle="modal" href="#myIdeas" class="btn btn-large btn-primary pull-right">Enroll an Idea</a></p>
-      <%= render :partial => 'enroll_idea', :locals => {:@approved => @myIdeas}%>
+      <% if @competition.open %>
+        <p><a data-toggle="modal" href="#myIdeas" class="btn btn-large btn-primary pull-right">Enroll an Idea</a></p>
+        <%= render :partial => 'enroll_idea', :locals => {:@approved => @myIdeas}%>
+      <% end %>
       <div class='row'>
         <div class='span4'>
           <div id='tags'>
