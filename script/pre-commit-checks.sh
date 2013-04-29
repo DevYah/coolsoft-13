@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Version: 0.3
 # Author: Mina Nagy
@@ -21,6 +21,8 @@ use_rubocop="no"
 
 # Check for whitespace errors
 check_whitespaces="yes"
+autofix_whitespaces="yes"
+spaces_per_tab="  "
 
 # Colors
 color_bad_file="\033[31m"
@@ -33,6 +35,10 @@ color_url="\033[34m"
 
 color_reset="\033[0m"
 basedir=$(dirname $0)
+
+function list_changed_files {
+  git diff-index --cached --name-only --diff-filter=AM $against --
+}
 
 function echo_bad_file {
   echo -e $color_bad_file$1$color_reset
@@ -71,12 +77,31 @@ fi
 
 # Check for whitespace errors
 if [[ "$check_whitespaces" == "yes" ]] && ! git diff-index --color --check --cached $against --; then
+
   echo
-  echo_error_msg "Error: You left random whitespaces laying around! Look at the above messages."
+  echo_error_msg "Error: You left random whitespaces laying around! Look at the above messages!"
+
+  if [[ "$autofix_whitespaces" == "yes" ]]; then
+    echo "I'm going to try and fix some of them for you automagically, bas mata3melhash tani"
+
+    FILE_LIST=$(git diff-index --check --cached $against -- | sed '/^[+-]/d' | sed -r 's/:[0-9]+:.*//' | uniq)
+    for FILE in $FILE_LIST; do
+      perl -i -wpe 's/\r\n/\n/g;s/\ *$//;s/\t/'"$spaces_per_tab"'/g;' "$FILE"
+      perl -i -we 'local $/;local $_=<>;s/(\r?\n)*$//; print' "$FILE"
+    done
+
+    echo
+    echo "Add these files and try to commit again!"
+
+    for FILE in $FILE_LIST; do
+      echo "  " $(echo_bad_file $FILE)
+    done
+  fi
+
   exit 1
 fi
 
-for f in $(git diff-index --cached --name-only --diff-filter=AM $against); do
+for f in list_changed_files; do
 
   # Check for merge artifacts
   if [[ "${merge_artifacts[*]}" != "" ]] &&
