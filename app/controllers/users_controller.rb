@@ -136,4 +136,18 @@ class UsersController < ApplicationController
     end
   end
 
+  #This method is used for generate the user profile view to be embedded in modal dialogs.
+  #Params:
+  #none
+  #Author: Hisham ElGezeery
+  def profile_modal
+    user_id = params[:id]
+    @selected_user = User.find(user_id)
+    @selected_user_ideas = Idea.where(:user_id => user_id).all
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 end
