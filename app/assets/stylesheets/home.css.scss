@@ -1,9 +1,11 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.idea-vote{
+
+.idea-votes{
  padding-left: 87%;
   font-size: 35px;
+  margin-right: 25px;
 }
 
 .affix{
@@ -23,6 +25,8 @@
 .margin{
   margin-top: 10px;
   margin-bottom: 15px;
+  margin-right: 10px;
+
 }
 
 .hidden{
@@ -50,4 +54,3 @@
 .tag{
   color: #0060ff;
 }
-

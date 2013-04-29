@@ -3,44 +3,32 @@ require 'spec_helper'
 describe NotificationsController do
   include Devise::TestHelpers
   before :each do
-    @u1 = User.new
-    @u1.email = 'amina@gmail.com'
-    @u1.username = 'amina'
-    @u1.password = '123123123'
-    @u1.confirm!
-    @u1.save
+    @user1 = User.new(email:'amina@gmail.com', username: 'amina', password: '123123123')
+    @user1.confirm!
+    @user1.save
 
-    sign_in @u1
+    sign_in @user1
 
-    @u2 = User.new
-    @u2.email = 'lina@gmail.com'
-    @u2.username = 'lina'
-    @u2.password = '123123123'
-    @u2.confirm!
-    @u2.save
+    @user2 = User.new(email:'lina@gmail.com', username: 'lina', password: '123123123')
+    @user2.confirm!
+    @user2.save
 
-    @u3 = User.new
-    @u3.email = 'salah@gmail.com'
-    @u3.username = 'salah'
-    @u3.password = '123123123'
-    @u3.confirm!
-    @u3.save
+    @user3 = User.new(email:'salah@gmail.com', username: 'salah', password: '123123123')
+    @user3.confirm!
+    @user3.save
 
-    @i1 = Idea.new
-    @i1.title = 'Idea title'
-    @i1.description = 'Idea description'
-    @i1.problem_solved = 'problem'
-    @i1.user = @u3
-    @i1.save
+    @idea1 = Idea.new(title: 'Idea title', description: 'Idea description', problem_solved: 'problem')
+    @idea1.user = @user3
+    @idea1.save
 
-    @not1 = EditNotification.send_notification(@u3, @i1, [@u2, @u1])
-    @not2 = InviteCommitteeNotification.send_notification(@u2, [@u1])
-    @not3 = DisapproveIdeaNotification.send_notification(@u2, @i1, [@u1])
-    @not4 = ApproveCommitteeNotification.send_notification(@u2, [@u1])
+    @notification1 = EditNotification.send_notification(@user3, @idea1, [@user2, @user1])
+    @notification2 = InviteCommitteeNotification.send_notification(@user2, [@user1])
+    @notification3 = DisapproveIdeaNotification.send_notification(@user2, @idea1, [@user1])
+    @notification4 = ApproveCommitteeNotification.send_notification(@user2, [@user1])
 
-    @idea_not = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: @not1.id, user_id: @u1.id })
-    @user_not_1 = UserNotificationsUser.find(:first, :conditions => {user_notification_id: @not4.id, user_id: @u1.id })
-    @user_not_2 = UserNotificationsUser.find(:first, :conditions => {user_notification_id: @not2.id, user_id: @u1.id })
+    @idea_notification = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: @notification1.id, user_id: @user1.id })
+    @user_notification_1 = UserNotificationsUser.find(:first, :conditions => {user_notification_id: @notification4.id, user_id: @user1.id })
+    @user_notification_2 = UserNotificationsUser.find(:first, :conditions => {user_notification_id: @notification2.id, user_id: @user1.id })
 
   end
 
@@ -50,7 +38,7 @@ describe NotificationsController do
     it 'gets all current user notifications' do
 
       get :view_all_notifications
-      assigns(:all_notifications).should eq([@not4, @not3, @not2, @not1])
+      assigns(:all_notifications).should eq([@notification4, @notification3, @notification2, @notification1])
 
       response.should render_template('view_all_notifications')
 
@@ -58,43 +46,26 @@ describe NotificationsController do
   end
 
   describe 'PUT redirect_idea' do
-
-    it 'assigns the read value to true and redirects to idea/id' do
-
-      put :redirect_idea, :not_id => @not1.id
-      @idea_not.reload
-      @idea_not.read.should eq(true)
-
-      response.should redirect_to @i1
-
+    it 'assigns the read value to true' do
+      put :redirect_idea, :notification => @notification1.id
+      @idea_notification.reload
+      @idea_notification.read.should eq(true)
     end
   end
-
 
   describe 'PUT redirect_expertise' do
-
-    it 'assigns the read value to true and redirects to idea/id' do
-
-      put :redirect_expertise, :not_id => @not2.id
-      @user_not_2.reload
-      @user_not_2.read.should eq(true)
-
-      response.should redirect_to(controller: 'users', action: 'expertise')
-
+    it 'assigns the read value to true' do
+      put :redirect_expertise, :notification => @notification2.id
+      @user_notification_2.reload
+      @user_notification_2.read.should eq(true)
     end
   end
 
-
   describe 'PUT redirect_review' do
-
-    it 'assigns the read value to true and redirects to idea/id' do
-
-      put :redirect_review, :not_id => @not4.id
-      @user_not_1.reload
-      @user_not_1.read.should eq(true)
-
-      response.should redirect_to @u2.becomes(User)
-
+    it 'assigns the read value to true' do
+      put :redirect_review, :notification => @notification4.id
+      @user_notification_1.reload
+      @user_notification_1.read.should eq(true)
     end
   end
 
