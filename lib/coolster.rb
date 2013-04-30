@@ -4,12 +4,20 @@ module Coolster
 
   @@online_user_ids = []
 
+  # Adds user id to online_user_ids
+  # Params:
+  # +user_id+:: the parameter is an id of a string passed through the Coolster#add_online_user.
+  # Author: Amina Zoheir
   def self.add_to_online_users(user_id)
     unless @@online_user_ids.include?(user_id)
       @@online_user_ids << user_id
     end
   end
 
+  # Sends http post request to CoolsterApp /push_to_all with script parameter
+  # Params:
+  # +script+:: the parameter is a string (javascript).
+  # Author: Amina Zoheir
   def self.update_all(script)
     begin
       RestClient.post 'http://localhost:9292/push_to_all', {script: script, multipart: true}
@@ -17,6 +25,11 @@ module Coolster
     end
   end
 
+  # Sends http post request to CoolsterApp /push with script, user ids intersected with online user ids as parameters
+  # Params:
+  # +user_ids+:: the parameter is an array of strings.
+  # +script+:: the parameter is a string (javascript).
+  # Author: Amina Zoheir
   def self.update(user_ids, script)
     scripts = {}
     user_ids = @@online_user_ids & user_ids
@@ -26,6 +39,11 @@ module Coolster
     end
   end
 
+  # Sends http post request to CoolsterApp /push_to_each with a hash of user ids pointing to scripts as parameters
+  # Params:
+  # +user_ids+:: the parameter is an array of strings.
+  # +&block+:: the parameter is a block.
+  # Author: Amina Zoheir
   def self.update_each(user_ids, &block)
     scripts = {}
     user_ids = @@online_user_ids & user_ids
