@@ -29,27 +29,6 @@
 </div>
 <!-- Main Idea Page -->
 <div class='idea-page idea-<%= @idea.id %>'>
-  <% if current_user %>
-    <% if current_user.type == "Committee" %>
-      <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
-        <div id='approve-btns'>
-          <button class = 'btn btn-success add-rating'>Approve</button>
-          <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
-        </div>
-        <div class='add-ratings'style="display: none;" >
-          <h3>Add Prespectives</h3>
-          <input type="text" class="rating_complete" name="blah2" />
-          <ul id="rating">
-          </ul>
-          <div id ="flash">
-          </div>
-          <div id ="ratings">
-            <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
   <div class='row'>
     <div class='span12'>
       <h3><%= @idea.title %></h3>
@@ -94,8 +73,29 @@
     </div>
     <div class='span4'>
       <div class='row'>
+        <% if current_user %>
+          <% if current_user.type == "Committee" %>
+            <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
+              <div id='approve-btns' >
+                <button class = 'btn btn-success add-rating'>Approve</button>
+                <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
+              </div>
+              <div class='add-ratings'style="display: none;" >
+                <h3>Add Prespectives</h3>
+                <input type="text" class="rating_complete" name="blah2" />
+                <ul id="rating">
+                </ul>
+                <div id ="flash">
+                </div>
+                <div id ="ratings">
+                  <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
         <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
-        <div class='span4 archive_status'>
+        <div class='span4 archive_status approve_status ratings'>
           <p>
             <% if @idea.ratings.size > 0 %>
               <table>
@@ -114,32 +114,6 @@
         </div>
       </div>
     </div>
-  <%end%>
-  <p>
-    <h3>Description:</h3>
-    <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
-  </p>
-  <p>
-    <h3>Problem Solved:</h3>
-    <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
-  </p>
-  <div class='archive_status'>
-    <p>
-      <% if @idea.ratings.size > 0 %>
-        <table>
-          <tr>
-            <th style='text-align: left;'><b>Ratings:-</b></th>
-            <th></th>
-          </tr>
-          <% @idea.ratings.each do |therating| %>
-            <tr>
-              <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
-            </tr>
-          <% end %>
-        </table>
-      <% end %>
-
-    </p>
   </div>
 </div>
 <script type="text/javascript">
@@ -154,12 +128,9 @@
 
     $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
   }
-
 </script>
-<% if @idea.archive_status == true %>
+<% if !@idea.approved %>
   <script type='text/javascript'>
-    $('.archive_status').toggle();
+    $('.approve_status').hide();
   </script>
 <% end %>
-
-
