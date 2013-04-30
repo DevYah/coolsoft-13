@@ -1,3 +1,5 @@
+// Does long polling on Coolsters server.
+// Author: Amina Zoheir
 function poll() {
   console.log("POLLLLING");
   $.ajax({
