@@ -104,19 +104,7 @@ $(document).ready(function() {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
-
-  // $("#searchdivelse input").keyup(function(e){
-  //   if (e.keycode == 13){
-  //     $("#searchdivelse").submit();
-  //     searchvalue = $("#search").val();
-  //     alert(searchvalue);
-  //   }
-  // });
   
-  // function set_searchtext(searchvalue){
-  //   searchtext = searchvalue;
-  //   alert(searchtext);
-  // }
    $('#searchdiv').submit(function(e) {
      if (in_stream){
       e.preventDefault();

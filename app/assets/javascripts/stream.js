@@ -5,7 +5,7 @@ var currentpage = 1;
 var thistag = [];
 var searchtext = "";
 will_insert = true;
-user_search = false;
+user_search = "";
 var previous_search = "";
 
 // function change_state(user){
@@ -18,7 +18,7 @@ function stream_manipulator(page,tag,search,insert,user){
   searchtext = search+"";
   will_insert = insert;
   inside = 0;
-  user_search = user;
+  user_search = (user == "true");
 
 if(!user_search){
   if(will_insert){
