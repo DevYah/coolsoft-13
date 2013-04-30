@@ -59,8 +59,8 @@ class IdeasController < ApplicationController
 
   # updating Idea
   # Params
-  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # +id+ :: this is an instance +Idea+ passed through _form.html.erb, used to identify which +Idea+ to  update
+  # +id+ :: this is an instance +Idea+ passed through show.html.erb, used to identify which is +Idea+ to update
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
@@ -100,17 +100,15 @@ class IdeasController < ApplicationController
     current_user.unvote_for @idea
     @idea.reload
     respond_to do |format|
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-        format.js
+      format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
   # creating new Idea
   # Params
   # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
-  # +idea_tags+ :: this is an instance of +IdeaTags+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
   # Author: Marwa Mehanna
   def create
     @idea = Idea.new(params[:idea])
