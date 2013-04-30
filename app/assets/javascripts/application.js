@@ -9,40 +9,74 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
+//
 //= require jquery
 //= require jquery_ujs
-//= require jquery.tokeninput
-//= require jquery-ui
 //= require bootstrap
+//= require jquery.purr
+//= require bootstrap
+//= require best_in_place
+//
+//= require jquery-ui
+//= require jquery.tokeninput
+//= require jquery-star-rating
+//= require jquery_purr
+//
 //= require notification_polling
-//= require_tree .
-$(function() {
-	$("#searchdiv input").keyup(function(){
-		$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-		if (this.length()==0){
-			 $.ajax({
-        url: '/home/index?page=' + 1,
-        type: 'get',
-        dataType: 'script'
-       });
-	}
+//= require notifications
 
-	});
-});
+function popupCenter(url, width, height, name) {
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (height / 2);
+  return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
+                                ",height=" + height + ",toolbar=no,left=" + left +
+                                ",top=" + top);
+}
 
+$(document).ready(function () {
 
-$(document).bind("ajaxError", function(e, xhr){
-	if(xhr.status == 401){
-		$('#signedout').modal('show');
-	}
-});
+  var before_search = false;
+  var original;
 
-$(document).ready(function() {
-  $("#sign").click(function() {
-    window.location= "/users/sign_in";
+  $(document).bind("ajaxError", function (e, xhr) {
+    if (xhr.status === 401) {
+      $('#signedout').modal('show');
+    }
   });
+
+  $("#searchdiv input").keyup(function () {
+    if (window.location === "http://localhost:3000/") {
+      $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(), null, "script");
+    } else {
+      if (!before_search) {
+        before_search = true;
+        original = $("#main > .container").detach();
+      }
+      if (this.value !== "") {
+        $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(), null, "script");
+      } else {
+        before_search = false;
+        $("#main > .container").replaceWith(original);
+      }
+    }
+  });
+
+  $("#sign").click(function () {
+    window.location = "/users/sign_in";
+  });
+
+  $("a.popup").click(function (e) {
+    popupCenter($(this).attr("href"),
+                $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
+    e.stopPropagation();
+    return false;
+  });
+
+  $("#twitter_signin_button").tooltip({
+    placement: 'bottom',
+    trigger: 'click',
+    title: 'Trying to sign in using twitter, please interact with the popup!',
+    container: 'header'
+  });
+
 });
-
-
-
-
