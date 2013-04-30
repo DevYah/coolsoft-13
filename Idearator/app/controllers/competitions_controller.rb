@@ -15,6 +15,9 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
     @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
+    @myIdeas.reject! do |i|
+      (@competition.tags & i.tags).empty?
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @competition }
