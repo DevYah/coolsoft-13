@@ -92,7 +92,6 @@ Sprint0::Application.routes.draw do
   controller :ratings do
     match 'ratings/ajax'
   end
-  resources :competitions
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

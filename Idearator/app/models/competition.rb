@@ -1,6 +1,6 @@
 class Competition < ActiveRecord::Base
 
- attr_accessible :title, :description ,:start_date ,:end_date, :tag_ids
+  attr_accessible :title, :description ,:start_date ,:end_date, :tag_ids
 
   validates_length_of :title, :maximum => 50
   validates_length_of :description, :maximum => 1000
@@ -14,7 +14,7 @@ class Competition < ActiveRecord::Base
   has_many :competition_idea_notifications, :dependent => :destroy
   has_many :delete_competition_notifications
 
-   def filter
+  def filter
     @ideas = []
     tags=self.tags
     tags.each do |tag|
@@ -42,10 +42,10 @@ class Competition < ActiveRecord::Base
 
   def send_edit_notification(investor)
    users=User.where(:id => self.ideas.map(&:user_id))
-    EditCompetitionNotification.send_notification(investor,self,users)
-  end
-  def send_delete_notification(investor)
-    users=User.where(:id => self.ideas.map(&:user_id))
-    DeleteCompetitionNotification.send_notification(investor,self,users)
-  end
+   EditCompetitionNotification.send_notification(investor,self,users)
+ end
+ def send_delete_notification(investor)
+  users=User.where(:id => self.ideas.map(&:user_id))
+  DeleteCompetitionNotification.send_notification(investor,self,users)
+end
 end
