@@ -9,4 +9,13 @@ class CoolsterController < ApplicationController
     render text: "ok"
   end
 
+  # Removes user id to online users list in coolster library.
+  # Params:
+  # +user_ids+:: the parameter is an string passed through CoolsterApp /update.
+  # Author: Amina Zoheir
+  def remove_online_user
+    Coolster.remove_from_online_users(params[:user])
+    render text: "ok"
+  end
+
 end
