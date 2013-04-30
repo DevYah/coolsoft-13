@@ -6,4 +6,4 @@ $('a[data-popover-idea-id]').popover({
   placement: 'bottom'
 });
 
-$('a[data-popover-idea-id]').popover('show')
+$('a[data-popover-idea-id="<%=escape_javascript(params[:id])%>"]').popover('show')
