@@ -2,7 +2,6 @@
 //params: none
 //Author: Hisham ElGezeery
 $(function() {
-
   $("#main a[href^='/users/']").each(function(){
     var href = $(this).attr('href');
     var href_url = href.split('/users/');
