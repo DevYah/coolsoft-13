@@ -105,6 +105,12 @@ class User < ActiveRecord::Base
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
   end
 
+  def get_approved_ideas
+    ideas = self.ideas
+    approved_ideas = ideas.where(:approved => true)
+    unarchived_ideas = approved_ideas.where(:archive_status => false).all
+  end
+
   def vote_for(idea)
     self.votes.create(idea_id: idea.id)
     if idea.user.own_idea_notifications
