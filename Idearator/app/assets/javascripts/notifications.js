@@ -1,28 +1,16 @@
 function add_notification_event_handlers() {
-  $('div.invite-committee-notification').click(function () {
-    var notification = $(this).data('notification');
-    $.getScript("/redirect_expertise.js?&notification=" + notification);
-  });
-
-  $('div.idea-notification').click(function () {
-    var notification = $(this).data('notification');
-    $.getScript("/redirect_idea.js?&notification=" + notification);
-  });
-
-  $('div.approve-committee-notification').click(function () {
-    var notification = $(this).data('notification');
-    $.getScript("/redirect_review.js?&notification=" + notification);
-  });
-
-  $('div.delete-notification').click(function () {
-    var notification = $(this).data('notification');
-    $.getScript("/set_read.js?&notification=" + notification);
-  });
-
-  $('div.competition-notification').click(function () {
-    var notification = $(this).data('notification');
-    $.getScript("/redirect_competition.js?&notification=" + notification);
-  });
+  notification_click('div.invite-committee-notification', '/redirect_expertise');
+  notification_click('div.approve-committee-notification', '/redirect_review');
+  notification_click('div.idea-notification', '/redirect_idea');
+  notification_click('div.delete-notification', '/set_read');
+  notification_click('div.competition-notification', '/redirect_competition');
 }
 
 $(document).ready(add_notification_event_handlers);
+
+function notification_click(select, redirect){
+  $(select).click(function(){
+    var notification = $(this).data('notification');
+    $.getScript(redirect + ".js?&notification=" + notification);
+  });
+}
