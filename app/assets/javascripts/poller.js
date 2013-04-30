@@ -25,7 +25,7 @@ function poll() {
         }
       }
     },
-    timeout: 30000
+    timeout: 60000
   });
 }
 
