@@ -134,21 +134,22 @@ class IdeasController < ApplicationController
   def destroy
     idea = Idea.find(params[:id])
     if current_user.id == idea.user_id
-      list_of_comments = Comment.where(idea_id: idea.id)
-      list_of_commenters = []
-      list_of_voters = idea.votes
-
-      list_of_comments.each do |c|
-        list_of_commenters.append(User.find(c.user_id)).flatten!
-        c.destroy
+      DeleteNotification.send_notification(current_user, idea, idea.voters)
+      idea.voters.each do |u|
+        idea.voters.delete(u)
       end
-
-      list = list_of_commenters.append(list_of_voters).flatten!
-
-      DeleteNotification.send_notification(current_user, idea, list)
-
+      list_of_ratings = Rating.where(:idea_id => idea.id)
+      list_of_user_ratings = []
+      list_of_ratings.each do |r|
+        list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
+      end
+      list_of_ratings.each do |r|
+        r.destroy
+      end
+      list_of_user_ratings.each do |ur|
+        ur.destroy
+      end
       idea.destroy
-
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
