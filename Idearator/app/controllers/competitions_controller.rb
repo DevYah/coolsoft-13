@@ -1,8 +1,11 @@
 class CompetitionsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update]
-  # GET /competitions
-  # GET /competitions.json
+  # view stream of competitiions
+  # Params
+  # +Page+:: is passed in params through the new competition.js , it is used to load instances of +Competition+ to be viewed
+  # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
+  # Muhammed Hassan
   def index
     all = Competition.all
     if (user_signed_in?)
