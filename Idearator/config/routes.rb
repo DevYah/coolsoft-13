@@ -57,7 +57,7 @@ Sprint0::Application.routes.draw do
   # Admin actions routes
   controller :admins do
     match 'admins/invite'
-    match 'admins/invite_committee'
+    match 'invite_committee'
   end
 
   # Committe actions routes
