@@ -83,4 +83,13 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def redirect_stream
+    notification = Notification.find(params[:notification])
+    notification.set_read_for current_user
+    respond_to do |format|
+      format.js { render 'redirect', locals:{path: '/competitions/' + ((notification.competition.id).to_s) + 'review_competitions_ideas'} }
+      format.json { head :no_content }
+    end
+  end
+
 end

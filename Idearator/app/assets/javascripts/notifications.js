@@ -4,6 +4,7 @@ function add_notification_event_handlers() {
   notification_click('div.idea-notification', '/redirect_idea');
   notification_click('div.delete-notification', '/set_read');
   notification_click('div.competition-notification', '/redirect_competition');
+  notification_click('div.enter_idea-notification', '/redirect_stream')
 }
 
 $(document).ready(add_notification_event_handlers);
