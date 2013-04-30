@@ -7,7 +7,7 @@ class Competition < ActiveRecord::Base
 
   belongs_to :investor
   has_many :competition_entries
-  has_many :ideas, :through => :competition_entries, :source => :idea
+  has_many :ideas, :through => :competition_entries, :source => :idea, :conditions => ['competition_entries.approved = ?',true]
   belongs_to :winner, :class_name => 'Idea', :foreign_key => 'idea_id'
   has_and_belongs_to_many :tags
   has_many :competition_notifications, :dependent => :destroy
