@@ -15,6 +15,9 @@ class HomeController < ApplicationController
   #Author: Mohamed Salah Nazir
   def index
     @page_number = params[:myPage]
+    @winners = MonthlyWinner.all.reverse
+    first = @winners.shift
+    @first = Idea.find(first.idea)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     if(params[:myTags])
       if(params[:myTags].length > 0)
