@@ -57,17 +57,6 @@ class IdeasController < ApplicationController
     @boolean = true
   end
 
-  # editing Idea
-  # Params
-  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
-  # Author: Marwa Mehanna
-  def edit
-    @idea = Idea.find(params[:id])
-    @tags = Tag.all
-    @chosentags = Idea.find(params[:id]).tags
-    @boolean = true
-  end
-
   # updating Idea
   # Params
   # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
