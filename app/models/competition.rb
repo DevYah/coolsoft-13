@@ -26,6 +26,10 @@ class Competition < ActiveRecord::Base
     @ideas
   end
 
+  # check if a competition is still open
+  # Params
+  # +self+:: the current +Competition+ that we want to check
+  # Muhamed Hassan
   def open
     return  start_date < Time.now.to_date && end_date > Time.now.to_date
   end
