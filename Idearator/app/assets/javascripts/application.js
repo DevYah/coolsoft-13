@@ -24,6 +24,8 @@
 //
 //= require notification_polling
 //= require notifications
+//= require jquery.cookie
+//= require bootstrap-tour
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
@@ -78,5 +80,11 @@ $(document).ready(function () {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
-
+  var tour = new Tour();
+  tour.addStep({
+    element: "#sign", // string (jQuery selector) - html element next to which the step popover should be shown
+    title: "Title of my popover", // string - title of the popover
+    content: "Content of my popover" // string - content of the popover
+});
+  tour.start();
 });
