@@ -30,7 +30,7 @@ $(document).ready(function() {
 
   $.datepicker.setDefaults({
     dateFormat: 'yy/mm/dd', changeMonth: true,
-    changeYear: true, yearRange: '1900:' + (new Date().getFullYear() - 8)
+    changeYear: true, yearRange: 'c-65:c+10'
   });
 
   // This method checks if the "Sign up as committee" ckeckbox
