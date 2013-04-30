@@ -49,8 +49,8 @@
   cursor:pointer;
 }
 
-   .hint {
-     display:none;
+.hint {
+  display:none;
 //   position: absolute;
 //   right: -250px;
 //   width: 200px;
@@ -58,15 +58,15 @@
 //   border: 1px solid #c93;
 //   padding: 10px 12px;
 //   background-color: #ffc;
-   }
+}
 
 // .hint .hint-pointer {
-//     position: absolute;
-//     left: -10px;
-//     top: 5px;
-//     width: 10px;
-//     height: 19px;
-//     background: url(pointer.gif) left top no-repeat;
+//   position: absolute;
+//   left: -10px;
+//   top: 5px;
+//   width: 10px;
+//   height: 19px;
+//   background: url(pointer.gif) left top no-repeat;
 // }
 
 .vote-component {
@@ -94,4 +94,3 @@
 #tags{
   padding-left:20px;
 }
->>>>>>> f8b5b37e0698c5f03592ca8606e1a678af40dd99
