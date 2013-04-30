@@ -27,3 +27,8 @@ function toggle_all_tags(committee) {
     $("#all-tags").slideDown();
   }
 }
+
+$.datepicker.setDefaults({
+    dateFormat: 'yy/mm/dd', changeMonth: true,
+    changeYear: true, yearRange: '1900:' + (new Date().getFullYear() - 8)
+  });
