@@ -35,7 +35,6 @@ class CompetitionsController < ApplicationController
       @entry.first.approved = true
       @entry.first.save
       respond_to do |format|
-        format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
         format.js
       end
 
@@ -54,7 +53,6 @@ class CompetitionsController < ApplicationController
       @entry.first.rejected = true
       @entry.first.save
       respond_to do |format|
-        format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
         format.js
       end
 
