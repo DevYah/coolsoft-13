@@ -25,7 +25,7 @@
 //= require notification_polling
 //= require notifications
 //
-//= require unauthorized_error
+//= require unauthorized_sign_in_up_modal
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
