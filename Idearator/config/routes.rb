@@ -23,6 +23,7 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match ':id/my_ideas' => 'users#my_ideas'
     end
   end
 
@@ -58,7 +59,7 @@ Sprint0::Application.routes.draw do
   # Admin actions routes
   controller :admins do
     match 'admins/invite'
-    match 'admins/invite_committee'
+    match 'invite_committee'
   end
 
   # Committe actions routes
