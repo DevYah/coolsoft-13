@@ -1,7 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update, :vote, :unvote]
-
+  before_filter :authenticate_user!, :only => [:create , :edit, :update ,:like ,:vote ,:unvote]
 
   # view idea of current user
   # Params
@@ -14,6 +13,11 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @ideavoted = current_user.votes.detect { |w|w.id == @idea.id } rescue ActiveRecord::RecordNotFound
+      @competitions=Competition.all
+      @competitions.reject! do |c|
+        (@idea.tags & c.tags).empty?
+      end
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
@@ -24,7 +28,10 @@ class IdeasController < ApplicationController
   # making new Idea
   #Marwa Mehanna
   def new
+    puts 'hashish first print'
     @idea = Idea.new
+    @competition = params[:competition]
+    puts 'hashish    ' + @idea.to_s + ' hashish'
     @tags = Tag.all
     @chosentags = []
     respond_to do |format|
@@ -64,7 +71,24 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
-    @idea.send_edit_notification current_user
+    @ideavoters = @idea.votes
+    @userVreceivers = []
+    if !@idea.votes.nil?
+      @ideavoters.each { |user|
+        if user.participated_idea_notifications
+          @userVreceivers << user
+      end }
+      EditNotification.send_notification(current_user, @idea, @userVreceivers)
+    end
+    list_of_comments = Comment.where(idea_id: @idea.id)
+    list_of_commenters = []
+    list_of_comments.each do |c|
+      list_of_commenters.append(User.find(c.user_id)).flatten!
+    end
+    list = list_of_commenters
+    if list != nil
+      EditNotification.send_notification(current_user, @idea, list)
+    end
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
@@ -82,12 +106,21 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehannna
   def vote
     @idea = Idea.find(params[:id])
-    current_user.vote_for @idea
-    @idea.reload
+    current_user.votes << @idea
+    @idea.num_votes = @idea.num_votes + 1
+    @ideaowner = User.find(@idea.user_id)
+    if @ideaowner.own_idea_notifications
+      VoteNotification.send_notification(current_user, @idea, [@ideaowner])
+    end
     respond_to do |format|
-      format.html { redirect_to @idea, :notice =>'Thank you for voting' }
-      format.json { head :no_content }
-      format.js
+      if @idea.update_attributes(params[:idea])
+        format.html { redirect_to @idea, :notice =>'Thank you for voting' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -97,12 +130,17 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehannna
   def unvote
     @idea = Idea.find(params[:id])
-    current_user.unvote_for @idea
-    @idea.reload
+    current_user.votes.delete(@idea)
+    @idea.num_votes = @idea.num_votes - 1
     respond_to do |format|
+      if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
         format.json { head :no_content }
         format.js
+      else
+        format.html { redirect_to @idea, alert: 'Idea is still voted' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -118,6 +156,9 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
+        if params[:competition] != '' and params[:competition] != nil
+          Competition.find(params[:competition]).ideas << @idea
+        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
@@ -255,6 +296,30 @@ class IdeasController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You cant add rating prespectives' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  # Enters the idea into a chosen Competition
+  # Params:
+  # +id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # +id1+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
+  def enter_competition
+    @idea = Idea.find(params[:id])
+    @competition = Competition.find(params[:id1])
+    if not @idea.competitions.where(:id => @competition.id).exists?
+      @competition.ideas << @idea
+      @idea.competitions << @competition
+      EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
+      respond_to do |format|
+        format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'This idea is already enrolled in this competiton'}
         format.json { head :no_content }
       end
     end

@@ -11,6 +11,8 @@ Sprint0::Application.routes.draw do
     match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
   end
 
+  resources :competitions
+
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
@@ -30,8 +32,8 @@ Sprint0::Application.routes.draw do
     match 'filter', on: :collection
     match 'like', on: :member
     resources :comments do
-        put 'update', on: :member
-      end
+      put 'update', on: :member
+    end
     member do
       match 'vote'
       match 'unvote'
@@ -42,6 +44,8 @@ Sprint0::Application.routes.draw do
       match 'add_rating'
     end
   end
+
+  match 'ideas/:competition/new' => 'ideas#new'
 
   resources :user_ratings, :controller => 'user_ratings'
   match '/user_ratings/create' => 'user_ratings#create'
@@ -91,7 +95,10 @@ Sprint0::Application.routes.draw do
   controller :ratings do
     match 'ratings/ajax'
   end
+  resources :competitions
 
+  match 'competitions/:id/enroll_idea/id1' => 'competitions#enroll_idea'
+  match 'ideas/:id/enter_competition/:id1' => 'ideas#enter_competition'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
