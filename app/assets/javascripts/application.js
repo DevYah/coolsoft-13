@@ -16,55 +16,81 @@
 //= require jquery.purr
 //= require bootstrap
 //= require best_in_place
-//
 //= require jquery-ui
 //= require jquery.tokeninput
-//= require jquery-star-rating
 //= require jquery_purr
-//
 //= require notification_polling
 //= require notifications
 
-function popupCenter(url, width, height, name) {
-  var left = (screen.width / 2) - (width / 2);
-  var top = (screen.height / 2) - (height / 2);
-  return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
-                                ",height=" + height + ",toolbar=no,left=" + left +
-                                ",top=" + top);
-}
 
-$(document).ready(function () {
+var last_search = "";
+var original;
+search_type = false;
+//searchvalue = "";
 
-  var before_search = false;
-  var original;
-
-  $(document).bind("ajaxError", function (e, xhr) {
-    if (xhr.status === 401) {
-      $('#signedout').modal('show');
-    }
-  });
-
-  $("#searchdiv input").keyup(function () {
-    if (window.location === "http://localhost:3000/") {
-      $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(), null, "script");
-    } else {
-      if (!before_search) {
-        before_search = true;
-        original = $("#main > .container").detach();
-      }
-      if (this.value !== "") {
-        $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(), null, "script");
-      } else {
-        before_search = false;
-        $("#main > .container").replaceWith(original);
+$(function() {
+  $("#searchdiv input").keyup(function(e){
+    e.preventDefault();
+      //$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+  if(e.which != 13){
+    var search = $("#search").val();
+    // if(last_search!=search){
+      var search_in = $("#searchtype").val();
+      last_search = search;
+      if($("#search").val()!= ""){
+        if(search.length > 2){
+        $("#stream_results").html("");
+        stream_manipulator(1,"",search,true, search_in);
+        }
+      }else{
+        search_type = false;
+        $("#stream_results").html("");
+        stream_manipulator(1,"","",true, search_in);
       }
     }
+    // }
   });
+});
 
-  $("#sign").click(function () {
-    window.location = "/users/sign_in";
-  });
+// $(function() {
+//  $("#user-search-button-redirection").click(function remove_search_hander(e){
+//   e.preventDefault();
+//   var search_value = $("#search-input").val();
+//   alert(search);
+//   $.ajax({
+//     url: '/stream/index?page=' + 1,
+//     type: 'get',
+//     dataType: 'script',
+//     data: { mypage: 1, tag: "", search: search_value, search_user: false},
+//     success: function() {
+//     }
+//   });
+//  });
+// });
 
+$(document).bind("ajaxError", function(e, xhr){
+	if(xhr.status == 401){
+		$('#signedout').modal('show');
+	}
+});
+
+
+$(document).ready(function() {
+	$("#sign").click(function() {
+		window.location= "/users/sign_in";
+	});
+  $("#user-search-button").click(function remove_button_handler(e) {
+    e.preventDefault();
+    search_type = true;
+    $("#searchtype").val("true");
+    console.log($("#searchtype").val());
+});
+  $("#idea-search-button").click(function remove_button_handler(e) {
+    e.preventDefault();
+    search_type = false;
+    $("#searchtype").val("false");
+    console.log($("#searchtype").val());
+});
   $("a.popup").click(function (e) {
     popupCenter($(this).attr("href"),
                 $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
@@ -79,4 +105,29 @@ $(document).ready(function () {
     container: 'header'
   });
 
+  // $("#searchdivelse input").keyup(function(e){
+  //   if (e.keycode == 13){
+  //     $("#searchdivelse").submit();
+  //     searchvalue = $("#search").val();
+  //     alert(searchvalue);
+  //   }
+  // });
+
+  // function set_searchtext(searchvalue){
+  //   searchtext = searchvalue;
+  //   alert(searchtext);
+  // }
+   $('#searchdiv').submit(function(e) {
+     if (in_stream){
+      e.preventDefault();
+     }
+    });
 });
+function popupCenter(url, width, height, name) {
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (height / 2);
+  return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
+                                ",height=" + height + ",toolbar=no,left=" + left +
+                                ",top=" + top);
+}
+
