@@ -1,11 +1,11 @@
 <% if @firstTime %>
-if(!($('.competition').length > 0)){
-  $("#Searchpreview").empty();
-  $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
-}
+  if(!($('.competition').length > 0)){
+    $("#Searchpreview").empty();
+    $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
+  }
 <% else %>
 <% if @filter %>
-  $(".competitions").remove();
+$(".competitions").remove();
 <% end %>
 $("#Searchpreview").append("<%= escape_javascript(render(:partial => "index")) %>");
 apply_script();

@@ -18,6 +18,21 @@ function add_notification_event_handlers() {
     var notification = $(this).data('notification');
     $.getScript("/set_read.js?&notification=" + notification);
   });
+
+  $('div.delete-competition-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/set_read.js?&notification=" + notification);
+  });
+
+  $('div.competition-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/redirect_competition.js?&notification=" + notification);
+  });
+
+  $('div.competition-idea-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/redirect_idea.js?&notification=" + notification);
+  });
 }
 
 $(document).ready(add_notification_event_handlers);
