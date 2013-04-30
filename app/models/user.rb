@@ -9,12 +9,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :username, :date_of_birth, :type, :active, :first_name, :last_name,
-                  :gender, :about_me, :recieve_vote_notification, :banned,
-                  :recieve_comment_notification, :provider, :uid, :photo, :approved
+    :username, :date_of_birth, :type, :active, :first_name, :last_name,
+    :gender, :about_me, :recieve_vote_notification, :banned,
+    :recieve_comment_notification, :provider, :uid, :photo, :approved, :facebook_share
 
   has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
   has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
+  has_many :sent_competition_notifications, class_name: 'CompetitionNotification', :dependent => :destroy
+  has_many :sent_competition_idea_notifications, class_name: 'CompetitionIdeaNotification', :dependent => :destroy
+  has_many :delete_competition_notifications, :dependent => :destroy
   has_many :delete_notifications, :dependent => :destroy
   has_many :sent_notifications, class_name: 'Notification'
   has_many :ideas
@@ -100,6 +103,22 @@ class User < ActiveRecord::Base
 
   def unread_notifications_count
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
+  def vote_for(idea)
+    self.votes.create(idea_id: idea.id)
+    if idea.user.own_idea_notifications
+      VoteNotification.send_notification(self, idea, [idea.user])
+    end
+    idea.save
+  end
+
+  def unvote_for(idea)
+    voted_ideas.delete(idea)
+  end
+
+  def voted_for?(idea)
+    votes.where(idea_id: idea.id).exists?
   end
 
 end
