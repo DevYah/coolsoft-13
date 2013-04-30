@@ -27,26 +27,42 @@ class CompetitionsController < ApplicationController
   end
 
   def approve
+
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
-    @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
-    @entry.first.approved = true
-    @entry.first.save
-    respond_to do |format|
-      format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
-      format.js
+    if current_user != nil && current_user.id == @competition.investor_id
+      @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
+      @entry.first.approved = true
+      @entry.first.save
+      respond_to do |format|
+        format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
+        format.js
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not approve ideas' }
+        format.json { head :no_content }
+      end
     end
   end
-
   def reject
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
-    @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
-    @entry.first.rejected = true
-    @entry.first.save
-    respond_to do |format|
-      format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been rejected' }
-      format.js
+    if current_user != nil && current_user.id == @competition.investor_id
+      @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
+      @entry.first.rejected = true
+      @entry.first.save
+      respond_to do |format|
+        format.html { redirect_to  '/competitions/' + @competition.id.to_s + '/review_competitions_ideas' , notice: 'The idea has been approved' }
+        format.js
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not reject ideas' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -103,7 +119,7 @@ class CompetitionsController < ApplicationController
 
   # updating Idea
   # Params
-   # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
+  # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
   # Author: Marwa Mehanna
   def update
     @competition = Competition.find(params[:id])

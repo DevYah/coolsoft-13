@@ -1,97 +1,118 @@
-<% if current_user %>
-  <% if current_user.type == "Committee" %>
-    <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
-      <div id='approve-btns'>
-        <button class = 'btn btn-success add-rating'>Approve</button>
-        <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
-      </div>
-      <div class='add-ratings'style="display: none;" >
-        <h3>Add Prespectives</h3>
-        <input type="text" class="rating_complete" name="blah2" />
-        <ul id="rating">
-        </ul>
-        <div id ="flash">
+<!-- Modals -->
+<!-- archive confirmation modal -->
+<div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Are you sure you want to archive?!</h3>
+  </div>
+  <div class="modal-body">
+    <p>If you Archive the idea, all votes, comments and ratings will be deleted!</p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
+    <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+  </div>
+</div>
+<!-- delete modal -->
+<div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Are you sure you want to delete?!</h3>
+  </div>
+  <div class="modal-body">
+    <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
+    <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
+  </div>
+</div>
+<!-- Main Idea Page -->
+<div class='idea-page idea-<%= @idea.id %>'>
+  <% if current_user %>
+    <% if current_user.type == "Committee" %>
+      <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
+        <div id='approve-btns'>
+          <button class = 'btn btn-success add-rating'>Approve</button>
+          <%= link_to 'Disapprove', { :controller => "committees", :action => "disapprove" }, :id => params[:id],:confirm => "Are you sure you want to disapprove this idea?",:class => 'btn btn-danger' %>
         </div>
-        <div id ="ratings">
-          <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+        <div class='add-ratings'style="display: none;" >
+          <h3>Add Prespectives</h3>
+          <input type="text" class="rating_complete" name="blah2" />
+          <ul id="rating">
+          </ul>
+          <div id ="flash">
+          </div>
+          <div id ="ratings">
+            <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
-<div id="fb-root"></div>
-<div class='media'>
-  <a  class='pull-left' href='#'>
-    <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
-  </a>
-  <% if @user == @idea.user_id%>
-    <script>
-      $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
-    </script>
-  <% end %>
-  <p>
-    <h3><%= @idea.title %></h3>
-    <div class='pull-right archive_status'>
-      <span class="idea-votes inline pull-right"><%=  @idea.num_votes %></span>
-      <%if @ideavoted.nil? %>
-        <%= link_to 'Vote', { :controller => "ideas", :action => "vote" }, :id => @idea.id,remote: true,:class =>"btn btn-large btn-success inline pull-right margin" %>
-      <% else %>
-        <%= link_to 'Unvote', { :controller => "ideas", :action => "unvote" }, :id => @idea.id,:confirm => "Are you sure?",remote:true,:class => 'btn btn-large btn-danger inline pull-right margin ' %>
-      <%end%>
+  <div class='row'>
+    <div class='span12'>
+      <h3><%= @idea.title %></h3>
     </div>
-    <%if @user==@idea.user_id%>
-      <div class='btn-group'>
-        <%= link_to 'Edit', edit_idea_path(@idea) ,:class => 'btn btn-inverse' %>
-        <% if @idea.archive_status == true %>
-          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
-        <% else %>
-          <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
+  </div>
+  <div class='row'>
+    <div class='span4'>
+      <a  href='#'>
+        <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
+      </a>
+      <% if @user == @idea.user_id %>
+        <script>
+          $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
+        </script>
+      <% end %>
+      <div class='pull-left'>
+        <%if @chosentags != nil %>
+          <% @chosentags.each do |tag|%>
+            <span class="label label-info "><%= tag.name %></span>
+          <% end %>
         <% end %>
-        <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
+        <%= render :partial => 'share' ,locals: { idea: @idea }%>
+        <% if @user == @idea.user_id %>
+          <div class='btn-group' id='control'>
+            <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
+            <% if @idea.archive_status == true %>
+              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
+            <% else %>
+              <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
+            <% end %>
+            <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
+          </div>
+        <% end %>
       </div>
-      <div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3>Are you sure you want to archive?!</h3>
-        </div>
-        <div class="modal-body">
-          <p>If you Archive the idea, all votes, comments and ratings will be deleted!</p>
-        </div>
-        <div class="modal-footer">
-          <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
-          <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+    </div>
+    <div class='span4'>
+      <span><%=link_to @username, @idea.user.becomes(User)%></span>
+      <h3>Description:</h3>
+      <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
+      <h3>Problem Solved:</h3>
+      <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
+    </div>
+    <div class='span4'>
+      <div class='row'>
+        <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
+        <div class='span4 archive_status'>
+          <p>
+            <% if @idea.ratings.size > 0 %>
+              <table>
+                <tr>
+                  <th style='text-align: left;'><b>Ratings:-</b></th>
+                  <th></th>
+                </tr>
+                <% @idea.ratings.each do |therating| %>
+                  <tr>
+                    <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+                  </tr>
+                <% end %>
+              </table>
+            <% end %>
+          </p>
         </div>
       </div>
-      <div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3>Are you sure you want to delete?!</h3>
-        </div>
-        <div class="modal-body">
-          <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
-        </div>
-        <div class="modal-footer">
-          <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
-          <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
-        </div>
-      </div>
-      <h2><%=link_to @username, @idea.user.becomes(User)%></h2>
-    <%end%>
-  </p>
-</div>
-<div>
-  <%if @chosentags != nil %>
-    <% @chosentags.each do |tag|%>
-      <span class="label label-info "><%= tag.name %></span>
-    <% end %>
-  <% end %>
-</div>
-<div class='media-body'>
-  <%if @idea.archive_status == false%>
-    <div id='show' class='container'>
-      <%= image_tag('f_logo.jpg', :id => 'fbk')%>
-      <%= image_tag('twitter-bird-white-on-blue.jpg', :id => 'tw')%>
-      <a class="popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(@idea)%>&media=<%=root_url + @idea.photo.url %>&description=<%= @idea.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
     </div>
   <%end%>
   <p>
@@ -140,4 +161,5 @@
     $('.archive_status').toggle();
   </script>
 <% end %>
+
 
