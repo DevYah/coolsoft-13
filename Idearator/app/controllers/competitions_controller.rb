@@ -12,7 +12,10 @@ class CompetitionsController < ApplicationController
     end
   end
 
-
+  #review unapproved ideas
+  #Params
+  #+id+:: is passed in the params it is the competition id
+  #Author Omar Kassem
   def review_competitions_ideas
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
@@ -26,6 +29,11 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  #approve certain idea
+  #Params
+  #+id+:: is passed in the params it is the competition id
+  #+idea_id+:: is passed in the params it is the id of the idea to be approved
+  #Author Omar Kassem
   def approve
 
     @idea = Idea.find(params[:idea_id])
@@ -45,6 +53,12 @@ class CompetitionsController < ApplicationController
       end
     end
   end
+
+  #reject certain idea
+  #Params
+  #+id+:: is passed in the params it is the competition id
+  #+idea_id+:: is passed in the params it is the id of the idea to be rejected
+  #Author Omar Kassem
   def reject
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
