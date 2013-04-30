@@ -100,10 +100,11 @@ describe IdeasController do
   describe 'PUT unarchive' do
     context 'idea creator wants to unarchive' do
       before :each do
-        @user = FactoryGirl.build(:user)
+        @user = FactoryGirl.create(:user)
         @user.confirm!
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
+        @idea.archive_status = true
         @idea.save
         sign_in @user
       end
@@ -112,6 +113,33 @@ describe IdeasController do
         put :unarchive, :id => @idea.id, :format => 'js'
         @idea.reload
         (@idea.attributes['archive_status']).should eql(false)
+      end
+    end
+
+    context 'idea creator is a twitter user and wants to unarchive' do
+      before :each do
+        @user = FactoryGirl.create(:user)
+        @user.confirm!
+        @user.provider = 'twitter'
+        @user.save
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.archive_status = true
+        @idea.save
+        sign_in @user
+        @twitter_client = double('Twitter::Client')
+        Twitter::Client.stub!(:new).and_return(@twitter_client)
+        @twitter_client.stub!(:update)
+      end
+
+      it 'instantiates a connection with twitter' do
+        put :unarchive, :id => @idea.id, :format => 'js'
+        Twitter::Client.should_receive(:new)
+      end
+
+      it 'updates his twitter status' do
+        put :unarchive, :id => @idea.id, :format => 'js'
+        @twitter_client.should_receive(:update)
       end
     end
 
@@ -147,28 +175,28 @@ describe IdeasController do
     end
   end
 
-   it 'show ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna"
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
-    end
+  it 'show ' do
+    @user = User.new
+    @user.email = "119ggpkkkkkq@gmail.com"
+    @user.confirm!
+    @user.save
+    idea = Idea.new
+    idea.title = idea.description = idea.problem_solved = "Dayna"
+    idea.save
+    @comment = Comment.new
+    @comment.content = "dayna"
+    @comment.idea_id = idea.id
+    @comment.num_likes = 0
+    @comment.save
+    @like = Like.new
+    @like.user_id = @user.id
+    @like.comment_id = @comment.id
+    @like.save
+    sign_in @user
+    get :like , :id => idea.id , :commentid => @comment.id
+    @comment.reload
+    @comment.num_likes.should eq(1)
+  end
 
   describe 'DELETE destroy' do
     context 'idea creator wants to delete' do
@@ -246,29 +274,29 @@ describe IdeasController do
     end
   end
 
-         it 'likes a comment ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna"
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
+  it 'likes a comment ' do
+    @user = User.new
+    @user.email = "119ggpkkkkkq@gmail.com"
+    @user.confirm!
+    @user.save
+    idea = Idea.new
+    idea.title = idea.description = idea.problem_solved = "Dayna"
+    idea.save
+    @comment = Comment.new
+    @comment.content = "dayna"
+    @comment.idea_id = idea.id
+    @comment.num_likes = 0
+    @comment.save
+    @like = Like.new
+    @like.user_id = @user.id
+    @like.comment_id = @comment.id
+    @like.save
+    sign_in @user
+    get :like , :id => idea.id , :commentid => @comment.id
+    @comment.reload
+    @comment.num_likes.should eq(1)
 
-   end
+  end
 
 
   describe 'GET #show' do
@@ -321,6 +349,33 @@ describe IdeasController do
       @idea.reload
       Idea.last.should eq(@idea)
     end
+
+    context 'twitter user wants to create an idea' do
+      before :each do
+        @user = FactoryGirl.create(:user)
+        @user.confirm!
+        @user.provider = 'twitter'
+        @user.save
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.archive_status = true
+        @idea.save
+        sign_in @user
+        @twitter_client = double('Twitter::Client')
+        Twitter::Client.stub!(:new).and_return(@twitter_client)
+        @twitter_client.stub!(:update)
+      end
+
+      it 'instantiates a connection with twitter' do
+        post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
+        Twitter::Client.should_receive(:new)
+      end
+
+      it 'updates his twitter status' do
+        post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
+        @twitter_client.should_receive(:update)
+      end
+    end
   end
 
   describe 'POST #edit' do
@@ -336,35 +391,91 @@ describe IdeasController do
       @idea1.reload
       @idea1.title.should eq('ay title')
     end
+
+    context 'idea creator is a twitter user and wants to edit' do
+      before :each do
+        @user = FactoryGirl.create(:user)
+        @user.confirm!
+        @user.provider = 'twitter'
+        @user.save
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.archive_status = true
+        @idea.save
+        sign_in @user
+        @twitter_client = double('Twitter::Client')
+        Twitter::Client.stub!(:new).and_return(@twitter_client)
+        @twitter_client.stub!(:update)
+      end
+
+      it 'instantiates a connection with twitter' do
+        put :update, :id => @idea.id, :idea => { :title => 'ay title' }
+        Twitter::Client.should_receive(:new)
+      end
+
+      it 'updates his twitter status' do
+        put :update, :id => @idea.id, :idea => { :title => 'ay title' }
+        @twitter_client.should_receive(:update)
+      end
+    end
   end
 
-  context 'user wants to vote' do
-    before :each do
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      @idea.user_id = @user.id
-      @idea.save
-      sign_in @user
+  describe 'PUT vote' do
+    context 'user wants to vote' do
+      before :each do
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.save
+        sign_in @user
+      end
+
+      it 'idea id in user.votes' do
+        put :vote, :id => @idea.id
+        @idea.reload
+        @voted = @user.votes.find(@idea)
+        (@voted.id).should eql(@idea.id)
+      end
+
+      it 'redirects to idea' do
+        put :vote, :id => @idea.id
+        response.should redirect_to @idea
+      end
+
+      it 'increase idea votes' do
+        @numvotes = @idea.num_votes + 1
+        put :vote, :id => @idea.id
+        @idea.reload
+        (@numvotes).should eql(@idea.num_votes)
+      end
     end
 
-    it 'idea id in user.votes' do
-      put :vote, :id => @idea.id
-      @idea.reload
-      @voted = @user.votes.find(@idea)
-      (@voted.id).should eql(@idea.id)
-    end
+    context 'twitter user wants to vote' do
+      before :each do
+        @user = FactoryGirl.create(:user)
+        @user.confirm!
+        @user.provider = 'twitter'
+        @user.save
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.archive_status = true
+        @idea.save
+        sign_in @user
+        @twitter_client = double('Twitter::Client')
+        Twitter::Client.stub!(:new).and_return(@twitter_client)
+        @twitter_client.stub!(:update)
+      end
 
-    it 'redirects to idea' do
-      put :vote, :id => @idea.id
-      response.should redirect_to @idea
-    end
+      it 'instantiates a connection with twitter' do
+        put :vote, :id => @idea.id
+        Twitter::Client.should_receive(:new)
+      end
 
-    it 'increase idea votes' do
-      @numvotes = @idea.num_votes + 1
-      put :vote, :id => @idea.id
-      @idea.reload
-      (@numvotes).should eql(@idea.num_votes)
+      it 'updates his twitter status' do
+        put :vote, :id => @idea.id
+        @twitter_client.should_receive(:update)
+      end
     end
   end
 
