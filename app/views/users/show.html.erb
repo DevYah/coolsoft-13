@@ -75,31 +75,31 @@
         <% else %>
           <dt>First Name</dt>
           <dd>
-            <%= best_in_place @user.becomes(User), :first_name, :nil => 'click to specify your first name' %>
+            <%= best_in_place @user, :first_name, :nil => 'click to specify your first name' %>
           </dd>
           <br>
           <dt>Last Name</dt>
           <dd>
-            <%= best_in_place @user.becomes(User), :last_name, :nil => 'click to specify your last name' %>
+            <%= best_in_place @user, :last_name, :nil => 'click to specify your last name' %>
           </dd>
           <br>
           <dt>Date of birth </dt>
           <dd>
-            <%= best_in_place @user.becomes(User), :date_of_birth, :type => 'date', :nil => 'not specified' %>
+            <%= best_in_place @user, :date_of_birth, :type => 'date', :nil => 'not specified' %>
           </dd>
           <br>
           <dt>Gender</dt>
           <dd>
-            <%= best_in_place @user.becomes(User), :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
+            <%= best_in_place @user, :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
           </dd>
         <% end %>
       </dl>
       <dl id='user-about'>
         <dt>About User</dt>
         <br>
-        <dd>
+        <dd id='user-about-me'>
           <% if current_user == @user %>
-            <%= best_in_place @user.becomes(User), :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
+            <%= best_in_place @user, :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
           <% elsif @user.about_me != "" and @user.about_me %>
             <%= @user.about_me %>
           <% else %>
