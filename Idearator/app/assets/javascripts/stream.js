@@ -8,20 +8,13 @@ will_insert = true;
 user_search = false;
 var previous_search = "";
 
-// function change_state(user){
-
-// }
-
 function stream_manipulator(page,tag,search,insert,user){
-  //alert(previous_search);
   currentpage = page;
   searchtext = search+"";
   will_insert = insert;
   inside = 0;
   user_search = user;
-  alert(user_search == "false");
 if(user_search == "false"){
-  alert(1);
   if(will_insert){
   if(tag!=""){
     for (var i = 0; i < thistag.length; i++) {
@@ -41,11 +34,10 @@ if(user_search == "false"){
   if(inside == 0){
     thistag.push(tag);
   }
-  //alert(inside+" "+thistag[0]);
+
 
   if (inside != 1){
     $("#stream_results").html("");
-    //alert(currentpage+"#"+thistag+"#"+searchtext+"#"+user_search);
 
     $.ajax({
       url: '/stream/index?page=' + currentpage,
@@ -75,7 +67,6 @@ if(user_search == "false"){
     }
 }
 }else{
-  alert(2);
   if(previous_search != searchtext){
   $("#stream_results").html("");
   thistag = [];
@@ -85,13 +76,12 @@ if(user_search == "false"){
       dataType: 'script',
       data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: true},
       success: function() {
-        alert(mypage+"#"+tag+"#"+search+"#"+search_user);
       }
     });
   }
 }
 }
-//alert(currentpage)
+
 $(document).ready(function(){
    $(".btn-link").click(function tag_caller(e){
     e.preventDefault();
@@ -109,19 +99,30 @@ $(document).ready(function(){
     stream_manipulator(1,curr.val(),"",false, "false");
   });
    $(window).scroll (function(){
-    if($(window).scrollTop()!=0){
-      if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
-        currentpage++;
-        $.ajax({
-          url: '/stream/index?page=' + currentpage,
-          type: 'get',
-          dataType: 'script',
-          data: { mypage: currentpage, tag: thistag, search: $("#search").val(), search_user: $("#searchtype").val()},
-          success: function() {
-            console.log($("#searchtype").val());
-          }
-        });
-      }
-    }
+    currentpage = call_infinite_scrolling("stream","index",currentpage,"");
+    console.log(currentpage);
   });
 });
+
+function call_infinite_scrolling(controller,action,page,id){
+  if(id == ""){
+    var url_to_go = '/'+controller+'/'+action+'?page='+page;
+  }else{
+    var url_to_go = '/'+controller+'/'+id+'?page='+page;
+  }
+  if($(window).scrollTop()!=0){
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
+      page++;
+      $.ajax({
+        url: url_to_go ,
+        type: 'get',
+        dataType: 'script',
+        data: { mypage: page },
+        success: function() {
+        }
+      });
+
+    }
+  }
+  return page;
+}
