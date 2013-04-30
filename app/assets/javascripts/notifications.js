@@ -1,24 +1,22 @@
 function add_notification_event_handlers() {
-  $('div.invite-committee').click(function () {
-    $.getScript("/users/expertise")
+  $('div.invite-committee-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/redirect_expertise.js?&notification=" + notification);
   });
 
-  $('div.idea').click(function () {
-    var idea = this.getAttribute('data-notification')
-    window.location.href='/ideas/' + idea;
+  $('div.idea-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/redirect_idea.js?&notification=" + notification);
   });
 
-  $('.unread').hover(function () {
-    $(this).toggleClass('unread-select');
+  $('div.approve-committee-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/redirect_review.js?&notification=" + notification);
   });
 
-  $('.read').hover(function () {
-    $(this).toggleClass('read-select');
-  });
-
-  $('div.approve-committee').click(function () {
-    var user = this.getAttribute('data-notification')
-    window.location.href='/users/' + user;
+  $('div.delete-notification').click(function () {
+    var notification = $(this).data('notification');
+    $.getScript("/set_read.js?&notification=" + notification);
   });
 }
 

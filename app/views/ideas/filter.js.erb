@@ -1,6 +1,10 @@
 $("#IdeaStream").empty();
-$("#tags").empty();
-<% @tags.each do |tag| %>
-  $("#tags").append("<label> <%= escape_javascript(tag) %> </label")
+$(".tags").empty();
+<% if @tags %>
+  <% @tags.each do |tag| %>
+    $(".tags").append("<li><label class=\"tag\"> <%= escape_javascript(tag) %> </label></li>")
+  <% end %>
 <% end %>
+$("#IdeaStream").append("<div class='page'><%= escape_javascript(render :partial => '/ideas/show') %></div>");
 $("#IdeaStream").append("<div class='page'><%= escape_javascript(render :partial => '/home/stream') %></div>");
+apply_infinite_scrolling();

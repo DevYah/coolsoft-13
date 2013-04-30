@@ -8,5 +8,4 @@ class TagsController < ApplicationController
     @tags = Tag.find(:all, conditions: ['name LIKE(?)', "%#{ params[:q] }%"]).take(5)
     render :json => @tags , only: [:name,:id]
   end
-
 end

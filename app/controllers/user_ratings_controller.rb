@@ -12,21 +12,29 @@ class UserRatingsController < ApplicationController
     user_rating = UserRating.new(params[:rating])
     user_rating.rating_id = params[:rating_id]
     user_rating.user_id = current_user.id
-    
-    if user_rating.save
-      rating = Rating.find_by_id(params[:rating_id])
-      saved_r = UserRating.find_by_rating_id(params[:rating_id])
 
-      if saved_r.class != Array
-        rating.value = user_rating.value.to_f
-      else
-        rating.value = ((saved_r.size * rating.value) + user_rating.value).to_f / (saved_r.size).to_f
+    if user_rating.save
+      saved_rating = UserRating.where('rating_id' => params[:rating_id])
+
+      if saved_rating.size != 0
+        rating = Rating.find_by_id(params[:rating_id])
+        average_rating = 0
+
+        saved_rating.each do |sr|
+          average_rating = average_rating.to_i + sr.value.to_i
+        end
+
+        rating.value = average_rating.to_f / saved_rating.size.to_f
+        rating.save
       end
 
-      rating.save
+      respond_to do |format|
+        format.html { redirect_to idea, :notice => 'Your rating has been saved successfully!' }
+        format.js
+      end
     else
       respond_to do |format|
-        format.html { redirect_to idea, :notice => 'Your rating has not been saved, please retry!' }
+        format.html { redirect_to idea, :alert => 'Your rating has not been saved, please retry!' }
         format.js
       end
     end
@@ -41,23 +49,30 @@ class UserRatingsController < ApplicationController
   def update
     idea = Idea.find_by_id(params[:idea_id])
     user_rating = current_user.user_ratings.find_by_rating_id(params[:rating_id])
-    val = user_rating.value
-    
-    if user_rating.update_attributes(params[:rating])
-      rating = Rating.find_by_id(params[:rating_id])
-      saved_r = UserRating.find_by_rating_id(params[:rating_id])
 
-      if saved_r.class != Array
-        rating.value = user_rating.value.to_f
-      else
-        rating.value = ((saved_r.size * rating.value) - val + user_rating.value).to_f / (saved_r.size).to_f
+    if user_rating.update_attributes(params[:rating])
+      saved_rating = UserRating.where('rating_id' => params[:rating_id])
+
+      if saved_rating.size != 0
+        rating = Rating.find_by_id(params[:rating_id])
+        average_rating = 0
+
+        saved_rating.each do |sr|
+          average_rating = average_rating.to_i + sr.value.to_i
+        end
+
+        rating.value = average_rating.to_f / saved_rating.size.to_f
+        rating.save
       end
 
-      rating.save
-    else 
       respond_to do |format|
-        format.html { redirect_to idea_path(idea), :notice => 'Your rating has not been updated, please retry!' }
-        format.js 
+        format.html { redirect_to idea_path(idea), :notice => 'Your rating has been updated successfully!' }
+        format.js { render text: "" }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to idea_path(idea), :alert => 'Your rating has not been updated, please retry!' }
+        format.js { render text: "" }
       end
     end
   end

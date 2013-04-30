@@ -1,5 +1,8 @@
 class Notification < ActiveRecord::Base
-  # attr_accessible :title, :body
+  acts_as_superclass
 
-  has_and_belongs_to_many :users
+  has_many :notifications_users, :dependent => :destroy
+  has_many :users, :through => :notifications_users
+  attr_accessible :users
+
 end
