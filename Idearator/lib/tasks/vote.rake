@@ -10,8 +10,6 @@ namespace :db do
         u.save
       end
     end
-
-
     4.times do |x|
       20.times do |n|
         u = Vote.new
@@ -20,6 +18,5 @@ namespace :db do
         u.save
       end
     end
-
   end
 end
