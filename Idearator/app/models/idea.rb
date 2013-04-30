@@ -17,6 +17,7 @@ class Idea < ActiveRecord::Base
   has_many :delete_notifications
   has_many :ratings
   has_and_belongs_to_many :tags
+
   has_many :votes
   has_many :voters, :through => :votes, :source => :user
   has_many :competition_entries
@@ -24,7 +25,8 @@ class Idea < ActiveRecord::Base
   has_many :winning_competitions, :class_name => 'Competition'
   has_one :trend
 
-  has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+
+  has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
   def self.search(search)
     if search
       where('title LIKE ?', "%#{search}%")
