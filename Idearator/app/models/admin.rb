@@ -1,5 +1,5 @@
 class Admin < User
   # attr_accessible :title, :body
 
-  has_many :inviteds
+  has_and_belongs_to_many :inviteds
 end

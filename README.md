@@ -3,7 +3,7 @@ CoolSoft '13
 
 Mina Nagy Zaki was here.
 
-Mohammad Khalid Ibrahim Abdulkhaliq
+Mohammad Abdulkhaliq
 
 Omar Mahmoud
 
