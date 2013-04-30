@@ -13,4 +13,5 @@ class Trend < ActiveRecord::Base
     end
   end
 
+
 end
