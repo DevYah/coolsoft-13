@@ -37,9 +37,6 @@
   <% end %>
 </ul>
 <ul class="nav">
-  <li>
-    <%= link_to('stream', controller: '/home' , action: 'index') %>
-  </li>
   <% if user_signed_in? %>
     <% if current_user.is_a? Committee%>
       <li>
