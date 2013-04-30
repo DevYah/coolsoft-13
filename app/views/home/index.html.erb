@@ -16,7 +16,9 @@
           <div class="media-body">
             <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
             <h4 class="media-heading idea">
-               <a data-popover-idea-id=<%=top.id %>> <%= top.title %> </a>
+              <a data-popover-idea-id=<%=top.id %>>
+                <%= top.title %>
+              </a>
             </h4>
             <span class="badge"><%= top.num_votes %>
               votes</span>
