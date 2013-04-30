@@ -17,7 +17,7 @@
     </li>
   <%else%>
     <li>
-      <%= link_to "Competitions", 'competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
+      <%= link_to "Competitions", '/competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
     </li>
   <% end %>
 </ul>
@@ -56,13 +56,13 @@
           <li>
             <%= link_to('New competition', controller: 'competitions' , action: 'new')%></li>
           <li>
-            <%= link_to "My Competitions", 'competitions' , :id => 'competitionsNav' ,:remote =>true %>
+            <%= link_to "My Competitions", '/competitions' , :id => 'competitionsNav' ,:remote =>true %>
           </li>
         </ul>
       </li>
     <% else %>
       <li>
-        <%= link_to "Competitions", 'competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
+        <%= link_to "Competitions", '/competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
       </li>
     <% end %>
   <% end %>
