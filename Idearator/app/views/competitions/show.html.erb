@@ -49,7 +49,7 @@
       </div>
       <% else %>
           <% @competition.ideas.each do |idea|%>
-            <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+            <%= render partial: '/ideas/stream_component', locals: { idea: idea } %>
         <% end %>
       <% end %>
     </div>
