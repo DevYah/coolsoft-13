@@ -12,6 +12,7 @@ class CoolsterApp < Sinatra::Base
 
   @@users = {}
   @@guests = []
+  @@saved_scripts = {}
 
   def self.http_options(path, opts={}, &block)
     route 'OPTIONS', path, opts, &block
@@ -39,8 +40,13 @@ class CoolsterApp < Sinatra::Base
   aget '/poll' do
     puts "polling"
     if env['warden'].authenticated?
-      @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
-      EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
+      if @@saved_scripts[env['warden'].user[1][0].to_s].nil? || @@saved_scripts[env['warden'].user[1][0].to_s] == []
+        @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
+        EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
+      else
+        body @@scripts[env['warden'].user[1][0].to_s][0]
+        @@scripts[env['warden'].user[1][0].to_s].remove_at(0)
+      end    
     else
       @@guests << Proc.new{|script| body script}
     end
@@ -55,7 +61,20 @@ class CoolsterApp < Sinatra::Base
     puts "updating1"
     puts params[:users]
     params[:users].each do |user|
-      @@users[user].call params[:script]
+      if @@users[user].nil?
+        if @@saved_scripts[user].nil?
+          @@saved_scripts[user] = []
+        end
+        @@saved_scripts[user] << params[:script]
+        if @@saved_scripts[user].length > 5
+          @@users.delete(user)
+          @@saved_scripts.delete(user)
+          EventMachine::HttpRequest.new('http://localhost:3000/coolster/remove_online_user').post :body => {user: user}
+        end
+      else
+        @@users[user].call params[:script]
+        @@users[user] = nil
+      end
     end
     body "ok"
   end
@@ -67,7 +86,20 @@ class CoolsterApp < Sinatra::Base
   apost '/push_to_all' do
     puts "updating2"
     @@users.each do |key, value|
-      value.call params[:script]
+      if value.nil?
+        if @@saved_scripts[key].nil?
+          @@saved_scripts[key] = []
+        end
+        @@saved_scripts[key] << params[:script]
+        if @@saved_scripts[key].length > 5
+          @@users.delete(key)
+          @@saved_scripts.delete(key)
+          EventMachine::HttpRequest.new('http://localhost:3000/coolster/remove_online_user').post :body => {user: key}
+        end
+      else
+        value.call params[:script]
+        @@users[key] = nil
+      end
     end
     @@guests.each do |guest|
       guest.call params[:script]
@@ -82,7 +114,20 @@ class CoolsterApp < Sinatra::Base
   apost '/push_to_each' do
     puts "updating3"
     params[:scripts].each do |user, script|
-      @@users[user].call script
+      if @@users[user].nil?
+        if @@saved_scripts[user].nil?
+          @@saved_scripts[user] = []
+        end
+        @@saved_scripts[user] << script
+        if @@saved_scripts[user].length > 5
+          @@users.delete(user)
+          @@saved_scripts.delete(user)
+          EventMachine::HttpRequest.new('http://localhost:3000/coolster/remove_online_user').post :body => {user: user}
+        end
+      else
+        @@users[user].call script
+        @@users[user] = nil
+      end
     end
     body "ok"
   end
