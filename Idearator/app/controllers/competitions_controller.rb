@@ -19,9 +19,11 @@ class CompetitionsController < ApplicationController
   def show
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
+    @ideas=@competition.ideas.page(params[:mypage]).per(4)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @competition }
+      format.js
     end
   end
 
