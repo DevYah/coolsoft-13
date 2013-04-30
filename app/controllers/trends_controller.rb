@@ -1,11 +1,10 @@
 class TrendsController < ApplicationController
   class VoteHooks
-    #Select the recent two votes and calculates the time between them
+    #Select the recent five votes and calculates the time between them
     #in order to set trending
     #Params:
     #+vote+ :: the parameter is an instance of +Vote+
-    #Assigns the trending value of the idea
-    #author Hesham Nabil
+    #Author: Hesham Nabil
     def after_save(vote)
       v = Vote.find(:all , :conditions => { :idea_id  => vote.idea_id }, :order => 'created_at desc', :limit=> 5 )
       diff = Time.now - v.last.created_at
@@ -34,11 +33,4 @@ class TrendsController < ApplicationController
       t.save
     end
   end
-
-  #show the trending ideas
-  #author Hesham Nabil
-  def index
-    @trending = Idea.find(:all, :conditions => { :approved => true }, :order=> 'trending desc', :limit=>4)
-  end
-
 end

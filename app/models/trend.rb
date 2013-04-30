@@ -3,7 +3,6 @@ class Trend < ActiveRecord::Base
   has_many :ideas
 
   def self.del
-    puts "never even got here \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     @trending = Trend.find(:all , :order => 'trending desc' , :limit =>4)
     @trending.each do |all|
       all.rounds = all.rounds + 1
@@ -12,6 +11,4 @@ class Trend < ActiveRecord::Base
       all.save
     end
   end
-
-
 end
