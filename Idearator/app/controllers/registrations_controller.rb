@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
- 
+  include OmniauthHandlerMixin
+
   # This method overrides the original devise method in order to show the list of tags the user can choose
   # from if they signed up as a committee member
   #
@@ -10,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
     @tags = Tag.all
     super
   end
-  
+
   # This method overrides the original devise method to ensure the use
   # actually chose their area(s) of expertise and throw an error message if
   # none were chosen
@@ -20,7 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
   # Author: Menna Amr
   def create
     build_resource
-    
+
     @tags = Tag.all
 
     if resource.type == "Committee" && params[:tags].nil?
@@ -32,7 +33,7 @@ class RegistrationsController < Devise::RegistrationsController
       if resource.type == "Committee"
         UserMailer.committee_signup("menna.amr2@gmail.com").deliver
         resource.becomes(Committee).tag_ids = params[:tags]
-      end 
+      end
 
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
@@ -47,9 +48,9 @@ class RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       respond_with resource
     end
-  end  
+  end
 
-  include OmniauthHandlerMixin
+  protected
 
   # Allow the user to choose a different username if user's twitter screen name
   # is already used as a username locally
@@ -73,5 +74,5 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
-end
 
+end

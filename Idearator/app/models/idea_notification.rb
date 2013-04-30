@@ -1,12 +1,29 @@
 class IdeaNotification < ActiveRecord::Base
+  inherits_from :notification
 
   belongs_to :idea
   belongs_to :user
-  has_many :idea_notifications_users
-  has_many :users, :through => :idea_notifications_users
-  attr_accessible :link, :type, :user, :idea, :users
+  attr_accessible :type, :user, :idea, :users
 
   def self.send_notification(user_sender, idea, users_receivers)
+  end
+
+  def text
+  end
+
+  def read_by?(user)
+    if NotificationsUser.find(:first, :conditions => {notification_id: self.id, user_id: user.id }).read
+      true
+    else
+      false
+    end
+  end
+
+  def set_read_for(user)
+    notification = NotificationsUser.find(:first, :conditions => {notification_id: self.id, user_id: user.id})
+
+    notification.read = true
+    notification.save
   end
 
 end

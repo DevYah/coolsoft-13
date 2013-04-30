@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
@@ -6,16 +5,21 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   #username is unique
   validates :username, :uniqueness => true
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
-  # Setup accessible (or protected) attributes for your model
-  # attr_accessible :title, :body
-  attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :username, :date_of_birth, :type, :active, :first_name, :last_name,
-                  :gender, :about_me, :recieve_vote_notification,
-                  :recieve_comment_notification, :provider, :uid , :photo, :approved
 
-  has_many :idea_notifications
-  has_many :user_notifications
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter]
+
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+    :username, :date_of_birth, :type, :active, :first_name, :last_name,
+    :gender, :about_me, :recieve_vote_notification, :banned,
+    :recieve_comment_notification, :provider, :uid, :photo, :approved, :facebook_share
+
+  has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
+  has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
+  has_many :sent_competition_notifications, class_name: 'CompetitionNotification', :dependent => :destroy
+  has_many :sent_competition_idea_notifications, class_name: 'CompetitionIdeaNotification', :dependent => :destroy
+  has_many :delete_competition_notifications, :dependent => :destroy
+  has_many :delete_notifications, :dependent => :destroy
+  has_many :sent_notifications, class_name: 'Notification'
   has_many :ideas
   has_many :comments
   has_many :user_ratings
@@ -28,7 +32,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :votes, :class_name => 'Idea', :join_table => :votes
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>",:thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
 
-# this method finds the +User+ using the hash and creates a new +User+ 
+# this method finds the +User+ using the hash and creates a new +User+
 # if no users with this email exist
 #
 # Params:
@@ -45,8 +49,8 @@ class User < ActiveRecord::Base
                          uid:auth.uid,
                          email:auth.info.email,
                          password:Devise.friendly_token[0,20])
-  end
-  user
+    end
+    user
   end
 
   # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
@@ -82,5 +86,37 @@ class User < ActiveRecord::Base
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end
-end
 
+  def new_notifications(after)
+    notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', self.becomes(User), Time.at(after.to_i + 1))
+    sorted_notifications = notifications.sort_by &:created_at
+    new_notifications = sorted_notifications.reverse
+  end
+
+  def get_notifications
+    notifications = self.notifications
+    sorted_notifications = notifications.sort_by &:created_at
+    all_notifications = sorted_notifications.reverse
+  end
+
+  def unread_notifications_count
+    NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
+  def vote_for(idea)
+    self.votes.create(idea_id: idea.id)
+    if idea.user.own_idea_notifications
+      VoteNotification.send_notification(self, idea, [idea.user])
+    end
+    idea.save
+  end
+
+  def unvote_for(idea)
+    voted_ideas.delete(idea)
+  end
+
+  def voted_for?(idea)
+    votes.where(idea_id: idea.id).exists?
+  end
+
+end
