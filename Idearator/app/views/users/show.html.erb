@@ -7,19 +7,16 @@
     User's Profile
   <% end %>
 </h1>
-
 <% if @user.banned == true %>
   <p class='text-error'>This User is currently banned!</p>
 <% elsif @user.active == false %>
   <p class='text-error'>This User is currently deactivated!</p>
 <% end %>
-
 <div class='options'>
   <% if current_user == @user %>
     <div class= 'btn'><%= link_to "Edit" , edit_user_registration_path %></div>
   <% end %>
 </div>
-
 <% if @admin != nil && @admin.type == 'Admin' && @user.active == true && @user.banned == false %>
   <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
 <% end %>
@@ -35,7 +32,7 @@
       <dl class='dl-horizontal'>
         <dt>Email</dt>
         <dd><%= @user.email %></dd>
-        <br>
+        <br />
         <% if @user != current_user %>
           <dt>First Name</dt>
           <dd>
@@ -45,7 +42,7 @@
               Not specified
             <% end %>
           </dd>
-          <br>
+          <br />
           <dt>Last Name</dt>
           <dd>
             <% if @user.last_name != "" and @user.last_name %>
@@ -54,8 +51,9 @@
               Not specified
             <% end %>
           </dd>
-          <br>
-          <dt>Date of birth </dt>
+          <br />
+          <dt>Date of birth
+          </dt>
           <dd>
             <% if @user.date_of_birth != "" and @user.date_of_birth %>
               <%= @user.date_of_birth %>
@@ -63,7 +61,7 @@
               Not specified
             <% end %>
           </dd>
-          <br>
+          <br />
           <dt>Gender</dt>
           <dd>
             <% if @user.gender != "" and @user.gender %>
@@ -77,17 +75,18 @@
           <dd>
             <%= best_in_place @user, :first_name, :nil => 'click to specify your first name' %>
           </dd>
-          <br>
+          <br />
           <dt>Last Name</dt>
           <dd>
             <%= best_in_place @user, :last_name, :nil => 'click to specify your last name' %>
           </dd>
-          <br>
-          <dt>Date of birth </dt>
+          <br />
+          <dt>Date of birth
+          </dt>
           <dd>
             <%= best_in_place @user, :date_of_birth, :type => 'date', :nil => 'not specified' %>
           </dd>
-          <br>
+          <br />
           <dt>Gender</dt>
           <dd>
             <%= best_in_place @user, :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
@@ -96,7 +95,7 @@
       </dl>
       <dl id='user-about'>
         <dt>About User</dt>
-        <br>
+        <br />
         <dd id='user-about-me'>
           <% if current_user == @user %>
             <%= best_in_place @user, :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
