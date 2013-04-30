@@ -74,7 +74,7 @@ class NotificationsController < ApplicationController
   # Params:
   # +not_id+:: the parameter is an instance of +IdeaNotification+ passed through the view_notifications view.
   # Author: Amina Zoheir
-  def redirect_idea
+  def redirect_compertition
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
     respond_to do |format|
