@@ -41,16 +41,14 @@
         </div>
       <% end %>
     </div>
-    <div class='span8'>
-      <% if @competition.ideas.count == 0 %>
+    <div class='span8' id='stream_competition' value='<%= @competition.id%>'>
+      <% if @ideas.count == 0 %>
       <div class="alert alert-error">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>There are no ideas yet</strong>
       </div>
       <% else %>
-          <% @competition.ideas.each do |idea|%>
-            <%= render partial: '/ideas/stream_component', locals: { idea: idea } %>
-        <% end %>
+        <%= render :partial => 'show'%>
       <% end %>
     </div>
   </div>
