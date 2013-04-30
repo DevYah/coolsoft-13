@@ -1,16 +1,18 @@
+// Show sign in/up modal dialog on ajax unauthorized error
+// Author: Amina Zoheir
 $(document).bind("ajaxError", function (e, xhr) {
   if (xhr.status === 401) {
     $('#signedout').modal('show');
   }
 });
 
-$(document).ready(function () {
+// Adds event handler on click for sign in and sign up buttons to show their forms
+// Author: Amina Zoheir
+$(document).ready(function() {
   $('#unauth-sign-in-button').click(function () {
-    var newValue = { opacity : 100 }
     $('.unauth-huge').addClass('unauth-right', 500);
   });
   $('#unauth-sign-up-button').click(function () {
-    var newValue = { opacity : 100 }
     $('.unauth-huge').removeClass('unauth-right', 500);
   });
-}
+});
