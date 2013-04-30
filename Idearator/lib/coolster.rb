@@ -14,6 +14,14 @@ module Coolster
     end
   end
 
+  # Removes user id from online_user_ids
+  # Params:
+  # +user_id+:: the parameter is an id of a string passed through the Coolster#remove_online_user.
+  # Author: Amina Zoheir
+  def self.remove_from_online_users(user_id)
+    @@online_user_ids.delete(user_id)
+  end
+
   # Sends http post request to CoolsterApp /push_to_all with script parameter
   # Params:
   # +script+:: the parameter is a string (javascript).
