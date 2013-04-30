@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     @page_number = params[:myPage]
     @winners = MonthlyWinner.all.reverse
     first = @winners.shift
-    @first = Idea.find(first.idea)
+    @first = Idea.find(first.idea_id)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     if(params[:myTags])
       if(params[:myTags].length > 0)

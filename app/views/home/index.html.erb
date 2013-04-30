@@ -58,7 +58,7 @@
           </div>
         </div>
         <% @winners.each do |second| %>
-          <% @second=Idea.find(second.idea) %>
+          <% @second=Idea.find(second.idea_id) %>
           <div class="item">
             <div id='idea_of_the_mouth'>
               <div class='row'>
