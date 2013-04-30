@@ -322,7 +322,28 @@ describe IdeasController do
         @idea.reload
         Idea.last.should eq(@idea)
       end
-    end 
+    end
+
+    context 'Idea Creation for competition' do
+      before :each do
+        @u1 = User.new(:email => 'u@gmail.com', :password => '123123123', :username => 'u')
+        @u1.confirm!
+        @u1.save
+        @i1 = Investor.new(:email => 'i@gmail.com', :password => '123123123', :username => 'i')
+        @i1.confirm!
+        @i1.save
+        @competition = Competition.create(:title => 'title', :description => 'description')
+        @competition.investor = @i1
+        @competition.save
+        sign_in @u1
+      end
+      it 'creates the idea' do
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition => @competition.id }.to change(Idea, :count).by(1)
+      end
+      it 'appends the idea to competition list' do
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition => @competition.id }.to change(@competition.ideas, :count).by(1)
+      end
+    end
   end
 
 
@@ -435,8 +456,8 @@ describe IdeasController do
     end
     context 'Failure Scenario' do
       it 'does not append competitions list if idea is already in competition' do
-        put :enter_competition, id: @idea.id, id1: @competition.id
-        @competition.reload
+        @competition.ideas << @idea
+        @idea.competitions << @competition
         expect { put :enter_competition, id: @idea.id, id1: @competition.id }.to change(@competition.ideas, :count).by(0)
       end
     end

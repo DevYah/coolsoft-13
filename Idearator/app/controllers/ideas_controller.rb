@@ -311,6 +311,7 @@ class IdeasController < ApplicationController
     @competition = Competition.find(params[:id1])
     if not @idea.competitions.where(:id => @competition.id).exists?
       @competition.ideas << @idea
+      @idea.competitions << @competition
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
       respond_to do |format|
         format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
