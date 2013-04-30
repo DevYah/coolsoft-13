@@ -27,7 +27,7 @@
           <span class="label label-info "><%= tag.name %></span>
         <% end %>
       </div>
-        <div class='span2' id='commentsPopovers'>
+        <div class='span1' id='commentsPopovers'>
           <span class='label label-success' id='commentsPopover'>
             Number of comments
           </span><div class="fb-comments-count" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" id='numberCommentsPopover'><h5>0</h5></div>
@@ -37,7 +37,7 @@
             <span class="label label-info "><%= tag.name %></span>
           <% end %>
         <% end %>
-        <div class="span4 pull-right" id='votesPopover'>
+        <div class="span2 pull-right" id='votesPopover'>
           <%= render :partial => "/ideas/vote_component", locals: { idea: @idea ,size: 'span1', large: false} %>
         </div>
       </div>
