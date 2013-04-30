@@ -13,15 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+
 //= require jquery.purr
-//
 //= require best_in_place
 //
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
-//= require bootstrap-datepicker
+
 //
 //= require notification_polling
 //= require notifications
