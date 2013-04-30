@@ -9,22 +9,23 @@ p.same_line{
   display: inline;
 }
 
-div.notification{
+.content .notification{
   border-radius: 5px;
   margin: 10px;
   cursor: pointer;
+  position:relative
+}
+
+.nav .notification{
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  min-height: 40px;
+  position:relative
 }
 
 .unread{
   background: rgba(0,153,153, 0.25);
-}
-
-div.unread-select{
-  background: rgba(0,153,153, 0.50);
-}
-
-div.read-select{
-  background: rgba(0, 0, 0, 0.20);
 }
 
 .read{
@@ -44,11 +45,31 @@ h3.title{
   background: rgba(0,153,153, 0.05);
 }
 
-.notification:hover .link{
+.content .notification:hover .notification-link{
   display: inline;
 }
 
-.link{
+.content .notification.read:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.content .notification.unread:hover {
+  background: rgba(0,153,153, 0.50);
+}
+
+.nav .notification:hover .notification-link{
+  display: inline;
+}
+
+.nav .notification.read:hover {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.nav .notification.unread:hover {
+  background: rgba(0,153,153, 0.50);
+}
+
+.notification-link{
   display: none;
   float: right;
 }
@@ -57,8 +78,15 @@ div.padding_right{
   padding-right: 20px;
 }
 
-.date{
+.notification-date{
   font-size: 10px;
   color:#686868;
-  float: right;
+  position:absolute;
+  bottom:0;
+  right:0;
+  padding-right: 20px;
+}
+
+.custom-dropdown{
+  width: 400px;
 }

@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:create , :edit, :update, :vote, :unvote]
+  before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update, :vote, :unvote]
+
 
   # view idea of current user
   # Params
@@ -13,12 +14,10 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
-      @ideavoted = current_user.votes.detect { |w|w.id == @idea.id }rescue ActiveRecord::RecordNotFound
-    end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @idea }
-      format.js
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @idea }
+      end
     end
   end
 
@@ -47,7 +46,6 @@ class IdeasController < ApplicationController
     end
   end
 
-
   # editing Idea
   # Params
   # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
@@ -66,24 +64,7 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
-    @ideavoters = @idea.votes
-    @userVreceivers = []
-    if !@idea.votes.nil?
-      @ideavoters.each { |user|
-        if user.participated_idea_notifications
-          @userVreceivers << user
-        end }
-      EditNotification.send_notification(current_user, @idea, @userVreceivers)
-    end
-    list_of_comments = Comment.where(idea_id: @idea.id)
-    list_of_commenters = []
-    list_of_comments.each do |c|
-      list_of_commenters.append(User.find(c.user_id)).flatten!
-    end
-    list = list_of_commenters
-    if list != nil
-      EditNotification.send_notification(current_user, @idea, list)
-    end
+    @idea.send_edit_notification current_user
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
@@ -101,20 +82,12 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehannna
   def vote
     @idea = Idea.find(params[:id])
-    current_user.votes << @idea
-    @idea.num_votes = @idea.num_votes + 1
-    @ideaowner = User.find(@idea.user_id)
-    if @ideaowner.own_idea_notifications
-      VoteNotification.send_notification(current_user, @idea, [@ideaowner])
-    end
+    current_user.vote_for @idea
+    @idea.reload
     respond_to do |format|
-      if @idea.update_attributes(params[:idea])
-        format.html { redirect_to @idea, :notice =>'Thank you for voting' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @idea, alert: 'Sorry,cant vote' }
-        format.json { head :no_content }
-      end
+      format.html { redirect_to @idea, :notice =>'Thank you for voting' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -124,16 +97,12 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehannna
   def unvote
     @idea = Idea.find(params[:id])
-    current_user.votes.delete(@idea)
-    @idea.num_votes = @idea.num_votes - 1
+    current_user.unvote_for @idea
+    @idea.reload
     respond_to do |format|
-      if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
         format.json { head :no_content }
-      else
-        format.html { redirect_to @idea, alert: 'Idea is still voted' }
-        format.json { head :no_content }
-      end
+        format.js
     end
   end
 
@@ -148,6 +117,7 @@ class IdeasController < ApplicationController
     @idea.user_id = current_user.id
     respond_to do |format|
       if @idea.save
+        VoteCount.create(idea_id: @idea.id)
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
@@ -156,7 +126,6 @@ class IdeasController < ApplicationController
       end
     end
   end
-
 
   # Deletes all records related to a specific idea
   # Params:
@@ -168,19 +137,18 @@ class IdeasController < ApplicationController
       list_of_comments = Comment.where(idea_id: idea.id)
       list_of_commenters = []
       list_of_voters = idea.votes
-      idea.destroy
-      list_of_comments.each do |c|
-        c.destroy
-      end
-
 
       list_of_comments.each do |c|
         list_of_commenters.append(User.find(c.user_id)).flatten!
+        c.destroy
       end
 
       list = list_of_commenters.append(list_of_voters).flatten!
 
       DeleteNotification.send_notification(current_user, idea, list)
+
+      idea.destroy
+
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
@@ -191,8 +159,13 @@ class IdeasController < ApplicationController
     end
   end
 
+  # Archives a specific idea
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be archived
+  # Author: Mahmoud Abdelghany Hashish
   def archive
     idea = Idea.find(params[:id])
+
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = true
       idea.save
@@ -201,24 +174,43 @@ class IdeasController < ApplicationController
         list_of_commenters.append(User.find(c.user_id)).flatten!
       end
       list = list_of_commenters.append(idea.votes).flatten!
+
       if current_user.type == 'Admin'
         list.append(User.find(idea.user_id)).flatten!
       end
+
       ArchiveNotification.send_notification(current_user, idea, list)
       idea.votes.each do |u|
         idea.votes.delete(u)
       end
+
+      idea.num_votes = 0
+
       idea.comments.each do |c|
         c.destroy
       end
+
+      list_of_ratings = Rating.where(:idea_id => idea.id)
+      list_of_user_ratings = []
+
+      list_of_ratings.each do |r|
+        list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
+      end
+
+      list_of_user_ratings.each do |ur|
+        ur.destroy
+      end
+
+      idea.save
+
       respond_to do |format|
-        format.html { redirect_to idea, alert: 'Idea has been successfully archived.' }
-        format.json { head :no_content }
+        format.html { redirect_to idea, alert: 'Idea has been successfully archived!' }
+        format.js
       end
     else
       respond_to do |format|
-        format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
-        format.json { head :no_content }
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.js { head :no_content }
       end
     end
   end
@@ -232,14 +224,10 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = false
       idea.save
-      respond_to do |format|
-        format.html { redirect_to idea, alert: 'Idea has been successfully unarchived.' }
-        format.json { head :no_content }
-      end
     else
       respond_to do |format|
-        format.html { redirect_to idea, alert: 'Idea isnot archived, you are not allowed to archive it.' }
-        format.json { head :no_content }
+        format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
+        format.js { head :no_content }
       end
     end
   end

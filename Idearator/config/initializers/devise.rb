@@ -1,10 +1,11 @@
+require "omniauth-facebook"
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "menna.amr2@gmail.com"
+  config.mailer_sender = "idearator.13@gmail.com"
 
   # Configure the class responsible to send e-mails.
   config.mailer = "Devise::Mailer"
@@ -82,7 +83,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "80c72cfd1bac19bd5713811c05cae1bbef4138cd65b3ac9f112dfa29967ab708663965342b7617c83520742f8f2e10146c2caf894db9aaa4884dc72e76be785b"
+  # config.pepper = "e6f5360d1cf4f2db812aed07cee2af20c6481d5529b9283d46753ffaa791cf8931733e66d1b81efb930fe024e5c7ab12dc80f35232c27684e2539ba037689cb9"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -186,7 +187,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

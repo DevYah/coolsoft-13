@@ -18,7 +18,7 @@ class AdminsController < ApplicationController
         mail.deliver
         flash[:notice] = 'success'
       else
-        flash[:error] = i.errors.full_messages
+        flash[:error] = i.errors.full_messages.to_s
       end
     else
       flash[:error] = 'user already exists'
