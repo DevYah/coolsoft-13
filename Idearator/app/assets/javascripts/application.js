@@ -78,30 +78,4 @@ $(document).ready(function () {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
-
-  var tour = new Tour();
-
-  tour.addStep({
-    element: ".bootstrap-tour-1", // string (jQuery selector) - html element next to which the step popover should be shown
-    title: "Welcome to Idearator!", // string - title of the popover
-    content: "Why don't you take a look around?", // string - content of the popover
-    placement: "down"
-});
-
-  tour.addStep({
-    element: ".btn-block", // string (jQuery selector) - html element next to which the step popover should be shown
-    title: "Post your idea!", // string - title of the popover
-    content: "Want to share your idea with the world? Click here to submit!", // string - content of the popover
-    placement: "left"
-});
-
-    tour.addStep({
-    element: ".title", // string (jQuery selector) - html element next to which the step popover should be shown
-    title: "What's trending?", // string - title of the popover
-    content: "Here you'll find Idearator's current top 10 ideas!", // string - content of the popover
-    placement: "bottom"
-});
-
-  tour.start(true);
-  tour.restart();
 });
