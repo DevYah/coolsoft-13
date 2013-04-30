@@ -12,19 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require jquery.purr
-//= require bootstrap
-//= require best_in_place
-//
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
+//= require jquery.cookie
+//
+//= require bootstrap
+//= require best_in_place
 //
 //= require notification_polling
 //= require notifications
-//= require jquery.cookie
 //= require bootstrap-tour
 
 function popupCenter(url, width, height, name) {
@@ -80,11 +78,30 @@ $(document).ready(function () {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
+
   var tour = new Tour();
+
   tour.addStep({
-    element: "#sign", // string (jQuery selector) - html element next to which the step popover should be shown
-    title: "Title of my popover", // string - title of the popover
-    content: "Content of my popover" // string - content of the popover
+    element: ".bootstrap-tour-1", // string (jQuery selector) - html element next to which the step popover should be shown
+    title: "Welcome to Idearator!", // string - title of the popover
+    content: "Why don't you take a look around?", // string - content of the popover
+    placement: "down"
 });
-  tour.start();
+
+  tour.addStep({
+    element: ".btn-block", // string (jQuery selector) - html element next to which the step popover should be shown
+    title: "Post your idea!", // string - title of the popover
+    content: "Want to share your idea with the world? Click here to submit!", // string - content of the popover
+    placement: "left"
+});
+
+    tour.addStep({
+    element: ".title", // string (jQuery selector) - html element next to which the step popover should be shown
+    title: "What's trending?", // string - title of the popover
+    content: "Here you'll find Idearator's current top 10 ideas!", // string - content of the popover
+    placement: "bottom"
+});
+
+  tour.start(true);
+  tour.restart();
 });
