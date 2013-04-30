@@ -39,6 +39,10 @@ p{
   left: 55px;
 }
 
+span .best_in_place width {
+  max-width: 100px;
+}
+
 .new-idea {
   position: relative;
   display: block;
@@ -66,4 +70,33 @@ label {
   position: relative;
   width: 800px;
   left: 20px;
+}
+
+input {
+  width: 10%;
+}
+
+#user-about-me {
+  width: 100%;
+  max-width:600px;
+  word-wrap: break-word;
+}
+
+.best_in_place {
+  padding: .1m;
+  cursor: hand;
+  cursor: pointer;
+  -moz-transition: background 0.5s linear;
+  -o-transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.best_in_place:hover, .do_hover {
+  background-color: #CCC;
 }
