@@ -29,8 +29,8 @@ Sprint0::Application.routes.draw do
     match 'filter', on: :collection
     match 'like', on: :member
     resources :comments do
-        put 'update', on: :member
-      end
+      put 'update', on: :member
+    end
     member do
       match 'vote'
       match 'unvote'
