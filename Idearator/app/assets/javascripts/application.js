@@ -26,47 +26,27 @@
 var last_search = "";
 var original;
 search_type = false;
-//searchvalue = "";
 
 $(function() {
   $("#searchdiv input").keyup(function(e){
     e.preventDefault();
-      //$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
   if(e.which != 13){
     var search = $("#search").val();
-    // if(last_search!=search){
-      var search_in = $("#searchtype").val();
-      last_search = search;
+    var search_in = $("#searchtype").val();
+    last_search = search;
       if($("#search").val()!= ""){
         if(search.length > 2){
         $("#stream_results").html("");
-        stream_manipulator(1,"",search,true, search_in);
+        stream_manipulator(1,"",search,false, search_in);
         }
       }else{
         search_type = false;
         $("#stream_results").html("");
-        stream_manipulator(1,"","",true, search_in);
+        stream_manipulator(1,"","",false, search_in);
       }
     }
-    // }
   });
 });
-
-// $(function() {
-//  $("#user-search-button-redirection").click(function remove_search_hander(e){
-//   e.preventDefault();
-//   var search_value = $("#search-input").val();
-//   alert(search);
-//   $.ajax({
-//     url: '/stream/index?page=' + 1,
-//     type: 'get',
-//     dataType: 'script',
-//     data: { mypage: 1, tag: "", search: search_value, search_user: false},
-//     success: function() {
-//     }
-//   });
-//  });
-// });
 
 $(document).bind("ajaxError", function(e, xhr){
 	if(xhr.status == 401){
@@ -83,13 +63,11 @@ $(document).ready(function() {
     e.preventDefault(); 
     search_type = true;
     $("#searchtype").val("true");
-    console.log($("#searchtype").val());
 });
   $("#idea-search-button").click(function remove_button_handler(e) {
     e.preventDefault();
     search_type = false;
     $("#searchtype").val("false");
-    console.log($("#searchtype").val());
 });
   $("a.popup").click(function (e) {
     popupCenter($(this).attr("href"),
