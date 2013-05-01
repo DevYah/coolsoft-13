@@ -93,7 +93,6 @@ Sprint0::Application.routes.draw do
     match 'ratings/ajax'
   end
 
-  resources :competitions
 
 
   controller :stream do
