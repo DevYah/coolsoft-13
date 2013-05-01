@@ -11,10 +11,10 @@
             <span class="label label-info "><%= tag.name %></span>
           <% end %>
         </ul>
-         <%= render :partial => 'ideas/share' ,locals: {idea: idea}%>
+        <%= render :partial => 'ideas/share' ,locals: {idea: idea}%>
       </div>
       <div class='span4'>
-         <%= 'by' %>
+        <%= 'by' %>
         <span><%= link_to idea.user.username , idea %></span>
         <div><%= idea.description %></div>
       </div>
