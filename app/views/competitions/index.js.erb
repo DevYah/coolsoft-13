@@ -1,9 +1,5 @@
 var main ;
-if($('.topten').length == 0){
-  main = $('.content');
-}else{
-  main = $('#Searchpreview');
-}
+main = $('.content');
 <% if @firstTime %>
 if(!($('.competition').length > 0)){
   main.empty();
@@ -11,7 +7,7 @@ if(!($('.competition').length > 0)){
 }
 <% else %>
 <% if @filter %>
-main.remove();
+$('.competitions').empty();
 <% end %>
 main.append("<%= escape_javascript(render(:partial => "index")) %>");
 apply_script();

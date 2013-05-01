@@ -16,7 +16,7 @@
     </ul>
   <% end %>
   <div>
-    <% if @competitions.length>0 %>
+    <% if @competitions && @competitions.length>0 %>
       <% @competitions.each do |c| %>
         <% if c.investor.active and c.investor.banned == false and c.open %>
           <div class="row-fluid text-center" id='competition-<%= c.id %>'>
@@ -28,7 +28,7 @@
                   </h2>
                   <div>
                     by:
-                    <%= link_to c.investor.username , c %>
+                    <%= link_to c.investor.username , c.investor.becomes(User) %>
                   </div>
                 </div>
                 <div class="span6">

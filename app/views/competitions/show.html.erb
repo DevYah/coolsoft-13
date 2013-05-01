@@ -29,28 +29,31 @@
         <% end %>
       </div>
       <h4>Description</h4>
-      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :description ,  type: :textarea %></div>
+      <div><%= best_in_place_if user_signed_in? && current_user.id == @competition.investor_id, @competition, :description ,  type: :textarea %></div>
       <h4>Start date</h4>
-      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :start_date , :type => 'date'%></div>
+      <div><%= best_in_place_if user_signed_in? && current_user.id == @competition.investor_id, @competition, :start_date , :type => 'date'%></div>
       <h4>End date</h4>
-      <div><%= best_in_place_if current_user.id == @competition.investor_id, @competition, :end_date , :type => 'date' %></div>
-      <% if current_user.id == @competition.investor_id %>
+      <div><%= best_in_place_if user_signed_in? && current_user.id == @competition.investor_id, @competition, :end_date , :type => 'date' %></div>
+      <% if user_signed_in? &&current_user.id == @competition.investor_id %>
         <div class='btn-group' id='control'>
           <%= link_to 'Edit', edit_competition_path(@competition),:class=>'btn btn-primary'%>
           <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
         </div>
       <% end %>
     </div>
-    <div class='span8'>
-      <% if @competition.ideas.count == 0 %>
-      <div class="alert alert-error">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>There are no ideas yet</strong>
-      </div>
+    <div class='span8' id='stream_competition' value='<%= @competition.id%>'>
+      <% if @competition.open %>
+        <p><a data-toggle="modal" href="#myIdeas" class="btn btn-primary ">Enroll an Idea</a></p>
+        <%= render :partial => 'enroll_idea', :locals => {:@approved => @myIdeas}%>
+      <% end %>
+      <hr />
+      <% if @ideas.count == 0 %>
+        <div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>There are no ideas yet</strong>
+        </div>
       <% else %>
-          <% @competition.ideas.each do |idea|%>
-            <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
-        <% end %>
+        <%= render :partial => 'show'%>
       <% end %>
     </div>
   </div>

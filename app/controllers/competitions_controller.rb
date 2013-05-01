@@ -48,9 +48,18 @@ end
   def show
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
+    if (user_signed_in?)
+      @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
+      @myIdeas.reject! do |i|
+        (@competition.tags & i.tags).empty?
+      end
+    end
+    @ideas=@competition.ideas.page(params[:mypage]).per(4)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @competition }
+      format.js
     end
   end
 
@@ -96,7 +105,7 @@ end
 
   # updating Idea
   # Params
-   # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
+  # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
   # Author: Marwa Mehanna
   def update
     @competition = Competition.find(params[:id])
@@ -128,6 +137,30 @@ end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
+      end
+    end
+  end
+
+  # Enrolls a chosen Idea into a competition
+  # Params:
+  # +id+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # +idea_id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
+  def enroll_idea
+    @idea = Idea.find(params[:idea_id])
+    @competition = Competition.find(params[:id])
+    if not @competition.ideas.where(:id => @idea.id).exists?
+      @competition.ideas << @idea
+      #@idea.competitions << @competition
+      EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'Idea Submitted successfully'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'This idea is already enrolled in this competiton'}
+        format.json { head :no_content }
       end
     end
   end
