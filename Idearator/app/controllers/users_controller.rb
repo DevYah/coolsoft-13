@@ -39,7 +39,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   # sets the active field of the current user to true
   # Params: none
   # Author: Amina Zoheir
@@ -50,7 +49,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 
   # Pass the current_user and all the tags to the  expertise view
   # Params:
@@ -76,6 +74,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   # Enter chosen tags sent from expertise view, in committeestags table
   # Params:
   # +tags[]+:: the parameter is ana instance of +tag+ passed through the form from expertise action
@@ -115,10 +114,6 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
-
-
-  # POST /users
-  # POST /users.json
 
   # This method creates a new User and calls UserMailer to send a confirmation email.
   #Author: Menna Amr
