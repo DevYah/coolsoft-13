@@ -4,6 +4,7 @@
   <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
 <% end %>
 <% content_for :sidebar do %>
+  <% if MonthlyWinner.all.count > 0 %>
   <div class='topten'>
     <div class='row'>
       <h3 class='title1'>Idea of the Month</h3>
@@ -112,6 +113,7 @@
       <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div>
   </div>
+  <% end %>
   <div class="topten">
     <h1 class="title">Top Ten
     </h1>
@@ -137,7 +139,8 @@
     <button class="btn backtotop" type="button">To Top
       <i class = 'icon-black icon-hand-up'></i></button>
   </div>
-  <script type="text/javascript">
+<% end %>
+<script type="text/javascript">
     $('.backtotop').click(function(){
       $('html, body').animate({scrollTop:0}, 'slow');
       });
@@ -145,7 +148,7 @@
       $('.backtotop').hide();
     });
   </script>
-<% end %>
+
 <style type = "text/css">
   .totop{
     margin: auto;
