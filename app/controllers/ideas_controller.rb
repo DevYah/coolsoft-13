@@ -101,9 +101,9 @@ class IdeasController < ApplicationController
     current_user.unvote_for @idea
     @idea.reload
     respond_to do |format|
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-        format.js
+      format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -268,7 +268,7 @@ class IdeasController < ApplicationController
   # Enters the idea into a chosen Competition
   # Params:
   # +id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
-  # +id1+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # +competition_id+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
   # Author: Mohammad Abdulkhaliq
   def enter_competition
     @idea = Idea.find(params[:id])
