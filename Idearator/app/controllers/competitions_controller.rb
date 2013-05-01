@@ -107,3 +107,4 @@ class CompetitionsController < ApplicationController
       end
     end
   end
+end
