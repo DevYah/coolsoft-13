@@ -1,6 +1,7 @@
 Sprint0::Application.routes.draw do
 
   default_url_options :host => 'localhost:3000'
+
   root :to => 'home#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
@@ -55,7 +56,7 @@ Sprint0::Application.routes.draw do
   # Admin actions routes
   controller :admins do
     match 'admins/invite'
-    match 'invite_committee'
+    match 'admins/invite_committee'
   end
 
   # Committe actions routes
@@ -136,4 +137,11 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  #2.3 Create/Edit Tags
+  resources :tags
+
+  match 'tags/:id/synonym' => 'tags#addsym', :via => :put
+  match 'tags/:id/delsym' => 'tags#delsym', :via => :put
+
 end
