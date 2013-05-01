@@ -119,10 +119,14 @@ $(document).ready(function () {
     var tour = new Tour();
 
   tour.addStep({
+    path: '/',
     element: ".bootstrap-tour-1", // string (jQuery selector) - html element next to which the step popover should be shown
     title: "Welcome to Idearator!", // string - title of the popover
     content: "Why don't you take a look around?", // string - content of the popover
     placement: "bottom",
+    redirect: function() {
+      document.location.href = '/'
+    }
 });
 
   tour.addStep({
@@ -131,7 +135,10 @@ $(document).ready(function () {
     title: "Post your idea!", // string - title of the popover
     content: "Want to share your idea with the world? Click here to submit!", // string - content of the popover
     backdrop: true,
-    placement: "left"
+    placement: "left",
+    redirect: function() {
+      document.location.href = '/home/index'
+    }
 });
 
     tour.addStep({
