@@ -43,12 +43,19 @@ namespace :db do
       t.save
     end
 
-    i = Investor.new
-    i.email = Faker::Internet.email
-    i.username = Faker::Name.name
-    i.password = 123123123
-    i.confirm!
-    i.save
+      i = Investor.new
+      i.email = Faker::Internet.email
+      i.username = Faker::Name.name
+      i.password = 123123123
+      i.confirm!
+      i.save
+
+      i2 = Investor.new
+      i2.email = Faker::Internet.email
+      i2.username = Faker::Name.name
+      i2.password = 123123123
+      i2.confirm!
+      i2.save
 
     20.times do |n|
       c = Competition.new
