@@ -24,10 +24,21 @@ class Idea < ActiveRecord::Base
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
   def self.search(search)
     if search
-      where('title LIKE ?', "%#{search}%")
+      where('title LIKE  ? AND approved  = ?', "%#{search}%", true)
     else
       find(:all)
     end
+  end
+
+  def self.filter(tags)
+    @ideas = []
+    tags.each do |tag|
+      t = Tag.find(:first, :conditions => {:name => tag})
+      ideatags = IdeasTags.find(:all, :conditions => {:tag_id => t.id})
+      ideas = Idea.where(:id => ideatags.map(&:idea_id))
+      @ideas = @ideas + ideas
+    end
+    @ideas
   end
 
   def send_edit_notification(user)
@@ -43,4 +54,5 @@ class Idea < ActiveRecord::Base
       EditNotification.send_notification(user, self, [c])
      end }
   end
+
 end
