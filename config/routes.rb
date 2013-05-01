@@ -30,8 +30,8 @@ Sprint0::Application.routes.draw do
     match 'filter', on: :collection
     match 'like', on: :member
     resources :comments do
-        put 'update', on: :member
-      end
+      put 'update', on: :member
+    end
     member do
       match 'vote'
       match 'unvote'
@@ -40,6 +40,7 @@ Sprint0::Application.routes.draw do
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
+      match 'popover'
     end
   end
 
@@ -56,7 +57,7 @@ Sprint0::Application.routes.draw do
   # Admin actions routes
   controller :admins do
     match 'admins/invite'
-    match 'admins/invite_committee'
+    match 'invite_committee'
   end
 
   # Committe actions routes
