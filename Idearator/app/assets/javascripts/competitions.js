@@ -18,8 +18,8 @@ $(document).ready(function() {
     tokenLimit: 5,
     tokenFormatter: function(item){
       return "<li>" + item.name
-      + "<input id='competitions_tags_tags_' type='hidden' value='" + item.id + "' name='competition[tag_ids][]' />"
-      + "</li>";
+           + "<input id='competitions_tags_tags_' type='hidden' value='" + item.id + "' name='competition[tag_ids][]' />"
+           + "</li>";
     },
     prePopulate: prePopulate
   });
@@ -29,12 +29,12 @@ $(document).ready(function() {
     $('#edited-check-mark').remove();
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
-  $.datepicker.setDefaults({
+   $.datepicker.setDefaults({
     dateFormat: 'yy/mm/dd', changeMonth: true,
     changeYear: true, yearRange: '1900:' + (new Date().getFullYear() - 8)
   });
 
-  $(window).scroll (function(){
+   $(window).scroll (function(){
     thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"));
   });
-}
+});
