@@ -23,7 +23,7 @@ function apply_script(){
         return;
      $.ajax({
       type: 'get',
-      url: 'competitions',
+      url: '/competitions',
       data: {
         tags: array
       },
@@ -55,7 +55,7 @@ function apply_script(){
      }
      $.ajax({
       type: 'get',
-      url: 'competitions',
+      url: '/competitions',
       data: {
         tags: array
       },
@@ -72,6 +72,7 @@ function apply_script(){
    });
   }
 
+var thispage = 1;
 $(document).ready(function() {
   var prePopulate = [];
 
@@ -93,6 +94,7 @@ $(document).ready(function() {
     },
     prePopulate: prePopulate
   });
+
   $('.best_in_place').best_in_place();
   $('.best_in_place').bind("ajax:success", function(){
     $('#edited-check-mark').remove();
@@ -146,7 +148,7 @@ $(document).ready(function() {
 
      $.ajax({
       type: 'get',
-      url: 'competitions',
+      url: '/competitions',
       data: {
         myPage: Page,
         tags: array
@@ -170,4 +172,7 @@ $(document).ready(function() {
 
        apply_script();
 
+   $(window).scroll (function(){
+    thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"));
+  });
 });

@@ -42,10 +42,15 @@ class Competition < ActiveRecord::Base
 
   def send_edit_notification(investor)
    users=User.where(:id => self.ideas.map(&:user_id))
-   EditCompetitionNotification.send_notification(investor,self,users)
- end
- def send_delete_notification(investor)
-  users=User.where(:id => self.ideas.map(&:user_id))
-  DeleteCompetitionNotification.send_notification(investor,self,users)
-end
+    EditCompetitionNotification.send_notification(investor,self,users)
+  end
+
+  def send_delete_notification(investor)
+    users=User.where(:id => self.ideas.map(&:user_id))
+    DeleteCompetitionNotification.send_notification(investor,self,users)
+  end
+
+ def open
+    return  start_date < Time.now.to_date && end_date > Time.now.to_date
+  end
 end

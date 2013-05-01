@@ -147,28 +147,28 @@ describe IdeasController do
     end
   end
 
-   it 'show ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna"
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
-    end
+  it 'show ' do
+    @user = User.new
+    @user.email = "119ggpkkkkkq@gmail.com"
+    @user.confirm!
+    @user.save
+    idea = Idea.new
+    idea.title = idea.description = idea.problem_solved = "Dayna"
+    idea.save
+    @comment = Comment.new
+    @comment.content = "dayna"
+    @comment.idea_id = idea.id
+    @comment.num_likes = 0
+    @comment.save
+    @like = Like.new
+    @like.user_id = @user.id
+    @like.comment_id = @comment.id
+    @like.save
+    sign_in @user
+    get :like , :id => idea.id , :commentid => @comment.id
+    @comment.reload
+    @comment.num_likes.should eq(1)
+  end
 
   describe 'DELETE destroy' do
     context 'idea creator wants to delete' do
@@ -246,29 +246,29 @@ describe IdeasController do
     end
   end
 
-         it 'likes a comment ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna"
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
+  it 'likes a comment ' do
+    @user = User.new
+    @user.email = "119ggpkkkkkq@gmail.com"
+    @user.confirm!
+    @user.save
+    idea = Idea.new
+    idea.title = idea.description = idea.problem_solved = "Dayna"
+    idea.save
+    @comment = Comment.new
+    @comment.content = "dayna"
+    @comment.idea_id = idea.id
+    @comment.num_likes = 0
+    @comment.save
+    @like = Like.new
+    @like.user_id = @user.id
+    @like.comment_id = @comment.id
+    @like.save
+    sign_in @user
+    get :like , :id => idea.id , :commentid => @comment.id
+    @comment.reload
+    @comment.num_likes.should eq(1)
 
-   end
+  end
 
 
   describe 'GET #show' do
@@ -313,15 +313,39 @@ describe IdeasController do
 
   describe 'POST #create' do
 
-    it 'creates a new idea' do
-      @idea = Idea.new
-      @idea.title = @idea.description = @idea.problem_solved = 'ay7aga'
-      @idea.save
-      post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
-      @idea.reload
-      Idea.last.should eq(@idea)
+    context 'normal idea creation' do
+      it 'creates a new idea' do
+        @idea = Idea.new
+        @idea.title = @idea.description = @idea.problem_solved = 'ay7aga'
+        @idea.save
+        post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
+        @idea.reload
+        Idea.last.should eq(@idea)
+      end
+    end
+
+    context 'Idea Creation for competition' do
+      before :each do
+        @u1 = User.new(:email => 'u@gmail.com', :password => '123123123', :username => 'u')
+        @u1.confirm!
+        @u1.save
+        @i1 = Investor.new(:email => 'i@gmail.com', :password => '123123123', :username => 'i')
+        @i1.confirm!
+        @i1.save
+        @competition = Competition.create(:title => 'title', :description => 'description')
+        @competition.investor = @i1
+        @competition.save
+        sign_in @u1
+      end
+      it 'creates the idea' do
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(Idea, :count).by(1)
+      end
+      it 'appends the idea to competition list' do
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(@competition.ideas, :count).by(1)
+      end
     end
   end
+
 
   describe 'POST #edit' do
 
@@ -395,6 +419,46 @@ describe IdeasController do
       put :unvote, :id => @idea.id
       @idea.reload
       (@numvotes).should eql(@idea.num_votes)
+    end
+  end
+
+  describe 'PUT enter_competition' do
+    before :each do
+      @u1 = User.new(:email => 'u@gmail.com', :password => '123123123', :username => 'u')
+      @u1.confirm!
+      @u1.save
+      @i1 = Investor.new(:email => 'i@gmail.com', :password => '123123123', :username => 'i')
+      @i1.confirm!
+      @i1.save
+      @idea = Idea.create(:title => 'title', :description => 'description', :problem_solved => 'problem_solved', :approved => true)
+      @competition = Competition.create(:title => 'title', :description => 'description')
+      @competition.investor = @i1
+      @competition.save
+      @u1.ideas << @idea
+      sign_in @u1
+    end
+    context 'Success Scenario' do
+      it 'retrieves valid competition and idea id from :id and :id1' do
+        put :enter_competition, :id => @idea.id, :competition_id => @competition.id
+        assigns(:idea).should_not eq(nil)
+        assigns(:competition).should_not eq(nil)
+      end
+      it 'adds the idea to the competition ideas list' do
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(@competition.ideas, :count).by(1)
+      end
+      it 'calls send_notification in EnterIdeaCompetition' do
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(EnterIdeaNotification, :count).by(1)
+      end
+      it 'redirects to competition show page' do
+        put :enter_competition, :id => @idea.id, :competition_id => @competition.id
+        response.should redirect_to "/ideas/#{@idea.id}"
+      end
+    end
+    context 'Failure Scenario' do
+      it 'does not append competitions list if idea is already in competition' do
+        @competition.ideas << @idea
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id }.to change(@competition.ideas, :count).by(0)
+      end
     end
   end
 end
