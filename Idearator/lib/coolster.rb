@@ -75,4 +75,8 @@ module Coolster
     end
   end
 
+  def self.get_online_user_ids
+    @@online_user_ids
+  end
+
 end
