@@ -11,14 +11,17 @@ describe IdeasController do
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
         @idea.save
-        @comment = FactoryGirl.build(:comment)
-        @comment.user_id = @user.id
-        @comment.idea_id = @idea.id
-        @comment.save
         @vote = FactoryGirl.build(:vote)
         @vote.user_id = @user.id
         @vote.idea_id = @idea.id
         @vote.save
+        @rating = FactoryGirl.build(:rating)
+        @rating.idea_id = @idea.id
+        @rating.save
+        @user_rating = FactoryGirl.build(:user_rating)
+        @user_rating.user_id = @user.id
+        @user_rating.rating_id = @rating.id
+        @user_rating.save
         sign_in @user
       end
 
@@ -28,12 +31,12 @@ describe IdeasController do
         (@idea.archive_status).should eql(true)
       end
 
-      it 'deletes idea comments' do
-        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
-      end
-
       it 'deletes idea votes' do
         expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
+      end
+
+      it 'deletes user ratings' do
+        expect { put :archive, :id => @idea.id }.to change(UserRating, :count).by(-1)
       end
     end
 
@@ -46,14 +49,17 @@ describe IdeasController do
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
         @idea.save
-        @comment = FactoryGirl.build(:comment)
-        @comment.user_id = @user.id
-        @comment.idea_id = @idea.id
-        @comment.save
         @vote = FactoryGirl.build(:vote)
         @vote.user_id = @user.id
         @vote.idea_id = @idea.id
         @vote.save
+        @rating = FactoryGirl.build(:rating)
+        @rating.idea_id = @idea.id
+        @rating.save
+        @user_rating = FactoryGirl.build(:user_rating)
+        @user_rating.user_id = @user.id
+        @user_rating.rating_id = @rating.id
+        @user_rating.save
         sign_in @admin
       end
 
@@ -63,12 +69,12 @@ describe IdeasController do
         (@idea.archive_status).should eql(true)
       end
 
-      it 'deletes idea comments' do
-        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
-      end
-
       it 'deletes idea votes' do
         expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
+      end
+
+      it 'deletes user ratings' do
+        expect { put :archive, :id => @idea.id }.to change(UserRating, :count).by(-1)
       end
     end
 
@@ -91,8 +97,8 @@ describe IdeasController do
         expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(0)
       end
 
-      it 'does not delete idea comments' do
-        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(0)
+      it 'does not delete user ratings' do
+        expect { put :archive, :id => @idea.id }.to change(UserRating, :count).by(0)
       end
     end
   end
@@ -147,28 +153,28 @@ describe IdeasController do
     end
   end
 
-   it 'show ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna"
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
-    end
+  it 'show ' do
+    @user = User.new
+    @user.email = "119ggpkkkkkq@gmail.com"
+    @user.confirm!
+    @user.save
+    idea = Idea.new
+    idea.title = idea.description = idea.problem_solved = "Dayna"
+    idea.save
+    @comment = Comment.new
+    @comment.content = "dayna"
+    @comment.idea_id = idea.id
+    @comment.num_likes = 0
+    @comment.save
+    @like = Like.new
+    @like.user_id = @user.id
+    @like.comment_id = @comment.id
+    @like.save
+    sign_in @user
+    get :like , :id => idea.id , :commentid => @comment.id
+    @comment.reload
+    @comment.num_likes.should eq(1)
+  end
 
   describe 'DELETE destroy' do
     context 'idea creator wants to delete' do
@@ -260,29 +266,29 @@ describe IdeasController do
     end
   end
 
-         it 'likes a comment ' do
-        @user = User.new
-        @user.email = "119ggpkkkkkq@gmail.com"
-        @user.confirm!
-        @user.save
-        idea = Idea.new
-        idea.title = idea.description = idea.problem_solved = "Dayna"
-        idea.save
-        @comment = Comment.new
-        @comment.content = "dayna"
-        @comment.idea_id = idea.id
-        @comment.num_likes = 0
-        @comment.save
-         @like = Like.new
-         @like.user_id = @user.id
-        @like.comment_id = @comment.id
-        @like.save
-        sign_in @user
-        get :like , :id => idea.id , :commentid => @comment.id
-        @comment.reload
-        @comment.num_likes.should eq(1)
+  it 'likes a comment ' do
+    @user = User.new
+    @user.email = "119ggpkkkkkq@gmail.com"
+    @user.confirm!
+    @user.save
+    idea = Idea.new
+    idea.title = idea.description = idea.problem_solved = "Dayna"
+    idea.save
+    @comment = Comment.new
+    @comment.content = "dayna"
+    @comment.idea_id = idea.id
+    @comment.num_likes = 0
+    @comment.save
+    @like = Like.new
+    @like.user_id = @user.id
+    @like.comment_id = @comment.id
+    @like.save
+    sign_in @user
+    get :like , :id => idea.id , :commentid => @comment.id
+    @comment.reload
+    @comment.num_likes.should eq(1)
 
-   end
+  end
 
 
   describe 'GET #show' do
