@@ -157,7 +157,7 @@ class UsersController < ApplicationController
   # Author: Hisham ElGezeery
   def my_ideas
     @user = User.find(params[:id])
-    @approved = @user.get_approved_ideas
+    @ideas = @user.get_approved_ideas
     respond_to do |format|
       format.html # my_ideas.html.erb
     end
