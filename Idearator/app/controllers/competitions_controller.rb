@@ -1,6 +1,7 @@
 class CompetitionsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update]
+
   # GET /competitions
   # GET /competitions.json
   def index
@@ -27,6 +28,7 @@ class CompetitionsController < ApplicationController
   end
 
   # making new Competition
+  #Params: None
   #Marwa Mehann
   def new
     @competition = Competition.new
