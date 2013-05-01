@@ -23,22 +23,24 @@ Sprint0::Application.configure do
   config.action_controller.perform_caching = false
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  require 'tlsmail'
+  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+  ActionMailer::Base.delivery_method = :smtp
 
   # Don't care if the mailer can't send
   ActionMailer::Base.perform_deliveries = false
   ActionMailer::Base.raise_delivery_errors = false
 
-  ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.default from: "idearator.cool@gmail.com"
 
   ActionMailer::Base.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    :port => 587,
-    :domain => 'localhost:3000',
-    :user_name => "idearator.cool@gmail.com",
-    :password => "idearator13",
-    :authentication => "plain",
-    :enable_starttls_auto => true
+  :address              => 'smtp.gmail.com',
+  :port                 => 587,
+  :domain               => 'localhost:3000',
+  :user_name            => "idearator.cool@gmail.com",
+  :password             => "idearator13",
+  :authentication       => "plain",
+  :enable_starttls_auto => true
   }
 
   # Print deprecation notices to the Rails logger
