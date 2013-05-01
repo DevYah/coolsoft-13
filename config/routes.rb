@@ -1,7 +1,7 @@
 Sprint0::Application.routes.draw do
 
   default_url_options :host => 'localhost:3000'
-  root :to => 'home#index'
+  root :to => 'stream#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
                                        :registrations => 'registrations' }
@@ -51,9 +51,9 @@ Sprint0::Application.routes.draw do
   match '/user_ratings/update' => 'user_ratings#update'
 
   controller :home do
-    match 'home/search'
-    match 'home/searchelse'
-    match 'home/index'
+    match '/home/search'
+    match '/home/searchelse'
+    match '/home/index'
   end
 
   # Admin actions routes
@@ -94,10 +94,18 @@ Sprint0::Application.routes.draw do
   controller :ratings do
     match 'ratings/ajax'
   end
+
   resources :competitions
+
 
   match 'competitions/:id/enroll_idea/id1' => 'competitions#enroll_idea'
   match 'ideas/:id/enter_competition/:id1' => 'ideas#enter_competition'
+
+
+  controller :stream do
+    match '/stream/index'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -143,4 +151,9 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+  match '/stream/index' => 'stream#index'
 end
