@@ -37,8 +37,12 @@
               <div class="dates span3">
                 <%=
                  link_to_if(current_page?(:controller => 'competitions', :action => 'index'), "Enroll", { :controller => "competitions", :action => "show", :id => c.id }, :class => 'btn btn-primary btn-large') do
-                  link_to("Enroll", { :controller => "ideas", :action => "enter_competition", :id => @idea.id, :competition_id => c.id }, :class => 'btn btn-primary btn-large')
+                  if not c.ideas.where(:id => @idea.id).exists?
+                    link_to("Enroll", { :controller => "ideas", :action => "enter_competition", :id => @idea.id, :competition_id => c.id }, :class => 'btn btn-primary btn-large')
+                  else
+                    link_to("Enrolled", { :controller => "competitions", :action => "show", :id => c.id }, :class => 'btn btn-success btn-large')
                   end
+                end
                 %>
               </div>
             </div>
