@@ -7,39 +7,39 @@ class CompetitionsController < ApplicationController
   # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
   # Muhammed Hassan
   def index
-    all = Competition.all
+    all = Competition
     if (user_signed_in?)
       if (current_user.is_a? Investor)
-        all = Competition.joins(:Investors).where(:Investors => {:id => current_user.id})
+        all = Competition.joins(:investor).where(:users => {:id => current_user.id})
       end
     end
     @filter = false
     @firstTime = false
-    if(params[:myPage])
-      @tags = params[:tags].slice(1,params[:tags].length)
-      if(@tags.length ==0)
-        @competitions = Competition.uniq.page(params[:myPage]).per(10)
-      else
-        @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq.page(params[:myPage]).per(10)
-      end
-    else
-      if (params[:tags])
-        @filter = true
+      if(params[:myPage])
         @tags = params[:tags].slice(1,params[:tags].length)
         if(@tags.length ==0)
-          @competitions = Competition.uniq.page(1).per(10)
+          @competitions = all.uniq.page(params[:myPage]).per(10)
         else
-          @competitions = Competition.joins(:tags).where(:tags => {:name => @tags}).uniq.page(1).per(10)
+          @competitions = all.joins(:tags).where(:tags => {:name => @tags}).uniq.page(params[:myPage]).per(10)
         end
       else
-        @firstTime = true
-        @competitions = Competition.uniq.page(1).per(10)
+        if (params[:tags])
+          @filter = true
+          @tags = params[:tags].slice(1,params[:tags].length)
+          if(@tags.length ==0)
+            @competitions = all.uniq.page(1).per(10)
+          else
+            @competitions = all.joins(:tags).where(:tags => {:name => @tags}).uniq.page(1).per(10)
+          end
+        else
+          @firstTime = true
+          @competitions = all.uniq.page(1).per(10)
+        end
       end
-    end
-    respond_to do |format|
-      format.js
-    end
+      respond_to do |format|
+    format.js
   end
+end
 
   # view competition of current user
   # Params
