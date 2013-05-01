@@ -16,7 +16,10 @@
   left: 230px;
   bottom: 10px;
 }
-
+#graph #bubble-chart, #bar-chart {
+  position: absolute;
+  top: 60px;
+}
 #ideas{
   padding-left: 2cm;
   max-height: 150px;
