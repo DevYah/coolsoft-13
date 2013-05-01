@@ -3,7 +3,8 @@ class NotificationsController < ApplicationController
 
   class CoolsterPusher < AbstractCoolsterPusher
 
-    def push_notification(user_ids, notification)
+    def push_notification(users, notification)
+      user_ids = users.collect! { |u| u.id.to_s }
       Coolster.update_each(user_ids) do |user_id|
         count = User.find(user_id).unread_notifications_count
        render 'notifications/add_notification',
