@@ -457,7 +457,6 @@ describe IdeasController do
     context 'Failure Scenario' do
       it 'does not append competitions list if idea is already in competition' do
         @competition.ideas << @idea
-        @idea.competitions << @competition
         expect { put :enter_competition, id: @idea.id, id1: @competition.id }.to change(@competition.ideas, :count).by(0)
       end
     end
