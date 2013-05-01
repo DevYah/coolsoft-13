@@ -23,7 +23,7 @@
 //= require jquery_purr
 //
 //= require notifications
-
+//= require poller.js
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);

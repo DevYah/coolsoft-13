@@ -95,6 +95,7 @@ Sprint0::Application.routes.draw do
 
   controller :coolster do
     match 'coolster/add_online_user'
+    match 'coolster/remove_online_user'
   end
 
 
