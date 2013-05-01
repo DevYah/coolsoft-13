@@ -21,6 +21,10 @@ class CompetitionsController < ApplicationController
     @chosen_tags_competition = Competition.find(params[:id]).tags
     @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
     @ideas=@competition.ideas.page(params[:mypage]).per(4)
+    @myIdeas.reject! do |i|
+      (@competition.tags & i.tags).empty?
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @competition }
@@ -114,7 +118,7 @@ class CompetitionsController < ApplicationController
   def enroll_idea
     @idea = Idea.find(params[:id])
     @competition = Competition.find(params[:id1])
-    if not @idea.competitions.where(:id => @competition.id).exists?
+    if not @competition.ideas.where(:id => @idea.id).exists?
       @competition.ideas << @idea
       #@idea.competitions << @competition
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
