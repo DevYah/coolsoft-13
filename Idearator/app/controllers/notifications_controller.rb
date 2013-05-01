@@ -75,7 +75,7 @@ class NotificationsController < ApplicationController
   # Params:
   # +notification+:: the parameter is an integer passed through notifications/_view.
   # Author: Amina Zoheir
-  def redirect_compertition
+  def redirect_competition
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
     respond_to do |format|
