@@ -23,6 +23,7 @@
 //= require notifications
 
 
+
 var last_search = "";
 var original;
 search_type = false;
@@ -33,16 +34,13 @@ $(function() {
   if(e.which != 13){
     var search = $("#search").val();
     var search_in = $("#searchtype").val();
-    last_search = search;
       if($("#search").val()!= ""){
         if(search.length > 2){
-        $("#stream_results").html("");
-        stream_manipulator(1,"",search,false, search_in);
+        stream_manipulator(1,[],search,"false", search_in);
         }
       }else{
-        search_type = false;
-        $("#stream_results").html("");
-        stream_manipulator(1,"","",false, search_in);
+        $("#searchtype").val("false");
+        stream_manipulator(1,[],"","false", $("#searchtype").val());
       }
     }
   });

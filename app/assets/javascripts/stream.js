@@ -8,133 +8,116 @@ will_insert = true;
 user_search = "";
 var previous_search = "";
 
+function check_if_exists(tag){
+  for(var i = 0; i < thistag.length; i++){
+    if(thistag[i]==tag){
+      return true;
+    }
+  }
+  return false;
+}
+
 function stream_manipulator(page,tag,search,insert,user){
-  //alert(previous_search);
   currentpage = page;
   searchtext = search+"";
-  will_insert = insert;
-  inside = 0;
+  will_insert = (insert == "true");
   user_search = (user == "true");
+  reset = "false";
 
-if(!user_search){
-  if(will_insert){
-  if(tag!=""){
-    for (var i = 0; i < thistag.length; i++) {
-      if (thistag[i] == tag) {
-        inside = 1;
-        break;
-      }
-    }
-  }else{
-      inside = -1;
-  }
-
-  if(search != ""){
-    thistag = [];
-  }
-    
-  if(inside == 0){
-    thistag.push(tag);
-  }
-
-  if (inside != 1){
+  if (!(searchtext == "" && !user_search && tag == "" && !will_insert)){
     $("#stream_results").html("");
-    $.ajax({
-      url: '/stream/index?page=' + currentpage,
-      type: 'get',
-      dataType: 'script',
-      data: { mypage: currentpage, tag: [tag], search: searchtext, search_user: user_search, insert: will_insert},
-      success: function() {
-        alert(will_insert);
-      }
-    });
-  }
-}else{
-  if(search==""){
-    if(thistag.length == 0){
-      $("#stream_results").html("");
-    $.ajax({
-      url: '/stream/index?page=' + currentpage,
-      type: 'get',
-      dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
-      success: function() {
-        alert(will_insert);
-      }
-    });
-    }else{
-  for (var i = 0; i < thistag.length; i++) {
-      if (thistag[i] == tag) {
-        thistag.splice(i,1);
-        $("#stream_results").html("");
-        $.ajax({
-          url: '/stream/index?page=' + currentpage,
-          type: 'get',
-          dataType: 'script',
-          data: { mypage: currentpage, tag: [tag], search: searchtext, search_user: false, insert: will_insert},
-          success: function() {
-            alert(will_insert);
+      if (searchtext == "" && !user_search){
+        if(will_insert){
+          if(!check_if_exists(tag)){
+            thistag = tag.concat(thistag);
           }
-        });
-        break;
+          searchtext = "";
+          user_search = false;
+          currentpage = 1;
+
+        }else{
+          if (check_if_exists(tag)){
+            for (var i = 0; i < thistag.length; i++) {
+              if (thistag[i] == tag) {
+                thistag.splice(i,1);
+                searchtext = "";
+                user_search = false;
+                currentpage = 1;
+                break;
+              }
+            }
+          }else{
+            reset = "true";
+            searchtext = "";
+            user_search = false;
+            currentpage = 1;
+          }
+        }
+      }else{
+        if(tag == "" && !will_insert){
+          if (user_search){
+            currentpage = 1;
+            searchtext = search+"";
+            user_search = true;
+            thistag = [];
+          }else{
+            currentpage = 1;
+            searchtext = search+"";
+            user_search = false;
+            thistag = [];
+          }
+        }
       }
     }
+    if(reset == "true"){
+      $.ajax({
+        url: '/stream/index?page=' + currentpage,
+        type: 'get',
+        dataType: 'script',
+        data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert ,reset_global: reset},
+        success: function() {
+          apply_tag_handlers();
+        }
+      });
+    }else{
+       $.ajax({
+        url: '/stream/index?page=' + currentpage,
+        type: 'get',
+        dataType: 'script',
+        data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
+        success: function() {
+          apply_tag_handlers();
+        }
+      });
+    }
   }
-  }else{
-    thistag = []
-    $("#stream_results").html("");
-    $.ajax({
-      url: '/stream/index?page=' + currentpage,
-      type: 'get',
-      dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
-      success: function() {
-        alert(will_insert);
-      }
-    });
-  }
-}
-}else{
-  if(previous_search != searchtext){
-  $("#stream_results").html("");
-    $.ajax({
-      url: '/stream/index?page=' + currentpage,
-      type: 'get',
-      dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: true, insert: will_insert},
-      success: function() {
-        alert("2ndo");
-        previous_search = searchtext;
-      }
-    });
-  }
-}
-}
-$(document).ready(function(){
-   $(".btn-link").click(function tag_caller(e){
+
+$(document).ready(function(){ apply_tag_handlers(); });
+   function apply_tag_handlers(){
+   $("#stream_results .btn-link").click(function tag_caller(e){
     e.preventDefault();
     var tag = $(this);
     $("#search").val("");
     $("#searchtype").val("false");
-    stream_manipulator(1,tag.val(),"",true, false);
+    stream_manipulator(1,[tag.val()],"","true", "false");
   });
-   $(".close").click(function tag_remover(e){
+   $("#stream_results .close").click(function tag_remover(e){
     e.preventDefault();
     var curr = $(this);
     $("#search").val("");
     $("#searchtype").val("false");
-    stream_manipulator(1,curr.val(),"",false, false);
+    stream_manipulator(1,[curr.val()],"","false", "false");
   });
+   }
 
-    $(window).scroll (function(){
+
+$(window).scroll (function(){
       if($(window).scrollTop()!=0){
         if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
-          currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,searchtext,user_search,true]);
+          currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);
           }
     }
         });
-      });
-
 
  function call_infinite_scrolling(controller,action,page,id,params){
   if(id == ""){
@@ -150,6 +133,7 @@ $(document).ready(function(){
         dataType: 'script',
         data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
         success: function() {
+          apply_tag_handlers();
         }
       });
   return page;
