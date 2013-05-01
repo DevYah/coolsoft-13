@@ -152,5 +152,5 @@ $(document).ready(function () {
     }
 });
 
-  tour.start(true);
+  tour.start();
 });
