@@ -1,0 +1,48 @@
+ <script>
+  $(".btn-link").click(function tag_caller(e){
+    e.preventDefault();
+    var tag = $(this);
+    //$("#stream_results").html("");
+    $("#search").val("");
+    alert($("#search").val());
+    stream_manipulator(1,tag.val(),"",true, "false");
+  });
+  </script>
+
+
+<% if @page.nil? %>
+<% if !@searching_with %>
+
+  <% @ideas.each do |idea| %>
+    <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+  <%end%>
+<% else %>
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %>
+      </td>
+    </tr>
+    <br>
+  <%end%>
+</table>
+<% end %>
+<% else %>
+<% if !@search_with_user %>
+
+  <% @ideas.each do |idea| %>
+    <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+  <%end%>
+
+<% else %>
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %>
+      </td>
+    </tr>
+    <br>
+  <%end%>
+</table>
+<% end %>
+<% end %>
