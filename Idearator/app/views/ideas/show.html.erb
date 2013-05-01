@@ -10,7 +10,7 @@
   </div>
   <div class="modal-footer">
     <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
-    <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+    <%= link_to 'Archive', { :controller => "ideas", :action => "archive", :id => @idea.id }, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
   </div>
 </div>
 <!-- delete modal -->
@@ -76,7 +76,7 @@
           <div class='btn-group' id='control'>
             <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
             <% if @idea.archive_status == true %>
-              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
+              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
             <% else %>
               <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
             <% end %>
