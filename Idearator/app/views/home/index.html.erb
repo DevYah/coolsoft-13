@@ -12,12 +12,14 @@
       <% if top.user.active == true and top.user.banned == false%>
         <div class="topten_idea media">
           <a class="pull-left" href="#">
-            <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "80x80") %></span>
+            <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
           </a>
           <div class="media-body">
             <span><%= link_to  top.user.username, top.user.becomes(User)  %></span>
             <h4 class="media-heading idea">
-              <%= link_to top.title ,top %>
+              <a data-popover-idea-id=<%=top.id %>>
+                <%= top.title %>
+              </a>
             </h4>
             <span class="badge"><%= top.num_votes %>
               votes</span>
