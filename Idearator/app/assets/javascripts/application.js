@@ -16,10 +16,12 @@
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
+//= require jquery.purr
 //= require jquery.cookie
 //
 //= require bootstrap
 //= require best_in_place
+//= require ideas/popover
 //
 //= require notification_polling
 //= require notifications
