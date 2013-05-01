@@ -43,7 +43,6 @@ class User < ActiveRecord::Base
 # +signed_in_resource+:: Currently signed in resource. Unused.
 #
 #Author: Menna Amr
->>>>>>> 751657237f11d2ed7fb5e4292d34d9bad509b6a1
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
