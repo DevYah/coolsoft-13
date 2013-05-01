@@ -34,7 +34,8 @@ class CoolsterApp < Sinatra::Base
 
   # Adds an new proc to the users hash with the users id as the key to be called later
   # in any of the /push methods and sends an http post request to CoolsterController with this id.
-  # If guest adds it does the same but for the guest hash with the ession id as the key.
+  # Does the same for the guest, adds a new proc to the guest hash with the session id as the key to be called later
+  # in /push_to_all.
   # Params: none
   # Author: Amina Zoheir
   aget '/poll' do
