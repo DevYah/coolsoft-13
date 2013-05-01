@@ -22,7 +22,7 @@ class SimilarityEngine
   SIMILARITY_MODEL = {
     # Jaccard coeffs are 0.0..1.0
     tags_jacc_idx:           10,
-    title_keywords_jacc_idx: 5,
+    title_keywords_jacc_idx: lambda { |x| 6**x - 1 },
     # Hamming distance are -16..16
     title_hamming_dist:      0.5,
     desc_hamming_dist:       0.1,
@@ -139,10 +139,10 @@ class SimilarityEngine
   def self.idea_similarity_coeff(idea1, idea2)
     vals = {
       tags_jacc_idx:           jaccard_index(idea1.tag_ids, idea1.tag_ids),
-      title_hamming_dist:      hamming_distance(simhash(idea1.title, TITLE_SHINGLE_LEN),
-                                                simhash(idea2.title, TITLE_SHINGLE_LEN)),
       title_keywords_jacc_idx: jaccard_index(hashed_keywords(idea1.title),
                                              hashed_keywords(idea2.title)),
+      title_hamming_dist:      hamming_distance(simhash(idea1.title, TITLE_SHINGLE_LEN),
+                                                simhash(idea2.title, TITLE_SHINGLE_LEN)),
       desc_hamming_dist:       hamming_distance(simhash(idea1.description, DESC_SHINGLE_LEN),
                                                 simhash(idea2.description, DESC_SHINGLE_LEN)),
       prob_hamming_dist:       hamming_distance(simhash(idea1.problem_solved, PROB_SHINGLE_LEN),
@@ -150,7 +150,12 @@ class SimilarityEngine
     }
 
     vals.reduce(0) do |acc, kv|
-      acc + SIMILARITY_MODEL[kv[0]] * kv[1]
+      model = SIMILARITY_MODEL[kv[0]]
+      if [Fixnum, Float].include? model.class
+        model * kv[1]
+      elsif model.is_a? Proc
+        model.call(kv[1])
+      end + acc
     end
   end
 
