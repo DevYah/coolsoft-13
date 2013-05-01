@@ -58,17 +58,17 @@
   padding: 0 5px;
 }
 
-.social-media-login.twitter-nav-login {
-  background: url('/assets/bird_blue_32.png') center no-repeat;
+.twitter-nav-login {
+  background: url('/assets/twitter_signin.png') center no-repeat;
 }
 
-.social-media-login.facebook-nav-login {
-  background: url('/assets/facebook-button-small.jpg') center no-repeat;
+.facebook-nav-login {
+  background: url('/assets/facebook_signin.png') center no-repeat;
 }
 
 .social-media-login {
   display: block;
-  width: 32px; height: 20px;
+  width: 150px; height: 20px;
   font-size: 0;
 }
 
