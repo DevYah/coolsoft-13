@@ -8,10 +8,6 @@ will_insert = true;
 user_search = "";
 var previous_search = "";
 
-// function change_state(user){
-
-// }
-
 function stream_manipulator(page,tag,search,insert,user){
   //alert(previous_search);
   currentpage = page;
@@ -40,20 +36,33 @@ if(!user_search){
   if(inside == 0){
     thistag.push(tag);
   }
-  //alert(inside+" "+thistag[0]);
+
   if (inside != 1){
     $("#stream_results").html("");
-    //alert(currentpage+"#"+thistag+"#"+searchtext+"#"+user_search);
     $.ajax({
       url: '/stream/index?page=' + currentpage,
       type: 'get',
       dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search},
+      data: { mypage: currentpage, tag: [tag], search: searchtext, search_user: user_search, insert: will_insert},
       success: function() {
+        alert(will_insert);
       }
     });
   }
 }else{
+  if(search==""){
+    if(thistag.length == 0){
+      $("#stream_results").html("");
+    $.ajax({
+      url: '/stream/index?page=' + currentpage,
+      type: 'get',
+      dataType: 'script',
+      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
+      success: function() {
+        alert(will_insert);
+      }
+    });
+    }else{
   for (var i = 0; i < thistag.length; i++) {
       if (thistag[i] == tag) {
         thistag.splice(i,1);
@@ -62,23 +71,37 @@ if(!user_search){
           url: '/stream/index?page=' + currentpage,
           type: 'get',
           dataType: 'script',
-          data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: false},
+          data: { mypage: currentpage, tag: [tag], search: searchtext, search_user: false, insert: will_insert},
           success: function() {
+            alert(will_insert);
           }
         });
         break;
       }
     }
-}
-}else{
-  if(previous_search != searchtext){
-  $("#stream_results").html("");
-  thistag = [];
+  }
+  }else{
+    thistag = []
+    $("#stream_results").html("");
     $.ajax({
       url: '/stream/index?page=' + currentpage,
       type: 'get',
       dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: true},
+      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
+      success: function() {
+        alert(will_insert);
+      }
+    });
+  }
+}
+}else{
+  if(previous_search != searchtext){
+  $("#stream_results").html("");
+    $.ajax({
+      url: '/stream/index?page=' + currentpage,
+      type: 'get',
+      dataType: 'script',
+      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: true, insert: will_insert},
       success: function() {
         alert("2ndo");
         previous_search = searchtext;
@@ -87,13 +110,10 @@ if(!user_search){
   }
 }
 }
-//alert(currentpage)
 $(document).ready(function(){
-  alert($("#searchtype").val());
    $(".btn-link").click(function tag_caller(e){
     e.preventDefault();
     var tag = $(this);
-    //$("#stream_results").html("");
     $("#search").val("");
     $("#searchtype").val("false");
     stream_manipulator(1,tag.val(),"",true, false);
@@ -105,20 +125,32 @@ $(document).ready(function(){
     $("#searchtype").val("false");
     stream_manipulator(1,curr.val(),"",false, false);
   });
-   $(window).scroll (function(){
-    if($(window).scrollTop()!=0){
-      if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
-        currentpage++;
-        $.ajax({
-          url: '/stream/index?page=' + currentpage,
-          type: 'get',
-          dataType: 'script',
-          data: { mypage: currentpage, tag: thistag, search: $("#search").val(), search_user: $("#searchtype").val()},
-          success: function() {
-            console.log($("#searchtype").val());
+
+    $(window).scroll (function(){
+      if($(window).scrollTop()!=0){
+        if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
+          currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,searchtext,user_search,true]);
           }
-        });
-      }
     }
-  });
-});
+        });
+      });
+
+
+ function call_infinite_scrolling(controller,action,page,id,params){
+  if(id == ""){
+    var url_to_go = '/'+controller+'/'+action+'?page='+page;
+  }else{
+    var url_to_go = '/'+controller+'/'+id+'?page='+page;
+  }
+  
+      page++;
+      $.ajax({
+        url: url_to_go ,
+        type: 'get',
+        dataType: 'script',
+        data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
+        success: function() {
+        }
+      });
+  return page;
+}
