@@ -39,7 +39,6 @@ class CoolsterApp < Sinatra::Base
   # Author: Amina Zoheir
   aget '/poll' do
     puts "polling"
-    puts @@guests
     if env['warden'].authenticated?
       if @@saved_scripts[env['warden'].user[1][0].to_s].nil? || @@saved_scripts[env['warden'].user[1][0].to_s] == []
         @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
