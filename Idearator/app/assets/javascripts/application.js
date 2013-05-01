@@ -23,8 +23,10 @@
 //
 //= require jquery-star-rating
 //
-//= require notification_polling
 //= require notifications
+//
+//= require accountsettings
+
 
 
 var last_search = "";

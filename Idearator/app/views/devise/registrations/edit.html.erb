@@ -28,6 +28,16 @@
   <div><%= f.label :photo %><br />
     <%= f.file_field :photo %>  </p></div>
 
+  <div><%= f.label :username %><br />
+    <%= f.text_field :username %></div>
+
+  <div><%= f.label :date_of_birth %><br />
+    <%= date_select :user, :date_of_birth, :start_year => 2005 %></div>
+
+  <div><%= f.label :photo %><br />
+    <%= f.file_field :photo %>  </p></div>
+
+
   <div><%= f.submit "Update" %></div>
 <% end %>
 
