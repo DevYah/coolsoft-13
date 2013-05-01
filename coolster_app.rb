@@ -32,9 +32,9 @@ class CoolsterApp < Sinatra::Base
     halt 200
   end
 
-  # Checks if there is a current user adds a proc to the users hash with the users id as the key 
-  # and sends an http post request to CoolsterController with this id.
-  # else adds a proc in the guests array.
+  # Adds an new proc to the users hash with the users id as the key to be called later
+  # in any of the /push methods and sends an http post request to CoolsterController with this id.
+  # If guest adds it does the same but for the guest hash with the ession id as the key.
   # Params: none
   # Author: Amina Zoheir
   aget '/poll' do
@@ -57,6 +57,7 @@ class CoolsterApp < Sinatra::Base
     end
   end
 
+  # This is called by Idearator to push a javascript to specified users.
   # Calls the procs of the users in the array.
   # Params:
   # +script+:: the parameter is an string (javascript) passed through Coolster#update.
@@ -84,9 +85,10 @@ class CoolsterApp < Sinatra::Base
     body "ok"
   end
 
-  # Calls all procs in the users hash and the guests array.
+  # This is called by Idearator to push a javascript to all online users (users and guests)
+  # Calls all procs in the users hash and the guests hash.
   # Params:
-  # +script+:: the parameter is an string (javascript) passed through Coolster#update_all.
+  # +script+:: the parameter is a string (javascript) passed through Coolster#update_all.
   # Author: Amina Zoheir
   apost '/push_to_all' do
     puts "updating2"
@@ -124,9 +126,10 @@ class CoolsterApp < Sinatra::Base
     body "ok"
   end
 
+  # This is called by Idearator to push javascripts to users, each user has his specific javascript.
   # Calls all procs in the users hash and the guests array.
   # Params:
-  # +scripts+:: the parameter is a hash of strings (javascripts) passed through Coolster#update_all.
+  # +scripts+:: the parameter is a hash of strings (javascripts) passed through Coolster#update_each.
   # Author: Amina Zoheir
   apost '/push_to_each' do
     puts "updating3"
