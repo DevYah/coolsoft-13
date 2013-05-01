@@ -11,7 +11,7 @@ class CoolsterApp < Sinatra::Base
   end
 
   @@users = {}
-  @@guests = []
+  @@guests = {}
   @@saved_scripts = {}
 
   def self.http_options(path, opts={}, &block)
@@ -39,16 +39,22 @@ class CoolsterApp < Sinatra::Base
   # Author: Amina Zoheir
   aget '/poll' do
     puts "polling"
+    puts @@guests
     if env['warden'].authenticated?
       if @@saved_scripts[env['warden'].user[1][0].to_s].nil? || @@saved_scripts[env['warden'].user[1][0].to_s] == []
         @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
         EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
       else
-        body @@scripts[env['warden'].user[1][0].to_s][0]
-        @@scripts[env['warden'].user[1][0].to_s].remove_at(0)
+        body @@saved_scripts[env['warden'].user[1][0].to_s][0]
+        @@saved_scripts[env['warden'].user[1][0].to_s].remove_at(0)
       end    
     else
-      @@guests << Proc.new{|script| body script}
+      if @@saved_scripts[request.session.id].nil? || @@saved_scripts[request.session.id] == [] 
+        @@guests[request.session.id] = Proc.new{|script| body script}
+      else
+       body @@saved_scripts[request.session.id]
+       @@saved_scripts[request.session.id].remove_at[0] 
+      end
     end
   end
 
@@ -101,8 +107,20 @@ class CoolsterApp < Sinatra::Base
         @@users[key] = nil
       end
     end
-    @@guests.each do |guest|
-      guest.call params[:script]
+    @@guests.each do |key, value|
+      if value.nil?
+        if @@saved_scripts[key].nil?
+          @@saved_scripts[key] = []
+        end
+        @@saved_scripts[key] << params[:script]
+        if @@saved_scripts[key].length > 5
+          @@guests.delete(key)
+          @@saved_scripts.delete(key)
+        end
+      else
+        value.call params[:script]
+        @@guests[key] = nil
+      end
     end
     body "ok"
   end
