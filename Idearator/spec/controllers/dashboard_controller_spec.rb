@@ -59,10 +59,10 @@ describe DashboardController do
       assigns(:ideatags).size.should eq(0)
     end
   end
-end
+
   include Devise::TestHelpers
 
-  describe 'GET #graph' do
+  describe 'GET #chart_data' do
    it 'returns chart  ' do
      l=User.new
      l.email = "lina@gmail.com"
@@ -89,8 +89,8 @@ end
         tagidea.idea_id = i.id
         tagidea.save
       end 
-      get :graph, :tagid => tag.id
-      assigns(:no).should eq(20)
+      get :chart_data, :tag_id => tag.id
+      assigns(:ideasall).should eq(20)
     end
   end
 end
