@@ -5,6 +5,7 @@
   </div>
   <div class="modal-body">
    <div id='Stream'>
+    <% if @approved %>
   <% @approved.each do |approved| %>
     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
       <div class="span8 row" id="share">
@@ -33,6 +34,9 @@
         </div>
       </div>
     <% end %>
+  <% end %>
+  <% else %>
+      <h3>No ideas to view</h3>
   <% end %>
 </div>
   </div>

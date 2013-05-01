@@ -19,11 +19,13 @@ class CompetitionsController < ApplicationController
   def show
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
-    @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
-    @ideas=@competition.ideas.page(params[:mypage]).per(4)
-    @myIdeas.reject! do |i|
-      (@competition.tags & i.tags).empty?
+    if (user_signed_in?)
+      @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
+      @myIdeas.reject! do |i|
+        (@competition.tags & i.tags).empty?
+      end
     end
+    @ideas=@competition.ideas.page(params[:mypage]).per(4)
 
     respond_to do |format|
       format.html # show.html.erb
