@@ -10,10 +10,10 @@ describe CompetitionsController do
       @investor2.confirm!
 
       5.times do
-        @competition1 = FactoryGirl.create(:competition,tags: [Tag.new(:name => 'Games')],investor: @investor)
+        @competition1 = FactoryGirl.create(:competition,tags: [Tag.new(:name => 'Science'),Tag.new(:name => 'Games')],investor: @investor)
       end
       6.times do
-        @competition2 = FactoryGirl.create(:competition,investor: @investor2)
+        @competition2 = FactoryGirl.create(:competition,tags: [Tag.new(:name => 'Science')] ,investor: @investor2)
       end
     end
 
