@@ -22,7 +22,7 @@ class NotificationsController < ApplicationController
 
   # sets the read field to true for the specified notification and redirects to ideas#show.
   # Params:
-  # +not_id+:: the parameter is an instance of +Notification+ passed through notifications/_view.
+  # +not_id+:: the parameter is an integer passed through notifications/_view.
   # Author: Amina Zoheir
   def redirect_idea
     notification = Notification.find(params[:notification])
@@ -35,7 +35,7 @@ class NotificationsController < ApplicationController
 
   # sets the read field to true for the specified notification and redirects to users#send_expertise.
   # Params:
-  # +notification+:: the parameter is an instance of +Notification+ passed through the notifications/_view.
+  # +notification+:: the parameter is an integer passed through the notifications/_view.
   # Author: Amina Zoheir
   def redirect_expertise
     notification = Notification.find(params[:notification])
@@ -48,7 +48,7 @@ class NotificationsController < ApplicationController
 
   # sets the read field to true for the specified notification and redirects to cusers#show.
   # Params:
-  # +notification+:: the parameter is an instance of +Notification+ passed through notifications/_view.
+  # +notification+:: the parameter is an integer passed through notifications/_view.
   # Author: Amina Zoheir
   def redirect_review
     notification = Notification.find(params[:notification])
@@ -61,7 +61,7 @@ class NotificationsController < ApplicationController
 
   # sets the read field to true for the specified notification.
   # Params:
-  # +notification+:: the parameter is an instance of +Notification+ passed through notifications/_view.
+  # +notification+:: the parameter is an integer passed through notifications/_view.
   # Author: Amina Zoheir
   def set_read
     notification = Notification.find(params[:notification])
@@ -73,7 +73,7 @@ class NotificationsController < ApplicationController
 
   # sets the read field to true for the specified notification and redirects to competition#show.
   # Params:
-  # +notification+:: the parameter is an instance of +Notification+ passed through notifications/_view.
+  # +notification+:: the parameter is an integer passed through notifications/_view.
   # Author: Amina Zoheir
   def redirect_compertition
     notification = Notification.find(params[:notification])
@@ -84,6 +84,10 @@ class NotificationsController < ApplicationController
     end
   end
 
+  # sets the read field to true for the specified notification and redirects to competition#review_competition.
+  # Params:
+  # +notification+:: the parameter is an integer passed through notifications/_view.
+  # Author: Amina Zoheir
   def redirect_stream
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
