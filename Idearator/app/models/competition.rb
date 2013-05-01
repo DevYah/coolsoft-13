@@ -36,8 +36,10 @@ class Competition < ActiveRecord::Base
    users=User.where(:id => self.ideas.map(&:user_id))
     EditCompetitionNotification.send_notification(investor,self,users)
   end
+
   def send_delete_notification(investor)
     users=User.where(:id => self.ideas.map(&:user_id))
     DeleteCompetitionNotification.send_notification(investor,self,users)
   end
+
 end

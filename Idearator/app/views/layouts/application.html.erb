@@ -8,12 +8,10 @@
     <meta name='author' content='' />
     <%= stylesheet_link_tag 'application', :media => 'screen' %>
     <%= javascript_include_tag 'application' %>
-
     <% if params[:controller] %>
       <%= stylesheet_link_tag params[:controller] %>.
       <%= javascript_include_tag params[:controller] %>
     <% end %>
-
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -54,8 +52,8 @@
           <% if params[:controller] == 'stream' %>
             <div class='row'>
               <div class='span8' id='Searchpreview'>
-                  <%= render 'layouts/messages' %>
-                  <%= yield %>
+                <%= render 'layouts/messages' %>
+                <%= yield %>
               </div>
               <div class ='row'>
                 <div id='sidebar' class='span4'><!--! Trending view rendered here--></div>

@@ -5,7 +5,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions.json
   def index
     @competitions = Competition.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @competitions }
@@ -97,7 +96,6 @@ class CompetitionsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Competition has been successfully deleted!' }
       end
-
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
