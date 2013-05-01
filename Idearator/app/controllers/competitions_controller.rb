@@ -8,10 +8,8 @@ class CompetitionsController < ApplicationController
   # Muhammed Hassan
   def index
     all = Competition
-    if (user_signed_in?)
-      if (current_user.is_a? Investor)
+    if (params[:type])
         all = Competition.joins(:investor).where(:users => {:id => current_user.id})
-      end
     end
     @filter = false
     @firstTime = false
