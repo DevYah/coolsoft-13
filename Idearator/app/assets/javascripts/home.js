@@ -146,7 +146,10 @@ $(document).ready(function () {
     element: ".title", // string (jQuery selector) - html element next to which the step popover should be shown
     title: "What's trending?", // string - title of the popover
     content: "Here you'll find Idearator's current top 10 ideas!", // string - content of the popover
-    placement: "bottom"
+    placement: "bottom",
+    redirect: function() {
+      document.location.href = '/home/index'
+    }
 });
 
   tour.start(true);
