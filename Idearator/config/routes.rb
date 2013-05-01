@@ -1,7 +1,6 @@
 Sprint0::Application.routes.draw do
 
   default_url_options :host => 'localhost:3000'
-
   root :to => 'home#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
@@ -14,6 +13,9 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'approve_committee' => 'users#approve_committee'
+      match 'reject_committee' => 'users#reject_committee'
+      match 'invite_member' => 'users#invite_member'
     end
 
     collection do
@@ -22,6 +24,7 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'send_expertise'
       match ':id/my_ideas' => 'users#my_ideas'
     end
   end
@@ -30,8 +33,8 @@ Sprint0::Application.routes.draw do
     match 'filter', on: :collection
     match 'like', on: :member
     resources :comments do
-        put 'update', on: :member
-      end
+      put 'update', on: :member
+    end
     member do
       match 'vote'
       match 'unvote'
@@ -40,6 +43,7 @@ Sprint0::Application.routes.draw do
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
+      match 'popover'
     end
   end
 
@@ -70,6 +74,7 @@ Sprint0::Application.routes.draw do
     match 'getallideas'
     match 'gettags'
     match 'getideas'
+    match 'dashboard/chart_data/:tag_id'=>'dashboard#chart_data'
   end
 
   # Notifications routes
