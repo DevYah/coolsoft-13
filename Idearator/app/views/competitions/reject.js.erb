@@ -1,7 +1,7 @@
 var x =$('div#Stream').length
 if (x==1){
 $('#<%=@idea.id%>btns').hide();
-$('#MyModal-<%=@idea.id%> p').text('the idea has been rejected already');
+$('p#approvep').text('the idea has been rejected already');
 $('.<%=@idea.id%>').remove();
 }
 else{

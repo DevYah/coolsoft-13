@@ -1,14 +1,5 @@
-var x =$('div#Stream').length
-if (x==1){
+alert();
 $('#<%=@idea.id%>btns').hide();
-$('#MyModal-<%=@idea.id%> p').text('the idea has been approved already');
+alert();
+$('p#approvep').text('the idea has been rejected already');
 $('.<%=@idea.id%>').remove();
-}
-else{
-  $('#idea-<%= @idea.id%>').remove();
-var remaining = $('.unapproved-ideas').length;
-if (remaining == 0) {
-  var z = $('<h1>No ideas to review</h1>');
-  $('div.content').append(z);
-}
-}

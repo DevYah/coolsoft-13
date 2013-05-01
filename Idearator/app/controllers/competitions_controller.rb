@@ -12,6 +12,14 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def notification_review
+    @approved=Idea.find(params[:idea_id])
+    @competition=Competition.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   #review unapproved ideas
   #Params
   #+id+:: is passed in the params it is the competition id

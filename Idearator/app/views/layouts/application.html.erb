@@ -18,6 +18,7 @@
     <%= yield(:head) %>
   </head>
   <body data-devise=<%= user_signed_in? %>>
+    <div class='enter-idea-notification-modal'></div>
     <% if user_signed_in? %>
       <div id='myModal' class='modal hide fade'>
         <div class='modal-header'>

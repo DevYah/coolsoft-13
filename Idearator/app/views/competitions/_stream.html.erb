@@ -22,28 +22,7 @@
               <%if user_signed_in?%>
                 <% @ideavotehome= current_user.votes.detect { |w|w.id == @approve.id } %>
               <%end%>
-              <a href="#MyModal-<%= approved.id%>" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
-              <!-- Modal -->
-              <div id="MyModal-<%= approved.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h2 id="myModalLabel" class='<%=approved.id%>'><%=approved.title%></h2>
-                </div>
-                <div class="modal-body">
-   <a class="pull-right" href="#">
-            <span class="image <%=approved.id%>"><%= image_tag(approved.photo.url(:thumb), :size => "80x80") %></span>
-          </a>
-                  <h3 class='<%=approved.id%>'><%=approved.description%></h3>
-                  <p><%=approved.problem_solved%></p>
-
-                </div>
-                <div class="modal-footer">
-                  <div id='<%=approved.id%>btns'>
-                    <%= link_to 'Approve', { :controller => "competitions", :action => "approve", :idea_id => approved.id ,:id => @competition.id} ,:class => 'btn btn-success',remote: true, :'data-dismiss' => 'modal' %>
-                    <%= link_to 'Reject', { :controller => "competitions", :action => "reject", :idea_id => approved.id} ,:class => 'btn btn-danger',remote: true,:'data-dismiss' => 'modal' %>
-                  </div>
-                </div>
-              </div>
+              <%= link_to 'modal',{:controller => 'competitions', :action =>'notification_review', :idea_id => approved.id, :id => @competition.id}, :class => 'btn btn-success', remote: true %>
               <div id='sharing'>
                 <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(approved)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
                 <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(approved)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>
