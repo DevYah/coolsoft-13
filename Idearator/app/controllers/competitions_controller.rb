@@ -5,7 +5,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions.json
   def index
     @competitions = Competition.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @competitions }
@@ -71,9 +70,11 @@ class CompetitionsController < ApplicationController
   def show
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
+    @ideas=@competition.ideas.page(params[:mypage]).per(4)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @competition }
+      format.js
     end
   end
 
@@ -104,6 +105,8 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new(params[:competition])
     @competition.investor_id = current_user.id
+    @competition.filter
+    @competition.send_create_notification current_user
     respond_to do |format|
       if @competition.save
         format.html { redirect_to @competition, notice: 'Competition was successfully created.' }
@@ -121,7 +124,7 @@ class CompetitionsController < ApplicationController
   # Author: Marwa Mehanna
   def update
     @competition = Competition.find(params[:id])
-
+    @competition.send_edit_notification current_user
     respond_to do |format|
       if @competition.update_attributes(params[:competition])
         format.html { redirect_to @competition, :notice => 'Competition was successfully updated.' }
@@ -140,11 +143,11 @@ class CompetitionsController < ApplicationController
   def destroy
     @competition = Competition.find(params[:id])
     if current_user.id == @competition.investor_id
+      @competition.send_delete_notification current_user
       @competition.destroy
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Competition has been successfully deleted!' }
       end
-
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }
