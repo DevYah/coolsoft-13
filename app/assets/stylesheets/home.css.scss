@@ -75,11 +75,23 @@
   height:30px;
   cursor:pointer;
 }
-.landinglogin{
-  height:30px;
-  padding-top:50px;
+.landing-login{
+  display: block;
+  width: 170px; height: 40px;
+  font-size: 0;
 }
 .carousel{
   width:900px;
 }
+.signinout{
+position:relative;
+top:60px;
+opacity:0.6;
+filter:alpha(opacity=40);
+}
+.signinout:hover{
+opacity:1.0;
+filter:alpha(opacity=100);
+}
+
 
