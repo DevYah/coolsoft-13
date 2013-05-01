@@ -10,6 +10,8 @@ Sprint0::Application.routes.draw do
     match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
   end
 
+  resources :competitions
+
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
@@ -90,7 +92,6 @@ Sprint0::Application.routes.draw do
   controller :ratings do
     match 'ratings/ajax'
   end
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

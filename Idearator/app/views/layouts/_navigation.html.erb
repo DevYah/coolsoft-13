@@ -1,4 +1,4 @@
-<a class="brand" href="/home/index"><i class="icon-lightbulb icon-large"></i></a>
+<a class="brand" href="/"><i class="icon-lightbulb icon-large"></i></a>
 <ul class='nav'>
   <li class="divider-vertical"></li>
   <% if user_signed_in? %>
@@ -14,6 +14,10 @@
       <ul id = "update-dropdown" class="dropdown-menu custom-dropdown">
         <%= render 'notifications/view_notifications' %>
       </ul>
+    </li>
+  <%else%>
+    <li>
+      <%= link_to "Competitions", '/competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
     </li>
   <% end %>
 </ul>
@@ -44,8 +48,22 @@
         <%= link_to('My Ideas', controller: 'users', action: 'my_ideas', :id => current_user.id) %>
       </li>
     <% end %>
-    <% if current_user.is_a? Investor%>
-      <%= link_to('My Competitions', controller: 'competitions', action: 'index') %>
+    <%if current_user.is_a? Investor %>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= Competition %>
+          <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to('New competition', controller: 'competitions' , action: 'new')%></li>
+          <li>
+            <%= link_to "My Competitions", '/competitions' , :id => 'competitionsNav' ,:remote =>true %>
+          </li>
+        </ul>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Competitions", '/competitions' , :id => 'competitionsNav',:class => 'brand' ,:remote =>true %>
+      </li>
     <% end %>
   <% end %>
   <li>
