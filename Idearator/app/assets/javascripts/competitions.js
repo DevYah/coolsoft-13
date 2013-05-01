@@ -1,0 +1,24 @@
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+$(document).ready(function() {
+  var prePopulate = [];
+
+  $("#competition-tags .competition-tag input:checked").each(function(i, checkbox) {
+    checkbox = $(checkbox);
+    prePopulate.push({id: checkbox.val(), name: checkbox.data("tag-name")});
+  });
+
+  $("#competition-tags").html('<input type="text" id="tag_token_input" name="blah2" />')
+
+  $("#tag_token_input").tokenInput('/tags/ajax', {
+    theme: "facebook",
+    preventDuplicates: true,
+    tokenLimit: 5,
+    tokenFormatter: function(item){
+      return "<li>" + item.name
+           + "<input id='competitions_tags_tags_' type='hidden' value='" + item.id + "' name='competition[tag_ids][]' />"
+           + "</li>";
+    },
+    prePopulate: prePopulate
+  });
+});

@@ -14,6 +14,10 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @competitions=Competition.all
+      @competitions.reject! do |c|
+        (@idea.tags & c.tags).empty?
+      end
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
@@ -118,6 +122,9 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
+        if params[:competition] != '' and params[:competition] != nil
+          Competition.find(params[:competition]).ideas << @idea
+        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
@@ -259,4 +266,29 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+
+  # Enters the idea into a chosen Competition
+  # Params:
+  # +id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # +id1+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
+  def enter_competition
+    @idea = Idea.find(params[:id])
+    @competition = Competition.find(params[:id1])
+    if not @competition.ideas.where(:id => @idea.id).exists?
+      @competition.ideas << @idea
+      EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
+      respond_to do |format|
+        format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'This idea is already enrolled in this competiton'}
+        format.json { head :no_content }
+      end
+    end
+  end
+
 end
