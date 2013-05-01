@@ -53,9 +53,9 @@ Sprint0::Application.routes.draw do
   match '/user_ratings/update' => 'user_ratings#update'
 
   controller :home do
-    match '/home/search'
-    match '/home/searchelse'
-    match '/home/index'
+    match 'home/search'
+    match 'home/searchelse'
+    match 'home/index'
   end
 
   # Admin actions routes
@@ -96,10 +96,6 @@ Sprint0::Application.routes.draw do
 
   controller :ratings do
     match 'ratings/ajax'
-  end
-
-  controller :stream do
-    match '/stream/index'
   end
 
   # The priority is based upon order of creation:
@@ -147,15 +143,4 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
-  match '/review_ideas' => 'committees#review_ideas'
-  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
-  match '/users/deactivate' => 'users#deactivate'
-  match '/stream/index' => 'stream#index'
-  match '/home/show_more' => 'home#show_more'
-  #2.3 Create/Edit Tags
-  resources :tags
-
-  match 'tags/:id/synonym' => 'tags#addsym', :via => :put
-  match 'tags/:id/delsym' => 'tags#delsym', :via => :put
 end

@@ -56,10 +56,4 @@ class HomeController < ApplicationController
       end
     end
   end
-
-  def show_more
-    respond_to do |format|
-        format.js
-      end
-  end
 end
