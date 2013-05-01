@@ -14,7 +14,6 @@ $('.btn-success.add-rating').click(function(){
     $("#show").toggle("slow");
   });
 
-
   $("#fbk").click(function() {
     var pathname = window.location;
      var fburl = 'http://www.facebook.com/sharer.php?u='+encodeURI(pathname);

@@ -37,7 +37,6 @@ class Idea < ActiveRecord::Base
     start_date = date
     start_date = start_date - (start_date.day - 1).day
     end_date = start_date + 1.month
-    #FIXME num_votes changed to vote count
     ideas = Idea.where(:created_at => start_date..end_date).reorder('num_votes')
     idea = MonthlyWinner.new
     puts ideas.count
