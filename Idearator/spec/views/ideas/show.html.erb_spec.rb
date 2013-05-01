@@ -43,19 +43,19 @@ describe 'ideas/show.html.erb' do
       render :template => '/ideas/show', :locals => { :idea => @idea }
     end
 
-    it 'has a pinterest image' do
+    it 'has a hidden pinterest image' do
       rendered.should have_tag('img#pin', :visible => false)
     end
 
-    it 'has a facebook image' do
+    it 'has a hidden facebook image' do
       rendered.should have_tag('img#fbk', :visible => false)
     end
 
-    it 'has a twitter image' do
+    it 'has a hidden twitter image' do
       rendered.should have_tag('img#tw', :visible => false)
     end
 
-    it 'has facebook comments' do
+    it 'has hidden facebook comments' do
       rendered.should have_tag('div.fb-comments', :visible => false)
     end
   end
