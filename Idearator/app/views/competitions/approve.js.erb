@@ -1,5 +1,3 @@
-alert();
-$('#<%=@idea.id%>btns').hide();
-alert();
+$('#<%=@idea.id%>btns').remove();
 $('p#approvep').text('the idea has been rejected already');
 $('.<%=@idea.id%>').remove();
