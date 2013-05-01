@@ -1,5 +1,4 @@
 class FacebookApiCreate
-  include Rails.application.routes.url_helpers
 
   def after_create(idea)
     if idea.user.provider == "facebook" && idea.user.facebook_share
