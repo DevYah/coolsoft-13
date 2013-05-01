@@ -7,7 +7,7 @@ class EnterIdeaNotification < CompetitionIdeaNotification
     users_receivers.each do |user|
       user_ids << user.id.to_s
     end
-    NotificationsController::CoolsterPusher.new.push_notification user_ids, edit_idea_notification
+    NotificationsController::CoolsterPusher.new.push_notification user_ids, enter_idea_notification
   end
 
   def text
