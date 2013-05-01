@@ -99,7 +99,7 @@ Sprint0::Application.routes.draw do
 
   match 'competitions/:id/enroll_idea/:idea_id' => 'competitions#enroll_idea'
   match 'ideas/:id/enter_competition/:competition_id' => 'ideas#enter_competition'
- 
+
 controller :stream do
     match '/stream/index'
   end
