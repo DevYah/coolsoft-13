@@ -23,7 +23,7 @@
                 <li style = "color: #0060ff;"><%= tag.name %></li>
               <% end %>
             </ul>
-              <%= link_to 'Enroll', { :controller => "competitions", :action => "enroll_idea", :id => approved.id, :id1 => @competition.id }, :class =>"btn btn-large btn-primary inline pull-right margin" %>
+              <%= link_to 'Enroll', { :controller => "competitions", :action => "enroll_idea", :id => @competition.id, :idea_id => approved.id }, :class =>"btn btn-large btn-primary inline pull-right margin" %>
             <div id='sharing'>
               <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(approved)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
               <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(approved)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>

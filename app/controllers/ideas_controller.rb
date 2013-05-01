@@ -14,10 +14,7 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
-      @competitions=Competition.all
-      @competitions.reject! do |c|
-        (@idea.tags & c.tags).empty?
-      end
+      @competitions = Competition.joins(:tags).where('tags.id' => @idea.tags)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
@@ -122,8 +119,8 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
-        if params[:competition] != '' and params[:competition] != nil
-          Competition.find(params[:competition]).ideas << @idea
+        if params[:competition_id] != '' and params[:competition_id] != nil
+          Competition.find(params[:competition_id]).ideas << @idea
         end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
@@ -275,7 +272,7 @@ class IdeasController < ApplicationController
   # Author: Mohammad Abdulkhaliq
   def enter_competition
     @idea = Idea.find(params[:id])
-    @competition = Competition.find(params[:id1])
+    @competition = Competition.find(params[:competition_id])
     if not @competition.ideas.where(:id => @idea.id).exists?
       @competition.ideas << @idea
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])

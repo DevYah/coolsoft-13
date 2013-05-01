@@ -37,7 +37,7 @@
               <div class="dates span3">
                 <%=
                  link_to_if(current_page?(:controller => 'competitions', :action => 'index'), "Enroll", { :controller => "competitions", :action => "show", :id => c.id }, :class => 'btn btn-primary btn-large') do
-                  link_to("Enroll", { :controller => "ideas", :action => "enter_competition", :id => @idea.id, :id1 => c.id }, :class => 'btn btn-primary btn-large')
+                  link_to("Enroll", { :controller => "ideas", :action => "enter_competition", :id => @idea.id, :competition_id => c.id }, :class => 'btn btn-primary btn-large')
                   end
                 %>
               </div>

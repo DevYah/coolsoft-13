@@ -20,25 +20,25 @@ describe CompetitionsController do
   describe 'PUT enroll_idea' do
     context 'Success Scenario' do
       it 'retrieves valid competition and idea id from :id and :id1' do
-        put :enroll_idea, :id => @idea.id, :id1 => @competition.id
+        put :enroll_idea, :id => @competition.id, :idea_id => @idea.id
         assigns(:idea).should_not eq(nil)
         assigns(:competition).should_not eq(nil)
       end
       it 'adds the idea to the competition ideas list' do
-        expect { put :enroll_idea, id: @idea.id, id1: @competition.id } .to change(@competition.ideas, :count).by(1)
+        expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id } .to change(@competition.ideas, :count).by(1)
       end
       it 'calls send_notification in EnterIdeaCompetition' do
-        expect { put :enroll_idea, id: @idea.id, id1: @competition.id } .to change(EnterIdeaNotification, :count).by(1)
+        expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id } .to change(EnterIdeaNotification, :count).by(1)
       end
       it 'redirects to competition show page' do
-        put :enroll_idea, id: @idea.id, id1: @competition.id
+        put :enroll_idea, :id => @competition.id, :idea_id => @idea.id
         response.should redirect_to "/competitions/#{@competition.id}"
       end
     end
     context 'Failure Scenario' do
       it 'does not append competitions list if idea is already in competition' do
         @competition.ideas << @idea
-        expect { put :enroll_idea, id: @idea.id, id1: @competition.id }.to change(@competition.ideas, :count).by(0)
+        expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id }.to change(@competition.ideas, :count).by(0)
       end
     end
   end

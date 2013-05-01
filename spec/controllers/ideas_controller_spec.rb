@@ -338,10 +338,10 @@ describe IdeasController do
         sign_in @u1
       end
       it 'creates the idea' do
-        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition => @competition.id }.to change(Idea, :count).by(1)
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(Idea, :count).by(1)
       end
       it 'appends the idea to competition list' do
-        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition => @competition.id }.to change(@competition.ideas, :count).by(1)
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(@competition.ideas, :count).by(1)
       end
     end
   end
@@ -439,25 +439,25 @@ describe IdeasController do
     end
     context 'Success Scenario' do
       it 'retrieves valid competition and idea id from :id and :id1' do
-        put :enter_competition, :id => @idea.id, :id1 => @competition.id
+        put :enter_competition, :id => @idea.id, :competition_id => @competition.id
         assigns(:idea).should_not eq(nil)
         assigns(:competition).should_not eq(nil)
       end
       it 'adds the idea to the competition ideas list' do
-        expect { put :enter_competition, id: @idea.id, id1: @competition.id } .to change(@competition.ideas, :count).by(1)
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(@competition.ideas, :count).by(1)
       end
       it 'calls send_notification in EnterIdeaCompetition' do
-        expect { put :enter_competition, id: @idea.id, id1: @competition.id } .to change(EnterIdeaNotification, :count).by(1)
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(EnterIdeaNotification, :count).by(1)
       end
       it 'redirects to competition show page' do
-        put :enter_competition, id: @idea.id, id1: @competition.id
+        put :enter_competition, :id => @idea.id, :competition_id => @competition.id
         response.should redirect_to "/ideas/#{@idea.id}"
       end
     end
     context 'Failure Scenario' do
       it 'does not append competitions list if idea is already in competition' do
         @competition.ideas << @idea
-        expect { put :enter_competition, id: @idea.id, id1: @competition.id }.to change(@competition.ideas, :count).by(0)
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id }.to change(@competition.ideas, :count).by(0)
       end
     end
   end
