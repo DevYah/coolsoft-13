@@ -43,7 +43,7 @@ class CompetitionsController < ApplicationController
   # Author: Marwa Mehanna
   def edit
     @competition = Competition.find(params[:id])
-    @chosen_tags_competition = Competition.find(params[:id]).tags
+    @chosen_tags_competition = @competition.tags
   end
 
   # creating new Idea
@@ -68,7 +68,7 @@ class CompetitionsController < ApplicationController
 
   # updating Idea
   # Params
-   # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
+  # +id+ :: this is an instance of +Competition+ passed through _form.html.erb, used to identify which +Competition+ to edit
   # Author: Marwa Mehanna
   def update
     @competition = Competition.find(params[:id])
