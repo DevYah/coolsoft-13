@@ -34,15 +34,16 @@ class User < ActiveRecord::Base
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => 'user-default.png'
 
-  # this method finds the +User+ using the hash and creates a new +User+
-  # if no users with this email exist
-  #
-  # Params:
-  #
-  # +auth+:: omniauth authentication hash
-  # +signed_in_resource+:: Currently signed in resource. Unused.
-  #
-  #Author: Menna Amr
+# this method finds the +User+ using the hash and creates a new +User+
+# if no users with this email exist
+#
+# Params:
+#
+# +auth+:: omniauth authentication hash
+# +signed_in_resource+:: Currently signed in resource. Unused.
+#
+#Author: Menna Amr
+>>>>>>> 751657237f11d2ed7fb5e4292d34d9bad509b6a1
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
