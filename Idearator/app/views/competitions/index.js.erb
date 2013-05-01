@@ -1,10 +1,8 @@
 var main ;
 main = $('.content');
 <% if @firstTime %>
-if(!($('.competition').length > 0)){
   main.empty();
   main.append("<%= escape_javascript(render(:partial => "index")) %>");
-}
 <% else %>
 <% if @filter %>
 $('.competitions').empty();
