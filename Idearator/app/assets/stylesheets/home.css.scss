@@ -34,7 +34,7 @@
 }
 
 .topten{
-  border-radius: 5px;
+  padding: 10px;
   margin: 10px;
   background: rgba(0, 0, 0, 0.10);
 }
@@ -50,7 +50,9 @@
   width: 200px;
 }
 
-
+.topten_idea{
+  background: rgba(0, 0, 0, 0.10);
+}
 .tag{
   color: #0060ff;
 }
