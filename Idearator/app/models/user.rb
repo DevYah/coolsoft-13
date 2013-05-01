@@ -34,15 +34,15 @@ class User < ActiveRecord::Base
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => '300x300>', :thumb => '10x10!' }, :default_url => 'user-default.png'
 
-# this method finds the +User+ using the hash and creates a new +User+
-# if no users with this email exist
-#
-# Params:
-#
-# +auth+:: omniauth authentication hash
-# +signed_in_resource+:: Currently signed in resource. Unused.
-#
-#Author: Menna Amr
+  # this method finds the +User+ using the hash and creates a new +User+
+  # if no users with this email exist
+  #
+  # Params:
+  #
+  # +auth+:: omniauth authentication hash
+  # +signed_in_resource+:: Currently signed in resource. Unused.
+  #
+  #Author: Menna Amr
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
                          uid:auth.uid,
                          email:auth.info.email,
                          password:Devise.friendly_token[0,20])
-  end
-  user
+    end
+    user
   end
 
   # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
@@ -88,5 +88,37 @@ class User < ActiveRecord::Base
                        # random password, won't hurt
                        password: Devise.friendly_token[0, 20])
   end
-end
 
+  def new_notifications(after)
+    notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', self.becomes(User), Time.at(after.to_i + 1))
+    sorted_notifications = notifications.sort_by &:created_at
+    new_notifications = sorted_notifications.reverse
+  end
+
+  def get_notifications
+    notifications = self.notifications
+    sorted_notifications = notifications.sort_by &:created_at
+    all_notifications = sorted_notifications.reverse
+  end
+
+  def unread_notifications_count
+    NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+  end
+
+  def vote_for(idea)
+    self.votes.create(idea_id: idea.id)
+    if idea.user.own_idea_notifications
+      VoteNotification.send_notification(self, idea, [idea.user])
+    end
+    idea.save
+  end
+
+  def unvote_for(idea)
+    voted_ideas.delete(idea)
+  end
+
+  def voted_for?(idea)
+    votes.where(idea_id: idea.id).exists?
+  end
+
+end
