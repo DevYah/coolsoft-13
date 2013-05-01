@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
 
 
   # view idea of current user
+
   # Params
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Marwa Mehanna
@@ -100,9 +101,9 @@ class IdeasController < ApplicationController
     current_user.unvote_for @idea
     @idea.reload
     respond_to do |format|
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-        format.js
+      format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -134,21 +135,22 @@ class IdeasController < ApplicationController
   def destroy
     idea = Idea.find(params[:id])
     if current_user.id == idea.user_id
-      list_of_comments = Comment.where(idea_id: idea.id)
-      list_of_commenters = []
-      list_of_voters = idea.votes
-
-      list_of_comments.each do |c|
-        list_of_commenters.append(User.find(c.user_id)).flatten!
-        c.destroy
+      DeleteNotification.send_notification(current_user, idea, idea.voters)
+      idea.voters.each do |u|
+        idea.voters.delete(u)
       end
-
-      list = list_of_commenters.append(list_of_voters).flatten!
-
-      DeleteNotification.send_notification(current_user, idea, list)
-
+      list_of_ratings = Rating.where(:idea_id => idea.id)
+      list_of_user_ratings = []
+      list_of_ratings.each do |r|
+        list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
+      end
+      list_of_ratings.each do |r|
+        r.destroy
+      end
+      list_of_user_ratings.each do |ur|
+        ur.destroy
+      end
       idea.destroy
-
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
@@ -169,40 +171,24 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = true
       idea.save
-      list_of_commenters = []
-      idea.comments.each do |c|
-        list_of_commenters.append(User.find(c.user_id)).flatten!
-      end
-      list = list_of_commenters.append(idea.votes).flatten!
-
+      list = idea.voters
       if current_user.type == 'Admin'
         list.append(User.find(idea.user_id)).flatten!
       end
-
       ArchiveNotification.send_notification(current_user, idea, list)
-      idea.votes.each do |u|
-        idea.votes.delete(u)
+      idea.voters.each do |u|
+        idea.voters.delete(u)
       end
-
       idea.num_votes = 0
-
-      idea.comments.each do |c|
-        c.destroy
-      end
-
       list_of_ratings = Rating.where(:idea_id => idea.id)
       list_of_user_ratings = []
-
       list_of_ratings.each do |r|
         list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
       end
-
-      list_of_user_ratings.each do |ur|
-        ur.destroy
+      list_of_user_ratings.each do |u|
+        u.destroy
       end
-
       idea.save
-
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea has been successfully archived!' }
         format.js
@@ -259,4 +245,17 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+
+  # Popover with idea details
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be displayed
+  # Author: Dayna Hany
+  def popover
+    @idea = Idea.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end

@@ -12,19 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ideas/popover
+
+//= require jquery.tokeninput
+//= require jquery-ui
+//= require jquery_purr
+//= require best_in_place
 //= require bootstrap
 //= require jquery.purr
-//= require bootstrap
-//= require best_in_place
 //
-//= require jquery-ui
-//= require jquery.tokeninput
 //= require jquery-star-rating
-//= require jquery_purr
 //
 //= require notifications
 //
-//= require modal
+//= require accountsettings
 
 
 function popupCenter(url, width, height, name) {
