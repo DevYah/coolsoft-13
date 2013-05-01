@@ -8,7 +8,9 @@
         <%= image_tag idea.photo.url(:medium) %>
         <ul class ="inline">
           <% idea.tags.each do |tag| %>
-            <span class="label label-info "><%= tag.name %></span>
+            <button class="btn btn-link" value='<%= tag.name %>'>
+              <span class="label label-info "><%= tag.name %></span>
+            </button>
           <% end %>
         </ul>
          <%= render :partial => 'ideas/share' ,locals: {idea: idea}%>
@@ -23,4 +25,5 @@
       </div>
     </div>
   </div>
+  <hr />
 <% end %>
