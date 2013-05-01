@@ -44,7 +44,7 @@ Sprint0::Application.routes.draw do
     end
   end
 
-  match 'ideas/:competition/new' => 'ideas#new'
+  match 'ideas/:competition_id/new' => 'ideas#new'
 
   resources :user_ratings, :controller => 'user_ratings'
   match '/user_ratings/create' => 'user_ratings#create'
@@ -96,8 +96,8 @@ Sprint0::Application.routes.draw do
   end
   resources :competitions
 
-  match 'competitions/:id/enroll_idea/id1' => 'competitions#enroll_idea'
-  match 'ideas/:id/enter_competition/:id1' => 'ideas#enter_competition'
+  match 'competitions/:id/enroll_idea/:idea_id' => 'competitions#enroll_idea'
+  match 'ideas/:id/enter_competition/:competition_id' => 'ideas#enter_competition'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

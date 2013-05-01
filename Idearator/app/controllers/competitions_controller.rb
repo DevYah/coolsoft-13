@@ -91,8 +91,8 @@ class CompetitionsController < ApplicationController
   # +id1+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
   # Author: Mohammad Abdulkhaliq
   def enroll_idea
-    @idea = Idea.find(params[:id])
-    @competition = Competition.find(params[:id1])
+    @idea = Idea.find(params[:idea_id])
+    @competition = Competition.find(params[:id])
     if not @competition.ideas.where(:id => @idea.id).exists?
       @competition.ideas << @idea
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
