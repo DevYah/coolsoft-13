@@ -4,10 +4,9 @@ class IdeasController < ApplicationController
 
 
   # view idea of current user
-
-  # Params
+  # Params:
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
-  # Marwa Mehanna
+  # Author: Marwa Mehanna
   def show
     @idea = Idea.find(params[:id])
     if user_signed_in?
@@ -23,7 +22,8 @@ class IdeasController < ApplicationController
   end
 
   # making new Idea
-  #Marwa Mehanna
+  # Params: None
+  # Author: Marwa Mehanna
   def new
     @idea = Idea.new
     @tags = Tag.all
@@ -36,7 +36,7 @@ class IdeasController < ApplicationController
 
   # filters the ideas that have one or more of given tags
   # Params:
-  # +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
+  # +tags+:: the parameter is an list of +Tag+ passed through tag autocomplete field
   # Author: muhammed hassan
   def filter
     @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
@@ -48,8 +48,8 @@ class IdeasController < ApplicationController
   end
 
   # editing Idea
-  # Params
-  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
+  # Params:
+  # +id+:: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
   def edit
     @idea = Idea.find(params[:id])
@@ -59,9 +59,9 @@ class IdeasController < ApplicationController
   end
 
   # updating Idea
-  # Params
-  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Params:
+  # +id+:: this is an instance +Idea+ passed through _form.html.erb, used to identify which +Idea+ to  update
+  # +id+:: this is an instance +Idea+ passed through show.html.erb, used to identify which is +Idea+ to update
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
@@ -108,10 +108,8 @@ class IdeasController < ApplicationController
   end
 
   # creating new Idea
-  # Params
-  # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
-  # +idea_tags+ :: this is an instance of +IdeaTags+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Params:
+  # +idea+:: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
   # Author: Marwa Mehanna
   def create
     @idea = Idea.new(params[:idea])
@@ -218,12 +216,12 @@ class IdeasController < ApplicationController
     end
   end
 
-  #adds the rating prespectives taken from the user from the add_prespectives view
-  #to the idea reviewed
-  # Params
-  #+params[:ratings]+ ratings prespectives taken from the user
-  #+session[:idea_id] id of the idea to be reviewed
-  #Author : Omar Kassem
+  # adds the rating prespectives taken from the user from the add_prespectives view
+  # to the idea reviewed
+  # Params:
+  # +params[:ratings]+:: ratings prespectives taken from the user
+  # +session[:idea_id]+:: id of the idea to be reviewed
+  # Author: Omar Kassem
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
