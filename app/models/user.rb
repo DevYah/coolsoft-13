@@ -105,6 +105,10 @@ class User < ActiveRecord::Base
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
   end
 
+  # Get approved and unarchived ideas for user
+  # Params:
+  # None
+  # Author: Hisham ElGezeery
   def get_approved_ideas
     ideas = self.ideas
     approved_ideas = ideas.where(:approved => true)
