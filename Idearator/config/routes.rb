@@ -44,8 +44,6 @@ Sprint0::Application.routes.draw do
     end
   end
 
-  match 'ideas/:competition_id/new' => 'ideas#new'
-
   resources :user_ratings, :controller => 'user_ratings'
   match '/user_ratings/create' => 'user_ratings#create'
   match '/user_ratings/update' => 'user_ratings#update'
@@ -93,6 +91,17 @@ Sprint0::Application.routes.draw do
 
   controller :ratings do
     match 'ratings/ajax'
+  end
+
+
+  controller :competitions do
+    resources :competitions do
+      member do
+        match 'review_competitions_ideas' => 'competitions#review_competitions_ideas'
+        match 'approve' => 'competitions#approve'
+        match 'reject' => 'competitions#reject'
+      end
+    end
   end
 
   resources :competitions
