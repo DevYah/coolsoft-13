@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe UsersController do
   include Devise::TestHelpers
-  describe 'GET my_ideas' do
+  describe 'GET ideas' do
     it 'views an idea stream for a certain user' do
       @user = FactoryGirl.build(:user)
       @user.confirm!
@@ -10,8 +10,8 @@ describe UsersController do
       @idea.user = @user
       @idea.save
       sign_in @user
-      get :my_ideas, :id => @user.id
-      response.should render_template("users/my_ideas")
+      get :ideas, :id => @user.id
+      response.should render_template("users/ideas")
       assigns(:ideas).size.should eq(1)
     end
   end
@@ -43,4 +43,39 @@ describe UsersController do
       u1.participated_idea_notifications.should eq(false)
     end
   end
+     before :each do
+    @a = Admin.new
+    @a.email = 'admin@gmail.com'
+    @a.username = 'admin'
+    @a.password = '123123123'
+    @a.confirm!
+    @a.save
+    sign_in @a
+
+    @u1 = User.new
+    @u1.email = 'user1@gmail.com'
+    @u1.username = 'user1'
+    @u1.password = '123123123'
+    @u1.confirm!
+    @u1.save
+    sign_in @u1
+  end
+   describe "PUT #invite_member" do
+     it "retrieves the user instance from :id" do
+       put :invite_member, :id => @u1.id
+       assigns(:user).should eq(@u1)
+     end
+     it "inititates the user to the committees table" do
+       put :invite_member, :id => @u1.id
+       @u1.reload
+       @u1.type.should eq("Committee")
+     end
+     it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
+       expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
+     end
+     it "redirects to home page" do
+      put :invite_member, :id => @u1.id
+       response.should redirect_to '/'
+   end
+ end
 end

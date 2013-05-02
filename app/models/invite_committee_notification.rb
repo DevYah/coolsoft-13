@@ -10,3 +10,4 @@ class InviteCommitteeNotification < UserNotification
   end
 
 end
+2

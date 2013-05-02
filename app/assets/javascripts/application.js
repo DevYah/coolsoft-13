@@ -12,14 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.purr
-//= require bootstrap
-//= require best_in_place
-//
-//= require jquery-ui
+//= require ideas/popover
 //= require jquery.tokeninput
-//= require jquery-star-rating
+//= require jquery-ui
 //= require jquery_purr
+//= require best_in_place
+//= require bootstrap
+//= require jquery.purr
+//
+//= require jquery-star-rating
 //
 //= require notification_polling
 //= require notifications
