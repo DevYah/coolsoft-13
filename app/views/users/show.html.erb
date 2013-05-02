@@ -110,7 +110,7 @@
     </div>
   </div>
   <% if @user.get_approved_ideas.count != 0 %>
-    <a class="btn btn-primary" type="button" href='/users/<%= @user.id%>/my_ideas'>View Ideas (<%= @user.get_approved_ideas.count%>)</a>
+    <a class="btn btn-primary" type="button" href='/users/<%= @user.id%>/ideas'>View Ideas (<%= @user.get_approved_ideas.count%>)</a>
   <% end %>
   <div>
     <ul class="pager">
