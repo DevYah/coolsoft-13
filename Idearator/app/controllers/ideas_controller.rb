@@ -14,6 +14,7 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @competitions = Competition.joins(:tags).where('tags.id' => @idea.tags)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
@@ -100,9 +101,9 @@ class IdeasController < ApplicationController
     current_user.unvote_for @idea
     @idea.reload
     respond_to do |format|
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-        format.js
+      format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -118,6 +119,9 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
+        if params[:competition_id] != '' and params[:competition_id] != nil
+          Competition.find(params[:competition_id]).ideas << @idea
+        end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
       else
@@ -261,4 +265,29 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+
+  # Enters the idea into a chosen Competition
+  # Params:
+  # +id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # +competition_id+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
+  def enter_competition
+    @idea = Idea.find(params[:id])
+    @competition = Competition.find(params[:competition_id])
+    if not @competition.ideas.where(:id => @idea.id).exists?
+      @competition.ideas << @idea
+      EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
+      respond_to do |format|
+        format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'This idea is already enrolled in this competiton'}
+        format.json { head :no_content }
+      end
+    end
+  end
+
 end

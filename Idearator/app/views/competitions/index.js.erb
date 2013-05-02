@@ -1,0 +1,12 @@
+var main ;
+main = $('.content');
+<% if @firstTime %>
+  main.empty();
+  main.append("<%= escape_javascript(render(:partial => "index")) %>");
+<% else %>
+<% if @filter %>
+$('.competitions').empty();
+<% end %>
+main.append("<%= escape_javascript(render(:partial => "index")) %>");
+apply_script();
+<% end %>

@@ -22,6 +22,7 @@
 //= require jquery-star-rating
 //= require notification_polling
 //= require notifications
+//= require jquery-star-rating
 //= require stream
 
 
