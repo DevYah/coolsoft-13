@@ -224,7 +224,7 @@ describe CompetitionsController do
 
     it "filters competitions for investor" do
       sign_in(@investor)
-      get :index
+      get :index, :type => 1
       assigns(:competitions).should have(5).items
     end
 
