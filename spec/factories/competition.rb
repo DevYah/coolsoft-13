@@ -3,7 +3,7 @@ require 'factory_girl_rails'
 
 FactoryGirl.define do
 
-  factory :competition, :class => Competition do |f|
+  factory :notification_competition, :class => Competition do |f|
     f.title 'title'
     f.description 'description competition'
   end
