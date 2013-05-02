@@ -341,7 +341,7 @@ describe IdeasController do
         expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(Idea, :count).by(1)
       end
       it 'appends the idea to competition list' do
-        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(@competition.ideas, :count).by(1)
+        expect { post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }, :competition_id => @competition.id }.to change(CompetitionEntry, :count).by(1)
       end
     end
   end
@@ -444,7 +444,7 @@ describe IdeasController do
         assigns(:competition).should_not eq(nil)
       end
       it 'adds the idea to the competition ideas list' do
-        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(@competition.ideas, :count).by(1)
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(CompetitionEntry, :count).by(1)
       end
       it 'calls send_notification in EnterIdeaCompetition' do
         expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id } .to change(EnterIdeaNotification, :count).by(1)
@@ -457,7 +457,7 @@ describe IdeasController do
     context 'Failure Scenario' do
       it 'does not append competitions list if idea is already in competition' do
         @competition.ideas << @idea
-        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id }.to change(@competition.ideas, :count).by(0)
+        expect { put :enter_competition, :id => @idea.id, :competition_id => @competition.id }.to change(CompetitionEntry, :count).by(0)
       end
     end
   end
