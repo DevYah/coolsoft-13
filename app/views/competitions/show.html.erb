@@ -43,7 +43,7 @@
       <% end %>
     </div>
     <div class='span8' id='stream_competition' value='<%= @competition.id%>'>
-      <% if @competition.open and current_user %>
+      <% if @competition.open %>
         <p><a data-toggle="modal" href="#myIdeas" class="btn btn-primary ">Enroll an Idea</a></p>
         <%= render :partial => 'enroll_idea', :locals => {:@approved => @myIdeas}%>
       <% end %>
