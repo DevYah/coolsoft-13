@@ -54,6 +54,7 @@ $(document).bind("ajaxError", function(e, xhr){
 
 
 $(document).ready(function() {
+  
 	$("#sign").click(function() {
 		window.location= "/users/sign_in";
 	});
