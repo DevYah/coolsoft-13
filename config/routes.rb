@@ -57,7 +57,7 @@ Sprint0::Application.routes.draw do
   # Admin actions routes
   controller :admins do
     match 'admins/invite'
-    match 'admins/invite_committee'
+    match 'invite_committee'
   end
 
   # Committe actions routes
@@ -106,10 +106,13 @@ Sprint0::Application.routes.draw do
 
   resources :competitions
 
+  match 'competitions/:id/enroll_idea/:idea_id' => 'competitions#enroll_idea'
+  match 'ideas/:id/enter_competition/:competition_id' => 'ideas#enter_competition'
 
-  controller :stream do
+controller :stream do
     match '/stream/index'
   end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

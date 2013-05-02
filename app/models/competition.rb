@@ -1,6 +1,6 @@
 class Competition < ActiveRecord::Base
 
- attr_accessible :title, :description ,:start_date ,:end_date, :tag_ids
+  attr_accessible :title, :description ,:start_date ,:end_date, :tag_ids
 
   validates_length_of :title, :maximum => 50
   validates_length_of :description, :maximum => 1000
@@ -14,7 +14,7 @@ class Competition < ActiveRecord::Base
   has_many :competition_idea_notifications, :dependent => :destroy
   has_many :delete_competition_notifications
 
-   def filter
+  def filter
     @ideas = []
     tags=self.tags
     tags.each do |tag|
@@ -24,6 +24,14 @@ class Competition < ActiveRecord::Base
       @ideas = @ideas + ideas
     end
     @ideas
+  end
+
+  # check if a competition is still open
+  # Params
+  # +self+:: the current +Competition+ that we want to check
+  # Muhamed Hassan
+  def open
+    return  start_date < Time.now.to_date && end_date > Time.now.to_date
   end
 
   def send_create_notification(investor)
@@ -41,5 +49,6 @@ class Competition < ActiveRecord::Base
     users=User.where(:id => self.ideas.map(&:user_id))
     DeleteCompetitionNotification.send_notification(investor,self,users)
   end
+
 
 end
