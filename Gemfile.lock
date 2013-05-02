@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.4)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     best_in_place (2.1.0)
       jquery-rails
@@ -71,6 +72,7 @@ GEM
       i18n (~> 0.5)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    ffi (1.8.1)
     ffi (1.8.1-x86-mingw32)
     font-awesome-rails (3.0.2.0)
       railties (>= 3.1)
@@ -122,6 +124,7 @@ GEM
     multiple_table_inheritance (0.2.1)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
+    nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -152,6 +155,10 @@ GEM
       cocaine (~> 0.5.0)
       mime-types
     polyglot (0.3.3)
+    pry (0.9.12.1)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     pry (0.9.12.1-x86-mingw32)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -222,6 +229,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.7)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -245,6 +253,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
