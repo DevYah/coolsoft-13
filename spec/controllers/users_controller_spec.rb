@@ -96,7 +96,7 @@ describe UsersController do
        expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
      end
      it "redirects to home page" do
-      put :invite_member, :id => @u1.id
+       put :invite_member, :id => @u1.id
        response.should redirect_to '/'
    end
  end
