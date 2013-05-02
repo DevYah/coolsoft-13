@@ -116,6 +116,11 @@ $(document).ready(function () {
     title: "Share on Twitter"
   });
 
+  $('.post-an-idea').click(function (e) {
+    e.preventDefault();
+    $('#signedout').modal('show');
+  });
+
     var tour = new Tour();
 
   tour.addStep({
@@ -127,7 +132,7 @@ $(document).ready(function () {
     redirect: function() {
       document.location.href = '/'
     }
-});
+  });
 
   tour.addStep({
     path: "/home/index",
@@ -139,7 +144,7 @@ $(document).ready(function () {
     redirect: function() {
       document.location.href = '/home/index'
     }
-});
+  });
 
     tour.addStep({
     path: "/home/index",
@@ -150,7 +155,7 @@ $(document).ready(function () {
     redirect: function() {
       document.location.href = '/home/index'
     }
-});
+  });
 
   tour.start();
 });

@@ -20,12 +20,17 @@
 //= require jquery.cookie
 //
 //= require bootstrap
+//= require bootstrap-tour
 //= require best_in_place
 //= require ideas/popover
 //
 //= require notification_polling
 //= require notifications
-//= require bootstrap-tour
+//
+//= require profile_modal
+//
+//= require unauthorized_sign_in_up_modal
+
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
@@ -39,12 +44,6 @@ $(document).ready(function () {
 
   var before_search = false;
   var original;
-
-  $(document).bind("ajaxError", function (e, xhr) {
-    if (xhr.status === 401) {
-      $('#signedout').modal('show');
-    }
-  });
 
   $("#searchdiv input").keyup(function () {
     if (window.location === "http://localhost:3000/") {

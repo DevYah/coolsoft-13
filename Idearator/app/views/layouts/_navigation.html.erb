@@ -41,7 +41,7 @@
     <% end %>
     <% if current_user.ideas.count != 0 %>
       <li>
-        <%= link_to('My Ideas', controller: 'users', action: 'my_ideas', :id => current_user.id) %>
+        <%= link_to('My Ideas', controller: 'users', action: 'ideas', :id => current_user.id) %>
       </li>
     <% end %>
     <% if current_user.is_a? Investor%>
@@ -102,6 +102,7 @@
       <ul class="dropdown-menu">
         <li><a data-toggle="modal" href="#example">
             Invite</a></li>
+        <li><%= link_to "Tag Management", tags_path %></li>
       </ul>
     </li>
   </ul>
