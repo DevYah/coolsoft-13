@@ -13,6 +13,7 @@ gem 'jquery-rails', '2.2.1'
 gem 'jquery-tokeninput-rails', '1.6.0'
 gem 'bootstrap-sass', '2.3.1.0'
 gem 'google_visualr', '2.1.7'
+gem "highcharts-rails", "~> 3.0.0"
 gem 'paperclip', '3.4.1'
 
 gem 'kaminari', '0.14.1'
@@ -23,14 +24,16 @@ gem 'whenever', '0.8.2', :require => false
 
 gem 'best_in_place','2.1.0'
 
-gem 'multiple_table_inheritance', '~> 0.2.1'
+gem 'multiple_table_inheritance', '0.2.1'
+
+gem 'font-awesome-rails', '3.0.2.0'
+
+gem 'jquery-star-rating-rails', '4.0.4'
 
 group :assets do
   gem 'sass-rails', '3.2.6'
   gem 'uglifier', '2.0.1'
 end
-
-gem 'jquery-star-rating-rails'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.13.0'
