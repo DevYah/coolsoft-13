@@ -40,11 +40,11 @@ p{
   width: 300px;
 }
 
-dt {
+#user dt {
   font-size: 20px;
 }
 
-dd {
+#user dd {
   font-size: 18px;
 }
 
@@ -53,17 +53,13 @@ dd {
   height: 300px;
 }
 
-label {
-  font-size: 22px;
-}
-
 .user-idea {
   position: relative;
   width: 800px;
   left: 20px;
 }
 
-input {
+#user input {
   width: 40%;
 }
 
@@ -73,7 +69,7 @@ input {
   word-wrap: break-word;
 }
 
-.best_in_place {
+#user .best_in_place {
   padding: .1m;
   cursor: hand;
   cursor: pointer;
@@ -88,6 +84,6 @@ input {
   border-radius: 5px;
 }
 
-.best_in_place:hover, .do_hover {
+#user .best_in_place:hover, .do_hover {
   background-color: #CCC;
 }
