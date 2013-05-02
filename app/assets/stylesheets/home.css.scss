@@ -86,7 +86,8 @@
 
 .landing-login{
   display: block;
-  width: 170px; height: 40px;
+  width: 170px;
+  height: 40px;
   font-size: 0;
 }
 
@@ -96,12 +97,16 @@
 
 .signinout{
   position:relative;
-  top:60px;
-  opacity:0.6;
+  opacity:0.7;
   filter:alpha(opacity=40);
+  left:10px;
 }
 
 .signinout:hover{
   opacity:1.0;
   filter:alpha(opacity=100);
+}
+
+.landing-sign-up{
+  padding-left:20px;
 }
