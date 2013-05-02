@@ -9,7 +9,9 @@
     <% end %>
     <% else %>
       <% search_results_count = search_results_count + 1 %>
-        <%= render partial: 'users/_stream_users', locals: { selected_user: @users } %>
+        <% @users.each do |user|%>
+          <%= render template: '/users/_stream_users', locals: { user: user } %>
+        <% end %>
     <% end %>
   <% else %>
     <% if !@search_with_user %>
