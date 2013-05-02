@@ -61,17 +61,27 @@ describe SimilarityEngine do
     end
 
     it 'should be calculated automatically on idea creation' do
-        i1 = Idea.create(title: @str1, description: @str3, problem_solved: @str1,
-                    tag_ids: @tag_ids)
-        i2 = Idea.create(title: @str2, description: @str4, problem_solved: @str1,
-                    tag_ids: @tag_ids)
+      SimilarityEngine.build_after_idea_save = true
+      i1 = Idea.create(title: @str1, description: @str3, problem_solved: @str1,
+                  tag_ids: @tag_ids)
+      i2 = Idea.create(title: @str2, description: @str4, problem_solved: @str1,
+                  tag_ids: @tag_ids)
 
-        s1 = Similarity.where(idea_id: i1, similar_idea_id: i2).first.similarity
-        s2 = Similarity.where(idea_id: i2, similar_idea_id: i1).first.similarity
+      s1 = Similarity.where(idea_id: i1, similar_idea_id: i2).first.similarity
+      s2 = Similarity.where(idea_id: i2, similar_idea_id: i1).first.similarity
 
-        s1.should eq(s2)
-        s1.should > 10
+      s1.should eq(s2)
+      s1.should > 10
     end
 
+    it 'should be recalculated if manual rebuilding is initiated' do
+      SimilarityEngine.build_after_idea_save = false
+      i1 = Idea.create(title: @str2, description: @str4, problem_solved: @str2,
+                  tag_ids: @tag_ids[0, 2])
+      s1 = Similarity.where(idea_id: i1).first.should be(nil)
+
+      SimilarityEngine.rebuild_all_similarities
+      s1 = Similarity.where(idea_id: i1).first.should_not be(nil)
+    end
   end
 end

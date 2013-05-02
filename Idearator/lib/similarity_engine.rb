@@ -27,11 +27,18 @@ class SimilarityEngine
     prob_hamming_dist:       8
   }
 
+  class << self
+    build_after_idea_save = true
+    attr_accessor :build_after_idea_save
+  end
+
   # Hook to recalculate the similarity coefficients for an idea upon saving
+  # Turned off for now. Manual rebuilding has to be initiated from the console
+  # using SimilarityEngine.rebuild_all_similarities
   class IdeaHooks
     #FIXME delayed_job?
     def after_save(idea)
-      SimilarityEngine.rebuild_similarities(idea)
+      SimilarityEngine.rebuild_similarities(idea) if SimilarityEngine.build_after_idea_save
     end
   end
 
@@ -163,9 +170,9 @@ class SimilarityEngine
   # +idea+:: +Idea+ to calculate similarities for
   #
   # Author: Mina Nagy
-  def self.rebuild_similarities(idea)
+  def self.rebuild_similarities(idea, offset = 0)
     # find ideas in tagged by the same tags
-    ideas_in_tags = Idea.joins(:tags).where(tags: { id: idea.tags })
+    ideas_in_tags = Idea.offset(offset).joins(:tags).where(tags: { id: idea.tags })
                     .select('ideas.id, ideas.title, ideas.description, ideas.problem_solved')
                     .preload(:tags)
 
@@ -188,6 +195,19 @@ class SimilarityEngine
             " VALUES #{similarities.join(",")}"
 
       Similarity.connection.execute sql
+    end
+  end
+
+  # Initiate reconstruction of the similarity index for all ideas
+  #
+  # Params: None
+  #
+  # Author: Mina Nagy
+  def self.rebuild_all_similarities
+    offset = 0
+    Idea.find_each do |idea|
+      rebuild_similarities(idea, offset)
+      offset += 1
     end
   end
 
