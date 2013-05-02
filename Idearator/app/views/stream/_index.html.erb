@@ -1,10 +1,13 @@
+<% search_results_count = 0 %>
 <% if @page.nil? %>
   <% if !@searching_with %>
     <% @ideas.each do |idea| %>
+    <% search_results_count = search_results_count + 1 %>
       <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
     <%end%>
     <% else %>
       <% @users.each do |user| %>
+      <% search_results_count = search_results_count + 1 %>
         <%= render partial: 'users/_stream_users', locals: { selected: user } %>
       <%end%>
     <% end %>
@@ -14,11 +17,19 @@
         <%= render partial: 'tags', locals: { filter_this: @filter_tmp } %>
       <% end %>
       <% @ideas.each do |idea| %>
+      <% search_results_count = search_results_count + 1 %>
         <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
       <%end%>
     <% else %>
       <% @users.each do |user| %>
+      <% search_results_count = search_results_count + 1 %>
         <%= render partial: 'users/stream_users', locals: { selected_user: user } %>
       <%end%>
   <% end %>
+<% end %>
+<% if search_results_count == 0 %>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>No Results Found</strong>
+</div>
 <% end %>

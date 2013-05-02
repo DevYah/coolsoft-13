@@ -7,6 +7,7 @@ class StreamController < ApplicationController
   @@filter_all = []
 
   def index
+    @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     @page = params[:mypage]
     @searchtext = params[:search]
     @search_with_user = params[:search_user] == "true"
