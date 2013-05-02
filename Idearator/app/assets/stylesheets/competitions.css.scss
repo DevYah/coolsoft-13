@@ -1,0 +1,68 @@
+
+.competition{
+  border-radius: 20px;
+  background-color: rgba(0,0,0,0.05);
+  word-wrap: break-word;
+  margin-bottom: 30px;
+}
+
+
+.btn{
+  margin-right: 10px;
+  margin-bottom: 10px ;
+}
+
+.taging{
+  color: #0060ff;
+  font-size: 11.844px;
+  font-weight: bold;
+  padding: 4px 12px;
+}
+
+.aTag{
+ background-color: #3A87AD;
+ color: white;
+ border-radius: 2px;
+ cursor: pointer;
+}
+
+.green{
+  color: green;
+}
+
+.red{
+  color: red;
+}
+
+.description{
+  border-radius: 20px;
+}
+
+.currenttag{
+  background-color: #EFF2F7;
+    border: 1px solid #CCD5E4;
+    border-radius: 5px 5px 5px 5px;
+    color: #000000;
+    cursor: default;
+    float: left;
+    font-size: 16px;
+    height: auto !important;
+    margin: 3px;
+    overflow: hidden;
+    padding: 1px 3px;
+    white-space: nowrap;
+}
+
+.delete-token{
+  color: #A6B3CF;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#myIdeas {
+    /* new custom width */
+    width: 835px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -387px;
+}

@@ -1,4 +1,5 @@
-  <div id="myIdeas" class="modal hide fade in" style="display: none; ">
+<%= javascript_include_tag 'ideas' %>
+<div id="myIdeas" class="modal hide fade in" style="display: none; ">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>My Ideas</h3>
@@ -48,5 +49,5 @@
   </div>
   <div class="modal-footer">
     <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new", :competition_id => @competition.id } , :class => 'btn btn-large btn-danger pull-center'%>
-    </div>
   </div>
+</div>

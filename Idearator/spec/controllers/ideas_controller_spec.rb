@@ -3,10 +3,6 @@ require 'spec_helper'
 describe IdeasController do
   include Devise::TestHelpers
 
-  RSpec.configure do |config|
-    config.mock_framework = :rspec
-  end
-
   describe 'PUT archive' do
     context 'idea creator wants to archive' do
       before :each do
@@ -15,17 +11,14 @@ describe IdeasController do
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
         @idea.save
+        @comment = FactoryGirl.build(:comment)
+        @comment.user_id = @user.id
+        @comment.idea_id = @idea.id
+        @comment.save
         @vote = FactoryGirl.build(:vote)
         @vote.user_id = @user.id
         @vote.idea_id = @idea.id
         @vote.save
-        @rating = FactoryGirl.build(:rating)
-        @rating.idea_id = @idea.id
-        @rating.save
-        @user_rating = FactoryGirl.build(:user_rating)
-        @user_rating.user_id = @user.id
-        @user_rating.rating_id = @rating.id
-        @user_rating.save
         sign_in @user
       end
 
@@ -35,12 +28,12 @@ describe IdeasController do
         (@idea.archive_status).should eql(true)
       end
 
-      it 'deletes idea votes' do
-        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
+      it 'deletes idea comments' do
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
       end
 
-      it 'deletes user ratings' do
-        expect { put :archive, :id => @idea.id }.to change(UserRating, :count).by(-1)
+      it 'deletes idea votes' do
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
       end
     end
 
@@ -53,17 +46,14 @@ describe IdeasController do
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
         @idea.save
+        @comment = FactoryGirl.build(:comment)
+        @comment.user_id = @user.id
+        @comment.idea_id = @idea.id
+        @comment.save
         @vote = FactoryGirl.build(:vote)
         @vote.user_id = @user.id
         @vote.idea_id = @idea.id
         @vote.save
-        @rating = FactoryGirl.build(:rating)
-        @rating.idea_id = @idea.id
-        @rating.save
-        @user_rating = FactoryGirl.build(:user_rating)
-        @user_rating.user_id = @user.id
-        @user_rating.rating_id = @rating.id
-        @user_rating.save
         sign_in @admin
       end
 
@@ -73,12 +63,12 @@ describe IdeasController do
         (@idea.archive_status).should eql(true)
       end
 
-      it 'deletes idea votes' do
-        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
+      it 'deletes idea comments' do
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(-1)
       end
 
-      it 'deletes user ratings' do
-        expect { put :archive, :id => @idea.id }.to change(UserRating, :count).by(-1)
+      it 'deletes idea votes' do
+        expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(-1)
       end
     end
 
@@ -101,8 +91,8 @@ describe IdeasController do
         expect { put :archive, :id => @idea.id }.to change(Vote, :count).by(0)
       end
 
-      it 'does not delete user ratings' do
-        expect { put :archive, :id => @idea.id }.to change(UserRating, :count).by(0)
+      it 'does not delete idea comments' do
+        expect { put :archive, :id => @idea.id }.to change(Comment, :count).by(0)
       end
     end
   end
@@ -110,11 +100,10 @@ describe IdeasController do
   describe 'PUT unarchive' do
     context 'idea creator wants to unarchive' do
       before :each do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryGirl.build(:user)
         @user.confirm!
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
-        @idea.archive_status = true
         @idea.save
         sign_in @user
       end
@@ -189,17 +178,14 @@ describe IdeasController do
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
         @idea.save
+        @comment = FactoryGirl.build(:comment)
+        @comment.user_id = @user.id
+        @comment.idea_id = @idea.id
+        @comment.save
         @vote = FactoryGirl.build(:vote)
         @vote.user_id = @user.id
         @vote.idea_id = @idea.id
         @vote.save
-        @rating = FactoryGirl.create(:rating)
-        @rating.idea_id = @idea.id
-        @rating.save
-        @user_rating = FactoryGirl.build(:user_rating)
-        @user_rating.rating_id = @rating.id
-        @user_rating.user_id = @user.id
-        @user_rating.save
         sign_in @user
       end
 
@@ -212,16 +198,12 @@ describe IdeasController do
         response.should redirect_to '/'
       end
 
+      it 'deletes idea comments' do
+        expect { delete :destroy, :id => @idea.id }.to change(Comment, :count).by(-1)
+      end
+
       it 'deletes idea votes' do
         expect { delete :destroy, :id => @idea.id }.to change(Vote, :count).by(-1)
-      end
-
-      it 'deletes idea ratings' do
-        expect { delete :destroy, :id => @idea.id }.to change(Rating, :count).by(-1)
-      end
-
-      it 'deletes idea user ratings' do
-        expect { delete :destroy, :id => @idea.id }.to change(UserRating, :count).by(-1)
       end
     end
 
@@ -234,17 +216,14 @@ describe IdeasController do
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @userone.id
         @idea.save
+        @comment = FactoryGirl.build(:comment)
+        @comment.user_id = @userone.id
+        @comment.idea_id = @idea.id
+        @comment.save
         @vote = FactoryGirl.build(:vote)
         @vote.user_id = @userone.id
         @vote.idea_id = @idea.id
         @vote.save
-        @rating = FactoryGirl.build(:rating)
-        @rating.idea_id = @idea.id
-        @rating.save
-        @user_rating = FactoryGirl.build(:user_rating)
-        @user_rating.rating_id = @rating.id
-        @user_rating.user_id = @userone.id
-        @user_rating.save
         sign_in @usertwo
       end
 
@@ -257,16 +236,12 @@ describe IdeasController do
         response.should redirect_to @idea
       end
 
+      it 'does not delete idea comments' do
+        expect { delete :destroy, :id => @idea.id }.to change(Comment, :count).by(0)
+      end
+
       it 'does not delete idea votes' do
         expect { delete :destroy, :id => @idea.id }.to change(Vote, :count).by(0)
-      end
-
-      it 'does not delete idea ratings' do
-        expect { delete :destroy, :id => @idea.id }.to change(Rating, :count).by(0)
-      end
-
-      it 'does not delete idea user ratings' do
-        expect { delete :destroy, :id => @idea.id }.to change(UserRating, :count).by(0)
       end
     end
   end
@@ -387,35 +362,33 @@ describe IdeasController do
     end
   end
 
-  describe 'PUT vote' do
-    context 'user wants to vote' do
-      before :each do
-        @user = FactoryGirl.build(:user)
-        @user.confirm!
-        @idea = FactoryGirl.create(:idea)
-        @idea.user_id = @user.id
-        @idea.save
-        sign_in @user
-      end
+  context 'user wants to vote' do
+    before :each do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      @idea = FactoryGirl.create(:idea)
+      @idea.user_id = @user.id
+      @idea.save
+      sign_in @user
+    end
 
-      it 'idea id in user.votes' do
-        put :vote, :id => @idea.id
-        @idea.reload
-        @voted = @user.votes.find(@idea)
-        (@voted.id).should eql(@idea.id)
-      end
+    it 'idea id in user.votes' do
+      put :vote, :id => @idea.id
+      @idea.reload
+      @voted = @user.votes.find(@idea)
+      (@voted.id).should eql(@idea.id)
+    end
 
-      it 'redirects to idea' do
-        put :vote, :id => @idea.id
-        response.should redirect_to @idea
-      end
+    it 'redirects to idea' do
+      put :vote, :id => @idea.id
+      response.should redirect_to @idea
+    end
 
-      it 'increase idea votes' do
-        @numvotes = @idea.num_votes + 1
-        put :vote, :id => @idea.id
-        @idea.reload
-        (@numvotes).should eql(@idea.num_votes)
-      end
+    it 'increase idea votes' do
+      @numvotes = @idea.num_votes + 1
+      put :vote, :id => @idea.id
+      @idea.reload
+      (@numvotes).should eql(@idea.num_votes)
     end
   end
 

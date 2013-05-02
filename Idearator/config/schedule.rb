@@ -3,9 +3,8 @@ every 1.day, :at => '12:00 am' do
 end
 
 
-every 3.hours do
- runner 'Trend.del'
-end
+
+
 
 # Use this file to easily define all of your cron jobs.
 #
