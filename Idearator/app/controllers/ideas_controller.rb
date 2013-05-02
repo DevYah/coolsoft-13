@@ -4,9 +4,9 @@ class IdeasController < ApplicationController
 
 
   # view idea of current user
-  # Params
+  # Params:
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
-  # Marwa Mehanna
+  # Author: Marwa Mehanna
   def show
     @idea = Idea.find(params[:id])
     if user_signed_in?
@@ -22,7 +22,8 @@ class IdeasController < ApplicationController
   end
 
   # making new Idea
-  #Marwa Mehanna
+  # Params: None
+  # Author: Marwa Mehanna
   def new
     @idea = Idea.new
     @tags = Tag.all
@@ -35,7 +36,7 @@ class IdeasController < ApplicationController
 
   # filters the ideas that have one or more of given tags
   # Params:
-  # +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
+  # +tags+:: the parameter is an list of +Tag+ passed through tag autocomplete field
   # Author: muhammed hassan
   def filter
     @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
@@ -47,8 +48,8 @@ class IdeasController < ApplicationController
   end
 
   # editing Idea
-  # Params
-  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
+  # Params:
+  # +id+:: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
   def edit
     @idea = Idea.find(params[:id])
@@ -58,9 +59,9 @@ class IdeasController < ApplicationController
   end
 
   # updating Idea
-  # Params
-  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Params:
+  # +id+:: this is an instance +Idea+ passed through _form.html.erb, used to identify which +Idea+ to  update
+  # +id+:: this is an instance +Idea+ passed through show.html.erb, used to identify which is +Idea+ to update
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
@@ -100,17 +101,15 @@ class IdeasController < ApplicationController
     current_user.unvote_for @idea
     @idea.reload
     respond_to do |format|
-        format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
-        format.json { head :no_content }
-        format.js
+      format.html { redirect_to @idea, :notice =>'Your vote is deleted' }
+      format.json { head :no_content }
+      format.js
     end
   end
 
   # creating new Idea
-  # Params
-  # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
-  # +idea_tags+ :: this is an instance of +IdeaTags+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Params:
+  # +idea+:: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
   # Author: Marwa Mehanna
   def create
     @idea = Idea.new(params[:idea])
@@ -134,21 +133,22 @@ class IdeasController < ApplicationController
   def destroy
     idea = Idea.find(params[:id])
     if current_user.id == idea.user_id
-      list_of_comments = Comment.where(idea_id: idea.id)
-      list_of_commenters = []
-      list_of_voters = idea.votes
-
-      list_of_comments.each do |c|
-        list_of_commenters.append(User.find(c.user_id)).flatten!
-        c.destroy
+      DeleteNotification.send_notification(current_user, idea, idea.voters)
+      idea.voters.each do |u|
+        idea.voters.delete(u)
       end
-
-      list = list_of_commenters.append(list_of_voters).flatten!
-
-      DeleteNotification.send_notification(current_user, idea, list)
-
+      list_of_ratings = Rating.where(:idea_id => idea.id)
+      list_of_user_ratings = []
+      list_of_ratings.each do |r|
+        list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
+      end
+      list_of_ratings.each do |r|
+        r.destroy
+      end
+      list_of_user_ratings.each do |ur|
+        ur.destroy
+      end
       idea.destroy
-
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Idea has been successfully deleted!' }
       end
@@ -169,40 +169,24 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = true
       idea.save
-      list_of_commenters = []
-      idea.comments.each do |c|
-        list_of_commenters.append(User.find(c.user_id)).flatten!
-      end
-      list = list_of_commenters.append(idea.votes).flatten!
-
+      list = idea.voters
       if current_user.type == 'Admin'
         list.append(User.find(idea.user_id)).flatten!
       end
-
       ArchiveNotification.send_notification(current_user, idea, list)
-      idea.votes.each do |u|
-        idea.votes.delete(u)
+      idea.voters.each do |u|
+        idea.voters.delete(u)
       end
-
       idea.num_votes = 0
-
-      idea.comments.each do |c|
-        c.destroy
-      end
-
       list_of_ratings = Rating.where(:idea_id => idea.id)
       list_of_user_ratings = []
-
       list_of_ratings.each do |r|
         list_of_user_ratings.append(UserRating.where(:rating_id => r.id)).flatten!
       end
-
-      list_of_user_ratings.each do |ur|
-        ur.destroy
+      list_of_user_ratings.each do |u|
+        u.destroy
       end
-
       idea.save
-
       respond_to do |format|
         format.html { redirect_to idea, alert: 'Idea has been successfully archived!' }
         format.js
@@ -232,12 +216,12 @@ class IdeasController < ApplicationController
     end
   end
 
-  #adds the rating prespectives taken from the user from the add_prespectives view
-  #to the idea reviewed
-  # Params
-  #+params[:ratings]+ ratings prespectives taken from the user
-  #+session[:idea_id] id of the idea to be reviewed
-  #Author : Omar Kassem
+  # adds the rating prespectives taken from the user from the add_prespectives view
+  # to the idea reviewed
+  # Params:
+  # +params[:ratings]+:: ratings prespectives taken from the user
+  # +session[:idea_id]+:: id of the idea to be reviewed
+  # Author: Omar Kassem
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
@@ -259,4 +243,17 @@ class IdeasController < ApplicationController
       end
     end
   end
+
+
+  # Popover with idea details
+  # Params:
+  # +id+:: is used to specify the instance of +Idea+ to be displayed
+  # Author: Dayna Hany
+  def popover
+    @idea = Idea.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end
