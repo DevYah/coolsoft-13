@@ -18,6 +18,8 @@
  *= require font-awesome
  *= require notification
  *= require ideas
+ *= require profile_modal
+ *= require unauthorized_sign_in_up_modal
  *
  */
 
@@ -75,4 +77,3 @@
   width: 32px; height: 20px;
   font-size: 0;
 }
-
