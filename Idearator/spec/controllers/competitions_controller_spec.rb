@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe CompetitionsController do
-<<<<<<< HEAD
   include Devise::TestHelpers
 
   describe 'Review Competition Idea' do
@@ -182,7 +181,6 @@ describe CompetitionsController do
       end
     end
   end
-=======
 
   describe "GET #index" do
     before :each do
@@ -275,5 +273,4 @@ describe CompetitionsController do
     end
   end
 
->>>>>>> competition
 end

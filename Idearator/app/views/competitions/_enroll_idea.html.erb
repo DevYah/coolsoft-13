@@ -1,3 +1,4 @@
+  <%= javascript_include_tag 'ideas' %>
   <div id="myIdeas" class="modal hide fade in" style="display: none; ">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
@@ -5,9 +6,9 @@
   </div>
   <div class="modal-body">
    <div id='Stream'>
-    <% if @approved %>
+    <% if @approved != [] %>
   <% @approved.each do |approved| %>
-    <% if approved.user.active == true and approved.user.banned == false and approved.approved == true%>
+    <% if approved.user.active == true and approved.user.banned == false and approved.approved == true %>
       <div class="span8 row" id="share">
         <div class="wrapper row">
           <div class="span2"><%= image_tag approved.photo.url(:medium) %></div>
@@ -24,7 +25,11 @@
                 <li style = "color: #0060ff;"><%= tag.name %></li>
               <% end %>
             </ul>
+            <% if not @competition.ideas.where(:id => approved.id).exists?  %>
               <%= link_to 'Enroll', { :controller => "competitions", :action => "enroll_idea", :id => @competition.id, :idea_id => approved.id }, :class =>"btn btn-large btn-primary inline pull-right margin" %>
+            <% else %>
+              <h3 class='pull-right'> Enrolled </h3>
+            <% end %>
             <div id='sharing'>
               <a class="popup" href="http://www.facebook.com/sharer.php?u= <%=root_url + url_for(approved)%>" count-layout="horizontal"><%= image_tag('f_logo.jpg', :class => 'facebook')%></a>
               <a class="popup" href="http://twitter.com/share?url= <%=root_url + url_for(approved)%>&text=Checkout this idea on idearator" count-layout="horizontal"><%= image_tag("twitter-bird-white-on-blue.jpg", :class => "twitter")%></a>
@@ -36,11 +41,11 @@
     <% end %>
   <% end %>
   <% else %>
-      <h3>No ideas to view</h3>
+      <h3>You Have No Ideas, you have to create an Idea first</h3>
   <% end %>
 </div>
   </div>
   <div class="modal-footer">
-    <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new", :competition => @competition.id } , :class => 'btn btn-large btn-danger pull-center'%>
+    <%= link_to "Enter a New Idea", { :controller => "ideas", :action => "new", :competition_id => @competition.id } , :class => 'btn btn-large btn-danger pull-center'%>
     </div>
   </div>
