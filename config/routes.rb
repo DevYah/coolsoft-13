@@ -15,6 +15,9 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'approve_committee' => 'users#approve_committee'
+      match 'reject_committee' => 'users#reject_committee'
+      match 'invite_member' => 'users#invite_member'
     end
 
     collection do
@@ -23,6 +26,7 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'send_expertise'
       match ':id/my_ideas' => 'users#my_ideas'
     end
   end
@@ -41,6 +45,7 @@ Sprint0::Application.routes.draw do
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
+      match 'popover'
     end
   end
 
@@ -71,6 +76,7 @@ Sprint0::Application.routes.draw do
     match 'getallideas'
     match 'gettags'
     match 'getideas'
+    match 'dashboard/chart_data/:tag_id'=>'dashboard#chart_data'
   end
 
   # Notifications routes
@@ -80,6 +86,8 @@ Sprint0::Application.routes.draw do
     match 'redirect_review'
     match 'redirect_expertise'
     match 'set_read'
+    match 'redirect_stream'
+    match 'redirect_competition'
     match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
@@ -92,6 +100,7 @@ Sprint0::Application.routes.draw do
   controller :ratings do
     match 'ratings/ajax'
   end
+
 
 
   controller :competitions do
@@ -113,6 +122,13 @@ Sprint0::Application.routes.draw do
 controller :stream do
     match '/stream/index'
   end
+
+  controller :coolster do
+    match 'coolster/add_online_user'
+    match 'coolster/remove_online_user'
+  end
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -163,5 +179,6 @@ controller :stream do
   match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
-  match '/stream/index' => 'stream#index'
+
+
 end

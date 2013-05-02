@@ -10,7 +10,7 @@
   </div>
   <div class="modal-footer">
     <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
-    <%= link_to 'Archive', { :controller => "ideas", :action => "archive" }, :id => @idea.id, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+    <%= link_to 'Archive', { :controller => "ideas", :action => "archive", :id => @idea.id }, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
   </div>
 </div>
 <!-- delete modal -->
@@ -114,6 +114,14 @@
           <% end %>
         </p>
       </div>
+    </div>
+  </div>
+  <br />
+  <div class='row'>
+    <div class ='span4'></div>
+    <div class ='span4 archive_status'>
+      <div id="fb-root"></div>
+      <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
     </div>
   </div>
 </div>
