@@ -10,3 +10,4 @@ class CommentNotification < IdeaNotification
   end
 
 end
+
