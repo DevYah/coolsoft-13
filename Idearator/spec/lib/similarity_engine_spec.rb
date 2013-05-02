@@ -9,8 +9,10 @@ describe SimilarityEngine do
     end
 
     before :all do
-      @tag_ids = []
-      5.times { @tag_ids << FactoryGirl.create(:tag).id }
+      @tag_ids = Tag.limit(5).pluck(:id)
+      if @tag_ids.empty?
+        5.times { @tag_ids << FactoryGirl.create(:tag).id }
+      end
       @i1 = Idea.new(tag_ids: @tag_ids)
       @i2 = Idea.new(tag_ids: @tag_ids)
 
@@ -77,6 +79,8 @@ describe SimilarityEngine do
     it 'should be recalculated if manual rebuilding is initiated' do
       SimilarityEngine.build_after_idea_save = false
       i1 = Idea.create(title: @str2, description: @str4, problem_solved: @str2,
+                  tag_ids: @tag_ids[0, 2])
+      i2 = Idea.create(title: @str1, description: @str3, problem_solved: @str2,
                   tag_ids: @tag_ids[0, 2])
       s1 = Similarity.where(idea_id: i1).first.should be(nil)
 
