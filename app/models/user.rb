@@ -105,6 +105,16 @@ class User < ActiveRecord::Base
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
   end
 
+  # Get approved and unarchived ideas for user
+  # Params:
+  # None
+  # Author: Hisham ElGezeery
+  def get_approved_ideas
+    ideas = self.ideas
+    approved_ideas = ideas.where(:approved => true)
+    unarchived_ideas = approved_ideas.where(:archive_status => false).all
+  end
+
   # user votes for a certain idea and send notification to owner of the idea.
   # Params:
   # +idea+:: the parameter instance of idea
