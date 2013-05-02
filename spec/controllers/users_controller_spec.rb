@@ -50,6 +50,16 @@ describe UsersController do
       assigns(:ideas).size.should eq(1)
     end
   end
+  describe 'Get profile_modal' do
+    it 'views a modal profile for a specific user' do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      sign_in @user
+      get :profile_modal, :id => @user.id
+      response.should render_template("users/profile_modal")
+      assigns(:selected_user).should eq(@user)
+    end
+  end
   describe "PUT change_settings" do
     it "changes user settings" do
       u= User.new
