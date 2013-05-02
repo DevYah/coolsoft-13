@@ -49,7 +49,7 @@ function initialize_barchart(tagid) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
       if (line == "") return;
-      var items = line.split(',');      
+      var items = line.split(',');
       var series = {
         name: items[0],
         data: [{y: parseInt(items[1]), url: '/ideas/' + items[2]}]
@@ -65,7 +65,7 @@ function initialize_barchart(tagid) {
 //#+params[:tag_id] + id of the tag the user clicks on 
 //#Author:Lina Basheer
 function initialize_bubblechart(tagid) {
- $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) { 
+ $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) {
   var options = {
     chart: {
       renderTo: 'bubble-chart',
@@ -100,7 +100,7 @@ function initialize_bubblechart(tagid) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
       if (line == "") return;
-      var items = line.split(',');      
+      var items = line.split(',');
       var series = {
         name: items[0],
         data: [{y: parseInt(items[1]),x:parseInt(items[2]), url: '/ideas/' + items[2]}]
@@ -113,3 +113,4 @@ function initialize_bubblechart(tagid) {
     console.log(options);
   });
 }
+

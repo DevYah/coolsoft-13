@@ -3,7 +3,7 @@ require 'factory_girl_rails'
 
 FactoryGirl.define do
   factory :user, :class => User do |f|
-    f.email 'ay7aga'
+    f.email 'useremail@domain.com'
     f.password 'mahmoudhashish'
   end
 
