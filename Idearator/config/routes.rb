@@ -13,6 +13,10 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'ideas'
+      match 'approve_committee' => 'users#approve_committee'
+      match 'reject_committee' => 'users#reject_committee'
+      match 'invite_member' => 'users#invite_member'
     end
 
     collection do
@@ -21,6 +25,8 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'profile_modal'
+      match 'send_expertise'
     end
   end
 
@@ -28,8 +34,8 @@ Sprint0::Application.routes.draw do
     match 'filter', on: :collection
     match 'like', on: :member
     resources :comments do
-        put 'update', on: :member
-      end
+      put 'update', on: :member
+    end
     member do
       match 'vote'
       match 'unvote'
@@ -38,6 +44,7 @@ Sprint0::Application.routes.draw do
       match 'add_prespectives' => 'committees#add_prespectives'
       match 'disapprove' => 'committees#disapprove'
       match 'add_rating'
+      match 'popover'
     end
   end
 
@@ -54,7 +61,7 @@ Sprint0::Application.routes.draw do
   # Admin actions routes
   controller :admins do
     match 'admins/invite'
-    match 'admins/invite_committee'
+    match 'invite_committee'
   end
 
   # Committe actions routes
@@ -68,6 +75,7 @@ Sprint0::Application.routes.draw do
     match 'getallideas'
     match 'gettags'
     match 'getideas'
+    match 'dashboard/chart_data/:tag_id'=>'dashboard#chart_data'
   end
 
   # Notifications routes
@@ -135,4 +143,11 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  #2.3 Create/Edit Tags
+  resources :tags
+
+  match 'tags/:id/synonym' => 'tags#addsym', :via => :put
+  match 'tags/:id/delsym' => 'tags#delsym', :via => :put
+
 end

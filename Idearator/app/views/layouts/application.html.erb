@@ -29,17 +29,15 @@
         </div>
       </div>
     <%end%>
-    <div id='signedout' class='modal hide fade' data-backdrop='static' data-keyboard='false'>
+    <div id='user-profile-modal' class='modal hide fade'>
       <div class='modal-header'>
-        <h2 id='myModalLabel'>Oooops !!</h2>
+          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+          <h2 id='myModalLabel'></h2>
       </div>
       <div class='modal-body'>
-        <h4>It looks like you're currently not signed in</h4>
-      </div>
-      <div class='modal-footer'>
-        <button id='sign' class='btn'>Ok</button>
       </div>
     </div>
+    <%= render 'layouts/unauthorized_modal' %>
     <header class='navbar navbar-fixed-top'>
       <nav class='navbar-inner'>
         <div id = 'update-nav' class='container'>
@@ -74,7 +72,27 @@
             <%= yield %>
           <% end %>
         </div>
-      </div><!--! end of .container -->
-    </div><!--! end of #main -->
+      </div>
+      <!--! end of .container -->
+    </div>
+    <div class="container">
+      <div id="example" class="modal hide fade in" style="display: none; ">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>invite Committee members</h3>
+        </div>
+        <div class="modal-body">
+          <h4>enter the email below</h4>
+          <%= form_tag( '/invite_committee', :method => "get") do %>
+            <%= text_field_tag(:email,nil,:placeholder => 'enter email here' , :class => 'span3') %></p>
+        </div>
+        <div class="modal-footer">
+            <%= submit_tag("send invitation",:class => 'btn btn-success') %>
+          <% end %>
+          <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+      </div>
+    </div>
+    <!--! end of #main -->
   </body>
 </html>
