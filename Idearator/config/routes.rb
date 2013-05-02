@@ -2,7 +2,7 @@ Sprint0::Application.routes.draw do
 
   match '/home/index' => 'home#index'
   default_url_options :host => 'localhost:3000'
-  root :to => 'home#landing'
+  root :to => 'home#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
                                        :registrations => 'registrations' }
