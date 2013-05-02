@@ -6,6 +6,8 @@ class Idea < ActiveRecord::Base
   validates_length_of :description, :maximum => 1000
   validates_length_of :problem_solved, :maximum => 1000
 
+  after_save TrendsController::IdeaHooks.new
+
   belongs_to :user
   belongs_to :committee
   has_one :daily_vote_count, class_name: 'VoteCount'
@@ -21,6 +23,7 @@ class Idea < ActiveRecord::Base
   has_many :competition_entries
   has_many :competitions, :through => :competition_entries, :source => :competition
   has_many :winning_competitions, :class_name => 'Competition'
+  has_one :trend
 
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
