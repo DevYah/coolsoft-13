@@ -33,8 +33,6 @@ class SimilarityEngine
   end
 
   # Hook to recalculate the similarity coefficients for an idea upon saving
-  # Turned off for now. Manual rebuilding has to be initiated from the console
-  # using SimilarityEngine.rebuild_all_similarities
   class IdeaHooks
     #FIXME delayed_job?
     def after_save(idea)
