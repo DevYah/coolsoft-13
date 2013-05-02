@@ -9,10 +9,4 @@ class UserMailer < ActionMailer::Base
     mail(:to => admin, :subject => "New Committee Member Sign Up")
   end
 
-  def committee_accept(user)
-    @user = user
-    @url  = "http://localhost:3000/users/login"
-    mail(:to => user.email, :subject => "Congratulations!")
-  end
-
 end
