@@ -2,6 +2,9 @@ namespace :db do
 	desc "Fill Users and Ideas."
 	task :populate => :environment do
 
+    # Turn off automatic similarity calculation
+    SimilarityEngine.build_after_idea_save = false
+
 		@tags = ["Agriculture", "Software", "Fashion", "Development", "Games" , "BigThings" , "SmallThings" , "CamelCase" , "Food" , "TakeAway"]
 		40.times do |n|
 			u = User.new
@@ -62,6 +65,8 @@ namespace :db do
 		t = Threshold.new
 		t.threshold = 40
 		t.save
+
+    SimilarityEngine.rebuild_all_similarities
 
 	end
 end
