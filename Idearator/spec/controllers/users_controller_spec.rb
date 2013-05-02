@@ -1,6 +1,43 @@
 require 'spec_helper'
 describe UsersController do
   include Devise::TestHelpers
+  describe "responding to GET show" do
+    before(:each) do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      sign_in @user
+    end
+    it "should expose the requested user as @user and render [show] template" do
+      @new_user = FactoryGirl.build(:user_two)
+      @new_user.confirm!
+      get :show, :id => @new_user.id
+      assigns[:user].should == @new_user
+      response.should render_template("users/show")
+    end
+  end
+  describe "PUT 'update'" do
+    before(:each) do
+      @user = FactoryGirl.build(:user)
+      @user.first_name = 'first_name'
+      @user.last_name = 'last_name'
+      @user.username = 'username'
+      @user.date_of_birth = Date.current()
+      @user.confirm!
+      sign_in @user
+    end
+    describe 'Success' do
+      it "should change the user's attributes" do
+        @attr = { :first_name => 'first_name_updated', :last_name => 'last_name_updated', :username => 'username_updated' }
+        puts 'Old first_name: ' + @user.first_name
+        put :update, :id => @user, :user => @attr
+        @user.reload
+        (@user.first_name).should eql('first_name_updated')
+        (@user.last_name).should eql('last_name_updated')
+        (@user.username).should eql('username_updated')
+        puts 'New first_name: ' + @user.first_name
+      end
+    end
+  end
   describe "PUT change_settings" do
     it "changes user settings" do
       u= User.new
@@ -45,68 +82,22 @@ describe UsersController do
     @u1.confirm!
     @u1.save
   end
-  describe "PUT #invite_member" do
-    it "retrieves the user instance from :id" do
-      put :invite_member, :id => @u1.id
-      assigns(:user).should eq(@u1)
-    end
-    it "inititates the user to the committees table" do
-      put :invite_member, :id => @u1.id
-      @u1.reload
-      @u1.type.should eq("Committee")
-    end
-    it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
-      expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
-    end
-    it "redirects to home page" do
-      put :invite_member, :id => @u1.id
-      response.should redirect_to '/'
-    end
-  end
-
-  #Test for users#approve_committee
-  #Author : Mohammad Abdulkhaliq
-  describe "approve-committee" do
-    before :each do
-      @c = Committee.new
-      @c.email = 'mohammad28march1993@gmail.com'
-      @c.password = '123123123'
-      @c.username = 'c'
-      @c.confirm!
-      @c.save
-      sign_in @a
-    end
-    it 'it sets the approved value of committee to approved' do
-      put :approve_committee, :id => @c.id
-      @c.reload
-      expect(@c.approved).to eq(true)
-    end
-    it 'redirects to admins index page' do
-      put :approve_committee, :id => @c.id
-      response.should redirect_to("/")
-    end
-  end
-
-  #Test for users#reject_committee
-  #Author : Mohammad Abdulkhaliq
-  describe "reject_committee" do
-    before :each do
-      @c = Committee.new
-      @c.email = 'mohammad28march1993@gmail.com'
-      @c.password = '123123123'
-      @c.username = 'c'
-      @c.confirm!
-      @c.save
-      sign_in @a
-    end
-    it 'it sets the type of user to nil hence revoking his status as Comittee' do
-      tm = @c.id
-      put :reject_committee, :id => @c.id
-      expect(User.find(tm).type).to eq(nil)
-    end
-    it 'redirects to admins index page' do
-      put :reject_committee, :id => @c.id
-      response.should redirect_to("/")
-    end
-  end
+   describe "PUT #invite_member" do
+     it "retrieves the user instance from :id" do
+       put :invite_member, :id => @u1.id
+       assigns(:user).should eq(@u1)
+     end
+     it "inititates the user to the committees table" do
+       put :invite_member, :id => @u1.id
+       @u1.reload
+       @u1.type.should eq("Committee")
+     end
+     it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
+       expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
+     end
+     it "redirects to home page" do
+       put :invite_member, :id => @u1.id
+       response.should redirect_to '/'
+   end
+ end
 end
