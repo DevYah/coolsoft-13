@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
     :username, :date_of_birth, :type, :active, :first_name, :last_name,
     :gender, :about_me, :recieve_vote_notification, :banned,
-    :recieve_comment_notification, :provider, :uid, :photo, :approved
+    :recieve_comment_notification, :provider, :uid, :photo, :approved, :facebook_share
 
   has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
   has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
