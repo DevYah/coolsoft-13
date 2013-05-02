@@ -171,7 +171,7 @@ class UsersController < ApplicationController
   # Author: Mohammad Abdulkhaliq
   def invite_member
     unless current_user.is_a? Admin
-      redirect_to  'users/sign_in' , notice: 'Please sign in as an admin'
+      redirect_to  'users/sign_in' , notice: 'Please sign in as an admin' and return
     end
     @user = User.find(params[:id])
     @user.type = 'Committee'
@@ -227,12 +227,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.becomes(User).update_attributes(params[:user])
-        format.html { redirect_to(@user.becomes(User), :notice => 'User was successfully updated.') }
-        format.json { respond_with_bip(@user.becomes(User)) }
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@user) }
       else
         format.html { render :action => 'edit' }
-        format.json { respond_with_bip(@user.becomes(User)) }
+        format.json { respond_with_bip(@user) }
       end
     end
   end
