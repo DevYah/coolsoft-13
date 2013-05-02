@@ -24,7 +24,7 @@ class Idea < ActiveRecord::Base
   has_many :winning_competitions, :class_name => 'Competition'
 
   has_many :similarities
-  has_many :similar_ideas, through: :similarities, conditions: ['similarity > ?', 5], limit: 5
+  has_many :similar_ideas, through: :similarities, conditions: ['similarity > ? AND approved = ? AND rejected = ?', 5, 't', 'f'], limit: 5
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
 
