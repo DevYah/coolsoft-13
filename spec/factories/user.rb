@@ -16,4 +16,11 @@ FactoryGirl.define do
     f.email 'ay7aga3'
     f.type 'Admin'
   end
+
+  factory :investor, :class => Investor do |f|
+    f.email 'investoremail@domain.com'
+    f.password 'mahmoudhashish'
+    f.username 'investor'
+  end
+
 end
