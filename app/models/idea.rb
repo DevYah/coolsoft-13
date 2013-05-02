@@ -30,10 +30,10 @@ class Idea < ActiveRecord::Base
     end
   end
 
-  #send notification  to users who voted for this idea  when the idea submitter edit his idea
-  #Params:
-  #+user+ :: the parameter instance of user
-  #Author :: Marwa Mehanna
+  # send notification  to users who voted for this idea  when the idea submitter edit his idea
+  # Params:
+  # +user+:: the parameter instance of user
+  # Author:: Marwa Mehanna
   def send_edit_notification(user)
     voters=self.voters
     voters.each{|u|
