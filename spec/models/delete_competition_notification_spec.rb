@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DeleteNotification do
+describe DeleteCompetitionNotification do
   before :each do
     @user = FactoryGirl.create(:investor)
     @user.confirm!
@@ -12,7 +12,7 @@ describe DeleteNotification do
 
   describe 'send_notification' do
 
-    it 'adds delete competition notification to delete_compitition_notifications table'do
+    it 'adds delete competition notification to delete_competition_notifications table'do
       DeleteCompetitionNotification.send_notification(@user, @competition, [@user])
       expect(DeleteCompetitionNotification.last.competition_id).to eq(@competition.id)
       expect(DeleteCompetitionNotification.last.user_id).to eq(@user.id)

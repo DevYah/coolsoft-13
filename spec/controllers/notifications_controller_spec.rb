@@ -5,7 +5,7 @@ describe NotificationsController do
 
   before :each do
     @idea = FactoryGirl.create(:idea)
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.create(:notification_competition)
     @user = FactoryGirl.create(:user)
     @user.confirm!
     sign_in @user
