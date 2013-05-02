@@ -20,13 +20,11 @@ class SimilarityEngine
 
   # Weighing model
   SIMILARITY_MODEL = {
-    # Jaccard coeffs are 0.0..1.0
     tags_jacc_idx:           10,
     title_keywords_jacc_idx: lambda { |x| 6**x - 1 },
-    # Hamming distance are -16..16
-    title_hamming_dist:      0.5,
-    desc_hamming_dist:       0.1,
-    prob_hamming_dist:       0.1
+    title_hamming_dist:      lambda { |x| 11**x - 1 },
+    desc_hamming_dist:       8,
+    prob_hamming_dist:       8
   }
 
   # Hook to recalculate the similarity coefficients for an idea upon saving
@@ -106,9 +104,9 @@ class SimilarityEngine
   # +b+:: second +Fixnum+
   #
   # Author: Mina Nagy
-  def self.hamming_distance(a, b, half_width = 16)
+  def self.hamming_distance(a, b, width = 32)
     return 0 if a == b && b == 0
-    half_width - (a^b).to_s(2).count('1')
+    1.0 - ((a ^ b).to_s(2).count('1') / width.to_f)
   end
 
 
@@ -167,7 +165,9 @@ class SimilarityEngine
   # Author: Mina Nagy
   def self.rebuild_similarities(idea)
     # find ideas in tagged by the same tags
-    ideas_in_tags = Idea.joins(:tags).where(tags: { id: idea.tags }).select('ideas.id').preload(:tags)
+    ideas_in_tags = Idea.joins(:tags).where(tags: { id: idea.tags })
+                    .select('ideas.id, ideas.title, ideas.description, ideas.problem_solved')
+                    .preload(:tags)
 
     similarities = []
     timestamp = Time.now.to_i
