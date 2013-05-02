@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
   # Author: Mohammad Abdulkhaliq
   def committee_accept(user)
     @user = user
-    @url  = "http://localhost:3000"
+    @url  = app.root_url
     mail(:to => user.email, :subject => "Congratulations!")
   end
 
@@ -26,7 +26,7 @@ class UserMailer < ActionMailer::Base
   # Author: Mohammad Abdulkhaliq
   def committee_reject(user)
     @user = user
-    @url  = "http://localhost:3000"
+    @url  = app.root_url
     mail(:to => user.email, :subject => "Idearator")
   end
 
