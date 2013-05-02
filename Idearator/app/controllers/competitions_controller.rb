@@ -1,12 +1,13 @@
 class CompetitionsController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update]
+  before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update, :enroll_idea]
   # view stream of competitiions
   # Params
   # +Page+:: is passed in params through the new competition.js , it is used to load instances of +Competition+ to be viewed
   # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
   # Muhammed Hassan
   def index
+
     @firstTime = false
     all = Competition
     if params[:type]
@@ -42,6 +43,58 @@ class CompetitionsController < ApplicationController
     end
   end
 
+
+  def review_competitions_ideas
+    @competition = Competition.find(params[:id])
+    if current_user != nil && current_user.id == @competition.investor_id
+      @ideas = CompetitionEntry.find(:all,:conditions =>{:approved => false, :rejected => false, :competition_id => @competition.id})
+      @ideas.map!{|id| Idea.find(id.idea_id)}
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not review ideas' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def approve
+
+    @idea = Idea.find(params[:idea_id])
+    @competition = Competition.find(params[:id])
+    if current_user != nil && current_user.id == @competition.investor_id
+      @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
+      @entry.first.approved = true
+      @entry.first.save
+      respond_to do |format|
+        format.js
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not approve ideas' }
+        format.json { head :no_content }
+      end
+    end
+  end
+  def reject
+    @idea = Idea.find(params[:idea_id])
+    @competition = Competition.find(params[:id])
+    if current_user != nil && current_user.id == @competition.investor_id
+      @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
+      @entry.first.rejected = true
+      @entry.first.save
+      respond_to do |format|
+        format.js
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to  '/' , notice: 'You can not reject ideas' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
   # view competition of current user
   # Params
   # +id+:: is passed in params through the new competition view, it is used to identify the instance of +Competition+ to be viewed
@@ -50,7 +103,7 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     @chosen_tags_competition = Competition.find(params[:id]).tags
     if (user_signed_in?)
-      @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:approved => true, :rejected => false})
+      @myIdeas=User.find(current_user).ideas.find(:all, :conditions =>{:rejected => false})
       @myIdeas.reject! do |i|
         (@competition.tags & i.tags).empty?
       end
@@ -65,7 +118,7 @@ class CompetitionsController < ApplicationController
   end
 
   # making new Competition
-  #Marwa Mehann
+  #Marwa Mehanna
   def new
     @competition = Competition.new
     chosen_tags_competition=[]
@@ -134,7 +187,6 @@ class CompetitionsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to '/', alert: 'Your Competition has been successfully deleted!' }
       end
-
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: 'You do not own the idea, so it cannot be deleted!' }

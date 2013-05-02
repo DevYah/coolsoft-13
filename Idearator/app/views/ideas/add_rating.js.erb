@@ -1,9 +1,8 @@
-$('div#idea-<%= @idea.id %>').remove();
-$('.btn-success.add-rating').parent().find('div.add-ratings').hide();
+$('div#idea--<%= @idea.id %>').remove();
 var remaining = $('.btn-success.add-rating').length ;
 if (remaining == 0){
   var z = $('<h1>No ideas to review</h1>');
-  $('div.content').append(z);
+  $('div.content').prepend(z);
 }
 var btns = $('div#approve-btns').length;
 if (btns == 1){

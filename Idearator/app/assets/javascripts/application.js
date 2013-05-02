@@ -19,6 +19,7 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require jquery_purr
+//= require jquery-star-rating
 //= require notification_polling
 //= require notifications
 //= require jquery-star-rating
