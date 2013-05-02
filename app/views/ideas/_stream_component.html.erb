@@ -13,14 +13,14 @@
               <span class="label label-info "><%= tag.name %></span>
             </button>
             <% else %>
-            <%= link_to tag.name, :controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true" %>
+            <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
             <% end %>
           <% end %>
         </ul>
-         <%= render :partial => 'ideas/share' ,locals: {idea: idea}%>
+        <%= render :partial => 'ideas/share' ,locals: {idea: idea}%>
       </div>
       <div class='span4'>
-         <%= 'by' %>
+        <%= 'by' %>
         <span><%= link_to idea.user.username , idea %></span>
         <div><%= idea.description %></div>
       </div>

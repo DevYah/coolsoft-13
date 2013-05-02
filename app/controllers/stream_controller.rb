@@ -7,6 +7,7 @@ class StreamController < ApplicationController
   @@filter_all = []
 
   def index
+    @trending = Idea.joins(:trend).order('trending desc').limit(4)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     @page = params[:mypage]
     @searchtext = params[:search]
@@ -14,6 +15,7 @@ class StreamController < ApplicationController
     @searching_with = params[:searchtype] == "true"
     @insert = params[:insert]
     
+
     if params[:reset_global]
       @@filter_all = []
     end
@@ -36,22 +38,29 @@ class StreamController < ApplicationController
         end
       end
     else
-      if @searchtext != "" and @filter_tmp == []
-        if @search_with_user
-          @users = User.search(params[:search]).page(params[:mypage]).per(10)
-        else  
-          @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
+      if @searchtext != "" and @filter_tmp != []
+        if !@search_with_user
+          @ideas = Idea.filter(@filter_tmp,@searchtext).sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
+          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
         end
       else
-        if @searchtext == "" and @filter_tmp != []
-          @ideas = Idea.filter(@filter_tmp).sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
-          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
-          @filter_tmp.uniq
-        else
+        if @searchtext != "" and @filter_tmp == []
           if @search_with_user
             @users = User.search(params[:search]).page(params[:mypage]).per(10)
           else
-            @ideas = Idea.order(:created_at).page(params[:mypage]).per(10)
+            @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
+          end
+        else
+          if @searchtext == "" and @filter_tmp != []
+            @ideas = Idea.filter(@filter_tmp,"").sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
+            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+            @filter_tmp.uniq
+          else
+            if @search_with_user
+              @users = User.search(params[:search]).page(params[:mypage]).per(10)
+            else
+              @ideas = Idea.order(:created_at).page(params[:mypage]).per(10)
+            end
           end
         end
       end

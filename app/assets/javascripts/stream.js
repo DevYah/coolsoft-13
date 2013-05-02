@@ -23,9 +23,34 @@ function stream_manipulator(page,tag,search,insert,user){
   will_insert = (insert == "true");
   user_search = (user == "true");
   reset = "false";
-
   if (!(searchtext == "" && !user_search && tag == "" && !will_insert)){
     $("#stream_results").html("");
+    if(searchtext != "" && tag != ""){
+      currentpage = 1;
+      user_search = false;
+
+      if(will_insert){
+        if(!check_if_exists(tag)){
+          thistag = tag.concat(thistag);
+        }
+      }else{
+        if (check_if_exists(tag)){
+          for (var i = 0; i < thistag.length; i++) {
+            if (thistag[i] == tag) {
+              thistag.splice(i,1);
+              user_search = false;
+              currentpage = 1;
+              break;
+            }
+          }
+        }else{
+          reset = "true";
+          searchtext = "";
+          user_search = false;
+          currentpage = 1;
+        }
+      }
+  }else{
       if (searchtext == "" && !user_search){
         if(will_insert){
           if(!check_if_exists(tag)){
@@ -69,6 +94,7 @@ function stream_manipulator(page,tag,search,insert,user){
         }
       }
     }
+  }
     if(reset == "true"){
       $.ajax({
         url: '/stream/index?page=' + currentpage,
@@ -94,30 +120,28 @@ function stream_manipulator(page,tag,search,insert,user){
 
 $(document).ready(function(){ apply_tag_handlers(); });
    function apply_tag_handlers(){
-   $("#stream_results .btn-link").click(function tag_caller(e){
-    e.preventDefault();
-    var tag = $(this);
-    $("#search").val("");
-    $("#searchtype").val("false");
-    stream_manipulator(1,[tag.val()],"","true", "false");
-  });
-   $("#stream_results .close").click(function tag_remover(e){
-    e.preventDefault();
-    var curr = $(this);
-    $("#search").val("");
-    $("#searchtype").val("false");
-    stream_manipulator(1,[curr.val()],"","false", "false");
-  });
-   }
+    $("#stream_results .btn-link").click(function tag_caller(e){
+      e.preventDefault();
+      var tag = $(this);
+      $("#searchtype").val("false");
+      stream_manipulator(1,[tag.val()],$("#search").val(),"true", "false");
+    });
+      $("#stream_results .close").click(function tag_remover(e){
+      e.preventDefault();
+      var curr = $(this);
+      $("#searchtype").val("false");
+      stream_manipulator(1,[curr.val()],$("#search").val(),"false", "false");
+    });
+  }
 
 
 $(window).scroll (function(){
-      if($(window).scrollTop()!=0){
-        if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
-          currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);
-          }
+  if($(window).scrollTop()!=0){
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
+      currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);
     }
-        });
+  }
+});
 
  function call_infinite_scrolling(controller,action,page,id,params){
   if(id == ""){
@@ -125,16 +149,15 @@ $(window).scroll (function(){
   }else{
     var url_to_go = '/'+controller+'/'+id+'?page='+page;
   }
-  
-      page++;
-      $.ajax({
-        url: url_to_go ,
-        type: 'get',
-        dataType: 'script',
-        data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
-        success: function() {
-          apply_tag_handlers();
-        }
-      });
-  return page;
+    page++;
+    $.ajax({
+      url: url_to_go ,
+      type: 'get',
+      dataType: 'script',
+      data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
+      success: function() {
+        apply_tag_handlers();
+      }
+    });
+    return page;
 }

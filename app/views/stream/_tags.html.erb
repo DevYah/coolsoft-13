@@ -1,7 +1,6 @@
     <% filter_this.each do |current|%>
       <!-- <div class="well well-small"> -->
-        <span class="label label-info "><%= current %>
-          <button class="close" value='<%= current %>'>&times;</button>
-        </span>
+        <span class="label label-info "><button class="close" value='<%= current %>'>&times;</button>
+          <%= current %></span>
       <!-- </div> -->
     <% end %>

@@ -6,22 +6,27 @@ class Idea < ActiveRecord::Base
   validates_length_of :description, :maximum => 1000
   validates_length_of :problem_solved, :maximum => 1000
 
+  after_save TrendsController::IdeaHooks.new
+
   belongs_to :user
+  belongs_to :committee
   has_one :daily_vote_count, class_name: 'VoteCount'
   has_many :comments
   has_many :idea_notifications, :dependent => :destroy
   has_many :competition_idea_notifications, :dependent => :destroy
   has_many :delete_notifications
   has_many :ratings
-  belongs_to :committee
   has_and_belongs_to_many :tags
+
   has_many :votes
   has_many :voters, :through => :votes, :source => :user
   has_many :competition_entries
   has_many :competitions, :through => :competition_entries, :source => :competition
   has_many :winning_competitions, :class_name => 'Competition'
+  has_one :trend
 
-  has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => '/images/:style/missing.png'
+
+  has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
   def self.search(search)
     if search
       where('title LIKE  ? AND approved  = ?', "%#{search}%", true)
@@ -30,15 +35,16 @@ class Idea < ActiveRecord::Base
     end
   end
 
-  def self.filter(tags)
-    @ideas = []
+  def self.filter(tags,search_parameter)
+    ideas = []
+    search_results = Idea.search(search_parameter)
     tags.each do |tag|
       t = Tag.find(:first, :conditions => {:name => tag})
       ideatags = IdeasTags.find(:all, :conditions => {:tag_id => t.id})
-      ideas = Idea.where(:id => ideatags.map(&:idea_id))
-      @ideas = @ideas + ideas
+      tag_ideas = Idea.where(:id => ideatags.map(&:idea_id))
+      ideas = ideas + tag_ideas
     end
-    @ideas
+    @results = ideas & search_results
   end
 
   def send_edit_notification(user)
