@@ -117,11 +117,12 @@
   </div>
   <br />
   <div class='row'>
-    <div class ='span4'></div>
-    <div class ='span4 archive_status'>
+    <div class='span4 archive_status'>
       <div id="fb-root"></div>
       <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
     </div>
+
+    <%= render partial: 'similar_ideas', locals: { idea: @idea } %>
   </div>
 </div>
 <% if @idea.archive_status == true %>
