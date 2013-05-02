@@ -1,3 +1,6 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "user.js" %>
+<% end %>
 <h2>Sign up</h2>
 
 
@@ -13,15 +16,8 @@
   <div><%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %></div><br />
 
-  <p><%= f.label :username %>
-  <%= f.text_field :username %></p>
-
-  <p><%= f.label :date_of_birth %>
-  <%= f.date_select :date_of_birth, {:order => [:day, :month, :year],
-                                     :start_year => Time.now.year - 16,
-                                     :end_year => 1940,
-                                     :prompt => {:month => 'Month', :day => 'Day', :year => 'Year'}},
-                                    {:class => 'date-select'} %></p><br />
+  <div><%= f.label :username %>
+  <%= f.text_field :username %></div>
 
   <div> <%= f.check_box :type, {id: "is-committee"}, "Committee", "User" %> Sign up as committee </div><br />
 
