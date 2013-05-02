@@ -1,6 +1,5 @@
 Sprint0::Application.routes.draw do
 
-  match '/home/index' => 'home#index'
   default_url_options :host => 'localhost:3000'
   root :to => 'home#index'
 
@@ -143,4 +142,12 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  #2.3 Create/Edit Tags
+  resources :tags
+
+  match 'tags/:id/synonym' => 'tags#addsym', :via => :put
+  match 'tags/:id/delsym' => 'tags#delsym', :via => :put
+
 end
+

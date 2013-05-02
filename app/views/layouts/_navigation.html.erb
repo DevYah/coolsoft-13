@@ -30,7 +30,7 @@
                 :class => 'popup social-media-login twitter-nav-login scrollshow',
                 'data-width' => 600, 'data-height' => 500  %>
     </li>
-      <li><%= link_to('Login', new_user_session_path, :class => 'scrollshow')  %> </li>
+      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow')  %> </li>
   <% end %>
 </ul>
 <ul class="nav">
@@ -111,6 +111,7 @@
       <ul class="dropdown-menu">
         <li><a data-toggle="modal" href="#example">
             Invite</a></li>
+        <li><%= link_to "Tag Management", tags_path %></li>
       </ul>
     </li>
   </ul>
