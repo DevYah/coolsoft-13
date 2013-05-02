@@ -41,7 +41,7 @@
     <% end %>
     <% if current_user.ideas.count != 0 %>
       <li>
-        <%= link_to('My Ideas', controller: 'users', action: 'my_ideas', :id => current_user.id) %>
+        <%= link_to('My Ideas', controller: 'users', action: 'ideas', :id => current_user.id) %>
       </li>
     <% end %>
     <% if current_user.is_a? Investor%>
@@ -100,7 +100,8 @@
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
-        <li><a href="/admins/invite">Invite</a></li>
+        <li><a data-toggle="modal" href="#example">
+            Invite</a></li>
       </ul>
     </li>
   </ul>
