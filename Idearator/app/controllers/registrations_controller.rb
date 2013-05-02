@@ -75,4 +75,18 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # Deny the user from Signing In if User is banned
+  #
+  # Params: +resrouce+:: The user object
+  #
+  # Author: Menna Amr
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(User) && resource.banned?
+      sign_out resource
+      flash[:error] = "This account has been suspended."
+      root_path
+    else
+      super
+    end
+  end
 end
