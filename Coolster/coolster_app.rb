@@ -41,12 +41,13 @@ class CoolsterApp < Sinatra::Base
   aget '/poll' do
     puts "polling"
     if env['warden'].authenticated?
+      puts @@saved_scripts[request.session.id]
       if @@saved_scripts[env['warden'].user[1][0].to_s].nil? || @@saved_scripts[env['warden'].user[1][0].to_s] == []
         @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
         EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
       else
         body @@saved_scripts[env['warden'].user[1][0].to_s][0]
-        @@saved_scripts[env['warden'].user[1][0].to_s].remove_at(0)
+        @@saved_scripts[env['warden'].user[1][0].to_s].delete_at(0)
       end    
     else
       if @@saved_scripts[request.session.id].nil? || @@saved_scripts[request.session.id] == [] 
