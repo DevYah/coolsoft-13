@@ -1,6 +1,9 @@
 
 $(document).ready(function() {
 
+$('.btn-success.add-rating').click(function(){
+    $('.add-ratings').show();
+  });
   // When The user clicks on facebook share or twitter share button, this method
   // gets the current URL of the current page and apends it to the default facebook
   // and twitter sharing URLs.
