@@ -1,10 +1,17 @@
 //= require highcharts
 //= require highcharts/highcharts-more
+
+ //#Function to choose which graph to be displayed and set barchart as default chart  
+ //#+params[:tag_id] + id of the tag the user clicks on 
+ //#Author:Lina Basheer
 function graph_chooser(tagid) {
     $('#chart-tabs a:first').tab('show');
     $("a[href='#bubble-chart']").click(initialize_bubblechart(tagid));
     $("a[href='#bar-chart']").click(initialize_barchart(tagid));
   }
+//#Function to draw bar chart graph
+//#+params[:tag_id] + id of the tag the user clicks on 
+//#Author:Lina Basheer
 function initialize_barchart(tagid) {
   $.get('/dashboard/chart_data/' + tagid+ '.csv', function(data) {
     var options = {
@@ -42,7 +49,7 @@ function initialize_barchart(tagid) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
       if (line == "") return;
-      var items = line.split(',');      
+      var items = line.split(',');
       var series = {
         name: items[0],
         data: [{y: parseInt(items[1]), url: '/ideas/' + items[2]}]
@@ -54,18 +61,22 @@ function initialize_barchart(tagid) {
   });
 }
 
+//#Function to draw bubble chart graph
+//#+params[:tag_id] + id of the tag the user clicks on 
+//#Author:Lina Basheer
 function initialize_bubblechart(tagid) {
- $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) { 
+ $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) {
   var options = {
     chart: {
       renderTo: 'bubble-chart',
-      defaultSeriesType: 'bubble'
+      defaultSeriesType: 'bubble',
+      zoomType: 'xy'
     },
     title: {
       text: 'Number of votes'
     },
     xAxis: {
-      categories: []
+       type: 'integer'
     },
     yAxis: {
       title: {
@@ -89,7 +100,7 @@ function initialize_bubblechart(tagid) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
       if (line == "") return;
-      var items = line.split(',');      
+      var items = line.split(',');
       var series = {
         name: items[0],
         data: [{y: parseInt(items[1]),x:parseInt(items[2]), url: '/ideas/' + items[2]}]
@@ -101,17 +112,5 @@ function initialize_bubblechart(tagid) {
     var chart = new Highcharts.Chart(options);
     console.log(options);
   });
-}  
+}
 
-
-
-// function columnurl(e, chart, data) { 
-//   var selection = chart.getSelection();
-//   var row = selection[0].row;
-//   var column = selection[0].column;
-//   var idea_no = data.getValue(row,0);
-//   var title =data.getValue(column,row);
-//   console.log(idea_no);
-//   //$.getScript("/link_idea.js?&title="+title);
-//   window.location.href='/ideas/' + idea_no;
-// }

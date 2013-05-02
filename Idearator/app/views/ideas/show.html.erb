@@ -55,73 +55,74 @@
       <h3><%= @idea.title %></h3>
       <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary pull-right">Enter Competition</a></p>
       <%= render :partial => 'enter_competition'%>
-  </div>
-</div>
-<div class='row'>
-  <div class='span4'>
-    <a  href='#'>
-      <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
-    </a>
-    <% if @user == @idea.user_id %>
-      <script>
-        $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
-      </script>
-    <% end %>
-    <div class='pull-left'>
-      <%if @chosentags != nil %>
-        <% @chosentags.each do |tag|%>
-          <span class="label label-info "><%= tag.name %></span>
-        <% end %>
-      <% end %>
-      <%= render :partial => 'share' ,locals: { idea: @idea }%>
-      <% if @user == @idea.user_id %>
-        <div class='btn-group' id='control'>
-          <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
-          <% if @idea.archive_status == true %>
-            <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
-          <% else %>
-            <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
-          <% end %>
-          <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
-        </div>
-      <% end %>
     </div>
   </div>
-  <div class='span4'>
-    <span><%=link_to @username, @idea.user.becomes(User)%></span>
-    <h3>Description:</h3>
-    <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
-    <h3>Problem Solved:</h3>
-    <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
-  </div>
-  <div class='span4'>
-    <div class='row'>
-      <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
-      <div class='span4 archive_status'>
-        <p>
-          <% if @idea.ratings.size > 0 %>
-            <table>
-              <tr>
-                <th style='text-align: left;'><b>Ratings:-</b></th>
-                <th></th>
-              </tr>
-              <% @idea.ratings.each do |therating| %>
-                <tr>
-                  <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
-                </tr>
-              <% end %>
-            </table>
+  <div class='row'>
+    <div class='span4'>
+      <a  href='#'>
+        <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
+      </a>
+      <% if @user == @idea.user_id %>
+        <script>
+          $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
+        </script>
+      <% end %>
+      <div class='pull-left'>
+        <%if @chosentags != nil %>
+          <% @chosentags.each do |tag|%>
+            <span class="label label-info "><%= tag.name %></span>
           <% end %>
-        </p>
+        <% end %>
+        <%= render :partial => 'share' ,locals: { idea: @idea }%>
+        <% if @user == @idea.user_id %>
+          <div class='btn-group' id='control'>
+            <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
+            <% if @idea.archive_status == true %>
+              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive" }, :id => @idea.id, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
+            <% else %>
+              <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
+            <% end %>
+            <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
-  <br />
-  <div class='row'>
-    <div class ='span4'></div>
-    <div class ='span4 archive_status'>
-      <div id="fb-root"></div>
-      <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
+    <div class='span4'>
+      <span><%=link_to @username, @idea.user.becomes(User)%></span>
+      <h3>Description:</h3>
+      <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
+      <h3>Problem Solved:</h3>
+      <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
+    </div>
+    <div class='span4'>
+      <div class='row'>
+        <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
+        <div class='span4 archive_status'>
+          <p>
+            <% if @idea.ratings.size > 0 %>
+              <table>
+                <tr>
+                  <th style='text-align: left;'><b>Ratings:-</b></th>
+                  <th></th>
+                </tr>
+                <% @idea.ratings.each do |therating| %>
+                  <tr>
+                    <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+                  </tr>
+                <% end %>
+              </table>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class='row'>
+      <div class ='span4'></div>
+      <div class ='span4 archive_status'>
+        <div id="fb-root"></div>
+        <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
+      </div>
     </div>
   </div>
 </div>

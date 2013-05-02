@@ -96,4 +96,3 @@ $('.btn-success.add-rating').click(function(){
   }
 
 });
-

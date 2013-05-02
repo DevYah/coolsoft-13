@@ -32,7 +32,8 @@
 //= require stream
 //= require poller.js
 
-
+//
+//= require unauthorized_sign_in_up_modal
 
 var last_search = "";
 var original;
@@ -58,28 +59,7 @@ $(function() {
         $("#stream_results").html("");
         $("#searchtype").val("false");
         stream_manipulator(1,"","",true, "false");
-      }
-    }
-    // }
-  });
 });
-
-// $(function() {
-//  $("#user-search-button-redirection").click(function remove_search_hander(e){
-//   e.preventDefault();
-//   var search_value = $("#search-input").val();
-//   alert(search);
-//   $.ajax({
-//     url: '/stream/index?page=' + 1,
-//     type: 'get',
-//     dataType: 'script',
-//     data: { mypage: 1, tag: "", search: search_value, search_user: false},
-//     success: function() {
-//     }
-//   });
-//  });
-// });
-
 $(document).bind("ajaxError", function(e, xhr){
 	if(xhr.status == 401){
 		$('#signedout').modal('show');
@@ -116,19 +96,6 @@ $(document).ready(function() {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
-
-  // $("#searchdivelse input").keyup(function(e){
-  //   if (e.keycode == 13){
-  //     $("#searchdivelse").submit();
-  //     searchvalue = $("#search").val();
-  //     alert(searchvalue);
-  //   }
-  // });
-
-  // function set_searchtext(searchvalue){
-  //   searchtext = searchvalue;
-  //   alert(searchtext);
-  // }
    $('#searchdiv').submit(function(e) {
      if (in_stream){
       e.preventDefault();

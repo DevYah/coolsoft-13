@@ -4,10 +4,9 @@ class IdeasController < ApplicationController
 
 
   # view idea of current user
-
-  # Params
+  # Params:
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
-  # Marwa Mehanna
+  # Author: Marwa Mehanna
   def show
     @idea = Idea.find(params[:id])
     if user_signed_in?
@@ -24,7 +23,8 @@ class IdeasController < ApplicationController
   end
 
   # making new Idea
-  #Marwa Mehanna
+  # Params: None
+  # Author: Marwa Mehanna
   def new
     @idea = Idea.new
     @tags = Tag.all
@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
 
   # filters the ideas that have one or more of given tags
   # Params:
-  # +tags:: the parameter is an list of +Tag+ passed through tag autocomplete field
+  # +tags+:: the parameter is an list of +Tag+ passed through tag autocomplete field
   # Author: muhammed hassan
   def filter
     @approved = Idea.joins(:tags).where(:tags => {:name => params[:myTags]}).uniq.page(params[:page]).per(10)
@@ -49,8 +49,8 @@ class IdeasController < ApplicationController
   end
 
   # editing Idea
-  # Params
-  # +id+ :: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
+  # Params:
+  # +id+:: this is an instance of +Idea+ passed through _form.html.erb, used to identify which +Idea+ to edit
   # Author: Marwa Mehanna
   def edit
     @idea = Idea.find(params[:id])
@@ -60,15 +60,18 @@ class IdeasController < ApplicationController
   end
 
   # updating Idea
-  # Params
-  # +ideas_tags:: this is an instance of +IdeasTag+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Params:
+  # +id+:: this is an instance +Idea+ passed through _form.html.erb, used to identify which +Idea+ to  update
+  # +id+:: this is an instance +Idea+ passed through show.html.erb, used to identify which is +Idea+ to update
   # Author: Marwa Mehanna
   def update
     @idea = Idea.find(params[:id])
     @idea.send_edit_notification current_user
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
+        if current_user.provider == 'twitter' && current_user.facebook_share
+          current_user.twitter.update("I've updated my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        end
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
       else
@@ -87,6 +90,9 @@ class IdeasController < ApplicationController
     current_user.vote_for @idea
     @idea.reload
     respond_to do |format|
+      if current_user.provider == 'twitter' && current_user.facebook_share
+        current_user.twitter.update("I've voted to an idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+      end
       format.html { redirect_to @idea, :notice =>'Thank you for voting' }
       format.json { head :no_content }
       format.js
@@ -109,10 +115,8 @@ class IdeasController < ApplicationController
   end
 
   # creating new Idea
-  # Params
-  # +idea+ :: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
-  # +idea_tags+ :: this is an instance of +IdeaTags+ passed through _form.html.erb, this is where +tags+ will be added
-  # +tags+ :: this is an instance of +Tags+ passed through _form.html.erb, used to identify which +Tags+ to add
+  # Params:
+  # +idea+:: this is an instance of +Idea+ passed through _form.html.erb, identifying the idea which will be added to records
   # Author: Marwa Mehanna
   def create
     @idea = Idea.new(params[:idea])
@@ -122,6 +126,10 @@ class IdeasController < ApplicationController
         VoteCount.create(idea_id: @idea.id)
         if params[:competition_id] != '' and params[:competition_id] != nil
           Competition.find(params[:competition_id]).ideas << @idea
+        end
+
+        if current_user.provider == 'twitter' && current_user.facebook_share
+          current_user.twitter.update("I've created a new idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
         end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
@@ -214,6 +222,9 @@ class IdeasController < ApplicationController
     if current_user.type == 'Admin' || current_user.id == idea.user_id
       idea.archive_status = false
       idea.save
+      if current_user.provider == 'twitter' && current_user.facebook_share
+        current_user.twitter.update("My idea is back to life! =D I've unarchived my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + idea.id.to_s)
+      end
     else
       respond_to do |format|
         format.html { redirect_to idea, alert: "Idea isn't archived, you are not allowed to archive it." }
@@ -222,12 +233,12 @@ class IdeasController < ApplicationController
     end
   end
 
-  #adds the rating prespectives taken from the user from the add_prespectives view
-  #to the idea reviewed
-  # Params
-  #+params[:ratings]+ ratings prespectives taken from the user
-  #+session[:idea_id] id of the idea to be reviewed
-  #Author : Omar Kassem
+  # adds the rating prespectives taken from the user from the add_prespectives view
+  # to the idea reviewed
+  # Params:
+  # +params[:ratings]+:: ratings prespectives taken from the user
+  # +session[:idea_id]+:: id of the idea to be reviewed
+  # Author: Omar Kassem
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
