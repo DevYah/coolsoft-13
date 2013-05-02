@@ -187,7 +187,9 @@ class SimilarityEngine
                         "(#{similar_idea.id},#{similarity},#{idea.id},#{timestamp})")
     end
 
-    Similarity.where('idea_id = ? OR similar_idea_id = ?', idea.id, idea.id).delete_all
+    # FIXME what's the proper way to delete?
+    stale_ids = Similarity.offset(offset).where('idea_id = ? OR similar_idea_id = ?', idea.id, idea.id).pluck(:id)
+    Similarity.delete stale_ids
 
     if !similarities.empty?
       sql = "INSERT INTO similarities (`idea_id`, `similarity`, `similar_idea_id`, `created_at`, `updated_at`)" +
