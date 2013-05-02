@@ -35,6 +35,20 @@ class Idea < ActiveRecord::Base
     end
   end
 
+  #Adds the idea of the highest votes in the month of the input date
+  #+date+::
+  #Author Omar Kassem
+  def self.best_idea_for_month(date)
+    start_date = date
+    start_date = start_date - (start_date.day - 1).day
+    end_date = start_date + 1.month
+    ideas = Idea.where(:created_at => start_date..end_date).reorder('num_votes')
+    idea = MonthlyWinner.new
+    puts ideas.count
+    idea.idea_id = ideas.last.id
+    idea.save
+  end
+
   # send notification  to users who voted for this idea  when the idea submitter edit his idea
   # Params:
   # +user+:: the parameter instance of user
@@ -47,5 +61,4 @@ class Idea < ActiveRecord::Base
       end
     }
   end
-
 end
