@@ -117,6 +117,20 @@ class User < ActiveRecord::Base
     @twitter_user
   end
 
+  # Get approved and unarchived ideas for user
+  # Params:
+  # None
+  # Author: Hisham ElGezeery
+  def get_approved_ideas
+    ideas = self.ideas
+    approved_ideas = ideas.where(:approved => true)
+    unarchived_ideas = approved_ideas.where(:archive_status => false).all
+  end
+
+  # user votes for a certain idea and send notification to owner of the idea.
+  # Params:
+  # +idea+:: the parameter instance of idea
+  # Author:: Marwa Mehanna
   def vote_for(idea)
     self.votes.create(idea_id: idea.id)
     if idea.user.own_idea_notifications
@@ -125,10 +139,18 @@ class User < ActiveRecord::Base
     idea.save
   end
 
+  # user unvotes for a certain idea
+  # Params:
+  # +idea+:: the parameter instance of idea
+  # Author:: Marwa Mehanna
   def unvote_for(idea)
     voted_ideas.delete(idea)
   end
 
+  # checks if user voted for this idea
+  # Params:
+  # +idea+:: the parameter instance of idea
+  # Author:: Marwa Mehanna
   def voted_for?(idea)
     votes.where(idea_id: idea.id).exists?
   end

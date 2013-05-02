@@ -16,11 +16,6 @@ p{
   padding-left:20px;
 }
 
-.options {
-  display: block;
-  width: 40px;
-}
-
 .user-photo {
   display: inline-block;
   position: absolute;
@@ -45,11 +40,11 @@ p{
   width: 300px;
 }
 
-dt {
+#user dt {
   font-size: 20px;
 }
 
-dd {
+#user dd {
   font-size: 18px;
 }
 
@@ -58,12 +53,37 @@ dd {
   height: 300px;
 }
 
-label {
-  font-size: 22px;
-}
-
 .user-idea {
   position: relative;
   width: 800px;
   left: 20px;
+}
+
+#user input {
+  width: 40%;
+}
+
+#user-about-me {
+  width: 100%;
+  max-width:600px;
+  word-wrap: break-word;
+}
+
+#user .best_in_place {
+  padding: .1m;
+  cursor: hand;
+  cursor: pointer;
+  -moz-transition: background 0.5s linear;
+  -o-transition: background 0.5s linear;
+  -webkit-transition: background 0.5s linear;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#user .best_in_place:hover, .do_hover {
+  background-color: #CCC;
 }
