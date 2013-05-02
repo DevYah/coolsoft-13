@@ -171,7 +171,7 @@ class UsersController < ApplicationController
   # Author: Mohammad Abdulkhaliq
   def invite_member
     unless current_user.is_a? Admin
-      redirect_to  'users/sign_in' , notice: 'Please sign in as an admin'
+      redirect_to  'users/sign_in' , notice: 'Please sign in as an admin' and return
     end
     @user = User.find(params[:id])
     @user.type = 'Committee'
