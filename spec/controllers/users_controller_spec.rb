@@ -1,6 +1,41 @@
 require 'spec_helper'
 describe UsersController do
   include Devise::TestHelpers
+  describe "responding to GET show" do
+    before(:each) do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      sign_in @user
+    end
+    it "should expose the requested user as @user and render [show] template" do
+      @new_user = FactoryGirl.build(:user_two)
+      @new_user.confirm!
+      get :show, :id => @new_user.id
+      assigns[:user].should == @new_user
+      response.should render_template("users/show")
+    end
+  end
+  describe "PUT 'update'" do
+    before(:each) do
+      @user = FactoryGirl.build(:user)
+      @user.first_name = 'first_name'
+      @user.last_name = 'last_name'
+      @user.username = 'username'
+      @user.date_of_birth = Date.current()
+      @user.confirm!
+      sign_in @user
+    end
+    it "should change the user's attributes" do
+      @attr = { :first_name => 'first_name_updated', :last_name => 'last_name_updated', :username => 'username_updated' }
+      puts 'Old first_name: ' + @user.first_name
+      put :update, :id => @user, :user => @attr
+      @user.reload
+      (@user.first_name).should eql('first_name_updated')
+      (@user.last_name).should eql('last_name_updated')
+      (@user.username).should eql('username_updated')
+      puts 'New first_name: ' + @user.first_name
+    end
+  end
   describe 'GET ideas' do
     it 'views an idea stream for a certain user' do
       @user = FactoryGirl.build(:user)
@@ -43,7 +78,7 @@ describe UsersController do
       u1.participated_idea_notifications.should eq(false)
     end
   end
-     before :each do
+  before :each do
     @a = Admin.new
     @a.email = 'admin@gmail.com'
     @a.username = 'admin'
@@ -58,24 +93,23 @@ describe UsersController do
     @u1.password = '123123123'
     @u1.confirm!
     @u1.save
-    sign_in @u1
   end
-   describe "PUT #invite_member" do
-     it "retrieves the user instance from :id" do
-       put :invite_member, :id => @u1.id
-       assigns(:user).should eq(@u1)
-     end
-     it "inititates the user to the committees table" do
-       put :invite_member, :id => @u1.id
-       @u1.reload
-       @u1.type.should eq("Committee")
-     end
-     it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
-       expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
-     end
-     it "redirects to home page" do
+  describe "PUT #invite_member" do
+    it "retrieves the user instance from :id" do
       put :invite_member, :id => @u1.id
-       response.should redirect_to '/'
-   end
- end
+      assigns(:user).should eq(@u1)
+    end
+    it "inititates the user to the committees table" do
+      put :invite_member, :id => @u1.id
+      @u1.reload
+      @u1.type.should eq("Committee")
+    end
+    it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
+      expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
+    end
+    it "redirects to home page" do
+      put :invite_member, :id => @u1.id
+      response.should redirect_to '/'
+    end
+  end
 end
