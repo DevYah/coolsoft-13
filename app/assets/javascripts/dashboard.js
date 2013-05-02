@@ -1,8 +1,8 @@
 //= require highcharts
 //= require highcharts/highcharts-more
 
- //#Function to choose which graph to be displayed and set barchart as default chart  
- //#+params[:tag_id] + id of the tag the user clicks on 
+ //#Function to choose which graph to be displayed and set barchart as default chart
+ //#+params[:tag_id] + id of the tag the user clicks on
  //#Author:Lina Basheer
 function graph_chooser(tagid) {
     $('#chart-tabs a:first').tab('show');
@@ -10,7 +10,7 @@ function graph_chooser(tagid) {
     $("a[href='#bar-chart']").click(initialize_barchart(tagid));
   }
 //#Function to draw bar chart graph
-//#+params[:tag_id] + id of the tag the user clicks on 
+//#+params[:tag_id] + id of the tag the user clicks on
 //#Author:Lina Basheer
 function initialize_barchart(tagid) {
   $.get('/dashboard/chart_data/' + tagid+ '.csv', function(data) {
@@ -62,7 +62,7 @@ function initialize_barchart(tagid) {
 }
 
 //#Function to draw bubble chart graph
-//#+params[:tag_id] + id of the tag the user clicks on 
+//#+params[:tag_id] + id of the tag the user clicks on
 //#Author:Lina Basheer
 function initialize_bubblechart(tagid) {
  $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) {
@@ -113,4 +113,3 @@ function initialize_bubblechart(tagid) {
     console.log(options);
   });
 }
-
