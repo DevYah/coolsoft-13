@@ -241,9 +241,11 @@ class IdeasController < ApplicationController
       @idea.save
       @rating = params[:rating]
       @rating.each do |rate|
-        r = Rating.find(:all, :conditions => {:name => rate})
-        @idea.ratings << r
-        @idea.save
+        r = @idea.ratings.build
+        r.name=rate
+        r.value=0
+        r.idea_id=@idea.id
+        r.save
       end
       respond_to do |format|
         format.js {render "add_rating"}
@@ -256,7 +258,6 @@ class IdeasController < ApplicationController
     end
   end
 
-
   # Popover with idea details
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be displayed
@@ -267,5 +268,5 @@ class IdeasController < ApplicationController
       format.js
     end
   end
-
 end
+
