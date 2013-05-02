@@ -180,6 +180,7 @@ class SimilarityEngine
 
     # calculate similarity with each idea
     ideas_in_tags.find_each do |similar_idea|
+      next if idea.id == similar_idea.id
       similarity = idea_similarity_coeff(idea, similar_idea)
 
       similarities.push("(#{idea.id},#{similarity},#{similar_idea.id},#{timestamp})," +
@@ -202,7 +203,7 @@ class SimilarityEngine
   #
   # Author: Mina Nagy
   def self.rebuild_all_similarities
-    offset = 0
+    offset = 1
     Idea.find_each do |idea|
       rebuild_similarities(idea, offset)
       offset += 1
