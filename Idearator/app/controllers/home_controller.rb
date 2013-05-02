@@ -14,6 +14,7 @@ class HomeController < ApplicationController
   #the @approved to the ideas matching this search
   #Author: Mohamed Salah Nazir
   def index
+    @trending = Idea.joins(:trend).order('trending desc').limit(4)
     @page_number = params[:myPage]
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     if(params[:myTags])
