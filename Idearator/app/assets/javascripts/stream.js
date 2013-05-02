@@ -24,7 +24,6 @@ function stream_manipulator(page,tag,search,insert,user){
   user_search = (user == "true");
   reset = "false";
   if (!(searchtext == "" && !user_search && tag == "" && !will_insert)){
-    $("#stream_results").html("");
     if(searchtext != "" && tag != ""){
       currentpage = 1;
       user_search = false;
@@ -95,6 +94,7 @@ function stream_manipulator(page,tag,search,insert,user){
       }
     }
   }
+  $("#stream_results").html("");
     if(reset == "true"){
       $.ajax({
         url: '/stream/index?page=' + currentpage,
