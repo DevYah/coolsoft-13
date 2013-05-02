@@ -33,7 +33,6 @@
 <% if @admin.type == "Admin" and @registered and @user.banned==false%>
   <%= render :partial => 'modal_reject'%>
   <p><a data-toggle="modal" href="#reject" class="options btn btn-danger">Reject</a></p>
-</div>
 <% end %>
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
