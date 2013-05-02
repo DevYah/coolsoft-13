@@ -1,19 +1,14 @@
-class AdminsController < ApplicationController
 
+class AdminsController < ApplicationController
   before_filter do
     unless current_user and current_user.is_a? Admin
       redirect_to '/home/index'
     end
   end
 
-  # display invitation form
-  # Author: muhammed hassan
-  def invite
-  end
-
-  # checks invitation is valid and delivers the email
-  # +email+:: the email of the  guest
-  # Author: muhammed hassan
+# checks invitation is valid and delivers the email
+# +email+:: the email of the  guest
+# Author: muhammed hassan
   def invite_committee
     if User.find(:all, :conditions => {:email => params[:email]}).length ==0
       i = Invited.creates( params[:email] , current_user.id )
@@ -21,27 +16,28 @@ class AdminsController < ApplicationController
       if i.valid?
         mail = Inviter.invite_email(params[:email])
         mail.deliver
-        @messege = 'success'
+        flash[:notice] = 'success'
       else
-        @messege = i.errors.full_messages
+        flash[:error] = i.errors.full_messages.to_s
       end
     else
-      @messege = 'user already exists'
+      flash[:error] = 'user already exists'
     end
+    redirect_to :controller => 'home', :action => 'index'
   end
 
-  # toggles the ban status of the selected user
-  # Author: Omar Kassem
+# toggles the ban status of the selected user
+# Author: Omar Kassem
   def ban_unban
     if current_user
       if current_user.type == 'Admin'
         @user=User.find(params[:id])
         @user.toggle(:banned)
         @user.save
-        redirect_to :controller => 'users',:action => 'show'
+        redirect_to :controller => 'users', :action => 'show'
       end
     else
-      respond_to do |format|
+    respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You cant ban/unban users' }
         format.json { head :no_content }
 
