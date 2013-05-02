@@ -155,11 +155,11 @@ class UsersController < ApplicationController
   # Params:
   # none
   # Author: Hisham ElGezeery
-  def my_ideas
+  def ideas
     @user = User.find(params[:id])
     @ideas = @user.get_approved_ideas
     respond_to do |format|
-      format.html # my_ideas.html.erb
+      format.html # ideas.html.erb
     end
   end
 
