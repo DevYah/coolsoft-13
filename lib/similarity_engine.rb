@@ -123,7 +123,7 @@ class SimilarityEngine
   # Params:
   # +str+:: the +String+ to split
   #
-  # Autho: Mina Nagy
+  # Author`: Mina Nagy
   def self.hashed_keywords(str)
     return [] if str.nil?
     str = str.split
