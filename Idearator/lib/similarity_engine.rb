@@ -188,7 +188,7 @@ class SimilarityEngine
     end
 
     # FIXME what's the proper way to delete?
-    stale_ids = Similarity.offset(offset).where('idea_id = ? OR similar_idea_id = ?', idea.id, idea.id).pluck(:id)
+    stale_ids = Similarity.where('idea_id = ? OR similar_idea_id = ?', idea.id, idea.id).pluck(:id)
     Similarity.delete stale_ids
 
     if !similarities.empty?
@@ -205,7 +205,7 @@ class SimilarityEngine
   #
   # Author: Mina Nagy
   def self.rebuild_all_similarities
-    offset = 1
+    offset = 0
     Idea.find_each do |idea|
       rebuild_similarities(idea, offset)
       offset += 1
