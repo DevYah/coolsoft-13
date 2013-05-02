@@ -93,6 +93,17 @@ Sprint0::Application.routes.draw do
     match 'ratings/ajax'
   end
 
+
+  controller :competitions do
+    resources :competitions do
+      member do
+        match 'review_competitions_ideas' => 'competitions#review_competitions_ideas'
+        match 'approve' => 'competitions#approve'
+        match 'reject' => 'competitions#reject'
+      end
+    end
+  end
+
   resources :competitions
 
   match 'competitions/:id/enroll_idea/:idea_id' => 'competitions#enroll_idea'
