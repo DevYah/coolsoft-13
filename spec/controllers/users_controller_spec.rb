@@ -44,7 +44,6 @@ describe UsersController do
     @u1.password = '123123123'
     @u1.confirm!
     @u1.save
-    sign_in @u1
   end
    describe "PUT #invite_member" do
      it "retrieves the user instance from :id" do
