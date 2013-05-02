@@ -91,15 +91,10 @@
   font-size: 0;
 }
 
-.carousel{
-  width:900px;
-}
-
 .signinout{
   position:relative;
   opacity:0.8;
   filter:alpha(opacity=40);
-  left:10px;
 }
 
 .signinout:hover{
@@ -107,6 +102,9 @@
   filter:alpha(opacity=100);
 }
 
-.landing-sign-up{
-  padding-left:20px;
+.landing-sign-up input{
+  margin-left:30px;
+}
+.landing-sign-up label{
+  margin-left:30px;
 }
