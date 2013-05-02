@@ -7,6 +7,7 @@ class Idea < ActiveRecord::Base
   validates_length_of :problem_solved, :maximum => 1000
 
   after_create ::FacebookApiCreate.new
+  after_save TrendsController::IdeaHooks.new
 
   belongs_to :user
   belongs_to :committee
@@ -23,6 +24,7 @@ class Idea < ActiveRecord::Base
   has_many :competition_entries
   has_many :competitions, :through => :competition_entries, :source => :competition
   has_many :winning_competitions, :class_name => 'Competition'
+  has_one :trend
 
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
@@ -34,17 +36,17 @@ class Idea < ActiveRecord::Base
     end
   end
 
+  # send notification  to users who voted for this idea  when the idea submitter edit his idea
+  # Params:
+  # +user+:: the parameter instance of user
+  # Author:: Marwa Mehanna
   def send_edit_notification(user)
-    voters=self.votes
+    voters=self.voters
     voters.each{|u|
       if u.participated_idea_notifications
         EditNotification.send_notification(user, self, [u])
       end
     }
-    commenters=Comment.where(idea_id: self.id)
-    commenters.each{ |c|
-     if c.participated_idea_notifications
-      EditNotification.send_notification(user, self, [c])
-     end }
   end
+
 end

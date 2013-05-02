@@ -92,7 +92,8 @@
       </div>
     </div>
     <div class='span4'>
-      <span><%=link_to @username, @idea.user.becomes(User)%></span>
+      <%= 'by'%>
+      <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
       <h3>Description:</h3>
       <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
       <h3>Problem Solved:</h3>
