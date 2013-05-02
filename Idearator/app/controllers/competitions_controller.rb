@@ -44,6 +44,14 @@ class CompetitionsController < ApplicationController
   end
 
 
+  def notification_review
+    @approved=Idea.find(params[:idea_id])
+    @competition=Competition.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def review_competitions_ideas
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id

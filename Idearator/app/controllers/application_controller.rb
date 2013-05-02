@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def load_notifications
     if user_signed_in?
       @all_notifications = current_user.get_notifications
-      @notifications = @all_notifications.first(7)
+      @notifications = @all_notifications.first(10)
       @count = current_user.unread_notifications_count
     end
   end

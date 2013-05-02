@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+gem 'warden'
+gem 'sinatra', '>= 1.3.2'
+gem 'async_sinatra', '1.1.0'
+gem 'rest-client', '1.6.7'
+gem 'thin', '1.5.1'
+gem 'em-http-request', '1.0.3'
