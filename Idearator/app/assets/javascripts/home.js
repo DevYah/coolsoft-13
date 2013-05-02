@@ -129,4 +129,10 @@ $(document).ready(function () {
     title: "Share on Twitter"
   });
   $('#myCarousel').carousel();
+
+  $('.post-an-idea').click(function (e) {
+    e.preventDefault();
+    $('#signedout').modal('show');
+  });
+
 });

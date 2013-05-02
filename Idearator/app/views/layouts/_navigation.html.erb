@@ -1,4 +1,5 @@
 <a class="brand" href="/home/index"><i class="icon-lightbulb icon-large"></i></a>
+<a class="brand scrollshowbadge" href="/home/index">Idearator</a>
 <ul class='nav'>
   <li class="divider-vertical"></li>
   <% if user_signed_in? %>
@@ -29,7 +30,7 @@
                 :class => 'popup social-media-login twitter-nav-login scrollshow',
                 'data-width' => 600, 'data-height' => 500  %>
     </li>
-      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow') %></li>
+      <li><%= link_to('Login', new_user_session_path, :class => 'scrollshow')  %> </li>
   <% end %>
 </ul>
 <ul class="nav">
@@ -69,6 +70,9 @@
       <% end %>
     <% end %>
   </li>
+  <% if current_user.nil? %>
+    <%= link_to 'Post your idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-primary post-an-idea"%>
+  <% end %>
 </ul>
 <% if user_signed_in? %>
   <ul class="nav pull-right">
@@ -89,6 +93,11 @@
         <li>
           <a href="#deactivateModal" data-toggle="modal"> Deactivate </a>
         </li>
+        <% if current_user != nil%>
+          <div class="text-center">
+            <%= link_to 'Post your idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary"%>
+          </div>
+        <% end %>
       </ul>
     </li>
   </ul>
