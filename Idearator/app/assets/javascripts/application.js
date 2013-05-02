@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require ideas/popover
-
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require jquery_purr
@@ -25,6 +24,8 @@
 //
 //= require notification_polling
 //= require notifications
+//
+//= require profile_modal
 //
 //= require unauthorized_sign_in_up_modal
 
