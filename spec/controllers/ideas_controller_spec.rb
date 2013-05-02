@@ -3,6 +3,10 @@ require 'spec_helper'
 describe IdeasController do
   include Devise::TestHelpers
 
+  RSpec.configure do |config|
+    config.mock_framework = :rspec
+  end
+
   describe 'PUT archive' do
     context 'idea creator wants to archive' do
       before :each do
@@ -113,33 +117,6 @@ describe IdeasController do
         put :unarchive, :id => @idea.id, :format => 'js'
         @idea.reload
         (@idea.attributes['archive_status']).should eql(false)
-      end
-    end
-
-    context 'idea creator is a twitter user and wants to unarchive' do
-      before :each do
-        @user = FactoryGirl.create(:user)
-        @user.confirm!
-        @user.provider = 'twitter'
-        @user.save
-        @idea = FactoryGirl.create(:idea)
-        @idea.user_id = @user.id
-        @idea.archive_status = true
-        @idea.save
-        sign_in @user
-        @twitter_client = double('Twitter::Client')
-        Twitter::Client.stub!(:new).and_return(@twitter_client)
-        @twitter_client.stub!(:update)
-      end
-
-      it 'instantiates a connection with twitter' do
-        put :unarchive, :id => @idea.id, :format => 'js'
-        Twitter::Client.should_receive(:new)
-      end
-
-      it 'updates his twitter status' do
-        put :unarchive, :id => @idea.id, :format => 'js'
-        @twitter_client.should_receive(:update)
       end
     end
 
@@ -349,33 +326,6 @@ describe IdeasController do
       @idea.reload
       Idea.last.should eq(@idea)
     end
-
-    context 'twitter user wants to create an idea' do
-      before :each do
-        @user = FactoryGirl.create(:user)
-        @user.confirm!
-        @user.provider = 'twitter'
-        @user.save
-        @idea = FactoryGirl.create(:idea)
-        @idea.user_id = @user.id
-        @idea.archive_status = true
-        @idea.save
-        sign_in @user
-        @twitter_client = double('Twitter::Client')
-        Twitter::Client.stub!(:new).and_return(@twitter_client)
-        @twitter_client.stub!(:update)
-      end
-
-      it 'instantiates a connection with twitter' do
-        post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
-        Twitter::Client.should_receive(:new)
-      end
-
-      it 'updates his twitter status' do
-        post :create, :idea => FactoryGirl.attributes_for(:idea), :idea_tags => { :tags => [] }
-        @twitter_client.should_receive(:update)
-      end
-    end
   end
 
   describe 'POST #edit' do
@@ -390,33 +340,6 @@ describe IdeasController do
       put :update, :id => @idea1.id, :idea => { :title => 'ay title' }
       @idea1.reload
       @idea1.title.should eq('ay title')
-    end
-
-    context 'idea creator is a twitter user and wants to edit' do
-      before :each do
-        @user = FactoryGirl.create(:user)
-        @user.confirm!
-        @user.provider = 'twitter'
-        @user.save
-        @idea = FactoryGirl.create(:idea)
-        @idea.user_id = @user.id
-        @idea.archive_status = true
-        @idea.save
-        sign_in @user
-        @twitter_client = double('Twitter::Client')
-        Twitter::Client.stub!(:new).and_return(@twitter_client)
-        @twitter_client.stub!(:update)
-      end
-
-      it 'instantiates a connection with twitter' do
-        put :update, :id => @idea.id, :idea => { :title => 'ay title' }
-        Twitter::Client.should_receive(:new)
-      end
-
-      it 'updates his twitter status' do
-        put :update, :id => @idea.id, :idea => { :title => 'ay title' }
-        @twitter_client.should_receive(:update)
-      end
     end
   end
 
@@ -448,33 +371,6 @@ describe IdeasController do
         put :vote, :id => @idea.id
         @idea.reload
         (@numvotes).should eql(@idea.num_votes)
-      end
-    end
-
-    context 'twitter user wants to vote' do
-      before :each do
-        @user = FactoryGirl.create(:user)
-        @user.confirm!
-        @user.provider = 'twitter'
-        @user.save
-        @idea = FactoryGirl.create(:idea)
-        @idea.user_id = @user.id
-        @idea.archive_status = true
-        @idea.save
-        sign_in @user
-        @twitter_client = double('Twitter::Client')
-        Twitter::Client.stub!(:new).and_return(@twitter_client)
-        @twitter_client.stub!(:update)
-      end
-
-      it 'instantiates a connection with twitter' do
-        put :vote, :id => @idea.id
-        Twitter::Client.should_receive(:new)
-      end
-
-      it 'updates his twitter status' do
-        put :vote, :id => @idea.id
-        @twitter_client.should_receive(:update)
       end
     end
   end
