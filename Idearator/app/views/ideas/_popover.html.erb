@@ -6,7 +6,8 @@
         <h4 class="text-info" style = "color: #141B7F;" id= 'titleTag'><%= @idea.title %></h4>
         <h5 style="
     padding-left: 276px;" id= 'userTag'>
-          <span>by: <%=link_to @idea.user.username ,@idea.user.becomes(User)%></span>
+          <span>by:
+            <%=link_to @idea.user.username ,@idea.user.becomes(User)%></span>
         </h5>
       </div>
     </div>
@@ -21,13 +22,14 @@
               <%= @idea.description %>
             </h6>
           </div>
-        </div>
-        <div class='row'>
-          <div class='tagsPopover'>
-            <% @idea.tags.each do |tag| %>
-              <span class="label label-info "><%= tag.name %></span>
-            <% end %>
+          <div class='row'>
+            <div class='tagsPopover'>
+              <% @idea.tags.each do |tag| %>
+                <span class="label label-info "><%= tag.name %></span>
+              <% end %>
+            </div>
           </div>
+        </div>
           <div class='span1' id='commentsPopovers'>
             <span class='label label-success' id='commentsPopover'>
               Number of comments
@@ -45,6 +47,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
