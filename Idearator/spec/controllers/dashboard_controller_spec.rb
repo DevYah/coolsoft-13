@@ -68,15 +68,27 @@ describe DashboardController do
      l.email = "lina@gmail.com"
      l.password = "123123123"
       l.first_name = "lina"
+      l.confirm!
       l.save
       tag = Tag.new
       tag.name = "tag"
       tag.save
       sign_in l
+      i = Idea.new
+      i.user_id = l.id
+      i.title = Faker::Name.name
+      i.description = Faker::Lorem.paragraph
+      i.problem_solved = Faker::Lorem.paragraph
+      i.approved = 'true'
+      i.num_votes = rand(1..500)
+      i.save
+      tagidea = IdeasTags.new
+      tagidea.tag_id = tag.id
+      tagidea.idea_id = i.id
+      tagidea.save
 
       20.times do
        i = Idea.new
-       i.user_id = l.id
        i.title = Faker::Name.name
         i.description = Faker::Lorem.paragraph
         i.problem_solved = Faker::Lorem.paragraph
@@ -90,7 +102,8 @@ describe DashboardController do
         tagidea.save
       end 
       get :chart_data, :tag_id => tag.id
-      assigns(:ideasall).should eq(20)
+      assigns(:user_ideas).size.should eq(1)
+      assigns(:ideasall).size.should eq(20)
     end
   end
 end
