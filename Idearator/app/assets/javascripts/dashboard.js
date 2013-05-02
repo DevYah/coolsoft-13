@@ -42,7 +42,7 @@ function initialize_barchart(tagid) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
       if (line == "") return;
-      var items = line.split(',');      
+      var items = line.split(',');
       var series = {
         name: items[0],
         data: [{y: parseInt(items[1]), url: '/ideas/' + items[2]}]
@@ -55,7 +55,7 @@ function initialize_barchart(tagid) {
 }
 
 function initialize_bubblechart(tagid) {
- $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) { 
+ $.get('/dashboard/chart_data/' + tagid + '.csv', function(data) {
   var options = {
     chart: {
       renderTo: 'bubble-chart',
@@ -89,7 +89,7 @@ function initialize_bubblechart(tagid) {
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line) {
       if (line == "") return;
-      var items = line.split(',');      
+      var items = line.split(',');
       var series = {
         name: items[0],
         data: [{y: parseInt(items[1]),x:parseInt(items[2]), url: '/ideas/' + items[2]}]
@@ -101,11 +101,11 @@ function initialize_bubblechart(tagid) {
     var chart = new Highcharts.Chart(options);
     console.log(options);
   });
-}  
+}
 
 
 
-// function columnurl(e, chart, data) { 
+// function columnurl(e, chart, data) {
 //   var selection = chart.getSelection();
 //   var row = selection[0].row;
 //   var column = selection[0].column;

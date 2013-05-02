@@ -7,6 +7,6 @@
 <%= form_for(@user, url: url_for(action: 'new_committee_tag')) do |form| %>
   <% @tags.each do |tag|%>
     <div><%= check_box_tag 'user[tags][]', tag.id, false %><%= tag.name %> </div>
-  <% end %>	
+  <% end %>
   <%= form.submit  value= 'Submit' %>
 <% end %>
