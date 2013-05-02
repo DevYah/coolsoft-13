@@ -116,4 +116,9 @@ $(document).ready(function () {
     title: "Share on Twitter"
   });
 
+  $('.post-an-idea').click(function (e) {
+    e.preventDefault();
+    $('#signedout').modal('show');
+  });
+
 });

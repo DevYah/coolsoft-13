@@ -3,6 +3,10 @@ require 'spec_helper'
 describe IdeasController do
   include Devise::TestHelpers
 
+  RSpec.configure do |config|
+    config.mock_framework = :rspec
+  end
+
   describe 'PUT archive' do
     context 'idea creator wants to archive' do
       before :each do
@@ -106,10 +110,11 @@ describe IdeasController do
   describe 'PUT unarchive' do
     context 'idea creator wants to unarchive' do
       before :each do
-        @user = FactoryGirl.build(:user)
+        @user = FactoryGirl.create(:user)
         @user.confirm!
         @idea = FactoryGirl.create(:idea)
         @idea.user_id = @user.id
+        @idea.archive_status = true
         @idea.save
         sign_in @user
       end
@@ -358,33 +363,35 @@ describe IdeasController do
     end
   end
 
-  context 'user wants to vote' do
-    before :each do
-      @user = FactoryGirl.build(:user)
-      @user.confirm!
-      @idea = FactoryGirl.create(:idea)
-      @idea.user_id = @user.id
-      @idea.save
-      sign_in @user
-    end
+  describe 'PUT vote' do
+    context 'user wants to vote' do
+      before :each do
+        @user = FactoryGirl.build(:user)
+        @user.confirm!
+        @idea = FactoryGirl.create(:idea)
+        @idea.user_id = @user.id
+        @idea.save
+        sign_in @user
+      end
 
-    it 'idea id in user.votes' do
-      put :vote, :id => @idea.id
-      @idea.reload
-      @voted = @user.votes.find(@idea)
-      (@voted.id).should eql(@idea.id)
-    end
+      it 'idea id in user.votes' do
+        put :vote, :id => @idea.id
+        @idea.reload
+        @voted = @user.votes.find(@idea)
+        (@voted.id).should eql(@idea.id)
+      end
 
-    it 'redirects to idea' do
-      put :vote, :id => @idea.id
-      response.should redirect_to @idea
-    end
+      it 'redirects to idea' do
+        put :vote, :id => @idea.id
+        response.should redirect_to @idea
+      end
 
-    it 'increase idea votes' do
-      @numvotes = @idea.num_votes + 1
-      put :vote, :id => @idea.id
-      @idea.reload
-      (@numvotes).should eql(@idea.num_votes)
+      it 'increase idea votes' do
+        @numvotes = @idea.num_votes + 1
+        put :vote, :id => @idea.id
+        @idea.reload
+        (@numvotes).should eql(@idea.num_votes)
+      end
     end
   end
 
