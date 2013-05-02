@@ -13,6 +13,7 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'ideas'
     end
 
     collection do
@@ -21,7 +22,6 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
-      match ':id/my_ideas' => 'users#my_ideas'
       match 'profile_modal'
     end
   end
