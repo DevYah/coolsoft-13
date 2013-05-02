@@ -109,9 +109,9 @@ Sprint0::Application.routes.draw do
         match 'review_competitions_ideas' => 'competitions#review_competitions_ideas'
         match 'approve' => 'competitions#approve'
         match 'reject' => 'competitions#reject'
-        match 'notification_review' => 'competitions#notification_review'
       end
     end
+    match 'notification_review' => 'competitions#notification_review'
   end
 
   resources :competitions
