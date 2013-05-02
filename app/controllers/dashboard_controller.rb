@@ -40,8 +40,8 @@ class DashboardController < ApplicationController
     end
   end
 
-  #Method to render chosen tag id to graph 
-  #+params[:tag_id] + id of the tag the user clicks on 
+  #Method to render chosen tag id to graph
+  #+params[:tag_id] + id of the tag the user clicks on
   #Author:Lina Basheer
 
   def getideas
@@ -66,8 +66,8 @@ class DashboardController < ApplicationController
     end
   end
 
-  #Method to get ideas in chosen tag 
-  #+params[:tag_id] + id of the tag the user clicks on 
+  #Method to get ideas in chosen tag
+  #+params[:tag_id] + id of the tag the user clicks on
   #Author:Lina Basheer
   def chart_data
     @tagid = params[:tag_id]
@@ -77,7 +77,7 @@ class DashboardController < ApplicationController
     @ideasall = (@ideasall + @user_ideas).uniq
     respond_to do |format|
       format.csv
-    end  
-  end  
+    end
+  end
 
 end

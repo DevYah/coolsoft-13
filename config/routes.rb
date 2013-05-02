@@ -176,9 +176,17 @@ controller :stream do
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+
   match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
+
+
+  #2.3 Create/Edit Tags
+  resources :tags
+
+  match 'tags/:id/synonym' => 'tags#addsym', :via => :put
+  match 'tags/:id/delsym' => 'tags#delsym', :via => :put
 
 
 end
