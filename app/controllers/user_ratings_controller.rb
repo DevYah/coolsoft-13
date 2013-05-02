@@ -25,7 +25,7 @@ class UserRatingsController < ApplicationController
         end
 
         if current_user.provider == 'twitter'
-          current_user.twitter.update("I've rated an idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+          current_user.twitter.update("I've rated an idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + idea.id.to_s)
         end
 
         rating.value = average_rating.to_f / saved_rating.size.to_f
