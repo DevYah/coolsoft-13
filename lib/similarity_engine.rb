@@ -63,7 +63,7 @@ class SimilarityEngine
   # +a+:: the first set
   # +b+:: the second set
   #
-  # Autho: Mina Nagy
+  # Author: Mina Nagy
   def self.jaccard_index(a, b)
     return 0 if a.empty? && b.empty?
     (a & b).size.to_f / (a | b).size
@@ -123,7 +123,7 @@ class SimilarityEngine
   # Params:
   # +str+:: the +String+ to split
   #
-  # Author`: Mina Nagy
+  # Author: Mina Nagy
   def self.hashed_keywords(str)
     return [] if str.nil?
     str = str.split
@@ -138,7 +138,7 @@ class SimilarityEngine
   # +idea1+:: first +Idea+
   # +idea2+:: second +Idea+
   #
-  # Autho: Mina Nagy
+  # Author: Mina Nagy
   def self.idea_similarity_coeff(idea1, idea2)
     vals = {
       tags_jacc_idx:           jaccard_index(idea1.tag_ids, idea1.tag_ids),
