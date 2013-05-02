@@ -13,7 +13,7 @@
                 <%= link_to  approved.title , approved %>
               </h3>
               <%= approved.description %>
-              <ul class ="inline">
+              <ul class="inline">
                 <% approved.tags.each do |tag| %>
                   <li style = "color: #0060ff;"><%= tag.name %></li>
                 <% end %>
@@ -23,7 +23,7 @@
               <div class='add-ratings'style="display: none;" >
                 <% if current_user.type == 'Committee' %>
                   <h3>Add Prespectives</h3>
-                  <input type="text" class="rating_complete" name="blah2" />
+                  <input type="text" class="rating_complete" />
                   <ul id="rating">
                   </ul>
                   <div id="flash">
