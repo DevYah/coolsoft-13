@@ -21,15 +21,15 @@
   <% if not user_signed_in? %>
     <li>
       <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
-                 :class => 'popup social-media-login facebook-nav-login',
+                 :class => 'popup social-media-login facebook-nav-login scrollshow',
                  "data-width" => 600, "data-height" => 500 %>
     </li>
     <li>
       <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
-                :class => 'popup social-media-login twitter-nav-login',
+                :class => 'popup social-media-login twitter-nav-login scrollshow',
                 'data-width' => 600, 'data-height' => 500  %>
     </li>
-      <li><%= link_to('Sign in', new_user_session_path) %></li>
+      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow') %></li>
   <% end %>
 </ul>
 <ul class="nav">
