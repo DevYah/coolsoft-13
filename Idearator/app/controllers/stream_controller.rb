@@ -28,7 +28,8 @@ class StreamController < ApplicationController
     end
 
     if @page.nil?
-      if @searchtext.nil?  
+      @@filter_all = []
+      if @searchtext.nil? 
         @ideas = Idea.order(:created_at).page(params[:mypage]).per(10)
       else
         if !@searching_with
@@ -45,6 +46,7 @@ class StreamController < ApplicationController
         end
       else
         if @searchtext != "" and @filter_tmp == []
+          @@filter_all = []
           if @search_with_user
             @users = User.search(params[:search]).page(params[:mypage]).per(10)
           else
@@ -57,8 +59,10 @@ class StreamController < ApplicationController
             @filter_tmp.uniq
           else
             if @search_with_user
+              @@filter_all = []
               @users = User.search(params[:search]).page(params[:mypage]).per(10)
             else
+              @@filter_all = []
               @ideas = Idea.order(:created_at).page(params[:mypage]).per(10)
             end
           end

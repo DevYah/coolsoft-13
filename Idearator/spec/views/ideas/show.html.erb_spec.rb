@@ -65,4 +65,3 @@ describe 'ideas/show.html.erb' do
     @idea.destroy
   end
 end
-

@@ -9,8 +9,9 @@ in_stream = true;
 <% content_for :sidebar do %>
   <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
 <% end %>
+
 <% content_for :sidebar do %>
-  <div class="topten">
+  <div class="topten" id="sidebar_content">
     <h1 class="title">Top Ten
     </h1>
     <% @top.each do |top| %>
@@ -34,7 +35,6 @@ in_stream = true;
       <% end %>
     <%end%>
   </div>
-  <%= render :partial => 'trends/index' %>
   <div class="affix" data-spy='affix'>
     <button class="btn backtotop" type="button">To Top
       <i class = 'icon-black icon-hand-up'></i></button>

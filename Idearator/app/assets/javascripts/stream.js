@@ -118,7 +118,7 @@ function stream_manipulator(page,tag,search,insert,user){
     }
   }
 
-$(document).ready(function(){ apply_tag_handlers(); });
+$(document).ready(function(){ apply_tag_handlers();});
    function apply_tag_handlers(){
     $("#stream_results .btn-link").click(function tag_caller(e){
       e.preventDefault();
@@ -136,6 +136,20 @@ $(document).ready(function(){ apply_tag_handlers(); });
 
 
 $(window).scroll (function(){
+  console.log($(window).scrollTop());
+  if($(window).scrollTop() > 345){
+    $("#sidebar_content").css({
+      "position": "fixed",
+      "width":"inherit",
+      "top":-345
+    });
+  }else{
+    $("#sidebar_content").css({
+      "position": "relative",
+      "width":"inherit",
+      "top":50
+    });
+  }
   if($(window).scrollTop()!=0){
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
       currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);

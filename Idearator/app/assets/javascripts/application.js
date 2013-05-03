@@ -28,6 +28,10 @@
 //= require jquery-star-rating
 //= require notification_polling
 //= require notifications
+//
+//= require profile_modal
+//
+//= require unauthorized_sign_in_up_modal
 
 
 
@@ -102,4 +106,3 @@ function popupCenter(url, width, height, name) {
                                 ",height=" + height + ",toolbar=no,left=" + left +
                                 ",top=" + top);
 }
-
