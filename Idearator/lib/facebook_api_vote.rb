@@ -5,8 +5,8 @@ class FacebookApiVote
   # Params:
   # +vote+:: It's is the vote created passed to this class by the Vote model
   # Author: Mohamed Sameh
-  def after_create(vote)
-    if vote.user.provider == "facebook" && vote.user.facebook_share
+  def after_save(vote)
+    if !vote.user.nil? && vote.user.provider == "facebook" && vote.user.facebook_share
       graph = Koala::Facebook::API.new(vote.user.authentication_token)
       Thread.new {
         graph.put_connections("me", "idearator:vote", idea: "http://idearator.pagekite.me/ideas/#{vote.idea.id}")
