@@ -10,7 +10,19 @@ function backToTop() {
   return $(window).scrollTop() < 600;
 }
 
+function redirect_to_best(r){
+  window.location = "/ideas/" + r;
+}
+
 $(document).ready(function () {
+  $(".best-wrapper").hover(function() {
+    $(this).children(".description").slideToggle("slow");
+  });
+
+  $(".best-wrapper").click(function() {
+  redirect_to_best($(this).data("idea-id"));
+  });
+
   $(".fbk").tooltip({
     toggle: "tooltip",
     title: "Share on Facebook",

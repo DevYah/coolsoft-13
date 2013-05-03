@@ -106,6 +106,123 @@
   margin-left:30px;
 }
 
+.landing-sign-up .sign-up-landing-button{
+  margin-left:5px;
+}
+
 .landing-sign-up label{
   margin-left:30px;
 }
+
+.best-ideas{
+  width:350px;
+  height:250px;
+  border-radius:0.5em;
+}
+
+div.best-wrapper{
+    cursor:pointer;
+    margin-left:30px;
+    margin-top:0px;
+    margin-bottom:40px;
+    float:left; /* important */
+    position:relative; /* important(so we can absolutely position the description div */
+}
+
+.best-ideas:hover{
+  box-shadow: 0px 0px 0.5em #000000;
+}
+
+div.description{
+    display:none;
+    position:absolute; /* absolute position (so we can position it where we want)*/
+    bottom:0px; /* position will be on bottom */
+    left:0px;
+    width:100%;
+    /* styling bellow */
+    background-color:black;
+    font-family: 'tahoma';
+    font-size:15px;
+    color:white;
+    opacity:0.9; /* transparency */
+    filter:alpha(opacity=60); /* IE transparency */
+}
+p.description_content{
+    padding:10px;
+    margin:0px;
+}
+
+.fancy-title{
+  color:rgba(0,0,128,0.75);
+}
+
+.best-ideas-div{
+  background:rgba(0, 0, 0, 0.10);
+}
+
+.best-title{
+  color:#00ffff;
+}
+
+.stream-generate-button {
+  margin-top:20px;
+  -moz-box-shadow:inset 0px 0px 30px 2px #f29c93;
+  -webkit-box-shadow:inset 0px 0px 30px 2px #f29c93;
+  box-shadow:inset 0px 0px 30px 2px #f29c93;
+  background-color:#fe1a00;
+  -moz-border-radius:40px;
+  -webkit-border-radius:40px;
+  border-radius:40px;
+  display:inline-block;
+  color:#ffffff;
+  font-family:arial;
+  font-size:25px;
+  font-weight:bold;
+  padding:16px 49px;
+  text-decoration:none;
+  text-shadow:1px 0px 0px #b23e35;
+}
+
+.stream-generate-button:hover {
+  background-color:#ce0100;
+}
+
+.stream-generate-button:active {
+  position:relative;
+  top:1px;
+}
+
+.landing-sign-up .sign-up-landing-button {
+  margin-top:30px;
+  -moz-box-shadow:inset 7px -7px 46px 12px #3c85de;
+  -webkit-box-shadow:inset 7px -7px 46px 12px #3c85de;
+  box-shadow:inset 7px -7px 46px 12px #3c85de;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+  background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+  background-color:#3d94f6;
+  -moz-border-radius:42px;
+  -webkit-border-radius:42px;
+  border-radius:42px;
+  display:inline-block;
+  color:#ffffff;
+  font-family:arial;
+  font-size:25px;
+  font-weight:bold;
+  padding:10px 63px;
+  text-decoration:none;
+  text-shadow:1px 0px 22px #1570cd;
+}
+
+.landing-sign-up .sign-up-landing-button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+  background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+  background-color:#1e62d0;
+}
+
+.landing-sign-up .sign-up-landing-button:active {
+  position:relative;
+  top:1px;
+}
+
