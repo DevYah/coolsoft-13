@@ -98,7 +98,7 @@
     <div class='span4'>
       <div class='row'>
         <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
-        <div class='span4 archive_status'>
+        <div class='span4 archive-status'>
           <p>
             <% if @idea.ratings.size > 0 %>
               <table>
@@ -120,7 +120,7 @@
   </div>
   <div class='row'>
     <div class='span4'></div>
-    <div class ='span4 archive_status'>
+    <div class ='span4 archive-status'>
       <div id="fb-root"></div>
       <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
     </div>
@@ -130,6 +130,8 @@
         <%= render :partial => 'enter_competition'%>
       <% end %>
     </div>
+
+    <%= render partial: 'similar_ideas', locals: { idea: @idea } %>
   </div>
 </div>
 <script type="text/javascript">
@@ -150,7 +152,7 @@
 <% end %>
 <% if @idea.archive_status == true %>
   <script type='text/javascript'>
-    $('.approve_status').hide();
+    $('.archive-status').hide();
   </script>
 <% end %>
 

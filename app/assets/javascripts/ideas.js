@@ -71,4 +71,10 @@ $('.btn-success.add-rating').click(function(){
     $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
   }
 
+  $("input, select, textarea").on("focus", function(){
+   $(this).siblings("span").css("display", "inline");
+   }).on("blur", function(){
+   $(this).siblings("span").css("display", "none");
+  });
 });
+

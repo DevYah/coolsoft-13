@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require ideas/popover
+<<<<<<< HEAD
 //= require bootstrap
 
 //= require jquery.purr
@@ -23,6 +24,18 @@
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
+=======
+//= require jquery-ui
+//= require jquery.tokeninput
+//= require jquery-star-rating
+//= require jquery_purr
+//= require jquery.purr
+//= require jquery.cookie
+//
+//= require bootstrap
+//= require best_in_place
+//= require ideas/popover
+>>>>>>> master
 //
 //= require notifications
 //= require jquery-star-rating
