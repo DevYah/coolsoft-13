@@ -17,6 +17,14 @@ function check_if_exists(tag){
   return false;
 }
 
+// This function manipulates the stream according to various parameters that are sent to it when actions are done
+// and when tags filtering are chosen the search params are checked to filter the stream or when streaming only.
+// params:
+// +page+:: int
+// +tag+:: Instance of Tag
+// +search+:: string
+// +insert+:: Boolean is sent true to insert this +tag+ or false to remove +tag+
+// +user+:: Boolean is sent true if search for user is selected
 function stream_manipulator(page,tag,search,insert,user){
   currentpage = page;
   searchtext = search+"";

@@ -2,8 +2,12 @@ class StreamController < ApplicationController
 	
   #This is the action that controls the stream through having 4 aparameters manipulated in a way that they change the 
   #value of the @ideas that is sent
-  #+params+:mypage,search,tag,search_user
-  #Mohamed Salah Nazir
+  # params:
+  # +mypage+:: int
+  # +search+:: string
+  # +tag+:: Intstance of tag
+  # +search_user+:: boolean is sent to true to search for users
+  # Author: Mohamed Salah Nazir
   @@filter_all = []
 
   def index
