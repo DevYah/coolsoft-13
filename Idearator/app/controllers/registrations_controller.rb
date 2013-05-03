@@ -13,6 +13,33 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
 
+  # This method overrides the original devise method to ensure the use
+  # actually chose their area(s) of expertise and throw an error message if
+  # none were chosen
+  #
+  # params: None
+  #
+  # Author: Menna Amr
+  def create
+    build_resource
+
+    @tags = Tag.all
+
+    if resource.type == "Committee" && params[:tags].nil?
+      set_flash_message :error, :select_expertise
+      redirect_to "/users/sign_up" and return
+    end
+
+    if resource.save
+      if resource.type == "Committee"
+        UserMailer.committee_signup("menna.amr2@gmail.com").deliver
+        ApproveCommitteeNotification.send_notification(resource, Admin.all)
+        resource.becomes(Committee).tag_ids = params[:tags]
+      end
+    end
+  end
+
+
 
   protected
 
@@ -55,3 +82,4 @@ class RegistrationsController < Devise::RegistrationsController
     end
    end
 end
+
