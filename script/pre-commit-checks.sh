@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Version: 0.3
 # Author: Mina Nagy
