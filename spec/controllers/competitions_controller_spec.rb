@@ -188,12 +188,13 @@ describe CompetitionsController do
       @investor.confirm!
       @investor2 = FactoryGirl.create(:investor,email: 'abuali@yahoo.com',username: 'hamed')
       @investor2.confirm!
-
+      @tag1 = Tag.new(:name => 'Science')
+      @tag2 = Tag.new(:name => 'Games')
       5.times do
-        @competition1 = FactoryGirl.create(:competition,tags: [Tag.new(:name => 'Science'),Tag.new(:name => 'Games')],investor: @investor)
+        @competition1 = FactoryGirl.create(:competition,tags: [@tag1,@tag2],investor: @investor)
       end
       6.times do
-        @competition2 = FactoryGirl.create(:competition,tags: [Tag.new(:name => 'Science')] ,investor: @investor2)
+        @competition2 = FactoryGirl.create(:competition,tags: [@tag1] ,investor: @investor2)
       end
     end
 
