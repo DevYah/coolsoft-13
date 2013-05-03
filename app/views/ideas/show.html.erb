@@ -53,10 +53,6 @@
   <div class='row'>
     <div class='span12'>
       <h3><%= @idea.title %></h3>
-      <% if current_user and @idea.approved %>
-        <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary pull-right">Enter Competition</a></p>
-        <%= render :partial => 'enter_competition'%>
-      <% end %>
     </div>
   </div>
   <div class='row'>
@@ -90,7 +86,7 @@
       </div>
     </div>
     <div class='span4'>
-      <%= 'by'%>
+      <p><%= 'by'%></p>
       <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
       <h3>Description:</h3>
       <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
@@ -120,12 +116,17 @@
       </div>
     </div>
   </div>
-  <br />
   <div class='row'>
-    <div class ='span4'></div>
+    <div class='span4'></div>
     <div class ='span4 archive_status'>
       <div id="fb-root"></div>
       <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
+    </div>
+    <div class ='span4 enter_competition'>
+      <% if current_user and @idea.approved %>
+        <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary">Enter Competition</a></p>
+        <%= render :partial => 'enter_competition'%>
+      <% end %>
     </div>
   </div>
 </div>
