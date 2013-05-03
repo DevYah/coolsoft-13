@@ -210,7 +210,7 @@ class CompetitionsController < ApplicationController
   def enroll_idea
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
-    if not @competition.ideas.where(:id => @idea.id).exists?
+    if CompetitionEntry.find(:all, :conditions => {:competition_id => @competition.id, :rejected => false, :idea_id => @idea.id }) == []
       @competition.ideas << @idea
       #@idea.competitions << @competition
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])

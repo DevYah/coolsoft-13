@@ -29,6 +29,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new
     @tags = Tag.all
     @chosentags = []
+    @competition = params[:competition_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @idea }
@@ -273,7 +274,7 @@ class IdeasController < ApplicationController
   def enter_competition
     @idea = Idea.find(params[:id])
     @competition = Competition.find(params[:competition_id])
-    if not @competition.ideas.where(:id => @idea.id).exists?
+    if CompetitionEntry.find(:all, :conditions => {:competition_id => @competition.id, :rejected => false, :idea_id => @idea.id }) == []
       @competition.ideas << @idea
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
       respond_to do |format|
