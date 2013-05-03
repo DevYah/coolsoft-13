@@ -3,6 +3,7 @@ class CommentNotification < IdeaNotification
 
   def self.send_notification(user_sender, idea, users_receivers)
     comment_notification = CommentNotification.create(user: user_sender, idea: idea, users: users_receivers)
+    NotificationsController::CoolsterPusher.new.push_notification users_receivers, comment_notification
   end
 
   def text
@@ -10,4 +11,3 @@ class CommentNotification < IdeaNotification
   end
 
 end
-
