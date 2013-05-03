@@ -70,7 +70,15 @@
               </div>
             </div>
           <% else %>
-            <%= yield %>
+            <% if params[:controller] == 'home'%>
+              <div id='IdeaStream'>
+                <%= render 'layouts/messages' %>
+                <%= yield %>
+              </div>
+            <% else %>
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            <% end %>
           <% end %>
         </div>
       </div>

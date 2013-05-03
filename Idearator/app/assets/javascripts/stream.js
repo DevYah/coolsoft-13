@@ -135,6 +135,27 @@ function stream_manipulator(page,tag,search,insert,user){
 }
 
 $(document).ready(function(){
+  $('.signup-landing-button').hide();
+  $('.landing-sign-in-form').hide();
+
+  $('.signin-landing-button').click(function (e) {
+    e.preventDefault();
+    $('.landing-sign-up').hide();
+    $('.landing-login').hide();
+    $('.landing-sign-in-form').slideDown("slow");
+    $('.signin-landing-button').hide();
+    $('.signup-landing-button').show();
+  });
+
+  $('.signup-landing-button').click(function (e) {
+    e.preventDefault();
+    $('.landing-login').show();
+    $('.landing-sign-in-form').hide();
+    $('.landing-sign-up').slideDown("slow");
+    $('.signup-landing-button').hide();
+    $('.signin-landing-button').show();
+  });
+
   apply_tag_handlers();
 
   $('.post-an-idea').click(function (e) {

@@ -9,7 +9,8 @@
     </div>
     <div class='row'>
       <div class="span3 pull-right signinout">
-        <%= link_to('Sign in', new_user_session_path , :class =>"btn btn-success btn-large btn-block") %>
+        <%= link_to('Sign in', new_user_session_path , :class =>"btn btn-success btn-large btn-block signin-landing signin-landing-button") %>
+        <%= link_to('Sign up', new_user_session_path , :class =>"btn btn-info btn-large btn-block signin-landing signup-landing-button") %>
         <ul class='inline unstyled text-center'>
           <li>
             <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
@@ -27,6 +28,9 @@
         </div>
         <div class= "landing-sign-up">
           <%= render 'users/sign_up_form_landing' %>
+        </div>
+        <div class= "landing-sign-in-form">
+          <%= render 'users/sign_in_form_landing' %>
         </div>
       </div>
       <div id="myCarousel" class="carousel slide span9">
@@ -68,20 +72,22 @@
         <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
       </div>
     </div>
-    <div class="container best-ideas-div img-rounded">
-      <div class="text-center">
-        <h3 class="fancy-title">Checkout Some of our best ideas</h3>
-      </div>
-        <% @best.each do |best| %>
-          <div class='best-wrapper' data-idea-id='<%= best.id %>'>
-            <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
-            <div class='description img-rounded text-center'>
-              <h3 class='description_content best-title'><%= best.title%></h3>
-              <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+    <% if @best.size != 0%>
+      <div class="container best-ideas-div img-rounded">
+        <div class="text-center">
+          <h3 class="fancy-title">Checkout Some of our best ideas</h3>
+        </div>
+          <% @best.each do |best| %>
+            <div class='best-wrapper' data-idea-id='<%= best.id %>'>
+              <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
+              <div class='description img-rounded text-center'>
+                <h3 class='description_content best-title'><%= best.title%></h3>
+                <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+              </div>
             </div>
-          </div>
-        <% end %>
-    </div>
+          <% end %>
+      </div>
+    <%end%>
     <div class="text-center">
       <button class="stream-generate-button">Check Out The Latest Ideas</button>
     </div>
@@ -93,44 +99,45 @@ in_stream = true;
 </script>
 
 <div id="landing-stream">
-  <div id="stream_results">
-    <%= render :partial => 'index'%>
-  </div>
-
-  <% content_for :sidebar do %>
-    <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
-  <% end %>
-
-  <% content_for :sidebar do %>
-    <div class="topten" id="sidebar_content">
-      <h1 class="title">Top Ten
-      </h1>
-      <% @top.each do |top| %>
-        <% if top.user.active == true and top.user.banned == false%>
-          <div class="topten_idea media">
-             <h4 class="media-heading idea">
-                <a data-popover-idea-id=<%=top.id %>>
-                  <%= top.title %>
+  <div class='row'>
+    <div class='span8'>
+      <div id="stream_results">
+        <%= render :partial => 'index'%>
+      </div>
+    </div>
+    <div class ='row'>
+      <div id='sidebar' class='span4'>
+        <div class="topten" id="sidebar_content">
+          <h1 class="title">Top Ten</h1>
+          <% @top.each do |top| %>
+            <% if top.user.active == true and top.user.banned == false%>
+              <div class="topten_idea media">
+                <h4 class="media-heading idea">
+                  <a data-popover-idea-id=<%=top.id %>>
+                    <%= top.title %>
+                  </a>
+                </h4>
+                <a class="pull-left" href="#">
+                  <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
                 </a>
-              </h4>
-            <a class="pull-left" href="#">
-              <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
-            </a>
-            <div class="media-body">
-              <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
-              <br>
-              <span class="badge"><%= top.num_votes %>
-                votes</span>
-            </div>
-          </div>
-        <% end %>
-      <%end%>
+                <div class="media-body">
+                  <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
+                  <br>
+                  <span class="badge"><%= top.num_votes %>votes</span>
+                </div>
+              </div>
+            <% end %>
+          <%end%>
+        </div>
+        <%= render :partial => '/trends/index'%>
+        <div class="affix" data-spy='affix'>
+          <button class="btn backtotop" type="button">To Top
+            <i class = 'icon-black icon-hand-up'></i>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="affix" data-spy='affix'>
-      <button class="btn backtotop" type="button">To Top
-        <i class = 'icon-black icon-hand-up'></i></button>
-    </div>
-  <% end %>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -140,7 +147,7 @@ in_stream = true;
      $(document).ready(function(){
       $('.backtotop').hide();
     });
- </script>
+</script>
 
 <style type = "text/css">
   .totop{

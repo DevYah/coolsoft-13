@@ -257,4 +257,58 @@ class UsersController < ApplicationController
     end
   end
 
+  before_filter :authenticate_user!, :only => [:approve_committee, :reject_committee]
+  # Sends mail confirming registration and if the user is not even a committee member the admin is notified of so
+  # Params:
+  # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+  # Author: Mohammad Abdulkhaliq
+  def approve_committee
+    if(not current_user.is_a? Admin)
+      redirect_to '/', :notice => 'Please sign in as an admin'
+      return
+    end
+    @user = User.find(params[:id])
+    if @user.is_a? Committee
+      @user.approved = true
+      @user.save
+      respond_to do |format|
+        UserMailer.committee_accept(@user).deliver
+        format.html  { redirect_to('/', :notice => 'User successfully initiated as a Committee.') }
+        format.json  { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html  { redirect_to('/', :notice => 'User not a Committee.') }
+        format.json  { head :no_content }
+      end
+    end
+  end
+
+  # Remove the user's status as a committtee
+  # Then sends a mail notifiying him of what happened.
+  # Params:
+  # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+  # Author: Mohammad Abdulkhaliq
+  def reject_committee
+    if(not current_user.is_a? Admin)
+      redirect_to '/', :notice => 'Please sign in as an admin'
+      return
+    end
+    @user = User.find(params[:id])
+    if @user.is_a? Committee
+      @user.type = nil
+      @user.approved = false
+      @user.save
+      UserMailer.committee_reject(@user).deliver
+      respond_to do |format|
+        format.html  { redirect_to('/', :notice => 'User successfully rejected as a Committee.') }
+        format.json  { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html  { redirect_to('/', :notice => 'User not a Committee.') }
+        format.json  { head :no_content }
+      end
+    end
+  end
 end

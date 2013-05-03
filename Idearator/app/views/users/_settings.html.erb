@@ -8,15 +8,15 @@
 			<p class="muted">This Allows us to Automatically share all your actions on your Facebook Account.</p>
 		</div>
 	<%end%>
-	<%if current_user.provider== "twitter"%>
-		<div class="well">
-		  <label class="checkbox">
-			  <%= check_box_tag 'user[]', '3', current_user.facebook_share %>
-			  Share actions on Twitter
-			</label>
-			<p class="muted">This allows us to automatically share your actions on your Twitter account.</p>
-		</div>
-	<%end%>
+  <%if current_user.provider== "twitter"%>
+    <div class="well">
+      <label class="checkbox">
+        <%= check_box_tag 'user[]', '3', current_user.facebook_share %>
+        Share actions on Twitter
+      </label>
+      <p class="muted">This allows us to automatically share your actions on your Twitter account.</p>
+    </div>
+  <%end%>
 	<div class="well">
 	  <label class="checkbox">
 		  <%= check_box_tag 'user[]', '1', current_user.own_idea_notifications %>
