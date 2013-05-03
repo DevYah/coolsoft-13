@@ -15,6 +15,7 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'ideas'
       match 'approve_committee' => 'users#approve_committee'
       match 'reject_committee' => 'users#reject_committee'
       match 'invite_member' => 'users#invite_member'
@@ -26,8 +27,8 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'profile_modal'
       match 'send_expertise'
-      match ':id/my_ideas' => 'users#my_ideas'
     end
   end
 

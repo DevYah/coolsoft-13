@@ -296,8 +296,6 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     respond_to do |format|
       format.js
-
     end
   end
-
 end

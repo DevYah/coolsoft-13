@@ -12,17 +12,19 @@
 <% elsif @user.active == false %>
   <p class='text-error'>This User is currently deactivated!</p>
 <% end %>
-
 <div class="btn-group">
   <% if @user == current_user %>
     <%= link_to 'Edit', edit_user_registration_path, :class => "btn"%>
     <%= link_to 'Deactivate', {:controller => 'users' ,:action => 'confirm_deactivate'},:class => "btn"%>
   <% end %>
-  <% if current_user != nil && current_user.type == 'Admin' && @user.active == true && @user.banned == false %>
+  <% if current_user != nil && current_user.type == 'Admin' && @user.active == true && @user.banned == false  && current_user.id != @user.id %>
     <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
   <% end %>
-  <% if current_user != nil && current_user.type == 'Admin' && @user.banned==true %>
+  <% if current_user != nil && current_user.type == 'Admin' && @user.banned==true && current_user.id != @user.id%>
     <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?', :class => 'options btn btn-success' %>
+  <% end %>
+  <% if current_user != nil && current_user.type == 'Committee' && current_user == @user%>
+    <%= link_to 'Review Ideas', { :controller => 'committees', :action => 'review_ideas' }, :class => 'btn' %>
   <% end %>
 </div>
 <% if @user.banned == false and @user.active == true %>
@@ -75,14 +77,11 @@
         <% else %>
           <dt>First Name</dt>
           <dd>
-
             <%= best_in_place @user, :first_name, :nil => 'click to specify your first name' %>
-
           </dd>
           <br />
           <dt>Last Name</dt>
           <dd>
-
             <%= best_in_place @user, :last_name, :nil => 'click to specify your last name' %>
           </dd>
           <br />
@@ -90,32 +89,25 @@
           </dt>
           <dd>
             <%= best_in_place @user, :date_of_birth, :type => 'date', :nil => 'not specified' %>
-
           </dd>
           <br />
           <dt>Gender</dt>
           <dd>
-
             <%= best_in_place @user, :gender, :type => :select, :collection => [['male', 'male'], ['female', 'female'], ['', 'unspecified']], :nil => 'Unspecified' %>
-
           </dd>
         <% end %>
       </dl>
       <dl id='user-about'>
         <dt>About User</dt>
         <br />
-
         <dd id='user-about-me'>
           <% if current_user == @user %>
             <%= best_in_place @user, :about_me, :type => 'textarea', :nil => 'click to fill your about me' %>
-
           <% elsif @user.about_me != "" and @user.about_me %>
             <%= @user.about_me %>
           <% else %>
             Not specified
-
           <% end %>
-
         </dd>
       </dl>
     </div>
@@ -129,4 +121,3 @@
     </ul>
   </div>
 <% end %>
-

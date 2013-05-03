@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require ideas/popover
-
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require jquery_purr
@@ -32,6 +31,8 @@
 //= require stream
 //= require poller.js
 
+//
+//= require profile_modal
 //
 //= require unauthorized_sign_in_up_modal
 
