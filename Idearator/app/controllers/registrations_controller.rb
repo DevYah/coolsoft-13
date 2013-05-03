@@ -40,7 +40,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
 
-
   protected
 
 
