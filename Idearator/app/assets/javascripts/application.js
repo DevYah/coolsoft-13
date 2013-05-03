@@ -24,8 +24,9 @@
 //= require best_in_place
 //= require ideas/popover
 //
-//= require notification_polling
 //= require notifications
+//
+//= require poller.js
 //
 //= require profile_modal
 //

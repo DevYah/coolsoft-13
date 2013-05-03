@@ -99,6 +99,12 @@ Sprint0::Application.routes.draw do
     match 'ratings/ajax'
   end
 
+  controller :coolster do
+    match 'coolster/add_online_user'
+    match 'coolster/remove_online_user'
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
