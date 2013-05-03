@@ -22,7 +22,11 @@
 }
 
 .unauth-sign-in {
-  height: 30px;
+  display: block;
+  width: 170px;
+  height: 40px;
+  font-size: 0;
+  padding-top:15px;
 }
 
 .unauth-left {
@@ -47,11 +51,6 @@
   width: 530px;
 }
 
-.unauth-social-media {
-  margin: 30px;
-  margin-top: 20px;
-}
-
 .unauth-huge {
   width: 9999px;
 }
@@ -63,4 +62,33 @@
 
 .unauth-modal-close:hover{
   text-decoration: none;
+}
+
+.unauth-sign-in-div{
+  padding-top:50px;
+}
+
+.unauth-sign-in-social{
+  display: block;
+  width: 170px;
+  height: 40px;
+  font-size: 0;
+}
+
+.sign_up_button{
+  margin-top:5px;
+  margin-bottom:0px;
+}
+
+.sign_in_button{
+  margin-top:5px;
+  margin-bottom:0px;
+}
+
+.sign-in-form .remember_me_label{
+  margin-left:5px;
+}
+
+.sign-in-form .sign_in_button{
+  margin-top:10px;
 }

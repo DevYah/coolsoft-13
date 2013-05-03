@@ -40,18 +40,17 @@ class Idea < ActiveRecord::Base
     end
   end
 
-
-  def self.filter(tags)
-    @ideas = []
+  def self.filter(tags,search_parameter)
+    ideas = []
+    search_results = Idea.search(search_parameter)
     tags.each do |tag|
       t = Tag.find(:first, :conditions => {:name => tag})
       ideatags = IdeasTags.find(:all, :conditions => {:tag_id => t.id})
-      ideas = Idea.where(:id => ideatags.map(&:idea_id))
-      @ideas = @ideas + ideas
+      tag_ideas = Idea.where(:id => ideatags.map(&:idea_id))
+      ideas = ideas + tag_ideas
     end
-    @ideas
+    @results = ideas & search_results
   end
-
 
   #Adds the idea of the highest votes in the month of the input date
   #+date+::

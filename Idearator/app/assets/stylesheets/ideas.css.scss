@@ -9,28 +9,6 @@
   &:first-letter { text-transform: uppercase };
 }
 
-
-.fbk{
-  width:40px;
-  height:40px;
-  cursor: pointer;
-  padding:5px;
-}
-
-.tw{
-  width:40px;
-  height:40px;
-  cursor:pointer;
-  padding:5px;
-}
-
-.pin{
-  width:40px;
-  height:40px;
-  cursor:pointer;
-  padding:5px;
-}
-
 #control{
   padding-top:10px;
   padding-right:10px;
@@ -80,3 +58,13 @@
 .idea-page .enter_competition{
   text-align: center;
 }
+
+.outside_tag_button{
+  color:#FFFFFF;
+}
+
+.outside_tag_button:hover{
+  color:#FFFFFF;
+  text-decoration: none;
+}
+

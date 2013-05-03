@@ -15,4 +15,8 @@ $(document).ready(function() {
   $('#unauth-sign-up-button').click(function () {
     $('.unauth-huge').removeClass('unauth-right', 500);
   });
+  $('.post-an-idea').click(function (e) {
+    e.preventDefault();
+    $('#signedout').modal('show');
+  });
 });

@@ -1,41 +1,48 @@
-<script>
-  $(".btn-link").click(function tag_caller(e){
-   e.preventDefault();
-   var tag = $(this);
-     $("#search").val("");
-     alert($("#search").val());
-     stream_manipulator(1,tag.val(),"",true, "false");
-   });
-</script>
+<% search_results_count = 0 %>
 <% if @page.nil? %>
   <% if !@searching_with %>
     <% @ideas.each do |idea| %>
+    <% if idea.approved == true and idea.user.banned == false and idea.user.active == true %>
+    <% search_results_count = search_results_count + 1 %>
       <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
     <%end%>
+    <% end %>
+    <% else %>
+        <% @users.each do |user|%>
+          <% if user.banned == false and user.active == true %>
+            <%= render template: '/users/_stream_users', locals: { user: user } %>
+            <% search_results_count = search_results_count + 1 %>
+        <% end %>
+        <% end %>
+    <% end %>
   <% else %>
-    <table>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.username %>
-          </td>
-        </tr>
-        <br />
+    <% if !@search_with_user %>
+      <% if @page == "1" %>
+        <%= render partial: 'tags', locals: { filter_this: @filter_tmp } %>
+      <% end %>
+      <% @ideas.each do |idea| %>
+        <% if idea.approved == true and idea.user.banned == false and idea.user.active == true %>
+          <% search_results_count = search_results_count + 1 %>
+          <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+        <% end %>
       <%end%>
-    </table>
+    <% else %>
+      <% @users.each do |user|%>
+        <% if user.banned == false and user.active == true %>
+          <%= render template: '/users/_stream_users', locals: { user: user } %>
+          <% search_results_count = search_results_count + 1 %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
-<% else %>
-  <% if !@search_with_user %>
-    <% @ideas.each do |idea| %>
-      <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
-    <%end%>
-  <% else %>
-    <table>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.username %></td>
-        </tr>
-        <br />
-      <%end%>
-    </table>
+
+<% if @searchtext != "" %>
+  <% if search_results_count == 0 %>
+    <% if @page == "1" %>
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>No Results Found</strong>
+      </div>
+    <% end%>
   <% end %>
 <% end %>
