@@ -168,9 +168,9 @@ class SimilarityEngine
   # +idea+:: +Idea+ to calculate similarities for
   #
   # Author: Mina Nagy
-  def self.rebuild_similarities(idea, offset = 0)
+  def self.rebuild_similarities(idea)
     # find ideas in tagged by the same tags
-    ideas_in_tags = Idea.offset(offset).joins(:tags).where(tags: { id: idea.tags })
+    ideas_in_tags = Idea.joins(:tags).where(tags: { id: idea.tags })
                     .select('ideas.id, ideas.title, ideas.description, ideas.problem_solved')
                     .preload(:tags)
 
@@ -189,7 +189,7 @@ class SimilarityEngine
 
     # FIXME what's the proper way to delete?
     stale_ids = Similarity.where('idea_id = ? OR similar_idea_id = ?', idea.id, idea.id).pluck(:id)
-    Similarity.delete stale_ids
+    Similarity.delete stale_ids if !stale_ids.empty?
 
     if !similarities.empty?
       sql = "INSERT INTO similarities (`idea_id`, `similarity`, `similar_idea_id`, `created_at`, `updated_at`)" +
@@ -205,10 +205,8 @@ class SimilarityEngine
   #
   # Author: Mina Nagy
   def self.rebuild_all_similarities
-    offset = 0
     Idea.find_each do |idea|
-      rebuild_similarities(idea, offset)
-      offset += 1
+      rebuild_similarities(idea)
     end
   end
 
