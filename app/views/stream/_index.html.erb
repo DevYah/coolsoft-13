@@ -35,11 +35,14 @@
       <% end %>
     <% end %>
   <% end %>
+
 <% if @searchtext != "" %>
   <% if search_results_count == 0 %>
-    <div class="alert alert-error">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>No Results Found</strong>
-    </div>
+    <% if @page == "1" %>
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>No Results Found</strong>
+      </div>
+    <% end%>
   <% end %>
 <% end %>

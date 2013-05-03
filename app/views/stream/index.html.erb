@@ -1,6 +1,10 @@
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "navigationscroll.js" %>
 <% end %>
+
+<script>
+in_stream = true;
+</script>
 <%if current_user == nil%>
   <div id= "landing">
     <div class="hero-unit text-center" id="title">
@@ -92,84 +96,91 @@
       <button class="stream-generate-button">Check Out The Latest Ideas</button>
     </div>
   </div>
-<%else%>
-<%end%>
-<script>
-in_stream = true;
-</script>
-
-<div id="landing-stream">
-  <div class='row'>
-    <div class='span8'>
-      <div id="stream_results">
-        <%= render :partial => 'index'%>
-      </div>
-    </div>
-    <div class ='row'>
-      <div id='sidebar' class='span4'>
-        <div class="topten" id="sidebar_content">
-          <h1 class="title">Top Ten</h1>
-          <% @top.each do |top| %>
-            <% if top.user.active == true and top.user.banned == false%>
-              <div class="topten_idea media">
-                <h4 class="media-heading idea">
-                  <a data-popover-idea-id=<%=top.id %>>
-                    <%= top.title %>
-                  </a>
-                </h4>
-                <a class="pull-left" href="#">
-                  <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
-                </a>
-                <div class="media-body">
-                  <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
-                  <br>
-                  <span class="badge"><%= top.num_votes %>votes</span>
-                </div>
-              </div>
-            <% end %>
-          <%end%>
+  <div id="landing-stream">
+    <div class='row'>
+      <div class='span8'>
+        <div id="stream_results">
+          <%= render :partial => 'index'%>
         </div>
-        <%= render :partial => '/trends/index'%>
-        <div class="affix" data-spy='affix'>
-          <button class="btn backtotop" type="button">To Top
-            <i class = 'icon-black icon-hand-up'></i>
-          </button>
+      </div>
+      <div class ='row'>
+        <div id='sidebar' class='span4'>
+          <div class="topten" id="sidebar_content">
+            <h1 class="title">Top Ten</h1>
+            <% @top.each do |top| %>
+              <% if top.user.active == true and top.user.banned == false%>
+                <div class="topten_idea media">
+                  <h4 class="media-heading idea">
+                    <a data-popover-idea-id=<%=top.id %>>
+                      <%= top.title %>
+                    </a>
+                  </h4>
+                  <a class="pull-left" href="#">
+                    <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
+                  </a>
+                  <div class="media-body">
+                    <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
+                    <br>
+                    <span class="badge"><%= top.num_votes %>votes</span>
+                  </div>
+                </div>
+              <% end %>
+            <%end%>
+          </div>
+          <%= render :partial => '/trends/index'%>
+          <div class="affix" data-spy='affix'>
+            <button class="btn backtotop" type="button">To Top
+              <i class = 'icon-black icon-hand-up'></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<%else%>
+  <div>
+    <div class='row'>
+      <div class='span8'>
+        <div id="stream_results">
+          <%= render :partial => 'index'%>
+        </div>
+      </div>
+      <div class ='row'>
+        <div id='sidebar' class='span4'>
+          <div class="topten" id="sidebar_content">
+            <h1 class="title">Top Ten</h1>
+            <% @top.each do |top| %>
+              <% if top.user.active == true and top.user.banned == false%>
+                <div class="topten_idea media">
+                  <h4 class="media-heading idea">
+                    <a data-popover-idea-id=<%=top.id %>>
+                      <%= top.title %>
+                    </a>
+                  </h4>
+                  <a class="pull-left" href="#">
+                    <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
+                  </a>
+                  <div class="media-body">
+                    <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
+                    <br>
+                    <span class="badge"><%= top.num_votes %>votes</span>
+                  </div>
+                </div>
+              <% end %>
+            <%end%>
+          </div>
+          <%= render :partial => '/trends/index'%>
+          <div class="affix" data-spy='affix'>
+            <button class="btn backtotop" type="button">To Top
+              <i class = 'icon-black icon-hand-up'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
 
-<script type="text/javascript">
-    $('.backtotop').click(function(){
-      $('html, body').animate({scrollTop:0}, 'slow');
-      });
-     $(document).ready(function(){
-      $('.backtotop').hide();
-    });
-</script>
 
-<style type = "text/css">
-  .totop{
-    margin: auto;
-  }
 
-  .idea-vote{
-    padding-left: 87%;
-    font-size: 35px;
-  }
 
-  .block{
-    box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
-    margin-bottom: 20px;
-  }
-
-  .wrapper{
-    margin-top: 20px;
-  }
-
-  .margin{
-    margin-top: 10px;
-    margin-bottom: 15px;
-  }
-</style>
