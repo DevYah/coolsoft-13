@@ -14,12 +14,12 @@
       <%= stylesheet_link_tag params[:controller] %>
       <%= javascript_include_tag params[:controller] %>
     <% end %>
-
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
   <body data-devise=<%= user_signed_in? %>>
     <% if user_signed_in? %>
+    <div class='enter-idea-notification-modal'></div>
       <div id='myModal' class='modal hide fade'>
         <div class='modal-header'>
           <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
