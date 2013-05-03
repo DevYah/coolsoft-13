@@ -82,8 +82,14 @@
       <% end %>
     <% else %>
       <% if @firstTime %>
-        <h2 class="red">Sorry! no Competitions in this section
+      <% if @flag %>
+        <h2 class="red"> You Have No Compeititions with approved Ideas
         </h2>
+      <% else %>
+      <h2 class="red">Sorry! no Competitions are open for this moment
+        </h2>
+      <% end %>
+
       <% end %>
     <% end %>
   </div>
