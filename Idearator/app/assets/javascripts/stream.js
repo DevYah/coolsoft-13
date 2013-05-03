@@ -49,7 +49,7 @@ function stream_manipulator(page,tag,search,insert,user){
           currentpage = 1;
         }
       }
-  }else{
+    }else{
       if (searchtext == "" && !user_search){
         if(will_insert){
           if(!check_if_exists(tag)){
@@ -106,7 +106,7 @@ function stream_manipulator(page,tag,search,insert,user){
         }
       });
     }else{
-       $.ajax({
+      $.ajax({
         url: '/stream/index?page=' + currentpage,
         type: 'get',
         dataType: 'script',
@@ -119,20 +119,20 @@ function stream_manipulator(page,tag,search,insert,user){
   }
 
 $(document).ready(function(){ apply_tag_handlers();});
-   function apply_tag_handlers(){
-    $("#stream_results .btn-link").click(function tag_caller(e){
-      e.preventDefault();
-      var tag = $(this);
-      $("#searchtype").val("false");
-      stream_manipulator(1,[tag.val()],$("#search").val(),"true", "false");
-    });
-      $("#stream_results .close").click(function tag_remover(e){
-      e.preventDefault();
-      var curr = $(this);
-      $("#searchtype").val("false");
-      stream_manipulator(1,[curr.val()],$("#search").val(),"false", "false");
-    });
-  }
+function apply_tag_handlers(){
+  $("#stream_results .btn-link").click(function tag_caller(e){
+    e.preventDefault();
+    var tag = $(this);
+    $("#searchtype").val("false");
+    stream_manipulator(1,[tag.val()],$("#search").val(),"true", "false");
+  });
+  $("#stream_results .close").click(function tag_remover(e){
+    e.preventDefault();
+    var curr = $(this);
+    $("#searchtype").val("false");
+    stream_manipulator(1,[curr.val()],$("#search").val(),"false", "false");
+  });
+}
 
 
 $(window).scroll (function(){
@@ -157,21 +157,21 @@ $(window).scroll (function(){
   }
 });
 
- function call_infinite_scrolling(controller,action,page,id,params){
+function call_infinite_scrolling(controller,action,page,id,params){
   if(id == ""){
     var url_to_go = '/'+controller+'/'+action+'?page='+page;
   }else{
     var url_to_go = '/'+controller+'/'+id+'?page='+page;
   }
-    page++;
-    $.ajax({
-      url: url_to_go ,
-      type: 'get',
-      dataType: 'script',
-      data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
-      success: function() {
-        apply_tag_handlers();
-      }
-    });
-    return page;
+  page++;
+  $.ajax({
+    url: url_to_go ,
+    type: 'get',
+    dataType: 'script',
+    data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
+    success: function() {
+      apply_tag_handlers();
+    }
+  });
+  return page;
 }

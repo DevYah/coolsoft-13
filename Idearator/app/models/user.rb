@@ -169,5 +169,5 @@ class User < ActiveRecord::Base
   def voted_for?(idea)
     votes.where(idea_id: idea.id).exists?
   end
-  
+
 end

@@ -42,12 +42,12 @@ search_type = false;
 $(function() {
   $("#searchdiv input").keyup(function(e){
     e.preventDefault();
-  if(e.which != 13){
-    var search = $("#search").val();
-    var search_in = $("#searchtype").val();
+    if(e.which != 13){
+      var search = $("#search").val();
+      var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
         if(search.length > 2){
-        stream_manipulator(1,[],search,"false", search_in);
+          stream_manipulator(1,[],search,"false", search_in);
         }
       }else{
         $("#searchtype").val("false");
@@ -73,12 +73,12 @@ $(document).ready(function() {
     e.preventDefault(); 
     search_type = true;
     $("#searchtype").val("true");
-});
+  });
   $("#idea-search-button").click(function remove_button_handler(e) {
     e.preventDefault();
     search_type = false;
     $("#searchtype").val("false");
-});
+  });
   $("a.popup").click(function (e) {
     popupCenter($(this).attr("href"),
                 $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
