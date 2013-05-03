@@ -71,8 +71,10 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
       @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
-      @entry.first.approved = true
-      @entry.first.save
+      @entry.each do |entry|
+        entry.approved=true
+        entry.save
+      end
       respond_to do |format|
         format.js
       end
@@ -89,8 +91,10 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
       @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
-      @entry.first.rejected = true
-      @entry.first.save
+      @entry.each do |entry|
+        entry.rejected=true
+        entry.save
+      end
       respond_to do |format|
         format.js
       end
