@@ -75,12 +75,15 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
       @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
-      @entry.first.approved = true
-      @entry.first.save
+      @entry.each do |entry|
+        entry.approved=true
+        entry.save
+      end
+    @competition = Competition.find(params[:id])
+    @competition.ideas.uniq
       respond_to do |format|
         format.js
       end
-
     else
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You can not approve ideas' }
@@ -88,17 +91,21 @@ class CompetitionsController < ApplicationController
       end
     end
   end
+
   def reject
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
       @entry = CompetitionEntry.find(:all,:conditions => {:competition_id => @competition.id,:idea_id => @idea.id})
-      @entry.first.rejected = true
-      @entry.first.save
+      @entry.each do |entry|
+        entry.rejected=true
+        entry.save
+      end
+    @competition = Competition.find(params[:id])
+    @competition.ideas.uniq
       respond_to do |format|
         format.js
       end
-
     else
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You can not reject ideas' }
@@ -130,7 +137,8 @@ class CompetitionsController < ApplicationController
   end
 
   # making new Competition
-  #Marwa Mehanna
+  # Params: None
+  # Author: Marwa Mehanna
   def new
     @competition = Competition.new
     chosen_tags_competition=[]
@@ -214,7 +222,7 @@ class CompetitionsController < ApplicationController
   def enroll_idea
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
-    if not @competition.ideas.where(:id => @idea.id).exists?
+    if CompetitionEntry.find(:all, :conditions => {:competition_id => @competition.id, :rejected => false, :idea_id => @idea.id }) == []
       @competition.ideas << @idea
       #@idea.competitions << @competition
       EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])

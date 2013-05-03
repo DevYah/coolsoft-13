@@ -86,10 +86,9 @@ $(document).ready(function(){
  $(".btn-link").click(function tag_caller(e){
   e.preventDefault();
   var tag = $(this);
-    //$("#stream_results").html("");
-    $("#search").val("");
-    $("#searchtype").val("false");
-    stream_manipulator(1,tag.val(),"",true, "false");
+  $("#search").val("");
+  $("#searchtype").val("false");
+  stream_manipulator(1,tag.val(),"",true, "false");
   });
  $(".close").click(function tag_remover(e){
   e.preventDefault();

@@ -29,7 +29,7 @@ class Idea < ActiveRecord::Base
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
   def self.search(search)
     if search
-      where('title LIKE  ? AND approved  = ?', "%#{search}%", true)
+      where('title LIKE ?', "%#{search}%")
     else
       find(:all)
     end
@@ -48,11 +48,24 @@ class Idea < ActiveRecord::Base
   end
 
 
+  #Adds the idea of the highest votes in the month of the input date
+  #+date+::
+  #Author Omar Kassem
+  def self.best_idea_for_month(date)
+    start_date = date
+    start_date = start_date - (start_date.day - 1).day
+    end_date = start_date + 1.month
+    ideas = Idea.where(:created_at => start_date..end_date).reorder('num_votes')
+    idea = MonthlyWinner.new
+    puts ideas.count
+    idea.idea_id = ideas.last.id
+    idea.save
+  end
+
   # send notification  to users who voted for this idea  when the idea submitter edit his idea
   # Params:
   # +user+:: the parameter instance of user
   # Author:: Marwa Mehanna
-
   def send_edit_notification(user)
     voters=self.voters
     voters.each{|u|
@@ -61,5 +74,4 @@ class Idea < ActiveRecord::Base
       end
     }
   end
-
 end

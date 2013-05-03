@@ -25,17 +25,39 @@ describe UsersController do
       @user.confirm!
       sign_in @user
     end
-    describe 'Success' do
-      it "should change the user's attributes" do
-        @attr = { :first_name => 'first_name_updated', :last_name => 'last_name_updated', :username => 'username_updated' }
-        puts 'Old first_name: ' + @user.first_name
-        put :update, :id => @user, :user => @attr
-        @user.reload
-        (@user.first_name).should eql('first_name_updated')
-        (@user.last_name).should eql('last_name_updated')
-        (@user.username).should eql('username_updated')
-        puts 'New first_name: ' + @user.first_name
-      end
+    it "should change the user's attributes" do
+      @attr = { :first_name => 'first_name_updated', :last_name => 'last_name_updated', :username => 'username_updated' }
+      puts 'Old first_name: ' + @user.first_name
+      put :update, :id => @user, :user => @attr
+      @user.reload
+      (@user.first_name).should eql('first_name_updated')
+      (@user.last_name).should eql('last_name_updated')
+      (@user.username).should eql('username_updated')
+      puts 'New first_name: ' + @user.first_name
+    end
+  end
+  describe 'GET ideas' do
+    it 'views an idea stream for a certain user' do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      @idea = FactoryGirl.create(:idea)
+      @idea.approved = true
+      @idea.user = @user
+      @idea.save
+      sign_in @user
+      get :ideas, :id => @user.id
+      response.should render_template("users/ideas")
+      assigns(:ideas).size.should eq(1)
+    end
+  end
+  describe 'Get profile_modal' do
+    it 'views a modal profile for a specific user' do
+      @user = FactoryGirl.build(:user)
+      @user.confirm!
+      sign_in @user
+      get :profile_modal, :id => @user.id
+      response.should render_template("users/profile_modal")
+      assigns(:selected_user).should eq(@user)
     end
   end
   describe "PUT change_settings" do
@@ -82,22 +104,22 @@ describe UsersController do
     @u1.confirm!
     @u1.save
   end
-   describe "PUT #invite_member" do
-     it "retrieves the user instance from :id" do
-       put :invite_member, :id => @u1.id
-       assigns(:user).should eq(@u1)
-     end
-     it "inititates the user to the committees table" do
-       put :invite_member, :id => @u1.id
-       @u1.reload
-       @u1.type.should eq("Committee")
-     end
-     it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
-       expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
-     end
-     it "redirects to home page" do
-       put :invite_member, :id => @u1.id
-       response.should redirect_to '/'
-   end
- end
+  describe "PUT #invite_member" do
+    it "retrieves the user instance from :id" do
+      put :invite_member, :id => @u1.id
+      assigns(:user).should eq(@u1)
+    end
+    it "inititates the user to the committees table" do
+      put :invite_member, :id => @u1.id
+      @u1.reload
+      @u1.type.should eq("Committee")
+    end
+    it "calls InviteCommitteeNotification.send_notification(Admin, User)" do
+      expect{ put :invite_member, :id => @u1.id }.to change(InviteCommitteeNotification,:count).by(1)
+    end
+    it "redirects to home page" do
+      put :invite_member, :id => @u1.id
+      response.should redirect_to '/'
+    end
+  end
 end
