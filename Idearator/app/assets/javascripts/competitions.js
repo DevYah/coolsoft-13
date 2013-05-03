@@ -29,9 +29,9 @@ $(document).ready(function() {
     $('#edited-check-mark').remove();
     $(this).append("<i class='icon-ok pull-right' id ='edited-check-mark'></i>");
   });
-   $.datepicker.setDefaults({
+    $.datepicker.setDefaults({
     dateFormat: 'yy/mm/dd', changeMonth: true,
-    changeYear: true, yearRange: '1900:' + (new Date().getFullYear() - 8)
+    changeYear: true, yearRange: '2013:' + (new Date().getFullYear() +8)
   });
 
    $(window).scroll (function(){
