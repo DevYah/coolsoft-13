@@ -42,7 +42,7 @@ module Coolster
     scripts = {}
     user_ids = @@online_user_ids & user_ids
     begin
-      RestClient.post 'http://localhost:9292/push', {script: script, users: user_ids}
+      RestClient.post 'http://localhost:9292/push', {script: script, users: user_ids, multipart: true}
     rescue => e
     end
   end
