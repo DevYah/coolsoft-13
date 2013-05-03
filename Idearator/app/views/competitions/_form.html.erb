@@ -22,15 +22,16 @@
     <div class='control-group'>
       <%= f.label :Start_date, :class=> 'control-label'%>
       <div class='controls'>
-        <%= f.text_field :start_date, :class=> 'text_field', :placeholder=>'Enter the start date of the competition',:required => true %>
+        <%= f.date_select :start_date %>
       </div>
     </div>
     <div class='control-group'>
       <%= f.label :End_date, :class=> 'control-label'%>
       <div class='controls'>
-        <%= f.text_field :end_date, :class=> 'text_field', :placeholder=>'Enter the End date of the competition',:required => true %>
+             <%= f.date_select :end_date %>
       </div>
     </div>
+    <%= f.label :tags, :class=> 'control-label'%>
     <div id="competition-tags">
       <% Tag.all.each do |tag|%>
         <div class='competition-tag'>
