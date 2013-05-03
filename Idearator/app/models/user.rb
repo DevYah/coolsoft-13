@@ -56,6 +56,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.search(search)
+    if search
+      where('username LIKE  ? AND banned  = ? AND active = ?', "%#{search}%", false,true)
+    else
+      find(:all)
+    end
+  end
+
   # Find a +User+ by the twitter auth data. Uses +provider+ and +uid+ fields to
   # find the user.
   # Params:
