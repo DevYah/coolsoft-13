@@ -43,10 +43,8 @@ search_type = false;
 $(function() {
   $("#searchdiv input").keyup(function(e){
     e.preventDefault();
-      //$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-  if(e.which != 13){
-    var search = $("#search").val();
-    // if(last_search!=search){
+    if(e.which != 13){
+      var search = $("#search").val();
       var search_in = $("#searchtype").val();
       last_search = search;
       if($("#search").val()!= ""){
