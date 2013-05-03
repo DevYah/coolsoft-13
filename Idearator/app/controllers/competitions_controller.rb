@@ -14,8 +14,12 @@ class CompetitionsController < ApplicationController
       @firstTime = true
     end
     if (params[:type] =="1")
-      all = Competition.joins(:investor).where(:users => {:id => current_user.id})
-    end
+      if user_signed_in? and current_user.is_a? Investor
+        all = Competition.joins(:investor).where(:users => {:id => current_user.id})
+      end
+    elsif  ( params[:type] =="3")
+        all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
+      end
     @filter = false
     if(params[:myPage])
       @tags = params[:tags].slice(1,params[:tags].length)
