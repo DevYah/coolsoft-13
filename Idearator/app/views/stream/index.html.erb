@@ -1,0 +1,168 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "navigationscroll.js" %>
+<% end %>
+<%if current_user == nil%>
+  <div id= "landing">
+    <div class="hero-unit text-center" id="title">
+      <h1>Idearator</h1>
+      <p>The Community that turns your ideas into a Reality</p>
+    </div>
+    <div class='row'>
+      <div class="span3 pull-right signinout">
+        <%= link_to('Sign in', new_user_session_path , :class =>"btn btn-success btn-large btn-block") %>
+        <ul class='inline unstyled text-center'>
+          <li>
+            <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
+            :class => 'popup facebook-nav-login landing-login',
+            "data-width" => 600, "data-height" => 500 %>
+          </li>
+          <li>
+            <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
+            :class => 'popup twitter-nav-login landing-login',
+            'data-width' => 600, 'data-height' => 500  %>
+          </li>
+        </ul>
+        <div class="text-center">
+          <h5>OR</h5>
+        </div>
+        <div class= "landing-sign-up">
+          <%= render 'users/sign_up_form_landing' %>
+        </div>
+      </div>
+      <div id="myCarousel" class="carousel slide span9">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner carouselitem text-center">
+          <div class="active item">
+            <div class="text-center">
+              <%= image_tag('lightbulb-image-for-WEbsite1.jpg')%>
+              <div class="carousel-caption text-center">
+                <h4>Have an Awsome Idea ?!</h4>
+                <h4>Decide you want to share your idea with the world.</h4>
+              </div>
+            </div>
+          </div>
+          <div class="item carouselitem">
+            <div class="text-center">
+              <%= image_tag('331281.jpg')%>
+            </div>
+            <div class="carousel-caption text-center">
+              <h4>Sign up right now to Idearator</h4>
+            </div>
+          </div>
+          <div class="item carouselitem">
+            <div class="text-center">
+              <%= image_tag('bulb1.jpg')%>
+            </div>
+            <div class="carousel-caption text-center">
+              <h4>Submit your idea</h4>
+              <h4>Let the community decide the future of your idea</h4>
+              <h4>Turn your idea into a Reality</h4>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+    </div>
+    <div class="container best-ideas-div img-rounded">
+      <div class="text-center">
+        <h3 class="fancy-title">Checkout Some of our best ideas</h3>
+      </div>
+        <% @best.each do |best| %>
+          <div class='best-wrapper' data-idea-id='<%= best.id %>'>
+            <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
+            <div class='description img-rounded text-center'>
+              <h3 class='description_content best-title'><%= best.title%></h3>
+              <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <div class="text-center">
+      <button class="stream-generate-button">Check Out The Latest Ideas</button>
+    </div>
+  </div>
+<%else%>
+<%end%>
+<script>
+in_stream = true;
+</script>
+
+<div id="landing-stream">
+  <div id="stream_results">
+    <%= render :partial => 'index'%>
+  </div>
+
+  <% content_for :sidebar do %>
+    <%= link_to 'Post an idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-large btn-primary btn-block"%>
+  <% end %>
+
+  <% content_for :sidebar do %>
+    <div class="topten" id="sidebar_content">
+      <h1 class="title">Top Ten
+      </h1>
+      <% @top.each do |top| %>
+        <% if top.user.active == true and top.user.banned == false%>
+          <div class="topten_idea media">
+             <h4 class="media-heading idea">
+                <a data-popover-idea-id=<%=top.id %>>
+                  <%= top.title %>
+                </a>
+              </h4>
+            <a class="pull-left" href="#">
+              <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
+            </a>
+            <div class="media-body">
+              <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
+              <br>
+              <span class="badge"><%= top.num_votes %>
+                votes</span>
+            </div>
+          </div>
+        <% end %>
+      <%end%>
+    </div>
+    <div class="affix" data-spy='affix'>
+      <button class="btn backtotop" type="button">To Top
+        <i class = 'icon-black icon-hand-up'></i></button>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+    $('.backtotop').click(function(){
+      $('html, body').animate({scrollTop:0}, 'slow');
+      });
+     $(document).ready(function(){
+      $('.backtotop').hide();
+    });
+ </script>
+
+<style type = "text/css">
+  .totop{
+    margin: auto;
+  }
+
+  .idea-vote{
+    padding-left: 87%;
+    font-size: 35px;
+  }
+
+  .block{
+    box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
+    margin-bottom: 20px;
+  }
+
+  .wrapper{
+    margin-top: 20px;
+  }
+
+  .margin{
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+</style>

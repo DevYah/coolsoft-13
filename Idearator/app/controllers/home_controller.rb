@@ -16,6 +16,11 @@ class HomeController < ApplicationController
   def index
     @trending = Idea.joins(:trend).order('trending desc').limit(4)
     @page_number = params[:myPage]
+    if MonthlyWinner.all.count > 0
+      @winners = MonthlyWinner.all.reverse
+      first = @winners.shift
+      @first = Idea.find(first.idea_id)
+    end
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     @best = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>9)
     if(params[:myTags])

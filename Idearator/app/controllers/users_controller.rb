@@ -62,14 +62,14 @@ class UsersController < ApplicationController
       else
         respond_to do |format|
           format.html{
-            redirect_to controller: 'home', action: 'index'
+            redirect_to controller: 'stream', action: 'index'
           }
         end
       end
     else
       respond_to do |format|
         format.html{
-          redirect_to controller: 'home', action: 'index'
+          redirect_to controller: 'stream', action: 'index'
         }
       end
     end
@@ -94,16 +94,16 @@ class UsersController < ApplicationController
       end
       respond_to do |format|
         format.html{
-          redirect_to controller: 'home', action: 'index'
+          redirect_to controller: 'stream', action: 'index'
         }
       end
     end
   end
 
-
-  #This method is used to generate the view of each User Profile. A specific user and his ideas are made
-  #available to the view to be presented in the appropriate manner.
-  #Author: Hisham ElGezeery
+  # generates the view of each User Profile. A specific user and his ideas are made
+  # available to the view to be presented in the appropriate manner.
+  # Params: none
+  # Author: Hisham ElGezeery
   def show
     @user = User.find(params[:id])
     @approved = Idea.where(:user_id => @user.id, :archive_status => false).all
@@ -205,29 +205,56 @@ class UsersController < ApplicationController
     end
   end
 
-  #is used to edit a specific user profile.
-  #Params:
-  #None
-  #Author: Hisham ElGezeery.
+  # is used to edit a specific user profile.
+  # Params:
+  # none
+  # Author: Hisham ElGezeery.
   def edit
     @user = User.find(params[:id])
   end
 
-  #is used to update a user's info.
-  #Params:
-  #+about_me+:: the parameter is an instance of +User+ passed through the form 'form'.
-  #Author: Hisham ElGezeery.
+  # is used to update user's attributes.
+  # Params:
+  # none
+  # Author: Hisham ElGezeery.
   def update
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.becomes(User).update_attributes(params[:user])
-        format.html { redirect_to(@user.becomes(User), :notice => 'User was successfully updated.') }
-        format.json { respond_with_bip(@user.becomes(User)) }
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.json { respond_with_bip(@user) }
       else
         format.html { render :action => 'edit' }
-        format.json { respond_with_bip(@user.becomes(User)) }
+        format.json { respond_with_bip(@user) }
       end
     end
   end
+
+  # generates the user profile view to be embedded in modal dialogs.
+  # Params:
+  # none
+  # Author: Hisham ElGezeery
+  def profile_modal
+    user_id = params[:id]
+    @selected_user = User.find(user_id)
+    @selected_user_ideas = Idea.where(:user_id => user_id).all
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # is used to render the page for displaying user's ideas.
+  # Params:
+  # none
+  # Author: Hisham ElGezeery
+  def ideas
+    @user = User.find(params[:id])
+    @ideas = @user.get_approved_ideas
+    respond_to do |format|
+      format.html # ideas.html.erb
+    end
+  end
+
 end
