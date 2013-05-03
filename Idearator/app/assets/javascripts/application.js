@@ -17,7 +17,6 @@
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
-<<<<<<< HEAD
 //= require jquery.purr
 //= require jquery.cookie
 //
@@ -25,18 +24,6 @@
 //= require best_in_place
 //= require ideas/popover
 //
-=======
-//= require best_in_place
-//= require bootstrap
-
-//= require jquery.purr
-
-//= require best_in_place
-//= require jquery-ui
-//= require jquery.tokeninput
-//= require jquery_purr
-//= require jquery-star-rating
->>>>>>> 9023a3c51d4e56eaef5f717ffa46b582e2637666
 //= require notifications
 
 
