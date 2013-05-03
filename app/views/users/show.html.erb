@@ -17,15 +17,18 @@
     <%= link_to 'Edit', edit_user_registration_path, :class => "btn"%>
     <%= link_to 'Deactivate', {:controller => 'users' ,:action => 'confirm_deactivate'},:class => "btn"%>
   <% end %>
-  <% if current_user != nil && current_user.type == 'Admin' && @user.active == true && @user.banned == false  && current_user.id != @user.id %>
+  <% if current_user != nil && current_user.type == 'Admin' && @user.active == true && @user.banned == false %>
     <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
   <% end %>
-  <% if current_user != nil && current_user.type == 'Admin' && @user.banned==true && current_user.id != @user.id%>
+  <% if current_user != nil && current_user.type == 'Admin' && @user.banned==true %>
     <%= link_to 'Unban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Unban this user?', :class => 'options btn btn-success' %>
   <% end %>
   <% if current_user != nil && current_user.type == 'Committee' && current_user == @user%>
     <%= link_to 'Review Ideas', { :controller => 'committees', :action => 'review_ideas' }, :class => 'btn' %>
   <% end %>
+  <% if @admin.type == "Admin" && @user.active==true && !@registered and @user.banned == false %>
+    <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "options btn btn-primary" %>
+  <%end%>
 </div>
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
