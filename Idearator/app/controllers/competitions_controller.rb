@@ -30,6 +30,7 @@ class CompetitionsController < ApplicationController
         @type = 1
       end
     elsif  ( params[:type] =="3")
+      @flag = true
       @type = 3
       all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
     elsif  ( params[:type] =="2")
