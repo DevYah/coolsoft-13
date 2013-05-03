@@ -32,8 +32,9 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
       if resource.type == "Committee"
         UserMailer.committee_signup("menna.amr2@gmail.com").deliver
+        ApproveCommitteeNotification.send_notification(resource, Admin.all)
         resource.becomes(Committee).tag_ids = params[:tags]
-      end
+      end 
 
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
@@ -76,3 +77,4 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
 end
+

@@ -29,6 +29,14 @@
   <% if @admin.type == "Admin" && @user.active==true && !@registered and @user.banned == false %>
     <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "options btn btn-primary" %>
   <%end%>
+  <% if @admin.type == "Admin" and @registered and @user.banned==false%>
+    <%= render :partial => 'modal_approve'%>
+    <p><a data-toggle="modal" href="#approve" class="options btn btn-success">Approve</a></p>
+  <% end %>
+  <% if @admin.type == "Admin" and @registered and @user.banned==false%>
+    <%= render :partial => 'modal_reject'%>
+    <p><a data-toggle="modal" href="#reject" class="options btn btn-danger">Reject</a></p>
+  <% end %>
 </div>
 <% if @user.banned == false and @user.active == true %>
   <div id='user'>
