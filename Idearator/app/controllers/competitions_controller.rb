@@ -62,7 +62,11 @@ class CompetitionsController < ApplicationController
     end
   end
 
-
+#This method renders the modal for reviewing ideas through notifications
+  #Params
+  #+idea_id+id of the idea to be reviewed
+  #+id+ id of the competition
+  #Author Omar Kassem
   def notification_review
     @approved=Idea.find(params[:idea_id])
     @competition=Competition.find(params[:id])
@@ -71,6 +75,10 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  #This method renders the stream of the unapproved ideas of certain competition
+  #Params
+  #+id+ id of the competition
+  #Author Omar Kassem
   def review_competitions_ideas
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
@@ -84,8 +92,12 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  #This method approves the idea chosen by the investor to be approved
+  #Params
+  #+idea_id+id of the idea to be reviewed
+  #+id+ id of the competition
+  #Author Omar Kassem
   def approve
-
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
     if current_user != nil && current_user.id == @competition.investor_id
@@ -107,6 +119,11 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  #This method rejects the idea chosen by the investor to be rejected
+  #Params
+  #+idea_id+id of the idea to be reviewed
+  #+id+ id of the competition
+  #Author Omar Kassem
   def reject
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
