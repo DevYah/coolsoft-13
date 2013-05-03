@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require ideas/popover
-
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require jquery_purr
@@ -23,8 +22,13 @@
 //
 //= require jquery-star-rating
 //
-//= require notification_polling
 //= require notifications
+//
+//= require poller.js
+//
+//= require profile_modal
+//
+//= require unauthorized_sign_in_up_modal
 
 function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
@@ -38,12 +42,6 @@ $(document).ready(function () {
 
   var before_search = false;
   var original;
-
-  $(document).bind("ajaxError", function (e, xhr) {
-    if (xhr.status === 401) {
-      $('#signedout').modal('show');
-    }
-  });
 
   $("#searchdiv input").keyup(function () {
     if (window.location === "http://localhost:3000/") {
