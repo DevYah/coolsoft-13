@@ -92,6 +92,14 @@ class User < ActiveRecord::Base
                        secret: auth['credentials']['secret'])
   end
 
+  def self.search(search)
+    if search
+      where('username LIKE  ? AND banned  = ? AND active = ?', "%#{search}%", false,true)
+    else
+      find(:all)
+    end
+  end
+
   def new_notifications(after)
     notifications = Notification.joins(:notifications_users).where('notifications_users.user_id = ? and created_at > ?', self.becomes(User), Time.at(after.to_i + 1))
     sorted_notifications = notifications.sort_by &:created_at
@@ -162,5 +170,5 @@ class User < ActiveRecord::Base
   def voted_for?(idea)
     votes.where(idea_id: idea.id).exists?
   end
-
+  
 end
