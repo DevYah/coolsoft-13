@@ -1,6 +1,6 @@
 <div id='Stream'>
   <% @ideas.each do |approved| %>
-    <% if approved.user.active == true and approved.user.banned == false %>
+    <% if approved.user.active == true and approved.user.banned == false and approved.approved == true %>
       <div id='idea-<%= approved.id%>' class='unapproved-ideas'>
         <div class="row" id="share">
           <div class="wrapper row">
