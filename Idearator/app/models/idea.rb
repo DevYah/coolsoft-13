@@ -8,6 +8,7 @@ class Idea < ActiveRecord::Base
 
   after_save ::FacebookApiCreate.new
   after_save ::TrendsController::IdeaHooks.new
+  after_save ::SimilarityEngine::IdeaHooks.new
 
   belongs_to :user
   belongs_to :committee
@@ -26,8 +27,11 @@ class Idea < ActiveRecord::Base
   has_many :winning_competitions, :class_name => 'Competition'
   has_one :trend
 
+  has_many :similarities
+  has_many :similar_ideas, through: :similarities, conditions: ['similarity > ? AND approved = ? AND rejected = ?', 5, 't', 'f'], limit: 5
 
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
+
   def self.search(search)
     if search
       where('title LIKE ?', "%#{search}%")
@@ -75,4 +79,5 @@ class Idea < ActiveRecord::Base
       end
     }
   end
+
 end

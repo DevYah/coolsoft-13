@@ -130,6 +130,8 @@
         <%= render :partial => 'enter_competition'%>
       <% end %>
     </div>
+
+    <%= render partial: 'similar_ideas', locals: { idea: @idea } %>
   </div>
 </div>
 <script type="text/javascript">
