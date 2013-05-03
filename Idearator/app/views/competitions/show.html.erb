@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class='row'>
-    <div class='span4'>
+    <div class='span4' id="comp_desc">
       <div id='tags'>
         <%if @chosen_tags_competition != nil %>
           <% @chosen_tags_competition.each do |tag|%>
@@ -42,12 +42,11 @@
         </div>
       <% end %>
     </div>
-    <div class='span8' id='stream_competition' value='<%= @competition.id%>'>
+    <div class='span7' id='stream_competition' value='<%= @competition.id%>'>
       <% if @competition.open and current_user and not current_user.is_a? Investor %>
         <p><a data-toggle="modal" href="#myIdeas" class="btn btn-primary ">Enroll an Idea</a></p>
         <%= render :partial => 'enroll_idea', :locals => {:@approved => @myIdeas}%>
       <% end %>
-      <hr />
       <% if @ideas.count == 0 %>
         <div class="alert alert-error">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
