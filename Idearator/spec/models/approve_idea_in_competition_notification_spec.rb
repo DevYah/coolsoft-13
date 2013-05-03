@@ -5,7 +5,7 @@ describe ApproveIdeaInCompetitionNotification do
     @user = FactoryGirl.create(:investor)
     @user.confirm!
     @idea = FactoryGirl.create(:idea)
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.create(:notification_competition)
     @competition.investor = @user
     @competition.save
     @notification = ApproveIdeaInCompetitionNotification.create(user: @user,idea: @idea, competition: @competition, users: [@user])

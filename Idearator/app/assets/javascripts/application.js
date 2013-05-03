@@ -28,8 +28,14 @@
 //= require jquery-star-rating
 //= require notifications
 
+
 //= require jquery-star-rating
 //= require stream
+
+//
+//= require accountsettings
+
+
 //= require poller.js
 
 //

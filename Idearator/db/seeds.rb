@@ -35,8 +35,8 @@ nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat
 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.',
-problem_solved: 'here is the problem solved', num_votes: 16, approved: true)
-idea.user = user
+problem_solved: 'here is the problem solved', num_votes: 16, approved: true,
+user: user)
 
 #Idea by regular user, not approved, not archived.
 idea2 = Idea.create(title: 'This is the title of the second idea in the database',
@@ -47,8 +47,8 @@ nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat
 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.",
-problem_solved: 'here is the problem solved',approved: true)
-idea2.user = user
+problem_solved: 'here is the problem solved',approved: true,
+user: user)
 
 idea3 = Idea.create(title: 'third idea title',
 description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -58,8 +58,8 @@ nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat
 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.',
-problem_solved: 'here is the problem solved',approved: true)
-idea3.user = user
+problem_solved: 'here is the problem solved',approved: true,
+user: user)
 
 idea4 = Idea.create(title: '4th idea title',
 description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -69,8 +69,8 @@ nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat
 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.',
-problem_solved: 'here is the problem solved',approved: true)
-idea4.user = user
+problem_solved: 'here is the problem solved',approved: true,
+user: user)
 
 idea5 = Idea.create(title: '5th idea title',
 description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -80,8 +80,8 @@ nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat
 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.',
-problem_solved: 'here is the problem solved',approved: true)
-idea5.user = user
+problem_solved: 'here is the problem solved',approved: true,
+user: user)
 
 idea6 = Idea.create(title: '6th idea title',
 description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -91,8 +91,9 @@ nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
 in reprehenderit in voluptate velit esse cillum dolore eu fugiat
 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 sunt in culpa qui officia deserunt mollit anim id est laborum.',
-problem_solved: 'here is the problem solved',approved: true)
-idea6.user = committee.becomes(User)
+problem_solved: 'here is the problem solved',approved: true,
+user: committee.becomes(User))
+
 #-----------------------------------------------------------------------------------#
 ### Ideas Approved by Committee ###
 idea.committee = committee

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe InviteCommitteeNotification do
-before :each do
+  before :each do
     @user = FactoryGirl.create(:user)
     @user.confirm!
     @notification = InviteCommitteeNotification.create(user: @user, users: [@user])

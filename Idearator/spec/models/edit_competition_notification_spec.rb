@@ -4,7 +4,7 @@ describe EditCompetitionNotification do
   before :each do
     @user = FactoryGirl.create(:investor)
     @user.confirm!
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.create(:notification_competition)
     @competition.investor = @user
     @competition.save
     @notification = EditCompetitionNotification.create(user: @user, competition: @competition, users: [@user])
