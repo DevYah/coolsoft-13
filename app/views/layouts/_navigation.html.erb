@@ -43,7 +43,7 @@
         <%= link_to('Dashboard', controller: 'dashboard' , action: 'index') %>
       </li>
     <% end %>
-    <% if current_user.ideas.count != 0 %>
+    <% if current_user.get_approved_ideas.count != 0 %>
       <li>
         <%= link_to('My Ideas', controller: 'users', action: 'ideas', :id => current_user.id) %>
       </li>

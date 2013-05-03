@@ -5,12 +5,18 @@ class StreamController < ApplicationController
   #+params+:mypage,search,tag,search_user
   #Mohamed Salah Nazir
   def index
+    @trending = Idea.joins(:trend).order('trending desc').limit(4)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     @page = params[:mypage]
     @searchtext = params[:search]
     @filter = params[:tag].to_a
     @search_with_user = params[:search_user] == "true"
     @searching_with = params[:searchtype] == "true"
+    if MonthlyWinner.all.count > 0
+      @winners = MonthlyWinner.all.reverse
+      first = @winners.shift
+      @first = Idea.find(first.idea_id)
+    end
     if @page != nil
       if !@search_with_user
         if @searchtext.to_s.strip.length == 0 and @filter.empty?
