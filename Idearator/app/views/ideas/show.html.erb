@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <meta property="og:url"    content="<%=root_url + url_for(@idea)%>" />
+  <meta property="og:title"  content="<%= @idea.title%>" />
+  <meta property="og:image"  content="<%= root_url+ @idea.photo.url %>" />
+  <meta property="og:type"   content="idearator:idea" />
+<% end %>
 <!-- Modals -->
 <!-- archive confirmation modal -->
 <div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>

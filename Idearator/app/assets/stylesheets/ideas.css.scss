@@ -10,21 +10,21 @@
 }
 
 
-#fbk{
+.fbk{
   width:40px;
   height:40px;
   cursor: pointer;
   padding:5px;
 }
 
-#tw{
+.tw{
   width:40px;
   height:40px;
   cursor:pointer;
   padding:5px;
 }
 
-#pin{
+.pin{
   width:40px;
   height:40px;
   cursor:pointer;
@@ -48,7 +48,25 @@
   height:30px;
   cursor:pointer;
 }
+   .hint {
+     display:none;
+//   position: absolute;
+//   right: -250px;
+//   width: 200px;
+//   margin-top: -4px;
+//   border: 1px solid #c93;
+//   padding: 10px 12px;
+//   background-color: #ffc;
+   }
 
+// .hint .hint-pointer {
+//     position: absolute;
+//     left: -10px;
+//     top: 5px;
+//     width: 10px;
+//     height: 19px;
+//     background: url(pointer.gif) left top no-repeat;
+// }
 .vote-component {
   text-align: center;
 }
