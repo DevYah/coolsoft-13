@@ -14,6 +14,7 @@ class IdeasController < ApplicationController
       @username = current_user.username
       @tags = Tag.all
       @chosentags = Idea.find(params[:id]).tags
+      @competitions = Competition.joins(:tags).where('tags.id' => @idea.tags)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @idea }
@@ -28,6 +29,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new
     @tags = Tag.all
     @chosentags = []
+    @competition = params[:competition_id]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @idea }
@@ -69,7 +71,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         if current_user.provider == 'twitter' && current_user.facebook_share
-          current_user.twitter.update("I've updated my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+          current_user.twitter.update("I've updated my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s) rescue Twitter::Error
         end
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
@@ -90,7 +92,7 @@ class IdeasController < ApplicationController
     @idea.reload
     respond_to do |format|
       if current_user.provider == 'twitter' && current_user.facebook_share
-        current_user.twitter.update("I've voted to an idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        current_user.twitter.update("I've voted to an idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s) rescue Twitter::Error
       end
       format.html { redirect_to @idea, :notice =>'Thank you for voting' }
       format.json { head :no_content }
@@ -123,8 +125,12 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.save
         VoteCount.create(idea_id: @idea.id)
+        if params[:competition_id] != '' and params[:competition_id] != nil
+          Competition.find(params[:competition_id]).ideas << @idea
+        end
+
         if current_user.provider == 'twitter' && current_user.facebook_share
-          current_user.twitter.update("I've created a new idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+          current_user.twitter.update("I've created a new idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s) rescue Twitter::Error
         end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
@@ -218,7 +224,7 @@ class IdeasController < ApplicationController
       idea.archive_status = false
       idea.save
       if current_user.provider == 'twitter' && current_user.facebook_share
-        current_user.twitter.update("My idea is back to life! =D I've unarchived my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + idea.id.to_s)
+        current_user.twitter.update("My idea is back to life! =D I've unarchived my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + idea.id.to_s) rescue Twitter::Error
       end
     else
       respond_to do |format|
@@ -258,6 +264,30 @@ class IdeasController < ApplicationController
     end
   end
 
+
+
+  # Enters the idea into a chosen Competition
+  # Params:
+  # +id+:: the parameter is an instance of +Idea+ passed through the enroll_idea partial view
+  # +competition_id+:: the parameter is an instance of +Competition+ passed through the enroll_idea partial view
+  # Author: Mohammad Abdulkhaliq
+  def enter_competition
+    @idea = Idea.find(params[:id])
+    @competition = Competition.find(params[:competition_id])
+    if CompetitionEntry.find(:all, :conditions => {:competition_id => @competition.id, :rejected => false, :idea_id => @idea.id }) == []
+      @competition.ideas << @idea
+      EnterIdeaNotification.send_notification(@idea.user, @idea, @competition, [@competition.investor])
+      respond_to do |format|
+        format.html { redirect_to @idea, notice: 'Idea Submitted successfully'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @competition, notice: 'This idea is already enrolled in this competiton'}
+        format.json { head :no_content }
+      end
+    end
+  end
   # Popover with idea details
   # Params:
   # +id+:: is used to specify the instance of +Idea+ to be displayed
@@ -268,4 +298,6 @@ class IdeasController < ApplicationController
       format.js
     end
   end
+
 end
+
