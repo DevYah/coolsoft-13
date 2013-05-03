@@ -12,24 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ideas/popover
-//= require jquery.tokeninput
 //= require jquery-ui
+//= require jquery.tokeninput
+//= require jquery-star-rating
 //= require jquery_purr
-//= require best_in_place
-//= require bootstrap
-
 //= require jquery.purr
-
+//= require jquery.cookie
+//
+//= require bootstrap
+//= require bootstrap-tour
 //= require best_in_place
-//= require jquery-ui
-//= require jquery.tokeninput
-//= require jquery_purr
-//= require jquery-star-rating
+//= require ideas/popover
+//
+//= require notification_polling
 //= require notifications
-
-
-//= require jquery-star-rating
 //= require stream
 
 //
@@ -110,6 +106,7 @@ $(function() {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
+
    $('#searchdiv').submit(function(e) {
      if (in_stream){
       e.preventDefault();
@@ -123,4 +120,5 @@ $(function() {
       ",height=" + height + ",toolbar=no,left=" + left +
       ",top=" + top);
   }
+});
 
