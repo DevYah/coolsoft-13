@@ -119,4 +119,20 @@ $(document).ready(function () {
   } else {
     alert('Please choose a tag');
   }
+
+  $(".facebook").tooltip({
+    toggle: "tooltip",
+    title: "Share on Facebook",
+  });
+
+  $(".twitter").tooltip({
+    toggle: "tooltip",
+    title: "Share on Twitter"
+  });
+
+  $('.post-an-idea').click(function (e) {
+    e.preventDefault();
+    $('#signedout').modal('show');
+  });
+
 });

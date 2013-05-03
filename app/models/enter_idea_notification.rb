@@ -3,6 +3,7 @@ class EnterIdeaNotification < CompetitionIdeaNotification
 
   def self.send_notification (user_sender, idea, competition, users_receivers)
     enter_idea_notification = EnterIdeaNotification.create(user: user_sender, idea: idea, competition: competition, users: users_receivers)
+    NotificationsController::CoolsterPusher.new.push_notification users_receivers, enter_idea_notification
   end
 
   def text
