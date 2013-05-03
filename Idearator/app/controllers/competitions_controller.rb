@@ -80,7 +80,6 @@ class CompetitionsController < ApplicationController
       respond_to do |format|
         format.js
       end
-
     else
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You can not approve ideas' }
@@ -88,6 +87,7 @@ class CompetitionsController < ApplicationController
       end
     end
   end
+
   def reject
     @idea = Idea.find(params[:idea_id])
     @competition = Competition.find(params[:id])
@@ -102,7 +102,6 @@ class CompetitionsController < ApplicationController
       respond_to do |format|
         format.js
       end
-
     else
       respond_to do |format|
         format.html { redirect_to  '/' , notice: 'You can not reject ideas' }
@@ -134,7 +133,8 @@ class CompetitionsController < ApplicationController
   end
 
   # making new Competition
-  #Marwa Mehanna
+  # Params: None
+  # Author: Marwa Mehanna
   def new
     @competition = Competition.new
     chosen_tags_competition=[]
