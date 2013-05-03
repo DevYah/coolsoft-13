@@ -34,9 +34,25 @@ $(document).bind("ajaxError", function(e, xhr){
 
 $(document).ready(function() {
 
+  $(".fbk").tooltip({
+    toggle: "tooltip",
+    title: "Share on Facebook",
+  });
+
+  $(".tw").tooltip({
+    toggle: "tooltip",
+    title: "Share on Twitter"
+  });
+
+  $(".pin").tooltip({
+    toggle: "tooltip",
+    title: "Share on pin",
+  });
+
   $("#sign").click(function() {
     window.location= "/users/sign_in";
   });
+
   $("#user-search-button").click(function remove_button_handler(e) {
     e.preventDefault();
     search_type = true;
@@ -45,6 +61,7 @@ $(document).ready(function() {
     $('.idea-search-div').removeClass('drop-down-item');
     $('#search').attr('placeholder', "Search for users...");
   });
+
   $("#idea-search-button").click(function remove_button_handler(e) {
     e.preventDefault();
     search_type = false;
@@ -53,6 +70,7 @@ $(document).ready(function() {
     $('.idea-search-div').addClass('drop-down-item');
     $('#search').attr('placeholder', "Search for ideas...");
   });
+
   $("a.popup").click(function (e) {
     popupCenter($(this).attr("href"),
                 $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
@@ -66,9 +84,11 @@ $(document).ready(function() {
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
+
   $('#searchdiv').submit(function(e) {
     if (in_stream){
       e.preventDefault();
     }
   });
+
 });
