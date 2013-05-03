@@ -48,25 +48,10 @@
   height:30px;
   cursor:pointer;
 }
-   .hint {
-     display:none;
-//   position: absolute;
-//   right: -250px;
-//   width: 200px;
-//   margin-top: -4px;
-//   border: 1px solid #c93;
-//   padding: 10px 12px;
-//   background-color: #ffc;
-   }
+.hint {
+ display:none;
+}
 
-// .hint .hint-pointer {
-//     position: absolute;
-//     left: -10px;
-//     top: 5px;
-//     width: 10px;
-//     height: 19px;
-//     background: url(pointer.gif) left top no-repeat;
-// }
 .vote-component {
   text-align: center;
 }
@@ -89,6 +74,8 @@
   margin-bottom: 15px;
   margin-right: 10px;
 }
-#tags{
-  padding-left:20px;
+
+
+.idea-page .enter_competition{
+  text-align: center;
 }

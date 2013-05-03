@@ -1,5 +1,5 @@
 <% size ||= 'span4' %>
-<div class='size vote-component'>
+<div class='size vote-component archive-status'>
   <div class='size vote-count' id = 'votesVotes'><%= idea.num_votes %></div>
   <div class='size'>
     <% if user_signed_in? && current_user.voted_for?(idea) %>
