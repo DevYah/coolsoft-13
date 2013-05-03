@@ -7,19 +7,34 @@ class CompetitionsController < ApplicationController
   # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
   # Muhammed Hassan
   def index
-
+    @type = 2
     @firstTime = false
     all = Competition
     if params[:type]
       @firstTime = true
     end
+    if (params[:types] =="1")
+      if user_signed_in? and current_user.is_a? Investor
+        all = Competition.joins(:investor).where(:users => {:id => current_user.id})
+        @type = 1
+      end
+    elsif  ( params[:types] =="3")
+      @type = 3
+      all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
+    elsif  ( params[:types] =="2")
+      @type = 2
+    end
     if (params[:type] =="1")
       if user_signed_in? and current_user.is_a? Investor
         all = Competition.joins(:investor).where(:users => {:id => current_user.id})
+        @type = 1
       end
     elsif  ( params[:type] =="3")
-        all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-      end
+      @type = 3
+      all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
+    elsif  ( params[:type] =="2")
+      @type = 2
+    end
     @filter = false
     if(params[:myPage])
       @tags = params[:tags].slice(1,params[:tags].length)
@@ -79,8 +94,8 @@ class CompetitionsController < ApplicationController
         entry.approved=true
         entry.save
       end
-    @competition = Competition.find(params[:id])
-    @competition.ideas.uniq
+      @competition = Competition.find(params[:id])
+      @competition.ideas.uniq
       respond_to do |format|
         format.js
       end
@@ -101,8 +116,8 @@ class CompetitionsController < ApplicationController
         entry.rejected=true
         entry.save
       end
-    @competition = Competition.find(params[:id])
-    @competition.ideas.uniq
+      @competition = Competition.find(params[:id])
+      @competition.ideas.uniq
       respond_to do |format|
         format.js
       end
