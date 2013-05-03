@@ -140,23 +140,17 @@ class UsersController < ApplicationController
   # Author: Mohamed Sameh
   def change_settings
     if params[:user] != nil
-      settings= params[:user]
-      s= User.find(current_user)
-      if settings.include?('1')
-        s.own_idea_notifications= true
-      else
-        s.own_idea_notifications= false
-      end
-      if settings.include?('2')
-        s.participated_idea_notifications= true
-      else
-        s.participated_idea_notifications= false
-      end
+      settings = params[:user]
+      s = User.find(current_user)
+      s.own_idea_notifications = settings.include?('1')
+      s.participated_idea_notifications = settings.include?('2')
+      s.facebook_share = settings.include?('3')
       s.save
     else
       s= User.find(current_user)
-      s.own_idea_notifications= false
-      s.participated_idea_notifications= false
+      s.own_idea_notifications = false
+      s.participated_idea_notifications = false
+      s.facebook_share = false
       s.save
     end
     respond_to do |format|

@@ -6,6 +6,7 @@ class Idea < ActiveRecord::Base
   validates_length_of :description, :maximum => 1000
   validates_length_of :problem_solved, :maximum => 1000
 
+  after_create ::FacebookApiCreate.new
   after_save TrendsController::IdeaHooks.new
 
   belongs_to :user

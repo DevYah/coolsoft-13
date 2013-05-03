@@ -9,37 +9,17 @@ $('.btn-success.add-rating').click(function(){
   // This page's URl is then shared on The user's facebook or twitter account.
   // Author: Mohamed Sameh
 
-  $("#share").click(function() {
-    $("#show").toggle("slow");
-  });
-
-  $("#fbk").click(function() {
-    var pathname = window.location;
-     var fburl = 'http://www.facebook.com/sharer.php?u='+encodeURI(pathname);
-     var win=window.open(fburl, 'popup');
-     win.focus();
-  });
-
-  $("#tw").click(function() {
-    var pathname = window.location;
-    var tweeturl = 'http://twitter.com/share?url='
-                   + encodeURI(pathname)
-                   + '&text=Checkout this idea on idearator';
-    var win = window.open(tweeturl, 'popup');
-    win.focus();
-  });
-
-  $("#fbk").tooltip({
+  $(".fbk").tooltip({
     toggle: "tooltip",
     title: "Share on Facebook",
   });
 
-  $("#tw").tooltip({
+  $(".tw").tooltip({
     toggle: "tooltip",
     title: "Share on Twitter"
   });
 
-  $("#pin").tooltip({
+  $(".pin").tooltip({
     toggle: "tooltip",
     title: "Share on pin",
   });
@@ -97,3 +77,4 @@ $('.btn-success.add-rating').click(function(){
    $(this).siblings("span").css("display", "none");
   });
 });
+
