@@ -270,10 +270,6 @@ DEPENDENCIES
   rspec-rails (~> 2.13.0)
   sass-rails (= 3.2.6)
   sqlite3 (= 1.3.7)
-<<<<<<< HEAD
-  tlsmail
-=======
   twitter
->>>>>>> 18ead19fefc75880cb773dec43bafda7dfe58e58
   uglifier (= 2.0.1)
   whenever (= 0.8.2)
