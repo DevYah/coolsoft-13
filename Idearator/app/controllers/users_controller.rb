@@ -62,14 +62,14 @@ class UsersController < ApplicationController
       else
         respond_to do |format|
           format.html{
-            redirect_to controller: 'home', action: 'index'
+            redirect_to controller: 'stream', action: 'index'
           }
         end
       end
     else
       respond_to do |format|
         format.html{
-          redirect_to controller: 'home', action: 'index'
+          redirect_to controller: 'stream', action: 'index'
         }
       end
     end
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
       end
       respond_to do |format|
         format.html{
-          redirect_to controller: 'home', action: 'index'
+          redirect_to controller: 'stream', action: 'index'
         }
       end
     end

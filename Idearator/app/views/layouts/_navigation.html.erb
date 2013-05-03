@@ -1,4 +1,4 @@
-<a class="brand" href="/"><i class="icon-lightbulb icon-large"></i></a>
+<a class="brand" href="/stream/index"><i class="icon-lightbulb icon-large"></i> Idearator</a>
 <ul class='nav'>
   <li class="divider-vertical"></li>
   <% if user_signed_in? %>
@@ -23,17 +23,17 @@
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
-    <li><%= link_to('Sign in', new_user_session_path) %></li>
     <li>
       <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
-                 :class => 'popup social-media-login facebook-nav-login',
+                 :class => 'popup social-media-login facebook-nav-login scrollshow',
                  "data-width" => 600, "data-height" => 500 %>
     </li>
     <li>
       <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
-                :class => 'popup social-media-login twitter-nav-login',
+                :class => 'popup social-media-login twitter-nav-login scrollshow',
                 'data-width' => 600, 'data-height' => 500  %>
     </li>
+      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow')  %> </li>
   <% end %>
 </ul>
 <ul class="nav">
@@ -84,28 +84,36 @@
   <li>
     <%= form_tag "/stream/index", :method => :get,:class => "form-search", :id => 'searchdiv' do %>
       <%= hidden_field_tag :searchtype, params[:searchtype] || "false" %>
-      <div class="input-append">
-        <%= text_field_tag :search, params[:search],:placeholder => "Search....." ,:class => "span2 search-query"%>
-        <div class="btn-group">
-          <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="search_button">
-            <i class="icon-search icon-white"></i>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" id="user-search-button">Find Members</a>
-            </li>
-            <li>
-              <a href="#" id="idea-search-button">Search for an idea</a>
-            </li>
-          </ul>
+        <div class="input-append">
+          <%= text_field_tag :search, params[:search],:placeholder => "Search for ideas..." ,:class => "span2 search-query"%>
+            <div class="btn-group">
+              <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="search_button">
+                <i class="icon-search icon-white"></i>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="user-search-div">
+                  <a href="#" id="user-search-button">Find Members</a>
+                </li>
+                <li class="idea-search-div drop-down-item">
+                  <a href="#" id="idea-search-button">Search for an idea</a>
+                </li>
+              </ul>
+            </div>
         </div>
-      </div>
     <% end %>
   </li>
+  <% if current_user.nil? %>
+    <%= link_to 'Post your idea', { :controller => '/ideas', :action => 'new' }, :class => "btn btn-primary post-an-idea" %>
+  <% end %>
 </ul>
 <% if user_signed_in? %>
   <ul class="nav pull-right">
+    <li>
+      <div class="text-center">
+        <%= link_to 'Post your idea', {:controller => 'ideas' ,:action => 'new'},:class => "btn btn-primary"%>
+      </div>
+    </li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><%= current_user.username %>
         <b class="caret"></b></a>

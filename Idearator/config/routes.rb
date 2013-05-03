@@ -1,6 +1,5 @@
 Sprint0::Application.routes.draw do
 
-  match '/home/index' => 'home#index'
   default_url_options :host => 'localhost:3000'
   root :to => 'stream#index'
 
@@ -55,11 +54,6 @@ Sprint0::Application.routes.draw do
   match '/user_ratings/create' => 'user_ratings#create'
   match '/user_ratings/update' => 'user_ratings#update'
 
-  controller :home do
-    match '/home/search'
-    match '/home/searchelse'
-    match '/home/index'
-  end
 
   # Admin actions routes
   controller :admins do
@@ -104,7 +98,6 @@ Sprint0::Application.routes.draw do
   end
 
 
-
   controller :competitions do
     resources :competitions do
       member do
@@ -129,8 +122,6 @@ controller :stream do
     match 'coolster/add_online_user'
     match 'coolster/remove_online_user'
   end
-
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -178,7 +169,6 @@ controller :stream do
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-
   match '/review_ideas' => 'committees#review_ideas'
   match '/users/confirm_deactivate' => 'users#confirm_deactivate'
   match '/users/deactivate' => 'users#deactivate'
@@ -190,5 +180,5 @@ controller :stream do
   match 'tags/:id/synonym' => 'tags#addsym', :via => :put
   match 'tags/:id/delsym' => 'tags#delsym', :via => :put
 
-
 end
+
