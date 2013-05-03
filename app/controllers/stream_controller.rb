@@ -11,7 +11,6 @@ class StreamController < ApplicationController
     @filter = params[:tag].to_a
     @search_with_user = params[:search_user] == "true"
     @searching_with = params[:searchtype] == "true"
-
     if @page != nil
       if !@search_with_user
         if @searchtext.to_s.strip.length == 0 and @filter.empty?
