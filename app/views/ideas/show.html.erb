@@ -123,7 +123,7 @@
       <div class="fb-comments" data-href="http://apps.facebook.com/idearator/ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
     </div>
     <div class ='span4 enter_competition'>
-      <% if current_user and @idea.approved %>
+      <% if current_user and @idea.approved and current_user.id==@idea.user_id %>
         <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary">Enter Competition</a></p>
         <%= render :partial => 'enter_competition'%>
       <% end %>
@@ -151,3 +151,4 @@
     $('.approve_status').hide();
   </script>
 <% end %>
+
