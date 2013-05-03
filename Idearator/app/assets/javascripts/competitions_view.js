@@ -23,7 +23,8 @@ function apply_script(){
     type: 'get',
     url: '/competitions',
     data: {
-      tags: array
+      tags: array,
+      types :type
     },
     beforeSend: function () {
         // this is where we append a loading image
@@ -55,7 +56,8 @@ function apply_script(){
     type: 'get',
     url: '/competitions',
     data: {
-      tags: array
+      tags: array,
+      types: type
     },
     beforeSend: function () {
     },
@@ -111,7 +113,8 @@ $(window).scroll(function () {
     url: '/competitions',
     data: {
       myPage: Page,
-      tags: array
+      tags: array,
+      types : type
     },
     beforeSend: function () {
         // this is where we append a loading image
