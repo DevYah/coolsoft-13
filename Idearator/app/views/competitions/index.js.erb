@@ -9,12 +9,12 @@ main = $('.content');
     type =2;
   <%elsif @type == 3 %>
     type = 3;
-<% end %>
+  <% end %>
   main.append("<%= escape_javascript(render(:partial => "index")) %>");
 <% else %>
-<% if @filter %>
-$('.competitions').empty();
-<% end %>
-main.append("<%= escape_javascript(render(:partial => "index")) %>");
-apply_script();
+  <% if @filter %>
+    $('.competitions').empty();
+  <% end %>
+  main.append("<%= escape_javascript(render(:partial => "index")) %>");
+  apply_script();
 <% end %>

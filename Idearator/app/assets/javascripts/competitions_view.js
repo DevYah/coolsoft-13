@@ -12,7 +12,7 @@ function apply_script(){
       array[i] = $(this).text();
       if(array[i] == text )
         flag = true ;
-      i += 1;
+        i += 1;
     });
    }
    array[i] = $(this).text();
