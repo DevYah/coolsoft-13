@@ -297,3 +297,54 @@ p.description_content{
   top:1px;
 }
 
+.landing-sign-in-form .sign-up-landing-button {
+  margin-top:30px;
+  -moz-box-shadow:inset 7px -7px 46px 12px #3c85de;
+  -webkit-box-shadow:inset 7px -7px 46px 12px #3c85de;
+  box-shadow:inset 7px -7px 46px 12px #3c85de;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+  background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+  background-color:#3d94f6;
+  -moz-border-radius:42px;
+  -webkit-border-radius:42px;
+  border-radius:42px;
+  display:inline-block;
+  color:#ffffff;
+  font-family:arial;
+  font-size:25px;
+  font-weight:bold;
+  padding:10px 63px;
+  text-decoration:none;
+  text-shadow:1px 0px 22px #1570cd;
+}
+
+.landing-sign-in-form .sign-up-landing-button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+  background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+  background-color:#1e62d0;
+}
+
+.landing-sign-in-form .sign-up-landing-button:active {
+  position:relative;
+  top:1px;
+}
+
+.landing-sign-in-form input{
+  margin-left:30px;
+}
+
+.landing-sign-in-form .sign-up-landing-button{
+  margin-left:5px;
+}
+
+.landing-sign-in-form label{
+  margin-left:30px;
+}
+
+.landing-sign-in-form .remember_me_label{
+  margin-left:0px;
+}
+
+

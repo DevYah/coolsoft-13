@@ -7,6 +7,7 @@ class DeleteCompetitionNotification < ActiveRecord::Base
 
   def self.send_notification(user_sender,competition, users_receivers)
     delete_competition_notification = DeleteCompetitionNotification.create(user: user_sender,competition: competition, competition_title: competition.title, users: users_receivers)
+    NotificationsController::CoolsterPusher.new.push_notification users_receivers, delete_competition_notification
   end
 
   def text

@@ -29,13 +29,11 @@
 //= require unauthorized_sign_in_up_modal
 //
 //= require profile_modal
-
-
-
-function stream_render(e) {
-  e.preventDefault();
-
-}
+//= require poller.js
+//
+//= require profile_modal
+//
+//= require unauthorized_sign_in_up_modal
 
 
 var last_search = "";

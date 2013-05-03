@@ -52,11 +52,6 @@ Sprint0::Application.routes.draw do
   match '/user_ratings/create' => 'user_ratings#create'
   match '/user_ratings/update' => 'user_ratings#update'
 
-  controller :home do
-    match 'home/search'
-    match 'home/searchelse'
-    match 'home/index'
-  end
 
   # Admin actions routes
   controller :admins do
@@ -101,6 +96,12 @@ Sprint0::Application.routes.draw do
   controller :stream do
     match '/stream/index'
   end
+
+  controller :coolster do
+    match 'coolster/add_online_user'
+    match 'coolster/remove_online_user'
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
