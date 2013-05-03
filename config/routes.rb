@@ -11,6 +11,8 @@ Sprint0::Application.routes.draw do
     match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
   end
 
+  resources :competitions
+
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
@@ -86,6 +88,8 @@ Sprint0::Application.routes.draw do
     match 'redirect_review'
     match 'redirect_expertise'
     match 'set_read'
+    match 'redirect_stream'
+    match 'redirect_competition'
     match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
