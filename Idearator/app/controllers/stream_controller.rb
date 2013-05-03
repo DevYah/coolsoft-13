@@ -50,12 +50,13 @@ class StreamController < ApplicationController
           if @search_with_user
             @users = User.search(params[:search]).page(params[:mypage]).per(10)
           else
+            puts Idea.search(params[:search])
             @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
           end
         else
           if @searchtext == "" and @filter_tmp != []
             @ideas = Idea.filter(@filter_tmp,"").sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
-            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)  
             @filter_tmp.uniq
           else
             if @search_with_user

@@ -29,6 +29,7 @@ class Idea < ActiveRecord::Base
   has_attached_file :photo, :styles => { :small => '60x60>', :medium => "300x300>", :thumb => '10x10!' }, :default_url => 'missing.png'
   def self.search(search)
     if search
+      puts 'hashish'
       where('title LIKE  ? AND approved  = ?', "%#{search}%", true)
     else
       find(:all)

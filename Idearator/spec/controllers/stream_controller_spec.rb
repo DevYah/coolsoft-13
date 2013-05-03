@@ -7,10 +7,8 @@ describe StreamController do
       idea.problem_solved = "problem"
       idea.description = "description"
       idea.save
-
-      get :index, :search => 'ti', :tag => [], :mypage => 1, :search_user => 'false', :searchtype => 'false',
-      :insert => 'true', :set_global => 'false', :reset_global => 'true'
-      assigns(:ideas).should have(0).items
+      #Idea.should_receive(:search).with('ti')
+      get :index, :search => 'ti', :tag => [], :mypage => 1, :search_user => 'false', :searchtype => 'false', :insert => 'true', :set_global => 'false', :reset_global => 'true'
     end
   end
 end
