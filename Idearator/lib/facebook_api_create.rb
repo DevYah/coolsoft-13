@@ -5,8 +5,8 @@ class FacebookApiCreate
   # Params:
   # +idea+:: It's is the idea created passed to this class by the Idea model
   # Author: Mohamed Sameh
-  def after_create(idea)
-    if idea.user.provider == "facebook" && idea.user.facebook_share
+  def after_save(idea)
+    if !idea.user.nil? && idea.user.provider == "facebook" && idea.user.facebook_share
       graph = Koala::Facebook::API.new(idea.user.authentication_token)
       Thread.new {
         graph.put_connections("me", "idearator:create", idea: "http://idearator.pagekite.me/ideas/#{idea.id}")
