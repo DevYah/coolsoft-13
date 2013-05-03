@@ -16,6 +16,8 @@ gem 'google_visualr', '2.1.7'
 gem "highcharts-rails", "~> 3.0.0"
 gem 'paperclip', '3.4.1'
 
+gem 'twitter'
+
 gem 'kaminari', '0.14.1'
 
 gem 'bot-away', '2.0.1'
@@ -31,6 +33,8 @@ gem 'font-awesome-rails', '3.0.2.0'
 gem 'jquery-star-rating-rails', '4.0.4'
 
 gem "koala"
+gem 'rest-client', '1.6.7'
+gem 'thin', '1.5.1'
 
 group :assets do
   gem 'sass-rails', '3.2.6'

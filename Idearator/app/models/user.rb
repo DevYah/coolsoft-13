@@ -11,8 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
     :username, :date_of_birth, :type, :active, :first_name, :last_name,
     :gender, :about_me, :recieve_vote_notification, :banned,
-    :recieve_comment_notification, :provider, :uid, :photo, :approved, :authentication_token, :facebook_share
-
+    :recieve_comment_notification, :provider, :uid, :photo, :approved, :authentication_token, :secret, :facebook_share
 
   has_many :sent_idea_notifications, class_name: 'IdeaNotification', :dependent => :destroy
   has_many :sent_user_notifications, class_name: 'UserNotification', :dependent => :destroy
@@ -81,14 +80,16 @@ class User < ActiveRecord::Base
   def self.create_user_from_twitter_oauth(auth)
     name = auth.info.name.split(' ', 2)
     user = User.create(first_name: name[0],
-                       last_name: name[1],
-                       provider: auth.provider,
-                       uid: auth.uid,
+     last_name: name[1],
+     provider: auth.provider,
+     uid: auth.uid,
                        # this is an invalid email, but uniqueness is guaranteed
                        email: "#{auth.info.nickname}@twitter.com",
                        username: (auth.chosen_user_name or auth.info.nickname),
                        # random password, won't hurt
-                       password: Devise.friendly_token[0, 20])
+                       password: Devise.friendly_token[0, 20],
+                       authentication_token: auth['credentials']['token'],
+                       secret: auth['credentials']['secret'])
   end
 
   def new_notifications(after)
@@ -107,6 +108,30 @@ class User < ActiveRecord::Base
     NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
   end
 
+  # It returns a Twitter Client object, new one if none exists
+  # Params: none
+  # Author: Mahmoud Abdelghany Hashish
+  def twitter
+    unless @twitter_user
+      @twitter_user = Twitter::Client.new(:oauth_token => self.authentication_token, :oauth_token_secret => self.secret) rescue nil
+    end
+    @twitter_user
+  end
+
+  # Get approved and unarchived ideas for user
+  # Params:
+  # None
+  # Author: Hisham ElGezeery
+  def get_approved_ideas
+    ideas = self.ideas
+    approved_ideas = ideas.where(:approved => true)
+    unarchived_ideas = approved_ideas.where(:archive_status => false).all
+  end
+
+  # user votes for a certain idea and send notification to owner of the idea.
+  # Params:
+  # +idea+:: the parameter instance of idea
+  # Author:: Marwa Mehanna
   def vote_for(idea)
     self.votes.create(idea_id: idea.id)
     if idea.user.own_idea_notifications
@@ -115,10 +140,25 @@ class User < ActiveRecord::Base
     idea.save
   end
 
+  # user unvotes for a certain idea
+  # Params:
+  # +idea+:: the parameter instance of idea
+  # Author:: Marwa Mehanna
   def unvote_for(idea)
     voted_ideas.delete(idea)
+    t = Idea.find(idea.id).trend
+    if t.trending > 4
+      t.trending = t.trending - 4
+    else
+      t.trending = 0
+    end
+    t.save
   end
 
+  # checks if user voted for this idea
+  # Params:
+  # +idea+:: the parameter instance of idea
+  # Author:: Marwa Mehanna
   def voted_for?(idea)
     votes.where(idea_id: idea.id).exists?
   end

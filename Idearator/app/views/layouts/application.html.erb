@@ -30,28 +30,15 @@
         </div>
       </div>
     <%end%>
-    <% if user_signed_in? %>
-      <div id='deactivateModal' class='modal hide fade'>
-        <div class='modal-header'>
-          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
-          <h2 id='deactivateModalLabel'>Deactivate</h2>
-        </div>
-        <div class='modal-body'>
-          <%= render 'users/confirm_deactivate' %>
-        </div>
-      </div>
-    <%end%>
-    <div id='signedout' class='modal hide fade' data-backdrop='static' data-keyboard='false'>
+    <div id='user-profile-modal' class='modal hide fade'>
       <div class='modal-header'>
-        <h2 id='myModalLabel'>Oooops !!</h2>
+          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+          <h2 id='myModalLabel'></h2>
       </div>
       <div class='modal-body'>
-        <h4>It looks like you're currently not signed in</h4>
-      </div>
-      <div class='modal-footer'>
-        <button id='sign' class='btn'>Ok</button>
       </div>
     </div>
+    <%= render 'layouts/unauthorized_modal' %>
     <header class='navbar navbar-fixed-top'>
       <nav class='navbar-inner'>
         <div id = 'update-nav' class='container'>
