@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe Coolster do
 
-  before :each do
+  before :all do
     RestClient.stub!(:post)
   end
+
   describe 'add_to_online_users' do
     it 'adds the user id passed to it to the list of online users' do
       Coolster.add_to_online_users("1")
