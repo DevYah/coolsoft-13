@@ -53,8 +53,10 @@
   <div class='row'>
     <div class='span12'>
       <h3><%= @idea.title %></h3>
-      <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary pull-right">Enter Competition</a></p>
-      <%= render :partial => 'enter_competition'%>
+      <% if current_user and @idea.approved %>
+        <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary pull-right">Enter Competition</a></p>
+        <%= render :partial => 'enter_competition'%>
+      <% end %>
     </div>
   </div>
   <div class='row'>
@@ -133,9 +135,9 @@
     $('.token-input-list-facebook li p').each(function(){
       list += "rating[]="+$(this).text()+"&";
       i=i+1;
-
+  
     });
-
+  
     $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
   }
 </script>
