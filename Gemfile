@@ -32,6 +32,7 @@ gem 'font-awesome-rails', '3.0.2.0'
 
 gem 'jquery-star-rating-rails', '4.0.4'
 
+gem "koala"
 gem 'rest-client', '1.6.7'
 gem 'thin', '1.5.1'
 

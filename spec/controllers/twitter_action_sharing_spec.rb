@@ -55,12 +55,12 @@ describe 'Twitter Sharing' do
             post :create, :idea => FactoryGirl.attributes_for(:idea_two)
           end
 
-          it 'instantiates a connection with twitter' do
+          it 'does not instantiate a connection with twitter' do
             Twitter::Client.should_not_receive(:new)
             post :create, :idea => FactoryGirl.attributes_for(:idea_two)
           end
 
-          it 'updates his twitter status' do
+          it 'does not update his twitter status' do
             Twitter::Client.any_instance.should_not_receive(:update)
             post :create, :idea => FactoryGirl.attributes_for(:idea_two)
           end
@@ -110,12 +110,12 @@ describe 'Twitter Sharing' do
             put :vote, :id => @idea.id
           end
 
-          it 'instantiates a connection with twitter' do
+          it 'does not instantiate a connection with twitter' do
             Twitter::Client.should_not_receive(:new)
             put :vote, :id => @idea.id
           end
 
-          it 'updates his twitter status' do
+          it 'does not update his twitter status' do
             Twitter::Client.any_instance.should_not_receive(:update)
             put :vote, :id => @idea.id
           end
@@ -165,12 +165,12 @@ describe 'Twitter Sharing' do
             put :update, :id => @idea.id
           end
 
-          it 'instantiates a connection with twitter' do
+          it 'does not instantiate a connection with twitter' do
             Twitter::Client.should_not_receive(:new)
             put :update, :id => @idea.id
           end
 
-          it 'updates his twitter status' do
+          it 'does not update his twitter status' do
             Twitter::Client.any_instance.should_not_receive(:update)
             put :update, :id => @idea.id
           end
@@ -225,12 +225,12 @@ describe 'Twitter Sharing' do
             put :unarchive, :id => @idea.id, :format => 'js'
           end
 
-          it 'instantiates a connection with twitter' do
+          it 'does not instantiate a connection with twitter' do
             Twitter::Client.should_not_receive(:new)
             put :unarchive, :id => @idea.id, :format => 'js'
           end
 
-          it 'updates his twitter status' do
+          it 'does not update his twitter status' do
             Twitter::Client.any_instance.should_not_receive(:update)
             put :unarchive, :id => @idea.id, :format => 'js'
           end
@@ -293,12 +293,12 @@ describe 'Twitter Sharing' do
             post :create, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 5 }
           end
 
-          it 'instantiates a connection with twitter' do
+          it 'does not instantiate a connection with twitter' do
             Twitter::Client.should_not_receive(:new)
             post :create, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 5 }
           end
 
-          it 'updates his twitter status' do
+          it 'does not update his twitter status' do
             Twitter::Client.any_instance.should_not_receive(:update)
             post :create, :idea_id => @idea.id, :rating_id => @rating.id, :rating => { :value => 5 }
           end
