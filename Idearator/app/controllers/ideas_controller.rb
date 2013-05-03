@@ -298,4 +298,6 @@ class IdeasController < ApplicationController
       format.js
     end
   end
+
 end
+
