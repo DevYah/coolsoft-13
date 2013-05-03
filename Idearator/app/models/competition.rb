@@ -31,7 +31,7 @@ class Competition < ActiveRecord::Base
   # +self+:: the current +Competition+ that we want to check
   # Muhamed Hassan
   def open
-    return  start_date < Time.now.to_date && end_date > Time.now.to_date
+    return  start_date <= Time.now.to_date && end_date >= Time.now.to_date
   end
 
   def send_create_notification(investor)
