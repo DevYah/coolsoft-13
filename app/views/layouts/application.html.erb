@@ -30,6 +30,14 @@
         </div>
       </div>
     <%end%>
+    <div id='user-profile-modal' class='modal hide fade'>
+      <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
+          <h2 id='myModalLabel'></h2>
+      </div>
+      <div class='modal-body'>
+      </div>
+    </div>
     <%= render 'layouts/unauthorized_modal' %>
     <header class='navbar navbar-fixed-top'>
       <nav class='navbar-inner'>
@@ -42,9 +50,9 @@
     <div id='main' role='main'>
       <div class='container'>
         <div class='content'>
-          <% if params[:controller] != 'home'%>
+          <% if params[:controller] != 'stream'%>
             <div class='row'>
-              <div class='span8' id='Searchpreview'>
+              <div class='span8'>
                 <% if params[:controller] == 'home'%>
                   <div id='IdeaStream'>
                     <%= render 'layouts/messages' %>

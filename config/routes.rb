@@ -1,7 +1,7 @@
 Sprint0::Application.routes.draw do
 
   default_url_options :host => 'localhost:3000'
-  root :to => 'home#index'
+  root :to => 'stream#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
                                        :registrations => 'registrations' }
@@ -13,6 +13,7 @@ Sprint0::Application.routes.draw do
   resources :users do
     member do
       match 'ban_unban' => 'admins#ban_unban'
+      match 'ideas'
       match 'approve_committee' => 'users#approve_committee'
       match 'reject_committee' => 'users#reject_committee'
       match 'invite_member' => 'users#invite_member'
@@ -24,8 +25,8 @@ Sprint0::Application.routes.draw do
       match 'new_committee_tag'
       match 'confirm_deactivate'
       match 'deactivate'
+      match 'profile_modal'
       match 'send_expertise'
-      match ':id/my_ideas' => 'users#my_ideas'
     end
   end
 
@@ -97,6 +98,10 @@ Sprint0::Application.routes.draw do
     match 'ratings/ajax'
   end
 
+  controller :stream do
+    match '/stream/index'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -142,7 +147,6 @@ Sprint0::Application.routes.draw do
   # Note: This route will make all actions in every controller
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
   #2.3 Create/Edit Tags
   resources :tags
 
