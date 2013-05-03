@@ -74,6 +74,15 @@ h3.title{
   float: right;
 }
 
+.notification-link a{
+  color: #0088CC;
+}
+
+.notification-link a:hover{
+  text-decoration: none;
+  color: #005580;
+}
+
 div.padding_right{
   padding-right: 20px;
 }
@@ -89,4 +98,6 @@ div.padding_right{
 
 .custom-dropdown{
   width: 400px;
+  max-height: 510px;
+  overflow-y: auto;
 }
