@@ -26,6 +26,8 @@
 //
 //= require notifications
 //
+//= require accountsettings
+
 //= require poller.js
 //
 //= require profile_modal
