@@ -1,7 +1,8 @@
 Sprint0::Application.routes.draw do
 
+  match '/home/index' => 'home#index'
   default_url_options :host => 'localhost:3000'
-  root :to => 'home#landing'
+  root :to => 'stream#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks',
                                        :registrations => 'registrations' }
@@ -9,6 +10,8 @@ Sprint0::Application.routes.draw do
   devise_scope :user do
     match 'users/registrations/twitter_screen_name_clash' => 'registrations#twitter_screen_name_clash'
   end
+
+  resources :competitions
 
   resources :users do
     member do
@@ -53,9 +56,9 @@ Sprint0::Application.routes.draw do
   match '/user_ratings/update' => 'user_ratings#update'
 
   controller :home do
-    match 'home/search'
-    match 'home/searchelse'
-    match 'home/index'
+    match '/home/search'
+    match '/home/searchelse'
+    match '/home/index'
   end
 
   # Admin actions routes
@@ -85,6 +88,8 @@ Sprint0::Application.routes.draw do
     match 'redirect_review'
     match 'redirect_expertise'
     match 'set_read'
+    match 'redirect_stream'
+    match 'redirect_competition'
     match 'view_new_notifications'
   end
   match 'notifications' => 'application#update_nav_bar'
@@ -97,6 +102,35 @@ Sprint0::Application.routes.draw do
   controller :ratings do
     match 'ratings/ajax'
   end
+
+
+
+  controller :competitions do
+    resources :competitions do
+      member do
+        match 'review_competitions_ideas' => 'competitions#review_competitions_ideas'
+        match 'approve' => 'competitions#approve'
+        match 'reject' => 'competitions#reject'
+      end
+    end
+    match 'notification_review' => 'competitions#notification_review'
+  end
+
+  resources :competitions
+
+  match 'competitions/:id/enroll_idea/:idea_id' => 'competitions#enroll_idea'
+  match 'ideas/:id/enter_competition/:competition_id' => 'ideas#enter_competition'
+
+controller :stream do
+    match '/stream/index'
+  end
+
+  controller :coolster do
+    match 'coolster/add_online_user'
+    match 'coolster/remove_online_user'
+  end
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -144,10 +178,17 @@ Sprint0::Application.routes.draw do
   # accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+
+  match '/review_ideas' => 'committees#review_ideas'
+  match '/users/confirm_deactivate' => 'users#confirm_deactivate'
+  match '/users/deactivate' => 'users#deactivate'
+
+
   #2.3 Create/Edit Tags
   resources :tags
 
   match 'tags/:id/synonym' => 'tags#addsym', :via => :put
   match 'tags/:id/delsym' => 'tags#delsym', :via => :put
+
 
 end

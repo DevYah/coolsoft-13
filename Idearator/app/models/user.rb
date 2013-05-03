@@ -47,10 +47,11 @@ class User < ActiveRecord::Base
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       user = User.create(username:auth.extra.raw_info.username,
-       provider:auth.provider,
-       uid:auth.uid,
-       email:auth.info.email,
-       password:Devise.friendly_token[0,20])
+                         provider:auth.provider,
+                         uid:auth.uid,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20],
+                         authentication_token: auth['credentials']['token'])
     end
     user
   end
@@ -89,6 +90,14 @@ class User < ActiveRecord::Base
                        password: Devise.friendly_token[0, 20],
                        authentication_token: auth['credentials']['token'],
                        secret: auth['credentials']['secret'])
+  end
+
+  def self.search(search)
+    if search
+      where('username LIKE  ? AND banned  = ? AND active = ?', "%#{search}%", false,true)
+    else
+      find(:all)
+    end
   end
 
   def new_notifications(after)
@@ -161,5 +170,5 @@ class User < ActiveRecord::Base
   def voted_for?(idea)
     votes.where(idea_id: idea.id).exists?
   end
-
+  
 end

@@ -26,6 +26,14 @@
 //
 //= require notification_polling
 //= require notifications
+//= require stream
+
+//
+//= require accountsettings
+
+
+//= require poller.js
+
 //
 //= require profile_modal
 //
@@ -36,47 +44,81 @@ function popupCenter(url, width, height, name) {
   var left = (screen.width / 2) - (width / 2);
   var top = (screen.height / 2) - (height / 2);
   return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
-                                ",height=" + height + ",toolbar=no,left=" + left +
-                                ",top=" + top);
+    ",height=" + height + ",toolbar=no,left=" + left +
+    ",top=" + top);
 }
 
-$(document).ready(function () {
+var last_search = "";
+var original;
+search_type = false;
 
-  var before_search = false;
-  var original;
+$(function() {
+  $("#searchdiv input").keyup(function(e){
+    e.preventDefault();
+    if(e.which != 13){
+      var search = $("#search").val();
+      var search_in = $("#searchtype").val();
+      last_search = search;
+      if($("#search").val()!= ""){
+        if(search.length > 2){
+          $("#stream_results").html("");
+          stream_manipulator(1,"",search,true, search_in);
+        }
+      }else{
+        search_type = false;
+        $("#stream_results").html("");
+        $("#searchtype").val("false");
+        stream_manipulator(1,"","",true, "false");
+      });
+  $(document).bind("ajaxError", function(e, xhr){
+   if(xhr.status == 401){
+    $('#signedout').modal('show');
+  }
+});
 
-  $("#searchdiv input").keyup(function () {
-    if (window.location === "http://localhost:3000/") {
-      $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(), null, "script");
-    } else {
-      if (!before_search) {
-        before_search = true;
-        original = $("#main > .container").detach();
-      }
-      if (this.value !== "") {
-        $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(), null, "script");
-      } else {
-        before_search = false;
-        $("#main > .container").replaceWith(original);
-      }
-    }
+
+  $(document).ready(function() {
+   $("#sign").click(function() {
+    window.location= "/users/sign_in";
   });
-
-  $("#sign").click(function () {
-    window.location = "/users/sign_in";
+   $("#user-search-button").click(function remove_button_handler(e) {
+    e.preventDefault();
+    search_type = true;
+    $("#searchtype").val("true");
+    console.log($("#searchtype").val());
   });
-
-  $("a.popup").click(function (e) {
+   $("#idea-search-button").click(function remove_button_handler(e) {
+    e.preventDefault();
+    search_type = false;
+    $("#searchtype").val("false");
+    console.log($("#searchtype").val());
+  });
+   $("a.popup").click(function (e) {
     popupCenter($(this).attr("href"),
-                $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
+      $(this).attr("data-width"), $(this).attr("data-height"), "authPopup");
     e.stopPropagation();
     return false;
   });
 
-  $("#twitter_signin_button").tooltip({
+   $("#twitter_signin_button").tooltip({
     placement: 'bottom',
     trigger: 'click',
     title: 'Trying to sign in using twitter, please interact with the popup!',
     container: 'header'
   });
+
+   $('#searchdiv').submit(function(e) {
+     if (in_stream){
+      e.preventDefault();
+    }
+  });
+ });
+  function popupCenter(url, width, height, name) {
+    var left = (screen.width / 2) - (width / 2);
+    var top = (screen.height / 2) - (height / 2);
+    return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
+      ",height=" + height + ",toolbar=no,left=" + left +
+      ",top=" + top);
+  }
 });
+

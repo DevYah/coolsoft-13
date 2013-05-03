@@ -10,21 +10,21 @@
 }
 
 
-#fbk{
+.fbk{
   width:40px;
   height:40px;
   cursor: pointer;
   padding:5px;
 }
 
-#tw{
+.tw{
   width:40px;
   height:40px;
   cursor:pointer;
   padding:5px;
 }
 
-#pin{
+.pin{
   width:40px;
   height:40px;
   cursor:pointer;
@@ -47,6 +47,9 @@
   width:30px;
   height:30px;
   cursor:pointer;
+}
+.hint {
+ display:none;
 }
 
 .vote-component {
@@ -71,6 +74,8 @@
   margin-bottom: 15px;
   margin-right: 10px;
 }
-#tags{
-  padding-left:20px;
+
+
+.idea-page .enter_competition{
+  text-align: center;
 }

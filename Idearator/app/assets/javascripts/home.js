@@ -11,6 +11,20 @@ function backToTop() {
 }
 
 $(document).ready(function () {
+  $(".fbk").tooltip({
+    toggle: "tooltip",
+    title: "Share on Facebook",
+  });
+
+  $(".tw").tooltip({
+    toggle: "tooltip",
+    title: "Share on Twitter"
+  });
+
+  $(".pin").tooltip({
+    toggle: "tooltip",
+    title: "Share on pin",
+  });
 
   var page = 1;
   var loading = false;
@@ -159,3 +173,4 @@ $(document).ready(function () {
 
   tour.start(true);
 });
+
