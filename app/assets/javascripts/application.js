@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require ideas/popover
-
 //= require jquery.tokeninput
 //= require jquery-ui
 //= require jquery_purr
@@ -28,12 +27,25 @@
 //= require jquery_purr
 //= require jquery-star-rating
 //= require notifications
+
 //= require jquery-star-rating
 //= require stream
 //= require poller.js
 
 //
+//= require profile_modal
+//
 //= require unauthorized_sign_in_up_modal
+
+
+function popupCenter(url, width, height, name) {
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (height / 2);
+  return window.open(url, name, "menubar=no,toolbar=no,status=no,width=" + width +
+                                ",height=" + height + ",toolbar=no,left=" + left +
+                                ",top=" + top);
+}
+
 
 var last_search = "";
 var original;
@@ -43,10 +55,8 @@ search_type = false;
 $(function() {
   $("#searchdiv input").keyup(function(e){
     e.preventDefault();
-      //$.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
-  if(e.which != 13){
-    var search = $("#search").val();
-    // if(last_search!=search){
+    if(e.which != 13){
+      var search = $("#search").val();
       var search_in = $("#searchtype").val();
       last_search = search;
       if($("#search").val()!= ""){

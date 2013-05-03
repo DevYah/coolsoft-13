@@ -255,7 +255,7 @@ describe CompetitionsController do
           assigns(:competition).should_not eq(nil)
         end
         it 'adds the idea to the competition ideas list' do
-          expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id } .to change(@competition.ideas, :count).by(1)
+          expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id } .to change(CompetitionEntry, :count).by(1)
         end
         it 'calls send_notification in EnterIdeaCompetition' do
           expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id } .to change(EnterIdeaNotification, :count).by(1)
@@ -268,7 +268,7 @@ describe CompetitionsController do
       context 'Failure Scenario' do
         it 'does not append competitions list if idea is already in competition' do
           @competition.ideas << @idea
-          expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id }.to change(@competition.ideas, :count).by(0)
+          expect { put :enroll_idea, :id => @competition.id, :idea_id => @idea.id }.to change(CompetitionEntry, :count).by(0)
         end
       end
     end
