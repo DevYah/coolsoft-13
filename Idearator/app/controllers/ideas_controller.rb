@@ -269,4 +269,3 @@ class IdeasController < ApplicationController
     end
   end
 end
-
