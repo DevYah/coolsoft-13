@@ -1,13 +1,13 @@
 class Idea < ActiveRecord::Base
 
-  attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user_id, :approved, :tag_ids
+  attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user, :user_id, :approved, :tag_ids
 
   validates_length_of :title, :maximum => 50
   validates_length_of :description, :maximum => 1000
   validates_length_of :problem_solved, :maximum => 1000
 
-  after_create ::FacebookApiCreate.new
-  after_save TrendsController::IdeaHooks.new
+  after_save ::FacebookApiCreate.new
+  after_save ::TrendsController::IdeaHooks.new
 
   belongs_to :user
   belongs_to :committee
@@ -35,6 +35,19 @@ class Idea < ActiveRecord::Base
       find(:all)
     end
   end
+
+
+  def self.filter(tags)
+    @ideas = []
+    tags.each do |tag|
+      t = Tag.find(:first, :conditions => {:name => tag})
+      ideatags = IdeasTags.find(:all, :conditions => {:tag_id => t.id})
+      ideas = Idea.where(:id => ideatags.map(&:idea_id))
+      @ideas = @ideas + ideas
+    end
+    @ideas
+  end
+
 
   #Adds the idea of the highest votes in the month of the input date
   #+date+::

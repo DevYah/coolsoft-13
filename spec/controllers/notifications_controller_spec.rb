@@ -2,44 +2,48 @@ require 'spec_helper'
 
 describe NotificationsController do
   include Devise::TestHelpers
+
   before :each do
-    @user1 = User.new(email:'amina@gmail.com', username: 'amina', password: '123123123')
-    @user1.confirm!
-    @user1.save
-
-    sign_in @user1
-
-    @user2 = User.new(email:'lina@gmail.com', username: 'lina', password: '123123123')
-    @user2.confirm!
-    @user2.save
-
-    @user3 = User.new(email:'salah@gmail.com', username: 'salah', password: '123123123')
-    @user3.confirm!
-    @user3.save
-
-    @idea1 = Idea.new(title: 'Idea title', description: 'Idea description', problem_solved: 'problem')
-    @idea1.user = @user3
-    @idea1.save
-
-    @notification1 = EditNotification.send_notification(@user3, @idea1, [@user2, @user1])
-    @notification2 = InviteCommitteeNotification.send_notification(@user2, [@user1])
-    @notification3 = DisapproveIdeaNotification.send_notification(@user2, @idea1, [@user1])
-    @notification4 = ApproveCommitteeNotification.send_notification(@user2, [@user1])
-
-    @idea_notification = IdeaNotificationsUser.find(:first, :conditions => {idea_notification_id: @notification1.id, user_id: @user1.id })
-    @user_notification_1 = UserNotificationsUser.find(:first, :conditions => {user_notification_id: @notification4.id, user_id: @user1.id })
-    @user_notification_2 = UserNotificationsUser.find(:first, :conditions => {user_notification_id: @notification2.id, user_id: @user1.id })
-
+    @idea = FactoryGirl.create(:idea)
+    @competition = FactoryGirl.create(:notification_competition)
+    @user = FactoryGirl.create(:user)
+    @user.confirm!
+    sign_in @user
+    @vote_notification = FactoryGirl.create(:vote_notification)
+    @vote_notification.idea = @idea
+    @vote_notification.user = @user
+    @vote_notification.users = [@user]
+    @vote_notification.save
+    @invite_committee_notification = FactoryGirl.create(:invite_committee_notification)
+    @invite_committee_notification.user = @user
+    @invite_committee_notification.users = [@user]
+    @invite_committee_notification.save
+    @approve_committee_notification = FactoryGirl.create(:approve_committee_notification)
+    @approve_committee_notification.user = @user
+    @approve_committee_notification.users = [@user]
+    @approve_committee_notification.save
+    @delete_notification = FactoryGirl.create(:delete_notification)
+    @delete_notification.idea = @idea
+    @delete_notification.user = @user
+    @delete_notification.users = [@user]
+    @delete_notification.save
+    @create_competition_notification = FactoryGirl.create(:create_competition_notification)
+    @create_competition_notification.user = @user
+    @create_competition_notification.competition = @competition
+    @create_competition_notification.users = [@user]
+    @create_competition_notification.save
+    @enter_idea_notification = FactoryGirl.create(:enter_idea_notification)
+    @enter_idea_notification.user = @user
+    @enter_idea_notification.competition = @competition
+    @enter_idea_notification.idea = @idea
+    @enter_idea_notification.users = [@user]
+    @enter_idea_notification.save
   end
-
-
   describe 'GET view_all_notifications' do
 
-    it 'gets all current user notifications' do
+    it 'redirects to all notifications view' do
 
       get :view_all_notifications
-      assigns(:all_notifications).should eq([@notification4, @notification3, @notification2, @notification1])
-
       response.should render_template('view_all_notifications')
 
     end
@@ -47,25 +51,49 @@ describe NotificationsController do
 
   describe 'PUT redirect_idea' do
     it 'assigns the read value to true' do
-      put :redirect_idea, :notification => @notification1.id
-      @idea_notification.reload
-      @idea_notification.read.should eq(true)
+      put :redirect_idea, :notification => @vote_notification.id
+      notification_user = NotificationsUser.find(:first, :conditions => {notification_id: @vote_notification.id, user_id: @user.id })
+      notification_user.read.should eq(true)
     end
   end
 
   describe 'PUT redirect_expertise' do
     it 'assigns the read value to true' do
-      put :redirect_expertise, :notification => @notification2.id
-      @user_notification_2.reload
-      @user_notification_2.read.should eq(true)
+      put :redirect_expertise, :notification => @invite_committee_notification.id
+      notification_user = NotificationsUser.find(:first, :conditions => {notification_id: @invite_committee_notification.id, user_id: @user.id })
+      notification_user.read.should eq(true)
     end
   end
 
   describe 'PUT redirect_review' do
     it 'assigns the read value to true' do
-      put :redirect_review, :notification => @notification4.id
-      @user_notification_1.reload
-      @user_notification_1.read.should eq(true)
+      put :redirect_review, :notification => @approve_committee_notification.id
+      notification_user = NotificationsUser.find(:first, :conditions => {notification_id: @approve_committee_notification.id, user_id: @user.id })
+      notification_user.read.should eq(true)
+    end
+  end
+
+  describe 'PUT set_read' do
+    it 'assigns the read value to true' do
+      put :set_read, :notification => @delete_notification.id
+      notification_user = NotificationsUser.find(:first, :conditions => {notification_id: @delete_notification.id, user_id: @user.id })
+      notification_user.read.should eq(true)
+    end
+  end
+
+  describe 'PUT redirect_competition' do
+    it 'assigns the read value to true' do
+      put :redirect_competition, :notification => @create_competition_notification.id
+      notification_user = NotificationsUser.find(:first, :conditions => {notification_id: @create_competition_notification.id, user_id: @user.id })
+      notification_user.read.should eq(true)
+    end
+  end
+
+  describe 'PUT redirect_stream' do
+    it 'assigns the read value to true' do
+      put :redirect_stream, :notification => @enter_idea_notification.id
+      notification_user = NotificationsUser.find(:first, :conditions => {notification_id: @enter_idea_notification.id, user_id: @user.id })
+      notification_user.read.should eq(true)
     end
   end
 
