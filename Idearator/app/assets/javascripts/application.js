@@ -22,8 +22,9 @@
 //
 //= require jquery-star-rating
 //
-//= require notification_polling
 //= require notifications
+//
+//= require poller.js
 //
 //= require profile_modal
 //

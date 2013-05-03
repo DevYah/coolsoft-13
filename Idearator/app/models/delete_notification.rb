@@ -7,6 +7,7 @@ class DeleteNotification < ActiveRecord::Base
 
   def self.send_notification(user_sender, idea, users_receivers)
     delete_notification = DeleteNotification.create(user: user_sender, idea: idea, idea_title: idea.title, users: users_receivers)
+    NotificationsController::CoolsterPusher.new.push_notification users_receivers, delete_notification
   end
 
   def text
