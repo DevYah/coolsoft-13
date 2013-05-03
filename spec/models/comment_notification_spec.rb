@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CommentNotification do
-before :each do
+  before :each do
     @user = FactoryGirl.create(:user)
     @user.confirm!
     @idea = FactoryGirl.create(:idea)

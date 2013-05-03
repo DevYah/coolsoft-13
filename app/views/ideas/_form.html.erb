@@ -18,7 +18,7 @@
           <span class='help-inline'>Sorry you can't change the title</span>
         <%else%>
           <%= i.text_field :title, :class=> 'text_field', :placeholder=>'Write title here...',:required => true %>
-          <span class='help-inline'>Please make it short and descriptive</span>
+          <span class="hint"> Choose a short descriptive title for your idea! <span class="hint-pointer"> </span> </span>
         <%end%>
       </div>
     </div>
@@ -26,12 +26,14 @@
       <%= i.label :description, :class=> 'control-label'%>
       <div class="controls">
         <%= i.text_area :description, :class=> 'text_field', :size => "5x5", :placeholder=>"Write description here...",:required => true %>
+        <span class="hint"> Describe your idea in an easy to understand way. <span class="hint-pointer"> </span> </span>
       </div>
     </div>
     <div class="control-group">
       <%= i.label :problem_solved,:class=> 'control-label'%>
       <div class="controls">
         <%= i.text_area :problem_solved,:class=> 'text_field', :size => "5x5", :placeholder=>'Write problem solved here...'%>
+        <span class="hint"> Describe the problem your idea could solve. <span class="hint-pointer"> </span> </span>
       </div>
     </div>
     <div id="idea-tags">

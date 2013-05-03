@@ -140,23 +140,17 @@ class UsersController < ApplicationController
   # Author: Mohamed Sameh
   def change_settings
     if params[:user] != nil
-      settings= params[:user]
-      s= User.find(current_user)
-      if settings.include?('1')
-        s.own_idea_notifications= true
-      else
-        s.own_idea_notifications= false
-      end
-      if settings.include?('2')
-        s.participated_idea_notifications= true
-      else
-        s.participated_idea_notifications= false
-      end
+      settings = params[:user]
+      s = User.find(current_user)
+      s.own_idea_notifications = settings.include?('1')
+      s.participated_idea_notifications = settings.include?('2')
+      s.facebook_share = settings.include?('3')
       s.save
     else
       s= User.find(current_user)
-      s.own_idea_notifications= false
-      s.participated_idea_notifications= false
+      s.own_idea_notifications = false
+      s.participated_idea_notifications = false
+      s.facebook_share = false
       s.save
     end
     respond_to do |format|
@@ -263,4 +257,58 @@ class UsersController < ApplicationController
     end
   end
 
+  before_filter :authenticate_user!, :only => [:approve_committee, :reject_committee]
+  # Sends mail confirming registration and if the user is not even a committee member the admin is notified of so
+  # Params:
+  # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+  # Author: Mohammad Abdulkhaliq
+  def approve_committee
+    if(not current_user.is_a? Admin)
+      redirect_to '/', :notice => 'Please sign in as an admin'
+      return
+    end
+    @user = User.find(params[:id])
+    if @user.is_a? Committee
+      @user.approved = true
+      @user.save
+      respond_to do |format|
+        UserMailer.committee_accept(@user).deliver
+        format.html  { redirect_to('/', :notice => 'User successfully initiated as a Committee.') }
+        format.json  { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html  { redirect_to('/', :notice => 'User not a Committee.') }
+        format.json  { head :no_content }
+      end
+    end
+  end
+
+  # Remove the user's status as a committtee
+  # Then sends a mail notifiying him of what happened.
+  # Params:
+  # +id+:: the parameter is an instance of +User+ passed through the button_to Approve Committee
+  # Author: Mohammad Abdulkhaliq
+  def reject_committee
+    if(not current_user.is_a? Admin)
+      redirect_to '/', :notice => 'Please sign in as an admin'
+      return
+    end
+    @user = User.find(params[:id])
+    if @user.is_a? Committee
+      @user.type = nil
+      @user.approved = false
+      @user.save
+      UserMailer.committee_reject(@user).deliver
+      respond_to do |format|
+        format.html  { redirect_to('/', :notice => 'User successfully rejected as a Committee.') }
+        format.json  { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html  { redirect_to('/', :notice => 'User not a Committee.') }
+        format.json  { head :no_content }
+      end
+    end
+  end
 end
