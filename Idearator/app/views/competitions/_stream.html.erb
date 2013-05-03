@@ -3,7 +3,7 @@
     <% if approved.user.active == true and approved.user.banned == false and approved.approved == true %>
       <div id='idea-<%= approved.id%>' class='unapproved-ideas'>
         <div class="row" id="share">
-          <div class="wrapper row">
+
             <div class="span2"><%= image_tag approved.photo.url(:medium) %></div>
             <div class="span6">
               <div class="span1 pull-right">
@@ -30,7 +30,7 @@
                 <a class= "popup" href="http://pinterest.com/pin/create/button/?url=<%=root_url + url_for(approved)%>&media=<%=root_url + approved.photo.url %>&description=<%= approved.description%>" class="pin-it-button" count-layout="horizontal"><%= image_tag("pinterest_badge_red.png", :id => "pin")%></a>
               </div>
             </div>
-          </div>
+
         </div>
       <% end %>
     <% end %>
