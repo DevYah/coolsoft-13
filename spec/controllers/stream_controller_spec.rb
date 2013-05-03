@@ -1,10 +1,11 @@
 require 'spec_helper'
 describe StreamController do
   before :each do
-  	user = User.new 
+  	user = Users.new 
   	user.email = "user1@gmail.com"
   	user.password = "123123123"
   	user.username = "lee7o"
+  	user.first_name = "mohamed"
   	user.confirm!
   	user.save
   	
@@ -32,38 +33,6 @@ describe StreamController do
     idea2.approved
     idea2.user_id = user.id
     idea2.save
-
-    tag = Tag.new
-    tag.name = "tag1"
-    tag.save
-    tag1 = Tag.new
-    tag1.name = "tag2"
-    tag1.save
-    tag2 = Tag.new
-    tag2.name = "tag3"
-    tag2.save
-
-    it = IdeasTags.new
-    it.idea_id = idea.id
-    it.tag_id = tag.id
-    it.save
-    it1 = IdeasTags.new
-    it1.idea_id = idea.id
-    it1.tag_id = tag1.id
-    it1.save
-    it2 = IdeasTags.new
-    it2.idea_id = idea1.id
-    it2.tag_id = tag1.id
-    it2.save
-    it3 = IdeasTags.new
-    it3.idea_id = idea1.id
-    it3.tag_id = tag2.id
-    it3.save
-    it4 = IdeasTags.new
-    it4.idea_id = idea2.id
-    it4.tag_id = tag2.id
-    it4.save
-
   end
   describe 'Get #index' do
     it 'populates two ideas matching the search' do
