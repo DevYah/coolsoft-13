@@ -75,6 +75,8 @@ class CompetitionsController < ApplicationController
         entry.approved=true
         entry.save
       end
+    @competition = Competition.find(params[:id])
+    @competition.ideas.uniq
       respond_to do |format|
         format.js
       end
@@ -95,6 +97,8 @@ class CompetitionsController < ApplicationController
         entry.rejected=true
         entry.save
       end
+    @competition = Competition.find(params[:id])
+    @competition.ideas.uniq
       respond_to do |format|
         format.js
       end
