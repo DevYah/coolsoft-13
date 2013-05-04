@@ -183,8 +183,9 @@ $(document).ready(function(){
     apply_tag_handlers();
     $('html, body').animate({scrollTop:$('#landing').height()}, 'slow');
   });
-    $(".best-wrapper").hover(function() {
-    $(this).children(".description").slideToggle("slow");
+
+  $(".best-wrapper").hover(function() {
+      $(this).children(".description-caption").slideToggle("slow");
   });
 
   $(".best-wrapper").click(function() {
