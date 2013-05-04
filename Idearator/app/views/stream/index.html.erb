@@ -85,7 +85,7 @@ in_stream = true;
         <% @best.each do |best| %>
           <div class='best-wrapper' data-idea-id='<%= best.id %>'>
             <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
-            <div class='description img-rounded text-center'>
+            <div class='description-caption img-rounded text-center'>
               <h3 class='description_content best-title'><%= best.title%></h3>
               <h4 class='description_content best-user'> By <%= best.user.username %></h4>
             </div>
@@ -122,7 +122,8 @@ in_stream = true;
               <div class="media-body">
                 <span>by: <%= link_to  top.user.username, top.user.becomes(User)  %></span>
                 <br>
-                <span class="badge"><%= top.num_votes %>votes</span>
+                <span class="badge"><%= top.num_votes %>
+                   votes</span>
               </div>
             </div>
             <% end %>
