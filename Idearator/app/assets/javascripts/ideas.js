@@ -9,21 +9,6 @@ $('.btn-success.add-rating').click(function(){
   // This page's URl is then shared on The user's facebook or twitter account.
   // Author: Mohamed Sameh
 
-  $(".fbk").tooltip({
-    toggle: "tooltip",
-    title: "Share on Facebook",
-  });
-
-  $(".tw").tooltip({
-    toggle: "tooltip",
-    title: "Share on Twitter"
-  });
-
-  $(".pin").tooltip({
-    toggle: "tooltip",
-    title: "Share on pin",
-  });
-
   var prePopulate = [];
 
   $("#idea-tags .idea-tag input:checked").each(function(i, checkbox) {

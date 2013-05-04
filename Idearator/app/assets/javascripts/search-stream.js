@@ -34,21 +34,6 @@ $(document).bind("ajaxError", function(e, xhr){
 
 $(document).ready(function() {
 
-  $(".fbk").tooltip({
-    toggle: "tooltip",
-    title: "Share on Facebook",
-  });
-
-  $(".tw").tooltip({
-    toggle: "tooltip",
-    title: "Share on Twitter"
-  });
-
-  $(".pin").tooltip({
-    toggle: "tooltip",
-    title: "Share on pin",
-  });
-
   $("#sign").click(function() {
     window.location= "/users/sign_in";
   });

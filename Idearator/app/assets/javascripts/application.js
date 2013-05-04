@@ -11,19 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require ideas/popover
 //= require bootstrap
+//= require bootstrap-tooltip
 //= require jquery.purr
-//= require bootstrap
 //= require best_in_place
-//
-//= require jquery-ui
-//= require jquery.tokeninput
-//= require jquery-star-rating
-//= require jquery_purr
-//= require jquery.cookie
-//
 //
 //= require notifications
 //= require jquery-star-rating
@@ -34,6 +28,10 @@
 //= require profile_modal
 //= require poller.js
 //= require search-stream
+//= require jquery.tokeninput
+//= require jquery-star-rating
+//= require jquery.cookie
+//
 
 
 function popupCenter(url, width, height, name) {
@@ -43,3 +41,22 @@ function popupCenter(url, width, height, name) {
     ",height=" + height + ",toolbar=no,left=" + left +
     ",top=" + top);
 }
+
+
+$(document).ready(function() {
+
+  $(".fbk").tooltip({
+    toggle: "tooltip",
+    title: "Share on Facebook",
+  });
+
+  $(".tw").tooltip({
+    toggle: "tooltip",
+    title: "Share on Twitter"
+  });
+
+  $(".pin").tooltip({
+    toggle: "tooltip",
+    title: "Share on pinterest",
+  });
+});
