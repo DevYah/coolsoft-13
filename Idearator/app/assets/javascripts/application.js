@@ -22,30 +22,17 @@
 //= require jquery.tokeninput
 //= require jquery-star-rating
 //= require jquery_purr
-//= require jquery-ui
-//= require jquery.tokeninput
-//= require jquery-star-rating
-//= require jquery_purr
-//= require jquery.purr
 //= require jquery.cookie
 //
-//= require bootstrap
-//= require best_in_place
-//= require ideas/popover
 //
 //= require notifications
 //= require jquery-star-rating
-//= require stream
 //
 //= require accountsettings
 //= require unauthorized_sign_in_up_modal
 //
 //= require profile_modal
 //= require poller.js
-//
-//= require profile_modal
-//
-//= require unauthorized_sign_in_up_modal
 //= require search-stream
 
 
