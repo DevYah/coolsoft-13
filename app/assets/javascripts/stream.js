@@ -111,6 +111,7 @@ function stream_manipulator(page,tag,search,insert,user){
     }
   }
   $("#stream_results").html("");
+  $("#stream_results").data("tags",thistag);
   if(reset == "true"){
     $.ajax({
       url: '/stream/index?page=' + currentpage,

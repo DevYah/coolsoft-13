@@ -1,0 +1,25 @@
+ var search_text = "<%= idea.title %>";
+ var tags_list = [];
+
+ <% idea.tags.each do |tag| %>
+  var this_tag = "<%= tag.name %>";
+  tags_list.push(this_tag);
+ <% end %>
+
+ var curr_search = $('#search').val();
+ var curr_tags = $('#stream_results').data('tags');
+ var ay_nila = true;
+
+if(curr_tags.length != 0){
+  ay_nila = false;
+  for(var i = 0; i < tags_list.length; i++){
+    if($.inArray(tags_list[i], curr_tags)!= -1){
+      ay_nila = true;
+      break;
+    }
+  }
+}
+
+if(search_text.indexOf(curr_search) != -1 && ay_nila){
+  $("#stream_results:first").before("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea})) %>");
+}
