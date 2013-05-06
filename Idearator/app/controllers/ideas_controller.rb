@@ -2,6 +2,17 @@ class IdeasController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:new ,:create , :edit, :update, :vote, :unvote]
 
+  class CoolsterPusher < AbstractCoolsterPusher
+
+    def push_to_stream(idea)
+      puts "\n\n\nAMINA"  
+      script = render 'stream/add_to_stream',
+              locals: { idea: idea }
+      puts script
+      Coolster.update_all(script)
+    end
+
+  end
 
   # view idea of current user
   # Params:

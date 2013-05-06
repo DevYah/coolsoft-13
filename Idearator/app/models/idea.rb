@@ -10,6 +10,8 @@ class Idea < ActiveRecord::Base
   after_save ::TrendsController::IdeaHooks.new
   after_save ::SimilarityEngine::IdeaHooks.new
 
+  after_save :add_idea
+
   belongs_to :user
   belongs_to :committee
   has_one :daily_vote_count, class_name: 'VoteCount'
@@ -77,6 +79,12 @@ class Idea < ActiveRecord::Base
         EditNotification.send_notification(user, self, [u])
       end
     }
+  end
+
+  def add_idea
+    if self.approved
+      IdeasController::CoolsterPusher.new.push_to_stream self
+    end
   end
 
 end
