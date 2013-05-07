@@ -40,7 +40,8 @@ class StreamController < ApplicationController
     if @page.nil?
       @@filter_all = []
       if @searchtext.nil?
-        @ideas = Idea.order(:created_at).page(params[:mypage]).per(10)
+        @ideas = Idea.order(:created_at).reverse
+        @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
       else
         if !@searching_with
           @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
