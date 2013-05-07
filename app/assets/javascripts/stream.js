@@ -45,7 +45,8 @@ function stream_manipulator(page,tag,search,insert,user){
       user_search = false;
 
       if(will_insert){
-        if(!check_if_exists(tag)){
+        console.log(tag[0]);
+        if(!check_if_exists(tag) && (tag[0] != $("#landing-stream").data("outsidetags")[0])){
           thistag = tag.concat(thistag);
         }
       }else{
@@ -68,7 +69,7 @@ function stream_manipulator(page,tag,search,insert,user){
     }else{
       if (searchtext == "" && !user_search){
         if(will_insert){
-          if(!check_if_exists(tag)){
+          if(!check_if_exists(tag)&& (tag[0] != $("#landing-stream").data("outsidetags")[0])){
             thistag = tag.concat(thistag);
           }
           searchtext = "";
@@ -136,6 +137,11 @@ function stream_manipulator(page,tag,search,insert,user){
 }
 
 $(document).ready(function(){
+  if($("#landing-stream").data("outsidetags").length > 0){
+    $("#landing-stream").show();
+    $("#landing").hide();
+  }
+
   if($('#search').val() != ""){
     $("#landing-stream").show();
     $("#landing").hide();
@@ -195,6 +201,7 @@ $(document).ready(function(){
 });
 
    function apply_tag_handlers(){
+
     $("#stream_results .btn-link").click(function tag_caller(e){
       e.preventDefault();
       $("#landing").hide();
@@ -203,14 +210,25 @@ $(document).ready(function(){
       stream_manipulator(1,[tag.val()],$("#search").val(),"true", "false");
       $('html, body').animate({scrollTop:0}, 'slow');
     });
-      $("#stream_results .close").click(function tag_remover(e){
+
+    $("#stream_results .close").click(function tag_remover(e){
       e.preventDefault();
-      if (thistag.length == 1){
-        $("#landing").show();
-        $('html, body').animate({scrollTop:$('#landing').height()}, 'slow');
-      }
       var curr = $(this);
       $("#searchtype").val("false");
+
+      tags_outside_exist = ((thistag.length == 0)&&($("#landing-stream").data("outsidetags").length==1));
+      tags_inside_exist = ((thistag.length == 1)&&($("#landing-stream").data("outsidetags").length==0));
+
+      if (curr.val() == $("#landing-stream").data("outsidetags")[0]){
+        $("#landing-stream").data("outsidetags",[]);
+      }
+
+      if (tags_outside_exist || tags_inside_exist){
+        $("#landing").show();
+        $(".stream-generate-button").hide();
+        $('html, body').animate({scrollTop:$('#landing').height()}, 'slow');
+      }
+      
       stream_manipulator(1,[curr.val()],$("#search").val(),"false", "false");
     });
   }
