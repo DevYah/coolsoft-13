@@ -21,8 +21,8 @@ if(curr_tags.length != 0){
 }
 
 if(!tags_exist){
-  if ($("#landing-stream").data("outsidetags").length > 0){
-    var tag_outside = $("#landing-stream").data("outsidetags")[0]
+  if ($("#stream_results").data("outsidetags").length > 0){
+    var tag_outside = $("#stream_results").data("outsidetags")[0]
     if($.inArray(tag_outside, tags_list)!= -1){
       tags_exist = true;
     }

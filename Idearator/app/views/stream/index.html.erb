@@ -97,10 +97,10 @@ in_stream = true;
       <button class="stream-generate-button">Check Out The Latest Ideas</button>
     </div>
   </div>
-  <div id="landing-stream" data-outsidetags='<%= @filter_tmp %>'>
+  <div id="landing-stream">
     <div class='row'>
       <div class='span8'>
-        <div id="stream_results" data-tags=[]>
+        <div id="stream_results" data-tags=[] data-outsidetags='<%= @filter_tmp %>'>
           <%= render :partial => 'index'%>
         </div>
       </div>
@@ -143,7 +143,7 @@ in_stream = true;
   <div>
     <div class='row'>
       <div class='span8'>
-        <div id="stream_results" data-tags=[]>
+        <div id="stream_results" data-tags=[] data-outsidetags='<%= @filter_tmp %>'>
           <%= render :partial => 'index'%>
         </div>
       </div>
