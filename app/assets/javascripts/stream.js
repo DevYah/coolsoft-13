@@ -46,7 +46,7 @@ function stream_manipulator(page,tag,search,insert,user){
 
       if(will_insert){
         console.log(tag[0]);
-        if(!check_if_exists(tag) && (tag[0] != $("#landing-stream").data("outsidetags")[0])){
+        if(!check_if_exists(tag) && (tag[0] != $("#stream_results").data("outsidetags")[0])){
           thistag = tag.concat(thistag);
         }
       }else{
@@ -69,7 +69,7 @@ function stream_manipulator(page,tag,search,insert,user){
     }else{
       if (searchtext == "" && !user_search){
         if(will_insert){
-          if(!check_if_exists(tag)&& (tag[0] != $("#landing-stream").data("outsidetags")[0])){
+          if(!check_if_exists(tag)&& (tag[0] != $("#stream_results").data("outsidetags")[0])){
             thistag = tag.concat(thistag);
           }
           searchtext = "";
@@ -137,7 +137,7 @@ function stream_manipulator(page,tag,search,insert,user){
 }
 
 $(document).ready(function(){
-  if($("#landing-stream").data("outsidetags").length > 0){
+  if($("#stream_results").data("outsidetags").length > 0){
     $("#landing-stream").show();
     $("#landing").hide();
   }
@@ -216,11 +216,11 @@ $(document).ready(function(){
       var curr = $(this);
       $("#searchtype").val("false");
 
-      tags_outside_exist = ((thistag.length == 0)&&($("#landing-stream").data("outsidetags").length==1));
-      tags_inside_exist = ((thistag.length == 1)&&($("#landing-stream").data("outsidetags").length==0));
+      tags_outside_exist = ((thistag.length == 0)&&($("#stream_results").data("outsidetags").length==1));
+      tags_inside_exist = ((thistag.length == 1)&&($("#stream_results").data("outsidetags").length==0));
 
-      if (curr.val() == $("#landing-stream").data("outsidetags")[0]){
-        $("#landing-stream").data("outsidetags",[]);
+      if (curr.val() == $("#stream_results").data("outsidetags")[0]){
+        $("#stream_results").data("outsidetags",[]);
       }
 
       if (tags_outside_exist || tags_inside_exist){
