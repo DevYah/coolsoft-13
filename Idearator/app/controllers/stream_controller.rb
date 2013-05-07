@@ -44,7 +44,8 @@ class StreamController < ApplicationController
         @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
       else
         if !@searching_with
-          @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
+          @ideas = Idea.search(params[:search]).order(:created_at).reverse
+          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
         else
           @users = User.search(params[:search]).page(params[:mypage]).per(10)
         end
@@ -61,8 +62,8 @@ class StreamController < ApplicationController
           if @search_with_user
             @users = User.search(params[:search]).page(params[:mypage]).per(10)
           else
-            puts Idea.search(params[:search])
-            @ideas = Idea.search(params[:search]).order(:created_at).page(params[:mypage]).per(10)
+            @ideas = Idea.search(params[:search]).order(:created_at).reverse
+            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
           end
         else
           if @searchtext == "" and @filter_tmp != []
@@ -75,7 +76,8 @@ class StreamController < ApplicationController
               @users = User.search(params[:search]).page(params[:mypage]).per(10)
             else
               @@filter_all = []
-              @ideas = Idea.order(:created_at).page(params[:mypage]).per(10)
+              @ideas = Idea.order(:created_at).reverse
+              @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
             end
           end
         end

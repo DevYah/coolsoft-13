@@ -8,18 +8,28 @@
 
  var curr_search = $('#search').val();
  var curr_tags = $('#stream_results').data('tags');
- var ay_nila = true;
+ var tags_exist = true;
 
 if(curr_tags.length != 0){
-  ay_nila = false;
+  tags_exist = false;
   for(var i = 0; i < tags_list.length; i++){
     if($.inArray(tags_list[i], curr_tags)!= -1){
-      ay_nila = true;
+      tags_exist = true;
       break;
     }
   }
 }
 
-if(search_text.indexOf(curr_search) != -1 && ay_nila){
-  $("#stream_results:first").before("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea})) %>");
+if(!tags_exist){
+  if ($("#landing-stream").data("outsidetags").length > 0){
+    var tag_outside = $("#landing-stream").data("outsidetags")[0]
+    if($.inArray(tag_outside, tags_list)!= -1){
+      tags_exist = true;
+    }
+  }
+}
+
+if(search_text.indexOf(curr_search) != -1 && tags_exist){
+  $("#alert-message").html("");
+  $("#replacable-stream:first").before("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea})) %>");
 }
