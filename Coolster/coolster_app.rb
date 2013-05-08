@@ -54,7 +54,7 @@ class CoolsterApp < Sinatra::Base
         @@guests[request.session.id] = Proc.new{|script| body script}
       else
        body @@saved_scripts[request.session.id]
-       @@saved_scripts[request.session.id].remove_at[0] 
+       @@saved_scripts[request.session.id].delete_at[0] 
       end
     end
   end
