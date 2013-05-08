@@ -14,7 +14,7 @@
         <%= image_tag idea.photo.url(:medium) %>
         <ul class ="inline">
           <% idea.tags.each do |tag| %>
-            <% if controller == 'stream' %>
+            <% if controller == "stream" || params[:controller] == "stream" %>
             <button class="btn btn-link" value='<%= tag.name %>'>
               <span class="label label-info "><%= tag.name %></span>
             </button>
