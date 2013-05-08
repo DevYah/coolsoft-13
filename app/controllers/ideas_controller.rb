@@ -5,6 +5,7 @@ class IdeasController < ApplicationController
   class CoolsterPusher < AbstractCoolsterPusher
 
     def push_to_stream(idea)
+      debugger
       puts "\n\n\nAMINA"  
       script = render 'stream/add_to_stream',
               locals: { idea: idea }
@@ -254,8 +255,7 @@ class IdeasController < ApplicationController
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
-      @idea.approved = true
-      @idea.save
+      @idea.approve
       @rating = params[:rating]
       @rating.each do |rate|
         r = @idea.ratings.build
