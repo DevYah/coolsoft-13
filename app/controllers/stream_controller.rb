@@ -54,6 +54,7 @@ class StreamController < ApplicationController
       if @searchtext != "" and @filter_tmp != []
         if !@search_with_user
           @ideas = Idea.filter(@filter_tmp,@searchtext).sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
+          @ideas = @ideas.reverse
           @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
         end
       else
@@ -68,6 +69,7 @@ class StreamController < ApplicationController
         else
           if @searchtext == "" and @filter_tmp != []
             @ideas = Idea.filter(@filter_tmp,"").sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
+            @ideas = @ideas.reverse
             @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
             @filter_tmp.uniq
           else
