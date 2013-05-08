@@ -31,5 +31,5 @@ if(!tags_exist){
 
 if(search_text.indexOf(curr_search) != -1 && tags_exist){
   $("#alert-message").html("");
-  $("#replacable-stream:first").before("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea})) %>");
+  $("#replacable-stream:first").before("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea, controller: 'stream', voted: false})) %>");
 }
