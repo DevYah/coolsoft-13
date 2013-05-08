@@ -71,7 +71,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         if current_user.provider == 'twitter' && current_user.facebook_share
-          current_user.twitter.update("I've updated my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+          current_user.twitter.update("I've updated my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s) rescue Twitter::Error
         end
         format.html { redirect_to @idea, :notice => 'Idea was successfully updated.' }
         format.json { respond_with_bip(@idea) }
@@ -92,7 +92,7 @@ class IdeasController < ApplicationController
     @idea.reload
     respond_to do |format|
       if current_user.provider == 'twitter' && current_user.facebook_share
-        current_user.twitter.update("I've voted to an idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+        current_user.twitter.update("I've voted to an idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s) rescue Twitter::Error
       end
       format.html { redirect_to @idea, :notice =>'Thank you for voting' }
       format.json { head :no_content }
@@ -130,7 +130,7 @@ class IdeasController < ApplicationController
         end
 
         if current_user.provider == 'twitter' && current_user.facebook_share
-          current_user.twitter.update("I've created a new idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s)
+          current_user.twitter.update("I've created a new idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + @idea.id.to_s) rescue Twitter::Error
         end
         format.html { redirect_to @idea, notice: 'idea was successfully created.' }
         format.json { render json: @idea, status: :created, location: @idea }
@@ -224,7 +224,7 @@ class IdeasController < ApplicationController
       idea.archive_status = false
       idea.save
       if current_user.provider == 'twitter' && current_user.facebook_share
-        current_user.twitter.update("My idea is back to life! =D I've unarchived my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + idea.id.to_s)
+        current_user.twitter.update("My idea is back to life! =D I've unarchived my idea on #Idearator ! available on: http://apps.facebook.com/idearator/" + idea.id.to_s) rescue Twitter::Error
       end
     else
       respond_to do |format|

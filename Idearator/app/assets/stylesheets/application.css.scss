@@ -17,6 +17,7 @@
  *= require bootstrap_and_overrides
  *= require token-input-facebook
  *= require jquery-star-rating
+ *= require font-awesome
  *= require notification
  *= require ideas
  *= require font-awesome
@@ -35,6 +36,10 @@
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+#sidebar{
+  float:right;
 }
 
 #searchdiv {
@@ -66,16 +71,44 @@
   padding: 0 5px;
 }
 
-.social-media-login.twitter-nav-login {
-  background: url('/assets/bird_blue_32.png') center no-repeat;
+.twitter-nav-login {
+  background: url('/assets/twitter_signin.png') center no-repeat;
 }
 
-.social-media-login.facebook-nav-login {
-  background: url('/assets/facebook-button-small.jpg') center no-repeat;
+.facebook-nav-login {
+  background: url('/assets/facebook_signin.png') center no-repeat;
 }
 
 .social-media-login {
   display: block;
-  width: 32px; height: 20px;
+  width: 150px;
+  height: 20px;
   font-size: 0;
 }
+
+.fbk{
+  width:40px;
+  height:40px;
+  cursor: pointer;
+  padding:5px;
+}
+
+.tw{
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  padding:5px;
+}
+
+.pin{
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  padding:5px;
+}
+
+.drop-down-item{
+  background:rgba(0, 0, 0, 0.10);
+}
+
+

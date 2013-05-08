@@ -22,6 +22,7 @@ class HomeController < ApplicationController
       @first = Idea.find(first.idea_id)
     end
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
+    @best = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>9)
     if(params[:myTags])
       if(params[:myTags].length > 0)
         tags = Array(params[:myTags])

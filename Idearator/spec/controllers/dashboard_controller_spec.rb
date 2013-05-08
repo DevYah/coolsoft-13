@@ -1,5 +1,6 @@
 require 'spec_helper'
 include Devise::TestHelpers
+
 describe DashboardController do
   describe 'Get index' do
     before :each do
