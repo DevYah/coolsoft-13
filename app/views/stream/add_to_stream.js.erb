@@ -34,6 +34,6 @@ if($('#stream_results').length > 0){
     $("#alert-message").html("");
     $("#replacable-stream").prepend("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea, controller: 'stream', voted: false})) %>");
     apply_tag_handlers();
-    // 7otty hena 7agat l facebook we twitter we pinterest
+    apply_tooltip_handlers();
   }
 }
