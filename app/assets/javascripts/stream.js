@@ -121,6 +121,7 @@ function stream_manipulator(page,tag,search,insert,user){
       data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert ,reset_global: reset},
       success: function() {
         apply_tag_handlers();
+        apply_tooltip_handlers();
       }
     });
   }else{
@@ -131,6 +132,7 @@ function stream_manipulator(page,tag,search,insert,user){
     data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
     success: function() {
       apply_tag_handlers();
+      apply_tooltip_handlers();
     }
   });
  }
