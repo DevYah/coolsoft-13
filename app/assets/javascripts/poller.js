@@ -2,7 +2,7 @@
 // Author: Amina Zoheir
 function poll() {
   $.ajax({
-    url: 'http://localhost:9292/poll',
+    url: 'http://' + window.location.hostname + ':9292/poll',
     dataType: "script",
     tryCount : 0,
     retryLimit : 5,
