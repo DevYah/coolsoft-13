@@ -33,6 +33,7 @@ if($('#stream_results').length > 0){
   if(search_text.indexOf(curr_search) != -1 && tags_exist){
     $("#alert-message").html("");
     $("#replacable-stream").prepend("<%= escape_javascript(render(partial: "/ideas/stream_component", locals:{idea: idea, controller: 'stream', voted: false})) %>");
+    $("#replacable-stream .idea-<%= idea.id%>").hide().slideDown(1000);
     apply_tag_handlers();
     apply_tooltip_handlers();
   }
