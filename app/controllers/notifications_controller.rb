@@ -67,7 +67,7 @@ class NotificationsController < ApplicationController
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
     respond_to do |format|
-      format.js { render 'layouts/update_nav_bar' }
+      format.js { head :no_content }
     end
   end
 
