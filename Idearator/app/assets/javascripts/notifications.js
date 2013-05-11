@@ -11,6 +11,16 @@ $(document).ready(add_notification_event_handlers);
 
 function notification_click(select, redirect){
   $(select).click(function(){
+    if(select == 'div.delete-notification'){
+      $(this).removeClass('unread');
+      $(this).addClass('read');
+      var count = $(this).data('count');
+      if(count > 0){
+        $('#count').html('<span id="count-badge" class="badge badge-important">' + count + '</span><b class="caret"></b>');
+      }else{
+        $('#count').html('<span id="count-badge" class="badge badge-inverse">' + count + '</span><b class="caret"></b>');
+      }
+    }
     var notification = $(this).data('notification');
     $.getScript(redirect + ".js?&notification=" + notification);
   });
