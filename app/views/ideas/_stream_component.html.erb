@@ -12,18 +12,16 @@
       </div>
       <div class='span2'>
         <%= image_tag idea.photo.url(:medium) %>
-        
-          <% idea.tags.each do |tag| %>
-            <% if controller == "stream" || params[:controller] == "stream" %>
+        <% idea.tags.each do |tag| %>
+          <% if controller == "stream" || params[:controller] == "stream" %>
             <button class="btn btn-link" value='<%= tag.name %>'>
               <span class="label label-info "><%= tag.name %></span>
             </button>
-            <% else %>
+          <% else %>
             <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
-            <% end %>
           <% end %>
-        
-          <%= render :partial => "/ideas/share", locals: { idea: idea } %>
+        <% end %>
+        <%= render :partial => "/ideas/share", locals: { idea: idea } %>
       </div>
       <div class='span4'>
         <%= 'by' %>
@@ -34,6 +32,5 @@
         <%= render :partial => "ideas/vote_component", locals: { idea: idea ,size: 'span1', voted: voted} %>
       </div>
     </div>
-    <hr />
   </div>
 <% end %>
