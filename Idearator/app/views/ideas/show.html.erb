@@ -65,6 +65,7 @@
       <% if @user == @idea.user_id %>
         <script>
           $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
+          $('#image-edit-link').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
         </script>
       <% end %>
       <div class='pull-left'>
