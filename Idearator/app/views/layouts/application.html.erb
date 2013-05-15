@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# idearator: http://ogp.me/ns/fb/idearator#">
     <meta property="fb:app_id" content="446451938769749"/>
@@ -7,6 +8,10 @@
     <title><%= content_for?(:title) ? yield(:title) : 'Idearator' %></title>
     <meta name='description' content='' />
     <meta name='author' content='' />
+
+    <script type="text/javascript">
+      COOLSTER_URL = "<%= COOLSTER_URL %>";
+    </script>
     <%= stylesheet_link_tag 'application', :media => 'screen' %>
     <%= javascript_include_tag 'application' %>
     <%= yield :javascript_includes %>
