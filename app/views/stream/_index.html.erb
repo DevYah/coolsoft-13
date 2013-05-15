@@ -1,12 +1,13 @@
-<div id="replacable-tags">
   <% if !@page.nil? %>
     <% if !@search_with_user %>
       <% if @page == "1" %>
+      <div id="replacable-tags">
         <%= render partial: 'tags', locals: { filter_this: @filter_tmp } %>
+        </div>
       <% end %>
     <% end %>
   <% end %>
-</div>
+
 
 <div id="replacable-stream">
 <% search_results_count = 0 %>
@@ -44,6 +45,16 @@
     <% end %>
   <% end %>
 </div>
+
+<% if search_results_count == 0 %>
+  <script type="text/javascript">
+    $("#spinner-outer").hide();
+  </script>
+<% else %>
+  <script type="text/javascript">
+    $("#spinner-outer").show();
+  </script>
+<% end %>
 
 <div id="alert-message">
   <% if @searchtext != "" %>

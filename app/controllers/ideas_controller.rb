@@ -21,11 +21,11 @@ class IdeasController < ApplicationController
   # Author: Marwa Mehanna
   def show
     @idea = Idea.find(params[:id])
+    @chosentags = Idea.find(params[:id]).tags
     if user_signed_in?
       @user = current_user.id
       @username = current_user.username
       @tags = Tag.all
-      @chosentags = Idea.find(params[:id]).tags
       @competitions = Competition.joins(:tags).where('tags.id' => @idea.tags)
       respond_to do |format|
         format.html # show.html.erb
