@@ -152,6 +152,12 @@ in_stream = true;
         <div id="stream_results" data-tags=[] data-outsidetags='<%= @filter_tmp %>'>
           <%= render :partial => 'index'%>
         </div>
+         <div id="spinner-outer" class="well">
+            <div id="spinner">
+              <div class='icon-refresh icon-spin icon-large' id="spinner-inner">
+            </div>
+          </div>
+        </div>
       </div>
       <div class ='row'>
         <div id='sidebar' class='span4'>
