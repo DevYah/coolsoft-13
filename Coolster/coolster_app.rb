@@ -23,7 +23,7 @@ class CoolsterApp < Sinatra::Base
   end
 
   before do
-    response.headers['Access-Control-Allow-Origin']  = 'localhost:3000'
+    response.headers['Access-Control-Allow-Origin']  = IDEARATOR_URL + ''
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'X-CSRF-Token'
   end
@@ -44,7 +44,7 @@ class CoolsterApp < Sinatra::Base
       puts @@saved_scripts[request.session.id]
       if @@saved_scripts[env['warden'].user[1][0].to_s].nil? || @@saved_scripts[env['warden'].user[1][0].to_s] == []
         @@users[env['warden'].user[1][0].to_s] = Proc.new{|script| body script}
-        EventMachine::HttpRequest.new('http://localhost:3000/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
+        EventMachine::HttpRequest.new('http://' + IDEARATOR_URL + '/coolster/add_online_user').post :body => {user: env['warden'].user[1][0]}
       else
         body @@saved_scripts[env['warden'].user[1][0].to_s][0]
         @@saved_scripts[env['warden'].user[1][0].to_s].delete_at(0)
@@ -54,7 +54,7 @@ class CoolsterApp < Sinatra::Base
         @@guests[request.session.id] = Proc.new{|script| body script}
       else
        body @@saved_scripts[request.session.id]
-       @@saved_scripts[request.session.id].remove_at[0] 
+       @@saved_scripts[request.session.id].delete_at[0] 
       end
     end
   end
@@ -77,7 +77,7 @@ class CoolsterApp < Sinatra::Base
         if @@saved_scripts[user].length > 5
           @@users.delete(user)
           @@saved_scripts.delete(user)
-          EventMachine::HttpRequest.new('http://localhost:3000/coolster/remove_online_user').post :body => {user: user}
+          EventMachine::HttpRequest.new('http://' + IDEARATOR_URL + '/coolster/remove_online_user').post :body => {user: user}
         end
       else
         @@users[user].call params[:script]
@@ -103,7 +103,7 @@ class CoolsterApp < Sinatra::Base
         if @@saved_scripts[key].length > 5
           @@users.delete(key)
           @@saved_scripts.delete(key)
-          EventMachine::HttpRequest.new('http://localhost:3000/coolster/remove_online_user').post :body => {user: key}
+          EventMachine::HttpRequest.new('http://' + IDEARATOR_URL + '/coolster/remove_online_user').post :body => {user: key}
         end
       else
         value.call params[:script]
@@ -144,7 +144,7 @@ class CoolsterApp < Sinatra::Base
         if @@saved_scripts[user].length > 5
           @@users.delete(user)
           @@saved_scripts.delete(user)
-          EventMachine::HttpRequest.new('http://localhost:3000/coolster/remove_online_user').post :body => {user: user}
+          EventMachine::HttpRequest.new('http://' + IDEARATOR_URL + '/coolster/remove_online_user').post :body => {user: user}
         end
       else
         @@users[user].call script
