@@ -21,6 +21,12 @@
   border-top-style:none;
   border-left-style:0.25px solid;
   border-bottom-style:0.25px solid;
+  border-radius: 0px;
+}
+
+.stream-idea{
+  margin: 0px;
+  margin-top: 20px;
 }
 
 #stream{
@@ -82,6 +88,7 @@ div.trending-ideas::-webkit-scrollbar-thumb {
   max-height: 300px;
   height: auto;
   overflow: auto;
+  border-radius: 0px;
 }
 
 h3.sidebar_title{
@@ -98,6 +105,7 @@ h3.sidebar_title{
   max-height: 300px;
   height: auto;
   overflow: auto;
+  border-radius: 0px;
 }
 
 #spinner-outer{
