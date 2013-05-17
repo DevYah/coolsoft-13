@@ -35,6 +35,6 @@ $(document).ready(function() {
   });
 
    $(window).scroll (function(){
-    thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"));
+    thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"),[]);
   });
 });
