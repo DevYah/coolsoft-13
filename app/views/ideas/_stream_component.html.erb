@@ -5,7 +5,7 @@
       voted = user_signed_in? && current_user.voted_for?(idea)
     end %>
 <% if idea.user.active and !idea.user.banned and idea.approved %>
-  <div class='wrapper row'>
+  <div class='wrapper row stream-idea'>
     <div class="idea-<%= idea.id%> span8 ideasstream well">
       <div class='span6'>
         <h4 class='inline'><%= link_to  idea.title , idea %></h4>
@@ -20,7 +20,8 @@
           <% else %>
             <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
           <% end %>
-          <%= render :partial => "/ideas/share", locals: { idea: idea } %>
+        <% end %>
+        <%= render :partial => "/ideas/share", locals: { idea: idea } %>
       </div>
       <div class='span4'>
         <%= 'by' %>

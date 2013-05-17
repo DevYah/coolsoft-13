@@ -10,6 +10,8 @@
 <% end %>
 <br />
 <br />
-<% @ideas.each do |idea| %>
-  <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
-<%end%>
+<div class="my-ideas">
+  <% @ideas.each do |idea| %>
+    <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+  <%end%>
+</div>
