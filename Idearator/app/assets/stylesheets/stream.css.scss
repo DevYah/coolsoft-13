@@ -1,18 +1,6 @@
 // Place all the styles related to the stream controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#spinner{
-
-  position:absolute;
-  left:50%;
-  height:50px;
-}
-.well-small{
-	 width:auto;
-	 max-width:150px;
-	 margin:1px;
-	 height:5px;
-}
 
 .idea-votes{
  padding-left: 87%;
@@ -20,49 +8,66 @@
   margin-right: 25px;
 }
 
-.affix{
-    bottom: 5%;
-    padding-left: 5%;
-}
-
 .block{
   box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
   margin-bottom: 20px;
 }
 
-.wrapper{
-  padding-top:2px;
-  background-color:#DDDDDD;
-  -moz-border-radius:10px;
-  -webkit-border-radius:10px;
-  border-radius:10px;
-  margin-top: 20px;
+.ideasstream{
+  background-color:#FFFFFF;
+  margin:-10px;
+  padding:10px;
+  border-right-style:none;
+  border-top-style:none;
+  border-left-style:0.25px solid;
+  border-bottom-style:0.25px solid;
 }
 
-html{
-  overflow:auto;
+#stream{
+  margin-top:10px;
 }
 
-div.topten::-webkit-scrollbar-track {
+#landing{
+  padding:10px;
+}
+
+div.topten_ideas::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 
-div.topten::-webkit-scrollbar {
+div.topten_ideas::-webkit-scrollbar {
     width: 12px;
 }
 
-div.topten::-webkit-scrollbar-thumb {
+div.topten_ideas::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: rgba(100,100,100,0.5); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
 }
 
-#back-to-top{
+div.trending-ideas::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+div.trending-ideas::-webkit-scrollbar {
+    width: 12px;
+}
+
+div.trending-ideas::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(100,100,100,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+}
+
+.affix{
   position:fixed;
-  right:3%;
+  right:5px;
   bottom:5%;
 }
 
@@ -70,23 +75,40 @@ div.topten::-webkit-scrollbar-thumb {
   background-color:#EEEEEE;
 }
 
-#sidebar{
-  position:absolute;
-  right:10%;
-}
-
-
-.topten{
-  margin:10px;
-  padding:10px;
-  background-color:#F5DEB3;
-  -moz-border-radius:10px;
-  -webkit-border-radius:10px;
-  border-radius:10px;
-  background: rgba(0, 0, 0, 0.10);
+.topten_ideas{
+  padding:0%;
+  margin-top:10%;
+  background-color: #FFFFFF;
   max-height: 300px;
   height: auto;
   overflow: auto;
+}
+
+h3.sidebar_title{
+  background-color: #f2f2f2;
+  margin: 0px;
+  padding: 2px;
+  font-size: 20px;
+}
+
+.trending-ideas{
+  padding:0%;
+  margin-top:-20px;
+  background-color: #FFFFFF;
+  max-height: 300px;
+  height: auto;
+  overflow: auto;
+}
+
+#spinner-outer{
+  margin-top:3%;
+  margin-bottom:3%;
+  padding-right:50%;
+  padding-left:50%;
+}
+
+#in-stream-component{
+  position:relative;
 }
 
 #spinner-outer{
@@ -94,10 +116,6 @@ div.topten::-webkit-scrollbar-thumb {
   height:30px;
 }
 
-#stream{
-  margin-left:60px;
-}
-
 .margin{
   margin-top: 10px;
   margin-bottom: 15px;
@@ -126,67 +144,29 @@ div.topten::-webkit-scrollbar-thumb {
 }
 
 .topten_idea{
-  background: rgba(0, 0, 0, 0.10);
+  background: white;
+  padding:10px;
+  margin-bottom:0px;
+  margin-top:0px;
+  padding-left:25px;
+  border-right-style:none;
+  border-top-style:none;
+  border-left-style:none;
+  border-bottom-style:0.25px solid;
 }
 .tag{
   color: #0060ff;
 }
 
-#landing-stream{
-  display:none;
-}
 .idea-votes{
  padding-left: 87%;
  font-size: 35px;
  margin-right: 25px;
 }
 
-.affix{
-  bottom: 5%;
-  padding-left: 5%;
-}
-
 .block{
   box-shadow: 0px 0px 2px rgba(51,51,51,0.9);
   margin-bottom: 20px;
-}
-
-
-.margin{
-  margin-top: 10px;
-  margin-bottom: 15px;
-  margin-right: 10px;
-
-}
-
-.hidden{
-  display: none;
-}
-
-
-.image{
-  margin-left: 10px;
-}
-
-.title{
-  margin-left: 20%;
-  padding: 10px;
-}
-
-.title1{
-  margin-left: 100px;
-}
-
-.idea{
-  width: 200px;
-}
-
-.topten_idea{
-  background: rgba(0, 0, 0, 0.10);
-}
-
-.tag{
-  color: #0060ff;
 }
 
 #title{
@@ -408,4 +388,3 @@ p.description_content{
 .media-heading{
   cursor:pointer;
 }
-

@@ -123,7 +123,7 @@ function stream_manipulator(page,tag,search,insert,user){
       success: function() {
         apply_tag_handlers();
         apply_tooltip_handlers();
-        //$("#spinner-inner").removeClass('icon-refresh icon-spin icon-large');
+        $("#spinner-outer").hide();
       }
     });
   }else{
@@ -135,13 +135,16 @@ function stream_manipulator(page,tag,search,insert,user){
     success: function() {
       apply_tag_handlers();
       apply_tooltip_handlers();
-      //$("#spinner-inner").removeClass('icon-refresh icon-spin icon-large');
+      $("#spinner-outer").hide();
     }
   });
  }
 }
 
 $(document).ready(function(){
+  if($("#landing").is(':visible')){
+    $("#in-stream-component").hide();
+  }
   if($("#stream_results").data("outsidetags").length > 0){
     $("#landing-stream").show();
     $("#landing").hide();
@@ -190,7 +193,7 @@ $(document).ready(function(){
 
   $(".stream-generate-button").click(function show_stream(e){
     e.preventDefault();
-    $("#landing-stream").show();
+    $("#in-stream-component").show();
     $(".stream-generate-button").hide();
     apply_tag_handlers();
     $('html, body').animate({scrollTop:$('#landing').height()+20}, 'slow');
@@ -264,16 +267,24 @@ $(window).scroll (function(){
       $('.backtotop').hide();
     }
     if($("#landing").is(":visible")){
-      if($(window).scrollTop()>$('#landing').height()+100){
-        $("#sidebar").css("top",$(window).scrollTop()+30);
+      if($(window).scrollTop()>$('#landing').height()+44){
+        $("#sidebar").css("position","fixed");
+        $("#sidebar").css("top","0%");
+        $("#sidebar").css("left",934);
       }else{
-        $("#sidebar").css("top",$("#landing").height()+100);
+        $("#sidebar").css('position','');
+        $("#sidebar").css('top','');
       }
     }else{
-      if($(window).scrollTop()>100){
-        $("#sidebar").css("top",$(window).scrollTop()+30);
+      if($(window).scrollTop()>44){
+        var ww = $(window).width();
+        var wh = $(window).height();
+        $("#sidebar").css("position","fixed");
+        $("#sidebar").css("top","0%");
+        $("#sidebar").css("left",934);
       }else{
-        $("#sidebar").css("top",100);
+        $("#sidebar").css('position','');
+        $("#sidebar").css('top','');
       }
     }
   if($(window).scrollTop()!=0 && !($(".stream-generate-button").is(":visible"))){
