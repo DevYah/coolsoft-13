@@ -76,7 +76,15 @@
       </li>
     <% end %>
   <% end %>
+  <% if current_user.nil? %>
+    <li>
+      <div>
+        <%= link_to 'Post your idea', { :controller => '/ideas', :action => 'new' }, :class => "btn btn-primary post-an-idea" %>
+      </div>
+    </li>
+  <% end %>
   <li>
+    <div>
     <%= form_tag "/stream/index", :method => :get,:class => "form-search", :id => 'searchdiv' do %>
       <%= hidden_field_tag :searchtype, params[:searchtype] || "false" %>
         <div class="input-append">
@@ -97,10 +105,8 @@
             </div>
         </div>
     <% end %>
+    </div>
   </li>
-  <% if current_user.nil? %>
-    <%= link_to 'Post your idea', { :controller => '/ideas', :action => 'new' }, :class => "btn btn-primary post-an-idea" %>
-  <% end %>
 </ul>
 <% if user_signed_in? %>
   <ul class="nav pull-right">
