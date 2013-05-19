@@ -3,13 +3,15 @@
   <%= stylesheet_link_tag 'competitions'%>
 <% end %>
 <div class="competitions">
-  <% if @filter %>
+   <% if @filter %>
     <ul class="currenttags">
       <% if @tags %>
         <% @tags.each do |t|%>
           <li class="taging currenttag">
-            <span class="tag"><%= t %></span>
-            <span class="delete-token">×</span>
+            <span class="label label-info tag">
+            <button class="delete-token">&times;</button>
+              <%= t %>
+            </span>
           </li>
         <% end %>
       <% end %>
@@ -19,13 +21,13 @@
     <% if @competitions && @competitions.length>0 %>
       <% @competitions.each do |c| %>
         <% if c.investor.active and c.investor.banned == false and c.open %>
-          <div class="row-fluid text-center" id='competition-<%= c.id %>'>
-            <div class="competition span12">
+          <div class="row-fluid" id='competition-<%= c.id %>'>
+            <div class="competition span12 well">
               <div class="row-fluid">
                 <div class="span6">
-                  <h2>
+                  <h3>
                     <%= link_to  c.title , c %>
-                  </h2>
+                  </h3>
                   <div>
                     by:
                     <%= link_to c.investor.username , c.investor.becomes(User) %>

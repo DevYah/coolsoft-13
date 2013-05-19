@@ -1,6 +1,5 @@
 .competition{
-  border-radius: 20px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: white;
   word-wrap: break-word;
   margin-bottom: 30px;
 }
@@ -11,12 +10,12 @@
 }
 
 .green{
-  color: green;
+  color: rgb(48,130,133);
 }
 
 
 .red{
-  color: red;
+  color: rgb(112,10,42);
 }
 
 .outside_tag_button{
@@ -29,8 +28,8 @@
 }
 
 .description{
-  border-radius: 20px;
   background-color: rgba(255,255,255,0.5);
+  font-size: 14px;
 }
 
 .currenttag{
