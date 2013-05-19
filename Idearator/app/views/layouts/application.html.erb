@@ -22,7 +22,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body data-devise=<%= user_signed_in? %>>
+  <body class='body' data-devise=<%= user_signed_in? %>>
     <% if user_signed_in? %>
       <div class='enter-idea-notification-modal'></div>
       <div id='myModal' class='modal hide fade'>

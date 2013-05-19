@@ -99,12 +99,11 @@
     <div class='span4'>
       <div class='row'>
         <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
-        <div class='span4 archive-status'>
+        <div class='span4 archive-status idea-ratings'>
           <p>
             <% if @idea.ratings.size > 0 %>
               <table>
                 <tr>
-                  <th style='text-align: left;'><b>Ratings:-</b></th>
                   <th></th>
                 </tr>
                 <% @idea.ratings.each do |therating| %>

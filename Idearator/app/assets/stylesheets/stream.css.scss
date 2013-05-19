@@ -15,13 +15,13 @@
 
 .ideasstream{
   background-color:#FFFFFF;
-  margin:-10px;
+  margin: 0px;
+  margin-right: 5px;
   padding:10px;
   border-right-style:none;
   border-top-style:none;
   border-left-style:0.25px solid;
   border-bottom-style:0.25px solid;
-  border-radius: 0px;
 }
 
 .stream-idea{
@@ -88,24 +88,28 @@ div.trending-ideas::-webkit-scrollbar-thumb {
   max-height: 300px;
   height: auto;
   overflow: auto;
-  border-radius: 0px;
+  width: 340px;
+  margin-left: 20px;
+  margin-top: 30px;
 }
 
 h3.sidebar_title{
-  background-color: #f2f2f2;
+  background-color: rgba(48,130,133,0.25);
   margin: 0px;
-  padding: 2px;
-  font-size: 20px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 30px;
 }
 
 .trending-ideas{
   padding:0%;
-  margin-top:-20px;
+  margin-top: 0px;
   background-color: #FFFFFF;
   max-height: 300px;
   height: auto;
   overflow: auto;
-  border-radius: 0px;
+  width: 340px;
+  margin-left: 20px;
 }
 
 #spinner-outer{
@@ -161,6 +165,7 @@ h3.sidebar_title{
   border-top-style:none;
   border-left-style:none;
   border-bottom-style:0.25px solid;
+  border-radius: 0px;
 }
 .tag{
   color: #0060ff;
@@ -393,6 +398,15 @@ p.description_content{
   margin-left:0px;
 }
 
-.media-heading{
+h4.media-heading{
   cursor:pointer;
+  font-size: 15px;
+}
+
+.stream-comp-description{
+  font-size: 14px;
+}
+
+.stream-idea-titile{
+  margin-bottom: 2px;
 }
