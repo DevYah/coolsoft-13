@@ -6,3 +6,109 @@ label.inline {
   display: inline;
   margin-bottom: 5px;
 }
+
+h4{
+  font-size: 15px;
+}
+
+h4 a{
+  color: rgba(112,10,42,0.70);
+}
+
+h4 a:hover{
+  text-decoration: none;
+  color: rgb(112,10,42);
+}
+
+a{
+  color: rgba(47,71,110,0.70);
+}
+
+a:hover{
+  text-decoration: none;
+  color: rgb(47,71,110);
+}
+
+.btn-danger{
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: rgba(112,10,42, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(112,10,42, 0.5), rgba(112,10,42, 0.75));
+background-image: linear-gradient(to bottom, rgba(112,10,42, 0.5), rgba(112,10,42, 0.75));
+background-repeat: repeat-x;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger:hover{
+  background-color: rgb(112,10,42);
+  color: white;
+}
+
+.btn-primary{
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: rgba(212,183,142, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(212,183,142, 0.5), rgba(212,183,142, 0.75));
+background-image: linear-gradient(to bottom, rgba(212,183,142, 0.5), rgba(212,183,142, 0.75));
+background-repeat: repeat-x;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:hover{
+  background-color: rgb(212,183,142);
+  color: white;
+}
+
+.btn-primary:click{
+  background-color: rgb(212,183,142);
+  color: white;
+}
+
+.btn-success{
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: rgba(48,130,133, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(48,130,133, 0.5), rgba(48,130,133, 0.75));
+background-image: linear-gradient(to bottom, rgba(48,130,133, 0.5), rgba(48,130,133, 0.75));
+background-repeat: repeat-x;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-success:hover{
+  background-color: rgb(48,130,133);
+  color: white;
+}
+
+.btn-info{
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: rgba(47,71,110, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(47,71,110, 0.5), rgba(47,71,110, 0.75));
+background-image: linear-gradient(to bottom, rgba(47,71,110, 0.5), rgba(47,71,110, 0.75));
+background-repeat: repeat-x;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-info:hover{
+  background-color: rgb(47,71,110);
+  color: white;
+}
+
+.nav .dropdown-toggle .caret {
+    border-bottom-color: white;
+    border-top-color: white;
+}
+
+.nav .dropdown-toggle .caret:hover {
+    border-bottom-color: white;
+    border-top-color: white;
+    color: white;
+}
+
+.badge-important{
+  background-color: rgb(170,40,70);
+}
+
+.label-info {
+background-color: rgba(47,71,110, 0.95);
+}

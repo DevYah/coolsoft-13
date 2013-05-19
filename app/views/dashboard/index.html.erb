@@ -82,7 +82,6 @@
 
     <% if @user.is_a? Committee %>
       $('#comm a').click(function{
-        alert("a7a");
         var bulb_count = $('.bulb-container-comm').length;
         if(bulb_count == 5 && this.value == 0){
           $("#comm-bulb-count-error").show();
