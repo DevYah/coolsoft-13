@@ -1,5 +1,5 @@
 $("#count").html("<%= escape_javascript(render(partial: "notifications/count_notifications", locals:{count: count})) %>");
-$(".nav #update-dropdown").prepend("<%= escape_javascript(render(partial: "/notifications/view", locals:{notification: notification, read: read})) %>");
+$(".nav .custom-dropdown").prepend("<%= escape_javascript(render(partial: "/notifications/view", locals:{notification: notification, read: read})) %>");
 if($('#notifications').length > 0){
   $(".content #notifications").prepend("<%= escape_javascript(render(partial: "/notifications/view", locals:{notification: notification, read: read, count: count})) %>");
   $('.content .notification:first').hide().slideDown(1000);
