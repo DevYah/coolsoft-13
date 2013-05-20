@@ -16,9 +16,8 @@
           <% if controller == "stream" || params[:controller] == "stream" %>
             <button class="btn btn-link" value='<%= tag.name %>'>
               <span class="label label-info ">
-                <i class="icon-tags"></i>
+                <i class="icon-tag"></i>
                 <%= tag.name %>
-                <span class="badge badge-stream"><%= tag.ideas.count %></span>
               </span>
             </button>
           <% else %>

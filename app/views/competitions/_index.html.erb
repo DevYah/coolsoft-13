@@ -9,9 +9,9 @@
         <% @tags.each do |t|%>
           <li class="taging currenttag">
             <span class="label label-info">
-              <i class="icon-tags"></i>
+              <i class="icon-tag"></i>
+              <button class="close delete-token">&times;</button>
               <span class="tag"><%= t %></span>
-              <span class="delete-token">X</span>
             </span>
           </li>
         <% end %>
@@ -73,7 +73,7 @@
                     <% c.tags.each do |tag| %>
                       <li class="taging">
                         <span class="label label-info">
-                          <i class="icon-tags"></i>
+                          <i class="icon-tag"></i>
                           <a href="#" class="aTag"><%= tag.name %></a></li>
                         </span>
                     <% end %>
