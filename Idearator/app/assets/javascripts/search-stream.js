@@ -11,7 +11,7 @@ $(function() {
     var search = $("#search").val();
     var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
-        if(search.length > 2){
+        if(search.length > 2 || e.which == 8){
         stream_manipulator(1,[],search,"false", search_in);
         $('html, body').animate({scrollTop:0}, 'slow');
         }

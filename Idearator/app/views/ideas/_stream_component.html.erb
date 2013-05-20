@@ -15,7 +15,11 @@
         <% idea.tags.each do |tag| %>
           <% if controller == "stream" || params[:controller] == "stream" %>
             <button class="btn btn-link" value='<%= tag.name %>'>
-              <span class="label label-info "><%= tag.name %></span>
+              <span class="label label-info ">
+                <i class="icon-tags"></i>
+                <%= tag.name %>
+                <span class="badge badge-stream"><%= tag.ideas.count %></span>
+              </span>
             </button>
           <% else %>
             <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
