@@ -1,17 +1,18 @@
-<h1 align='middle'>
+<h3 id='user-ideas-title'>
   <% if current_user == @user %>
     My Ideas
   <% else %>
     <%= @user.username %>'s ideas
   <% end %>
-</h1>
-<% if @user == current_user %>
-  <%= link_to 'My dashboard', {:controller => 'dashboard' ,:action => 'index'},:class => "btn btn-primary "%>
-<% end %>
-<br />
-<br />
-<div class="my-ideas">
+</h3>
+<div class="my-ideas span9">
   <% @ideas.each do |idea| %>
     <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
   <%end%>
 </div>
+
+<br />
+<br />
+<% if @user == current_user %>
+  <%= link_to '<i class="icon-chevron-right"></i> Check dashboard'.html_safe, {:controller => 'dashboard' ,:action => 'index'},:class => "my-dashboard-link"%>
+<% end %>

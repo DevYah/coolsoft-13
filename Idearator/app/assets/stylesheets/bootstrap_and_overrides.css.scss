@@ -29,9 +29,19 @@ a:hover{
   color: rgb(47,71,110);
 }
 
+dd{
+  font-size: 15px;
+}
+
+dt{
+  font-size: 15px;
+  font-weight: bold;
+}
+
 .btn, .nav{
   font-weight: bold;
 }
+
 
 .btn-danger{
 color: white;
@@ -52,7 +62,7 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
 .btn-group.open .btn-danger.dropdown-toggle{
-  background-color: rgb(112,10,42);
+  background-color: rgb(140, 0, 26);
   color: white;
 }
 
@@ -82,9 +92,9 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 .btn-success{
 color: white;
 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-background-color: rgba(195, 245, 0, 0.75);
-background-image: -webkit-linear-gradient(top, rgba(195, 245, 0, 0.5), rgba(195, 245, 0, 0.75));
-background-image: linear-gradient(to bottom, rgba(195, 245, 0, 0.5), rgba(195, 245, 0, 0.75));
+background-color: rgba(140, 169, 62, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(140, 169, 62, 0.5), rgba(140, 169, 62, 0.75));
+background-image: linear-gradient(to bottom, rgba(140, 169, 62, 0.5), rgba(140, 169, 62, 0.75));
 background-repeat: repeat-x;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
@@ -93,21 +103,44 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 .btn-success:active,
 .btn-success:focus,
 .btn-success.active{
-  background-color: rgb(195, 245, 0);
+  background-color: rgb(140, 169, 62);
   color: white;
 }
 
 .btn-group.open .btn-success.dropdown-toggle{
-  background-color: rgb(195, 245, 0);
+  background-color: rgb(140, 169, 62);
+  color: white;
+}
+
+.btn-important{
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: rgba(212,183,142, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(212,183,142, 0.5), rgba(212,183,142, 0.75));
+background-image: linear-gradient(to bottom, rgba(212,183,142, 0.5), rgba(212,183,142, 0.75));
+background-repeat: repeat-x;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-important:hover,
+.btn-important:active,
+.btn-important:focus,
+.btn-important.active{
+  background-color: rgb(212,183,142);
+  color: white;
+}
+
+.btn-group.open .btn-important.dropdown-toggle{
+  background-color: rgb(212,183,142);
   color: white;
 }
 
 .btn-info{
 color: white;
 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-background-color: rgba(47,71,110, 0.75);
-background-image: -webkit-linear-gradient(top, rgba(47,71,110, 0.5), rgba(47,71,110, 0.75));
-background-image: linear-gradient(to bottom, rgba(47,71,110, 0.5), rgba(47,71,110, 0.75));
+background-color: rgba(111,5,100, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(111,5,100, 0.5), rgba(111,5,100, 0.75));
+background-image: linear-gradient(to bottom, rgba(111,5,100, 0.5), rgba(111,5,100, 0.75));
 background-repeat: repeat-x;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
@@ -116,21 +149,25 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 .btn-info:active,
 .btn-info:focus,
 .btn-info.active{
-  background-color: rgb(47,71,110);
+  background-color: rgb(111,5,100);
   color: white;
 }
 
 .btn-group.open .btn-info.dropdown-toggle{
-  background-color: rgb(47,71,110);
+  background-color: rgb(111,5,100);
   color: white;
 }
 
 .nav .dropdown-toggle .caret {
     border-bottom-color: white;
     border-top-color: white;
+    color: white;
 }
 
-.nav .dropdown-toggle .caret:hover {
+.nav .dropdown-toggle .caret:hover,
+.nav .dropdown-toggle .caret:active
+.nav .dropdown-toggle .caret:focus,
+.nav .dropdown-toggle .caret.active {
     border-bottom-color: white;
     border-top-color: white;
     color: white;
@@ -138,16 +175,28 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 
 .badge-important{
   background-color: rgb(212,183,142);
+  box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
 }
 
 .label-info {
-background-color: rgba(47,71,110, 0.95);
+background-color: rgb(79,47,79);
+padding: 10px;
+padding-left: 15px;
+padding-right: 15px;
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
-    background-color: rgba(212,183,142,0.75);
-    background-image: linear-gradient(to bottom, rgba(212,183,142,0.5), rgba(212,183,142,0.75));
-    background-repeat: repeat-x;
-    color: white;
-    text-decoration: none;
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(50,193,169,0.75);
+  background-image: -moz-linear-gradient(top, rgba(50,193,169,0.5), rgba(50,193,169,0.75));
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, rgba(50,193,169,0.5), to rgba(50,193,169,0.75));
+  background-image: -webkit-linear-gradient(top, rgba(50,193,169,0.5), rgba(50,193,169,0.75));
+  background-image: -o-linear-gradient(top,rgba(50,193,169,0.5), rgba(50,193,169,0.75));
+  background-image: linear-gradient(to bottom, rgba(50,193,169,0.5), rgba(50,193,169, 0.75));
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#32c1a9', endColorstr='#32c1a9', GradientType=0);
 }

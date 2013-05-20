@@ -26,7 +26,7 @@ p.same_line{
 }
 
 .unread{
-  background: rgba(48,130,133, 0.25);
+  background: rgba(50,193,169, 0.5);
 }
 
 .read{
@@ -55,7 +55,7 @@ h3.notification-title{
 }
 
 .content .notification.unread:hover {
-  background: rgba(48,130,133, 0.50);
+  background: rgba(50,193,169, 0.75);
 }
 
 .nav .notification:hover .notification-link{
@@ -67,7 +67,7 @@ h3.notification-title{
 }
 
 .nav .notification.unread:hover {
-  background: rgba(48,130,133, 0.50);
+  background: rgba(50,193,169, 0.75);
 }
 
 .notification-link{
@@ -113,4 +113,8 @@ ul.custom-dropdown::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: rgba(100,100,100,0.5); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+}
+
+#notifications-page{
+  background-color: white;
 }
