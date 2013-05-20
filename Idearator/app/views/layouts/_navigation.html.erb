@@ -11,8 +11,10 @@
         <%end%>
         <b class="caret"></b>
       </a>
-      <ul id = "update-dropdown" class="dropdown-menu custom-dropdown">
+      <ul id = "update-dropdown" class="dropdown-menu">
+        <li class='custom-dropdown'>
         <%= render 'notifications/view_notifications' %>
+      </li>
       </ul>
     </li>
   <%else%>
@@ -38,7 +40,7 @@
     <li class="divider-vertical"></li>
   <% end %>
 </ul>
-<ul class="nav">
+<ul class="nav nav-collapse collapse">
   <% if user_signed_in? %>
     <% if current_user.get_approved_ideas.count != 0 %>
       <li>

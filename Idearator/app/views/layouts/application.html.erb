@@ -21,6 +21,7 @@
     <% end %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
+    <%= favicon_link_tag 'bulb.png' %>
   </head>
   <body class='body' data-devise=<%= user_signed_in? %>>
     <% if user_signed_in? %>
