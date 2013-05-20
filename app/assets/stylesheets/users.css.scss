@@ -40,13 +40,7 @@ p{
   width: 300px;
 }
 
-#user dt {
-  font-size: 20px;
-}
 
-#user dd {
-  font-size: 18px;
-}
 
 #user {
   width: 900px;
@@ -90,4 +84,17 @@ p{
 
 #user .best_in_place:hover, .do_hover {
   background-color: #CCC;
+}
+
+.user-profile-page{
+  background-color: white;
+}
+
+.my-dashboard-link{
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#user-ideas-title{
+  padding-left: 50px;
 }

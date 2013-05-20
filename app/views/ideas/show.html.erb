@@ -34,7 +34,7 @@
   </div>
 </div>
 <!-- Main Idea Page -->
-<div class='idea-page idea-<%= @idea.id %>'>
+<div class='idea-page idea-<%= @idea.id %> well'>
   <% if current_user %>
     <% if current_user.type == "Committee" %>
       <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
@@ -58,17 +58,19 @@
     </div>
   </div>
   <div class='row'>
-    <div class='span4'>
-      <a  href='#'>
+    <div class='span4 idea-picture'>
+      <div class='row'>
+      <a  href='#'class='pull-left'>
         <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
       </a>
+      </div>
       <% if @user == @idea.user_id %>
         <script>
           $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
           $('#image-edit-link').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
         </script>
       <% end %>
-      <div class='pull-left'>
+      <div class='pull-left row'>
         <%if @chosentags != nil %>
           <% @chosentags.each do |tag|%>
              <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
@@ -96,7 +98,7 @@
       <h3>Problem Solved:</h3>
       <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
     </div>
-    <div class='span4'>
+    <div class='span4 vote-no-margin'>
       <div class='row'>
         <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
         <div class='span4 archive-status idea-ratings'>
