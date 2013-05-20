@@ -12,12 +12,12 @@ h4{
 }
 
 h4 a{
-  color: rgba(112,10,42,0.70);
+  color: rgba(0,0,0,0.70);
 }
 
 h4 a:hover{
   text-decoration: none;
-  color: rgb(112,10,42);
+  color: rgb(0, 0, 0);
 }
 
 a{
@@ -29,17 +29,29 @@ a:hover{
   color: rgb(47,71,110);
 }
 
+.btn, .nav{
+  font-weight: bold;
+}
+
 .btn-danger{
 color: white;
 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-background-color: rgba(112,10,42, 0.75);
-background-image: -webkit-linear-gradient(top, rgba(112,10,42, 0.5), rgba(112,10,42, 0.75));
-background-image: linear-gradient(to bottom, rgba(112,10,42, 0.5), rgba(112,10,42, 0.75));
+background-color: rgba(140, 0, 26, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(140, 0, 26, 0.5), rgba(140, 0, 26, 0.75));
+background-image: linear-gradient(to bottom, rgba(140, 0, 26, 0.5), rgba(140, 0, 26, 0.75));
 background-repeat: repeat-x;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.btn-danger:hover{
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger.active{
+  background-color: rgb(140, 0, 26);
+  color: white;
+}
+
+.btn-group.open .btn-danger.dropdown-toggle{
   background-color: rgb(112,10,42);
   color: white;
 }
@@ -47,35 +59,46 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 .btn-primary{
 color: white;
 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-background-color: rgba(212,183,142, 0.75);
-background-image: -webkit-linear-gradient(top, rgba(212,183,142, 0.5), rgba(212,183,142, 0.75));
-background-image: linear-gradient(to bottom, rgba(212,183,142, 0.5), rgba(212,183,142, 0.75));
+background-color: rgba(50,193,169, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(50,193,169, 0.5), rgba(50,193,169, 0.75));
+background-image: linear-gradient(to bottom, rgba(50,193,169, 0.5), rgba(50,193,169, 0.75));
 background-repeat: repeat-x;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.btn-primary:hover{
-  background-color: rgb(212,183,142);
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary.active{
+  background-color: rgb(50,193,169);
   color: white;
 }
 
-.btn-primary:click{
-  background-color: rgb(212,183,142);
+.btn-group.open .btn-primary.dropdown-toggle{
+  background-color: rgb(50,193,169);
   color: white;
 }
 
 .btn-success{
 color: white;
 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-background-color: rgba(48,130,133, 0.75);
-background-image: -webkit-linear-gradient(top, rgba(48,130,133, 0.5), rgba(48,130,133, 0.75));
-background-image: linear-gradient(to bottom, rgba(48,130,133, 0.5), rgba(48,130,133, 0.75));
+background-color: rgba(195, 245, 0, 0.75);
+background-image: -webkit-linear-gradient(top, rgba(195, 245, 0, 0.5), rgba(195, 245, 0, 0.75));
+background-image: linear-gradient(to bottom, rgba(195, 245, 0, 0.5), rgba(195, 245, 0, 0.75));
 background-repeat: repeat-x;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.btn-success:hover{
-  background-color: rgb(48,130,133);
+.btn-success:hover,
+.btn-success:active,
+.btn-success:focus,
+.btn-success.active{
+  background-color: rgb(195, 245, 0);
+  color: white;
+}
+
+.btn-group.open .btn-success.dropdown-toggle{
+  background-color: rgb(195, 245, 0);
   color: white;
 }
 
@@ -89,7 +112,15 @@ background-repeat: repeat-x;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.btn-info:hover{
+.btn-info:hover,
+.btn-info:active,
+.btn-info:focus,
+.btn-info.active{
+  background-color: rgb(47,71,110);
+  color: white;
+}
+
+.btn-group.open .btn-info.dropdown-toggle{
   background-color: rgb(47,71,110);
   color: white;
 }
@@ -111,4 +142,12 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 
 .label-info {
 background-color: rgba(47,71,110, 0.95);
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+    background-color: rgba(212,183,142,0.75);
+    background-image: linear-gradient(to bottom, rgba(212,183,142,0.5), rgba(212,183,142,0.75));
+    background-repeat: repeat-x;
+    color: white;
+    text-decoration: none;
 }
