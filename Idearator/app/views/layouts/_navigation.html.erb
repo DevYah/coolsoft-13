@@ -23,6 +23,7 @@
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
+    <li class="divider-vertical"></li>
     <li>
       <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
                  :class => 'popup social-media-login facebook-nav-login scrollshow',
@@ -34,9 +35,10 @@
                 'data-width' => 600, 'data-height' => 500  %>
     </li>
       <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow')  %> </li>
+    <li class="divider-vertical"></li>
   <% end %>
 </ul>
-<ul class="nav">
+<ul class="nav nav-collapse collapse">
   <% if user_signed_in? %>
     <% if current_user.get_approved_ideas.count != 0 %>
       <li>
