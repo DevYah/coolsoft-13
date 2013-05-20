@@ -93,10 +93,10 @@
     <div class='span4'>
       <%= 'by'%>
       <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
-      <h3>Description:</h3>
-      <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
-      <h3>Problem Solved:</h3>
-      <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
+      <h4>Description:</h4>
+      <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
+      <h4>Problem Solved:</h4>
+      <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
     </div>
     <div class='span4 vote-no-margin'>
       <div class='row'>

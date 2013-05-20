@@ -26,7 +26,10 @@ var previous_search = "";
 var last_scroll = 0;
 var scroll_dist = 0;
 var scroll_up_dist = 0;
-set_scroll_up = false;
+var set_scroll_dir = "down";
+var scroll_down_dist = 0;
+var scroll_dist2 = 0;
+var offset = 0;
 
 function check_if_exists(tag){
   for(var i = 0; i < thistag.length; i++){
@@ -280,37 +283,17 @@ $(window).scroll (function(){
         $("#sidebar").css('top','');
       }
     }else{
-      if($(window).scrollTop()>733){
-        if(last_scroll < $(window).scrollTop()){
-          $("#sidebar").css("position","fixed");
-          $("#sidebar").css("top","-95%");
-          $("#sidebar").css("left",934);
-          scroll_dist = $(window).scrollTop();
-          set_scroll_up = false;
-        }else{
-          scroll_up_dist = scroll_dist - $(window).scrollTop();
-          if(scroll_up_dist < 850){
-            if(!set_scroll_up){
-              set_scroll_up = true;
-              $("#sidebar").css('position','');
-              $("#sidebar").css('position','absolute');
-              $("#sidebar").css("top",$(window).scrollTop()-733);
-              $("#sidebar").css("left",800);
-            }
-          }else{
-            set_scroll_up = false;
-            $("#sidebar").css("position","fixed");
-            $("#sidebar").css("top","10%");
-            $("#sidebar").css("left",934);
-          }
-        }
+       if($(window).scrollTop()>733){
+        var ww = $(window).width();
+        var wh = $(window).height();
+        $("#sidebar").css("position","fixed");
+        $("#sidebar").css("top",-733);
+        $("#sidebar").css("left",934);
       }else{
         $("#sidebar").css('position','');
         $("#sidebar").css('top','');
-        set_scroll_up = false;
       }
     }
-    last_scroll = $(window).scrollTop();
   if($(window).scrollTop()!=0 && !($(".stream-generate-button").is(":visible"))){
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
       currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);
