@@ -223,6 +223,9 @@
           </div>
         </div>
       <% end %>
+      <div class="trending-ideas well">
+        <%= render :partial => '/trends/index'%>
+      </div>
       <div class="topten_ideas well">
         <div id="topten_title well">
           <h3 class="title sidebar_title">Top 10 Ideas</h3>
@@ -247,9 +250,6 @@
             </div>
           <% end %>
         <%end%>
-      </div>
-      <div class="trending-ideas well">
-        <%= render :partial => '/trends/index'%>
       </div>
       <div class="affix" data-spy='affix'>
         <button class="btn backtotop" type="button">To Top

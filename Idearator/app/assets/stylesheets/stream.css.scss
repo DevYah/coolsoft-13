@@ -52,40 +52,6 @@
   background-color:white;
 }
 
-div.topten_ideas::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-div.topten_ideas::-webkit-scrollbar {
-    width: 12px;
-}
-
-div.topten_ideas::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(100,100,100,0.5); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
-}
-
-div.trending-ideas::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-div.trending-ideas::-webkit-scrollbar {
-    width: 12px;
-}
-
-div.trending-ideas::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(100,100,100,0.5); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
-}
-
 .affix{
   position:fixed;
   right:5px;
@@ -100,9 +66,6 @@ div.trending-ideas::-webkit-scrollbar-thumb {
   padding:0%;
   margin-top:10%;
   background-color: #FFFFFF;
-  max-height: 300px;
-  height: auto;
-  overflow: auto;
   width: 340px;
   margin-left: 20px;
   margin-top: 30px;
@@ -120,9 +83,6 @@ h3.sidebar_title{
   padding:0%;
   margin-top: 0px;
   background-color: #FFFFFF;
-  max-height: 300px;
-  height: auto;
-  overflow: auto;
   width: 340px;
   margin-left: 20px;
 }

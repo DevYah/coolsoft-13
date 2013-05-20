@@ -3,7 +3,7 @@
   <div class='idea-popover idea-<%= @idea.id %>'>
     <div class="row">
       <div class="span8">
-        <h4 class="text-info" style = "color: #141B7F;" id= 'titleTag'><%= @idea.title %></h4>
+        <h4 class="text-info" style = "color: #141B7F;" id= 'titleTag'><%=link_to @idea.title ,@idea%></h4>
         <h5 style="
     padding-left: 276px;" id= 'userTag'>
           <span>by:
