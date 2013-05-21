@@ -3,8 +3,8 @@
     <% @notifications.each do |notification| %>
       <%= render partial: 'notifications/view', locals: {notification: notification} %>
     <% end %>
-    <li><div class="text-right view_all_notifications"><%= link_to('view all', controller: 'notifications',
-          action: 'view_all_notifications')%></div></li>
+    <li><div class="text-right view_all_notifications"><%= link_to 'view all', {controller: 'notifications',
+          action: 'view_all_notifications'},:id => 'view-all'%></div></li>
   <% end %>
 <%else%>
   <li class="disabled text-center"><a>
