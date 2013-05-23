@@ -29,6 +29,13 @@
       <div class='span4'>
         <%= 'by' %>
         <span><%= link_to idea.user.username , idea.user.becomes(User) %></span>
+        <h6 class="stream-date">
+          <% if ((Time.now - Idea.find(idea.id).created_at).to_i)/24/60/60 < 1 %>
+            <%= distance_of_time_in_words(idea.created_at.to_time, Time.now).to_s + " ago" %>
+          <% else %>
+            <%= Idea.getDate(idea.id) %>
+          <% end %>
+        </h6>
         <h4 class='stream-idea-titile'>Description</h4>
         <div class='stream-comp-description'><%= idea.description %></div>
       </div>

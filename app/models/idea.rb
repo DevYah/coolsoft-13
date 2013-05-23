@@ -1,6 +1,6 @@
 class Idea < ActiveRecord::Base
-
-  attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user, :user_id, :approved, :tag_ids
+  
+  attr_accessible :title, :description, :problem_solved, :photo, :num_votes, :user, :user_id, :approved, :tag_ids, :created_at
   
   validates_length_of :title, :maximum => 50
   validates_length_of :description, :maximum => 1000
@@ -39,6 +39,57 @@ class Idea < ActiveRecord::Base
     else
       find(:all)
     end
+  end
+
+  def self.getDay_of_week(day)
+    day_in_week = ""
+    if day == 0
+      day_in_week="Sunday"
+    else
+      if day == 1
+        day_in_week = "Monday"
+      else
+        if day == 2
+          day_in_week = "Tuesday"
+        else
+          if day == 3
+            day_in_week = "Wednesday"
+          else
+            if day == 4
+              day_in_week = "Thursday"
+            else
+              day_in_week = "Friday"
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def self.getDate(idea_id)
+    idea_time = Idea.find(idea_id).created_at
+    idea_date = Idea.find(idea_id).created_at.to_date
+    curr_date = Time.now.to_date
+    date = ""
+    
+      if idea_date.month == curr_date.month and idea_date.year == curr_date.year
+        if curr_date.day - idea_date.day < 7
+          if curr_date.day - idea_date.day == 1
+            date = "Yesterday" + " at, " + idea_time.strftime("%H:%M")
+          else
+            date = Idea.getDay_of_week(idea_date.day) + " at, " + idea_time.strftime("%H:%M")
+          end
+        else
+          date = Idea.getDay_of_week(idea_date.day) + idea_date.day + " at, " + idea_time.strftime("%H:%M")
+        end
+      else
+        if idea_date.month != curr_date.month and idea_date.year == curr_date.year
+          date = idea_date.month + " "+ idea_date.day
+        else
+          date = idea_date.month + " "+ idea_date.day + ", " + idea_date.year
+        end
+      end
+    
   end
 
   def self.filter(tags,search_parameter)
