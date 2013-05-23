@@ -34,6 +34,15 @@
   </div>
 </div>
 <!-- Main Idea Page -->
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @idea.title %>
+  <% else %>
+    <% content_for :title, @idea.title %>
+  <% end %>
+<% else %>
+  <% content_for :title, @idea.title %>
+<% end %>
 <div class='idea-page idea-<%= @idea.id %> well'>
   <% if current_user %>
     <% if current_user.type == "Committee" %>
@@ -132,8 +141,6 @@
         <%= render :partial => 'enter_competition'%>
       <% end %>
     </div>
-
-    <%= render partial: 'similar_ideas', locals: { idea: @idea } %>
   </div>
 </div>
 <script type="text/javascript">
@@ -157,4 +164,7 @@
     $('.archive-status').hide();
   </script>
 <% end %>
+<div class="well similar-ideas">
+  <%= render partial: "similar_ideas", locals: {idea:@idea}%>  
+</div>
 
