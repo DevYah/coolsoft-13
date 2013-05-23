@@ -27,14 +27,12 @@
   <% if not user_signed_in? %>
     <li class="divider-vertical"></li>
     <li>
-      <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
-                 :class => 'popup social-media-login facebook-nav-login scrollshow',
-                 "data-width" => 600, "data-height" => 500 %>
+      <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
+                 :class => 'popup nav-login scrollshow' %>
     </li>
     <li>
-      <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
-                :class => 'popup social-media-login twitter-nav-login scrollshow',
-                'data-width' => 600, 'data-height' => 500  %>
+      <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
+                :class => 'popup nav-login scrollshow' %>
     </li>
       <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow')  %> </li>
     <li class="divider-vertical"></li>
