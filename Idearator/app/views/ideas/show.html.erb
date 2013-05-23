@@ -52,6 +52,9 @@
       <% end %>
     <% end %>
   <% end %>
+  <div class='row span12 offset10'>
+        <%= render :partial => 'share' ,locals: { idea: @idea }%>
+  </div>
   <div class='row'>
     <div class='span12'>
       <h3><%= @idea.title %></h3>
@@ -76,7 +79,6 @@
              <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
           <% end %>
         <% end %>
-        <%= render :partial => 'share' ,locals: { idea: @idea }%>
         <% if @user == @idea.user_id %>
           <div class='btn-group' id='control'>
             <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
