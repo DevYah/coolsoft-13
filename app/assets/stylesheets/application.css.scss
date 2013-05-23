@@ -88,6 +88,32 @@ padding-top:5px;
   font-size: 0;
 }
 
+.fb-login{
+  display: block;
+  padding: 3px;
+  color: #3b5998;
+  opacity: 0.5;
+}
+.tw-login{
+  display: block;
+  padding: 3px;
+  color: #4099FF;
+  opacity: 0.5;
+}
+
+.fb-login:hover{
+  opacity: 1;
+}
+
+.tw-login:hover{
+  opacity: 1;
+}
+
+.nav-login{
+  padding: 0px 0px 0px;
+  margin: 0px 0px 0px;
+}
+
 .fbk{
   cursor: pointer;
   padding:2px;
