@@ -89,31 +89,35 @@ padding-top:5px;
 }
 
 .fbk{
-  width:30px;
-  height:30px;
   cursor: pointer;
   padding:2px;
   opacity: 0.5;
 }
 
 .tw{
-  width:30px;
-  height:30px;
   cursor:pointer;
   padding:2px;
   opacity: 0.5;
 }
 
 .pin{
-  width:30px;
-  height:30px;
   cursor:pointer;
   padding:2px;
   opacity: 0.5;
 }
 
-.fbk:hover, .tw:hover, .pin:hover{
- opacity: 1; 
+.fbk:hover{ 
+  opacity: 1;
+  color: #3b5998; 
+}
+.tw:hover{
+  opacity: 1;
+  color: #4099FF;
+}
+
+.pin:hover{
+  opacity: 1;
+  color: #C92228;
 }
 
 .my-ideas{
