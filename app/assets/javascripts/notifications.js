@@ -27,3 +27,9 @@ function notification_click(select, redirect){
     $.getScript(redirect + ".js?&notification=" + notification);
   });
 }
+
+$(document).ready(function(){
+  $('#count').click(function(){
+   $.getScript('/set_old');
+  });
+});
