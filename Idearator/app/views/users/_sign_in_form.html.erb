@@ -1,4 +1,4 @@
-<h4 class='text-center unauth-header'>Sign in</h4>
+<h3 class='text-center unauth-header'>Sign in</h3>
 <%= form_tag user_session_path do %>
   <div class="input-prepend">
     <span class="add-on"><i class="icon-envelope"></i></span>
@@ -20,13 +20,11 @@
 <% end %>
 <ul class='inline unstyled text-center unauth-sign-in-social-div'>
   <li>
-    <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
-    :class => 'popup facebook-nav-login unauth-sign-in-social',
-    "data-width" => 600, "data-height" => 500 %>
+    <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
+                 :class => 'popup nav-login scrollshow' %>
   </li>
   <li>
-    <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
-    :class => 'popup twitter-nav-login unauth-sign-in-social',
-    'data-width' => 600, 'data-height' => 500  %>
+    <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
+                :class => 'popup nav-login scrollshow' %>
   </li>
 </ul>
