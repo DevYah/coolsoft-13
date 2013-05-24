@@ -29,7 +29,7 @@ class NotificationsController < ApplicationController
     notification.set_read_for current_user
     count = current_user.unread_notifications_count
     respond_to do |format|
-      format.js { render 'redirect', locals:{path: '/ideas/' + ((notification.idea.id).to_s), count:count} }
+      format.js { render 'redirect', locals:{path: '/ideas/' + ((notification.idea.id).to_s), count: count} }
       format.json { head :no_content }
     end
   end

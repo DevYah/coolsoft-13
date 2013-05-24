@@ -105,7 +105,7 @@ padding-top:5px;
   display: none;
 }
 
-.icon-user {
+nav .icon-user {
   padding-right: 10px;
 }
 
@@ -126,6 +126,32 @@ padding-top:5px;
   width: 150px;
   height: 20px;
   font-size: 0;
+}
+
+.fb-login{
+  display: block;
+  padding: 3px;
+  color: #3b5998;
+  opacity: 0.5;
+}
+.tw-login{
+  display: block;
+  padding: 3px;
+  color: #4099FF;
+  opacity: 0.5;
+}
+
+.fb-login:hover{
+  opacity: 1;
+}
+
+.tw-login:hover{
+  opacity: 1;
+}
+
+.nav-login{
+  padding: 0px 0px 0px;
+  margin: 0px 0px 0px;
 }
 
 .fbk{
@@ -162,4 +188,8 @@ padding-top:5px;
 
 .my-ideas{
   padding: 20px;
+}
+
+.new-share{
+  margin-left: 50px;
 }

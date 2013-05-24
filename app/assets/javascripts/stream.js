@@ -356,3 +356,7 @@ $(window).scroll (function(){
     });
     return page;
   }
+
+$(document).ready(function() {      
+ $('.carousel').carousel('pause');
+});
