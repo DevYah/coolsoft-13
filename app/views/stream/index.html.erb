@@ -11,7 +11,7 @@
     <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Idearator" %>  
   <% end %>
 <% else %>
-  <% content_for :title, @competition.title %>
+  <% content_for :title, "Idearator" %>
 <% end %>
 
 <%if current_user == nil%>
