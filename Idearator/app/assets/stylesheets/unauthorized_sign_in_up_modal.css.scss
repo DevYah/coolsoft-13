@@ -48,7 +48,7 @@
 }
 
 .unauth-width {
-  width: 530px;
+  margin: 0px;
 }
 
 .unauth-huge {
@@ -91,4 +91,8 @@
 
 .sign-in-form .sign_in_button{
   margin-top:10px;
+}
+
+#unauth-sign-in-button{
+  padding: 20px;
 }
