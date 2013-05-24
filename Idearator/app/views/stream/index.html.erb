@@ -6,6 +6,14 @@
   in_stream = true;
 </script>
 
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Idearator" %>  
+  <% end %>
+<% else %>
+  <% content_for :title, @competition.title %>
+<% end %>
+
 <%if current_user == nil%>
   <div id= "landing">
     <div class="hero-unit text-center" id="title">
@@ -108,8 +116,8 @@
       </div>
       <div id="spinner-outer">
         <div id="spinner">
-          <div class='icon-refresh icon-spin icon-large' id="spinner-inner">
-          </div>
+          <!-- <i class="spinner-inner"></i> -->
+          <img src="http://i.stack.imgur.com/0iq1w.gif" id="spinner-inner">
         </div>
       </div>
     </div>

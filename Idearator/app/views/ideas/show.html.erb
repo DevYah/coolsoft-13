@@ -34,6 +34,15 @@
   </div>
 </div>
 <!-- Main Idea Page -->
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @idea.title %>
+  <% else %>
+    <% content_for :title, @idea.title %>
+  <% end %>
+<% else %>
+  <% content_for :title, @idea.title %>
+<% end %>
 <div class='idea-page idea-<%= @idea.id %> well'>
   <% if current_user %>
     <% if current_user.type == "Committee" %>
@@ -63,7 +72,7 @@
   <div class='row'>
     <div class='span4 idea-picture'>
       <div class='row'>
-      <a  href='#'class='pull-left'>
+      <a href='#'class='pull-left'>
         <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
       </a>
       </div>
@@ -76,7 +85,7 @@
       <div class='pull-left row'>
         <%if @chosentags != nil %>
           <% @chosentags.each do |tag|%>
-             <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
+             <span class="label label-info"><i class="icon-tag"></i><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
           <% end %>
         <% end %>
         <% if @user == @idea.user_id %>
@@ -95,6 +104,13 @@
     <div class='span4'>
       <%= 'by'%>
       <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
+      <h6 class="stream-date">
+        <% if ((Time.now - @idea.created_at).to_i)/24/60/60 < 1 %>
+          <%= distance_of_time_in_words(@idea.created_at.to_time, Time.now).to_s + " ago" %>
+        <% else %>
+          <%= Idea.getDate(@idea.id) %>
+        <% end %>
+      </h6>
       <h4>Description:</h4>
       <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
       <h4>Problem Solved:</h4>
@@ -134,10 +150,9 @@
         <%= render :partial => 'enter_competition'%>
       <% end %>
     </div>
-
-    <%= render partial: 'similar_ideas', locals: { idea: @idea } %>
   </div>
 </div>
+
 <script type="text/javascript">
   function sendAjax(idea_id){
     var list = "";
@@ -159,4 +174,7 @@
     $('.archive-status').hide();
   </script>
 <% end %>
+<div class="well similar-ideas">
+  <%= render partial: "similar_ideas", locals: {idea:@idea}%>
+</div>
 

@@ -41,6 +41,7 @@ function check_if_exists(tag){
 }
 
 function stream_manipulator(page,tag,search,insert,user){
+  console.log("da5ell1");
   currentpage = page;
   searchtext = search+"";
   will_insert = (insert == "true");
@@ -117,20 +118,20 @@ function stream_manipulator(page,tag,search,insert,user){
       }
     }
   }
+  
   $("#stream_results").html("");
   $("#stream_results").data("tags",thistag);
-  $("#spinner-inner").addClass('icon-refresh icon-spin icon-large');
-  $("#spinner-outer").show();
+  
+  
   if(reset == "true"){
     $.ajax({
       url: '/stream/index?page=' + currentpage,
       type: 'get',
       dataType: 'script',
       data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert ,reset_global: reset},
-      success: function() {
+      complete: function() {
         apply_tag_handlers();
         apply_tooltip_handlers();
-        $("#spinner-outer").hide();
       }
     });
   }else{
@@ -139,16 +140,26 @@ function stream_manipulator(page,tag,search,insert,user){
     type: 'get',
     dataType: 'script',
     data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
-    success: function() {
+    complete: function() {
       apply_tag_handlers();
-      apply_tooltip_handlers();
-      $("#spinner-outer").hide();
-    }
+      apply_tooltip_handlers();     
+    } 
   });
  }
+ set_search();
 }
 
+$(document).on('ajaxStart', function(){
+   var link = $('#spinner-inner').attr("value");
+   $('#spinner-inner').css("visibility","visible");
+});
+
+$(document).on('ajaxStop', function(){
+   $('#spinner-inner').css("visibility","hidden");
+});
+
 $(document).ready(function(){
+
   if($("#landing").is(':visible')){
     $("#in-stream-component").hide();
   }
@@ -255,12 +266,11 @@ $(document).ready(function(){
         $('html, body').animate({scrollTop:$('#landing').height()}, 'slow');
       }
       
-      if(stream_height<3000){
-        $("#spinner-outer").hide();
-      }else{
-        $("#spinner-outer").show();
-      }
-
+      // if(stream_height<3500){
+      //   $("#spinner-outer").hide();
+      // }else{
+      //   $("#spinner-outer").show();
+      // }
       stream_manipulator(1,[curr.val()],$("#search").val(),"false", "false");
     });
   }

@@ -39,7 +39,7 @@
           </div>
           <%if @chosentags != nil %>
             <% @chosentags.each do |tag|%>
-              <span class="label label-info "><%= tag.name %></span>
+              <span class="label label-info "><i class="icon-tag"></i><%= tag.name %></span>
             <% end %>
           <% end %>
           <div class="span2 pull-right" id='votesPopover'>
