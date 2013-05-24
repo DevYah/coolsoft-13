@@ -150,11 +150,12 @@ function stream_manipulator(page,tag,search,insert,user){
 }
 
 $(document).on('ajaxStart', function(){
-   $(".spinner-inner").addClass('icon-spinner icon-spin icon-large');
+   var link = $('#spinner-inner').attr("value");
+   $('#spinner-inner').css("visibility","visible");
 });
 
 $(document).on('ajaxStop', function(){
-   $('.spinner-inner').removeClass('icon-spinner icon-spin icon-large');
+   $('#spinner-inner').css("visibility","hidden");
 });
 
 $(document).ready(function(){

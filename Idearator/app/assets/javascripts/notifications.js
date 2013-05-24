@@ -5,9 +5,7 @@ function add_notification_event_handlers() {
   notification_click('div.delete-notification', '/set_read');
   notification_click('div.competition-notification', '/redirect_competition');
   notification_click('div.enter_idea-notification', '/redirect_stream');
-  $("#view-all").click(function(){
-    resets_notifications();
-  });
+ 
   if($("#notifications").is(":visible")){
     resets_notifications();
   }
@@ -23,10 +21,8 @@ $(document).ready(add_notification_event_handlers);
 
 function notification_click(select, redirect){
   $(select).click(function(){
-    if(select == 'div.delete-notification'){
-      $(this).removeClass('unread');
-      $(this).addClass('read');
-    }
+    $(this).removeClass('unread');
+    $(this).addClass('read');
     var notification = $(this).data('notification');
     $.getScript(redirect + ".js?&notification=" + notification);
   });

@@ -12,7 +12,7 @@ $(function() {
     var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
         if(search.length > 2 || e.which == 8){
-          setTimeout(function(){stream_manipulator(1,[],search,"false", search_in)},1500);
+          setTimeout(function(){stream_manipulator(1,[],search,"false", search_in)},1000);
           $('html, body').animate({scrollTop:0}, 'slow');
         }
       }else{
