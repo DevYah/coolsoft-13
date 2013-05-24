@@ -43,6 +43,9 @@ function set_search(){
 }
 
 $(document).ready(function() {
+
+  setTimeout(function(){$(".alert-success").fadeOut(1000);},5000);
+
   set_search();
   $("#sign").click(function() {
     window.location= "/users/sign_in";
