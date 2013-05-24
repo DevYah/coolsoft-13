@@ -1,22 +1,24 @@
-<h3 class="title sidebar_title">Trending Ideas
+<h3 class="title sidebar_title">Trending Ideas<i class="icon-plus-sign show-trend"></i>
 </h3>
-<% @trending.each do |top| %>
-  <% if top.user.active == true and top.user.banned == false%>
-    <div class="topten_idea media well">
-       <h4 class="media-heading idea">
-          <a data-popover-idea-id=<%=top.id %>>
-            <%= top.title %>
-          </a>
-        </h4>
-      <a class="pull-left" href="#">
-        <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
-      </a>
-      <div class="media-body">
-        <span>by <%= link_to  top.user.username, top.user.becomes(User)  %></span>
-        <br>
-        <span class="badge badge-topten"><%= top.num_votes %>
-          votes</span>
+<div id="trend-content">
+  <% @trending.each do |top| %>
+    <% if top.user.active == true and top.user.banned == false%>
+      <div class="topten_idea media well">
+         <h4 class="media-heading idea">
+            <a data-popover-idea-id=<%=top.id %>>
+              <%= top.title %>
+            </a>
+          </h4>
+        <a class="pull-left" href="#">
+          <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
+        </a>
+        <div class="media-body">
+          <span>by <%= link_to  top.user.username, top.user.becomes(User)  %></span>
+          <br>
+          <span class="badge badge-topten"><%= top.num_votes %>
+            votes</span>
+        </div>
       </div>
-    </div>
-  <% end %>
-<%end%>
+    <% end %>
+  <%end%>
+</div>
