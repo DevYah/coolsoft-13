@@ -1,5 +1,16 @@
 <script src='http://www.google.com/jsapi'></script>
 <h1 align='middle'>Dashboard</h1>
+
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Dashboard" %>
+  <% else %>
+    <% content_for :title, "Dashboard" %>
+  <% end %>
+<% else %>
+  <% content_for :title, "Dashboard" %>
+<% end %>
+
 <div class='nav nav-tabs'>
   <% if @user.type == 'Committee' %>
     <ul class='nav nav-tabs'>

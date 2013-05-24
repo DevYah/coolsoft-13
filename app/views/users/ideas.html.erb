@@ -1,3 +1,13 @@
+<% if current_user != nil %>
+	<% if current_user.unread_notifications_count > 0 %>
+	  <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Ideas" %>
+	<% else %>
+	  <% content_for :title, "Ideas" %>
+	<% end %>
+<% else %>
+	<% content_for :title, "Ideas" %>
+<% end %>
+
 <h3 id='user-ideas-title'>
   <% if current_user == @user %>
     My Ideas

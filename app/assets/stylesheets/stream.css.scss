@@ -24,6 +24,11 @@
   border-bottom-style:0.25px solid;
 }
 
+
+.user-search, .idea-search{
+  margin-left:5px;
+}
+
 .stream-date{
   margin:0px;
   margin-bottom:30px;
@@ -60,7 +65,7 @@
 
 .affix{
   position:fixed;
-  right:5px;
+  right:15px;
   bottom:5%;
 }
 

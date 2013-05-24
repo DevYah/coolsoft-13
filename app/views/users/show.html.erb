@@ -1,5 +1,15 @@
 <link rel="stylesheet" type="text/css" media="all"
       href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css"/>
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @user.username %>
+  <% else %>
+    <% content_for :title, @user.username %>
+  <% end %>
+<% else %>
+  <% content_for :title, @user.username %>
+<% end %>
+
 <div class='well user-profile-page'>
   <h3>
     <% if @user.username != "" and @user.username %>
@@ -16,8 +26,8 @@
   <div class="btn-group">
     <% if current_user != nil %>
     <% if @user == current_user %>
-      <%= link_to 'Edit', edit_user_registration_path, :class => "btn"%>
-      <%= link_to 'Deactivate', {:controller => 'users' ,:action => 'confirm_deactivate'},:class => "btn"%>
+      <%= link_to 'Edit', edit_user_registration_path, :class => "btn btn-inverse"%>
+      <%= link_to 'Deactivate', {:controller => 'users' ,:action => 'confirm_deactivate'},:class => "btn btn-danger"%>
     <% end %>
     <% if current_user != nil && current_user.type == 'Admin' && @user.active == true && @user.banned == false %>
       <%= link_to 'Ban', { :controller => 'admins', :action => 'ban_unban' }, :id =>params[:id], :confirm => 'Are you sure you want to Ban this user?', :class => 'options btn btn-danger' %>
