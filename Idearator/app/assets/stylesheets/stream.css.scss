@@ -94,7 +94,7 @@ h3.sidebar_title{
   background-color: #FFFFFF;
   width: 340px;
   margin-left: 20px;
-  margin-top: 20px;
+  
   margin-bottom: 0px;
 }
 
@@ -272,6 +272,13 @@ p.description_content{
   color:#00ffff;
 }
 
+#sidebar{
+  max-height: 600px;
+  height: auto;
+  overflow: hidden;
+  margin-top:20px;
+}
+
 .stream-generate-button {
   margin-top:20px;
   -moz-box-shadow:inset 0px 0px 30px 2px #f29c93;
@@ -405,6 +412,20 @@ h4.media-heading{
   padding: 0px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.show{
+  margin-left:207px;
+  cursor:pointer;
+}
+
+.show-trend{
+  margin-left:190px;
+  cursor:pointer;
+}
+
+#topten-content, #trend-content{
+  display:none;
 }
 
 #sidebar .carousel-control{
