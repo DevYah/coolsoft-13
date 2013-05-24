@@ -1,0 +1,20 @@
+<div class='unauth-sign-up'>
+  <div><%= render 'users/sign_up_form' %></div>
+  <a class='switch'>
+    <i class='icon-chevron-right'></i> Or Sign in</a>
+  <ul class='inline unstyled text-center unauth-sign-in-social-div'>
+    <li>
+      <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
+                 :class => 'popup nav-login' %>
+    </li>
+    <li>
+      <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
+                :class => 'popup nav-login' %>
+    </li>
+  </ul>
+</div>
+<div class='unauth-sign-in'>
+  <div><%= render 'users/sign_in_form' %></div>
+  <a class='switch'>
+    <i class='icon-chevron-right'></i> Or Sign up</a>
+</div>

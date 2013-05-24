@@ -1,26 +1,11 @@
-<div id='signedout' class='modal hide fade' data-backdrop='static' data-keyboard='false'>
+<div id='signedout' class='modal hide fade span5' data-backdrop='static' data-keyboard='false'>
   <div class='modal-header'>
     <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
     <h3 class='text-center'>You need to sign up or sign in!</h3>
   </div>
   <div class='modal-body unauthorized-body'>
-        <div class='well unauth-centered unauth-sign-up'>
-          <div><%= render 'users/sign_up_form' %></div>
-          <a class='switch'>Or Sign in <i class='icon-chevron-right'></i></a>
-          <ul class='inline unstyled text-center unauth-sign-in-social-div'>
-  <li>
-    <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
-                 :class => 'popup nav-login' %>
-  </li>
-  <li>
-    <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
-                :class => 'popup nav-login' %>
-  </li>
-</ul>
-        </div>
-        <div class='well unauth-centered unauth-sign-in'>
-          <div><%= render 'users/sign_in_form' %></div>
-          <a class='switch'>Or Sign up <i class='icon-chevron-right'></i></a>
-        </div>
+    <div class='well unauth-centered'>
+      <%= render 'layouts/sign_up_in_form' %>
+    </div>
   </div>
 </div>
