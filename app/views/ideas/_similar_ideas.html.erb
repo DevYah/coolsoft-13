@@ -1,6 +1,7 @@
-<% if idea.similar_ideas.size != 0 %>
+<% similar_ideas = idea.similar_ideas.uniq %>
+<% if similar_ideas.size != 0 %>
   <h3 class="title sidebar_title">Similar Ideas</h3>
-  <% idea.similar_ideas.each do |similar_idea| %>
+  <% similar_ideas.each do |similar_idea| %>
     <%= render partial: "similar_idea", locals: {idea:similar_idea} %>
   <% end %>
 <% end %>

@@ -116,60 +116,58 @@
       </div>
       <div id="spinner-outer">
         <div id="spinner">
-          <i class="spinner-inner"></i>
+          <!-- <i class="spinner-inner"></i> -->
+          <img src="http://i.stack.imgur.com/0iq1w.gif" id="spinner-inner">
         </div>
       </div>
     </div>
     <div id='sidebar' class='span4 pull-right'>
       <% if MonthlyWinner.all.count > 0 %>
-        <div class='topten'>
-          <div class='row'>
-            <h3 class='title1'>Idea of the Month</h3>
-          </div>
-          <div id="myCarousel" class="carousel slide">
+        <div class='topten_ideas well'>
+            <h3 class='title sidebar_title'><i class="icon-trophy"></i> Idea of the Month</h3>
+          <div id="myCarousel" class="carousel slide sidebar-carousel">
             <!-- Carousel items -->
             <div class="carousel-inner">
               <div class="active item">
                 <div id='idea_of_the_month'>
-                  <div class='row'>
+                  <div class="topten_idea media iom">
                     <% month = @first.created_at.month %>
                     <% case month %>
                     <% when 1 %>
-                    <h1 class='title'>January</h1>
+                    <h3 class='text-center'>January</h3>
                     <% when 2 %>
-                    <h1 class='title'>February</h1>
+                    <h3 class='text-center'>February</h3>
                     <% when 3 %>
-                    <h1 class='title'>March</h1>
+                    <h3 class='text-center'>March</h3>
                     <% when 4 %>
-                    <h1 class='title'>April</h1>
+                    <h3 class='text-center'>April</h3>
                     <% when 5 %>
-                    <h1 class='title'>May</h1>
+                    <h3 class='text-center'>May</h3>
                     <% when 6 %>
-                    <h1 class='title'>June</h1>
+                    <h3 class='text-center'>June</h3>
                     <% when 7 %>
-                    <h1 class='title'>July</h1>
+                    <h3 class='text-center'>July</h3>
                     <% when 8 %>
-                    <h1 class='title'>August</h1>
+                    <h3 class='text-center'>August</h3>
                     <% when 9 %>
-                    <h1 class='title'>September</h1>
+                    <h3 class='text-center'>September</h3>
                     <% when 10 %>
-                    <h1 class='title'>October</h1>
+                    <h3 class='text-center'>October</h3>
                     <% when 11 %>
-                    <h1 class='title'>November</h1>
+                    <h3 class='text-center'>November</h3>
                     <% when 12 %>
-                    <h1 class='title'>December</h1>
+                    <h3 class='text-center'>December</h3>
                     <% end %>
-                  </div>
-                  <div class="topten_idea media">
                     <a class="pull-left" href="#">
                       <span class="image"><%= image_tag(@first.photo.url(:thumb), :size => "80x80") %></span>
                     </a>
                     <div class="media-body">
-                      <span><%= link_to @first.user.username, @first.user.becomes(User) %></span>
-                      <h4 class="media-heading idea">
+                      <h4 class="media-heading idea winning-ideaa">
                         <%= link_to @first.title ,@first %>
                       </h4>
-                      <span class="badge"><%= @first.num_votes %>
+                      <span>by <%= link_to @first.user.username, @first.user.becomes(User) %></span>
+                      <br /><br />
+                      <span class="badge badge-topten"><%= @first.num_votes %>
                         votes</span>
                       </div>
                     </div>
@@ -179,45 +177,43 @@
                   <% @second=Idea.find(second.idea_id) %>
                     <div class="item">
                       <div id='idea_of_the_mouth'>
-                        <div class='row'>
-                          <% month = @first.created_at.month %>
+                        <div class="topten_idea media iom">
+                          <% month = @second.created_at.month %>
                           <% case month %>
-                          <% when 1 %>
-                          <h1 class='title'>January</h1>
-                          <% when 2 %>
-                          <h1 class='title'>February</h1>
-                          <% when 3 %>
-                          <h1 class='title'>March</h1>
-                          <% when 4 %>
-                          <h1 class='title'>April</h1>
-                          <% when 5 %>
-                          <h1 class='title'>May</h1>
-                          <% when 6 %>
-                          <h1 class='title'>June</h1>
-                          <% when 7 %>
-                          <h1 class='title'>July</h1>
-                          <% when 8 %>
-                          <h1 class='title'>August</h1>
-                          <% when 9 %>
-                          <h1 class='title'>September</h1>
-                          <% when 10 %>
-                          <h1 class='title'>October</h1>
-                          <% when 11 %>
-                          <h1 class='title'>November</h1>
-                          <% when 12 %>
-                          <h1 class='title'>December</h1>
-                          <% end %>
-                        </div>
-                        <div class="topten_idea media">
+                            <% when 1 %>
+                            <h3 class='text-center'>January</h3>
+                            <% when 2 %>
+                            <h3 class='text-center'>February</h3>
+                            <% when 3 %>
+                            <h3 class='text-center'>March</h3>
+                            <% when 4 %>
+                            <h3 class='text-center'>April</h3>
+                            <% when 5 %>
+                            <h3 class='text-center'>May</h3>
+                            <% when 6 %>
+                            <h3 class='text-center'>June</h3>
+                            <% when 7 %>
+                            <h3 class='text-center'>July</h3>
+                            <% when 8 %>
+                            <h3 class='text-center'>August</h3>
+                            <% when 9 %>
+                            <h3 class='text-center'>September</h3>
+                            <% when 10 %>
+                            <h3 class='text-center'>October</h3>
+                            <% when 11 %>
+                            <h3 class='text-center'>November</h3>
+                            <% when 12 %>
+                            <h3 class='text-center'>December</h3>
+                            <% end %>
                           <a class="pull-left" href="#">
                             <span class="image"><%= image_tag(@second.photo.url(:thumb), :size => "80x80") %></span>
                           </a>
                           <div class="media-body">
-                            <span><%= link_to @second.user.username, @second.user.becomes(User) %></span>
-                            <h4 class="media-heading idea">
+                            <h4 class="media-heading idea winning-idea">
                               <%= link_to @second.title ,@second %>
                             </h4>
-                            <span class="badge"><%= @second.num_votes %>votes</span>
+                            <span><%= link_to @second.user.username, @second.user.becomes(User) %></span>
+                            <span class="badge badge-topten"><%= @second.num_votes %>votes</span>
                           </div>
                         </div>
                       </div>
@@ -249,7 +245,7 @@
                 <span class="image"><%= image_tag(top.photo.url(:thumb), :size => "40x40") %></span>
               </a>
               <div class="media-body">
-                <span>by: <%= link_to top.user.username, top.user.becomes(User) %></span>
+                <span>by <%= link_to top.user.username, top.user.becomes(User) %></span>
                 <br>
                 <span class="badge badge-topten"><%= top.num_votes %>
                   votes</span>
