@@ -83,22 +83,26 @@
         </script>
       <% end %>
       <div class='pull-left row'>
-        <%if @chosentags != nil %>
-          <% @chosentags.each do |tag|%>
-             <span class="label label-info"><i class="icon-tag"></i><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
-          <% end %>
-        <% end %>
-        <% if @user == @idea.user_id %>
-          <div class='btn-group' id='control'>
-            <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
-            <% if @idea.archive_status == true %>
-              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
-            <% else %>
-              <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
+        <div>
+          <%if @chosentags != nil %>
+            <% @chosentags.each do |tag|%>
+               <span class="label label-info"><i class="icon-tag"></i><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
             <% end %>
-            <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+        <div>
+          <% if @user == @idea.user_id %>
+            <div class='btn-group' id='control'>
+              <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
+              <% if @idea.archive_status == true %>
+                <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
+              <% else %>
+                <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
+              <% end %>
+              <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class='span4'>

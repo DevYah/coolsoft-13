@@ -36,4 +36,14 @@ class UserNotification < ActiveRecord::Base
     notification.save
   end
 
+  def is_new(user)
+    NotificationsUser.find(:first, :conditions => {notification_id: self.id, user_id: user.id }).new_notification
+  end
+
+  def set_old(user)
+    notification = NotificationsUser.find(:first, :conditions => {notification_id: self.id, user_id: user.id})
+    notification.new_notification = false
+    notification.save
+  end
+
 end

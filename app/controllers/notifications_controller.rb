@@ -103,4 +103,11 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def set_old
+    current_user.set_old_notifications
+    respond_to do |format|
+      format.js { render 'update_count', locals:{count: 0} }
+    end
+  end
+
 end

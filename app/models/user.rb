@@ -113,7 +113,14 @@ class User < ActiveRecord::Base
   end
 
   def unread_notifications_count
-    NotificationsUser.find(:all, :conditions => {user_id: self.id, read: false }).length
+    NotificationsUser.find(:all, :conditions => {user_id: self.id, new_notification: true }).length
+  end
+
+  def set_old_notifications
+    notifications = NotificationsUser.find(:all, :conditions => {user_id: self.id, new_notification: true})
+    notifications.each do |notification|
+      notification.notification.set_old(self)
+    end
   end
 
   # It returns a Twitter Client object, new one if none exists
