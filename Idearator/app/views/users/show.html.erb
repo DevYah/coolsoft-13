@@ -23,8 +23,9 @@
   <% elsif @user.active == false %>
     <p class='text-error'>This User is currently deactivated!</p>
   <% end %>
-  <div class="btn-group">
-    <% if current_user != nil %>
+  
+  <% if current_user != nil %>
+    <div class="btn-group">
     <% if @user == current_user %>
       <%= link_to 'Edit', edit_user_registration_path, :class => "btn btn-inverse"%>
       <%= link_to 'Deactivate', {:controller => 'users' ,:action => 'confirm_deactivate'},:class => "btn btn-danger"%>
@@ -38,16 +39,18 @@
     <% if @admin.type == "Admin" && @user.active==true && !@registered and @user.banned == false %>
       <%= link_to "Invite", { :controller => "users", :action => "invite_member", :id => @user }, :class => "options btn btn-primary" %>
     <%end%>
+    </div>
+    <div class="btn-group">
     <% if @admin.type == "Admin" and @registered and @user.banned==false%>
       <%= render :partial => 'modal_approve'%>
-      <p><a data-toggle="modal" href="#approve" class="options btn btn-success">Approve</a></p>
+      <a data-toggle="modal" href="#approve" class="options btn btn-success">Approve</a>
     <% end %>
     <% if @admin.type == "Admin" and @registered and @user.banned==false%>
       <%= render :partial => 'modal_reject'%>
-      <p><a data-toggle="modal" href="#reject" class="options btn btn-danger">Reject</a></p>
+      <a data-toggle="modal" href="#reject" class="options btn btn-danger">Reject</a>
     <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <% if @user.banned == false and @user.active == true %>
     <div id='user'>
       <div class='user-photo'>
