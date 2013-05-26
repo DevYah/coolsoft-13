@@ -190,7 +190,8 @@
                             <h4 class="media-heading idea winning-idea">
                               <%= link_to @second.title ,@second %>
                             </h4>
-                            <span><%= link_to @second.user.username, @second.user.becomes(User) %></span>
+                            <span>by <%= link_to @second.user.username, @second.user.becomes(User) %></span>
+                            <br /><br />
                             <span class="badge badge-topten"><%= @second.num_votes %>votes</span>
                           </div>
                         </div>

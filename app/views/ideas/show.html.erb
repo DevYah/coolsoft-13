@@ -62,7 +62,17 @@
     <% end %>
   <% end %>
   <div class='row span12 offset10'>
-        <%= render :partial => 'share' ,locals: { idea: @idea }%>
+    <% if @user == @idea.user_id %>
+      <div id='control'>
+        <%= link_to 'Edit', edit_idea_path(@idea)%>
+        <% if @idea.archive_status == true %>
+          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :remote => true %>
+        <% else %>
+          <a data-toggle='modal' data-target='#archive-modal' data-remote='true'>Archive</a>
+        <% end %>
+        <a data-toggle='modal' data-target='#delete-modal' data-remote='true'>Delete</a>
+      </div>
+    <% end %>
   </div>
   <div class='row'>
     <div class='span12'>
@@ -90,19 +100,7 @@
             <% end %>
           <% end %>
         </div>
-        <div>
-          <% if @user == @idea.user_id %>
-            <div class='btn-group' id='control'>
-              <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
-              <% if @idea.archive_status == true %>
-                <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
-              <% else %>
-                <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
-              <% end %>
-              <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
-            </div>
-          <% end %>
-        </div>
+        <%= render :partial => 'share' ,locals: { idea: @idea }%>
       </div>
     </div>
     <div class='span4'>
