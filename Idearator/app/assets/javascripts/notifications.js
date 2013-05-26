@@ -30,6 +30,8 @@ function notification_click(select, redirect){
 
 $(document).ready(function(){
   $('#count').click(function(){
-   $.getScript('/set_old');
+    val = $('#count').text();
+    if(val != 0)
+      $.getScript('/set_old');
   });
 });
