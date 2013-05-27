@@ -16,72 +16,99 @@
 
 <%if current_user == nil%>
   <div id= "landing">
-    <div class="hero-unit text-center" id="title">
-      <h1>Idearator</h1>
-      <p>The Community that turns your ideas into a Reality</p>
-    </div>
-    <div class='row'>
-      <div class="span3 pull-right signinout landing-centered">
-        <%= render 'layouts/sign_up_in_form' %>
-      </div>
-      <div id="myCarousel" class="carousel slide span9">
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner carouselitem text-center">
-          <div class="active item">
-            <div class="text-center">
-              <%= image_tag('lightbulb-image-for-WEbsite1.jpg')%>
+    <div class='row landing-centered text-center'>
+      <div class='span12'>
+        <div id="myCarousel" class="carousel slide span8">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner carouselitem text-center">
+            <div class="active item">
+              <div class="text-center">
+                <%= image_tag('lightbulb-image-for-WEbsite1.jpg')%>
+                <div class="carousel-caption text-center">
+                  <h4>Have an Awsome Idea ?!</h4>
+                  <h4>Decide you want to share your idea with the world.</h4>
+                </div>
+              </div>
+            </div>
+            <div class="item carouselitem">
+              <div class="text-center">
+                <%= image_tag('331281.jpg')%>
+              </div>
               <div class="carousel-caption text-center">
-                <h4>Have an Awsome Idea ?!</h4>
-                <h4>Decide you want to share your idea with the world.</h4>
+                <h4>Sign up right now to Idearator</h4>
+              </div>
+            </div>
+            <div class="item carouselitem">
+              <div class="text-center">
+                <%= image_tag('bulb1.jpg')%>
+              </div>
+              <div class="carousel-caption text-center">
+                <h4>Submit your idea</h4>
+                <h4>Let the community decide the future of your idea</h4>
+                <h4>Turn your idea into a Reality</h4>
               </div>
             </div>
           </div>
-          <div class="item carouselitem">
-            <div class="text-center">
-              <%= image_tag('331281.jpg')%>
-            </div>
-            <div class="carousel-caption text-center">
-              <h4>Sign up right now to Idearator</h4>
-            </div>
+          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+        <div class='span3'>
+          <div class="row signinout landing-centered">
+            <%= render 'layouts/sign_up_in_form' %>
+            
           </div>
-          <div class="item carouselitem">
-            <div class="text-center">
-              <%= image_tag('bulb1.jpg')%>
-            </div>
-            <div class="carousel-caption text-center">
-              <h4>Submit your idea</h4>
-              <h4>Let the community decide the future of your idea</h4>
-              <h4>Turn your idea into a Reality</h4>
-            </div>
+          <div class='row text-center'>
+            <br /><br />
+            <h6 class='check-ideas'>Take a look arround</h6>
+            <a class='show-stream btn btn-danger'> Checkout our latest ideas!</a>
           </div>
         </div>
-        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
       </div>
     </div>
-    <% if @best.size != 0%>
-      <div class="container best-ideas-div img-rounded">
-        <div class="text-center">
-          <h3 class="fancy-title">Checkout Some of our best ideas</h3>
-        </div>
-        <% @best.each do |best| %>
-          <div class='best-wrapper' data-idea-id='<%= best.id %>'>
-            <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
-            <div class='description-caption img-rounded text-center'>
-              <h3 class='description_content best-title'><%= best.title%></h3>
-              <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+    <div class='row span11 text-center'>
+      <h5 class='best-ideas-title'>Some of our best ideas</h5>
+    </div>
+    <div class='row text-center'>
+      <% if @best.size != 0%>
+        <div class='span11'>
+          <div id="Carousel" class="carousel slide">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <div class="active item">
+                <% @best1.each do |best| %>
+                    <div class='best-wrapper' data-idea-id='<%= best.id %>'>
+                    <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
+                    <div class='description-caption img-rounded text-center'>
+                      <h3 class='description_content best-title'><%= best.title%></h3>
+                      <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+                    </div>
+                    </div>
+                <% end %>
+              </div>
+              <% if @best2.size != 0 %>
+                <div class="item">
+                  <% @best2.each do |best| %>
+                      <div class='best-wrapper' data-idea-id='<%= best.id %>'>
+                      <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
+                      <div class='description-caption img-rounded text-center'>
+                        <h3 class='description_content best-title'><%= best.title%></h3>
+                        <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+                      </div>
+                      </div>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#Carousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#Carousel" data-slide="next">&rsaquo;</a>
           </div>
-        <% end %>
-      </div>
-    <%end%>
-    <div class="text-center">
-      <button class="stream-generate-button">Check Out The Latest Ideas
-      </button>
+        </div>
+      <%end%>
     </div>
   </div>
 <% end%>
@@ -89,6 +116,9 @@
 <div class="container landing-stream">
   <div class='row' id="in-stream-component">
     <div class='span8' id="stream">
+      <% if !user_signed_in? %>
+        <a class='hide-stream'>Hide stream<i class='icon-chevron-down'></i></a>
+      <% end %>
       <div id="stream_results" data-tags=[] data-outsidetags='<%= @filter_tmp %>'>
         <%= render :partial => 'index'%>
       </div>
@@ -210,7 +240,7 @@
       </div>
       <div class="topten_ideas well">
         <div id="topten_title well">
-          <h3 class="title sidebar_title">Top 10 Ideas<i class="icon-plus-sign show"></i></h3>
+          <h3 class="title sidebar_title show">Top 10 Ideas<i class="icon-plus-sign show-sign"></i></h3>
         </div>
         <div id="topten-content">
           <% @top.each do |top| %>
