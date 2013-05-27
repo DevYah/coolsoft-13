@@ -25,7 +25,11 @@
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
-    <li class="divider-vertical"></li>
+    <li class="divider-vertical scrollshow"></li>
+    </li>
+      <li><%= link_to('Sign up', new_user_registration_path, :class => 'scrollshow nav-login')  %> </li>
+    
+    <li class="divider-vertical scrollshow"></li>
     <li>
       <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
                  :class => 'popup nav-login scrollshow' %>
@@ -34,8 +38,8 @@
       <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
                 :class => 'popup nav-login scrollshow' %>
     </li>
-      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow')  %> </li>
-    <li class="divider-vertical"></li>
+      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow nav-login')  %> </li>
+    <li class="divider-vertical scrollshow"></li>
   <% end %>
 </ul>
 <ul class="nav nav-collapse collapse">
