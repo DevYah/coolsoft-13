@@ -176,10 +176,6 @@
   background-color: rgba(79,47,79,0.1);
 }
 
-.blue-text-field{
-  background-color: rgba(50,193,169,0.1);
-}
-
 .new-idea-page input.red-text-field:focus{
   border-color: rgb(140, 0, 26);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(140, 0, 26, 0.6);
@@ -193,10 +189,6 @@
 .new-idea-page textarea.purple-text-field:focus{
   border-color: rgb(79,47,79);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(79,47,79, 0.6);
-}
-
-textarea.blue-text-field:focus{
-  border-color: rgb(50,193,169);
 }
 
 .form-picture{
