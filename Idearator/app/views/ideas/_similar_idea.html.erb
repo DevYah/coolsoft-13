@@ -1,0 +1,12 @@
+<div class="well similar_idea" value='<%= idea.id %>'>
+	<%= image_tag idea.photo.url(:medium)%>
+	<h4 class="media-heading idea">
+	  	<%= link_to idea.title, idea %>
+	</h4>
+	<div class="media-body">
+    <span>by: <%= link_to idea.user.username, idea.user.becomes(User) %></span>
+    <br>
+    <span class="badge badge-topten"><%= idea.num_votes %>
+      votes</span>
+  </div>
+</div>

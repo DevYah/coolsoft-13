@@ -21,8 +21,9 @@
     <% end %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
+    <%= favicon_link_tag 'bulb.png' %>
   </head>
-  <body data-devise=<%= user_signed_in? %>>
+  <body class='body' data-devise=<%= user_signed_in? %>>
     <% if user_signed_in? %>
       <div class='enter-idea-notification-modal'></div>
       <div id='myModal' class='modal hide fade'>
@@ -55,7 +56,7 @@
       </div>
     </div>
     <%= render 'layouts/unauthorized_modal' %>
-    <header class='navbar navbar-fixed-top'>
+    <header class='navbar navbar-fixed-top navbar-inverse'>
       <nav class='navbar-inner'>
         <div id = 'main-nav' class='container'>
           <!--! Add/edit the navigation links in the _navigation partial-->
@@ -66,40 +67,11 @@
     <div id='main' role='main'>
       <div class='container'>
         <div class='content' id='content-div-application'>
-          <% if params[:controller] == ''%>
-            <div class='row'>
-              <div class='span8'>
-                <% if params[:controller] == 'home'%>
-                  <div id='IdeaStream'>
-                    <%= render 'layouts/messages' %>
-                    <%= yield %>
-                  </div>
-                <% else %>
-                  <%= render 'layouts/messages' %>
-                  <%= yield %>
-                <% end %>
-              </div>
-              <div class ='row'>
-                <div id='sidebar' class='span4'><!--! Trending view rendered here--></div>
-                <div id='sidebar' class='span4'>
-                  <%= yield :sidebar %></div>
-              </div>
-            </div>
-          <% else %>
-            <% if params[:controller] == 'home'%>
-              <div id='IdeaStream'>
-                <%= render 'layouts/messages' %>
-                <%= yield %>
-              </div>
-            <% else %>
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            <% end %>
-          <% end %>
+          <%= render 'layouts/messages' %>
+          <%= yield %>
         </div>
       </div>
-      <!--! end of .container -->
-    </div>
+    </div><!--! end of .container -->
     <div class="container">
       <div id="example" class="modal hide fade in" style="display: none; ">
         <div class="modal-header">

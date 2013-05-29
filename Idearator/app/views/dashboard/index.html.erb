@@ -1,5 +1,16 @@
 <script src='http://www.google.com/jsapi'></script>
 <h1 align='middle'>Dashboard</h1>
+
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Dashboard" %>
+  <% else %>
+    <% content_for :title, "Dashboard" %>
+  <% end %>
+<% else %>
+  <% content_for :title, "Dashboard" %>
+<% end %>
+
 <div class='nav nav-tabs'>
   <% if @user.type == 'Committee' %>
     <ul class='nav nav-tabs'>
@@ -15,7 +26,7 @@
       </li>
     </ul>
   <% end %>
-  <div class='tab-content'>
+  <div class='tab-content' id="monitor">
     <div id='pane1' class='tab-pane active'>
       <div id="own-bulb-count-error" class="alert fade in">
         <button type="button" class="close">×</button>
@@ -55,8 +66,9 @@
                 <% @approved_ideas.each do |idea| %>
                   <% @approved_counter = @approved_counter + 1 %>
                   <% if idea.user.active == true && idea.user.banned == false %>
-                    <li class='idea-link' data-idea-id='<%= @approved_counter %>' value='0' data-link="<%= (url_for :controller => 'dashboard', :action => 'gettags', :ideaid => idea.id, :remote => true).html_safe %>">
+                    <li> <a href="#" class='idea-link' data-idea-id='<%= @approved_counter %>' value='0' data-link="<%= (url_for :controller => 'dashboard', :action => 'gettags', :ideaid => idea.id, :remote => true).html_safe %>">
                       <%= idea.title %>
+                      </a>
                     </li>
                   <% end %>
                 <% end %>
@@ -80,8 +92,7 @@
   $(document).ready(function(){
 
     <% if @user.is_a? Committee %>
-      $('#comm li').click(function() {
-
+      $('#comm a').click(function{
         var bulb_count = $('.bulb-container-comm').length;
         if(bulb_count == 5 && this.value == 0){
           $("#comm-bulb-count-error").show();
@@ -151,9 +162,7 @@
           backgroundColor: '#FFDEAD'
           });
 
-        }
-
-        else {
+        }else {
           $('#pane1 .bulb-container '+'#'+ $(this).attr('data-idea-id')).remove();
           this.value = 0;
           $(this).css({

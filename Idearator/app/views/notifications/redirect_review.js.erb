@@ -1,1 +1,2 @@
 $.getScript("/notification_review.js?idea_id=" + <%= idea_id %> + "&id=" + <%= id %> );
+$("#count").html("<%= escape_javascript(render(partial: "notifications/count_notifications", locals:{count: count})) %>");

@@ -9,12 +9,28 @@ $(document).bind("ajaxError", function (e, xhr) {
 // Adds event handler on click for sign in and sign up buttons to show their forms
 // Author: Amina Zoheir
 $(document).ready(function() {
-  $('#unauth-sign-in-button').click(function () {
-    $('.unauth-huge').addClass('unauth-right', 500);
+  var w = $('#signedout').outerWidth();
+  $('#signedout').css({'margin-left':-Math.round(w/2) + 30})
+  $('.unauth-sign-in').hide();
+
+  $('.unauth-centered .unauth-sign-up .switch').click(function () {
+    $('.unauth-centered .unauth-sign-up').hide();
+    $('.unauth-centered .unauth-sign-in').fadeIn('slow');
   });
-  $('#unauth-sign-up-button').click(function () {
-    $('.unauth-huge').removeClass('unauth-right', 500);
+  $('.unauth-centered .unauth-sign-in .switch').click(function () {
+    $('.unauth-centered .unauth-sign-in').hide();
+    $('.unauth-centered .unauth-sign-up').fadeIn('slow');
   });
+
+  $('.landing-centered .unauth-sign-up .switch').click(function () {
+    $('.landing-centered .unauth-sign-up').hide();
+    $('.landing-centered .unauth-sign-in').fadeIn('slow');
+  });
+  $('.landing-centered .unauth-sign-in .switch').click(function () {
+    $('.landing-centered .unauth-sign-in').hide();
+    $('.landing-centered .unauth-sign-up').fadeIn('slow');
+  });
+
   $('.post-an-idea').click(function (e) {
     e.preventDefault();
     $('#signedout').modal('show');

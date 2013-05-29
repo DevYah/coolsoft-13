@@ -1,5 +1,11 @@
 <div class='well notification approve-committee-notification <%= read ? 'read' : 'unread' %>' data-time=<%= notification.created_at.to_i %> data-notification = <%= notification.id %>>
   <span><%= notification.text %></span>
   <div class='notification-link'><%= link_to 'review committee', notification.user.becomes(User)%></div>
-  <span class='notification-date'><%= notification.created_at.to_s(:long)%></span>
+  <span class='notification-date'> 
+  	<% if ((Time.now - notification.created_at).to_i)/24/60/60 < 1 %>
+       <%= distance_of_time_in_words(notification.created_at.to_time, Time.now).to_s + " ago" %>
+     <% else %>
+       <%= Notification.getDate(notification.id) %>
+     <% end %>
+   </span>
 </div>

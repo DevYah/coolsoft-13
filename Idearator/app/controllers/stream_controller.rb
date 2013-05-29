@@ -11,7 +11,9 @@ class StreamController < ApplicationController
   @@filter_all = []
 
   def index
-    @best = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>9)
+    @best = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>8)
+    @best1 = @best[0,4]
+    @best2 = @best[4,4]
     @trending = Idea.joins(:trend).order('trending desc').limit(4)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     @page = params[:mypage]
@@ -41,13 +43,13 @@ class StreamController < ApplicationController
       @@filter_all = []
       if @searchtext.nil?
         @ideas = Idea.order(:created_at).reverse
-        @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+        @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(20)
       else
         if !@searching_with
           @ideas = Idea.search(params[:search]).order(:created_at).reverse
-          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(20)
         else
-          @users = User.search(params[:search]).page(params[:mypage]).per(10)
+          @users = User.search(params[:search]).page(params[:mypage]).per(20)
         end
       end
     else
@@ -55,31 +57,31 @@ class StreamController < ApplicationController
         if !@search_with_user
           @ideas = Idea.filter(@filter_tmp,@searchtext).sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
           @ideas = @ideas.reverse
-          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+          @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(20)
         end
       else
         if @searchtext != "" and @filter_tmp == []
           @@filter_all = []
           if @search_with_user
-            @users = User.search(params[:search]).page(params[:mypage]).per(10)
+            @users = User.search(params[:search]).page(params[:mypage]).per(20)
           else
             @ideas = Idea.search(params[:search]).order(:created_at).reverse
-            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(20)
           end
         else
           if @searchtext == "" and @filter_tmp != []
             @ideas = Idea.filter(@filter_tmp,"").sort{|i1,i2| i1.created_at <=> i2.created_at}.uniq
             @ideas = @ideas.reverse
-            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+            @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(20)
             @filter_tmp.uniq
           else
             if @search_with_user
               @@filter_all = []
-              @users = User.search(params[:search]).page(params[:mypage]).per(10)
+              @users = User.search(params[:search]).page(params[:mypage]).per(20)
             else
               @@filter_all = []
               @ideas = Idea.order(:created_at).reverse
-              @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(10)
+              @ideas = Kaminari.paginate_array(@ideas).page(params[:mypage]).per(20)
             end
           end
         end
