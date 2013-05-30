@@ -5,6 +5,11 @@ BotAway.disabled_for :controller => 'sessions', :action => 'new'
 BotAway.disabled_for :controller => 'sessions', :action => 'create'
 # disable bot-away in development
 BotAway.disabled_for :mode => 'development'
+
+# FIXME
+# disable bot-away in production temporarily until proper exceptions are added
+BotAway.disabled_for :mode => 'production'
+
 # show honeypots for debugging purposes
 #BotAway.show_honeypots = true
 # disable bot-away for certain javascript generated params
