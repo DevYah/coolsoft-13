@@ -46,7 +46,9 @@ Sprint0::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  assets = Dir.glob(Rails.root.join('app', 'assets', '{javascripts/*.js*,stylesheets/*.css*}'))
+  assets.collect! { |p| File.basename(p).match(/(.*\.(js|css)).*/)[1] }
+  config.assets.precompile += assets
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
