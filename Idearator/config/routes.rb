@@ -85,6 +85,7 @@ Sprint0::Application.routes.draw do
     match 'redirect_stream'
     match 'redirect_competition'
     match 'view_new_notifications'
+    match 'set_old'
   end
   match 'notifications' => 'application#update_nav_bar'
 

@@ -1,15 +1,28 @@
-<h1 align='middle'>
+<% if current_user != nil %>
+	<% if current_user.unread_notifications_count > 0 %>
+	  <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Ideas" %>
+	<% else %>
+	  <% content_for :title, "Ideas" %>
+	<% end %>
+<% else %>
+	<% content_for :title, "Ideas" %>
+<% end %>
+
+<h3 id='user-ideas-title'>
   <% if current_user == @user %>
     My Ideas
   <% else %>
     <%= @user.username %>'s ideas
   <% end %>
-</h1>
+</h3>
+<div class="my-ideas span9">
+  <% @ideas.each do |idea| %>
+    <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+  <%end%>
+</div>
+
+<br />
+<br />
 <% if @user == current_user %>
-  <%= link_to 'My dashboard', {:controller => 'dashboard' ,:action => 'index'},:class => "btn btn-primary "%>
+  <%= link_to '<i class="icon-chevron-right"></i> Check dashboard'.html_safe, {:controller => 'dashboard' ,:action => 'index'},:class => "my-dashboard-link"%>
 <% end %>
-<br />
-<br />
-<% @ideas.each do |idea| %>
-  <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
-<%end%>

@@ -34,7 +34,16 @@
   </div>
 </div>
 <!-- Main Idea Page -->
-<div class='idea-page idea-<%= @idea.id %>'>
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @idea.title %>
+  <% else %>
+    <% content_for :title, @idea.title %>
+  <% end %>
+<% else %>
+  <% content_for :title, @idea.title %>
+<% end %>
+<div class='idea-page idea-<%= @idea.id %> well'>
   <% if current_user %>
     <% if current_user.type == "Committee" %>
       <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
@@ -52,59 +61,71 @@
       <% end %>
     <% end %>
   <% end %>
+  <div class='row span12 offset10'>
+    <% if @user == @idea.user_id %>
+      <div id='control'>
+        <%= link_to 'Edit', edit_idea_path(@idea)%>
+        <% if @idea.archive_status == true %>
+          <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :remote => true %>
+        <% else %>
+          <a data-toggle='modal' data-target='#archive-modal' data-remote='true'>Archive</a>
+        <% end %>
+        <a data-toggle='modal' data-target='#delete-modal' data-remote='true'>Delete</a>
+      </div>
+    <% end %>
+  </div>
   <div class='row'>
     <div class='span12'>
       <h3><%= @idea.title %></h3>
     </div>
   </div>
   <div class='row'>
-    <div class='span4'>
-      <a  href='#'>
+    <div class='span4 idea-picture'>
+      <div class='row'>
+      <a href='#'class='pull-left'>
         <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
       </a>
+      </div>
       <% if @user == @idea.user_id %>
         <script>
           $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
           $('#image-edit-link').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
         </script>
       <% end %>
-      <div class='pull-left'>
-        <%if @chosentags != nil %>
-          <% @chosentags.each do |tag|%>
-             <span class="label label-info"><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
-          <% end %>
-        <% end %>
-        <%= render :partial => 'share' ,locals: { idea: @idea }%>
-        <% if @user == @idea.user_id %>
-          <div class='btn-group' id='control'>
-            <%= link_to 'Edit', edit_idea_path(@idea),:class=>'btn btn-inverse'%>
-            <% if @idea.archive_status == true %>
-              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :class => 'btn btn-inverse btn-unarchive', :remote => true %>
-            <% else %>
-              <a data-toggle='modal' data-target='#archive-modal' data-remote='true' class='btn btn-danger btn-archive'>Archive</a>
+      <div class='pull-left row'>
+        <div>
+          <%if @chosentags != nil %>
+            <% @chosentags.each do |tag|%>
+               <span class="label label-info"><i class="icon-tag"></i><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
             <% end %>
-            <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn btn-danger btn-delete'>Delete</a>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+        <%= render :partial => 'share' ,locals: { idea: @idea }%>
       </div>
     </div>
     <div class='span4'>
       <%= 'by'%>
       <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
-      <h3>Description:</h3>
-      <div><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
-      <h3>Problem Solved:</h3>
-      <div><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
+      <h6 class="stream-date">
+        <% if ((Time.now - @idea.created_at).to_i)/24/60/60 < 1 %>
+          <%= distance_of_time_in_words(@idea.created_at.to_time, Time.now).to_s + " ago" %>
+        <% else %>
+          <%= Idea.getDate(@idea.id) %>
+        <% end %>
+      </h6>
+      <h4>Description:</h4>
+      <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
+      <h4>Problem Solved:</h4>
+      <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
     </div>
-    <div class='span4'>
+    <div class='span4 vote-no-margin'>
       <div class='row'>
         <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
-        <div class='span4 archive-status'>
+        <div class='span4 archive-status idea-ratings'>
           <p>
             <% if @idea.ratings.size > 0 %>
               <table>
                 <tr>
-                  <th style='text-align: left;'><b>Ratings:-</b></th>
                   <th></th>
                 </tr>
                 <% @idea.ratings.each do |therating| %>
@@ -131,10 +152,9 @@
         <%= render :partial => 'enter_competition'%>
       <% end %>
     </div>
-
-    <%= render partial: 'similar_ideas', locals: { idea: @idea } %>
   </div>
 </div>
+
 <script type="text/javascript">
   function sendAjax(idea_id){
     var list = "";
@@ -156,4 +176,7 @@
     $('.archive-status').hide();
   </script>
 <% end %>
+<div class="well similar-ideas">
+  <%= render partial: "similar_ideas", locals: {idea:@idea}%>
+</div>
 

@@ -5,14 +5,16 @@
     <li class="dropdown">
       <a id = "count" class="dropdown-toggle" data-toggle="dropdown" href="#">
         <%if @count == 0%>
-          <span class="badge badge-inverse"><%= @count %></span>
+          <span class="badge badge-inverse count-no"><%= @count %></span>
         <%else%>
-          <span class="badge badge-important"><%= @count %></span>
+          <span class="badge badge-important count-no"><%= @count %></span>
         <%end%>
         <b class="caret"></b>
       </a>
-      <ul id = "update-dropdown" class="dropdown-menu custom-dropdown">
+      <ul id = "update-dropdown" class="dropdown-menu">
+        <li class='custom-dropdown'>
         <%= render 'notifications/view_notifications' %>
+      </li>
       </ul>
     </li>
   <%else%>
@@ -23,20 +25,24 @@
 </ul>
 <ul id="nav_login" class="nav pull-right">
   <% if not user_signed_in? %>
+    <li class="divider-vertical scrollshow"></li>
+    </li>
+      <li><%= link_to('Sign up', new_user_registration_path, :class => 'scrollshow nav-login')  %> </li>
+    
+    <li class="divider-vertical scrollshow"></li>
     <li>
-      <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook),
-                 :class => 'popup social-media-login facebook-nav-login scrollshow',
-                 "data-width" => 600, "data-height" => 500 %>
+      <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
+                 :class => 'popup nav-login scrollshow' %>
     </li>
     <li>
-      <%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter),
-                :class => 'popup social-media-login twitter-nav-login scrollshow',
-                'data-width' => 600, 'data-height' => 500  %>
+      <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
+                :class => 'popup nav-login scrollshow' %>
     </li>
-      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow')  %> </li>
+      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow nav-login')  %> </li>
+    <li class="divider-vertical scrollshow"></li>
   <% end %>
 </ul>
-<ul class="nav">
+<ul class="nav nav-collapse collapse">
   <% if user_signed_in? %>
     <% if current_user.get_approved_ideas.count != 0 %>
       <li>
@@ -76,31 +82,37 @@
       </li>
     <% end %>
   <% end %>
+  <% if current_user.nil? %>
+    <li>
+      <div>
+        <%= link_to 'Post your idea', { :controller => '/ideas', :action => 'new' }, :class => "btn btn-primary post-an-idea" %>
+      </div>
+    </li>
+  <% end %>
   <li>
-    <%= form_tag "/stream/index", :method => :get,:class => "form-search", :id => 'searchdiv' do %>
+    <div>
+    <%= form_tag "/stream/index", :method => :get,:class => "form-search navbar-search", :id => 'searchdiv' do %>
       <%= hidden_field_tag :searchtype, params[:searchtype] || "false" %>
         <div class="input-append">
-          <%= text_field_tag :search, params[:search],:placeholder => "Search..." ,:class => "span2 search-query" %>
+          <%= text_field_tag :search, params[:search],:placeholder => "Search..." ,:class => "span2 search-query", :autocomplete => "off"%>
             <div class="btn-group">
-              <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="search_button">
+              <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" id="search_button">
                 <i class="icon-search icon-white"></i>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-search-div">
-                  <a href="#" id="user-search-button"><i class="icon-user"></i>Find Members</a>
+                  <a href="#" id="user-search-button"><i class="icon-user"></i>Find Members<i class="icon-ok user-search"></i></a>
                 </li>
                 <li class="idea-search-div">
-                  <a href="#" id="idea-search-button"><i class="icon-lightbulb"></i>Search for an idea</a>
+                  <a href="#" id="idea-search-button"><i class="icon-lightbulb"></i>Search for an idea<i class="icon-ok idea-search"></i></a>
                 </li>
               </ul>
             </div>
         </div>
     <% end %>
+    </div>
   </li>
-  <% if current_user.nil? %>
-    <%= link_to 'Post your idea', { :controller => '/ideas', :action => 'new' }, :class => "btn btn-primary post-an-idea" %>
-  <% end %>
 </ul>
 <% if user_signed_in? %>
   <ul class="nav pull-right">

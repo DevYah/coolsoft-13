@@ -26,30 +26,79 @@
  *
  */
 
+div#sidebar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0);
+    background: rgb(200,200,200);
+    -webkit-border-radius:7px;
+    border-radius: 7px;
+}
+
+div#sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+div#sidebar::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background: rgba(100,100,100,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,1);
+    background: rgb(200,200,200);
+    -webkit-border-radius:7px;
+    border-radius: 7px;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background: rgba(100,100,100,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+}
+
+html{
+  overflow-x:hidden;
+}
+
+.body{
+  background-color: rgba(246, 250, 156,0.25);
+  font-size: 13px;
+}
+
 .content {
-  padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
+#main
+{
+padding-top:5px;
+}
 
-#sidebar{
-  float:right;
+#searchdiv{
+  margin:5px;
 }
 
 #main-nav .brand{
   padding-bottom: 3px;
+  padding-top: 8px;
+  color: white;
 }
 
-#searchdiv {
-  position: fixed;
-  left: 40%;
-  top: 0.75%;
+#main-nav .brand:hover{
+  text-shadow: 0 0 0.2em #ffffbe;
+}
+
+#main-nav .brand:hover .icon-lightbulb{
+  text-shadow: 0 0 0.2em #ffffbe, 0 0 0.2em #ffffbe, 0 0 0.2em #ffffbe;
 }
 
 .ideaList {
@@ -65,13 +114,11 @@
   display: none;
 }
 
-.icon-user {
+nav .icon-user {
   padding-right: 10px;
 }
 
 #nav_login {
-  border: solid #ddd;
-  border-width: 0px 1px;
   padding: 0 5px;
 }
 
@@ -90,23 +137,69 @@
   font-size: 0;
 }
 
+.fb-login{
+  display: block;
+  padding: 3px;
+  color: #3b5998;
+  opacity: 0.5;
+}
+.tw-login{
+  display: block;
+  padding: 3px;
+  color: #4099FF;
+  opacity: 0.5;
+}
+
+.fb-login:hover{
+  opacity: 1;
+}
+
+.tw-login:hover{
+  opacity: 1;
+}
+
+.nav-login{
+  padding: 0px 0px 0px;
+  margin: 0px 0px 0px;
+}
+
 .fbk{
-  width:40px;
-  height:40px;
   cursor: pointer;
-  padding:5px;
+  padding:2px;
+  opacity: 0.5;
 }
 
 .tw{
-  width:40px;
-  height:40px;
   cursor:pointer;
-  padding:5px;
+  padding:2px;
+  opacity: 0.5;
 }
 
 .pin{
-  width:40px;
-  height:40px;
   cursor:pointer;
-  padding:5px;
+  padding:2px;
+  opacity: 0.5;
+}
+
+.fbk:hover{ 
+  opacity: 1;
+  color: #3b5998; 
+}
+.tw:hover{
+  opacity: 1;
+  color: #4099FF;
+}
+
+.pin:hover{
+  opacity: 1;
+  color: #C92228;
+}
+
+.my-ideas{
+  padding: 20px;
+}
+
+.landing-centered{
+  text-align: center;
+  min-height: 320px;
 }

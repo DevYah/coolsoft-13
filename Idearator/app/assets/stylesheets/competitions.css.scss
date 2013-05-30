@@ -1,6 +1,5 @@
 .competition{
-  border-radius: 20px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: white;
   word-wrap: break-word;
   margin-bottom: 30px;
 }
@@ -10,13 +9,17 @@
   font-size: 16px;
 }
 
+.tag{
+  color:white;
+}
+
 .green{
-  color: green;
+  color: rgb(140, 169, 62);
 }
 
 
 .red{
-  color: red;
+  color: rgb(140, 0, 26);
 }
 
 .outside_tag_button{
@@ -29,8 +32,8 @@
 }
 
 .description{
-  border-radius: 20px;
   background-color: rgba(255,255,255,0.5);
+  font-size: 14px;
 }
 
 .currenttag{
@@ -44,15 +47,12 @@
     height: auto !important;
     margin: 3px;
     overflow: hidden;
-    padding: 1px 3px;
     white-space: nowrap;
 }
 
 .delete-token{
-  color: #A6B3CF;
-    cursor: pointer;
-    font-weight: bold;
-    margin-left: 5px;
+    margin-left:7px;
+    color:white;
 }
 
 #myIdeas {
@@ -66,6 +66,8 @@
   border-left-style: solid;
   border-left-color: #FFFFFF;
   border-left-width: 1px;
+  padding: 20px;
+  padding-top: 0px;
 }
 
 

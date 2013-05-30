@@ -90,17 +90,6 @@
   font-size: 0;
 }
 
-.signinout{
-  position:relative;
-  opacity:0.8;
-  filter:alpha(opacity=40);
-}
-
-.signinout:hover{
-  opacity:1.0;
-  filter:alpha(opacity=100);
-}
-
 .landing-sign-up input{
   margin-left:30px;
 }
@@ -113,39 +102,11 @@
   margin-left:30px;
 }
 
-.best-ideas{
-  width:350px;
-  height:250px;
-  border-radius:0.5em;
-}
-
-div.best-wrapper{
-    cursor:pointer;
-    margin-left:30px;
-    margin-top:0px;
-    margin-bottom:40px;
-    float:left; /* important */
-    position:relative; /* important(so we can absolutely position the description div */
-}
 
 .best-ideas:hover{
   box-shadow: 0px 0px 0.5em #000000;
 }
 
-div.description-caption{
-    display:none;
-    position:absolute; /* absolute position (so we can position it where we want)*/
-    bottom:0px; /* position will be on bottom */
-    left:0px;
-    width:100%;
-    /* styling bellow */
-    background-color:black;
-    font-family: 'tahoma';
-    font-size:15px;
-    color:white;
-    opacity:0.9; /* transparency */
-    filter:alpha(opacity=60); /* IE transparency */
-}
 p.description_content{
     padding:10px;
     margin:0px;
