@@ -218,3 +218,7 @@ margin:3px;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#32c1a9', endColorstr='#32c1a9', GradientType=0);
 }
+
+select {
+  width: inherit;
+}
