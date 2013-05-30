@@ -29,7 +29,7 @@ module Coolster
   def self.update_all(script)
     puts COOLSTER_URL
     begin
-      RestClient.post ('http://' + COOLSTER_URL + '/push_to_all'), {script: script, multipart: true}
+      RestClient.post (COOLSTER_URL + '/push_to_all'), {script: script, multipart: true}
     rescue => e
     end
   end
@@ -43,7 +43,7 @@ module Coolster
     scripts = {}
     user_ids = @@online_user_ids & user_ids
     begin
-      RestClient.post 'http://' + COOLSTER_URL + '/push', {script: script, users: user_ids, multipart: true}
+      RestClient.post COOLSTER_URL + '/push', {script: script, users: user_ids, multipart: true}
     rescue => e
     end
   end
@@ -71,7 +71,7 @@ module Coolster
       raise Exception
     end
     begin
-      RestClient.post 'http://' + COOLSTER_URL + '/push_to_each', {scripts: scripts, multipart: true}
+      RestClient.post COOLSTER_URL + '/push_to_each', {scripts: scripts, multipart: true}
     rescue => e
     end
   end
