@@ -15,8 +15,9 @@ class CompetitionsController < ApplicationController
       @firstTime = true
       @@type = params[:type]
     else
-      @@type = 0
+      # @@type = 0
     end
+   
     if (@@type =="1")
       if user_signed_in? and current_user.is_a? Investor
         all = Competition.joins(:investor).where(:users => {:id => current_user.id})
