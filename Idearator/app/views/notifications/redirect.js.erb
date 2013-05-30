@@ -1,1 +1,2 @@
 window.location.href = '<%= path %>';
+$("#count").html("<%= escape_javascript(render(partial: "notifications/count_notifications", locals:{count: count})) %>");

@@ -2,14 +2,30 @@
   <%= javascript_include_tag 'competitions_view' %>
   <%= stylesheet_link_tag 'competitions'%>
 <% end %>
+
+<% if params[:controller] != "ideas"%>
+  <% if current_user != nil %>
+    <% if current_user.unread_notifications_count > 0 %>
+      <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + "Competitions" %>
+    <% else %>
+      <% content_for :title, "Competitions" %>
+    <% end %>
+  <% else %>
+    <% content_for :title, "Competitions" %>
+  <% end %>
+<% end %>
+
 <div class="competitions">
-  <% if @filter %>
+   <% if @filter %>
     <ul class="currenttags">
       <% if @tags %>
         <% @tags.each do |t|%>
           <li class="taging currenttag">
-            <span class="tag"><%= t %></span>
-            <span class="delete-token">×</span>
+            <span class="label label-info">
+              <i class="icon-tag"></i>
+              <button class="close delete-token">&times;</button>
+              <span class="tag"><%= t %></span>
+            </span>
           </li>
         <% end %>
       <% end %>
@@ -19,13 +35,13 @@
     <% if @competitions && @competitions.length>0 %>
       <% @competitions.each do |c| %>
         <% if c.investor.active and c.investor.banned == false and c.open %>
-          <div class="row-fluid text-center" id='competition-<%= c.id %>'>
-            <div class="competition span12">
+          <div class="row-fluid" id='competition-<%= c.id %>'>
+            <div class="competition span12 well">
               <div class="row-fluid">
                 <div class="span6">
-                  <h2>
+                  <h3>
                     <%= link_to  c.title , c %>
-                  </h2>
+                  </h3>
                   <div>
                     by:
                     <%= link_to c.investor.username , c.investor.becomes(User) %>
@@ -70,6 +86,7 @@
                     <% c.tags.each do |tag| %>
                       <li class="taging">
                         <span class="label label-info">
+                          <i class="icon-tag"></i>
                           <a href="#" class="aTag"><%= tag.name %></a></li>
                         </span>
                     <% end %>

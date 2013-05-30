@@ -17,21 +17,11 @@ p{
 }
 
 .user-photo {
-  display: inline-block;
-  position: absolute;
-  width: 290px;
 }
 
-.user-details {
-  display: inline-block;
-  position: relative;
-  left: 250px;
-  down: 60px;
-}
+.user-details {}
 
 #user-about {
-  position: relative;
-  left: 55px;
 }
 
 .new-idea {
@@ -40,21 +30,13 @@ p{
   width: 300px;
 }
 
-#user dt {
-  font-size: 20px;
-}
 
-#user dd {
-  font-size: 18px;
-}
 
 #user {
-  width: 900px;
-  height: 300px;
+  margin-left: 0px;
 }
 
 #user label {
-  font-size: 22px;
 }
 
 .user-idea {
@@ -90,4 +72,59 @@ p{
 
 #user .best_in_place:hover, .do_hover {
   background-color: #CCC;
+}
+
+.user-profile-page{
+  background-color: white;
+  margin-left: 0px;
+}
+
+.my-dashboard-link{
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#user-ideas-title{
+  padding-left: 50px;
+}
+
+.user-details dt{
+  text-align: left;
+}
+
+.user-details dd{
+  margin-left: 0px;
+}
+
+.user-profile-page .span10,.user-profile-page .user-photo,.user-profile-page .span4{
+  margin-left: 0px;
+}
+
+#user-profile-modal .span6,.modal-photo{
+  margin-left: 0px;
+}
+
+#user-profile-modal dt{
+  text-align: left;
+}
+
+#user-profile-modal dd{
+  margin-left: 0px;
+}
+
+#user-profile-modal dl{
+  margin-top: 0px;
+}
+
+#user-profile-modal .user-photo{
+  height: 200px;
+}
+
+.modal-photo{
+  width: 200px;
+}
+
+#user-profile-modal .modal-body{
+  overflow-x: hidden;
+  overflow-y: auto;
 }

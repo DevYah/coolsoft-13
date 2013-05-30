@@ -27,8 +27,9 @@ class NotificationsController < ApplicationController
   def redirect_idea
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
+    count = current_user.unread_notifications_count
     respond_to do |format|
-      format.js { render 'redirect', locals:{path: '/ideas/' + ((notification.idea.id).to_s)} }
+      format.js { render 'redirect', locals:{path: '/ideas/' + ((notification.idea.id).to_s), count: count} }
       format.json { head :no_content }
     end
   end
@@ -40,8 +41,9 @@ class NotificationsController < ApplicationController
   def redirect_expertise
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
+    count = current_user.unread_notifications_count
     respond_to do |format|
-      format.js { render 'redirect_expertise' }
+      format.js { render 'redirect_expertise', locals: {count: count}}
       format.json { head :no_content }
     end
   end
@@ -53,8 +55,9 @@ class NotificationsController < ApplicationController
   def redirect_review
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
+    count = current_user.unread_notifications_count
     respond_to do |format|
-      format.js { render 'redirect', locals:{path: '/users/' + (notification.user.becomes(User).id).to_s} }
+      format.js { render 'redirect', locals:{path: '/users/' + (notification.user.becomes(User).id).to_s, count: count } }
       format.json { head :no_content }
     end
   end
@@ -79,8 +82,9 @@ class NotificationsController < ApplicationController
   def redirect_competition
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
+    count = current_user.unread_notifications_count
     respond_to do |format|
-      format.js { render 'redirect', locals:{path: '/competitions/' + ((notification.competition.id).to_s)} }
+      format.js { render 'redirect', locals:{path: '/competitions/' + ((notification.competition.id).to_s), count: count } }
       format.json { head :no_content }
     end
   end
@@ -92,9 +96,17 @@ class NotificationsController < ApplicationController
   def redirect_stream
     notification = Notification.find(params[:notification])
     notification.set_read_for current_user
+    count = current_user.unread_notifications_count
     respond_to do |format|
-      format.js { render 'redirect_review', locals:{idea_id: notification.idea.id, id: notification.competition.id } }
+      format.js { render 'redirect_review', locals:{idea_id: notification.idea.id, id: notification.competition.id, count: count  } }
       format.json { head :no_content }
+    end
+  end
+
+  def set_old
+    current_user.set_old_notifications
+    respond_to do |format|
+      format.js { render 'update_count', locals:{count: 0} }
     end
   end
 

@@ -13,6 +13,17 @@
     <%= link_to 'Delete', competition_path(@competition), :method => :delete, :class => 'btn btn-danger' %>
   </div>
 </div>
+
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @competition.title %>
+  <% else %>
+    <% content_for :title, @competition.title %>
+  <% end %>
+<% else %>
+  <% content_for :title, @competition.title %>
+<% end %>
+
 <div class='competition-page competition-<%= @competition.id %>'>
   <div class='row'>
     <div class='span12'>

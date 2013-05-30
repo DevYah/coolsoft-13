@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+$(".similar_idea").click(function(){
+  var idea_id_redirect = $(this).attr("value");
+  window.location.href = '/ideas/' + idea_id_redirect;
+});
+
 $('.btn-success.add-rating').click(function(){
     $('.add-ratings').show();
   });
