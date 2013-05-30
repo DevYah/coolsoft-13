@@ -1,5 +1,7 @@
 var Page = 1;
 
+$(document).ready(apply_script);
+
 function apply_script(){
   $('.aTag').click(function(){
     Page = 1 ;
@@ -23,8 +25,7 @@ function apply_script(){
     type: 'get',
     url: '/competitions',
     data: {
-      tags: array,
-      types :type
+      tags: array
     },
     beforeSend: function () {
         // this is where we append a loading image
@@ -56,8 +57,7 @@ function apply_script(){
     type: 'get',
     url: '/competitions',
     data: {
-      tags: array,
-      types: type
+      tags: array
     },
     beforeSend: function () {
     },
@@ -113,8 +113,7 @@ $(window).scroll(function () {
     url: '/competitions',
     data: {
       myPage: Page,
-      tags: array,
-      types : type
+      tags: array
     },
     beforeSend: function () {
         // this is where we append a loading image

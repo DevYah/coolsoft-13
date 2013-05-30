@@ -6,34 +6,38 @@ class CompetitionsController < ApplicationController
   # +Page+:: is passed in params through the new competition.js , it is used to load instances of +Competition+ to be viewed
   # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
   # Muhammed Hassan
+  @@type = 0
   def index
-    @type = 2
+    
     @firstTime = false
     all = Competition
     if params[:type]
       @firstTime = true
+      @@type = params[:type]
+    else
+      @@type = 0
     end
-    if (params[:types] =="1")
+    if (@@type =="1")
       if user_signed_in? and current_user.is_a? Investor
         all = Competition.joins(:investor).where(:users => {:id => current_user.id})
         @type = 1
       end
-    elsif  ( params[:types] =="3")
+    elsif  ( @@type =="3")
       @type = 3
       all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-    elsif  ( params[:types] =="2")
+    elsif  ( @@type =="2")
       @type = 2
     end
-    if (params[:type] =="1")
+    if (@@type =="1")
       if user_signed_in? and current_user.is_a? Investor
         all = Competition.joins(:investor).where(:users => {:id => current_user.id})
         @type = 1
       end
-    elsif  ( params[:type] =="3")
+    elsif  ( @@type =="3")
       @flag = true
       @type = 3
       all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-    elsif  ( params[:type] =="2")
+    elsif  ( @@type =="2")
       @type = 2
     end
     @filter = false
@@ -60,6 +64,7 @@ class CompetitionsController < ApplicationController
     end
     respond_to do |format|
       format.js
+      format.html
     end
   end
 

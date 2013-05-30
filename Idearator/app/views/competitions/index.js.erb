@@ -1,6 +1,13 @@
 var main ;
 var type;
 main = $('.content');
+  <% if @type == 1 %>
+    type = 1
+  <%elsif @type == 2 %>
+    type =2;
+  <%elsif @type == 3 %>
+    type = 3;
+  <% end %>
 <% if @firstTime %>
   main.empty();
   <% if @type == 1 %>
