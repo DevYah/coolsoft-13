@@ -50,8 +50,11 @@ Sprint0::Application.configure do
   assets.collect! { |p| File.basename(p).match(/(.*\.(js|css)).*/)[1] }
   config.assets.precompile += assets
 
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.default_url_options = { :host => ENV['DOMAIN_NAME'] }
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.default from: ENV['DEFAULT_FROM_EMAIL']
