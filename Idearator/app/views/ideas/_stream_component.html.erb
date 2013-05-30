@@ -4,6 +4,9 @@
 <%  if defined?(voted).nil?
       voted = user_signed_in? && current_user.voted_for?(idea)
     end %>
+<%  if defined?(in_compeition).nil?
+      in_compeition = false
+    end %>
 <% if idea.user.active and !idea.user.banned and idea.approved %>
   <div class='wrapper row stream-idea'>
     <div class="idea-<%= idea.id%> span8 ideasstream well">
@@ -29,7 +32,11 @@
           <div class='stream-comp-description'><%= idea.description %></div>
         </div>
         <div class='span2'>
-          <%= render :partial => "ideas/vote_component", locals: { idea: idea ,size: 'span1', voted: voted} %>
+          <% if in_compeition%>
+          <%= link_to 'Enroll', { :controller => "competitions", :action => "enroll_idea", :id => @competition.id, :idea_id => idea.id }, :class =>"btn btn-large btn-primary pull right" %>
+          <% else %>
+            <%= render :partial => "ideas/vote_component", locals: { idea: idea ,size: 'span1', voted: voted} %>
+          <% end %>
         </div>
       </div>
       <div class='row span8'>
