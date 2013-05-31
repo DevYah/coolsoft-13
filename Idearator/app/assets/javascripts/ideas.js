@@ -62,10 +62,24 @@ $('.btn-success.add-rating').click(function(){
     $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
   }
 
+  $('.new-idea-form-title .hint').text($('.new-idea-form-title .hint-val').attr("placeholder"));
+  $('.new-idea-form-description .hint').text($('.new-idea-form-description .hint-val').attr("placeholder"));
+  $('.new-idea-form-problem .hint').text($('.new-idea-form-problem .hint-val').attr("placeholder"));
+
   $("input, select, textarea").on("focus", function(){
-   $(this).siblings("span").css("display", "inline");
-   }).on("blur", function(){
-   $(this).siblings("span").css("display", "none");
+    $(this).on("keyup", function(){
+      if($(this).val().length == 0){
+        $(this).siblings("span").css("display", "none");
+      }else{
+        $(this).siblings("span").css("display", "inline");
+      }
+    });
+    }).on("blur", function(){
+      if($(this).val().length == 0){
+        $(this).siblings("span").css("display", "none");
+      }else{
+        $(this).siblings("span").css("display", "inline");
+      }
   });
 });
 
