@@ -4,6 +4,10 @@ Sprint0::Application.configure do
   # App domain name
   config.domain_name = ENV['DOMAIN_NAME']
 
+  config.action_controller.default_url_options = {
+    :host => config.domain_name
+  }
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
