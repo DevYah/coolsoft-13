@@ -15,6 +15,7 @@
               <%= i.file_field :photo%>
             </p>
             <label>Tags</label>
+            <span class = 'tag-hint help-inline gold-hint'>Please choose the relative tags</span>
             <div id="idea-tags">
               <% Tag.all.each do |tag|%>
                 <div class='idea-tag'>
@@ -22,34 +23,33 @@
                   <%= tag.name %>
                 </div>
               <% end %>
-              <span class = 'help-inline'>Please check the relative tags</span>
             </div>
         </div>
         <div class='span6'>
-          <div class='control-group' >
+          <div class='control-group new-idea-form-title' >
           <%= i.label :title , :class=> 'control-label'%>
           <div class='controls'>
-              <span class="hint gold-hint"> Choose a short descriptive title for your idea! <span class="hint-pointer"> </span> </span>
+              <span class="hint gold-hint">  <span class="hint-pointer"> </span> </span>
             <% if @boolean%>
-              <%= i.text_field :title, :class=> 'text_field gold-text-field', :placeholder=>'Write title here...',:readonly => 'true'%>
+              <%= i.text_field :title, :class=> 'text_field gold-text-field hint-val', :placeholder=>'Choose a short descriptive title for your idea!',:readonly => 'true'%>
               <span class='help-inline'>Sorry you can't change the title</span>
             <%else%>
-              <%= i.text_field :title, :class=> 'text_field gold-text-field', :placeholder=>'Write title here...',:required => true %>
+              <%= i.text_field :title, :class=> 'text_field gold-text-field hint-val', :placeholder=>'Choose a short descriptive title for your idea!',:required => true %>
             <%end%>
           </div>
         </div>
-          <div class='control-group'>
+          <div class='control-group new-idea-form-description'>
             <%= i.label :description, :class=> 'control-label'%>
             <div class="controls">
-              <span class="hint gold-hint"> Describe your idea in an easy to understand way. <span class="hint-pointer"> </span> </span>
-              <%= i.text_area :description, :class=> 'text_field gold-text-field', :size => "5x5", :placeholder=>"Write description here...",:required => true %>
+              <span class="hint gold-hint">  <span class="hint-pointer"> </span> </span>
+              <%= i.text_area :description, :class=> 'text_field gold-text-field hint-val', :size => "5x5", :placeholder=>"Describe your idea in an easy to understand way",:required => true %>
             </div>
           </div>
-          <div class="control-group">
+          <div class="control-group new-idea-form-problem">
             <%= i.label :problem_solved,:class=> 'control-label'%>
             <div class="controls">
-              <span class="hint gold-hint"> Describe the problem your idea could solve. <span class="hint-pointer"> </span> </span>
-              <%= i.text_area :problem_solved,:class=> 'text_field gold-text-field', :size => "5x5", :placeholder=>'Write problem solved here...'%>
+              <span class="hint gold-hint">  <span class="hint-pointer"> </span> </span>
+              <%= i.text_area :problem_solved,:class=> 'text_field gold-text-field hint-val', :size => "5x5", :placeholder=>'Describe the problem your idea could solve'%>
             </div>
           </div>
         </div>
