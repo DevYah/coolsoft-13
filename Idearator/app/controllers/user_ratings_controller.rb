@@ -25,7 +25,7 @@ class UserRatingsController < ApplicationController
         end
 
         if current_user.provider == 'twitter' && current_user.facebook_share
-          current_user.twitter.update("I've rated an idea on IDEARATOR! available on: http://apps.facebook.com/idearator/" + idea.id.to_s) rescue Twitter::Error
+          current_user.twitter.update("I've rated an idea on #Idearator ! available on: " + root_url + "ideas/" + idea.id.to_s) rescue Twitter::Error
         end
 
         rating.value = average_rating.to_f / saved_rating.size.to_f
