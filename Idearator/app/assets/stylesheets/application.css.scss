@@ -19,6 +19,7 @@
  *= require font-awesome
  *= require profile_modal
  *= require unauthorized_sign_in_up_modal
+ *= require stream
  *
  */
 
@@ -199,3 +200,13 @@ nav .icon-user {
   text-align: center;
   min-height: 320px;
 }
+
+.outside_tag_button{
+  color:#FFFFFF;
+}
+
+.outside_tag_button:hover{
+  color:#FFFFFF;
+  text-decoration: none;
+}
+
