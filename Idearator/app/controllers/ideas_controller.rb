@@ -6,7 +6,6 @@ class IdeasController < ApplicationController
 
     def push_to_stream(idea)
       debugger
-      puts "\n\n\nAMINA"
       script = render 'stream/add_to_stream',
               locals: { idea: idea }
       puts script
