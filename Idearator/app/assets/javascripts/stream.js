@@ -39,7 +39,6 @@ function check_if_exists(tag){
 }
 
 function stream_manipulator(page,tag,search,insert,user){
-  console.log("da5ell1");
   currentpage = page;
   searchtext = search+"";
   will_insert = (insert == "true");

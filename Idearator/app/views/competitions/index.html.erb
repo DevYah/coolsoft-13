@@ -1,1 +1,6 @@
-<%= render partial: "index" %>
+<script type="text/javascript">
+	in_comp_index = true;
+</script>
+<div id="comp-all" data-comp-tags=[] data-state="">
+	<%= render partial: "index", locals:{competitions:@competitions} %>
+</div>

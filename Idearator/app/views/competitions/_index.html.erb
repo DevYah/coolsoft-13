@@ -17,24 +17,24 @@
 <% end %>
 
 <div class="competitions">
-   <% if @filter %>
     <ul class="currenttags">
-      <% if @tags %>
-        <% @tags.each do |t|%>
-          <li class="taging currenttag">
-            <span class="label label-info">
-              <i class="icon-tag"></i>
-              <button class="close delete-token">&times;</button>
-              <span class="tag"><%= t %></span>
-            </span>
-          </li>
-        <% end %>
+      <% if @filter %>
+        <% if @page == "1" %>
+          <% @filter.each do |t|%>
+            <li class="taging currenttag">
+              <span class="label label-info">
+                <i class="icon-tag"></i>
+                <button class="close delete-token" value="<%= t %>">&times;</button>
+                <span class="tag"><%= t %></span>
+              </span>
+            </li>
+          <% end %>
+        <% end %>  
       <% end %>
     </ul>
-  <% end %>
   <div>
-    <% if @competitions && @competitions.length>0 %>
-      <% @competitions.each do |c| %>
+    <% if competitions && competitions.length>0 %>
+      <% competitions.each do |c| %>
         <% if c.investor.active and c.investor.banned == false and c.open %>
           <div class="row-fluid" id='competition-<%= c.id %>'>
             <div class="competition span12 well">
@@ -88,7 +88,7 @@
                       <li class="taging">
                         <span class="label label-info">
                           <i class="icon-tag"></i>
-                          <a href="#" class="aTag"><%= tag.name %></a></li>
+                          <a href="#" class="aTag" value="<%= tag.name %>"><%= tag.name %></a></li>
                         </span>
                     <% end %>
                   </ul>
