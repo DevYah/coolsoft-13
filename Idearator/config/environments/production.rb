@@ -1,6 +1,9 @@
 Sprint0::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # App domain name
+  config.domain_name = ENV['DOMAIN_NAME']
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -54,7 +57,7 @@ Sprint0::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => ENV['DOMAIN_NAME'] }
+  config.action_mailer.default_url_options = { :host => config.domain_name }
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.default from: ENV['DEFAULT_FROM_EMAIL']

@@ -1,6 +1,9 @@
 Sprint0::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # App domain name
+  config.domain_name = ENV['DOMAIN_NAME'] || 'localhost:3000'
+
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
