@@ -7,66 +7,6 @@ class CompetitionsController < ApplicationController
   # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
   # Muhammed Hassan
   
-  # def index
-    
-  #   @firstTime = false
-  #   all = Competition
-  #   if params[:type]
-  #     @firstTime = true
-  #     @@type = params[:type]
-  #   end
-
-  #   if (@@type =="1")
-  #     if user_signed_in? and current_user.is_a? Investor
-  #       all = Competition.joins(:investor).where(:users => {:id => current_user.id})
-  #       @type = 1
-  #     end
-  #   elsif  ( @@type =="3")
-  #     @type = 3
-  #     all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-  #   elsif  ( @@type =="2")
-  #     @type = 2
-  #   end
-  #   if (@@type =="1")
-  #     if user_signed_in? and current_user.is_a? Investor
-  #       all = Competition.joins(:investor).where(:users => {:id => current_user.id})
-  #       @type = 1
-  #     end
-  #   elsif  ( @@type =="3")
-  #     @flag = true
-  #     @type = 3
-  #     all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-  #   elsif  ( @@type =="2")
-  #     @type = 2
-  #   end
-  #   @filter = false
-  #   if(params[:myPage])
-  #     @tags = params[:tags].slice(1,params[:tags].length)
-  #     if(@tags.length ==0)
-  #       @competitions = all.uniq.page(params[:myPage]).per(10)
-  #     else
-  #       @competitions = all.joins(:tags).where(:tags => {:name => @tags}).uniq.page(params[:myPage]).per(10)
-  #     end
-  #   else
-  #     if (params[:tags])
-  #       @filter = true
-  #       @tags = params[:tags].slice(1,params[:tags].length)
-  #       if(@tags.length ==0)
-  #         @competitions = all.uniq.page(1).per(10)
-  #       else
-  #         @competitions = all.joins(:tags).where(:tags => {:name => @tags}).uniq.page(1).per(10)
-  #       end
-  #     else
-  #       @firstTime = true
-  #       @competitions = all.uniq.page(1).per(10)
-  #     end
-  #   end
-  #   respond_to do |format|
-  #     format.js
-  #     format.html
-  #   end
-  # end
-
   def index
     @state = params[:state]
     @filter = params[:tags]
