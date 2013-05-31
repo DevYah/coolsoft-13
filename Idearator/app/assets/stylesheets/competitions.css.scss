@@ -112,7 +112,6 @@
 
 .gold-text-field:focus select{
   border-color: rgba(212,183,142,0.5);
-  width: 100%;
 }
 
 #competition-tags ul.token-input-list-facebook{
@@ -121,14 +120,6 @@
 
 .gold-hint{
   color: rgb(212,183,142);
-}
-
-.new-competition-page textarea.gold-text-field{
-  width: 100%;
-}
-
-.new-competition-page input.gold-text-field{
-  width: 100%;
 }
 
 .new-competition-page textarea.gold-text-field:focus{
@@ -144,4 +135,8 @@
 .new-competition-page label{
   font-weight: bold;
   display: inline;
+}
+
+.competition-submit{
+  padding: 8px 24px;
 }
