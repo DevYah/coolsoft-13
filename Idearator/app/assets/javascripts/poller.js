@@ -3,7 +3,7 @@
 
 function poll() {
   $.ajax({
-    url: 'http://' + COOLSTER_URL + '/poll',
+    url: COOLSTER_URL + '/poll',
     dataType: "script",
     success: function(data, textStatus, jXHR){
       $.ajax(this);
