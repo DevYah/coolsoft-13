@@ -158,7 +158,9 @@ $(document).on('ajaxStop', function(){
 $(document).ready(function(){
 
   if(!($("#landing").is(":visible"))){
+    $("#sidebar").css("left",$(window).width()-($("#sidebar").width()+100));
     $("#sidebar").css("display","block");
+    $("#sidebar").css("height",$(window).height()-100);
   }
 
   $("#sidebar").hover(function(){
@@ -263,7 +265,9 @@ $(document).ready(function(){
   });
 
   function fix_side_bar(){
+    $("#sidebar").css("left",$(window).width()-($("#sidebar").width()+100));
     $("#sidebar").fadeIn('1500');
+    $("#sidebar").css("height",$(window).height()-100);
   }
 
   $(".best-wrapper").click(function() {
