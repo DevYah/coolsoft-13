@@ -68,35 +68,31 @@ class CompetitionsController < ApplicationController
   # end
 
   def index
-    @enrolled = params[:enrolled]
-    @my_comp = params[:my_comp]
+    @state = params[:state]
     @filter = params[:tags]
     @page = params[:comp_page]
 
-    if @enrolled
-
+    if @state == "enrolled"
+      @filter_from = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
     else
-      if @my_comp
-        
+      if @state == "mycomp"
+        filter_from = Competition.joins(:investor).where(:users => {:id => current_user.id})
       end
     end
 
     if @filter
       @competitions = Competition.comp_filter(@filter).sort{|i1,i2| i1.created_at <=> i2.created_at}.reverse
-      @competitions = Kaminari.paginate_array(@competitions).page(@page).per(5)
     else
       @competitions = Competition.order(:created_at).reverse
-      @competitions = Kaminari.paginate_array(@competitions).page(@page).per(5)
     end
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
 
-  def enrolled
-    @competitions = Competition.order(:created_at).reverse
-     respond_to do |format|
+    if @filter_from
+      @competitions = @filter_from & @competitions
+    end
+
+    @competitions = Kaminari.paginate_array(@competitions).page(@page).per(5)
+
+    respond_to do |format|
       format.js
       format.html
     end

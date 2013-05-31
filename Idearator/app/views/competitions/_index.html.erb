@@ -1,9 +1,4 @@
 
-<% if @firstTime %>
-  <%= javascript_include_tag 'competitions_view' %>
-  <%= stylesheet_link_tag 'competitions'%>
-<% end %>
-
 <% if params[:controller] != "ideas"%>
   <% if current_user != nil %>
     <% if current_user.unread_notifications_count > 0 %>
@@ -33,8 +28,8 @@
       <% end %>
     </ul>
   <div>
-    <% if competitions && competitions.length>0 %>
-      <% competitions.each do |c| %>
+    <% if @competitions && @competitions.length>0 %>
+      <% @competitions.each do |c| %>
         <% if c.investor.active and c.investor.banned == false and c.open %>
           <div class="row-fluid" id='competition-<%= c.id %>'>
             <div class="competition span12 well">

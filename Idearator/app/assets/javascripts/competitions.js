@@ -26,7 +26,8 @@ function apply_comp_tag_handler(){
       url: '/competitions',
       data: {
         comp_page: thispage,
-        tags:$("#comp-all").data("comp-tags")
+        tags:$("#comp-all").data("comp-tags"),
+        state:$("#comp-all").data("state")
       },
       beforeSend: function () {
           // this is where we append a loading image
@@ -40,7 +41,6 @@ function apply_comp_tag_handler(){
         }
 
     });
-    console.log($("#comp-all").data("comp-tags"));
   });
   $(".delete-token").click(function(e){
     e.preventDefault();
@@ -59,7 +59,8 @@ function apply_comp_tag_handler(){
       url: '/competitions',
       data: {
         comp_page: thispage,
-        tags:$("#comp-all").data("comp-tags")
+        tags:$("#comp-all").data("comp-tags"),
+        state:$("#comp-all").data("state")
       },
       beforeSend: function () {
           // this is where we append a loading image
@@ -73,7 +74,6 @@ function apply_comp_tag_handler(){
         }
 
     });
-    console.log($("#comp-all").data("comp-tags"));
   });
 }
 
@@ -127,13 +127,8 @@ function backToTop() {
 
 var loading = false;
 
-// if(in_comp_index){
-//   alert("gowa");
-// }else{
-//   alert("barra");
-// }
-
 $(window).scroll(function () {
+  if(in_comp_index){
   if (loading) {
     return;
   }
@@ -152,7 +147,8 @@ $(window).scroll(function () {
     url: '/competitions',
     data: {
       comp_page: thispage,
-      tags:$("#comp-all").data("comp-tags")
+      tags:$("#comp-all").data("comp-tags"),
+      state:$("#comp-all").data("state")
     },
     beforeSend: function () {
         // this is where we append a loading image
@@ -167,9 +163,10 @@ $(window).scroll(function () {
 
       });
  }
+}else{
+   $(window).scroll (function(){
+    thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"),[]);
+    });
+}
 });
-
-  //  $(window).scroll (function(){
-  //   thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"),[]);
-  // });
 });
