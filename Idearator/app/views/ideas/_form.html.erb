@@ -12,17 +12,21 @@
         <div class='span5'>
             <p class='form-picture'>
               <img alt="Missing" id="image-edit-link" src="/assets/missing.png" class="image-placeholder">
-              <%= i.file_field :photo%>
+              <div class="control-group">
+                <%= i.file_field :photo%>
+              </div>
             </p>
-            <label>Tags</label>
-            <span class = 'tag-hint help-inline gold-hint'>Please choose the relative tags</span>
-            <div id="idea-tags">
-              <% Tag.all.each do |tag|%>
-                <div class='idea-tag'>
-                  <%= check_box_tag 'idea[tag_ids][]', tag.id, @idea.tags.include?(tag), data: {tag_name: tag.name } %>
-                  <%= tag.name %>
-                </div>
-              <% end %>
+            <div class="control-group">
+              <label>Tags</label>
+              <span class = 'tag-hint help-inline gold-hint'>Please choose the related tags.</span>
+              <div id="idea-tags">
+                <% Tag.all.each do |tag|%>
+                  <div class='idea-tag'>
+                    <%= check_box_tag 'idea[tag_ids][]', tag.id, @idea.tags.include?(tag), data: {tag_name: tag.name } %>
+                    <%= tag.name %>
+                  </div>
+                <% end %>
+              </div>
             </div>
         </div>
         <div class='span6'>
@@ -31,10 +35,10 @@
           <div class='controls'>
               <span class="hint gold-hint">  <span class="hint-pointer"> </span> </span>
             <% if @boolean%>
-              <%= i.text_field :title, :class=> 'text_field gold-text-field hint-val', :placeholder=>'Choose a short descriptive title for your idea!',:readonly => 'true'%>
+              <%= i.text_field :title, :class=> 'text_field gold-text-field hint-val input-block-level', :placeholder=>'Choose a short descriptive title for your idea!',:readonly => 'true'%>
               <span class='help-inline'>Sorry you can't change the title</span>
             <%else%>
-              <%= i.text_field :title, :class=> 'text_field gold-text-field hint-val', :placeholder=>'Choose a short descriptive title for your idea!',:required => true %>
+              <%= i.text_field :title, :class=> 'text_field gold-text-field hint-val input-block-level', :placeholder=>'Choose a short descriptive title for your idea.',:required => true %>
             <%end%>
           </div>
         </div>
@@ -42,23 +46,21 @@
             <%= i.label :description, :class=> 'control-label'%>
             <div class="controls">
               <span class="hint gold-hint">  <span class="hint-pointer"> </span> </span>
-              <%= i.text_area :description, :class=> 'text_field gold-text-field hint-val', :size => "5x5", :placeholder=>"Describe your idea in an easy to understand way",:required => true %>
+              <%= i.text_area :description, :class=> 'text_field gold-text-field hint-val input-block-level', :size => "5x5", :placeholder=>"Describe your idea in an easy to understand way.",:required => true %>
             </div>
           </div>
           <div class="control-group new-idea-form-problem">
             <%= i.label :problem_solved,:class=> 'control-label'%>
             <div class="controls">
               <span class="hint gold-hint">  <span class="hint-pointer"> </span> </span>
-              <%= i.text_area :problem_solved,:class=> 'text_field gold-text-field hint-val', :size => "5x5", :placeholder=>'Describe the problem your idea could solve'%>
+              <%= i.text_area :problem_solved,:class=> 'text_field gold-text-field hint-val input-block-level', :size => "5x5", :placeholder=>'Describe the problem(s) your idea aims to solve.'%>
             </div>
           </div>
+          <div class='actions row pull-right'>
+              <br />
+              <%= i.submit nil, :class=> 'btn btn-primary idea-submit'%>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class='actions row'>
-      <div class='span12'>
-        <br />
-        <%= i.submit nil, :class=> 'btn btn-primary'%>
       </div>
     </div>
   </fieldset>

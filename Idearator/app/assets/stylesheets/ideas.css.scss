@@ -219,12 +219,10 @@
 
 .new-idea-page textarea.gold-text-field{
   border-color: rgba(212,183,142,0.75);
-  width: 100%;
 }
 
 .new-idea-page input.gold-text-field{
   border-color: rgba(212,183,142,0.75);
-  width: 100%;
 }
 
 .new-idea-page textarea.gold-text-field:focus{
@@ -244,4 +242,12 @@
 
 .new-idea-page .controls{
   display: inline;
+}
+
+.idea-submit{
+  padding: 8px 24px;
+}
+
+#idea_photo{
+  margin-bottom: 10px;
 }
