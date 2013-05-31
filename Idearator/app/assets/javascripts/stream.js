@@ -158,9 +158,7 @@ $(document).on('ajaxStop', function(){
 $(document).ready(function(){
 
   if(!($("#landing").is(":visible"))){
-    $("#sidebar").css("position","fixed");
-    $("#sidebar").css("top",71);
-    $("#sidebar").css("left",940);
+    $("#sidebar").css("display","block");
   }
 
   $("#sidebar").hover(function(){
@@ -257,7 +255,7 @@ $(document).ready(function(){
 
   $(".hide-stream").click(function show_stream(e){
     e.preventDefault();
-    $("#sidebar").css("position","static");
+    $("#sidebar").css("display","none");
     $("#in-stream-component").slideUp(1000);
     $('#landing').slideDown(1000);
     $(".nav-login").addClass("scrollshow");
@@ -265,11 +263,7 @@ $(document).ready(function(){
   });
 
   function fix_side_bar(){
-    $("#sidebar").css("position","fixed");
-    $("#sidebar").css("top",85);
-    $("#sidebar").css("left",940);
-    $(".scrollshow").slideDown("fast");
-    $(".scrollshow").removeClass("scrollshow");
+    $("#sidebar").fadeIn('1500');
   }
 
   $(".best-wrapper").click(function() {
@@ -278,7 +272,6 @@ $(document).ready(function(){
 });
 
    function apply_tag_handlers(){
-    var stream_height = $("#stream_results").height()/currentpage;
 
     $("#stream_results .btn-link").click(function tag_caller(e){
       e.preventDefault();
@@ -326,17 +319,17 @@ $(window).scroll (function(){
       $('.backtotop').hide();
     }
     
-    if($("#landing").is(":visible")){
+    // if($("#landing").is(":visible")){
       
-      if($(window).scrollTop()>$('#landing').height()+20){
-        $("#sidebar").css("position","fixed");
-        $("#sidebar").css("top",65);
-        $("#sidebar").css("left",940);
-      }else{
-        $("#sidebar").css('position','');
-        $("#sidebar").css('top','');
-      }
-    }
+    //   if($(window).scrollTop()>$('#landing').height()+20){
+    //     $("#sidebar").css("position","fixed");
+    //     $("#sidebar").css("top",65);
+    //     $("#sidebar").css("left",940);
+    //   }else{
+    //     $("#sidebar").css('position','');
+    //     $("#sidebar").css('top','');
+    //   }
+    // }
 
   if($(window).scrollTop()!=0 && !($(".stream-generate-button").is(":visible"))){
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
