@@ -124,13 +124,14 @@
         <div class='span4 archive-status idea-ratings'>
           <p>
             <% if @idea.ratings.size > 0 %>
+              <%= javascript_include_tag 'rating_ballot' %>
               <table>
                 <tr>
                   <th></th>
                 </tr>
                 <% @idea.ratings.each do |therating| %>
                   <tr>
-                    <%= render :partial => '/user_ratings/form', :locals => { :therating => therating } %>
+                    <%= render :partial => '/user_ratings/ratings_component', :locals => { :therating => therating } %>
                   </tr>
                 <% end %>
               </table>
