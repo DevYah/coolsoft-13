@@ -16,7 +16,7 @@ class CompetitionsController < ApplicationController
       @filter_from = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
     else
       if @state == "mycomp"
-        filter_from = Competition.joins(:investor).where(:users => {:id => current_user.id})
+        @filter_from = Competition.joins(:investor).where(:users => {:id => current_user.id})
       end
     end
 
