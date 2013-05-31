@@ -6,6 +6,9 @@ function add_rating_handler() {
     }
   });
 
+  // Disables average rating ballots
+  $('input.rating_button.average').rating('readOnly',true);
+
   // Removes Cancel Rating Button
   $('.rating-cancel').remove();
 }
