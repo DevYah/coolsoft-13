@@ -22,12 +22,7 @@ var thistag = [];
 var searchtext = "";
 will_insert = true;
 user_search = "";
-var previous_search = "";
-var last_scroll = 0;
-var height = 0;
-var dist_to_up = 0;
-first_fix_down = false;
-first_fix_up = false;
+var ajax_loading = false;
 
 function check_if_exists(tag){
   for(var i = 0; i < thistag.length; i++){
@@ -158,9 +153,10 @@ $(document).on('ajaxStop', function(){
 $(document).ready(function(){
 
   if(!($("#landing").is(":visible"))){
-    $("#sidebar").css("left",$(window).width()-($("#sidebar").width()+100));
-    $("#sidebar").css("display","block");
-    $("#sidebar").css("height",$(window).height()-100);
+    $("#sidebar").css("left",($(window).width()-$("#sidebar").width()-30));
+    $("#sidebar").css("top",45);
+    $("#sidebar").fadeIn('1500');
+    $("#sidebar").css("height",$(window).height()-50);
   }
 
   $("#sidebar").hover(function(){
@@ -264,16 +260,17 @@ $(document).ready(function(){
     $(".scrollshow").slideUp("fast");
   });
 
-  function fix_side_bar(){
-    $("#sidebar").css("left",$(window).width()-($("#sidebar").width()+100));
-    $("#sidebar").fadeIn('1500');
-    $("#sidebar").css("height",$(window).height()-100);
-  }
-
   $(".best-wrapper").click(function() {
   redirect_to_best($(this).data("idea-id"));
   });
 });
+
+  function fix_side_bar(){
+    $("#sidebar").css("left",($(window).width()-$("#sidebar").width()-30));
+    $("#sidebar").css("top",45);
+    $("#sidebar").fadeIn('1500');
+    $("#sidebar").css("height",$(window).height()-50);
+  }
 
    function apply_tag_handlers(){
 
@@ -316,27 +313,21 @@ $(document).ready(function(){
 
 
 $(window).scroll (function(){
+  if(ajax_loading){
+    return;
+  }
+
   if (passedPage1()) {
       $('.backtotop').show();
-    }
-    if (backToTop()) {
+  }
+  
+  if (backToTop()) {
       $('.backtotop').hide();
-    }
+  }
     
-    // if($("#landing").is(":visible")){
-      
-    //   if($(window).scrollTop()>$('#landing').height()+20){
-    //     $("#sidebar").css("position","fixed");
-    //     $("#sidebar").css("top",65);
-    //     $("#sidebar").css("left",940);
-    //   }else{
-    //     $("#sidebar").css('position','');
-    //     $("#sidebar").css('top','');
-    //   }
-    // }
-
   if($(window).scrollTop()!=0 && !($(".stream-generate-button").is(":visible"))){
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
+      ajax_loading = true;
       currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);
     }
   }
@@ -356,6 +347,7 @@ $(window).scroll (function(){
       data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
       success: function() {
         apply_tag_handlers();
+        ajax_loading = false;
       }
     });
     return page;

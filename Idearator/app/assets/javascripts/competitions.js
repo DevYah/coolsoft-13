@@ -2,6 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 var thispage = 1;
+var loading = false;
 
 function tag_exists(tag){
   for(var i = 0; i < $("#comp-all").data("comp-tags").length; i++){
@@ -21,26 +22,7 @@ function apply_comp_tag_handler(){
       thispage = 1;
     }
     $("#comp-all").html("");
-    $.ajax({
-      type: 'get',
-      url: '/competitions',
-      data: {
-        comp_page: thispage,
-        tags:$("#comp-all").data("comp-tags"),
-        state:$("#comp-all").data("state")
-      },
-      beforeSend: function () {
-          // this is where we append a loading image
-          //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-        },
-        success: function (array) {
-          loading = false;
-        },
-        error: function () {
-            // failed request; give feedback to user
-        }
-
-    });
+    request();
   });
   $(".delete-token").click(function(e){
     e.preventDefault();
@@ -54,26 +36,7 @@ function apply_comp_tag_handler(){
         }
       }
     $("#comp-all").html("");
-    $.ajax({
-      type: 'get',
-      url: '/competitions',
-      data: {
-        comp_page: thispage,
-        tags:$("#comp-all").data("comp-tags"),
-        state:$("#comp-all").data("state")
-      },
-      beforeSend: function () {
-          // this is where we append a loading image
-          //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-        },
-        success: function (array) {
-          loading = false;
-        },
-        error: function () {
-            // failed request; give feedback to user
-        }
-
-    });
+    request();
   });
 }
 
@@ -110,39 +73,29 @@ $(document).ready(function() {
     changeYear: true, yearRange: '2013:' + (new Date().getFullYear() +8)
   });
 
-    var Page = 1;
-
-
 function nearBottomOfPage() {
   return $(window).scrollTop() > $(document).height() - $(window).height() - 100;
 }
 
-function passedPage1() {
-  return $(window).scrollTop() > 600;
-}
-
-function backToTop() {
-  return $(window).scrollTop() < 600;
-}
-
-var loading = false;
-
 $(window).scroll(function () {
   if(in_comp_index){
-  if (loading) {
-    return;
+    if (loading) {
+      return;
+    }
+    
+    if (nearBottomOfPage() && $("#search").val() === '') {
+      loading = true;
+      thispage += 1;
+      request();
+   }
+  }else{
+    thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"),[]);
   }
-  if (passedPage1()) {
-    $('.backtotop').show();
-  }
-  if (backToTop()) {
-    $('.backtotop').hide();
-  }
-  if (nearBottomOfPage() && $("#search").val() === '') {
-    loading = true;
-    thispage += 1;
+});
+});
 
-   $.ajax({
+function request(){
+  $.ajax({
     type: 'get',
     url: '/competitions',
     data: {
@@ -150,23 +103,8 @@ $(window).scroll(function () {
       tags:$("#comp-all").data("comp-tags"),
       state:$("#comp-all").data("state")
     },
-    beforeSend: function () {
-        // this is where we append a loading image
-        //$('#ajax-panel').html('<div class="loading"><img src="/images/loading.gif" alt="Loading..." /></div>');
-      },
-      success: function (array) {
-        loading = false;
-      },
-      error: function () {
-          // failed request; give feedback to user
-        }
-
-      });
- }
-}else{
-   $(window).scroll (function(){
-    thispage = call_infinite_scrolling("competitions","",thispage,$("#stream_competition").attr("value"),[]);
-    });
+    success: function () {
+      loading = false;
+    }
+  });
 }
-});
-});

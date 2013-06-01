@@ -10,6 +10,7 @@ $(function() {
     var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
         if(search.length > 2 || e.which == 8){
+          setTimeout(fix_side_bar(), 900);
           if($("#landing").is(":visible")){
             $("#landing").hide();
             $('#landing-stream').show();
