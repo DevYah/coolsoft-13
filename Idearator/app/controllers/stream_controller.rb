@@ -12,13 +12,6 @@ class StreamController < ApplicationController
 
   def index
     @best = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>8)
-    if @best.size > 4
-      @best1 = @best[0,4]
-      @best2 = @best[4, @best.size - 4]
-    else
-      @best1 = @best
-      @best2 = []
-    end
     @trending = Idea.joins(:trend).order('trending desc').limit(4)
     @top = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>10)
     @page = params[:mypage]
