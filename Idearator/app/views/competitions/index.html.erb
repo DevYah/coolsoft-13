@@ -1,0 +1,19 @@
+<script type="text/javascript">
+	in_comp_index = true;
+</script>
+
+<div id="comp-all" data-comp-tags=[] data-state="">
+	<%= render partial: "index", locals:{competitions:@competitions} %>
+</div>
+
+<% if @state == "enrolled" %>
+	<script type="text/javascript">
+		$("#comp-all").data("state","enrolled");
+	</script>
+<% else %>
+	<% if @state == "mycomp" %>
+		<script type="text/javascript">
+			$("#comp-all").data("state","mycomp");
+		</script>
+	<% end %>
+<% end %>
