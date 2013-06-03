@@ -89,6 +89,13 @@
                 <% end %>
                   <div class='best-wrapper' data-idea-id='<%= best.id %>'>
                   <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
+                  <!-- <div class="carousel-caption text-center">
+                      <h3 class='description_content best-title'><%= best.title%></h3>
+                    </div> -->
+                    <div class='description-caption img-rounded text-center description'>
+                      <h3 class='description_content best-title'><%= best.title%></h3>
+                      <h4 class='description_content best-user'> By <%= best.user.username %></h4>
+                    </div>
                   <div class='description-caption img-rounded text-center'>
                     <h3 class='description_content best-title'><%= best.title%></h3>
                     <h4 class='description_content best-user'> By <%= best.user.username %></h4>
