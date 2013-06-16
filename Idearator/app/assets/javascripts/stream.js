@@ -254,9 +254,11 @@ $(document).ready(function(){
     $(".scrollshow").slideDown(500);
     $('#landing').slideUp(1000);
     $("#in-stream-component").slideDown(3000);
-    setTimeout(fix_side_bar, 900);
     $('#sidebar .carousel').carousel();
-    sidebar_manipulation();
+    setTimeout(function(){
+      fix_side_bar();
+      sidebar_manipulation();
+      }, 900);
     apply_tag_handlers();
   });
 
@@ -282,21 +284,23 @@ $(document).ready(function(){
   function sidebar_manipulation(){
     $("#sidebar").css("top",sidebar_top);
     $("#sidebar").css("height",$(window).height()-50);
-    if($(window).width() < ($("#stream").width()+ 500)){
-      if($("#sidebar").is(":visible")){
-        $("#sidebar").fadeOut(1000);
-        setTimeout(function(){
-          $(".sidebar-btn").removeClass("icon-circle-arrow-right");
-          $(".sidebar-btn").addClass("icon-circle-arrow-left");
-          $(".sidebar-show").fadeIn(500);
-          $(".sidebar-show").css("right",0);
-        },1000);
-      }
-    }else{
-      $(".sidebar-show").fadeOut(500);
-      if(!($("#sidebar").is(":visible"))){
-        setTimeout(function(){$("#sidebar").fadeIn(1000);
-        $("#sidebar").css("right",0);},500);
+    if(!($("#landing").is(":visible"))){
+      if($(window).width() < ($("#stream").width()+ 500)){
+        if($("#sidebar").is(":visible")){
+          $("#sidebar").fadeOut(1000);
+          setTimeout(function(){
+            $(".sidebar-btn").removeClass("icon-circle-arrow-right");
+            $(".sidebar-btn").addClass("icon-circle-arrow-left");
+            $(".sidebar-show").fadeIn(500);
+            $(".sidebar-show").css("right",0);
+          },1000);
+        }
+      }else{
+        $(".sidebar-show").fadeOut(500);
+        if(!($("#sidebar").is(":visible"))){
+          setTimeout(function(){$("#sidebar").fadeIn(1000);
+          $("#sidebar").css("right",0);},500);
+        }
       }
     }
   }
@@ -320,8 +324,8 @@ $(document).ready(function(){
   function fix_side_bar(){
     $("#sidebar").css("right",0);
     $("#sidebar").css("top",sidebar_top);
-    $("#sidebar").fadeIn('1500');
     $("#sidebar").css("height",$(window).height()-50);
+    $("#sidebar").fadeIn('1500');
   }
 
    function apply_tag_handlers(){
