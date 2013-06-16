@@ -17,13 +17,35 @@
   background-color:#FFFFFF;
   margin: 0px;
   margin-right: 5px;
-  padding:10px;
+  padding-top:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:38px;
   border-right-style:none;
   border-top-style:none;
   border-left-style:0.25px solid;
   border-bottom-style:0.25px solid;
 }
 
+.sidebar-show{
+  position:fixed;
+  top:50%;
+  display:none;
+  right:0px;
+  background:rgba(212, 183, 142, 0.5);
+}
+
+.sidebar-btn{
+  width:80px;
+  height:50px;
+  background:rgba(212, 183, 142, 0.5);
+  font-size: 35px;
+  color: whitesmoke;
+}
+
+.sidebar-btn:hover{
+  background:rgba(212, 183, 142, 0.8); 
+}
 
 .user-search, .idea-search{
   margin-left:5px;
@@ -270,15 +292,16 @@ p.description_content{
   overflow: hidden;
   position:fixed;
   display:none;
-  background:white;
+  background:none;
   padding:0px;
   width:auto;
+  right:0px;
 }
 
 #separator{
-  background: #4f2f4f;
-  border-bottom: 1px solid #4f2f4f;
-  border-top: 1px solid #4f2f4f;
+  background: white;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
   height: 2px;
 }
 
@@ -425,10 +448,6 @@ h4.media-heading{
 .show-trend-sign{
   margin-left:190px;
   cursor:pointer;
-}
-
-#topten-content, #trend-content{
-  display:none;
 }
 
 #sidebar .carousel-control{
