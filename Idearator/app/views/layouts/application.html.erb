@@ -16,8 +16,12 @@
     <%= javascript_include_tag 'application' %>
     <%= yield :javascript_includes %>
     <% if params[:controller] %>
-      <%= stylesheet_link_tag params[:controller] %>
-      <%= javascript_include_tag params[:controller] %>
+      <% if Rails.application.assets.find_asset("#{params[:controller]}.css") %>
+        <%= stylesheet_link_tag params[:controller] %>
+      <% end %>
+      <% if Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+        <%= javascript_include_tag params[:controller] %>
+      <% end %>
     <% end %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>

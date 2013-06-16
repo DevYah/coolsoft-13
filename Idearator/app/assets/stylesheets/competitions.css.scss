@@ -26,15 +26,6 @@
   color: rgb(140, 0, 26);
 }
 
-.outside_tag_button{
-  color:#FFFFFF;
-}
-
-.outside_tag_button:hover{
-  color:#FFFFFF;
-  text-decoration: none;
-}
-
 .description{
   background-color: rgba(255,255,255,0.5);
   font-size: 14px;
@@ -114,15 +105,33 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(79,47,79, 0.6);
 }
 
-.blue-text-field:focus select{
-  border-color: rgb(50,193,169);
+.gold-text-field:focus select{
+  border-color: rgba(212,183,142,0.5);
 }
 
 #competition-tags ul.token-input-list-facebook{
-  background-color: rgba(79,47,79,0.1);
   border-radius: 3px;
 }
 
-#competition-tags li.token-input-input-token-facebook{
-  background-color: rgba(79,47,79,0.1);
+.gold-hint{
+  color: rgb(212,183,142);
+}
+
+.new-competition-page textarea.gold-text-field:focus{
+  border-color: rgb(212,183,142);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(212,183,142, 0.6);
+}
+
+.new-competition-page input.gold-text-field:focus{
+  border-color: rgb(212,183,142);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(212,183,142, 0.6);
+}
+
+.new-competition-page label{
+  font-weight: bold;
+  display: inline;
+}
+
+.competition-submit{
+  padding: 8px 24px;
 }
