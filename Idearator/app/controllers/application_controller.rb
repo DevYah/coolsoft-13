@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   # Params: none.
   # Author: Amina Zoheir
   def load_notifications
+    @user = current_user
     if user_signed_in?
       @all_notifications = current_user.get_notifications
       @notifications = @all_notifications.first(10)
