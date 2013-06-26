@@ -2,7 +2,6 @@
 tmp/*
 log/*
 *sqlite3
-db/schema.rb
 coverage/*
 
 # project specific files

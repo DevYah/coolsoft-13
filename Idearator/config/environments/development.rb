@@ -1,5 +1,7 @@
 Sprint0::Application.configure do
 
+  # App domain name
+  config.domain_name = ENV['DOMAIN_NAME'] || 'localhost:3000'
 
   # Paperclip.options[:command_path] = 'C:\Program Files (x86)\ImageMagick-6.8.4-Q16'
   # Settings specified here will take precedence over those in config/application.rb
@@ -22,7 +24,7 @@ Sprint0::Application.configure do
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => config.domain_name }
 
   # Don't care if the mailer can't send
   ActionMailer::Base.perform_deliveries = false

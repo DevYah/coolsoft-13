@@ -1,6 +1,13 @@
 Sprint0::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # App domain name
+  config.domain_name = ENV['DOMAIN_NAME']
+
+  config.action_controller.default_url_options = {
+    :host => config.domain_name
+  }
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -46,10 +53,27 @@ Sprint0::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  assets = Dir.glob(Rails.root.join('app', 'assets', '{javascripts/*.js*,stylesheets/*.css*}'))
+  assets.collect! { |p| File.basename(p).match(/(.*\.(js|css)).*/)[1] }
+  config.assets.precompile += assets
+
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.default_url_options = { :host => config.domain_name }
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.default from: ENV['DEFAULT_FROM_EMAIL']
+
+  ActionMailer::Base.smtp_settings = {
+    :address              => ENV['SMTP_SERVER'],
+    :port                 => ENV['SMTP_PORT'],
+    :user_name            => ENV['SMTP_USERNAME'],
+    :password             => ENV['SMTP_PASSWORD'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   # Enable threaded mode
   # config.threadsafe!

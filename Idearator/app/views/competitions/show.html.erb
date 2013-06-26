@@ -5,9 +5,6 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3>Are you sure you want to delete?!</h3>
   </div>
-  <div class="modal-body">
-    <p>If you Delete the competition, !</p>
-  </div>
   <div class="modal-footer">
     <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
     <%= link_to 'Delete', competition_path(@competition), :method => :delete, :class => 'btn btn-danger' %>

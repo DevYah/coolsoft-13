@@ -29,6 +29,7 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -54,7 +55,10 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     multi_json (1.6.1)
+    nokogiri (1.5.6)
     nokogiri (1.5.6-x86-mingw32)
+    pg (0.15.1)
+    pg (0.15.1-x86-mingw32)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     rack (1.4.5)
@@ -94,7 +98,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.7-x86-mingw32)
     sunspot (2.0.0)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
@@ -113,15 +116,16 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
   jquery-rails
+  pg
   rails (= 3.2.13.rc1)
   sass-rails (~> 3.2.3)
-  sqlite3
   sunspot_rails
   sunspot_solr
   uglifier (>= 1.0.3)

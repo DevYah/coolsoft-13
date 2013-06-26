@@ -9,20 +9,17 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
-
- *= require_tree .
- *= require ideas/popover
  *
-
  *= require bootstrap_and_overrides
  *= require token-input-facebook
  *= require jquery-star-rating
- *= require font-awesome
  *= require notification
  *= require ideas
+ *= require ideas/popover
  *= require font-awesome
  *= require profile_modal
  *= require unauthorized_sign_in_up_modal
+ *= require stream
  *
  */
 
@@ -203,3 +200,13 @@ nav .icon-user {
   text-align: center;
   min-height: 320px;
 }
+
+.outside_tag_button{
+  color:#FFFFFF;
+}
+
+.outside_tag_button:hover{
+  color:#FFFFFF;
+  text-decoration: none;
+}
+
