@@ -222,3 +222,13 @@ margin:3px;
 select {
   width: inherit;
 }
+
+.navbar .nav > li > .dropdown-menu:before {
+  content: none;
+  display: none;
+}
+
+.navbar .nav > li > .dropdown-menu:after {
+  content: none;
+  display: none;
+}
