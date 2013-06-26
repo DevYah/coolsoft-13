@@ -276,6 +276,9 @@ $(document).ready(function(){
   $(".best-wrapper").click(function() {
   redirect_to_best($(this).data("idea-id"));
   });
+  $(".best-wrapper").hover(function() {
+    $(this).children(".description").slideToggle("slow");
+  });
 });
 
    function apply_tag_handlers(){
