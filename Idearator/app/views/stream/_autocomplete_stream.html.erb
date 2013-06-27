@@ -1,0 +1,41 @@
+<% results_count = 0 %>
+<!-- <div id="spinner-outer-autocomplete">
+  <div id="spinner-autocomplete">
+    <img src="http://i.stack.imgur.com/0iq1w.gif" id="spinner-inner-autocomplete">
+  </div>
+</div> -->
+<table class = "table table-bordered" id = "autocomplete-table">
+  <% if !@searching_with %>
+    <% @search_results.each do |idea|%>
+      <tr class = "warning">
+        <td>
+          <% if idea.approved == true and idea.user.banned == false and idea.user.active == true %>
+            <% results_count = results_count + 1 %>        
+            <img alt="Missing" height="30" src="/assets/missing.png" width="30">
+              <strong>
+                <%= link_to idea.title, idea %>
+              </strong>
+              <span class="badge badge-autocomplete"><%= idea.num_votes %></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <% @search_results.each do |user|%>
+      <tr class = "warning">
+        <td>
+          <% if user.banned == false and user.active == true %>
+            <% results_count = results_count + 1 %>        
+              <%= link_to user.becomes(User) do %>
+                <img alt="Missing" height="25" src="/assets/user-default.png" width="25">
+              <% end %>
+              <strong>
+                <%= link_to user.username, user %>
+              </strong>
+              <span class="badge badge-autocomplete"><%= user.ideas.count %></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

@@ -145,16 +145,18 @@ function stream_manipulator(page,tag,search,insert,user){
 
 $(document).on('ajaxStart', function(){
    var link = $('#spinner-inner').attr("value");
-   $('#spinner-inner').css("visibility","visible");
+   $('#spinner-inner').show();
 });
 
 $(document).on('ajaxStop', function(){
-   $('#spinner-inner').css("visibility","hidden");
+   $('#spinner-inner').hide();
 });
 
 $(document).ready(function(){
   sidebar_width = $("#sidebar").width();
   sidebar_top = $(".navbar").height();
+  var left_autocomplete = ($(".input-append").offset().left);
+  $("#autocomplete-search").css("left",left_autocomplete);
   sidebar_show_handler();
   if(!($("#landing").is(":visible"))){
     $("#sidebar").css("right",0);
@@ -275,12 +277,19 @@ $(document).ready(function(){
   redirect_to_best($(this).data("idea-id"));
   });
   sidebar_manipulation();
+  autocomplete_manipulator();
   $(window).resize(function(){
     sidebar_top = $(".navbar").height();
     sidebar_manipulation();
+    autocomplete_manipulator();
   });
 });
   
+  function autocomplete_manipulator(){
+    var window_height = $(window).height();
+    $("#autocomplete-search").css("max-height",window_height-100);
+  }
+
   function sidebar_manipulation(){
     $("#sidebar").css("top",sidebar_top);
     $("#sidebar").css("height",$(window).height()-50);

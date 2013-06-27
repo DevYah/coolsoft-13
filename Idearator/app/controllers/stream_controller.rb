@@ -10,6 +10,16 @@ class StreamController < ApplicationController
   # Author: Mohamed Salah Nazir
   @@filter_all = []
 
+  def search
+    @searchtext = params[:search]
+    @searching_with = params[:searchtype] == "true"
+    if !@searching_with
+      @search_results = Idea.search(@searchtext)
+    else
+      @search_results = User.search(@searchtext)
+    end
+  end
+
   def index
     @best = Idea.find(:all, :conditions => { :approved => true }, :order=> 'num_votes desc', :limit=>8)
     @trending = Idea.joins(:trend).order('trending desc').limit(4)
