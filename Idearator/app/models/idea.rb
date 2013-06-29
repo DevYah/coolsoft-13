@@ -141,4 +141,18 @@ class Idea < ActiveRecord::Base
     !archive_status && approved
   end
 
+  def visible?(user=nil)
+    commontags = []
+    if user.is_a? Committee
+      commontags = user.tags & self.tags
+    end
+    if !user.nil? && user == self.user || commontags != []
+      true
+    elsif self.approved
+      true
+    else
+      false
+    end
+  end
+
 end
