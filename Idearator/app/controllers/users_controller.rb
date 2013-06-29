@@ -251,9 +251,9 @@ class UsersController < ApplicationController
   # Author: Hisham ElGezeery
   def ideas
     @user = User.find(params[:id])
-    @ideas = @user.get_approved_ideas
+    @ideas = @user.get_approved_ideas.reverse
     if current_user == @user
-      @ideas = @user.ideas
+      @ideas = @user.ideas.reverse
     end
     respond_to do |format|
       format.html # ideas.html.erb
