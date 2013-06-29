@@ -19,16 +19,18 @@ class IdeasController < ApplicationController
   # +id+:: is passed in params through the new idea view, it is used to identify the instance of +Idea+ to be viewed
   # Author: Marwa Mehanna
   def show
-    @idea = Idea.find(params[:id])
-    @chosentags = Idea.find(params[:id]).tags
-    if user_signed_in?
-      @user = current_user.id
-      @username = current_user.username
-      @tags = Tag.all
-      @competitions = Competition.joins(:tags).where('tags.id' => @idea.tags)
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @idea }
+    if Idea.exists?(params[:id])
+      @idea = Idea.find(params[:id])
+      @chosentags = Idea.find(params[:id]).tags
+      if user_signed_in?
+        @user = current_user.id
+        @username = current_user.username
+        @tags = Tag.all
+        @competitions = Competition.joins(:tags).where('tags.id' => @idea.tags)
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: @idea }
+        end
       end
     end
   end
