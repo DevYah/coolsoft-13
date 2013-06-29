@@ -92,7 +92,7 @@
   $(document).ready(function(){
 
     <% if @user.is_a? Committee %>
-      $('#comm a').click(function{
+      $('#comm a').click(function(){
         var bulb_count = $('.bulb-container-comm').length;
         if(bulb_count == 5 && this.value == 0){
           $("#comm-bulb-count-error").show();
@@ -129,7 +129,7 @@
 
         bulb_count = $('.bulb-container-comm').length;
         if(bulb_count==4) {
-        $('#comm-bulb-count-error').hide();
+          $('#comm-bulb-count-error').hide();
         }
 
       });

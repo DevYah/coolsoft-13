@@ -1,1 +1,14 @@
 $("#count").html("<%= escape_javascript(render(partial: "notifications/count_notifications", locals:{count: count})) %>");
+if(<%= count %> > 0){
+  var a = $('title').text().indexOf(")");
+  var title = $('title').text();
+  if(a != -1){
+    title = $('title').text().substring(a + 1);
+  }
+  $('title').text('(' + <%= count %> + ')' + title);
+}else{
+  var a = $('title').text().indexOf(")");
+  if(a != -1){
+    $('title').text($('title').text().substring(a + 1));
+  }
+}

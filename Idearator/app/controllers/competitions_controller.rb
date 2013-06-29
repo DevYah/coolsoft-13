@@ -6,60 +6,35 @@ class CompetitionsController < ApplicationController
   # +Page+:: is passed in params through the new competition.js , it is used to load instances of +Competition+ to be viewed
   # +tags+:: is passed in params through the new competition.js , it is used to filter instances of +Competition+ to be viewed
   # Muhammed Hassan
+  
   def index
-    @type = 2
-    @firstTime = false
-    all = Competition
-    if params[:type]
-      @firstTime = true
-    end
-    if (params[:types] =="1")
-      if user_signed_in? and current_user.is_a? Investor
-        all = Competition.joins(:investor).where(:users => {:id => current_user.id})
-        @type = 1
-      end
-    elsif  ( params[:types] =="3")
-      @type = 3
-      all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-    elsif  ( params[:types] =="2")
-      @type = 2
-    end
-    if (params[:type] =="1")
-      if user_signed_in? and current_user.is_a? Investor
-        all = Competition.joins(:investor).where(:users => {:id => current_user.id})
-        @type = 1
-      end
-    elsif  ( params[:type] =="3")
-      @flag = true
-      @type = 3
-      all = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
-    elsif  ( params[:type] =="2")
-      @type = 2
-    end
-    @filter = false
-    if(params[:myPage])
-      @tags = params[:tags].slice(1,params[:tags].length)
-      if(@tags.length ==0)
-        @competitions = all.uniq.page(params[:myPage]).per(10)
-      else
-        @competitions = all.joins(:tags).where(:tags => {:name => @tags}).uniq.page(params[:myPage]).per(10)
-      end
+    @state = params[:state]
+    @filter = params[:tags]
+    @page = params[:comp_page]
+
+    if @state == "enrolled"
+      @filter_from = Competition.joins(:ideas).where(:ideas =>{:user_id => current_user.id})
     else
-      if (params[:tags])
-        @filter = true
-        @tags = params[:tags].slice(1,params[:tags].length)
-        if(@tags.length ==0)
-          @competitions = all.uniq.page(1).per(10)
-        else
-          @competitions = all.joins(:tags).where(:tags => {:name => @tags}).uniq.page(1).per(10)
-        end
-      else
-        @firstTime = true
-        @competitions = all.uniq.page(1).per(10)
+      if @state == "mycomp"
+        @filter_from = Competition.joins(:investor).where(:users => {:id => current_user.id})
       end
     end
+
+    if @filter
+      @competitions = Competition.comp_filter(@filter).sort{|i1,i2| i1.created_at <=> i2.created_at}.reverse
+    else
+      @competitions = Competition.order(:created_at).reverse
+    end
+
+    if @filter_from
+      @competitions = @filter_from & @competitions
+    end
+
+    @competitions = Kaminari.paginate_array(@competitions).page(@page).per(5)
+
     respond_to do |format|
       format.js
+      format.html
     end
   end
 

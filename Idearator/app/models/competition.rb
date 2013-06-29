@@ -26,6 +26,17 @@ class Competition < ActiveRecord::Base
     @ideas
   end
 
+  def self.comp_filter(tags)
+    @comps = []
+    tags.each do |tag|
+      t = Tag.find(:first, :conditions => {:name => tag})
+      comptag = t.competitions
+      @comps = @comps + comptag
+    end
+    @comps.uniq
+    @comps
+  end
+
   # check if a competition is still open
   # Params
   # +self+:: the current +Competition+ that we want to check
