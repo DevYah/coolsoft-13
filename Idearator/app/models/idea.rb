@@ -137,4 +137,8 @@ class Idea < ActiveRecord::Base
     IdeasController::CoolsterPusher.new.push_to_stream self
   end
 
+  def votable?
+    !archive_status && approved
+  end
+
 end
