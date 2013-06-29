@@ -63,7 +63,7 @@
   <% end %>
   <div class='row span12 offset10'>
     <% if @user == @idea.user_id %>
-      <div id='control'>
+      <div id='control' class='control-links'>
         <%= link_to 'Edit', edit_idea_path(@idea)%>
         <% if @idea.archive_status == true %>
           <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :remote => true %>
@@ -155,6 +155,11 @@
     </div>
   </div>
 </div>
+<% if @idea.similar_ideas.size != 0%>
+  <div class="well similar-ideas">
+    <%= render partial: "similar_ideas", locals: {idea:@idea}%>
+  </div>
+<% end %>
 
 <script type="text/javascript">
   function sendAjax(idea_id){
@@ -177,7 +182,3 @@
     $('.archive-status').hide();
   </script>
 <% end %>
-<div class="well similar-ideas">
-  <%= render partial: "similar_ideas", locals: {idea:@idea}%>
-</div>
-
