@@ -5,4 +5,17 @@ if($('#notifications').length > 0){
   $('.content .notification:first').hide().slideDown(1000);
   $.getScript('/set_read.js?&notification=' + <%= notification.id %>);
 }
+if(<%= count %> > 0){
+  var a = $('title').text().indexOf(")");
+  var title = $('title').text();
+  if(a != -1){
+    title = $('title').text().substring(a + 1);
+  }
+  $('title').text('(' + <%= count %> + ')' + title);
+}else{
+  var a = $('title').text().indexOf(")");
+  if(a != -1){
+    $('title').text($('title').text().substring(a + 1));
+  }
+}
 add_notification_event_handlers();

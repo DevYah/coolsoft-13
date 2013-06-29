@@ -11,7 +11,11 @@
 }
 
 .idea-link{
-  cursor:default;
+  cursor:pointer;
+}
+
+#tagsall .badge-info{
+  float:right;
 }
 
 div::-webkit-scrollbar-track {
@@ -82,8 +86,12 @@ div::-webkit-scrollbar-thumb {
   overflow: auto;
 }
 
-.tab-content{
-  height: 860px;
+.nav-tabs .tab-content{
+  overflow:hidden;
+}
+
+#graph{
+ height:600px;
 }
 
 .bulb-container-comm .badge, .bulb-container-own .badge {
@@ -149,4 +157,8 @@ div::-webkit-scrollbar-thumb {
 .threshold-100 {
   box-shadow: 60px 50px  100px 50px #FFFF66;
   width: 20px;
+}
+
+#graph .nav-tabs {
+border-bottom: none;
 }

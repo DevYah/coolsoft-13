@@ -17,13 +17,35 @@
   background-color:#FFFFFF;
   margin: 0px;
   margin-right: 5px;
-  padding:10px;
+  padding-top:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:38px;
   border-right-style:none;
   border-top-style:none;
   border-left-style:0.25px solid;
   border-bottom-style:0.25px solid;
 }
 
+.sidebar-show{
+  position:fixed;
+  top:50%;
+  display:none;
+  right:0px;
+  background:rgba(212, 183, 142, 0.5);
+}
+
+.sidebar-btn{
+  width:80px;
+  height:50px;
+  background:rgba(212, 183, 142, 0.5);
+  font-size: 35px;
+  color: whitesmoke;
+}
+
+.sidebar-btn:hover{
+  background:rgba(212, 183, 142, 0.8); 
+}
 
 .user-search, .idea-search{
   margin-left:5px;
@@ -70,10 +92,8 @@
 
 .topten_ideas{
   padding:0%;
-  margin-top:20px;
   background-color: #FFFFFF;
   width: 340px;
-  margin-left: 20px;
 }
 
 h3.sidebar_title{
@@ -88,8 +108,6 @@ h3.sidebar_title{
   padding:0%;
   background-color: #FFFFFF;
   width: 340px;
-  margin-left: 20px;
-  
   margin-bottom: 0px;
 }
 
@@ -154,7 +172,8 @@ h3.sidebar_title{
   margin-top: 0px;
   background-color: #FFFFFF;
   width: 340px;
-  margin-left: 20px;
+  margin-left: 0px;
+  margin-bottom: 0px;
 }
 
 .tag{
@@ -276,10 +295,21 @@ p.description_content{
 }
 
 #sidebar{
-  max-height: 590px;
-  height: auto;
+  height: 700px;
   overflow: hidden;
-  margin-top:20px;
+  position:fixed;
+  display:none;
+  background:none;
+  padding:0px;
+  width:auto;
+  right:0px;
+}
+
+#separator{
+  background: white;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  height: 2px;
 }
 
 .stream-generate-button {
@@ -427,10 +457,6 @@ h4.media-heading{
   cursor:pointer;
 }
 
-#topten-content, #trend-content{
-  display:none;
-}
-
 #sidebar .carousel-control{
   position: absolute;
   top: 35%;
@@ -534,6 +560,10 @@ h4.media-heading{
 
 .check-ideas{
   color: rgb(140, 0, 26);
+}
+
+.main-container{
+  overflow-x: hidden;
 }
 
 .best-container{
