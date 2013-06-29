@@ -21,6 +21,9 @@ class Idea < ActiveRecord::Base
   has_many :ratings
   has_and_belongs_to_many :tags
 
+  validates :tags,
+        :presence => {:message => "can't be blank"}
+
   has_many :votes
   has_many :voters, :through => :votes, :source => :user
   has_many :competition_entries
@@ -135,6 +138,24 @@ class Idea < ActiveRecord::Base
     self.approved = true
     self.save
     IdeasController::CoolsterPusher.new.push_to_stream self
+  end
+
+  def votable?
+    !archive_status && approved
+  end
+
+  def visible?(user=nil)
+    commontags = []
+    if user.is_a? Committee
+      commontags = user.tags & self.tags
+    end
+    if !user.nil? && user == self.user || commontags != []
+      true
+    elsif self.approved
+      true
+    else
+      false
+    end
   end
 
 end

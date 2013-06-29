@@ -252,6 +252,9 @@ class UsersController < ApplicationController
   def ideas
     @user = User.find(params[:id])
     @ideas = @user.get_approved_ideas
+    if current_user == @user
+      @ideas = @user.ideas
+    end
     respond_to do |format|
       format.html # ideas.html.erb
     end

@@ -27,8 +27,16 @@
   <% if not user_signed_in? %>
     <li class="divider-vertical scrollshow"></li>
     </li>
-      <li><%= link_to('Sign up', new_user_registration_path, :class => 'scrollshow nav-login')  %> </li>
-    
+    <li class="dropdown">
+      <a class="dropdown-toggle scrollshow nav-login" data-toggle="dropdown" href="#">
+        Sign up
+      </a>
+      <ul class="dropdown-menu nav-forms left-form">
+        <li>
+          <%= render 'users/sign_up_with_tags' %>
+        </li>
+      </ul>
+    </li>
     <li class="divider-vertical scrollshow"></li>
     <li>
       <%= link_to '<i class="icon-facebook fb-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:facebook),
@@ -38,8 +46,16 @@
       <%= link_to '<i class="icon-twitter tw-login icon-large"></i>'.html_safe, user_omniauth_authorize_path(:twitter),
                 :class => 'popup nav-login scrollshow' %>
     </li>
-      <li><%= link_to('Sign in', new_user_session_path, :class => 'scrollshow nav-login')  %> </li>
-    <li class="divider-vertical scrollshow"></li>
+      <li class="dropdown">
+      <a class="dropdown-toggle scrollshow nav-login" data-toggle="dropdown" href="#">
+        Sign in
+      </a>
+      <ul class="dropdown-menu nav-forms right-form ">
+        <li>
+          <%= render 'users/sign_in_nav' %>
+        </li>
+      </ul>
+    </li>
   <% end %>
 </ul>
 <ul class="nav nav-collapse collapse">
@@ -122,7 +138,7 @@
       </div>
     </li>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><%= current_user.username %>
+      <a href="#" class="dropdown-toggle user-options" data-toggle="dropdown"><i class="icon-user"></i><%= current_user.username %>
         <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li>

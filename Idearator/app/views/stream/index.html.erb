@@ -57,48 +57,14 @@
             <%= render 'layouts/sign_up_in_form' %>
             
           </div>
-          <div class='row text-center'>
-            <br /><br />
-            <h6 class='check-ideas'>Take a look around</h6>
-            <a class='show-stream btn btn-danger'> Checkout our latest ideas!</a>
-          </div>
         </div>
       </div>
     </div>
-    <% if @best.size != 0%>
-      <div class='row span11 text-center'>
-        <h5 class='best-ideas-title'>Some of our best ideas</h5>
-      </div>
-      <div class='row text-center'>
-        <div class='span11'>
-          <div id="Carousel" class="carousel slide">
-            <!-- Carousel items -->
-            <div class="carousel-inner">
-              <% @best.each_with_index do |best, index| %>
-                <% if index == 0 %>
-                  <div class="active item">
-                <% else %>
-                  <% if index%4 == 0 %>
-                    </div>
-                    <div class="item">
-                  <% end %>
-                <% end %>
-                  <div class='best-wrapper' data-idea-id='<%= best.id %>'>
-                  <%= image_tag best.photo.url(:medium) ,:class => 'img-rounded best-ideas' %>
-                  <div class='description-caption img-rounded text-center'>
-                    <h3 class='description_content best-title'><%= best.title%></h3>
-                    <h4 class='description_content best-user'> By <%= best.user.username %></h4>
-                  </div>
-                  </div>
-              <% end %>
-              </div>
-            </div>
-            <!-- Carousel nav -->
-            <a class="carousel-control left" href="#Carousel" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#Carousel" data-slide="next">&rsaquo;</a>
-          </div>
-        </div>
-      <%end%>
+    <div class='row text-center'>
+      <br />
+      <h4 class='check-ideas'>Take a look around</h4>
+      <a class='show-stream btn btn-danger'> Checkout our latest ideas!</a>
+    </div>
     </div>
   </div>
 <% end%>

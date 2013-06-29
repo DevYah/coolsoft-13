@@ -89,7 +89,7 @@ padding-top:5px;
   display: none;
 }
 
-nav .icon-user {
+nav .user-options.icon-user {
   padding-right: 10px;
 }
 
@@ -188,7 +188,29 @@ nav .icon-user {
   text-decoration: none;
 }
 
-.control-links {
-font-size: 12px;
-font-weight: bold;
+.navbar .pull-right > li > .dropdown-menu.left-form{
+  left: 0;
+  right: auto;
+}
+
+.nav-forms form{
+  margin: 0px;
+}
+
+ul .nav-forms{
+  padding: 20px;
+}
+
+#all-tags {
+  display: none;
+}
+
+.nav-tags{
+  height: 50px;
+  overflow-y: auto;
+}
+
+.control-links{
+  font-size: 12px;
+  font-weight: bold;
 }
