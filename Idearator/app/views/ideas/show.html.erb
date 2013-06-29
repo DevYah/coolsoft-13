@@ -157,51 +157,6 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-  </div>
-  <div class='row'>
-    <div class='span4'></div>
-    <div class ='span4 archive-status'>
-      <div id="fb-root"></div>
-      <div class="fb-comments" data-href="<%= root_url %>ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
-    </div>
-    <div class ='span4 enter_competition'>
-      <% if current_user and @idea.approved and current_user.id==@idea.user_id %>
-        <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary">Enter Competition</a></p>
-        <%= render :partial => 'enter_competition'%>
-      <% end %>
-    </div>
-  </div>
-</div>
-<% if @idea.similar_ideas.size != 0 %>
-  <div class="well similar-ideas">
-    <%= render partial: "similar_ideas", locals: {idea:@idea}%>
-  </div>
-<% end %>
-
-<script type="text/javascript">
-  function sendAjax(idea_id){
-    var list = "";
-    var i=0;
-    $('.token-input-list-facebook li p').each(function(){
-      list += "rating[]="+$(this).text()+"&";
-      i=i+1;
-    });
-    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
-  }
-</script>
-<% if !@idea.approved %>
-  <script type='text/javascript'>
-    $('.approve_status').hide();
-  </script>
-<% end %>
-<% if @idea.archive_status == true %>
-  <script type='text/javascript'>
-    $('.archive-status').hide();
-  </script>
-<% end %>
-
-=======
     <% if @idea.similar_ideas.size != 0%>
       <div class="well similar-ideas">
         <%= render partial: "similar_ideas", locals: {idea:@idea}%>
@@ -234,4 +189,3 @@
 <% else %>
   <div class='well text-center'> This idea does not exist.</div>
 <% end %>
->>>>>>> master
