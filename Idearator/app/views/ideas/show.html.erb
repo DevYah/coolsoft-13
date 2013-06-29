@@ -1,187 +1,191 @@
-<% content_for :head do %>
-  <meta property="og:url"    content="<%=root_url + url_for(@idea)%>" />
-  <meta property="og:title"  content="<%= @idea.title%>" />
-  <meta property="og:image"  content="<%= root_url+ @idea.photo.url %>" />
-  <meta property="og:type"   content="idearator:idea" />
-<% end %>
-<!-- Modals -->
-<!-- archive confirmation modal -->
-<div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>Are you sure you want to archive?!</h3>
+<% if !@idea.nil? %>    
+  <% content_for :head do %>
+    <meta property="og:url"    content="<%=root_url + url_for(@idea)%>" />
+    <meta property="og:title"  content="<%= @idea.title%>" />
+    <meta property="og:image"  content="<%= root_url+ @idea.photo.url %>" />
+    <meta property="og:type"   content="idearator:idea" />
+  <% end %>
+  <!-- Modals -->
+  <!-- archive confirmation modal -->
+  <div id='archive-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='archive-modal-label' aria-hidden='true'>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Are you sure you want to archive?!</h3>
+    </div>
+    <div class="modal-body">
+      <p>If you Archive the idea, all votes, comments and ratings will be deleted!</p>
+    </div>
+    <div class="modal-footer">
+      <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
+      <%= link_to 'Archive', { :controller => "ideas", :action => "archive", :id => @idea.id }, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
+    </div>
   </div>
-  <div class="modal-body">
-    <p>If you Archive the idea, all votes, comments and ratings will be deleted!</p>
+  <!-- delete modal -->
+  <div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Are you sure you want to delete?!</h3>
+    </div>
+    <div class="modal-body">
+      <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
+    </div>
+    <div class="modal-footer">
+      <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
+      <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
+    </div>
   </div>
-  <div class="modal-footer">
-    <a data-dismiss='modal' data-toggle="#archive-modal" class="btn btn-success">Close</a>
-    <%= link_to 'Archive', { :controller => "ideas", :action => "archive", :id => @idea.id }, :class => 'btn btn-danger btn-modal btn-archive-modal' %>
-  </div>
-</div>
-<!-- delete modal -->
-<div id='delete-modal' class="modal hide fade" tabindex='-1' role='dialog' aria-labelledby='delete-modal-label' aria-hidden='true'>
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>Are you sure you want to delete?!</h3>
-  </div>
-  <div class="modal-body">
-    <p>If you Delete the idea, your idea will be eleminated as all votes, comments and ratings will be deleted!</p>
-  </div>
-  <div class="modal-footer">
-    <a data-dismiss='modal' data-toggle="#delete-modal" class="btn btn-success">Close</a>
-    <%= link_to 'Delete', idea_path(@idea), :method => :delete, :class => 'btn btn-danger' %>
-  </div>
-</div>
-<!-- Main Idea Page -->
-<% if current_user != nil %>
-  <% if current_user.unread_notifications_count > 0 %>
-    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @idea.title %>
+  <!-- Main Idea Page -->
+  <% if current_user != nil %>
+    <% if current_user.unread_notifications_count > 0 %>
+      <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")" + @idea.title %>
+    <% else %>
+      <% content_for :title, @idea.title %>
+    <% end %>
   <% else %>
     <% content_for :title, @idea.title %>
   <% end %>
-<% else %>
-  <% content_for :title, @idea.title %>
-<% end %>
-<% if user_signed_in? && @idea.visible?(current_user) || @idea.visible? %>
-  <div class='idea-page idea-<%= @idea.id %> well'>
-    <% if current_user %>
-      <% if current_user.type == "Committee" %>
-        <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
-          <div class='add-ratings'style="display: none;" >
-            <h3>Add Prespectives</h3>
-            <input type="text" class="rating_complete" name="blah2" />
-            <ul id="rating">
-            </ul>
-            <div id ="flash">
+  <% if user_signed_in? && @idea.visible?(current_user) || @idea.visible? %>
+    <div class='idea-page idea-<%= @idea.id %> well'>
+      <% if current_user %>
+        <% if current_user.type == "Committee" %>
+          <% if (current_user.tags & @idea.tags).count > 0 && @idea.approved == false && @idea.rejected == false %>
+            <div class='add-ratings'style="display: none;" >
+              <h3>Add Prespectives</h3>
+              <input type="text" class="rating_complete" name="blah2" />
+              <ul id="rating">
+              </ul>
+              <div id ="flash">
+              </div>
+              <div id ="ratings">
+                <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
+              </div>
             </div>
-            <div id ="ratings">
-              <%= button_to_function "Submit Prespectives" , "sendAjax(#{@idea.id})" , :class => 'btn btn-primary'%>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-    <div class='row span12 offset10'>
-      <% if @user == @idea.user_id %>
-        <div id='control' class='control-links'>
-          <%= link_to 'Edit', edit_idea_path(@idea)%>
-          <% if @idea.archive_status == true %>
-            <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :remote => true %>
-          <% else %>
-            <a data-toggle='modal' data-target='#archive-modal' data-remote='true'>Archive</a>
-          <% end %>
-          <a data-toggle='modal' data-target='#delete-modal' data-remote='true'>Delete</a>
-        </div>
-      <% end %>
-    </div>
-    <div class='row'>
-      <div class='span12'>
-        <h3><%= @idea.title %></h3>
-      </div>
-    </div>
-    <div class='row'>
-      <div class='span4 idea-picture'>
-        <div class='row'>
-        <a href='#'class='pull-left'>
-          <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
-        </a>
-        </div>
+      <div class='row span12 offset10'>
         <% if @user == @idea.user_id %>
-          <script>
-            $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
-            $('#image-edit-link').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
-          </script>
-        <% end %>
-        <div class='pull-left row'>
-          <div>
-            <%if @chosentags != nil %>
-              <% @chosentags.each do |tag|%>
-                 <span class="label label-info"><i class="icon-tag"></i><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
-              <% end %>
+          <div id='control' class='control-links'>
+            <%= link_to 'Edit', edit_idea_path(@idea)%>
+            <% if @idea.archive_status == true %>
+              <%= link_to 'Unarchive', { :controller => "ideas", :action => "unarchive", :id => @idea.id }, :remote => true %>
+            <% else %>
+              <a data-toggle='modal' data-target='#archive-modal' data-remote='true'>Archive</a>
             <% end %>
+            <a data-toggle='modal' data-target='#delete-modal' data-remote='true'>Delete</a>
           </div>
-          <%= render :partial => 'share' ,locals: { idea: @idea }%>
-        </div>
-      </div>
-      <div class='span4'>
-        <%= 'by'%>
-        <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
-        <h6 class="stream-date">
-          <% if ((Time.now - @idea.created_at).to_i)/24/60/60 < 1 %>
-            <%= distance_of_time_in_words(@idea.created_at.to_time, Time.now).to_s + " ago" %>
-          <% else %>
-            <%= Idea.getDate(@idea.id) %>
-          <% end %>
-        </h6>
-        <h4>Description:</h4>
-        <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
-        <h4>Problem Solved:</h4>
-        <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
-      </div>
-      <div class='span4 vote-no-margin'>
-        <div class='row'>
-          <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
-          <div class='span4 archive-status idea-ratings'>
-            <p>
-              <% if @idea.ratings.size > 0 %>
-                <%= javascript_include_tag 'rating_ballot' %>
-                <table>
-                  <tr>
-                    <th></th>
-                  </tr>
-                  <% @idea.ratings.each do |therating| %>
-                    <tr>
-                      <%= render :partial => '/user_ratings/ratings_component', :locals => { :therating => therating } %>
-                    </tr>
-                  <% end %>
-                </table>
-              <% end %>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class='row'>
-      <div class='span4'></div>
-      <div class ='span4 archive-status'>
-        <div id="fb-root"></div>
-        <div class="fb-comments" data-href="<%= root_url %>ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
-      </div>
-      <div class ='span4 enter_competition'>
-        <% if current_user and @idea.approved and current_user.id==@idea.user_id %>
-          <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary">Enter Competition</a></p>
-          <%= render :partial => 'enter_competition'%>
         <% end %>
       </div>
+      <div class='row'>
+        <div class='span12'>
+          <h3><%= @idea.title %></h3>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='span4 idea-picture'>
+          <div class='row'>
+          <a href='#'class='pull-left'>
+            <%= image_tag @idea.photo.url(:medium) ,id:'image-edit-link' %>
+          </a>
+          </div>
+          <% if @user == @idea.user_id %>
+            <script>
+              $('#image-edit-link').popover({animation: true, content:'<%= escape_javascript(render(:partial => "image")) %>', trigger: 'click', html: true});
+              $('#image-edit-link').tooltip({animation: true, title:'Click to edit' , trigger: 'hover', html: true });
+            </script>
+          <% end %>
+          <div class='pull-left row'>
+            <div>
+              <%if @chosentags != nil %>
+                <% @chosentags.each do |tag|%>
+                   <span class="label label-info"><i class="icon-tag"></i><%= link_to tag.name, {:controller => "stream", :action => "index", :tag => [tag.name], :mypage => "1" , :search_user => "false", :insert => "true", :set_global => "true"}, :class => "outside_tag_button"%></span>
+                <% end %>
+              <% end %>
+            </div>
+            <%= render :partial => 'share' ,locals: { idea: @idea }%>
+          </div>
+        </div>
+        <div class='span4'>
+          <%= 'by'%>
+          <span><%=link_to @idea.user.username, @idea.user.becomes(User)%></span>
+          <h6 class="stream-date">
+            <% if ((Time.now - @idea.created_at).to_i)/24/60/60 < 1 %>
+              <%= distance_of_time_in_words(@idea.created_at.to_time, Time.now).to_s + " ago" %>
+            <% else %>
+              <%= Idea.getDate(@idea.id) %>
+            <% end %>
+          </h6>
+          <h4>Description:</h4>
+          <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :description ,  type: :textarea %></div>
+          <h4>Problem Solved:</h4>
+          <div class='idea-info'><%= best_in_place_if @user==@idea.user_id, @idea, :problem_solved ,  type: :textarea%></div>
+        </div>
+        <div class='span4 vote-no-margin'>
+          <div class='row'>
+            <%= render :partial => "vote_component", locals: { idea: @idea, large: true ,size: 'span4'} %>
+            <div class='span4 archive-status idea-ratings'>
+              <p>
+                <% if @idea.ratings.size > 0 %>
+                  <%= javascript_include_tag 'rating_ballot' %>
+                  <table>
+                    <tr>
+                      <th></th>
+                    </tr>
+                    <% @idea.ratings.each do |therating| %>
+                      <tr>
+                        <%= render :partial => '/user_ratings/ratings_component', :locals => { :therating => therating } %>
+                      </tr>
+                    <% end %>
+                  </table>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='span4'></div>
+        <div class ='span4 archive-status'>
+          <div id="fb-root"></div>
+          <div class="fb-comments" data-href="<%= root_url %>ideas/<%= @idea.id %>" data-width="370" data-num-posts="10"></div>
+        </div>
+        <div class ='span4 enter_competition'>
+          <% if current_user and @idea.approved and current_user.id==@idea.user_id %>
+            <p><a data-toggle="modal" href="#competitions" class="btn btn-large btn-primary">Enter Competition</a></p>
+            <%= render :partial => 'enter_competition'%>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-  <% if @idea.similar_ideas.size != 0%>
-    <div class="well similar-ideas">
-      <%= render partial: "similar_ideas", locals: {idea:@idea}%>
-    </div>
+    <% if @idea.similar_ideas.size != 0%>
+      <div class="well similar-ideas">
+        <%= render partial: "similar_ideas", locals: {idea:@idea}%>
+      </div>
+    <% end %>
+  <% else %>
+    <div class='well text-center'> This idea wasn't approved.</div>
+  <% end %>
+  <script type="text/javascript">
+    function sendAjax(idea_id){
+      var list = "";
+      var i=0;
+      $('.token-input-list-facebook li p').each(function(){
+        list += "rating[]="+$(this).text()+"&";
+        i=i+1;
+      });
+      $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
+    }
+  </script>
+  <% if !@idea.approved %>
+    <script type='text/javascript'>
+      $('.approve_status').hide();
+    </script>
+  <% end %>
+  <% if @idea.archive_status == true %>
+    <script type='text/javascript'>
+      $('.archive-status').hide();
+    </script>
   <% end %>
 <% else %>
-  <div class='well text-center'> This idea wasn't approved.</div>
-<% end %>
-<script type="text/javascript">
-  function sendAjax(idea_id){
-    var list = "";
-    var i=0;
-    $('.token-input-list-facebook li p').each(function(){
-      list += "rating[]="+$(this).text()+"&";
-      i=i+1;
-    });
-    $.ajax("/ideas/" + idea_id + "/add_rating?"+list);
-  }
-</script>
-<% if !@idea.approved %>
-  <script type='text/javascript'>
-    $('.approve_status').hide();
-  </script>
-<% end %>
-<% if @idea.archive_status == true %>
-  <script type='text/javascript'>
-    $('.archive-status').hide();
-  </script>
+  <div class='well text-center'> This idea does not exist.</div>
 <% end %>

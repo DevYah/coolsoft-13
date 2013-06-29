@@ -21,6 +21,9 @@ class Idea < ActiveRecord::Base
   has_many :ratings
   has_and_belongs_to_many :tags
 
+  validates :tags,
+        :presence => {:message => "can't be blank"}
+
   has_many :votes
   has_many :voters, :through => :votes, :source => :user
   has_many :competition_entries

@@ -246,3 +246,25 @@
 #idea_photo{
   margin-bottom: 10px;
 }
+
+#available-tags{
+  display: none;
+  color: rgb(212,183,142);
+}
+
+.view_tags{
+  font-weight: bold;
+}
+
+.hide_tags{
+  display: none;
+  font-weight: bold;
+}
+
+.view_tags:hover{
+  cursor: pointer;
+}
+
+.hide_tags:hover{
+  cursor: pointer;
+}
