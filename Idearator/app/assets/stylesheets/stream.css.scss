@@ -28,7 +28,7 @@
 }
 
 #autocomplete-search{
-  max-height: 200px;
+  min-height: 200px;
   height: auto;
   overflow: auto;
   width: 240px;
@@ -125,10 +125,7 @@ h3.sidebar_title{
 }
 
 #spinner-outer{
-  margin-top:3%;
-  margin-bottom:3%;
-  padding-right:50%;
-  padding-left:50%;
+  margin: 0 auto;
   width:700px;
   height:30px;
 }
@@ -136,20 +133,17 @@ h3.sidebar_title{
 
 
 #spinner-inner{
-  display:none;
+  display: none;
 }
 
 #spinner-outer-autocomplete{
-  margin-top:1%;
-  margin-bottom:1%;
-  padding-right:50%;
-  padding-left:50%;
-  width:100px;
+  margin: 0 auto;
+  width:30px;
   height:15px;
 }
 
 #spinner-inner-autocomplete{
-  display:none;
+  display: none;
 }
 
 #in-stream-component{

@@ -140,7 +140,7 @@ function stream_manipulator(page,tag,search,insert,user){
     } 
   });
  }
- set_search();
+ 
 }
 
 $(document).on('ajaxStart', function(){
