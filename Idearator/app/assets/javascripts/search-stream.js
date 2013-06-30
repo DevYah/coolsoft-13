@@ -13,18 +13,18 @@ $(function() {
       if($("#search").val()!= ""){
           setTimeout(function(){fix_side_bar()}, 900);
           if($("#landing").is(":visible")){
-            $("#landing").hide();
-            $('#landing-stream').show();
+            // $("#landing").hide();
+            // $('#landing-stream').show();
             $("#autocomplete-search").slideDown(1000);
             search_autocompleter();
             //stream_manipulator(1,[],search,"false", search_in);
-            $('html, body').animate({scrollTop:0}, 'slow');
-            $("#in-stream-component").slideDown(1000);
+            // $('html, body').animate({scrollTop:0}, 'slow');
+            // $("#in-stream-component").slideDown(1000);
           }else{
             //stream_manipulator(1,[],search,"false", search_in);
             $("#autocomplete-search").slideDown(1000);
             search_autocompleter();
-            $('html, body').animate({scrollTop:0}, 'slow');
+            // $('html, body').animate({scrollTop:0}, 'slow');
           }
       }else{
         //$("#searchtype").val("false");

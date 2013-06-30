@@ -7,15 +7,17 @@
 <%  if defined?(in_competition).nil?
       in_competition = false
     end %>
-<% if idea.user.active and !idea.user.banned and idea.approved || idea.user == current_user%>
+<% if idea.user.active and !idea.user.banned and idea.approved || idea.user == current_user %>
   <div class='wrapper row stream-idea'>
     <div class="idea-<%= idea.id%> span8 ideasstream well">
       <div class='row'>
-        <% if idea.user == current_user %>
-          <% if idea.approved %>
-            <div class='span8 text-right app'>Approved</div>
-          <% else %>
-            <div class='span8 text-right unapp'>Unapproved</div>
+        <% if controller == "dashboard" || params[:controller] == "dashboard" %>
+          <% if idea.user == current_user %>
+            <% if idea.approved %>
+              <div class='span8 text-right app'>Approved</div>
+            <% else %>
+              <div class='span8 text-right unapp'>Unapproved</div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

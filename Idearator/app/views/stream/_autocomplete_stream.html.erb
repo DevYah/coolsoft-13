@@ -40,6 +40,9 @@
           </tr>
         <% end %>
       <% end %>
+        <% if results_count == 0 %>
+          <tr><td><h6><strong>No results found</strong></h6></td></tr>
+        <% end %>
     </table>
   </div>
   <div id="spinner-outer-autocomplete">

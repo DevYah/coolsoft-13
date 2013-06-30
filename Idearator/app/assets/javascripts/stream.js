@@ -19,9 +19,7 @@ function redirect_to_best(r){
 
 var currentpage = 1;
 var thistag = [];
-var searchtext = "";
 will_insert = true;
-user_search = "";
 var ajax_loading = false;
 var sidebar_top = $(".navbar").height();
 var sidebar_width = $("#sidebar").width();
@@ -35,80 +33,35 @@ function check_if_exists(tag){
   return false;
 }
 
-function stream_manipulator(page,tag,search,insert,user){
+function stream_manipulator(page,tag,insert){
   currentpage = page;
-  searchtext = search+"";
   will_insert = (insert == "true");
-  user_search = (user == "true");
   reset = "false";
-  if (!(searchtext == "" && !user_search && tag == "" && !will_insert)){
-    if(searchtext != "" && tag != ""){
-      currentpage = 1;
-      user_search = false;
-
-      if(will_insert){
-        if(!check_if_exists(tag) && (tag[0] != $("#stream_results").data("outsidetags")[0])){
-          thistag = tag.concat(thistag);
-        }
-      }else{
-        if (check_if_exists(tag)){
-          for (var i = 0; i < thistag.length; i++) {
-            if (thistag[i] == tag) {
-              thistag.splice(i,1);
-              user_search = false;
-              currentpage = 1;
-              break;
-            }
-          }
-        }else{
-          reset = "true";
-          searchtext = "";
-          user_search = false;
-          currentpage = 1;
-        }
+  if (!(tag == "" && !will_insert)){
+    if(will_insert){
+      if(!check_if_exists(tag)&& (tag[0] != $("#stream_results").data("outsidetags")[0])){
+        thistag = tag.concat(thistag);
       }
-    }else{
-      if (searchtext == "" && !user_search){
-        if(will_insert){
-          if(!check_if_exists(tag)&& (tag[0] != $("#stream_results").data("outsidetags")[0])){
-            thistag = tag.concat(thistag);
-          }
-          searchtext = "";
-          user_search = false;
-          currentpage = 1;
+      searchtext = "";
+      user_search = false;
+      currentpage = 1;
 
-        }else{
-          if (check_if_exists(tag)){
-            for (var i = 0; i < thistag.length; i++) {
-              if (thistag[i] == tag) {
-                thistag.splice(i,1);
-                searchtext = "";
-                user_search = false;
-                currentpage = 1;
-                break;
-              }
-            }
-          }else{
-            reset = "true";
+    }else{
+      if (check_if_exists(tag)){
+        for (var i = 0; i < thistag.length; i++) {
+          if (thistag[i] == tag) {
+            thistag.splice(i,1);
             searchtext = "";
             user_search = false;
             currentpage = 1;
+            break;
           }
         }
       }else{
-        if(tag == "" && !will_insert){
-          if (user_search){
-            currentpage = 1;
-            searchtext = search+"";
-            user_search = true;
-            thistag = [];
-          }else{
-            currentpage = 1;
-            searchtext = search+"";
-            user_search = false;
-            thistag = [];
-          }
-        }
+        reset = "true";
+        searchtext = "";
+        user_search = false;
+        currentpage = 1;
       }
     }
   }
@@ -122,7 +75,7 @@ function stream_manipulator(page,tag,search,insert,user){
       url: '/stream/index?page=' + currentpage,
       type: 'get',
       dataType: 'script',
-      data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert ,reset_global: reset},
+      data: { mypage: currentpage, tag: thistag, insert: will_insert ,reset_global: reset},
       complete: function() {
         apply_tag_handlers();
         apply_tooltip_handlers();
@@ -133,7 +86,7 @@ function stream_manipulator(page,tag,search,insert,user){
     url: '/stream/index?page=' + currentpage,
     type: 'get',
     dataType: 'script',
-    data: { mypage: currentpage, tag: thistag, search: searchtext, search_user: user_search, insert: will_insert},
+    data: { mypage: currentpage, tag: thistag, insert: will_insert},
     complete: function() {
       apply_tag_handlers();
       apply_tooltip_handlers();     
@@ -288,7 +241,9 @@ $(document).ready(function(){
   
   function autocomplete_manipulator(){
     var window_height = $(window).height();
-    $("#autocomplete-search").css("max-height",window_height-100);
+    if($(window).height() < $("#autocomplete-search").height()){
+      $("#autocomplete-search").css("max-height",window_height-100); 
+    }
   }
 
   function sidebar_manipulation(){
@@ -296,6 +251,7 @@ $(document).ready(function(){
     $("#sidebar").css("height",$(window).height()-50);
     if(!($("#landing").is(":visible"))){
       if($(window).width() < ($("#stream").width()+ 500)){
+        $("#autocomplete-search").slideUp(1000);
         if($("#sidebar").is(":visible")){
           $("#sidebar").fadeOut(1000);
           setTimeout(function(){
@@ -345,8 +301,10 @@ $(document).ready(function(){
       $("#landing").hide();
       var tag = $(this);
       $("#searchtype").val("false");
-      stream_manipulator(1,[tag.val()],$("#search").val(),"true", "false");
+      stream_manipulator(1,[tag.val()],"true");
       $('html, body').animate({scrollTop:0}, 'slow');
+      $("#search").val("");
+      $("#autocomplete-search").slideUp(1000);
     });
 
      $(".tagsPopover .btn-link").click(function tag_caller(e){
@@ -354,8 +312,10 @@ $(document).ready(function(){
       $("#landing").hide();
       var tag = $(this);
       $("#searchtype").val("false");
-      stream_manipulator(1,[tag.val()],$("#search").val(),"true", "false");
+      stream_manipulator(1,[tag.val()],"true");
       $('html, body').animate({scrollTop:0}, 'slow');
+      $("#search").val("");
+      $("#autocomplete-search").slideUp(1000);
     });
 
     $("#stream_results .close").click(function tag_remover(e){
@@ -373,7 +333,7 @@ $(document).ready(function(){
 
       if ((tags_all == 1) && search_isempty){
       }
-      stream_manipulator(1,[curr.val()],$("#search").val(),"false", "false");
+      stream_manipulator(1,[curr.val()],"false");
     });
   }
 
@@ -394,7 +354,7 @@ $(window).scroll (function(){
   if($(window).scrollTop()!=0 && !($(".stream-generate-button").is(":visible"))){
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50){
       ajax_loading = true;
-      currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,$("#search").val(),$("#searchtype").val(),false]);
+      currentpage = call_infinite_scrolling("stream","index",currentpage,"",[thistag,false]);
     }
   }
 });
@@ -410,7 +370,7 @@ $(window).scroll (function(){
       url: url_to_go ,
       type: 'get',
       dataType: 'script',
-      data: { mypage: page, tag: params[0], search: params[1], search_user: params[2], insert: params[3] },
+      data: { mypage: page, tag: params[0], insert: params[1] },
       success: function() {
         apply_tag_handlers();
         ajax_loading = false;
