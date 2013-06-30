@@ -11,7 +11,7 @@
   <div class='wrapper row stream-idea'>
     <div class="idea-<%= idea.id%> span8 ideasstream well">
       <div class='row'>
-        <% if controller == "dashboard" || params[:controller] == "dashboard" %>
+        <% if controller == "users" || params[:controller] == "users" %>
           <% if idea.user == current_user %>
             <% if idea.approved %>
               <div class='span8 text-right app'>Approved</div>
