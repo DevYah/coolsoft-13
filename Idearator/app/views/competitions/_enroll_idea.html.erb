@@ -7,7 +7,7 @@
     <div id='Stream'>
       <% if @approved != [] %>
         <% @approved.each do |approved| %>
-          <%= render partial: 'ideas/stream_component', locals: { idea: approved, in_compeition: true } %>
+          <%= render partial: 'ideas/stream_component', locals: { idea: approved, in_competition: true } %>
         <% end %>
       <% else %>
         <h3>You Have No Ideas, you need to create an Idea first</h3>
