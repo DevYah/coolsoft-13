@@ -12,24 +12,10 @@ $(function() {
     var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
           setTimeout(function(){fix_side_bar()}, 900);
-          if($("#landing").is(":visible")){
-            // $("#landing").hide();
-            // $('#landing-stream').show();
             $("#autocomplete-search").slideDown(1000);
             search_autocompleter();
-            //stream_manipulator(1,[],search,"false", search_in);
-            // $('html, body').animate({scrollTop:0}, 'slow');
-            // $("#in-stream-component").slideDown(1000);
-          }else{
-            //stream_manipulator(1,[],search,"false", search_in);
-            $("#autocomplete-search").slideDown(1000);
-            search_autocompleter();
-            // $('html, body').animate({scrollTop:0}, 'slow');
-          }
       }else{
-        //$("#searchtype").val("false");
         $("#autocomplete-search").slideUp(1000);
-        //stream_manipulator(1,[],"","false", $("#searchtype").val());
       }
     }
   });
@@ -37,10 +23,12 @@ $(function() {
 
 $(document).on('ajaxStart', function(){
   $("#full-component").html("");
+  $("#autocomplete-search").css("min-height",100);
   $('#spinner-inner-autocomplete').show();
 });
 
 $(document).on('ajaxStop', function(){
+  $("#autocomplete-search").css("min-height","");
   $('#spinner-inner-autocomplete').hide();
 });
 
@@ -54,18 +42,18 @@ $(document).bind("ajaxError", function(e, xhr){
   }
 });
 
-// function set_search(){
-//   if($("#searchtype").val()=="false"){
-//     $(".user-search").hide();
-//     $(".idea-search").show();
-//   }else{
-//     $(".idea-search").hide();
-//     $(".user-search").show();
-//   }
-// }
+function set_search(){
+  if($("#searchtype").val()=="false"){
+    $(".user-search").hide();
+    $(".idea-search").show();
+  }else{
+    $(".idea-search").hide();
+    $(".user-search").show();
+  }
+}
 
 $(document).ready(function() {
-  
+  set_search();
   setTimeout(function(){$(".alert-success").fadeOut(1000);},5000);
   if($("#in-stream-component").is(":visible")){
     $(".alert-success").css("width",770);

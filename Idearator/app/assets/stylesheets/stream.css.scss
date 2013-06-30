@@ -13,6 +13,21 @@
   margin-bottom: 20px;
 }
 
+.row-component{
+  padding:7px;
+  margin:0px;
+  background-color: rgba(212, 183, 142, 0.3);
+}
+
+.row-component:hover{
+  background-color: rgba(212, 183, 142, 0.6);
+}
+
+#full-component{
+  padding:0px;
+  margin:0px;
+}
+
 .ideasstream{
   background-color:#FFFFFF;
   margin: 0px;
@@ -28,16 +43,17 @@
 }
 
 #autocomplete-search{
-  min-height: 200px;
   height: auto;
   overflow: auto;
   width: 240px;
-  max-height: 600px;
+  max-height: 280px;
   left:585px;
   position: fixed;
   top: 42px;
   display:none;
   z-index:1;
+  padding:0px;
+  margin:0px;
 }
 
 .sidebar-show{
