@@ -276,6 +276,7 @@ $(document).ready(function(){
   $(".best-wrapper").click(function() {
   redirect_to_best($(this).data("idea-id"));
   });
+  
   sidebar_manipulation();
   autocomplete_manipulator();
   $(window).resize(function(){

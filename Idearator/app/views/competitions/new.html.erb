@@ -1,3 +1,12 @@
+<% if current_user != nil %>
+  <% if current_user.unread_notifications_count > 0 %>
+    <% content_for :title, "(" + current_user.unread_notifications_count.to_s + ")New Competition" %>
+  <% else %>
+    <% content_for :title, "New Competition" %>
+  <% end %>
+<% else %>
+  <% content_for :title, "New Competition" %>
+<% end %>
 <div class='well row new-competition-page'>
   <div class="span12">
     <div class='row'>

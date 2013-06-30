@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!, :only => [:load_notifications, :update_nav_bar]
   before_filter :load_notifications
   before_filter :banned?
+  before_filter :load_tags
 
   protect_from_forgery
 
@@ -38,4 +39,9 @@ class ApplicationController < ActionController::Base
       root_path
     end
   end
+
+  def load_tags
+    @tags = Tag.all
+  end
+
 end

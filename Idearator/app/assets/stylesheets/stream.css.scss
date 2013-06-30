@@ -20,7 +20,7 @@
   padding-top:10px;
   padding-left:10px;
   padding-right:10px;
-  padding-bottom:38px;
+  padding-bottom: 10px;
   border-right-style:none;
   border-top-style:none;
   border-left-style:0.25px solid;
@@ -195,7 +195,8 @@ h3.sidebar_title{
   margin-top: 0px;
   background-color: #FFFFFF;
   width: 340px;
-  margin-left: 20px;
+  margin-left: 0px;
+  margin-bottom: 0px;
 }
 
 .tag{
@@ -261,6 +262,7 @@ h3.sidebar_title{
 .best-ideas{
   height:180px;
   border-radius:0.5em;
+  background-color: white;
 }
 
 div.best-wrapper{
@@ -270,11 +272,16 @@ div.best-wrapper{
     position:relative; /* important(so we can absolutely position the description div */
 }
 
+.best-caption{
+  background: none;
+}
+
 .best-ideas:hover{
   box-shadow: 0px 0px 0.5em #000000;
 }
 
 div.description-caption{
+    display:none;
     position:absolute; /* absolute position (so we can position it where we want)*/
     bottom:0px; /* position will be on bottom */
     left:0px;
@@ -582,4 +589,37 @@ h4.media-heading{
 
 .check-ideas{
   color: rgb(140, 0, 26);
+}
+
+.best-container{
+  padding-bottom: 2px;
+  border-radius: 0px;
+  background-color: rgba(0,0,0, 0.90);
+}
+
+.new-best{
+  color: white;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 5px;
+}
+
+.show-stream{
+  font-size: 20px;
+  padding: 30px;
+}
+
+.landing-controls{
+  width: 100%;
+  margin: 5px;
+  margin-left: 10px;
+}
+.app{
+  font-weight: bold;
+  color: rgba(140, 169, 62, 0.70);
+}
+
+.unapp{
+  font-weight: bold;
+  color: rgba(140, 0, 26, 0.70);
 }

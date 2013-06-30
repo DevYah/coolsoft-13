@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+  $(".view_tags").click(function(){
+    $("#available-tags").slideDown("slow");
+    $(".view_tags").hide();
+    $(".hide_tags").fadeIn("slow");
+  });
+
+  $(".hide_tags").click(function(){
+    $("#available-tags").slideUp("slow");
+    $(".hide_tags").hide();
+    $(".view_tags").fadeIn("slow");
+  });
+
 $(".similar_idea").click(function(){
   var idea_id_redirect = $(this).attr("value");
   window.location.href = '/ideas/' + idea_id_redirect;
