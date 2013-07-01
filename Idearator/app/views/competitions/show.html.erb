@@ -25,9 +25,9 @@
 <% end %>
 
 <div class='competition-page competition-<%= @competition.id %>'>
-  <div class="row span13 offset11">
+  <div class="row">
     <% if user_signed_in? &&current_user.id == @competition.investor_id %>
-      <div class='control-links'>
+      <div class='control-links pull-right'>
         <%= link_to 'Edit', edit_competition_path(@competition)%>
         <a data-toggle='modal' data-target='#delete-modal' data-remote='true' class='btn-delete'>Delete</a>
       </div>
