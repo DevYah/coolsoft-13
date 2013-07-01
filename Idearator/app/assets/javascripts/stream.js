@@ -388,13 +388,10 @@ $(window).scroll (function(){
     return page;
   }
 
-$(document).ready(function() {      
- $('#sidebar .carousel').carousel('pause');
-});
-
-$(document).ready(function() {      
- $('.best-ideas-div').hide();
- $('.show-best').click(function(){
+$(document).ready(function() {
+  $('#sidebar .carousel').carousel('pause');
+  $('.best-ideas-div').hide();
+  $('.show-best').click(function(){
   $('.best-ideas-div').slideDown(1000);
   $('html, body').animate({scrollTop:$('#landing').height()+20}, 'slow');
  });
