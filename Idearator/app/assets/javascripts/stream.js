@@ -108,7 +108,6 @@ $(document).on('ajaxStop', function(){
 function autocomplete_horizontal_positioning(){
   var left_autocomplete = ($(".input-append").offset().left);
   $("#autocomplete-search").css("left",left_autocomplete);
-  alert(left_autocomplete);
 }
 
 $(document).ready(function(){
