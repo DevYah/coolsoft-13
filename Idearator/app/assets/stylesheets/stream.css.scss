@@ -44,7 +44,7 @@
 
 #autocomplete-search{
   height: auto;
-  overflow: auto;
+  overflow: hidden;
   width: 240px;
   max-height: 280px;
   left:585px;
@@ -54,6 +54,10 @@
   z-index:1;
   padding:0px;
   margin:0px;
+}
+
+#autocomplete-search:hover{
+  overflow:auto;
 }
 
 .sidebar-show{
