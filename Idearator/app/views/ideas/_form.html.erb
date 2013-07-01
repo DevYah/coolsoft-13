@@ -27,13 +27,7 @@
                   </div>
                 <% end %>
               </div>
-              <a class="view_tags">View available tags <i class="icon-chevron-down"></i></a>
-              <div id="available-tags">
-                <% @tags.each do |tag|%>
-                  <strong> <%= tag.name %>, </strong>
-                <% end %> 
-              </div>
-              <a class="hide_tags">Hide tags <i class="icon-chevron-up"></i></a>
+              <%= render "tags/available_tags" %>
             </div>
         </div>
         <div class='span6'>
