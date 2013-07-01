@@ -87,9 +87,9 @@ class Idea < ActiveRecord::Base
         end
       else
         if idea_date.month != curr_date.month and idea_date.year == curr_date.year
-          date = Date::MONTHNAMES[Date.today.month] + " "+ Idea.getDay_of_week(idea_date.day)
+          date = Date::MONTHNAMES[idea_date.month] + " " + idea_date.day.to_s + ", " + Idea.getDay_of_week(idea_date.day)
         else
-          date = Date::MONTHNAMES[Date.today.month] + ", " + Idea.getDay_of_week(idea_date.day) + idea_date.year.to_s
+          date = Date::MONTHNAMES[idea_date.month] + " " + idea_date.day.to_s + ", " + idea_date.year.to_s
         end
       end
     

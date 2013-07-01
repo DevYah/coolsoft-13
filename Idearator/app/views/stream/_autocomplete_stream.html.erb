@@ -19,28 +19,25 @@
           <% end %>
         <% end %>
       <% else %>
-       <!--  <% @search_results.each do |user|%>
-          <tr class = "warning row-component">
-            <td>
-              <%= link_to(user.becomes(User)) do %>
-                <div class="autocomplete-component">
-                  <% if user.banned == false and user.active == true %>
-                    <% results_count = results_count + 1 %>        
-                    <img alt="Missing" height="25" src="/assets/user-default.png" width="25">
-                    <strong>
-                      <%= user.username %>
-                    </strong>
-                    <span class="badge badge-autocomplete"><%= user.ideas.count %></span>
-                  <% end %>
-                </div>
+        <% @search_results.each do |user|%>
+          <%= link_to(user.becomes(User)) do %>
+            <div class="row-component well">
+              <% if user.banned == false and user.active == true %>
+                <% results_count = results_count + 1 %>        
+                <img alt="Missing" height="25" src="/assets/user-default.png" width="25">
+                <strong>
+                  <%= user.username %>
+                </strong>
+                <span class="badge badge-autocomplete"><%= user.ideas.count %></span>
               <% end %>
-            </td>
-          </tr>
+            </div>
+          <% end %>
         <% end %>
-      
-        <% if results_count == 0 %>
-          <tr><td><h6><strong>No results found</strong></h6></td></tr>
-        <% end %> -->
+      <% end %>
+      <% if results_count == 0 %>
+        <div class="alert alert-error">
+          <strong>No Results Found !!</strong>
+        </div>  
       <% end %>
   </div>
   <div id="spinner-outer-autocomplete">

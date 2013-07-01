@@ -49,9 +49,9 @@ class Notification < ActiveRecord::Base
         end
       else
         if notif_date.month != curr_date.month and notif_date.year == curr_date.year
-          date = Date::MONTHNAMES[Date.today.month] + " "+ Idea.getDay_of_week(notif_date.day)
+          date = Date::MONTHNAMES[notif_date.month] + " " + notif_date.day.to_s + ", " + Idea.getDay_of_week(notif_date.day)
         else
-          date = Date::MONTHNAMES[Date.today.month] + ", " + Idea.getDay_of_week(notif_date.day) + notif_date.year.to_s
+          date = Date::MONTHNAMES[notif_date.month] + " " + notif_date.day.to_s + ", " + notif_date.year.to_s
         end
       end
     

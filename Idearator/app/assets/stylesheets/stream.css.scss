@@ -146,7 +146,9 @@ h3.sidebar_title{
   height:30px;
 }
 
-
+.stream-date a:hover{
+  text-decoration:underline;
+}
 
 #spinner-inner{
   display: none;
@@ -155,6 +157,7 @@ h3.sidebar_title{
 
 #spinner-outer-autocomplete{
   margin: 0 auto;
+  margin-top:20px;
   width:30px;
   height:15px;
 }

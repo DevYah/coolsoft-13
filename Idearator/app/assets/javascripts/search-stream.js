@@ -7,15 +7,19 @@ $(function() {
   $("#searchdiv input").keyup(function(e){
     e.preventDefault();
   if(e.which != 13){
-    typing = true;
     var search = $("#search").val();
-    var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
-          setTimeout(function(){fix_side_bar()}, 900);
-            $("#autocomplete-search").slideDown(1000);
-            search_autocompleter();
+        if(last_search != search){
+          // setTimeout(function(){fix_side_bar()}, 900);
+          $("#autocomplete-search").slideDown(1000);
+          last_search = search;
+          search_autocompleter();
+        }
       }else{
-        $("#autocomplete-search").slideUp(1000);
+        if(last_search != search){
+          last_search="";
+          $("#autocomplete-search").slideUp(1000);
+        }
       }
     }
   });
@@ -23,7 +27,7 @@ $(function() {
 
 $(document).on('ajaxStart', function(){
   $("#full-component").html("");
-  $("#autocomplete-search").css("min-height",100);
+  $("#autocomplete-search").css("min-height",70);
   $('#spinner-inner-autocomplete').show();
 });
 
@@ -95,9 +99,7 @@ $(document).ready(function() {
   });
 
   $('#searchdiv').submit(function(e) {
-    if (in_stream){
       e.preventDefault();
-    }
   });
 
 });
