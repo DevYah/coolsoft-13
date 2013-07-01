@@ -108,7 +108,6 @@ $(document).on('ajaxStop', function(){
 function autocomplete_horizontal_positioning(){
   var left_autocomplete = ($(".input-append").offset().left);
   $("#autocomplete-search").css("left",left_autocomplete);
-  alert(left_autocomplete);
 }
 
 $(document).ready(function(){
@@ -389,13 +388,10 @@ $(window).scroll (function(){
     return page;
   }
 
-$(document).ready(function() {      
- $('#sidebar .carousel').carousel('pause');
-});
-
-$(document).ready(function() {      
- $('.best-ideas-div').hide();
- $('.show-best').click(function(){
+$(document).ready(function() {
+  $('#sidebar .carousel').carousel('pause');
+  $('.best-ideas-div').hide();
+  $('.show-best').click(function(){
   $('.best-ideas-div').slideDown(1000);
   $('html, body').animate({scrollTop:$('#landing').height()+20}, 'slow');
  });
