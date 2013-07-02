@@ -1,13 +1,15 @@
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "user.js" %>
 <% end %>
+<div class='msg-alert alert alert-error sign-up-error span6'>
+  <a class="close" data-dismiss="alert">×</a>
+  <%= devise_error_messages! %>
+</div>
 <div class='well sign-form span6'>
-  <h2>Sign up</h2>
-
+  <h3>Sign up</h3>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-
+    
     <div class="input-prepend">
       <span class="add-on"><i class="icon-envelope"></i></span>
       <%= f.email_field :email, :autofocus => true, placeholder:"Enter email here" %>
@@ -30,13 +32,7 @@
       <span class="add-on"><i class="icon-user"></i></span>
       <%= f.text_field :username, placeholder:"Enter a username" %>
     </div>
-    <br />
-
-    <div> <%= f.check_box :type, {id: "is-committee"}, "Committee", "User" %> Sign up as committee </div><br />
-
-    <div id= "all-tags"> Choose your area(s) of expertise: <% @tags.each do |tag|%>
-      <div> <%= check_box_tag 'tags[]', tag.id, false %><%= tag.name %> </div>
-    <% end %> </div>
+    <br /><br />
 
     <div><%= f.submit "Sign up", class: 'btn btn-info sign_up_button' %></div>
   <% end %>
