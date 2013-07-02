@@ -1,0 +1,11 @@
+<a class="view_tags">View available tags
+  <i class="icon-chevron-down"></i></a>
+<div class="available-tags">
+  <% @tags.each do |tag|%>
+    <strong>
+      <%= tag.name %>,
+    </strong>
+  <% end %>
+</div>
+<a class="hide_tags">Hide tags
+  <i class="icon-chevron-up"></i></a>

@@ -13,6 +13,21 @@ function tag_exists(tag){
   return false;
 }
 
+$(document).ready(function() {
+
+  $(".view_tags").click(function(){
+    $(".available-tags").slideDown("slow");
+    $(".view_tags").hide();
+    $(".hide_tags").fadeIn("slow");
+  });
+
+  $(".hide_tags").click(function(){
+    $(".available-tags").slideUp("slow");
+    $(".hide_tags").hide();
+    $(".view_tags").fadeIn("slow");
+  });
+});
+
 function apply_comp_tag_handler(){
   $(".aTag").click(function(e){
     e.preventDefault();

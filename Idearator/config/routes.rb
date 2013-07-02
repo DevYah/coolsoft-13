@@ -117,6 +117,7 @@ Sprint0::Application.routes.draw do
 
 controller :stream do
     match '/stream/index'
+    match '/stream/search'
   end
 
   controller :coolster do

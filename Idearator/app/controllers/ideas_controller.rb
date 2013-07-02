@@ -256,7 +256,7 @@ class IdeasController < ApplicationController
   def add_rating
     if current_user.type == 'Committee'
       @idea=Idea.find(params[:id])
-      @idea.approve
+      @idea.approve (current_user)
       @rating = params[:rating]
       @rating.each do |rate|
         r = @idea.ratings.build

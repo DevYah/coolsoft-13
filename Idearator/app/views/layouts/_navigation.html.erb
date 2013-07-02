@@ -107,7 +107,7 @@
   <% end %>
   <li>
     <div>
-    <%= form_tag "/stream/index", :method => :get,:class => "form-search navbar-search", :id => 'searchdiv' do %>
+    <%= form_tag "/stream/search", :method => :get,:class => "form-search navbar-search", :id => 'searchdiv' do %>
       <%= hidden_field_tag :searchtype, params[:searchtype] || "false" %>
         <div class="input-append">
           <%= text_field_tag :search, params[:search],:placeholder => "Search..." ,:class => "span2 search-query", :autocomplete => "off"%>
@@ -128,6 +128,7 @@
         </div>
     <% end %>
     </div>
+    <div id="autocomplete-search" class="well"></div>
   </li>
 </ul>
 <% if user_signed_in? %>
