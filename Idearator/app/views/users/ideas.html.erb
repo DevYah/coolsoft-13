@@ -17,7 +17,7 @@
 </h3>
 <div class="my-ideas span9">
   <% @ideas.each do |idea| %>
-    <%= render partial: 'ideas/stream_component', locals: { idea: idea } %>
+    <%= render partial: 'ideas/stream_component', locals: { idea: idea , controller: 'users', user: current_user} %>
   <%end%>
 </div>
 
