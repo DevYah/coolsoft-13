@@ -4,33 +4,32 @@
     
       <% if !@searching_with %>
         <% @search_results.each do |idea|%>
-          <%= link_to(idea) do %>
-            <div class="row-component well">
-              <% if idea.approved == true and idea.user.banned == false and idea.user.active == true %>
+          <% if idea.approved == true and idea.user.banned == false and idea.user.active == true %>
+            <%= link_to(idea) do %>
+              <div class="row-component well">
                 <% results_count = results_count + 1 %>        
                   <img alt="Missing" height="30" src="/assets/missing.png" width="30">
                     <strong>
                       <%= idea.title %>
                     </strong>
                     <span class="badge badge-autocomplete"><%= idea.num_votes %></span>
-                
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       <% else %>
         <% @search_results.each do |user|%>
-          <%= link_to(user.becomes(User)) do %>
-            <div class="row-component well">
-              <% if user.banned == false and user.active == true %>
+          <% if user.banned == false and user.active == true %>
+            <%= link_to(user.becomes(User)) do %>
+              <div class="row-component well">
                 <% results_count = results_count + 1 %>        
                 <img alt="Missing" height="25" src="/assets/user-default.png" width="25">
                 <strong>
                   <%= user.username %>
                 </strong>
                 <span class="badge badge-autocomplete"><%= user.ideas.count %></span>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

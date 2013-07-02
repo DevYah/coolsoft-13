@@ -1,12 +1,19 @@
-  <% if !@page.nil? %>
-    <% if !@search_with_user %>
-      <% if @page == "1" %>
-      <div id="replacable-tags">
-        <%= render partial: 'tags', locals: { filter_this: @filter_tmp } %>
-        </div>
-      <% end %>
+<% if params[:set_global] %>
+  <script type="text/javascript">
+    $("#in-stream-component").show();
+    $("#landing").hide();
+  </script>
+<% end %>
+
+<% if !@page.nil? %>
+  <% if !@search_with_user %>
+    <% if @page == "1" %>
+    <div id="replacable-tags">
+      <%= render partial: 'tags', locals: { filter_this: @filter_tmp } %>
+      </div>
     <% end %>
   <% end %>
+<% end %>
 
 
 
