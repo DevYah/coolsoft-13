@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
   # Author: Hisham ElGezeery
 
   def index
+       
     @user = current_user
     @threshold = Threshold.last
     if @user.type == 'Committee'

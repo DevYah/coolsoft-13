@@ -1,34 +1,51 @@
 var last_search = "";
 var original;
 search_type = false;
+typing = false;
 
 $(function() {
   $("#searchdiv input").keyup(function(e){
     e.preventDefault();
   if(e.which != 13){
     var search = $("#search").val();
-    var search_in = $("#searchtype").val();
       if($("#search").val()!= ""){
-        if(search.length > 2 || e.which == 8){
-          setTimeout(fix_side_bar(), 900);
-          if($("#landing").is(":visible")){
-            $("#landing").hide();
-            $('#landing-stream').show();
-            stream_manipulator(1,[],search,"false", search_in);
-            $('html, body').animate({scrollTop:0}, 'slow');
-            $("#in-stream-component").slideDown(1000);
-          }else{
-            stream_manipulator(1,[],search,"false", search_in);
-            $('html, body').animate({scrollTop:0}, 'slow');
-          }
+        if(last_search != search){
+          // setTimeout(function(){fix_side_bar()}, 900);
+          $("#autocomplete-search").slideDown(1000);
+          last_search = search;
+          search_autocompleter();
         }
       }else{
-        $("#searchtype").val("false");
-        stream_manipulator(1,[],"","false", $("#searchtype").val());
+        if(last_search != search){
+          last_search="";
+          $("#autocomplete-search").slideUp(1000);
+        }
       }
     }
   });
 });
+
+$(document).on('ajaxStart', function(){
+  $("#full-component").html("");
+  $("#autocomplete-search").css("min-height",70);
+  $('#spinner-inner-autocomplete').show();
+});
+
+$(document).on('ajaxStop', function(){
+  $("#autocomplete-search").css("min-height","");
+  $('#spinner-inner-autocomplete').hide();
+});
+
+function search_autocompleter(){
+  $.get($("#searchdiv").attr("action"), $("#searchdiv").serialize(),null,"script");
+}
+
+ function autocomplete_manipulator(){
+    var window_height = $(window).height();
+    if($(window).height() < $("#autocomplete-search").height()){
+      $("#autocomplete-search").css("max-height",window_height-100);
+    }
+  }
 
 $(document).bind("ajaxError", function(e, xhr){
   if(xhr.status == 401){
@@ -46,14 +63,32 @@ function set_search(){
   }
 }
 
+function autocomplete_horizontal_positioning(){
+  var left_autocomplete = ($(".input-append").offset().left);
+  $("#autocomplete-search").css("left",left_autocomplete);
+}
+
+
 $(document).ready(function() {
-  
+  set_search();
+  autocomplete_horizontal_positioning();
+  $(document).click(function(evt) {
+    if(evt.target.id == "search"){
+      if(!($("#autocomplete-search").is(":visible")) && ($("#search").val() != "")){
+        $("#autocomplete-search").slideDown(1000);
+        search_autocompleter();
+      }
+      return;
+    }else{
+      $("#autocomplete-search").slideUp(1000);
+    }
+  });
   setTimeout(function(){$(".alert-success").fadeOut(1000);},5000);
   if($("#in-stream-component").is(":visible")){
     $(".alert-success").css("width",770);
   }
   $(".scrollshow").show();
-  set_search();
+  
   $("#sign").click(function() {
     window.location= "/users/sign_in";
   });
@@ -62,14 +97,16 @@ $(document).ready(function() {
     e.preventDefault();
     search_type = true;
     $("#searchtype").val("true");
-    set_search();
+    $(".idea-search").hide();
+    $(".user-search").show();
   });
 
   $("#idea-search-button").click(function remove_button_handler(e) {
     e.preventDefault();
     search_type = false;
     $("#searchtype").val("false");
-    set_search();
+    $(".user-search").hide();
+    $(".idea-search").show();
   });
 
   $("a.popup").click(function (e) {
@@ -87,9 +124,15 @@ $(document).ready(function() {
   });
 
   $('#searchdiv').submit(function(e) {
-    if (in_stream){
       e.preventDefault();
+  });
+  autocomplete_manipulator();
+  $(window).resize(function(){
+    autocomplete_manipulator();
+    if($(window).width() < 977){
+      $("#autocomplete-search").fadeOut(1000);
+    }else{
+      autocomplete_horizontal_positioning();
     }
   });
-
 });
