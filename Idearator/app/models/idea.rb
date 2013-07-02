@@ -134,8 +134,9 @@ class Idea < ActiveRecord::Base
     }
   end
 
-  def approve
+  def approve(user)
     self.approved = true
+    self.committee = user
     self.save
     IdeasController::CoolsterPusher.new.push_to_stream self
   end
