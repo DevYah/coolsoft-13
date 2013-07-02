@@ -236,3 +236,15 @@ ul .nav-forms{
 .control-links:hover{
   cursor: pointer;
 }
+
+.well.sign-form{
+  background-color: white;
+}
+
+.field_with_errors{
+  display: inline;
+}
+
+.sign-up-error h2{
+  font-size: 13px;
+}
