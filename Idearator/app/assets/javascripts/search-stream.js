@@ -74,9 +74,14 @@ $(document).ready(function() {
   autocomplete_horizontal_positioning();
   $(document).click(function(evt) {
     if(evt.target.id == "search"){
+      if(!($("#autocomplete-search").is(":visible")) && ($("#search").val() != "")){
+        $("#autocomplete-search").slideDown(1000);
+        search_autocompleter();
+      }
       return;
+    }else{
+      $("#autocomplete-search").slideUp(1000);
     }
-    $("#autocomplete-search").slideUp(1000);
   });
   setTimeout(function(){$(".alert-success").fadeOut(1000);},5000);
   if($("#in-stream-component").is(":visible")){
