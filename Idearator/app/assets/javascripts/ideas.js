@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
   $(".view_tags").click(function(){
-    $("#available-tags").slideDown("slow");
+    $(".available-tags").slideDown("slow");
     $(".view_tags").hide();
     $(".hide_tags").fadeIn("slow");
   });
 
   $(".hide_tags").click(function(){
-    $("#available-tags").slideUp("slow");
+    $(".available-tags").slideUp("slow");
     $(".hide_tags").hide();
     $(".view_tags").fadeIn("slow");
   });
