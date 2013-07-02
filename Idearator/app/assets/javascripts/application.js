@@ -84,3 +84,8 @@ function apply_tooltip_handlers(){
     title: "Share on pinterest",
   });
 }
+
+ 
+$(document).ready(function() {
+  $('.sign-form').siblings(".alert").addClass("span6"); 
+});
