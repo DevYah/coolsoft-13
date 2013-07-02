@@ -28,12 +28,12 @@ $(function() {
 $(document).on('ajaxStart', function(){
   $("#full-component").html("");
   $("#autocomplete-search").css("min-height",70);
-  $('#spinner-inner-autocomplete').show();
+  $('#spinner-outer-autocomplete').show();
 });
 
 $(document).on('ajaxStop', function(){
   $("#autocomplete-search").css("min-height","");
-  $('#spinner-inner-autocomplete').hide();
+  $('#spinner-outer-autocomplete').hide();
 });
 
 function search_autocompleter(){
