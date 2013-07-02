@@ -33,6 +33,7 @@
 //= require jquery.cookie
 //= reqiure stream
 //= require nav
+//= require ideas
 //
 
 
